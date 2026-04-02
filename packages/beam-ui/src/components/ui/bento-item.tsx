@@ -46,8 +46,8 @@ const arrowIcon = css({
 /* ------------------------------------------------------------------ */
 
 const largeCard = css({
-  gridColumn: "span 2",
-  gridRow: "span 2",
+  gridColumn: { base: "span 1", md: "span 2" },
+  gridRow: { base: "span 1", md: "span 2" },
   display: "flex",
   flexDirection: "column",
   bg: "bg.card",
@@ -121,9 +121,9 @@ const ctaLink = css({
 /* ------------------------------------------------------------------ */
 
 const horizontalCard = css({
-  gridColumn: "span 2",
+  gridColumn: { base: "span 1", md: "span 2" },
   display: "flex",
-  flexDirection: "row",
+  flexDirection: { base: "column", md: "row" },
   bg: "bg.page",
   border: "1px solid",
   borderColor: "border.warm",
@@ -133,8 +133,8 @@ const horizontalCard = css({
 });
 
 const horizontalImage = css({
-  width: "33.333%",
-  minHeight: "100%",
+  width: { base: "100%", md: "33.333%" },
+  minHeight: { base: "160px", md: "100%" },
   bg: "linear-gradient(135deg, token(colors.sunbeam.black), token(colors.card.dark))",
   display: "flex",
   alignItems: "center",

@@ -24,7 +24,7 @@ export function Card({
       className={cx(
         css({
           backgroundColor: "bg.card",
-          padding: "40px",
+          padding: { base: "24px", lg: "40px" },
           borderRadius: "0",
           shadow: "golden",
           transition: "all 0.3s ease",

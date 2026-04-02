@@ -12,9 +12,10 @@ export interface ModelStats {
 
 const grid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(5, 1fr)",
+  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" },
   paddingBlock: "24px",
   marginBottom: "48px",
+  gap: { base: "16px", lg: "0" },
 });
 
 const cell = css({

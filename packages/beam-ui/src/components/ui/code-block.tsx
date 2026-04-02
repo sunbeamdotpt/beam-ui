@@ -224,6 +224,8 @@ const controlsBar = css({
   padding: "12px 16px",
   backgroundColor: "sunbeam.black",
   borderBottom: "1px solid rgba(255,255,255,0.05)",
+  flexWrap: "wrap",
+  gap: "8px",
 });
 
 const tabList = css({
