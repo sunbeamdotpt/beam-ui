@@ -1,5 +1,12 @@
 {
   "name": "beam-ui-monorepo",
   "private": true,
-  "workspaces": ["packages/*", "app"]
+  "workspaces": [
+    "packages/*",
+    "app"
+  ],
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3"
+  }
 }
