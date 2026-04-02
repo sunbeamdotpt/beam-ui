@@ -2,8 +2,17 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { css } from "styled-system/css";
 import { token } from "styled-system/tokens";
+import {
+  DialogRoot,
+  DialogBackdrop,
+  DialogPositioner,
+  DialogContent,
+  DialogCloseTrigger,
+} from "@ark-ui/react/dialog";
+import { Portal } from "@ark-ui/react/portal";
 import { headerLinks, docsSidebar } from "../../data/navigation";
 import { useTheme } from "../../hooks/use-theme";
+import { Sidebar } from "./sidebar";
 
 const header = css({
   position: "fixed",
@@ -28,13 +37,13 @@ const inner = css({
   justifyContent: "space-between",
   width: "100%",
   maxWidth: "1440px",
-  paddingInline: "32px",
+  paddingInline: { base: "16px", md: "24px", lg: "32px" },
 });
 
 const leftGroup = css({
   display: "flex",
   alignItems: "center",
-  gap: "40px",
+  gap: { base: "12px", lg: "40px" },
 });
 
 const brandLink = css({
@@ -47,9 +56,67 @@ const brandLink = css({
 });
 
 const nav = css({
-  display: "flex",
+  display: { base: "none", lg: "flex" },
   alignItems: "center",
   gap: "24px",
+});
+
+const menuBtn = css({
+  display: { base: "flex", lg: "none" },
+  alignItems: "center",
+  justifyContent: "center",
+  width: "36px",
+  height: "36px",
+  bg: "transparent",
+  border: "none",
+  cursor: "pointer",
+  color: "text.primary",
+  transition: "color 0.2s",
+  _hover: {
+    color: "accent",
+  },
+});
+
+const drawerBackdrop = css({
+  position: "fixed",
+  inset: 0,
+  bg: "rgba(31, 31, 31, 0.5)",
+  zIndex: 99,
+});
+
+const drawerPositioner = css({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  bottom: 0,
+  zIndex: 100,
+});
+
+const drawerContent = css({
+  width: "300px",
+  height: "100%",
+  bg: "bg.page",
+  overflowY: "auto",
+  boxShadow: "4px 0 20px rgba(0,0,0,0.15)",
+});
+
+const drawerCloseBtn = css({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "36px",
+  height: "36px",
+  bg: "transparent",
+  border: "none",
+  cursor: "pointer",
+  color: "text.secondary",
+  fontSize: "20px",
+  position: "absolute",
+  top: "14px",
+  right: "8px",
+  _hover: {
+    color: "accent",
+  },
 });
 
 const navLink = css({
@@ -93,6 +160,26 @@ const rightGroup = css({
 
 const searchWrapper = css({
   position: "relative",
+  display: { base: "none", md: "block" },
+});
+
+const searchTriggerMobile = css({
+  display: { base: "flex", md: "none" },
+  alignItems: "center",
+  justifyContent: "center",
+  width: "36px",
+  height: "36px",
+  bg: "transparent",
+  border: "1px solid",
+  borderColor: "border.subtle",
+  borderRadius: "sm",
+  cursor: "pointer",
+  color: "text.muted",
+  fontSize: "16px",
+  _hover: {
+    borderColor: "accent",
+    color: "accent",
+  },
 });
 
 const searchIcon = css({
@@ -226,8 +313,14 @@ export function Header() {
   const { theme, toggle } = useTheme();
   const [query, setQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Close drawer on route change
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [location.pathname]);
 
   const isActive = (label: string, href: string) => {
     if (href === "/") return location.pathname === "/";
@@ -281,78 +374,113 @@ export function Header() {
   );
 
   return (
-    <header className={header}>
-      <div className={inner}>
-        <div className={leftGroup}>
-          <Link to="/" className={brandLink}>
-            Sunbeam Studios
-          </Link>
-          <nav className={nav}>
-            {headerLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.href}
-                className={isActive(link.label, link.href) ? navLinkActive : navLink}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div className={rightGroup}>
-          <div className={searchWrapper} ref={wrapperRef}>
-            <span className={`material-symbols-outlined ${searchIcon}`}>search</span>
-            <input
-              ref={inputRef}
-              className={searchInput}
-              type="text"
-              placeholder="Search docs..."
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setShowResults(true);
-              }}
-              onFocus={() => setShowResults(true)}
-            />
-            <kbd className={kbdStyle}>&#x2318;K</kbd>
-            {showResults && query.trim() && (
-              <div className={searchDropdown}>
-                {filtered.length === 0 ? (
-                  <div className={searchNoResults}>No results for "{query}"</div>
-                ) : (
-                  (() => {
-                    let lastSection = "";
-                    return filtered.map((item) => {
-                      const showSection = item.section !== lastSection;
-                      lastSection = item.section;
-                      return (
-                        <div key={item.href + item.label}>
-                          {showSection && (
-                            <div className={searchResultSection}>{item.section}</div>
-                          )}
-                          <a
-                            className={searchResultItem}
-                            href={item.href}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleSelect(item.href);
-                            }}
-                          >
-                            {item.label}
-                          </a>
-                        </div>
-                      );
-                    });
-                  })()
-                )}
-              </div>
-            )}
+    <>
+      <header className={header}>
+        <div className={inner}>
+          <div className={leftGroup}>
+            <button
+              className={menuBtn}
+              onClick={() => setDrawerOpen(true)}
+              aria-label="Open navigation"
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>
+                hive
+              </span>
+            </button>
+            <Link to="/" className={brandLink}>
+              Sunbeam Studios
+            </Link>
+            <nav className={nav}>
+              {headerLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={isActive(link.label, link.href) ? navLinkActive : navLink}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
-          <button className={themeBtn} onClick={toggle} aria-label="Toggle theme">
-            {theme === "light" ? "\u2600" : "\u263E"}
-          </button>
+          <div className={rightGroup}>
+            <button
+              className={searchTriggerMobile}
+              onClick={() => inputRef.current?.focus()}
+              aria-label="Search"
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
+                search
+              </span>
+            </button>
+            <div className={searchWrapper} ref={wrapperRef}>
+              <span className={`material-symbols-outlined ${searchIcon}`}>search</span>
+              <input
+                ref={inputRef}
+                className={searchInput}
+                type="text"
+                placeholder="Search docs..."
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setShowResults(true);
+                }}
+                onFocus={() => setShowResults(true)}
+              />
+              <kbd className={kbdStyle}>&#x2318;K</kbd>
+              {showResults && query.trim() && (
+                <div className={searchDropdown}>
+                  {filtered.length === 0 ? (
+                    <div className={searchNoResults}>No results for "{query}"</div>
+                  ) : (
+                    (() => {
+                      let lastSection = "";
+                      return filtered.map((item) => {
+                        const showSection = item.section !== lastSection;
+                        lastSection = item.section;
+                        return (
+                          <div key={item.href + item.label}>
+                            {showSection && (
+                              <div className={searchResultSection}>{item.section}</div>
+                            )}
+                            <a
+                              className={searchResultItem}
+                              href={item.href}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleSelect(item.href);
+                              }}
+                            >
+                              {item.label}
+                            </a>
+                          </div>
+                        );
+                      });
+                    })()
+                  )}
+                </div>
+              )}
+            </div>
+            <button className={themeBtn} onClick={toggle} aria-label="Toggle theme">
+              <span className="material-symbols-outlined">{theme === "light" ? "light_mode" : "dark_mode"}</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile/Tablet navigation drawer */}
+      <DialogRoot open={drawerOpen} onOpenChange={(d) => setDrawerOpen(d.open)}>
+        <Portal>
+          <DialogBackdrop className={drawerBackdrop} />
+          <DialogPositioner className={drawerPositioner}>
+            <DialogContent className={drawerContent}>
+              <DialogCloseTrigger className={drawerCloseBtn} aria-label="Close navigation">
+                <span className="material-symbols-outlined">close</span>
+              </DialogCloseTrigger>
+              <Sidebar sections={docsSidebar} />
+            </DialogContent>
+          </DialogPositioner>
+        </Portal>
+      </DialogRoot>
+    </>
   );
 }
