@@ -1,0 +1,100 @@
+import { TabsRoot, TabList, TabTrigger, TabIndicator, TabContent } from "@ark-ui/react/tabs";
+import { css } from "styled-system/css";
+
+interface TabItem {
+  value: string;
+  label: string;
+}
+
+interface TabsProps {
+  items: TabItem[];
+  activeValue: string;
+  onChange: (value: string) => void;
+  variant?: "default" | "dark";
+}
+
+const tabList = css({
+  display: "flex",
+  gap: "32px",
+  borderBottom: "1px solid",
+  borderColor: "border.subtle",
+  marginBottom: "32px",
+});
+
+const tabListDark = css({
+  display: "flex",
+  gap: "24px",
+  borderBottom: "1px solid",
+  borderColor: "rgba(255,255,255,0.1)",
+  marginBottom: "24px",
+});
+
+const tabTrigger = css({
+  paddingBottom: "16px",
+  fontSize: "12px",
+  fontWeight: "button",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  bg: "transparent",
+  border: "none",
+  cursor: "pointer",
+  color: "text.muted",
+  borderBottom: "2px solid transparent",
+  transition: "all 0.15s ease",
+  _hover: {
+    color: "text.primary",
+  },
+  _selected: {
+    color: "sunbeam.orange",
+    borderBottomColor: "sunbeam.orange",
+  },
+});
+
+const tabTriggerDark = css({
+  paddingBottom: "12px",
+  fontSize: "11px",
+  fontWeight: "button",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  bg: "transparent",
+  border: "none",
+  cursor: "pointer",
+  color: "rgba(255,255,255,0.4)",
+  borderBottom: "2px solid transparent",
+  transition: "all 0.15s ease",
+  _hover: {
+    color: "rgba(255,255,255,0.6)",
+  },
+  _selected: {
+    color: "sunbeam.orange",
+    borderBottomColor: "sunbeam.orange",
+  },
+});
+
+export function Tabs({ items, activeValue, onChange, variant = "default" }: TabsProps) {
+  const isDark = variant === "dark";
+
+  return (
+    <TabsRoot
+      value={activeValue}
+      onValueChange={(details) => onChange(details.value)}
+    >
+      <TabList className={isDark ? tabListDark : tabList}>
+        {items.map((item) => (
+          <TabTrigger
+            key={item.value}
+            value={item.value}
+            className={isDark ? tabTriggerDark : tabTrigger}
+          >
+            {item.label}
+          </TabTrigger>
+        ))}
+        <TabIndicator />
+      </TabList>
+
+      {items.map((item) => (
+        <TabContent key={item.value} value={item.value} />
+      ))}
+    </TabsRoot>
+  );
+}

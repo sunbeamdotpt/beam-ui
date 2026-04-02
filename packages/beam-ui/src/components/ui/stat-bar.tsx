@@ -1,0 +1,145 @@
+import { css } from "styled-system/css";
+import { Icon } from "./icon";
+
+export interface ModelStats {
+  speed: number;
+  performance: number;
+  modalities: string[];
+  context: string;
+  priceIn: string;
+  priceOut: string;
+}
+
+const grid = css({
+  display: "grid",
+  gridTemplateColumns: "repeat(5, 1fr)",
+  paddingBlock: "24px",
+  marginBottom: "48px",
+});
+
+const cell = css({
+  paddingInline: "16px",
+  textAlign: "center",
+  borderRight: "1px solid",
+  borderColor: "border.subtle",
+  _last: {
+    borderRight: "none",
+  },
+});
+
+const label = css({
+  fontSize: "10px",
+  fontWeight: "button",
+  color: "text.muted",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  marginBottom: "8px",
+});
+
+const bars = css({
+  display: "flex",
+  justifyContent: "center",
+  gap: "2px",
+});
+
+const barFilled = css({
+  width: "6px",
+  height: "16px",
+  bg: "sunbeam.orange",
+  borderRadius: "sm",
+});
+
+const barEmpty = css({
+  width: "6px",
+  height: "16px",
+  bg: "bg.card",
+  borderRadius: "sm",
+});
+
+const modalityIcons = css({
+  display: "flex",
+  justifyContent: "center",
+  gap: "6px",
+  color: "text.primary",
+});
+
+const contextValue = css({
+  fontSize: "18px",
+  fontWeight: "button",
+  color: "sunbeam.orange",
+  lineHeight: 1.2,
+});
+
+const priceColumn = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "2px",
+});
+
+const priceLabel = css({
+  fontSize: "10px",
+  fontWeight: "button",
+  color: "sunbeam.orange",
+});
+
+const modalityIconMap: Record<string, string> = {
+  text: "description",
+  image: "image",
+  audio: "mic",
+};
+
+interface StatBarProps {
+  stats: ModelStats;
+}
+
+export function StatBar({ stats }: StatBarProps) {
+  return (
+    <section className={grid}>
+      {/* Speed */}
+      <div className={cell}>
+        <p className={label}>SPEED</p>
+        <div className={bars}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className={i < stats.speed ? barFilled : barEmpty} />
+          ))}
+        </div>
+      </div>
+
+      {/* Performance */}
+      <div className={cell}>
+        <p className={label}>PERFORMANCE</p>
+        <div className={bars}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className={i < stats.performance ? barFilled : barEmpty} />
+          ))}
+        </div>
+      </div>
+
+      {/* Modalities */}
+      <div className={cell}>
+        <p className={label}>MODALITIES</p>
+        <div className={modalityIcons}>
+          {stats.modalities.map((m) => (
+            <Icon key={m} name={modalityIconMap[m] ?? m} size={20} />
+          ))}
+        </div>
+      </div>
+
+      {/* Context */}
+      <div className={cell}>
+        <p className={label}>CONTEXT</p>
+        <p className={contextValue}>{stats.context}</p>
+      </div>
+
+      {/* Price */}
+      <div className={cell}>
+        <p className={label}>PRICE</p>
+        <div className={priceColumn}>
+          <span className={priceLabel}>{stats.priceIn} IN</span>
+          <span className={priceLabel}>{stats.priceOut} OUT</span>
+        </div>
+      </div>
+    </section>
+  );
+}

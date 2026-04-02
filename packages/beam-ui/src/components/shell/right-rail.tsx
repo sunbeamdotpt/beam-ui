@@ -1,0 +1,275 @@
+import { useEffect, useState, useCallback } from "react";
+import TurndownService from "turndown";
+import { css } from "styled-system/css";
+import { Icon } from "../ui/icon";
+
+const turndown = new TurndownService({
+  headingStyle: "atx",
+  codeBlockStyle: "fenced",
+  bulletListMarker: "-",
+});
+// Strip material icons
+turndown.addRule("materialIcons", {
+  filter: (node) => node.classList?.contains("material-symbols-outlined") ?? false,
+  replacement: () => "",
+});
+// Strip buttons (tab triggers, copy buttons, etc.)
+turndown.addRule("buttons", {
+  filter: "button",
+  replacement: () => "",
+});
+// Strip nav/breadcrumb elements
+turndown.addRule("navs", {
+  filter: "nav",
+  replacement: () => "",
+});
+// Strip small badge/pill elements (tag pills, read time, section badges)
+turndown.addRule("badges", {
+  filter: (node) => {
+    const fontSize = node.style?.fontSize || "";
+    const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase()
+      && (node.textContent?.trim().length ?? 0) < 20;
+    const isBadge = fontSize === "10px" || fontSize === "11px" || fontSize === "12px";
+    return (isBadge && isSmallCaps) || false;
+  },
+  replacement: () => "",
+});
+// Convert callout boxes to blockquotes
+turndown.addRule("callouts", {
+  filter: (node) => {
+    return node.getAttribute?.("style")?.includes("border-left")
+      && node.getAttribute?.("style")?.includes("4px") || false;
+  },
+  replacement: (_content, node) => {
+    const text = (node as HTMLElement).textContent?.trim() ?? "";
+    // Remove the label (PRO TIP, OPTIMIZATION TIP, etc.)
+    const cleaned = text.replace(/^(PRO TIP|OPTIMIZATION TIP|WARNING|INFO|TIP)\s*/i, "");
+    return `\n> **Tip:** ${cleaned}\n\n`;
+  },
+});
+
+const aside = css({
+  width: "200px",
+  minWidth: "200px",
+  position: "sticky",
+  top: "64px",
+  height: "calc(100vh - 64px)",
+  overflowY: "auto",
+  paddingInline: "24px",
+  paddingBlock: "40px",
+  borderLeft: "1px solid",
+  borderLeftColor: "border.subtle",
+});
+
+const heading = css({
+  fontSize: "10px",
+  fontWeight: "button",
+  textTransform: "uppercase",
+  letterSpacing: "0.2em",
+  color: "text.muted",
+  marginBottom: "20px",
+});
+
+const navList = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
+  paddingLeft: "12px",
+  borderLeft: "2px solid",
+  borderLeftColor: "border.subtle",
+});
+
+const navItem = css({
+  fontSize: "13px",
+  fontWeight: "body",
+  color: "text.muted",
+  textDecoration: "none",
+  transition: "color 0.15s",
+  cursor: "pointer",
+  _hover: { color: "text.primary" },
+});
+
+const navItemActive = css({
+  fontSize: "13px",
+  fontWeight: "button",
+  color: "accent",
+  textDecoration: "none",
+  cursor: "pointer",
+  marginLeft: "-14px",
+  paddingLeft: "12px",
+  borderLeft: "2px solid",
+  borderLeftColor: "accent",
+});
+
+const divider = css({
+  marginBlock: "24px",
+  border: "none",
+  borderTop: "1px solid",
+  borderTopColor: "border.subtle",
+});
+
+const actionList = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
+});
+
+const actionBtn = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  fontSize: "12px",
+  fontWeight: "body",
+  color: "text.muted",
+  textDecoration: "none",
+  cursor: "pointer",
+  transition: "color 0.15s",
+  background: "none",
+  border: "none",
+  padding: 0,
+  fontFamily: "body",
+  _hover: { color: "accent" },
+});
+
+const metaText = css({
+  fontSize: "11px",
+  color: "text.muted",
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+});
+
+interface RightRailProps {
+  items: Array<{ label: string; id: string }>;
+}
+
+export function RightRail({ items }: RightRailProps) {
+  const [activeId, setActiveId] = useState(items[0]?.id ?? "");
+
+  // Intersection Observer — track which section heading is in view
+  useEffect(() => {
+    const ids = items.map((i) => i.id);
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the topmost visible section
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      {
+        // Observe within the top 30% of viewport
+        rootMargin: "-64px 0px -70% 0px",
+        threshold: 0,
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [items]);
+
+  // Smooth scroll to section on click
+  const scrollTo = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Update URL hash without jumping
+      history.replaceState(null, "", `#${id}`);
+    }
+  }, []);
+
+  // On mount, check if URL has a hash and scroll to it
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const el = document.getElementById(hash);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+        setActiveId(hash);
+      }
+    }
+  }, []);
+
+  return (
+    <aside className={aside}>
+      {/* Section navigation */}
+      <h4 className={heading}>On This Page</h4>
+      <nav className={navList}>
+        {items.map((item) => (
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollTo(item.id);
+            }}
+            className={item.id === activeId ? navItemActive : navItem}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <hr className={divider} />
+
+      {/* Utility actions */}
+      <div className={actionList}>
+        <button
+          className={actionBtn}
+          onClick={() => {
+            const url = `${window.location.origin}${window.location.pathname}${activeId ? `#${activeId}` : ""}`;
+            navigator.clipboard?.writeText(url);
+          }}
+        >
+          <Icon name="link" size={14} />
+          <span>Copy permalink</span>
+        </button>
+        <button
+          className={actionBtn}
+          onClick={() => {
+            const el = document.querySelector('[data-content="center"]') ?? document.body;
+            const clone = el.cloneNode(true) as HTMLElement;
+            // Remove elements that shouldn't be in the markdown
+            clone.querySelectorAll('[data-breadcrumbs], [data-meta-bar]').forEach(n => n.remove());
+            let md = turndown.turndown(clone.innerHTML);
+            // Clean up badge text that leaked (ALL CAPS short strings on their own line)
+            md = md.replace(/^[A-Z][A-Z\s]{1,25}$/gm, "");
+            // Clean up empty link brackets
+            md = md.replace(/\[\s*\]\([^)]*\)/g, "");
+            // Clean up excessive newlines
+            md = md.replace(/\n{3,}/g, "\n\n");
+            navigator.clipboard?.writeText(md.trim());
+          }}
+        >
+          <Icon name="content_copy" size={14} />
+          <span>Copy as markdown</span>
+        </button>
+        <a className={actionBtn} href="https://src.sunbeam.pt/studio/beam-ui" target="_blank" rel="noopener noreferrer">
+          <Icon name="edit_note" size={14} />
+          <span>Edit in source control</span>
+        </a>
+        <button className={actionBtn} onClick={() => {}}>
+          <Icon name="bug_report" size={14} />
+          <span>Report an issue</span>
+        </button>
+      </div>
+
+      <hr className={divider} />
+
+      {/* Meta */}
+      <div className={metaText}>
+        <Icon name="schedule" size={12} />
+        <span>Last updated</span>
+      </div>
+    </aside>
+  );
+}

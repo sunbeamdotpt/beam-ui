@@ -1,0 +1,35 @@
+@layer reset, base, tokens, recipes, utilities;
+
+/* Styled scrollbars — applies to every scrollable container */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--colors-sunshine-300) transparent;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--colors-sunshine-300); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--colors-sunshine-700); }
+
+/* Dark mode scrollbar */
+[data-theme="dark"] * {
+  scrollbar-color: var(--colors-sunshine-700) transparent;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--colors-sunshine-700); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--colors-sunbeam-orange); }
+
+/* Code blocks get a subtler scrollbar */
+pre ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+pre ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+[id] {
+  scroll-margin-top: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
