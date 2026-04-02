@@ -7,24 +7,31 @@ const body = css({
   display: "flex",
   flex: 1,
   overflow: "hidden",
-  height: "calc(100vh - 64px)",
+  height: { base: "auto", lg: "calc(100vh - 64px)" },
+  minHeight: { base: "calc(100vh - 64px)", lg: "auto" },
+  flexDirection: { base: "column", lg: "row" },
+});
+
+const sidebarWrapper = css({
+  display: { base: "none", lg: "block" },
 });
 
 const panels = css({
   display: "flex",
   flex: 1,
-  overflow: "hidden",
+  overflow: { base: "visible", lg: "hidden" },
+  flexDirection: { base: "column", lg: "row" },
 });
 
 export const apiLeftPanel = css({
-  width: "55%",
+  width: { base: "100%", lg: "55%" },
   overflowY: "auto",
   bg: "bg.page",
   paddingInline: "24px",
 });
 
 export const apiRightPanel = css({
-  width: "45%",
+  width: { base: "100%", lg: "45%" },
   overflowY: "auto",
   bg: "sunbeam.black",
   color: "white",
@@ -33,7 +40,9 @@ export const apiRightPanel = css({
 export function ApiLayout() {
   return (
     <div className={body}>
-      <Sidebar sections={apiSidebar} />
+      <div className={sidebarWrapper}>
+        <Sidebar sections={apiSidebar} />
+      </div>
       <div className={panels}>
         <Outlet />
       </div>

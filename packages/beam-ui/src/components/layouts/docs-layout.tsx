@@ -13,10 +13,18 @@ const body = css({
   width: "100%",
 });
 
+const sidebarWrapper = css({
+  display: { base: "none", lg: "block" },
+});
+
+const rightRailWrapper = css({
+  display: { base: "none", lg: "block" },
+});
+
 const content = css({
   flex: 1,
   minWidth: 0,
-  paddingInline: "120px",
+  paddingInline: { base: "24px", md: "48px", lg: "120px" },
   paddingBlock: "32px",
   overflow: "visible",
 });
@@ -43,13 +51,19 @@ export function DocsLayout() {
 
   return (
     <div className={body}>
-      <Sidebar sections={docsSidebar} />
+      <div className={sidebarWrapper}>
+        <Sidebar sections={docsSidebar} />
+      </div>
       <div className={content}>
         <div className={center} data-content="center">
           <Outlet context={{ setToc } satisfies DocsContext} />
         </div>
       </div>
-      {toc.length > 0 && <RightRail items={toc} />}
+      {toc.length > 0 && (
+        <div className={rightRailWrapper}>
+          <RightRail items={toc} />
+        </div>
+      )}
     </div>
   );
 }

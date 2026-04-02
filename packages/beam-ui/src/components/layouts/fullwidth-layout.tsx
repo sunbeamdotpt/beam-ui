@@ -10,11 +10,15 @@ const body = css({
   width: "100%",
 });
 
+const sidebarWrapper = css({
+  display: { base: "none", lg: "block" },
+});
+
 const content = css({
   flex: 1,
   minWidth: 0,
   maxWidth: "900px",
-  paddingInline: "120px",
+  paddingInline: { base: "24px", md: "48px", lg: "120px" },
   paddingBlock: "32px",
   overflow: "visible",
 });
@@ -22,7 +26,9 @@ const content = css({
 export function FullwidthLayout() {
   return (
     <div className={body}>
-      <Sidebar sections={docsSidebar} />
+      <div className={sidebarWrapper}>
+        <Sidebar sections={docsSidebar} />
+      </div>
       <main className={content}>
         <Outlet />
       </main>
