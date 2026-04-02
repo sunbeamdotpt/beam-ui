@@ -219,6 +219,10 @@ export function TokensPage() {
         </p>
 
         <div className={installBlock}>
+          <span className={installPrompt}>#</span>
+          <span style={{ opacity: 0.5 }}>{" .npmrc: @sunbeam:registry=https://src.sunbeam.pt/api/packages/studio/npm/"}</span>
+        </div>
+        <div className={installBlock} style={{ marginTop: "8px" }}>
           <span className={installPrompt}>$</span>
           <span>npm install @sunbeam/beam-ui</span>
         </div>
