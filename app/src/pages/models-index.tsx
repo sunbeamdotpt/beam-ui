@@ -18,7 +18,7 @@ import {
 const page = css({
   maxWidth: "1000px",
   marginInline: "auto",
-  paddingInline: "64px",
+  paddingInline: { base: "24px", md: "40px", lg: "64px" },
   paddingBlock: "48px",
 });
 
@@ -27,10 +27,12 @@ const breadcrumbBar = css({
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "40px",
+  flexWrap: "wrap",
+  gap: "12px",
 });
 
 const heroTitle = css({
-  fontSize: "40px",
+  fontSize: { base: "28px", md: "34px", lg: "40px" },
   fontWeight: "heading",
   letterSpacing: "-0.02em",
   color: "text.primary",
@@ -53,7 +55,7 @@ const ctaRow = css({
 
 const featuredGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
   gap: "24px",
   marginBottom: "80px",
 });
@@ -117,7 +119,9 @@ const featuredDesc = css({
 const subsectionHeader = css({
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "flex-end",
+  alignItems: { base: "flex-start", md: "flex-end" },
+  flexDirection: { base: "column", md: "row" },
+  gap: { base: "8px", md: "16px" },
   marginBottom: "32px",
 });
 
@@ -136,7 +140,7 @@ const subsectionHint = css({
 
 const modelGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
   gap: "32px 48px",
   marginBottom: "64px",
 });

@@ -13,11 +13,12 @@ import { topics, featuredCookbooks } from "../data/cookbooks";
 const heroSection = css({
   maxWidth: "1440px",
   marginInline: "auto",
-  paddingInline: "48px",
+  paddingInline: { base: "24px", lg: "48px" },
   paddingBlock: "64px",
   display: "flex",
-  alignItems: "center",
-  gap: "48px",
+  flexDirection: { base: "column", lg: "row" },
+  alignItems: { base: "stretch", lg: "center" },
+  gap: { base: "32px", lg: "48px" },
 });
 
 const heroLeft = css({
@@ -50,7 +51,7 @@ const ctaRow = css({
 
 const heroRight = css({
   flex: 1,
-  maxWidth: "420px",
+  maxWidth: { base: "100%", lg: "420px" },
 });
 
 const recipeBox = css({
@@ -121,7 +122,7 @@ const recipeIcon = css({
 const sectionWrapper = css({
   maxWidth: "1440px",
   marginInline: "auto",
-  paddingInline: "48px",
+  paddingInline: { base: "24px", lg: "48px" },
   paddingBlock: "64px",
 });
 
@@ -159,16 +160,16 @@ const sectionHint = css({
 
 const topicGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
   gap: "24px",
 });
 
 /* Bento grid */
 const bentoGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(4, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" },
   gridTemplateRows: "auto auto",
-  gap: "32px",
+  gap: { base: "24px", lg: "32px" },
 });
 
 /* Grid icons for recipe box */

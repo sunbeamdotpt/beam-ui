@@ -86,7 +86,7 @@ const sectionTitle = css({
 
 const colorGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)" },
   gap: "16px",
   marginBottom: "40px",
 });
@@ -138,6 +138,7 @@ const semGrid = css({
   border: "1px solid",
   borderColor: "border.default",
   marginBottom: "40px",
+  overflowX: "auto",
 });
 
 const semHeader = css({

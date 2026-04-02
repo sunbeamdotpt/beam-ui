@@ -10,7 +10,7 @@ const hero = css({
   position: "relative",
   textAlign: "center",
   paddingBlock: "120px 100px",
-  paddingInline: "40px",
+  paddingInline: { base: "24px", lg: "48px" },
   overflow: "hidden",
 });
 
@@ -28,7 +28,7 @@ const heroGlow = css({
 
 const heroTitle = css({
   fontFamily: "heading",
-  fontSize: "82px",
+  fontSize: { base: "48px", md: "64px", lg: "82px" },
   fontWeight: "display",
   lineHeight: 1.0,
   letterSpacing: "-2.05px",
@@ -39,7 +39,7 @@ const heroTitle = css({
 
 const heroSubtitle = css({
   color: "text.secondary",
-  fontSize: "18px",
+  fontSize: { base: "16px", lg: "20px" },
   lineHeight: 1.5,
   marginBottom: "40px",
   position: "relative",
@@ -73,7 +73,7 @@ const section = css({
   maxWidth: "1280px",
   marginInline: "auto",
   paddingBlock: "80px",
-  paddingInline: "40px",
+  paddingInline: { base: "24px", lg: "48px" },
 });
 
 const sectionLabel = css({
@@ -115,7 +115,7 @@ const sectionDivider = css({
 /* Explore cards */
 const exploreGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
   gap: "20px",
 });
 
@@ -167,6 +167,7 @@ const installBlock = css({
   alignItems: "center",
   gap: "12px",
   border: "1px solid rgba(255,255,255,0.05)",
+  overflowX: "auto",
 });
 
 const installPrompt = css({

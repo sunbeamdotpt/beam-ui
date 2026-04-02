@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { css } from "styled-system/css";
+import { css, cx } from "styled-system/css";
 import { token } from "styled-system/tokens";
 import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout";
 import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";
@@ -69,7 +69,7 @@ const sectionTitle = css({
 
 const specimen = css({
   fontFamily: "heading",
-  fontSize: "48px",
+  fontSize: { base: "36px", lg: "48px" },
   fontWeight: "display",
   lineHeight: 1.1,
   color: "text.primary",
@@ -96,6 +96,7 @@ const weightSample = css({
   lineHeight: 1.1,
   color: "text.primary",
   marginBottom: "8px",
+  fontSize: { base: "28px", lg: "40px" },
 });
 
 const weightMeta = css({
@@ -110,6 +111,20 @@ const scaleItem = css({
   borderBottom: "1px solid",
   borderBottomColor: "border.subtle",
   _last: { borderBottom: "none" },
+  overflowWrap: "break-word",
+  wordBreak: "break-word",
+});
+
+const scaleItemLargeText = css({
+  fontSize: { base: "48px", lg: "82px" },
+});
+
+const scaleItemSectionText = css({
+  fontSize: { base: "36px", lg: "56px" },
+});
+
+const scaleItemSubLargeText = css({
+  fontSize: { base: "32px", lg: "48px" },
 });
 
 const scaleMeta = css({
@@ -197,7 +212,6 @@ export function TypographyPage() {
             className={weightSample}
             style={{
               fontFamily: token("fonts.heading"),
-              fontSize: "40px",
               fontWeight: w.value,
             }}
           >
@@ -211,25 +225,33 @@ export function TypographyPage() {
 
       {/* TYPE SCALE */}
       <h2 id="type-scale" className={sectionTitle}>Type Scale</h2>
-      {typeScale.map((s) => (
-        <div key={s.label} className={scaleItem}>
-          <div
-            style={{
-              fontFamily: token("fonts.heading"),
-              fontSize: s.size,
-              fontWeight: s.weight,
-              lineHeight: s.lh,
-              letterSpacing: s.ls,
-            }}
-          >
-            {s.sample}
+      {typeScale.map((s) => {
+        const responsiveClass =
+          s.size === "82px" ? scaleItemLargeText :
+          s.size === "56px" ? scaleItemSectionText :
+          s.size === "48px" ? scaleItemSubLargeText :
+          undefined;
+        return (
+          <div key={s.label} className={scaleItem}>
+            <div
+              className={responsiveClass ? cx(responsiveClass) : undefined}
+              style={{
+                fontFamily: token("fonts.heading"),
+                ...(responsiveClass ? {} : { fontSize: s.size }),
+                fontWeight: s.weight,
+                lineHeight: s.lh,
+                letterSpacing: s.ls,
+              }}
+            >
+              {s.sample}
+            </div>
+            <div className={scaleMeta}>
+              {s.label} -- {s.size} / {s.weight} / {s.lh}
+              {s.ls !== "normal" ? ` / ${s.ls}` : ""}
+            </div>
           </div>
-          <div className={scaleMeta}>
-            {s.label} -- {s.size} / {s.weight} / {s.lh}
-            {s.ls !== "normal" ? ` / ${s.ls}` : ""}
-          </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* PRINCIPLES */}
       <h2 id="principles" className={sectionTitle}>Principles</h2>

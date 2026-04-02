@@ -131,6 +131,7 @@ const tableWrapper = css({
   marginBottom: "32px",
   border: "1px solid",
   borderColor: "border.default",
+  overflowX: "auto",
 });
 
 const tableHeader = css({
@@ -138,6 +139,7 @@ const tableHeader = css({
   backgroundColor: "bg.card",
   padding: "12px 16px",
   gap: "8px",
+  minWidth: "600px",
 });
 
 const headerCell = css({
@@ -154,6 +156,7 @@ const rowEven = css({
   gap: "8px",
   backgroundColor: "bg.page",
   alignItems: "baseline",
+  minWidth: "600px",
 });
 
 const rowOdd = css({
@@ -162,6 +165,7 @@ const rowOdd = css({
   gap: "8px",
   backgroundColor: "bg.card",
   alignItems: "baseline",
+  minWidth: "600px",
 });
 
 const propNameCell = css({

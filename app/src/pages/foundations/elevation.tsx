@@ -92,7 +92,7 @@ const codeValue = css({
 
 const comparisonGrid = css({
   display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  gridTemplateColumns: { base: "1fr", md: "1fr 1fr" },
   gap: "24px",
   marginBottom: "40px",
 });

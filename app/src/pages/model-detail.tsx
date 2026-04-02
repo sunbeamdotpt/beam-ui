@@ -18,7 +18,7 @@ const model = featuredModels.find((m) => m.name === "Solar Medium 3.1")!;
 const page = css({
   maxWidth: "720px",
   marginInline: "auto",
-  paddingInline: "48px",
+  paddingInline: { base: "24px", lg: "48px" },
   paddingBlock: "48px",
 });
 
@@ -27,6 +27,8 @@ const breadcrumbBar = css({
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "0",
+  flexWrap: "wrap",
+  gap: "8px",
 });
 
 const tryStudio = css({
@@ -64,7 +66,8 @@ const heroGlow = css({
 
 const heroFlex = css({
   display: "flex",
-  gap: "32px",
+  flexDirection: { base: "column", md: "row" },
+  gap: { base: "24px", md: "32px" },
   alignItems: "flex-start",
   position: "relative",
   zIndex: 1,
@@ -180,7 +183,7 @@ const actionRow = css({
 
 const featuresGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
   gap: "16px",
 });
 

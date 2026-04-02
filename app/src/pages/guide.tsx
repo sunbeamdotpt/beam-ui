@@ -249,7 +249,7 @@ export function GuidePage() {
         <div
           className={css({
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
+            gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
             gap: "16px",
           })}
         >
@@ -343,6 +343,7 @@ const metaBar = css({
   justifyContent: "space-between",
   flexWrap: "wrap",
   gap: "8px",
+  flexDirection: { base: "column", md: "row" },
 });
 
 const metaActions = css({
@@ -350,6 +351,7 @@ const metaActions = css({
   alignItems: "center",
   gap: "16px",
   flexShrink: 0,
+  flexWrap: "wrap",
 });
 
 const ghostLink = css({
@@ -369,7 +371,7 @@ const ghostLink = css({
 const heroBanner = css({
   backgroundColor: "sunbeam.black",
   color: "white",
-  padding: "48px",
+  padding: { base: "32px", lg: "48px" },
   marginBottom: "48px",
   marginTop: "8px",
 });

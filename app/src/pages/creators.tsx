@@ -39,7 +39,7 @@ const creators: Creator[] = [
 const heroSection = css({
   maxWidth: "1440px",
   marginInline: "auto",
-  paddingInline: "48px",
+  paddingInline: { base: "24px", lg: "48px" },
   paddingBlock: "80px 64px",
   textAlign: "center",
   display: "flex",
@@ -48,7 +48,7 @@ const heroSection = css({
 });
 
 const heroTitle = css({
-  fontSize: "36px",
+  fontSize: { base: "28px", md: "36px", lg: "40px" },
   fontWeight: "heading",
   letterSpacing: "-0.03em",
   lineHeight: 1.15,
@@ -67,7 +67,7 @@ const heroSubtitle = css({
 const sectionWrapper = css({
   maxWidth: "1440px",
   marginInline: "auto",
-  paddingInline: "48px",
+  paddingInline: { base: "24px", lg: "48px" },
   paddingBlock: "0 80px",
 });
 
@@ -80,7 +80,7 @@ const sectionTitle = css({
 
 const creatorGrid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
   gap: "24px",
 });
 
