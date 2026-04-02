@@ -10,16 +10,16 @@ const footer = css({
 
 const grid = css({
   display: "grid",
-  gridTemplateColumns: "repeat(6, 1fr)",
+  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(6, 1fr)" },
   gap: "32px",
   maxWidth: "1440px",
   marginInline: "auto",
-  paddingInline: "48px",
+  paddingInline: { base: "24px", md: "48px", lg: "48px" },
   paddingBlock: "64px",
 });
 
 const brandCol = css({
-  gridColumn: "span 2",
+  gridColumn: { base: "span 2", md: "span 3", lg: "span 2" },
 });
 
 const brandName = css({
