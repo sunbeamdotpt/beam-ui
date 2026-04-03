@@ -30,10 +30,13 @@ export function Toast({
         borderVariants[variant],
         visible ? visibleStyle : hiddenStyle
       )}
+      role={variant === "error" ? "alert" : "status"}
+      aria-live={variant === "error" ? "assertive" : "polite"}
+      aria-atomic="true"
     >
       <span className={messageStyle}>{message}</span>
       {onDismiss && (
-        <button className={closeBtn} onClick={onDismiss} type="button">
+        <button className={closeBtn} onClick={onDismiss} type="button" aria-label="Close notification">
           <Icon name="close" size={16} />
         </button>
       )}

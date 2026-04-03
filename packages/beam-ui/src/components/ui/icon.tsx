@@ -5,9 +5,11 @@ interface IconProps {
   size?: number | string;
   filled?: boolean;
   className?: string;
+  /** When provided, the icon is treated as meaningful: role="img" + aria-label. Otherwise aria-hidden="true". */
+  label?: string;
 }
 
-export function Icon({ name, size, filled, className }: IconProps) {
+export function Icon({ name, size, filled, className, label }: IconProps) {
   return (
     <span
       className={cx(
@@ -24,6 +26,9 @@ export function Icon({ name, size, filled, className }: IconProps) {
         }),
         className
       )}
+      {...(label
+        ? { role: "img", "aria-label": label }
+        : { "aria-hidden": true as const })}
     >
       {name}
     </span>

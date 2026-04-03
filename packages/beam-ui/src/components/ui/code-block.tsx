@@ -42,6 +42,7 @@ function PillToggle({
         <button
           key={opt}
           onClick={() => onChange(opt)}
+          aria-pressed={value === opt}
           className={cx(
             css({
               padding: "4px 12px",
@@ -111,6 +112,7 @@ export function CodeBlock({
               <button
                 key={opt}
                 onClick={() => setStream(opt)}
+                aria-pressed={stream === opt}
                 className={cx(
                   css({
                     fontSize: "12px",
@@ -133,17 +135,15 @@ export function CodeBlock({
               </button>
             ))}
           </div>
-          <button onClick={handleCopy} className={copyBtn} title="Copy code">
+          <button onClick={handleCopy} className={copyBtn} title="Copy code" aria-label="Copy code">
             <Icon
               name={copied ? "check" : "content_copy"}
               size={16}
               className={css({ color: copied ? "code.success" : "rgba(255,255,255,0.35)" })}
             />
-            {copied && (
-              <span className={css({ fontSize: "10px", color: "code.success", fontFamily: "body", fontWeight: "button", textTransform: "uppercase" })}>
-                Copied!
-              </span>
-            )}
+            <span aria-live="polite" className={css({ fontSize: "10px", color: "code.success", fontFamily: "body", fontWeight: "button", textTransform: "uppercase" })}>
+              {copied ? "Copied!" : ""}
+            </span>
           </button>
         </div>
       )}
@@ -166,17 +166,15 @@ export function CodeBlock({
           <PillToggle options={modeToggle.options} value={mode} onChange={setMode} />
         )}
         {!streamToggle && (
-          <button onClick={handleCopy} className={copyBtn} title="Copy code">
+          <button onClick={handleCopy} className={copyBtn} title="Copy code" aria-label="Copy code">
             <Icon
               name={copied ? "check" : "content_copy"}
               size={16}
               className={css({ color: copied ? "code.success" : "rgba(255,255,255,0.35)" })}
             />
-            {copied && (
-              <span className={css({ fontSize: "10px", color: "code.success", fontFamily: "body", fontWeight: "button", textTransform: "uppercase" })}>
-                Copied!
-              </span>
-            )}
+            <span aria-live="polite" className={css({ fontSize: "10px", color: "code.success", fontFamily: "body", fontWeight: "button", textTransform: "uppercase" })}>
+              {copied ? "Copied!" : ""}
+            </span>
           </button>
         )}
       </div>

@@ -17,6 +17,8 @@ interface TableProps {
   onSelect?: (selectedKeys: string[]) => void;
   rowKey?: string;
   className?: string;
+  /** Accessible caption for the table (visually hidden by default) */
+  caption?: string;
 }
 
 export function Table({
@@ -27,6 +29,7 @@ export function Table({
   onSelect,
   rowKey = "id",
   className,
+  caption,
 }: TableProps) {
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
@@ -61,24 +64,38 @@ export function Table({
   return (
     <div className={cx(wrapper, className)}>
       <table className={table}>
+        {caption && (
+          <caption className={srOnly}>{caption}</caption>
+        )}
         <thead>
           <tr className={headerRow}>
             {selectable && (
-              <th className={cx(headerCell, css({ width: "40px" }))}>
+              <th scope="col" className={cx(headerCell, css({ width: "40px" }))} aria-label="Select row">
                 <input
                   type="checkbox"
                   checked={rows.length > 0 && selected.size === rows.length}
                   onChange={toggleAll}
                   className={checkbox}
+                  aria-label="Select all rows"
                 />
               </th>
             )}
             {columns.map((col) => (
               <th
                 key={col.key}
+                scope="col"
                 className={headerCell}
                 style={col.width ? { width: col.width } : undefined}
                 onClick={col.sortable ? () => handleSort(col.key) : undefined}
+                aria-sort={
+                  col.sortable
+                    ? sortKey === col.key
+                      ? sortDir === "asc"
+                        ? "ascending"
+                        : "descending"
+                      : "none"
+                    : undefined
+                }
               >
                 <span className={headerLabel}>
                   {col.label}
@@ -115,6 +132,7 @@ export function Table({
                       checked={selected.has(key)}
                       onChange={() => toggleRow(key)}
                       className={checkbox}
+                      aria-label={`Select row ${key}`}
                     />
                   </td>
                 )}
@@ -194,4 +212,16 @@ const dataCell = css({
 const checkbox = css({
   accentColor: "sunbeam.orange",
   cursor: "pointer",
+});
+
+const srOnly = css({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clip: "rect(0,0,0,0)",
+  whiteSpace: "nowrap",
+  border: 0,
 });

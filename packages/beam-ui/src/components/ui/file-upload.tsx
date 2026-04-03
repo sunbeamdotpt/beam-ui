@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, type DragEvent } from "react";
+import { useState, useRef, useCallback, type DragEvent, type KeyboardEvent } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -65,6 +65,15 @@ export function FileUpload({
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      tabIndex={0}
+      role="button"
+      aria-label="Upload files"
+      onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
+        if ((e.key === "Enter" || e.key === " ") && !disabled) {
+          e.preventDefault();
+          inputRef.current?.click();
+        }
+      }}
     >
       <input
         ref={inputRef}

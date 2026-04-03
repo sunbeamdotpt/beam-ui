@@ -84,6 +84,18 @@ const priceLabel = css({
   color: "sunbeam.orange",
 });
 
+const srOnly = css({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clip: "rect(0,0,0,0)",
+  whiteSpace: "nowrap",
+  border: 0,
+});
+
 const modalityIconMap: Record<string, string> = {
   text: "description",
   image: "image",
@@ -98,23 +110,25 @@ export function StatBar({ stats }: StatBarProps) {
   return (
     <section className={grid}>
       {/* Speed */}
-      <div className={cell}>
+      <div className={cell} aria-label={`Speed: ${stats.speed} out of 5`}>
         <p className={label}>SPEED</p>
-        <div className={bars}>
+        <div className={bars} aria-hidden="true">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className={i < stats.speed ? barFilled : barEmpty} />
           ))}
         </div>
+        <span className={srOnly}>{stats.speed} out of 5</span>
       </div>
 
       {/* Performance */}
-      <div className={cell}>
+      <div className={cell} aria-label={`Performance: ${stats.performance} out of 5`}>
         <p className={label}>PERFORMANCE</p>
-        <div className={bars}>
+        <div className={bars} aria-hidden="true">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className={i < stats.performance ? barFilled : barEmpty} />
           ))}
         </div>
+        <span className={srOnly}>{stats.performance} out of 5</span>
       </div>
 
       {/* Modalities */}
