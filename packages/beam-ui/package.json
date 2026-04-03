@@ -1,13 +1,19 @@
 {
   "name": "@sunbeam/beam-ui",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "type": "module",
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./preset": "./src/preset.ts",
+    "./styles/fonts.css": "./src/styles/fonts.css",
+    "./styles/global.css": "./src/styles/global.css",
     "./components/*": "./src/components/*",
     "./hooks/*": "./src/hooks/*",
-    "./data/*": "./src/data/*"
+    "./data/*": "./src/data/*",
+    "./form": "./src/form/index.tsx",
+    "./stores/*": "./src/stores/*",
+    "./i18n": "./src/i18n/index.ts"
   },
   "publishConfig": {
     "registry": "https://src.sunbeam.pt/api/packages/studio/npm/"
