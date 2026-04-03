@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DialogRoot,
@@ -72,6 +72,16 @@ export function KanbanCardDetail({
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(card.title);
   const [description, setDescription] = useState(card.description ?? "");
+
+  // Escape key closes the modal (safety net alongside Ark Dialog's built-in handler)
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open, onClose]);
 
   const handleSave = () => {
     onSave?.({ ...card, title, description });
