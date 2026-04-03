@@ -1,23 +1,43 @@
 /*
  * Beam Design Language — Font Declarations
  *
- * Usage:
+ * Two ways to load:
+ *
+ * Option A (recommended) — HTML <link> tags in your <head>:
+ *   This avoids bundler processing and lets Google Fonts serve
+ *   browser-optimized @font-face declarations automatically.
+ *
+ *   <link rel="preconnect" href="https://fonts.googleapis.com">
+ *   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ *   <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+ *   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+ *   <link href="https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceArgonVarVF[wght].woff2" rel="preload" as="font" type="font/woff2" crossorigin>
+ *
+ *   Then import just this file for the .material-symbols-outlined class and Monaspace @font-face:
+ *   <link rel="stylesheet" href="path/to/node_modules/@sunbeam/beam-ui/src/styles/fonts.css">
+ *
+ * Option B — JS import (simpler, but bundles the @import):
  *   import "@sunbeam/beam-ui/styles/fonts.css"
  *
- * Or add to your HTML <head>:
- *   <link rel="stylesheet" href="@sunbeam/beam-ui/styles/fonts.css">
+ *   This uses @import to pull fonts from Google/GitHub CDNs at runtime.
+ *   Works well with Vite and most bundlers.
  */
 
-/* Ysabeau Infant — Variable weight (body + heading) */
-@font-face {
-  font-family: 'Ysabeau Infant';
-  src: url('https://fonts.gstatic.com/s/ysabeauinfant/v2/hv-Alz1C9OYadWMF5GBiKthR4g.woff2') format('woff2');
-  font-weight: 1 999;
-  font-style: normal;
-  font-display: swap;
-}
+/* ------------------------------------------------------------------ */
+/* Option B: @import for JS-imported usage                             */
+/* These are ignored when fonts are loaded via <link> tags (Option A)  */
+/* since the browser deduplicates matching @font-face declarations.    */
+/* ------------------------------------------------------------------ */
 
-/* Monaspace Argon — Monospace */
+/* Ysabeau Infant — Variable weight (body + heading) */
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+/* Material Symbols Outlined — Icons */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ------------------------------------------------------------------ */
+/* Monaspace Argon — Monospace (GitHub CDN, no Google Fonts equivalent)*/
+/* ------------------------------------------------------------------ */
 @font-face {
   font-family: 'Monaspace Argon';
   src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceArgonVarVF%5Bwght%5D.woff2') format('woff2');
@@ -26,15 +46,9 @@
   font-display: swap;
 }
 
-/* Material Symbols Outlined — Icons */
-@font-face {
-  font-family: 'Material Symbols Outlined';
-  font-style: normal;
-  font-weight: 100 700;
-  src: url('https://fonts.gstatic.com/s/materialsymbolsoutlined/v243/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsLjBuVY.woff2') format('woff2');
-  font-display: swap;
-}
-
+/* ------------------------------------------------------------------ */
+/* Material Symbols icon class                                         */
+/* ------------------------------------------------------------------ */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
