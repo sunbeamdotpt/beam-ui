@@ -38,7 +38,9 @@ import { CheckboxPage } from "./pages/components/checkbox-page";
 import { SelectPage } from "./pages/components/select-page";
 import { TextInputPage } from "./pages/components/text-input-page";
 import { DialogPage } from "./pages/components/dialog-page";
+import { DropdownMenuPage } from "./pages/components/dropdown-menu-page";
 import { ToastPage } from "./pages/components/toast-page";
+import { FileListPage } from "./pages/components/file-list-page";
 import { FileUploadPage } from "./pages/components/file-upload-page";
 import { TooltipPage } from "./pages/components/tooltip-page";
 import { ContextMenuPage } from "./pages/components/context-menu-page";
@@ -124,8 +126,10 @@ export function App() {
           <Route path="components/combobox" element={<ComboboxPage />} />
           <Route path="components/context-menu" element={<ContextMenuPage />} />
           <Route path="components/dialog" element={<DialogPage />} />
+          <Route path="components/dropdown-menu" element={<DropdownMenuPage />} />
           <Route path="components/editable" element={<EditablePage />} />
           <Route path="components/empty-state" element={<EmptyStatePage />} />
+          <Route path="components/file-list" element={<FileListPage />} />
           <Route path="components/file-upload" element={<FileUploadPage />} />
           <Route path="components/hover-card" element={<HoverCardPage />} />
           <Route path="components/icon" element={<IconPage />} />
