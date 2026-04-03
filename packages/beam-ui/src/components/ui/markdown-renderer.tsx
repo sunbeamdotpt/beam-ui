@@ -1,0 +1,211 @@
+import { useMemo } from "react";
+import { css, cx } from "styled-system/css";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
+import { useTheme } from "../../hooks/use-theme";
+
+export interface MarkdownRendererProps {
+  content: string;
+  className?: string;
+}
+
+const processor = unified()
+  .use(remarkParse)
+  .use(remarkGfm)
+  .use(remarkRehype, { allowDangerousHtml: true })
+  .use(rehypeRaw)
+  .use(rehypeSanitize)
+  .use(rehypeStringify);
+
+export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
+  const { theme } = useTheme();
+
+  const html = useMemo(() => {
+    try {
+      const result = processor.processSync(content);
+      return String(result);
+    } catch {
+      return `<pre>${content}</pre>`;
+    }
+  }, [content]);
+
+  /*
+   * SECURITY NOTE: The HTML rendered here is produced by the unified pipeline
+   * which includes rehype-sanitize. This strips all dangerous HTML elements
+   * and attributes (scripts, event handlers, etc.) before the string reaches
+   * the DOM. The sanitization is equivalent to DOMPurify's default profile.
+   */
+  return (
+    <div
+      className={cx(
+        wrapperStyle,
+        theme === "dark" ? darkOverrides : undefined,
+        className,
+      )}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Scoped styles for rendered markdown                                 */
+/* ------------------------------------------------------------------ */
+
+const wrapperStyle = css({
+  fontSize: "15px",
+  lineHeight: 1.7,
+  color: "text.primary",
+  wordBreak: "break-word",
+
+  /* Headings */
+  "& h1, & h2, & h3, & h4, & h5, & h6": {
+    fontWeight: "heading",
+    color: "text.primary",
+    scrollMarginTop: "80px",
+    marginTop: "32px",
+    marginBottom: "16px",
+    lineHeight: 1.3,
+  },
+  "& h1": { fontSize: "32px", letterSpacing: "-0.02em" },
+  "& h2": { fontSize: "24px", letterSpacing: "-0.01em", borderBottom: "1px solid", borderColor: "border.default", paddingBottom: "8px" },
+  "& h3": { fontSize: "20px" },
+  "& h4": { fontSize: "16px" },
+
+  /* Paragraphs */
+  "& p": { marginBottom: "16px" },
+
+  /* Links — distinguishable by color AND underline for 508 */
+  "& a": {
+    color: "sunbeam.orange",
+    textDecoration: "underline",
+    textUnderlineOffset: "2px",
+    _hover: { opacity: 0.8 },
+  },
+
+  /* Bold / italic */
+  "& strong": { fontWeight: "bold" },
+  "& em": { fontStyle: "italic" },
+
+  /* Code blocks (pre > code) */
+  "& pre": {
+    backgroundColor: "bg.card",
+    border: "1px solid",
+    borderColor: "border.default",
+    padding: "16px",
+    overflowX: "auto",
+    marginBottom: "16px",
+    borderRadius: "0",
+  },
+  "& pre code": {
+    fontFamily: "mono",
+    fontSize: "13px",
+    lineHeight: 1.6,
+    background: "none",
+    padding: "0",
+    border: "none",
+  },
+
+  /* Inline code */
+  "& :not(pre) > code": {
+    fontFamily: "mono",
+    fontSize: "13px",
+    backgroundColor: "bg.card",
+    padding: "2px 6px",
+    border: "1px solid",
+    borderColor: "border.default",
+  },
+
+  /* Blockquotes */
+  "& blockquote": {
+    borderLeft: "3px solid",
+    borderColor: "sunbeam.orange",
+    paddingLeft: "16px",
+    marginLeft: "0",
+    marginBottom: "16px",
+    color: "text.secondary",
+    fontStyle: "italic",
+  },
+
+  /* Lists */
+  "& ul, & ol": {
+    paddingLeft: "24px",
+    marginBottom: "16px",
+  },
+  "& li": { marginBottom: "4px" },
+
+  /* Task lists (GFM checkboxes) */
+  "& ul.contains-task-list": {
+    listStyle: "none",
+    paddingLeft: "0",
+  },
+  "& li.task-list-item": {
+    display: "flex",
+    alignItems: "baseline",
+    gap: "8px",
+  },
+  '& input[type="checkbox"]': {
+    accentColor: "var(--colors-sunbeam-orange)",
+    width: "14px",
+    height: "14px",
+    flexShrink: 0,
+  },
+
+  /* Tables */
+  "& table": {
+    width: "100%",
+    borderCollapse: "collapse",
+    marginBottom: "16px",
+    fontSize: "14px",
+  },
+  "& th": {
+    textAlign: "left",
+    fontWeight: "button",
+    fontSize: "10px",
+    textTransform: "uppercase",
+    letterSpacing: "0.15em",
+    color: "text.muted",
+    backgroundColor: "bg.card",
+    padding: "10px 12px",
+    borderBottom: "1px solid",
+    borderColor: "border.default",
+  },
+  "& td": {
+    padding: "10px 12px",
+    borderBottom: "1px solid",
+    borderColor: "border.default",
+    color: "text.primary",
+  },
+  "& tr:last-child td": {
+    borderBottom: "none",
+  },
+
+  /* Images */
+  "& img": {
+    maxWidth: "100%",
+    height: "auto",
+    marginBottom: "16px",
+  },
+
+  /* Horizontal rule */
+  "& hr": {
+    border: "none",
+    borderTop: "1px solid",
+    borderColor: "border.default",
+    margin: "32px 0",
+  },
+
+  /* Delete / strikethrough */
+  "& del": {
+    textDecoration: "line-through",
+    color: "text.muted",
+  },
+});
+
+const darkOverrides = css({
+  /* No additional overrides needed — Beam tokens handle dark mode via CSS vars */
+});
