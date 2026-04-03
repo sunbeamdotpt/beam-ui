@@ -1,0 +1,1305 @@
+# Beam Design Language — Full API Reference
+
+> A comprehensive React component library by Sunbeam Studios for building design system interfaces.
+
+## Overview
+- **Package:** `@sunbeam/beam-ui`
+- **Registry:** https://src.sunbeam.pt/api/packages/studio/npm/
+- **Source:** https://src.sunbeam.pt/studio/beam-ui
+- **Docs:** https://design.sunbeam.pt
+- **Stack:** React 19, Panda CSS, Ark UI v4, TypeScript
+
+## Install
+```bash
+npm install @sunbeam/beam-ui --registry=https://src.sunbeam.pt/api/packages/studio/npm/
+```
+
+## Foundations
+- **Colors:** Warm sunbeam palette — primary orange (#fa520f), sunshine scale (#ff8a00 to #ffe295), semantic tokens for light/dark mode
+- **Typography:** Ysabeau Infant (body/heading), Monaspace Argon (monospace)
+- **Spacing:** 4px base unit scale
+- **Elevation:** Golden shadow system with hover lift effects
+- **Accessibility:** Section 508 + WCAG 2.1 AA compliant, keyboard navigable, screen reader tested
+
+## Components
+
+### Button
+
+> Primary action element with multiple visual variants.
+
+**Import:**
+```tsx
+import { Button } from "@sunbeam/beam-ui/components/ui/button"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| children | `ReactNode` | Yes | Button label content |
+| variant | `"dark" | "cream" | "ghost" | "text" | "primary"` | No | Visual style variant |
+| href | `string` | No | Renders as a Link when provided |
+| onClick | `() => void` | No | Click handler |
+| type | `"button" | "submit" | "reset"` | No | HTML button type |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Button variant="dark" onClick={handleClick}>Submit</Button>
+```
+
+**Variants:**
+- dark: Black background, white text
+- cream: Gold background with border
+- ghost: Transparent with border
+- text: Text-only link style
+- primary: Brand orange background
+
+---
+
+### Badge
+
+> Status indicator label for tagging content with semantic meaning.
+
+**Import:**
+```tsx
+import { Badge } from "@sunbeam/beam-ui/components/ui/badge"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| children | `ReactNode` | Yes | Badge label |
+| variant | `"premier" | "open" | "beta" | "experimental" | "deprecated" | "new" | "stable" | "preview" | "community" | "partner" | "verified" | "featured" | "section"` | No | Visual variant |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Badge variant="beta">Beta</Badge>
+```
+
+**Variants:**
+- premier: Orange background
+- open: Gold background
+- beta: Yellow background
+- deprecated: Muted style
+- section: Section header label
+
+---
+
+### Card
+
+> Content container with icon, title, description, and call-to-action link.
+
+**Import:**
+```tsx
+import { Card } from "@sunbeam/beam-ui/components/ui/card"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| icon | `string` | Yes | Material Symbols icon name |
+| title | `string` | Yes | Card heading |
+| description | `string` | Yes | Card body text |
+| ctaLabel | `string` | Yes | Call-to-action button text |
+| ctaHref | `string` | Yes | CTA link destination |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Card icon="rocket" title="Get Started" description="Build your first app" ctaLabel="Read docs" ctaHref="/docs" />
+```
+
+---
+
+### Icon
+
+> Material Symbols icon wrapper with accessibility support.
+
+**Import:**
+```tsx
+import { Icon } from "@sunbeam/beam-ui/components/ui/icon"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| name | `string` | Yes | Material Symbols icon name |
+| size | `number | string` | No | Icon size in px |
+| filled | `boolean` | No | Use filled icon variant |
+| label | `string` | No | Accessible label (sets role=img) |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Icon name="settings" size={24} filled />
+```
+
+**Features:**
+- Uses Material Symbols Outlined
+- Auto aria-hidden when no label provided
+- Supports filled/outlined toggle via font variation settings
+
+---
+
+### Avatar
+
+> User avatar with image support and initial fallback.
+
+**Import:**
+```tsx
+import { Avatar } from "@sunbeam/beam-ui/components/ui/avatar"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| name | `string` | Yes | User display name (used for initials) |
+| src | `string` | No | Image URL |
+| size | `"sm" | "md" | "lg"` | No | Size: sm (32px), md (40px), lg (56px) |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Avatar name="Sienna Cruz" src="/avatar.jpg" size="md" />
+```
+
+**Variants:**
+- sm: 32px
+- md: 40px (default)
+- lg: 56px
+
+---
+
+### Callout
+
+> Highlighted information block for tips, warnings, and info notices.
+
+**Import:**
+```tsx
+import { Callout } from "@sunbeam/beam-ui/components/ui/callout"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| children | `ReactNode` | Yes | Callout content |
+| variant | `"tip" | "warning" | "info"` | No | Visual variant with icon and border color |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Callout variant="tip">Use keyboard shortcuts for faster navigation.</Callout>
+```
+
+**Variants:**
+- tip: Orange border with lightbulb icon
+- warning: Gold border with warning icon
+- info: Sunshine border with info icon
+
+---
+
+### CodeBlock
+
+> Tabbed code display with optional toggle groups for streaming, version, and mode variants.
+
+**Import:**
+```tsx
+import { CodeBlock } from "@sunbeam/beam-ui/components/ui/code-block"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| tabs | `CodeTab[]` | Yes | Array of code tabs with label and content/variants |
+| streamToggle | `ToggleGroup` | No | Toggle for streaming vs non-streaming |
+| versionToggle | `ToggleGroup` | No | Toggle for API version |
+| modeToggle | `ToggleGroup` | No | Toggle for sync/async mode |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<CodeBlock tabs={[{ label: "Python", content: <pre>print("hello")</pre> }]} />
+```
+
+**Features:**
+- Multiple language tabs
+- Pill toggle groups for variants
+- Copy-to-clipboard support
+
+---
+
+### Tabs
+
+> Navigation tabs built on Ark UI with default and dark variants.
+
+**Import:**
+```tsx
+import { Tabs } from "@sunbeam/beam-ui/components/ui/tabs"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| items | `TabItem[]` | Yes | Tab items with value and label |
+| activeValue | `string` | Yes | Currently active tab value |
+| onChange | `(value: string) => void` | Yes | Tab change handler |
+| variant | `"default" | "dark"` | No | Visual style |
+
+**Usage:**
+```tsx
+<Tabs items={[{ value: "a", label: "Tab A" }]} activeValue="a" onChange={setTab} />
+```
+
+**Variants:**
+- default: Light underline style
+- dark: Dark background style
+
+---
+
+### Tooltip
+
+> Hoverable tooltip overlay built on Ark UI.
+
+**Import:**
+```tsx
+import { Tooltip } from "@sunbeam/beam-ui/components/ui/tooltip"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| content | `string` | Yes | Tooltip text |
+| children | `ReactNode` | Yes | Trigger element |
+| position | `"top" | "bottom" | "left" | "right"` | No | Tooltip placement |
+
+**Usage:**
+```tsx
+<Tooltip content="Settings"><Icon name="settings" /></Tooltip>
+```
+
+---
+
+### Dialog
+
+> Modal dialog with title, content area, and optional action buttons. Built on Ark UI.
+
+**Import:**
+```tsx
+import { Dialog } from "@sunbeam/beam-ui/components/ui/dialog"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| open | `boolean` | Yes | Controlled open state |
+| onClose | `() => void` | Yes | Close handler |
+| title | `string` | Yes | Dialog heading |
+| children | `ReactNode` | Yes | Dialog body content |
+| actions | `ReactNode` | No | Footer action buttons |
+
+**Usage:**
+```tsx
+<Dialog open={isOpen} onClose={() => setOpen(false)} title="Confirm">
+  <p>Are you sure?</p>
+</Dialog>
+```
+
+---
+
+### Select
+
+> Dropdown select input built on Ark UI with search and custom styling.
+
+**Import:**
+```tsx
+import { Select } from "@sunbeam/beam-ui/components/ui/select"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| options | `SelectOption[]` | Yes | Array of { value, label } options |
+| value | `string` | Yes | Selected value |
+| onChange | `(value: string) => void` | Yes | Change handler |
+| placeholder | `string` | No | Placeholder text |
+| disabled | `boolean` | No | Disable the select |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Select options={[{ value: "a", label: "Option A" }]} value={val} onChange={setVal} />
+```
+
+---
+
+### Checkbox
+
+> Checkbox input with label, indeterminate state, and Beam styling.
+
+**Import:**
+```tsx
+import { Checkbox } from "@sunbeam/beam-ui/components/ui/checkbox"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| checked | `boolean` | Yes | Checked state |
+| onChange | `(checked: boolean) => void` | Yes | Change handler |
+| label | `string` | No | Label text |
+| disabled | `boolean` | No | Disable the checkbox |
+| indeterminate | `boolean` | No | Show indeterminate state |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Checkbox checked={isChecked} onChange={setChecked} label="Accept terms" />
+```
+
+---
+
+### TextInput
+
+> Text input field with label, error state, and multiple input types.
+
+**Import:**
+```tsx
+import { TextInput } from "@sunbeam/beam-ui/components/ui/text-input"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| value | `string` | Yes | Input value |
+| onChange | `(value: string) => void` | Yes | Change handler |
+| placeholder | `string` | No | Placeholder text |
+| label | `string` | No | Label text |
+| error | `string` | No | Error message |
+| disabled | `boolean` | No | Disable the input |
+| type | `"text" | "password" | "email" | "number"` | No | HTML input type |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<TextInput value={name} onChange={setName} label="Name" placeholder="Enter name" />
+```
+
+---
+
+### SearchInput
+
+> Search input with icon and keyboard shortcut hint.
+
+**Import:**
+```tsx
+import { SearchInput } from "@sunbeam/beam-ui/components/ui/search-input"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<SearchInput />
+```
+
+**Features:**
+- Built-in search icon
+- Keyboard shortcut badge (Cmd+K)
+- Read-only trigger for search dialog
+
+---
+
+### Table
+
+> Data table with sortable columns, row selection, and accessible caption.
+
+**Import:**
+```tsx
+import { Table } from "@sunbeam/beam-ui/components/ui/table"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| columns | `Column[]` | Yes | Column definitions with key, label, sortable, width |
+| rows | `Record<string, any>[]` | Yes | Row data array |
+| onSort | `(key: string, dir: "asc" | "desc") => void` | No | Sort handler |
+| selectable | `boolean` | No | Enable row selection checkboxes |
+| onSelect | `(selectedKeys: string[]) => void` | No | Selection change handler |
+| rowKey | `string` | No | Key field for row identity (default: "id") |
+| caption | `string` | No | Accessible table caption |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Table
+  columns={[{ key: "name", label: "Name", sortable: true }]}
+  rows={[{ id: "1", name: "Item" }]}
+/>
+```
+
+**Features:**
+- Sortable columns with direction indicators
+- Select-all and per-row checkboxes
+- Visually hidden accessible caption
+
+---
+
+### List
+
+> Flexible list component with icon support and multiple layout variants.
+
+**Import:**
+```tsx
+import { List } from "@sunbeam/beam-ui/components/ui/list"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| items | `ListItem[]` | Yes | Array of { label, description?, icon?, href? } |
+| ordered | `boolean` | No | Render as ordered list |
+| variant | `"default" | "compact" | "bordered"` | No | Layout variant |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<List items={[{ label: "Item 1", icon: "star" }]} variant="bordered" />
+```
+
+**Variants:**
+- default: Standard spacing
+- compact: Tight spacing
+- bordered: Items with border separators
+
+---
+
+### Pagination
+
+> Page navigation with page size selector and ellipsis collapse.
+
+**Import:**
+```tsx
+import { Pagination } from "@sunbeam/beam-ui/components/ui/pagination"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| currentPage | `number` | Yes | Active page number |
+| totalPages | `number` | Yes | Total number of pages |
+| onPageChange | `(page: number) => void` | Yes | Page change handler |
+| pageSize | `number` | No | Current page size |
+| onPageSizeChange | `(size: number) => void` | No | Page size change handler |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Pagination currentPage={1} totalPages={10} onPageChange={setPage} />
+```
+
+---
+
+### Accordion
+
+> Collapsible content sections built on Ark UI with single or multiple expand modes.
+
+**Import:**
+```tsx
+import { Accordion } from "@sunbeam/beam-ui/components/ui/accordion"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| items | `AccordionEntry[]` | Yes | Array of { value, title, content } |
+| multiple | `boolean` | No | Allow multiple items open |
+| defaultValue | `string[]` | No | Initially expanded items |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Accordion items={[{ value: "faq1", title: "Question?", content: <p>Answer.</p> }]} />
+```
+
+---
+
+### Toast
+
+> Temporary notification message with auto-dismiss after 3 seconds.
+
+**Import:**
+```tsx
+import { Toast } from "@sunbeam/beam-ui/components/ui/toast"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| message | `string` | Yes | Toast message text |
+| variant | `"success" | "error" | "info"` | No | Visual variant |
+| visible | `boolean` | Yes | Visibility state |
+| onDismiss | `() => void` | No | Dismiss callback |
+
+**Usage:**
+```tsx
+<Toast message="Saved!" variant="success" visible={show} onDismiss={() => setShow(false)} />
+```
+
+**Variants:**
+- success: Green border
+- error: Red border
+- info: Blue border
+
+---
+
+### Switch
+
+> Toggle switch built on Ark UI for boolean settings.
+
+**Import:**
+```tsx
+import { Switch } from "@sunbeam/beam-ui/components/ui/switch"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| checked | `boolean` | Yes | Checked state |
+| onChange | `(checked: boolean) => void` | Yes | Change handler |
+| label | `string` | No | Label text |
+| disabled | `boolean` | No | Disable the switch |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Switch checked={isDark} onChange={setIsDark} label="Dark mode" />
+```
+
+---
+
+### ProgressBar
+
+> Determinate progress indicator built on Ark UI with size and color variants.
+
+**Import:**
+```tsx
+import { ProgressBar } from "@sunbeam/beam-ui/components/ui/progress-bar"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| value | `number` | Yes | Progress value (0-100) |
+| variant | `"default" | "success" | "error"` | No | Color variant |
+| showLabel | `boolean` | No | Show percentage label |
+| size | `"sm" | "md"` | No | Track height |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<ProgressBar value={75} variant="success" showLabel />
+```
+
+**Variants:**
+- default: Orange fill
+- success: Gold fill
+- error: Flame fill
+
+---
+
+### EmptyState
+
+> Placeholder for empty content areas with icon, message, and optional action.
+
+**Import:**
+```tsx
+import { EmptyState } from "@sunbeam/beam-ui/components/ui/empty-state"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| icon | `string` | No | Material Symbols icon name |
+| title | `string` | Yes | Empty state heading |
+| description | `string` | No | Explanatory text |
+| action | `ReactNode` | No | Action button or link |
+
+**Usage:**
+```tsx
+<EmptyState icon="inbox" title="No items" description="Create your first item" action={<Button>Create</Button>} />
+```
+
+---
+
+### Skeleton
+
+> Loading placeholder with shimmer animation.
+
+**Import:**
+```tsx
+import { Skeleton } from "@sunbeam/beam-ui/components/ui/skeleton"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| width | `string` | No | Element width |
+| height | `string` | No | Element height |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<Skeleton width="200px" height="20px" />
+```
+
+---
+
+### DatePicker
+
+> Calendar date picker built on Ark UI with day/month/year navigation.
+
+**Import:**
+```tsx
+import { DatePicker } from "@sunbeam/beam-ui/components/ui/date-picker"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| value | `string` | No | Selected date value (ISO string) |
+| onChange | `(value: string) => void` | No | Date change handler |
+| label | `string` | No | Input label |
+| placeholder | `string` | No | Input placeholder |
+
+**Usage:**
+```tsx
+<DatePicker value={date} onChange={setDate} label="Due date" />
+```
+
+**Features:**
+- Full calendar grid navigation
+- Month and year view switching
+- Keyboard accessible
+
+---
+
+### ColorPicker
+
+> Color selection popover with preset palette and hex input.
+
+**Import:**
+```tsx
+import { ColorPicker } from "@sunbeam/beam-ui/components/ui/color-picker"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| value | `string` | Yes | Current color hex value |
+| onChange | `(value: string) => void` | Yes | Color change handler |
+| presets | `string[]` | No | Custom color presets (defaults to 20 colors) |
+| label | `string` | No | Input label |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<ColorPicker value={color} onChange={setColor} label="Label color" />
+```
+
+---
+
+### LabelPicker
+
+> Multi-select popover for issue/PR labels with color indicators and search.
+
+**Import:**
+```tsx
+import { LabelPicker } from "@sunbeam/beam-ui/components/ui/label-picker"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| options | `LabelOption[]` | Yes | Available labels with id, name, color, description |
+| selected | `string[]` | Yes | Selected label IDs |
+| onChange | `(selected: string[]) => void` | Yes | Selection change handler |
+| placeholder | `string` | No | Trigger placeholder text |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<LabelPicker options={labels} selected={selectedIds} onChange={setSelectedIds} />
+```
+
+---
+
+### AssigneePicker
+
+> Multi-select popover for assigning users with avatar display and search.
+
+**Import:**
+```tsx
+import { AssigneePicker } from "@sunbeam/beam-ui/components/ui/assignee-picker"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| options | `UserOption[]` | Yes | Available users with id, username, displayName, avatarUrl |
+| selected | `string[]` | Yes | Selected user IDs |
+| onChange | `(selected: string[]) => void` | Yes | Selection change handler |
+| placeholder | `string` | No | Trigger placeholder text |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<AssigneePicker options={users} selected={assigneeIds} onChange={setAssigneeIds} />
+```
+
+---
+
+### MilestonePicker
+
+> Single-select popover for milestones with progress indicators.
+
+**Import:**
+```tsx
+import { MilestonePicker } from "@sunbeam/beam-ui/components/ui/milestone-picker"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| options | `MilestoneOption[]` | Yes | Available milestones with id, title, dueDate, progress, open, closed |
+| selected | `string | null` | Yes | Selected milestone ID |
+| onChange | `(selected: string | null) => void` | Yes | Selection change handler |
+| placeholder | `string` | No | Trigger placeholder text |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<MilestonePicker options={milestones} selected={milestoneId} onChange={setMilestoneId} />
+```
+
+---
+
+### BranchSelector
+
+> Branch/tag selector popover with tabs, search, and create-branch support.
+
+**Import:**
+```tsx
+import { BranchSelector } from "@sunbeam/beam-ui/components/ui/branch-selector"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| branches | `string[]` | Yes | Available branch names |
+| tags | `string[]` | Yes | Available tag names |
+| current | `string` | Yes | Currently selected ref |
+| defaultBranch | `string` | No | Default branch name |
+| onChange | `(ref: string) => void` | Yes | Ref change handler |
+| onCreateBranch | `(name: string) => void` | No | Create branch callback |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<BranchSelector branches={["main", "dev"]} tags={["v1.0"]} current="main" onChange={setRef} />
+```
+
+**Features:**
+- Tabbed Branches/Tags view
+- Fuzzy search filtering
+- Create new branch inline
+
+---
+
+### SyntaxHighlighter
+
+> Code syntax highlighting powered by Shiki with custom Beam light/dark themes.
+
+**Import:**
+```tsx
+import { SyntaxHighlighter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| code | `string` | Yes | Source code to highlight |
+| language | `string` | Yes | Language identifier (e.g. 'typescript') |
+| theme | `"light" | "dark"` | No | Color theme override |
+| showLineNumbers | `boolean` | No | Display line numbers |
+| highlightLines | `number[]` | No | Lines to highlight |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<SyntaxHighlighter code="const x = 1;" language="typescript" showLineNumbers />
+```
+
+**Features:**
+- Shiki-powered highlighting
+- Custom Beam dark/light themes
+- Line number gutter
+- Line highlighting
+
+---
+
+### CodeEditor
+
+> Full code editor powered by CodeMirror 6 with Beam syntax themes and language support.
+
+**Import:**
+```tsx
+import { CodeEditor } from "@sunbeam/beam-ui/components/ui/code-editor"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| value | `string` | Yes | Editor content |
+| onChange | `(value: string) => void` | No | Content change handler |
+| language | `string` | No | Language mode |
+| placeholder | `string` | No | Placeholder text |
+| readOnly | `boolean` | No | Read-only mode |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<CodeEditor value={code} onChange={setCode} language="javascript" />
+```
+
+**Features:**
+- CodeMirror 6 engine
+- Beam syntax themes (light/dark)
+- Line numbers, active line highlight
+- Search, history, key bindings
+
+---
+
+### MarkdownRenderer
+
+> Renders GitHub Flavored Markdown to styled HTML using unified/remark/rehype pipeline.
+
+**Import:**
+```tsx
+import { MarkdownRenderer } from "@sunbeam/beam-ui/components/ui/markdown-renderer"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| content | `string` | Yes | Markdown string to render |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<MarkdownRenderer content="# Hello\n\nWorld" />
+```
+
+**Features:**
+- GFM support (tables, task lists, strikethrough)
+- HTML sanitization
+- Theme-aware styling
+
+---
+
+### MarkdownEditor
+
+> Write/preview markdown editor with formatting toolbar.
+
+**Import:**
+```tsx
+import { MarkdownEditor } from "@sunbeam/beam-ui/components/ui/markdown-editor"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| value | `string` | Yes | Markdown content |
+| onChange | `(value: string) => void` | Yes | Content change handler |
+| placeholder | `string` | No | Placeholder text |
+| minHeight | `string` | No | Minimum editor height |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<MarkdownEditor value={md} onChange={setMd} placeholder="Write something..." />
+```
+
+**Features:**
+- Write/Preview tabs
+- Formatting toolbar (bold, italic, link, code, etc.)
+- Live markdown preview
+
+---
+
+### DiffViewer
+
+> Side-by-side or unified diff viewer for code review.
+
+**Import:**
+```tsx
+import { DiffViewer } from "@sunbeam/beam-ui/components/ui/diff-viewer"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| hunks | `DiffHunk[]` | Yes | Diff hunks with header and lines |
+| oldFileName | `string` | No | Original file name |
+| newFileName | `string` | No | New file name |
+| mode | `"unified" | "split"` | No | View mode |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<DiffViewer hunks={diffHunks} oldFileName="old.ts" newFileName="new.ts" mode="split" />
+```
+
+**Features:**
+- Unified and split view modes
+- Line number gutters
+- Add/remove/context line coloring
+
+---
+
+### CommentThread
+
+> Threaded comment display with markdown rendering, reactions, and timeline events.
+
+**Import:**
+```tsx
+import { CommentThread } from "@sunbeam/beam-ui/components/ui/comment-thread"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| comments | `Comment[]` | Yes | Comment objects with author, body, reactions |
+| events | `TimelineEvent[]` | No | Timeline events (labels, merges, etc.) |
+| onAddComment | `(body: string) => void` | No | New comment handler |
+| onReact | `(commentId: string, emoji: string) => void` | No | Reaction handler |
+| currentUser | `object` | No | Current user for reply form |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<CommentThread comments={comments} onAddComment={handleAdd} />
+```
+
+**Features:**
+- Markdown-rendered comment bodies
+- Emoji reactions
+- Timeline events (labels, merges, etc.)
+- Reply editor
+
+---
+
+### KanbanBoard
+
+> Drag-and-drop Kanban board built on dnd-kit with columns and cards.
+
+**Import:**
+```tsx
+import { KanbanBoard } from "@sunbeam/beam-ui/components/ui/kanban-board"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| columns | `KanbanColumn[]` | Yes | Column definitions with id, title, cardIds |
+| cards | `Record<string, KanbanCard>` | Yes | Card data keyed by id |
+| onMove | `(cardId: string, fromCol: string, toCol: string, index: number) => void` | No | Card move handler |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<KanbanBoard columns={cols} cards={cardMap} onMove={handleMove} />
+```
+
+**Features:**
+- Drag-and-drop via dnd-kit
+- Sortable cards within columns
+- Cross-column card movement
+- Card labels and assignee avatars
+
+---
+
+### CommitGraph
+
+> Git commit history visualization with branch lanes and merge paths.
+
+**Import:**
+```tsx
+import { CommitGraph } from "@sunbeam/beam-ui/components/ui/commit-graph"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| commits | `CommitNode[]` | Yes | Commit objects with hash, message, author, parents, branch, tags |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<CommitGraph commits={gitLog} />
+```
+
+**Features:**
+- SVG branch lane rendering
+- Merge path visualization
+- Branch and tag labels
+- Commit metadata display
+
+---
+
+### Charts
+
+> Chart components (Line, Bar, Pie, Area) built on Recharts with Beam theming.
+
+**Import:**
+```tsx
+import { Charts } from "@sunbeam/beam-ui/components/ui/charts"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| data | `ChartDataPoint[]` | Yes | Data points with label and numeric values |
+| dataKeys | `string[]` | Yes | Keys to plot from data |
+| height | `number` | No | Chart height in pixels |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<LineChart data={[{ label: "Jan", value: 100 }]} dataKeys={["value"]} />
+```
+
+**Features:**
+- LineChart, BarChart, PieChart, AreaChart
+- Responsive containers
+- Beam color palette
+- Tooltips and legends
+
+---
+
+### DiagramRenderer
+
+> Renders Mermaid diagram definitions to SVG with Beam theming.
+
+**Import:**
+```tsx
+import { DiagramRenderer } from "@sunbeam/beam-ui/components/ui/diagram-renderer"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| code | `string` | Yes | Mermaid diagram definition |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<DiagramRenderer code="graph TD; A-->B; B-->C;" />
+```
+
+**Features:**
+- Mermaid.js rendering
+- Beam-themed colors (light/dark)
+- Error fallback display
+
+---
+
+### MathRenderer
+
+> Renders LaTeX math expressions using KaTeX.
+
+**Import:**
+```tsx
+import { MathRenderer } from "@sunbeam/beam-ui/components/ui/math-renderer"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| math | `string` | Yes | LaTeX expression |
+| display | `boolean` | No | Display mode (block) vs inline |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<MathRenderer math="E = mc^2" display />
+```
+
+**Features:**
+- KaTeX rendering engine
+- Display and inline modes
+- Error fallback
+
+---
+
+### ActivityHeatmap
+
+> GitHub-style contribution activity heatmap for the past year.
+
+**Import:**
+```tsx
+import { ActivityHeatmap } from "@sunbeam/beam-ui/components/ui/activity-heatmap"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| data | `ActivityDay[]` | Yes | Array of { date, count } entries |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<ActivityHeatmap data={[{ date: "2026-01-15", count: 5 }]} />
+```
+
+**Features:**
+- 365-day grid layout
+- 5-level color intensity
+- Month labels
+- Theme-aware colors
+
+---
+
+### NotificationCenter
+
+> Popover notification list with type icons and mark-read functionality.
+
+**Import:**
+```tsx
+import { NotificationCenter } from "@sunbeam/beam-ui/components/ui/notification-center"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| notifications | `Notification[]` | Yes | Notification objects with id, type, title, repo, timestamp, read |
+| onMarkRead | `(id: string) => void` | Yes | Mark single notification read |
+| onMarkAllRead | `() => void` | Yes | Mark all notifications read |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<NotificationCenter notifications={notifs} onMarkRead={markRead} onMarkAllRead={markAllRead} />
+```
+
+**Features:**
+- Type-specific icons (issue, PR, release, mention, review)
+- Unread badge count
+- Mark all read action
+
+---
+
+### FileList
+
+> File browser with list/grid layouts, selection, and metadata display.
+
+**Import:**
+```tsx
+import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| items | `FileItem[]` | Yes | File items with id, name, type, size, modified |
+| selected | `Set<string>` | Yes | Selected file IDs |
+| onSelect | `(selected: Set<string>) => void` | Yes | Selection change handler |
+| onOpen | `(item: FileItem) => void` | No | File/folder open handler |
+| layout | `"list" | "grid"` | No | View layout mode |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<FileList items={files} selected={selectedIds} onSelect={setSelectedIds} />
+```
+
+**Features:**
+- List and grid layouts
+- File/folder type icons
+- Multi-select with checkboxes
+- Size and modified metadata
+
+---
+
+### FileUpload
+
+> Drag-and-drop file upload zone with accept filter and keyboard support.
+
+**Import:**
+```tsx
+import { FileUpload } from "@sunbeam/beam-ui/components/ui/file-upload"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| onFiles | `(files: File[]) => void` | Yes | File selection handler |
+| accept | `string` | No | Accepted MIME types |
+| multiple | `boolean` | No | Allow multiple files |
+| disabled | `boolean` | No | Disable uploads |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+<FileUpload onFiles={handleFiles} accept="image/*" multiple />
+```
+
+**Features:**
+- Drag-and-drop zone
+- Click to browse
+- Keyboard accessible
+- File count display
+
+---
+
+### Form
+
+> Type-safe form wrapper integrating Zod schema validation with React Hook Form.
+
+**Import:**
+```tsx
+import { Form } from "@sunbeam/beam-ui/form"
+```
+
+**Props:**
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| schema | `z.ZodSchema<T>` | Yes | Zod validation schema |
+| defaultValues | `DefaultValues<T>` | No | Initial form values |
+| onSubmit | `(data: T) => void | Promise<void>` | Yes | Validated submit handler |
+| children | `(methods: UseFormReturn<T>) => ReactNode` | Yes | Render function receiving form methods |
+| className | `string` | No | Additional CSS class |
+
+**Usage:**
+```tsx
+import { Form, z } from "@sunbeam/beam-ui/form";
+
+<Form schema={z.object({ name: z.string().min(1) })} onSubmit={handleSubmit}>
+  {({ register, formState }) => (
+    <>
+      <input {...register("name")} />
+      <button type="submit">Submit</button>
+    </>
+  )}
+</Form>
+```
+
+**Features:**
+- Zod schema validation
+- React Hook Form integration
+- Type-safe form methods
+- Re-exports z, useForm, zodResolver

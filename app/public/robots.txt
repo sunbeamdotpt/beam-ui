@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# AI Documentation
+# See /llms.txt for LLM-readable documentation
+# See /llms-full.txt for complete API reference
+
+User-agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /docs/
+
+User-agent: ClaudeBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /docs/
+
+User-agent: anthropic-ai
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /docs/
+
+Sitemap: https://design.sunbeam.pt/sitemap.xml

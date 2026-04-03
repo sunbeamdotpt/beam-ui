@@ -25,6 +25,7 @@ export const docsSidebar: NavSection[] = [
       { label: "Typography", href: "/foundations/typography" },
       { label: "Spacing", href: "/foundations/spacing" },
       { label: "Elevation", href: "/foundations/elevation" },
+      { label: "LLM Integration", href: "/foundations/llm-integration" },
     ],
   },
   {

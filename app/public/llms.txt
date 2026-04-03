@@ -1,0 +1,126 @@
+# Beam Design Language
+
+> A comprehensive React component library by Sunbeam Studios for building design system interfaces.
+
+## Overview
+- Package: @sunbeam/beam-ui
+- Registry: https://src.sunbeam.pt/api/packages/studio/npm/
+- Source: https://src.sunbeam.pt/studio/beam-ui
+- Docs: https://design.sunbeam.pt
+
+## Install
+```bash
+npm install @sunbeam/beam-ui --registry=https://src.sunbeam.pt/api/packages/studio/npm/
+```
+
+## Stack
+React 19, Panda CSS, Ark UI v4, TypeScript
+
+## Components
+- **Button** - Primary action element with multiple visual variants.  
+  `import { Button } from "@sunbeam/beam-ui/components/ui/button"`
+- **Badge** - Status indicator label for tagging content with semantic meaning.  
+  `import { Badge } from "@sunbeam/beam-ui/components/ui/badge"`
+- **Card** - Content container with icon, title, description, and call-to-action link.  
+  `import { Card } from "@sunbeam/beam-ui/components/ui/card"`
+- **Icon** - Material Symbols icon wrapper with accessibility support.  
+  `import { Icon } from "@sunbeam/beam-ui/components/ui/icon"`
+- **Avatar** - User avatar with image support and initial fallback.  
+  `import { Avatar } from "@sunbeam/beam-ui/components/ui/avatar"`
+- **Callout** - Highlighted information block for tips, warnings, and info notices.  
+  `import { Callout } from "@sunbeam/beam-ui/components/ui/callout"`
+- **CodeBlock** - Tabbed code display with optional toggle groups for streaming, version, and mode variants.  
+  `import { CodeBlock } from "@sunbeam/beam-ui/components/ui/code-block"`
+- **Tabs** - Navigation tabs built on Ark UI with default and dark variants.  
+  `import { Tabs } from "@sunbeam/beam-ui/components/ui/tabs"`
+- **Tooltip** - Hoverable tooltip overlay built on Ark UI.  
+  `import { Tooltip } from "@sunbeam/beam-ui/components/ui/tooltip"`
+- **Dialog** - Modal dialog with title, content area, and optional action buttons. Built on Ark UI.  
+  `import { Dialog } from "@sunbeam/beam-ui/components/ui/dialog"`
+- **Select** - Dropdown select input built on Ark UI with search and custom styling.  
+  `import { Select } from "@sunbeam/beam-ui/components/ui/select"`
+- **Checkbox** - Checkbox input with label, indeterminate state, and Beam styling.  
+  `import { Checkbox } from "@sunbeam/beam-ui/components/ui/checkbox"`
+- **TextInput** - Text input field with label, error state, and multiple input types.  
+  `import { TextInput } from "@sunbeam/beam-ui/components/ui/text-input"`
+- **SearchInput** - Search input with icon and keyboard shortcut hint.  
+  `import { SearchInput } from "@sunbeam/beam-ui/components/ui/search-input"`
+- **Table** - Data table with sortable columns, row selection, and accessible caption.  
+  `import { Table } from "@sunbeam/beam-ui/components/ui/table"`
+- **List** - Flexible list component with icon support and multiple layout variants.  
+  `import { List } from "@sunbeam/beam-ui/components/ui/list"`
+- **Pagination** - Page navigation with page size selector and ellipsis collapse.  
+  `import { Pagination } from "@sunbeam/beam-ui/components/ui/pagination"`
+- **Accordion** - Collapsible content sections built on Ark UI with single or multiple expand modes.  
+  `import { Accordion } from "@sunbeam/beam-ui/components/ui/accordion"`
+- **Toast** - Temporary notification message with auto-dismiss after 3 seconds.  
+  `import { Toast } from "@sunbeam/beam-ui/components/ui/toast"`
+- **Switch** - Toggle switch built on Ark UI for boolean settings.  
+  `import { Switch } from "@sunbeam/beam-ui/components/ui/switch"`
+- **ProgressBar** - Determinate progress indicator built on Ark UI with size and color variants.  
+  `import { ProgressBar } from "@sunbeam/beam-ui/components/ui/progress-bar"`
+- **EmptyState** - Placeholder for empty content areas with icon, message, and optional action.  
+  `import { EmptyState } from "@sunbeam/beam-ui/components/ui/empty-state"`
+- **Skeleton** - Loading placeholder with shimmer animation.  
+  `import { Skeleton } from "@sunbeam/beam-ui/components/ui/skeleton"`
+- **DatePicker** - Calendar date picker built on Ark UI with day/month/year navigation.  
+  `import { DatePicker } from "@sunbeam/beam-ui/components/ui/date-picker"`
+- **ColorPicker** - Color selection popover with preset palette and hex input.  
+  `import { ColorPicker } from "@sunbeam/beam-ui/components/ui/color-picker"`
+- **LabelPicker** - Multi-select popover for issue/PR labels with color indicators and search.  
+  `import { LabelPicker } from "@sunbeam/beam-ui/components/ui/label-picker"`
+- **AssigneePicker** - Multi-select popover for assigning users with avatar display and search.  
+  `import { AssigneePicker } from "@sunbeam/beam-ui/components/ui/assignee-picker"`
+- **MilestonePicker** - Single-select popover for milestones with progress indicators.  
+  `import { MilestonePicker } from "@sunbeam/beam-ui/components/ui/milestone-picker"`
+- **BranchSelector** - Branch/tag selector popover with tabs, search, and create-branch support.  
+  `import { BranchSelector } from "@sunbeam/beam-ui/components/ui/branch-selector"`
+- **SyntaxHighlighter** - Code syntax highlighting powered by Shiki with custom Beam light/dark themes.  
+  `import { SyntaxHighlighter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter"`
+- **CodeEditor** - Full code editor powered by CodeMirror 6 with Beam syntax themes and language support.  
+  `import { CodeEditor } from "@sunbeam/beam-ui/components/ui/code-editor"`
+- **MarkdownRenderer** - Renders GitHub Flavored Markdown to styled HTML using unified/remark/rehype pipeline.  
+  `import { MarkdownRenderer } from "@sunbeam/beam-ui/components/ui/markdown-renderer"`
+- **MarkdownEditor** - Write/preview markdown editor with formatting toolbar.  
+  `import { MarkdownEditor } from "@sunbeam/beam-ui/components/ui/markdown-editor"`
+- **DiffViewer** - Side-by-side or unified diff viewer for code review.  
+  `import { DiffViewer } from "@sunbeam/beam-ui/components/ui/diff-viewer"`
+- **CommentThread** - Threaded comment display with markdown rendering, reactions, and timeline events.  
+  `import { CommentThread } from "@sunbeam/beam-ui/components/ui/comment-thread"`
+- **KanbanBoard** - Drag-and-drop Kanban board built on dnd-kit with columns and cards.  
+  `import { KanbanBoard } from "@sunbeam/beam-ui/components/ui/kanban-board"`
+- **CommitGraph** - Git commit history visualization with branch lanes and merge paths.  
+  `import { CommitGraph } from "@sunbeam/beam-ui/components/ui/commit-graph"`
+- **Charts** - Chart components (Line, Bar, Pie, Area) built on Recharts with Beam theming.  
+  `import { Charts } from "@sunbeam/beam-ui/components/ui/charts"`
+- **DiagramRenderer** - Renders Mermaid diagram definitions to SVG with Beam theming.  
+  `import { DiagramRenderer } from "@sunbeam/beam-ui/components/ui/diagram-renderer"`
+- **MathRenderer** - Renders LaTeX math expressions using KaTeX.  
+  `import { MathRenderer } from "@sunbeam/beam-ui/components/ui/math-renderer"`
+- **ActivityHeatmap** - GitHub-style contribution activity heatmap for the past year.  
+  `import { ActivityHeatmap } from "@sunbeam/beam-ui/components/ui/activity-heatmap"`
+- **NotificationCenter** - Popover notification list with type icons and mark-read functionality.  
+  `import { NotificationCenter } from "@sunbeam/beam-ui/components/ui/notification-center"`
+- **FileList** - File browser with list/grid layouts, selection, and metadata display.  
+  `import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"`
+- **FileUpload** - Drag-and-drop file upload zone with accept filter and keyboard support.  
+  `import { FileUpload } from "@sunbeam/beam-ui/components/ui/file-upload"`
+- **Form** - Type-safe form wrapper integrating Zod schema validation with React Hook Form.  
+  `import { Form } from "@sunbeam/beam-ui/form"`
+
+## Foundations
+- **Colors**: Warm sunbeam palette with semantic tokens for light/dark mode (sunbeam.orange #fa520f, sunshine scale, ivory/cream surfaces)
+- **Typography**: Ysabeau Infant (body/heading), Monaspace Argon (mono)
+- **Spacing**: 4px base unit scale
+- **Elevation**: Golden shadow system
+- **Accessibility**: Section 508 + WCAG 2.1 AA compliant
+
+## Full Documentation
+For complete props, usage examples, and API details: [/llms-full.txt](https://design.sunbeam.pt/llms-full.txt)
+
+## Per-Component Docs
+Each component has a dedicated markdown file at: `/docs/{component-slug}.md`
+
+## Rendered Pages
+To view the fully rendered HTML page with live DOM structure, append `?render=html` to any page URL:
+`https://design.sunbeam.pt/components/button?render=html`

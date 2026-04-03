@@ -19,6 +19,7 @@ import { ColorsPage } from "./pages/foundations/colors";
 import { TypographyPage } from "./pages/foundations/typography";
 import { SpacingPage } from "./pages/foundations/spacing";
 import { ElevationPage } from "./pages/foundations/elevation";
+import { LlmIntegrationPage } from "./pages/foundations/llm-integration";
 import { DocsLayoutPage } from "./pages/layouts/docs-layout-page";
 import { ApiLayoutPage } from "./pages/layouts/api-layout-page";
 import { FullwidthLayoutPage } from "./pages/layouts/fullwidth-layout-page";
@@ -145,6 +146,7 @@ export function App() {
           <Route path="foundations/typography" element={<TypographyPage />} />
           <Route path="foundations/spacing" element={<SpacingPage />} />
           <Route path="foundations/elevation" element={<ElevationPage />} />
+          <Route path="foundations/llm-integration" element={<LlmIntegrationPage />} />
 
           {/* Components */}
           <Route path="components/accordion" element={<AccordionPage />} />

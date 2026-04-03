@@ -7,6 +7,7 @@ COPY package.json ./
 COPY packages/ packages/
 COPY app/package.json app/panda.config.ts app/postcss.config.cjs app/tsconfig.json app/vite.config.ts app/index.html ./app/
 COPY app/src/ app/src/
+COPY app/public/ app/public/
 
 # Install deps at root (workspace) and app level
 RUN npm install
@@ -27,6 +28,18 @@ COPY --from=build /build/app/dist /srv
 COPY <<'EOF' /etc/caddy/Caddyfile
 :8080 {
 	root * /srv
+
+	# AI user-agent matcher (single regex, OR logic)
+	@ai header_regexp User-Agent (?i)(GPTBot|ChatGPT|OAI-SearchBot|ClaudeBot|Claude-User|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|Google-Extended|Gemini|PhindBot|YouBot|Devin|FirecrawlAgent|Crawl4AI)
+
+	# Serve per-component markdown to AI user-agents (skip if ?render=html)
+	@aiDocs {
+		header_regexp User-Agent (?i)(GPTBot|ChatGPT|OAI-SearchBot|ClaudeBot|Claude-User|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|Google-Extended|Gemini|PhindBot|YouBot|Devin|FirecrawlAgent|Crawl4AI)
+		not query render=html
+		path_regexp comp ^/(components|foundations)/(.+)$
+	}
+	rewrite @aiDocs /docs/{re.comp.2}.md
+
 	file_server
 	try_files {path} /index.html
 	encode gzip
