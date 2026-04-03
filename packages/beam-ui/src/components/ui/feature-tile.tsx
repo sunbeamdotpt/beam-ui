@@ -39,7 +39,7 @@ const tileEndpoint = css({
 export function FeatureTile({ name, endpoint, icon: iconName }: FeatureTileProps) {
   return (
     <div className={tile}>
-      <Icon name={iconName} size={24} className={tileIcon} />
+      <Icon name={iconName} size={24} className={tileIcon} aria-hidden="true" />
       <h3 className={tileName}>{name}</h3>
       <p className={tileEndpoint}>{endpoint}</p>
     </div>

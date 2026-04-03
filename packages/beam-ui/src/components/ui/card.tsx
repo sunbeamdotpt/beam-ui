@@ -20,7 +20,7 @@ export function Card({
   className,
 }: CardProps) {
   return (
-    <div
+    <article
       className={cx(
         css({
           backgroundColor: "bg.card",
@@ -46,7 +46,7 @@ export function Card({
           color: "sunbeam.orange",
         })}
       >
-        <Icon name={icon} size={30} filled />
+        <Icon name={icon} size={30} filled aria-hidden="true" />
       </div>
       <h3
         className={css({
@@ -87,6 +87,6 @@ export function Card({
       >
         {ctaLabel} <Icon name="arrow_forward" size={14} />
       </Link>
-    </div>
+    </article>
   );
 }

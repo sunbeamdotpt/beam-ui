@@ -15,7 +15,7 @@ export function CapabilityCard({
   className,
 }: CapabilityCardProps) {
   return (
-    <div
+    <article
       className={cx(
         css({
           backgroundColor: "bg.card",
@@ -36,6 +36,7 @@ export function CapabilityCard({
         name={icon}
         size={24}
         className={css({ color: "sunbeam.orange" })}
+        aria-hidden="true"
       />
       <h4
         className={css({
@@ -57,6 +58,6 @@ export function CapabilityCard({
       >
         {description}
       </p>
-    </div>
+    </article>
   );
 }

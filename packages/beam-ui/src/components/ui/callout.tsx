@@ -35,9 +35,16 @@ const textColorMap: Record<CalloutVariant, string> = {
   info: token("colors.sunshine.700"),
 };
 
+const roleMap: Record<CalloutVariant, string> = {
+  tip: "note",
+  warning: "status",
+  info: "note",
+};
+
 export function Callout({ children, variant = "tip", className }: CalloutProps) {
   return (
     <div
+      role={roleMap[variant]}
       className={cx(
         css({
           padding: "24px",
@@ -62,7 +69,7 @@ export function Callout({ children, variant = "tip", className }: CalloutProps) 
         })}
         style={{ color: textColorMap[variant] }}
       >
-        <Icon name={iconMap[variant]} size={20} />
+        <Icon name={iconMap[variant]} size={20} aria-hidden="true" />
         <span>{labelMap[variant]}</span>
       </div>
       <div

@@ -95,7 +95,7 @@ export function ModelRow({ name, icon: iconName, tier, version, description, hre
 
   if (href) {
     return (
-      <Link to={href} className={row}>
+      <Link to={href} className={row} aria-label={`View ${name} model details`}>
         {content}
       </Link>
     );

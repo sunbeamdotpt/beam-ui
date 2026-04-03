@@ -232,10 +232,10 @@ export function BentoItem({
 }: BentoItemProps) {
   if (variant === "large") {
     return (
-      <Link to={href} className={cx(largeCard, css({ _hover: { "& .arrow": { transform: "translateX(8px)" } } }))}>
+      <Link to={href} className={cx(largeCard, css({ _hover: { "& .arrow": { transform: "translateX(8px)" } } }))} aria-label={`${title} — ${category}`}>
         <div className={largeImage}>
           <div className={largeImagePlaceholder}>
-            <Icon name="auto_awesome" size={48} />
+            <Icon name="auto_awesome" size={48} aria-hidden="true" />
           </div>
           <div style={{ position: "absolute", top: 16, left: 16 }}>
             <span className={categoryBadge}>{category}</span>
@@ -247,7 +247,7 @@ export function BentoItem({
           <div className={largeFooter}>
             <span className={difficultyLabel}>{difficulty.toUpperCase()}</span>
             <span className={ctaLink}>
-              READ RECIPE <Icon name="arrow_forward" size={16} />
+              READ RECIPE <Icon name="arrow_forward" size={16} aria-hidden="true" />
             </span>
           </div>
         </div>
@@ -257,9 +257,9 @@ export function BentoItem({
 
   if (variant === "horizontal") {
     return (
-      <Link to={href} className={horizontalCard}>
+      <Link to={href} className={horizontalCard} aria-label={`${title} — ${category}`}>
         <div className={horizontalImage}>
-          <Icon name="developer_board" size={40} />
+          <Icon name="developer_board" size={40} aria-hidden="true" />
         </div>
         <div className={horizontalBody}>
           <span className={horizontalCategory}>{category}</span>
@@ -273,12 +273,12 @@ export function BentoItem({
 
   // small
   return (
-    <Link to={href} className={smallCard}>
+    <Link to={href} className={smallCard} aria-label={`${title} — ${difficulty}`}>
       <h3 className={smallTitle}>{title}</h3>
       <p className={smallDesc}>{description}</p>
       <div className={smallFooter}>
         <span className={difficultyLabel}>{difficulty}</span>
-        <Icon name="east" size={20} className={arrowIcon} />
+        <Icon name="east" size={20} className={arrowIcon} aria-hidden="true" />
       </div>
     </Link>
   );
