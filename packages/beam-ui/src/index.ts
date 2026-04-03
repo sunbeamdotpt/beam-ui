@@ -98,6 +98,9 @@ export type { NotificationItem as NotificationStoreItem } from "./stores/notific
 // i18n
 export { I18nProvider, useTranslation } from "./i18n";
 
+// Preset (for consumer panda.config.ts)
+export { beamPreset } from "./preset";
+
 // Hooks
 export { useTheme } from "./hooks/use-theme";
 
