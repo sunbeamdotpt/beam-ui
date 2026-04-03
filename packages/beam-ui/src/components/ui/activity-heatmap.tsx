@@ -1,0 +1,204 @@
+import { useMemo } from "react";
+import { css, cx } from "styled-system/css";
+import { useTheme } from "../../hooks/use-theme";
+
+export interface ActivityDay {
+  date: string;
+  count: number;
+}
+
+interface ActivityHeatmapProps {
+  data: ActivityDay[];
+  className?: string;
+}
+
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+const LEVEL_COLORS_LIGHT = [
+  "rgba(127,99,21,0.08)", // border.subtle (light)
+  "#ffe8a0",             // very light gold
+  "#ffd06a",             // sunshine.300
+  "#ffb83e",             // sunshine.500
+  "#fa520f",             // sunbeam.orange
+];
+
+const LEVEL_COLORS_DARK = [
+  "rgba(255,161,16,0.08)", // border.subtle (dark)
+  "rgba(255,208,106,0.25)", // faint gold
+  "#ffd06a",               // sunshine.300
+  "#ffb83e",               // sunshine.500
+  "#fa520f",               // sunbeam.orange
+];
+
+function getLevel(count: number): number {
+  if (count === 0) return 0;
+  if (count <= 2) return 1;
+  if (count <= 5) return 2;
+  if (count <= 9) return 3;
+  return 4;
+}
+
+const CELL = 11;
+const GAP = 2;
+const STEP = CELL + GAP;
+const LABEL_W = 32;
+
+export function ActivityHeatmap({ data, className }: ActivityHeatmapProps) {
+  const { theme } = useTheme();
+  const colors = theme === "dark" ? LEVEL_COLORS_DARK : LEVEL_COLORS_LIGHT;
+
+  const { weeks, monthLabels, totalWeeks } = useMemo(() => {
+    const lookup = new Map<string, number>();
+    for (const d of data) lookup.set(d.date, d.count);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Start 52 weeks ago, aligned to Sunday
+    const start = new Date(today);
+    start.setDate(start.getDate() - 363);
+    start.setDate(start.getDate() - start.getDay());
+
+    const weeksArr: { date: string; count: number; dow: number }[][] = [];
+    const months: { label: string; x: number }[] = [];
+    let lastMonth = -1;
+    const cursor = new Date(start);
+
+    while (cursor <= today) {
+      const week: { date: string; count: number; dow: number }[] = [];
+      for (let d = 0; d < 7; d++) {
+        if (cursor > today) break;
+        const ds = cursor.toISOString().split("T")[0];
+        const m = cursor.getMonth();
+        if (m !== lastMonth) {
+          months.push({ label: MONTH_NAMES[m], x: weeksArr.length });
+          lastMonth = m;
+        }
+        week.push({ date: ds, count: lookup.get(ds) ?? 0, dow: cursor.getDay() });
+        cursor.setDate(cursor.getDate() + 1);
+      }
+      weeksArr.push(week);
+    }
+
+    return { weeks: weeksArr, monthLabels: months, totalWeeks: weeksArr.length };
+  }, [data]);
+
+  const svgW = LABEL_W + totalWeeks * STEP;
+  const svgH = 20 + 7 * STEP + 24; // month labels + cells + legend
+
+  const total = data.reduce((s, d) => s + d.count, 0);
+
+  return (
+    <div
+      className={cx(wrapper, className)}
+      role="img"
+      aria-label={`Activity heatmap: ${total} contributions in the last year`}
+    >
+      <a href="#after-heatmap" className="sr-only">Skip activity heatmap</a>
+      <svg
+        width={svgW}
+        height={svgH}
+        viewBox={`0 0 ${svgW} ${svgH}`}
+        className={svg}
+        aria-hidden="true"
+      >
+        {/* Month labels */}
+        {monthLabels.map((m, i) => (
+          <text
+            key={i}
+            x={LABEL_W + m.x * STEP}
+            y={12}
+            className={svgText}
+            fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+          >
+            {m.label}
+          </text>
+        ))}
+
+        {/* Day labels */}
+        {[1, 3, 5].map((dow) => (
+          <text
+            key={dow}
+            x={LABEL_W - 6}
+            y={20 + dow * STEP + CELL - 2}
+            className={svgTextEnd}
+            fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+          >
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dow]}
+          </text>
+        ))}
+
+        {/* Cells */}
+        {weeks.map((week, wi) =>
+          week.map((day) => (
+            <rect
+              key={day.date}
+              x={LABEL_W + wi * STEP}
+              y={20 + day.dow * STEP}
+              width={CELL}
+              height={CELL}
+              rx={2}
+              fill={colors[getLevel(day.count)]}
+            >
+              <title>
+                {day.count} contribution{day.count !== 1 ? "s" : ""} on {day.date}
+              </title>
+            </rect>
+          ))
+        )}
+
+        {/* Legend */}
+        <text
+          x={svgW - 5 * (CELL + 3) - 36}
+          y={svgH - 4}
+          className={svgTextEnd}
+          fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+        >
+          Less
+        </text>
+        {[0, 1, 2, 3, 4].map((level) => (
+          <rect
+            key={level}
+            x={svgW - (5 - level) * (CELL + 3) - 30}
+            y={svgH - CELL - 5}
+            width={CELL}
+            height={CELL}
+            rx={2}
+            fill={colors[level]}
+          />
+        ))}
+        <text
+          x={svgW - 1}
+          y={svgH - 4}
+          className={svgTextEnd}
+          fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+        >
+          More
+        </text>
+      </svg>
+      <span id="after-heatmap" />
+    </div>
+  );
+}
+
+const wrapper = css({
+  overflowX: "auto",
+});
+
+const svg = css({
+  display: "block",
+});
+
+const svgText = css({
+  fontSize: "10px",
+  fontFamily: "body",
+});
+
+const svgTextEnd = css({
+  fontSize: "9px",
+  fontFamily: "body",
+  textAnchor: "end",
+});
