@@ -30,6 +30,40 @@ import { CalloutPage } from "./pages/components/callout-page";
 import { TabsPage } from "./pages/components/tabs-page";
 import { IconPage } from "./pages/components/icon-page";
 import { SearchInputPage } from "./pages/components/search-input-page";
+import { TablePage } from "./pages/components/table-page";
+import { ListPage } from "./pages/components/list-page";
+import { TreeViewPage } from "./pages/components/tree-view-page";
+import { PaginationPage } from "./pages/components/pagination-page";
+import { CheckboxPage } from "./pages/components/checkbox-page";
+import { SelectPage } from "./pages/components/select-page";
+import { TextInputPage } from "./pages/components/text-input-page";
+import { DialogPage } from "./pages/components/dialog-page";
+import { ToastPage } from "./pages/components/toast-page";
+import { FileUploadPage } from "./pages/components/file-upload-page";
+import { TooltipPage } from "./pages/components/tooltip-page";
+import { ContextMenuPage } from "./pages/components/context-menu-page";
+import { AvatarPage } from "./pages/components/avatar-page";
+import { ProgressBarPage } from "./pages/components/progress-bar-page";
+import { EmptyStatePage } from "./pages/components/empty-state-page";
+import { SkeletonPage } from "./pages/components/skeleton-page";
+import { KbdPage } from "./pages/components/kbd-page";
+import { AccordionPage } from "./pages/components/accordion-page";
+import { ClipboardPage } from "./pages/components/clipboard-page";
+import { ComboboxPage } from "./pages/components/combobox-page";
+import { EditablePage } from "./pages/components/editable-page";
+import { HoverCardPage } from "./pages/components/hover-card-page";
+import { NumberInputPage } from "./pages/components/number-input-page";
+import { PinInputPage } from "./pages/components/pin-input-page";
+import { PopoverPage } from "./pages/components/popover-page";
+import { RadioGroupPage } from "./pages/components/radio-group-page";
+import { ScrollAreaPage } from "./pages/components/scroll-area-page";
+import { SliderPage } from "./pages/components/slider-page";
+import { SplitterPage } from "./pages/components/splitter-page";
+import { StepsPage } from "./pages/components/steps-page";
+import { SwitchPage } from "./pages/components/switch-page";
+import { TagsInputPage } from "./pages/components/tags-input-page";
+import { TogglePage } from "./pages/components/toggle-page";
+import { ToggleGroupPage } from "./pages/components/toggle-group-page";
 import { HeaderPage } from "./pages/shell/header-page";
 import { FooterPage } from "./pages/shell/footer-page";
 import { SidebarPage } from "./pages/shell/sidebar-page";
@@ -78,14 +112,48 @@ export function App() {
           <Route path="foundations/elevation" element={<ElevationPage />} />
 
           {/* Components */}
-          <Route path="components/button" element={<ButtonPage />} />
+          <Route path="components/accordion" element={<AccordionPage />} />
+          <Route path="components/avatar" element={<AvatarPage />} />
           <Route path="components/badge" element={<BadgePage />} />
-          <Route path="components/card" element={<CardPage />} />
-          <Route path="components/code-block" element={<CodeBlockPage />} />
+          <Route path="components/button" element={<ButtonPage />} />
           <Route path="components/callout" element={<CalloutPage />} />
-          <Route path="components/tabs" element={<TabsPage />} />
+          <Route path="components/card" element={<CardPage />} />
+          <Route path="components/checkbox" element={<CheckboxPage />} />
+          <Route path="components/clipboard" element={<ClipboardPage />} />
+          <Route path="components/code-block" element={<CodeBlockPage />} />
+          <Route path="components/combobox" element={<ComboboxPage />} />
+          <Route path="components/context-menu" element={<ContextMenuPage />} />
+          <Route path="components/dialog" element={<DialogPage />} />
+          <Route path="components/editable" element={<EditablePage />} />
+          <Route path="components/empty-state" element={<EmptyStatePage />} />
+          <Route path="components/file-upload" element={<FileUploadPage />} />
+          <Route path="components/hover-card" element={<HoverCardPage />} />
           <Route path="components/icon" element={<IconPage />} />
+          <Route path="components/kbd" element={<KbdPage />} />
+          <Route path="components/list" element={<ListPage />} />
+          <Route path="components/number-input" element={<NumberInputPage />} />
+          <Route path="components/pagination" element={<PaginationPage />} />
+          <Route path="components/pin-input" element={<PinInputPage />} />
+          <Route path="components/popover" element={<PopoverPage />} />
+          <Route path="components/progress-bar" element={<ProgressBarPage />} />
+          <Route path="components/radio-group" element={<RadioGroupPage />} />
+          <Route path="components/scroll-area" element={<ScrollAreaPage />} />
           <Route path="components/search-input" element={<SearchInputPage />} />
+          <Route path="components/select" element={<SelectPage />} />
+          <Route path="components/skeleton" element={<SkeletonPage />} />
+          <Route path="components/slider" element={<SliderPage />} />
+          <Route path="components/splitter" element={<SplitterPage />} />
+          <Route path="components/steps" element={<StepsPage />} />
+          <Route path="components/switch" element={<SwitchPage />} />
+          <Route path="components/table" element={<TablePage />} />
+          <Route path="components/tabs" element={<TabsPage />} />
+          <Route path="components/tags-input" element={<TagsInputPage />} />
+          <Route path="components/text-input" element={<TextInputPage />} />
+          <Route path="components/toast" element={<ToastPage />} />
+          <Route path="components/toggle" element={<TogglePage />} />
+          <Route path="components/toggle-group" element={<ToggleGroupPage />} />
+          <Route path="components/tooltip" element={<TooltipPage />} />
+          <Route path="components/tree-view" element={<TreeViewPage />} />
 
           {/* Layout showcase (docs) */}
           <Route path="layouts/docs" element={<DocsLayoutPage />} />
@@ -112,7 +180,7 @@ export function App() {
         {/* Fullwidth pages (sidebar + wider content) */}
         <Route element={<FullwidthLayout />}>
           <Route path="models" element={<ModelsIndexPage />} />
-          <Route path="models/solar-medium-3-1" element={<ModelDetailPage />} />
+          <Route path="models/solstice-4-vision" element={<ModelDetailPage />} />
         </Route>
 
         {/* API pages (sidebar + split panels) */}
