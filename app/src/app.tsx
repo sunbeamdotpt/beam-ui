@@ -14,6 +14,7 @@ import { ApiReferencePage } from "./pages/api-reference";
 import { CookbooksPage } from "./pages/cookbooks";
 import { CreatorsPage } from "./pages/creators";
 import { GuidePage } from "./pages/guide";
+import { AccessibilityPage } from "./pages/foundations/accessibility";
 import { ColorsPage } from "./pages/foundations/colors";
 import { TypographyPage } from "./pages/foundations/typography";
 import { SpacingPage } from "./pages/foundations/spacing";
@@ -108,6 +109,7 @@ export function App() {
         {/* Docs pages (sidebar + content + right-rail) */}
         <Route element={<DocsLayout />}>
           {/* Foundations */}
+          <Route path="foundations/accessibility" element={<AccessibilityPage />} />
           <Route path="foundations/colors" element={<ColorsPage />} />
           <Route path="foundations/typography" element={<TypographyPage />} />
           <Route path="foundations/spacing" element={<SpacingPage />} />

@@ -20,6 +20,7 @@ export const docsSidebar: NavSection[] = [
   {
     title: "FOUNDATIONS",
     items: [
+      { label: "Accessibility", href: "/foundations/accessibility" },
       { label: "Colors", href: "/foundations/colors" },
       { label: "Typography", href: "/foundations/typography" },
       { label: "Spacing", href: "/foundations/spacing" },
