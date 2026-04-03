@@ -1,0 +1,52 @@
+/*
+ * Beam Design Language — Font Declarations
+ *
+ * Usage:
+ *   import "@sunbeam/beam-ui/styles/fonts.css"
+ *
+ * Or add to your HTML <head>:
+ *   <link rel="stylesheet" href="@sunbeam/beam-ui/styles/fonts.css">
+ */
+
+/* Ysabeau Infant — Variable weight (body + heading) */
+@font-face {
+  font-family: 'Ysabeau Infant';
+  src: url('https://fonts.gstatic.com/s/ysabeauinfant/v2/hv-Alz1C9OYadWMF5GBiKthR4g.woff2') format('woff2');
+  font-weight: 1 999;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Monaspace Argon — Monospace */
+@font-face {
+  font-family: 'Monaspace Argon';
+  src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceArgonVarVF%5Bwght%5D.woff2') format('woff2');
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Material Symbols Outlined — Icons */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url('https://fonts.gstatic.com/s/materialsymbolsoutlined/v243/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsLjBuVY.woff2') format('woff2');
+  font-display: swap;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  -webkit-font-smoothing: antialiased;
+}
