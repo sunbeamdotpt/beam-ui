@@ -32,7 +32,7 @@ export function Popover({
         <PopoverContent className={cx(content, className)}>
           <div className={header}>
             {title && <PopoverTitle className={titleStyle}>{title}</PopoverTitle>}
-            <PopoverCloseTrigger className={closeButton}>
+            <PopoverCloseTrigger className={closeButton} aria-label="Close popover">
               <Icon name="close" size={16} />
             </PopoverCloseTrigger>
           </div>

@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DatePickerRoot,
@@ -40,9 +41,10 @@ export function DatePicker({
   disabled = false,
   className,
 }: DatePickerProps) {
+  const inputId = useId();
   return (
     <div className={cx(wrapper, className)}>
-      {label && <label className={labelStyle}>{label}</label>}
+      {label && <label htmlFor={inputId} className={labelStyle}>{label}</label>}
       <DatePickerRoot
         value={value ? [parseDate(value)] : undefined}
         onValueChange={(details) => {
@@ -56,8 +58,8 @@ export function DatePicker({
         closeOnSelect
       >
         <DatePickerControl className={controlStyle}>
-          <DatePickerInput className={inputStyle} placeholder={placeholder} />
-          <DatePickerTrigger className={triggerButton}>
+          <DatePickerInput id={inputId} className={inputStyle} placeholder={placeholder} />
+          <DatePickerTrigger className={triggerButton} aria-label="Open calendar">
             <Icon name="calendar_today" size={18} />
           </DatePickerTrigger>
         </DatePickerControl>
@@ -69,13 +71,13 @@ export function DatePicker({
                 {(context) => (
                   <>
                     <DatePickerViewControl className={navRow}>
-                      <DatePickerPrevTrigger className={navButton}>
+                      <DatePickerPrevTrigger className={navButton} aria-label="Previous">
                         <Icon name="chevron_left" size={18} />
                       </DatePickerPrevTrigger>
                       <DatePickerViewTrigger className={viewTrigger}>
                         {context.visibleRangeText.start}
                       </DatePickerViewTrigger>
-                      <DatePickerNextTrigger className={navButton}>
+                      <DatePickerNextTrigger className={navButton} aria-label="Next">
                         <Icon name="chevron_right" size={18} />
                       </DatePickerNextTrigger>
                     </DatePickerViewControl>
@@ -114,13 +116,13 @@ export function DatePicker({
                 {(context) => (
                   <>
                     <DatePickerViewControl className={navRow}>
-                      <DatePickerPrevTrigger className={navButton}>
+                      <DatePickerPrevTrigger className={navButton} aria-label="Previous">
                         <Icon name="chevron_left" size={18} />
                       </DatePickerPrevTrigger>
                       <DatePickerViewTrigger className={viewTrigger}>
                         {context.visibleRange.start.year}
                       </DatePickerViewTrigger>
-                      <DatePickerNextTrigger className={navButton}>
+                      <DatePickerNextTrigger className={navButton} aria-label="Next">
                         <Icon name="chevron_right" size={18} />
                       </DatePickerNextTrigger>
                     </DatePickerViewControl>
@@ -150,14 +152,14 @@ export function DatePicker({
                 {(context) => (
                   <>
                     <DatePickerViewControl className={navRow}>
-                      <DatePickerPrevTrigger className={navButton}>
+                      <DatePickerPrevTrigger className={navButton} aria-label="Previous">
                         <Icon name="chevron_left" size={18} />
                       </DatePickerPrevTrigger>
                       <DatePickerViewTrigger className={viewTrigger}>
                         {context.getYearsGrid().at(0)?.at(0)?.label} &ndash;{" "}
                         {context.getYearsGrid().at(-1)?.at(-1)?.label}
                       </DatePickerViewTrigger>
-                      <DatePickerNextTrigger className={navButton}>
+                      <DatePickerNextTrigger className={navButton} aria-label="Next">
                         <Icon name="chevron_right" size={18} />
                       </DatePickerNextTrigger>
                     </DatePickerViewControl>
@@ -254,6 +256,11 @@ const triggerButton = css({
   _hover: {
     color: "sunbeam.orange",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "-2px",
+  },
   _disabled: {
     opacity: 0.5,
     cursor: "not-allowed",
@@ -298,6 +305,11 @@ const navButton = css({
   _hover: {
     color: "sunbeam.orange",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const viewTrigger = css({
@@ -312,6 +324,11 @@ const viewTrigger = css({
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
 });
 
@@ -366,6 +383,11 @@ const dayCellTrigger = css({
   "&[data-outside-range]": {
     color: "text.muted",
     opacity: 0.4,
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "1px",
   },
   _disabled: {
     opacity: 0.3,

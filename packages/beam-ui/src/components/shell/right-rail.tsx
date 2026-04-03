@@ -201,24 +201,27 @@ export function RightRail({ items, lastUpdated }: RightRailProps) {
   }, []);
 
   return (
-    <aside className={aside}>
+    <aside className={aside} aria-label="On this page">
       {/* Section navigation */}
       <h4 className={heading}>On This Page</h4>
-      <nav className={navList}>
-        {items.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              scrollTo(item.id);
-            }}
-            className={item.id === activeId ? navItemActive : navItem}
-            {...(item.id === activeId ? { "aria-current": "location" as const } : {})}
-          >
-            {item.label}
-          </a>
-        ))}
+      <nav className={navList} aria-label="On this page">
+        <ul role="list" style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+          {items.map((item) => (
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo(item.id);
+                }}
+                className={item.id === activeId ? navItemActive : navItem}
+                {...(item.id === activeId ? { "aria-current": "location" as const } : {})}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
 
       <hr className={divider} />

@@ -117,7 +117,11 @@ export function CommitGraph({ commits, className }: CommitGraphProps) {
   }
 
   return (
-    <div className={cx(wrapperStyle, className)}>
+    <div
+      className={cx(wrapperStyle, className)}
+      role="group"
+      aria-label={`Commit graph with ${commits.length} commit${commits.length !== 1 ? "s" : ""}`}
+    >
       <svg
         width={graphWidth}
         height={totalHeight}

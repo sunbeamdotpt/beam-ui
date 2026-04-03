@@ -24,6 +24,7 @@ function KeyIcon({ name }: { name: string }) {
     <span
       className="material-symbols-outlined"
       style={{ fontSize: "14px", lineHeight: 1, verticalAlign: "middle" }}
+      aria-hidden="true"
     >
       {name}
     </span>

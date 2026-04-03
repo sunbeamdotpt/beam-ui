@@ -98,11 +98,13 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
                 className={avatarCircle}
                 style={{ zIndex: card.assignees!.length - i }}
                 title={a.name}
+                role="img"
+                aria-label={a.name}
               >
                 {a.avatarUrl ? (
                   <img src={a.avatarUrl} alt={a.name} className={avatarImg} />
                 ) : (
-                  <span className={avatarInitial}>
+                  <span className={avatarInitial} aria-hidden="true">
                     {a.name.charAt(0).toUpperCase()}
                   </span>
                 )}
@@ -132,7 +134,7 @@ function Column({
   const cardIds = useMemo(() => column.cards.map((c) => c.id), [column.cards]);
 
   return (
-    <div className={columnStyle}>
+    <div className={columnStyle} role="group" aria-label={`${column.title} column, ${column.cards.length} card${column.cards.length !== 1 ? "s" : ""}`}>
       <div className={columnHeader}>
         <span className={columnTitle}>{column.title}</span>
         <span className={columnCount}>{column.cards.length}</span>
@@ -245,7 +247,7 @@ export function KanbanBoard({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className={cx(boardStyle, className)}>
+      <div className={cx(boardStyle, className)} role="region" aria-label="Kanban board">
         {columns.map((col) => (
           <Column key={col.id} column={col} onAddCard={onAddCard} />
         ))}

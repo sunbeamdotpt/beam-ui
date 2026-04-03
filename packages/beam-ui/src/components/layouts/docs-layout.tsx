@@ -89,7 +89,7 @@ export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> }
       <div className={sidebarWrapper}>
         <Sidebar sections={docsSidebar} />
       </div>
-      <main className={content} role="main" id="main-content">
+      <main className={content} id="main-content">
         <div className={center} data-content="center">
           <Outlet context={{ setToc } satisfies DocsContext} />
         </div>

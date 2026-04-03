@@ -85,15 +85,15 @@ export function Wizard({
   return (
     <div className={cx(wrapper, className)}>
       {/* Step indicator */}
-      <div className={stepIndicator}>
+      <nav aria-label="Wizard progress" className={stepIndicator}>
         {steps.map((s, i) => (
-          <div key={i} className={stepItem}>
+          <div key={i} className={stepItem} aria-current={i === current ? "step" : undefined}>
             <div className={cx(
               stepCircle,
               i < current ? stepDone :
               i === current ? stepActive :
               stepPending
-            )}>
+            )} aria-hidden="true">
               {i < current ? (
                 <Icon name="check" size={14} />
               ) : (
@@ -107,14 +107,14 @@ export function Wizard({
               {s.title}
             </span>
             {i < steps.length - 1 && (
-              <div className={cx(stepLine, i < current && stepLineDone)} />
+              <div className={cx(stepLine, i < current && stepLineDone)} aria-hidden="true" />
             )}
           </div>
         ))}
-      </div>
+      </nav>
 
       {/* Content */}
-      <div className={content}>
+      <div className={content} aria-live="polite">
         {step.description && (
           <p className={description}>{step.description}</p>
         )}
@@ -141,7 +141,8 @@ export function Wizard({
           <Button
             variant="primary"
             onClick={goNext}
-            className={canProceed ? undefined : disabledBtn}
+            disabled={!canProceed}
+            aria-disabled={!canProceed}
           >
             {isLast ? completeLabel : nextLabel}
             {!isLast && <Icon name="arrow_forward" size={16} />}
@@ -179,7 +180,7 @@ export function WizardModal({
         <DialogContent className={modalContent}>
           <div className={modalHeader}>
             {title && <DialogTitle className={modalTitle}>{title}</DialogTitle>}
-            <DialogCloseTrigger className={modalClose}>
+            <DialogCloseTrigger className={modalClose} aria-label="Close wizard">
               <Icon name="close" size={20} />
             </DialogCloseTrigger>
           </div>
@@ -315,11 +316,6 @@ const stepCount = css({
   fontSize: "xs",
   fontFamily: "mono",
   color: "text.muted",
-});
-
-const disabledBtn = css({
-  opacity: 0.5,
-  pointerEvents: "none",
 });
 
 /* Modal styles */

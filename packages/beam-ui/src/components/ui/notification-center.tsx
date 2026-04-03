@@ -87,6 +87,9 @@ export function NotificationItem({
     <div
       className={cx(notifRow, !notification.read ? notifUnread : undefined, onClick && clickableRow)}
       onClick={() => onClick?.(notification)}
+      onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && onClick) { e.preventDefault(); onClick(notification); } }}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
     >
       {notification.icon && (
         <Icon name={notification.icon} size={18} className={typeIcon} />
@@ -105,7 +108,8 @@ export function NotificationItem({
         <button
           className={markReadBtn}
           onClick={(e) => { e.stopPropagation(); onMarkRead(notification.id); }}
-          aria-label="Mark as read"
+          aria-label={`Mark "${notification.title}" as read`}
+          type="button"
         >
           <Icon name="check" size={14} />
         </button>
@@ -179,9 +183,9 @@ export function NotificationCenter({
   return (
     <PopoverRoot positioning={{ placement: "bottom-end" }}>
       <PopoverTrigger asChild>
-        <button className={cx(triggerBtn, className)}>
+        <button className={cx(triggerBtn, className)} aria-label={`${headerText}, ${unreadCount} unread`}>
           <Icon name={triggerIcon} size={20} />
-          {unreadCount > 0 && <span className={badge}>{unreadCount}</span>}
+          {unreadCount > 0 && <span className={badge} aria-hidden="true">{unreadCount}</span>}
         </button>
       </PopoverTrigger>
       <PopoverPositioner>
@@ -190,11 +194,11 @@ export function NotificationCenter({
             <span className={headerTitle}>{headerText}</span>
             <div className={headerActions}>
               {unreadCount > 0 && (
-                <button className={markAllBtn} onClick={onMarkAllRead}>
+                <button className={markAllBtn} onClick={onMarkAllRead} type="button">
                   Mark all as read
                 </button>
               )}
-              <PopoverCloseTrigger className={closeBtn}>
+              <PopoverCloseTrigger className={closeBtn} aria-label="Close notifications">
                 <Icon name="close" size={16} />
               </PopoverCloseTrigger>
             </div>
@@ -435,6 +439,11 @@ const notifRow = css({
 const clickableRow = css({
   cursor: "pointer",
   _hover: { backgroundColor: "bg.card" },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "-2px",
+  },
 });
 
 const notifUnread = css({

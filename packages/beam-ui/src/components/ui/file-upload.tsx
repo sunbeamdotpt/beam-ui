@@ -138,6 +138,11 @@ const zone = css({
   _hover: {
     borderColor: "sunbeam.orange",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const zoneActive = css({
@@ -236,5 +241,10 @@ const removeBtn = css({
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
 });

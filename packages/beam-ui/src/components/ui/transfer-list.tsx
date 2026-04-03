@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useId } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -25,6 +25,9 @@ export function TransferList({
   selectedTitle = "Selected",
   className,
 }: TransferListProps) {
+  const instanceId = useId();
+  const availableLabelId = `${instanceId}-available`;
+  const selectedLabelId = `${instanceId}-selected`;
   const [availableSearch, setAvailableSearch] = useState("");
   const [selectedSearch, setSelectedSearch] = useState("");
   const [checkedAvailable, setCheckedAvailable] = useState<Set<string>>(new Set());
@@ -91,11 +94,11 @@ export function TransferList({
   };
 
   return (
-    <div className={cx(container, className)}>
+    <div className={cx(container, className)} role="group" aria-label="Transfer list">
       {/* Available panel */}
       <div className={panel}>
         <div className={panelHeader}>
-          <span className={panelTitle}>{availableTitle}</span>
+          <span id={availableLabelId} className={panelTitle}>{availableTitle}</span>
           <span className={panelCount}>{available.length}</span>
         </div>
         <div className={searchWrapper}>
@@ -106,17 +109,22 @@ export function TransferList({
             value={availableSearch}
             onChange={(e) => setAvailableSearch(e.target.value)}
             className={searchInput}
+            aria-label={`Filter ${availableTitle}`}
           />
         </div>
-        <div className={itemList}>
+        <div className={itemList} role="listbox" aria-labelledby={availableLabelId} aria-multiselectable="true" tabIndex={0}>
           {filteredAvailable.map((item) => (
             <div
               key={item.id}
+              role="option"
+              aria-selected={checkedAvailable.has(item.id)}
+              tabIndex={0}
               className={cx(
                 listItem,
                 checkedAvailable.has(item.id) ? listItemSelected : undefined
               )}
               onClick={(e) => handleItemClick(item.id, "available", e)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleItemClick(item.id, "available", e as any); } }}
             >
               {item.icon && <Icon name={item.icon} size={16} />}
               <span>{item.label}</span>
@@ -130,16 +138,16 @@ export function TransferList({
 
       {/* Action buttons */}
       <div className={actions}>
-        <button className={actionBtn} onClick={moveAllRight} title="Move all right">
+        <button className={actionBtn} onClick={moveAllRight} type="button" aria-label={`Move all to ${selectedTitle}`}>
           <Icon name="keyboard_double_arrow_right" size={18} />
         </button>
-        <button className={actionBtn} onClick={moveRight} title="Move selected right">
+        <button className={actionBtn} onClick={moveRight} type="button" aria-label={`Move selected to ${selectedTitle}`}>
           <Icon name="chevron_right" size={18} />
         </button>
-        <button className={actionBtn} onClick={moveLeft} title="Move selected left">
+        <button className={actionBtn} onClick={moveLeft} type="button" aria-label={`Move selected to ${availableTitle}`}>
           <Icon name="chevron_left" size={18} />
         </button>
-        <button className={actionBtn} onClick={moveAllLeft} title="Move all left">
+        <button className={actionBtn} onClick={moveAllLeft} type="button" aria-label={`Move all to ${availableTitle}`}>
           <Icon name="keyboard_double_arrow_left" size={18} />
         </button>
       </div>
@@ -147,7 +155,7 @@ export function TransferList({
       {/* Selected panel */}
       <div className={panel}>
         <div className={panelHeader}>
-          <span className={panelTitle}>{selectedTitle}</span>
+          <span id={selectedLabelId} className={panelTitle}>{selectedTitle}</span>
           <span className={panelCount}>{selected.length}</span>
         </div>
         <div className={searchWrapper}>
@@ -158,17 +166,22 @@ export function TransferList({
             value={selectedSearch}
             onChange={(e) => setSelectedSearch(e.target.value)}
             className={searchInput}
+            aria-label={`Filter ${selectedTitle}`}
           />
         </div>
-        <div className={itemList}>
+        <div className={itemList} role="listbox" aria-labelledby={selectedLabelId} aria-multiselectable="true" tabIndex={0}>
           {filteredSelected.map((item) => (
             <div
               key={item.id}
+              role="option"
+              aria-selected={checkedSelected.has(item.id)}
+              tabIndex={0}
               className={cx(
                 listItem,
                 checkedSelected.has(item.id) ? listItemSelected : undefined
               )}
               onClick={(e) => handleItemClick(item.id, "selected", e)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleItemClick(item.id, "selected", e as any); } }}
             >
               {item.icon && <Icon name={item.icon} size={16} />}
               <span>{item.label}</span>
@@ -280,6 +293,11 @@ const listItem = css({
   _hover: {
     backgroundColor: "bg.page",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "-2px",
+  },
 });
 
 const listItemSelected = css({
@@ -309,6 +327,11 @@ const actionBtn = css({
   _hover: {
     borderColor: "sunbeam.orange",
     color: "sunbeam.orange",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
 });
 

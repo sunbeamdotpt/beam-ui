@@ -40,14 +40,14 @@ export function NumberInput({
     >
       {label && <NumberInputLabel className={labelStyle}>{label}</NumberInputLabel>}
       <NumberInputControl className={control}>
-        <NumberInputDecrementTrigger className={trigger}>
-          <svg width="12" height="2" viewBox="0 0 12 2" fill="none">
+        <NumberInputDecrementTrigger className={trigger} aria-label="Decrease value">
+          <svg width="12" height="2" viewBox="0 0 12 2" fill="none" aria-hidden="true">
             <path d="M0 1h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </NumberInputDecrementTrigger>
         <NumberInputInput className={input} readOnly={false} />
-        <NumberInputIncrementTrigger className={trigger}>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <NumberInputIncrementTrigger className={trigger} aria-label="Increase value">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path d="M6 0v12M0 6h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </NumberInputIncrementTrigger>
@@ -108,6 +108,11 @@ const trigger = css({
   transition: "all 0.15s ease",
   _hover: {
     backgroundColor: "sunbeam.flame",
+  },
+  _focus: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
   _disabled: {
     opacity: 0.5,

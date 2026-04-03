@@ -49,11 +49,11 @@ export function Checkbox({
         )}
       >
         {indeterminate ? (
-          <svg width="10" height="2" viewBox="0 0 10 2" fill="none">
+          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" aria-hidden="true">
             <rect width="10" height="2" rx="1" fill="white" />
           </svg>
         ) : checked ? (
-          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
             <path
               d="M1 4L3.5 6.5L9 1"
               stroke="white"
@@ -106,6 +106,11 @@ const box = css({
   backgroundColor: "transparent",
   transition: "all 0.15s ease",
   flexShrink: 0,
+  "input:focus-visible + &": {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const boxChecked = css({

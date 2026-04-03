@@ -69,7 +69,7 @@ export function Combobox({
     >
       <ComboboxControl className={control}>
         <ComboboxInput className={input} placeholder={placeholder} />
-        <ComboboxTrigger className={triggerBtn}>
+        <ComboboxTrigger className={triggerBtn} aria-label="Toggle suggestions">
           <Icon name="expand_more" size={20} />
         </ComboboxTrigger>
       </ComboboxControl>
@@ -77,7 +77,7 @@ export function Combobox({
       <ComboboxPositioner>
         <ComboboxContent className={content}>
           {filtered.length === 0 ? (
-            <div className={empty}>No results found</div>
+            <div className={empty} role="status">No results found</div>
           ) : (
             filtered.map((option) => (
               <ComboboxItem
@@ -140,6 +140,11 @@ const triggerBtn = css({
   color: "text.secondary",
   _hover: {
     color: "text.primary",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "-2px",
   },
 });
 

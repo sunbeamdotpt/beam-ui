@@ -50,8 +50,10 @@ function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange
       role="checkbox"
       aria-checked={checked}
       aria-label={ariaLabel}
+      tabIndex={0}
       className={cx(checkboxOuter, checked && checkboxChecked)}
       onClick={(e) => { e.stopPropagation(); onChange(); }}
+      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
     >
       {checked && <Icon name="check" size={14} />}
     </div>
@@ -150,7 +152,7 @@ function ListView({
 
   return (
     <div className={listContainer} role="grid">
-      <div className={listHeader}>
+      <div className={listHeader} role="row">
         <Checkbox checked={allSelected} onChange={toggleAll} ariaLabel="Select all files" />
         <span />
         <span>Name</span>
@@ -160,6 +162,7 @@ function ListView({
       {items.map((item) => (
         <div
           key={item.id}
+          role="row"
           className={cx(listRow, selected.has(item.id) && listRowSelected)}
           onDoubleClick={() => onOpen?.(item)}
         >
@@ -243,9 +246,13 @@ function GridView({
       {items.map((item) => (
         <div
           key={item.id}
+          role="option"
+          aria-selected={selected.has(item.id)}
           className={cx(gridCell, selected.has(item.id) && gridCellSelected)}
           onClick={() => toggle(item.id)}
           onDoubleClick={() => onOpen?.(item)}
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(item.id); } }}
         >
           <div className={gridCheckbox}>
             <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />

@@ -37,7 +37,7 @@ const textColorMap: Record<CalloutVariant, string> = {
 
 const roleMap: Record<CalloutVariant, string> = {
   tip: "note",
-  warning: "status",
+  warning: "alert",
   info: "note",
 };
 

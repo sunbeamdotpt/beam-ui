@@ -39,8 +39,8 @@ export function TagsInput({
           <TagsInputItem key={index} index={index} value={tag} className={item}>
             <TagsInputItemPreview className={itemPreview}>
               <TagsInputItemText>{tag}</TagsInputItemText>
-              <TagsInputItemDeleteTrigger className={deleteTrigger}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <TagsInputItemDeleteTrigger className={deleteTrigger} aria-label={`Remove ${tag}`}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                   <path
                     d="M1 1l8 8M9 1l-8 8"
                     stroke="currentColor"
@@ -119,6 +119,11 @@ const deleteTrigger = css({
   padding: "0 0 0 2px",
   _hover: {
     opacity: 1,
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "1px",
   },
 });
 

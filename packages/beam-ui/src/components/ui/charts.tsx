@@ -67,11 +67,14 @@ interface LineChartProps {
   lines: { key: string; color?: string; label?: string }[];
   height?: number;
   className?: string;
+  /** Accessible description of the chart for screen readers */
+  "aria-label"?: string;
 }
 
-export function LineChart({ data, lines, height = 300, className }: LineChartProps) {
+export function LineChart({ data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps) {
+  const defaultLabel = `Line chart with ${data.length} data points`;
   return (
-    <div className={cx(chartWrapper, className)}>
+    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
       <ResponsiveContainer width="100%" height={height}>
         <RLineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.15)" />
@@ -116,11 +119,13 @@ interface BarChartProps {
   bars: { key: string; color?: string; label?: string }[];
   height?: number;
   className?: string;
+  "aria-label"?: string;
 }
 
-export function BarChart({ data, bars, height = 300, className }: BarChartProps) {
+export function BarChart({ data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps) {
+  const defaultLabel = `Bar chart with ${data.length} data points`;
   return (
-    <div className={cx(chartWrapper, className)}>
+    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
       <ResponsiveContainer width="100%" height={height}>
         <RBarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.15)" />
@@ -162,11 +167,13 @@ interface PieChartProps {
   height?: number;
   donut?: boolean;
   className?: string;
+  "aria-label"?: string;
 }
 
-export function PieChart({ data, height = 300, donut = false, className }: PieChartProps) {
+export function PieChart({ data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps) {
+  const defaultLabel = `${donut ? "Donut" : "Pie"} chart with ${data.length} segments`;
   return (
-    <div className={cx(chartWrapper, className)}>
+    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
       <ResponsiveContainer width="100%" height={height}>
         <RPieChart>
           <Pie
@@ -204,11 +211,13 @@ interface AreaChartProps {
   areas: { key: string; color?: string; label?: string }[];
   height?: number;
   className?: string;
+  "aria-label"?: string;
 }
 
-export function AreaChart({ data, areas, height = 300, className }: AreaChartProps) {
+export function AreaChart({ data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps) {
+  const defaultLabel = `Area chart with ${data.length} data points`;
   return (
-    <div className={cx(chartWrapper, className)}>
+    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
       <ResponsiveContainer width="100%" height={height}>
         <RAreaChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.15)" />

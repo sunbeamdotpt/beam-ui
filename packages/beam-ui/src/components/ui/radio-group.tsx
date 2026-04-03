@@ -1,3 +1,4 @@
+import { useId } from "react";
 import {
   RadioGroupRoot,
   RadioGroupItem,
@@ -20,13 +21,15 @@ interface RadioGroupProps {
 }
 
 export function RadioGroup({ options, value, onChange, label }: RadioGroupProps) {
+  const labelId = useId();
   return (
     <RadioGroupRoot
       value={value}
       onValueChange={(details) => onChange(details.value)}
       className={root}
+      aria-labelledby={label ? labelId : undefined}
     >
-      {label && <span className={groupLabel}>{label}</span>}
+      {label && <span className={groupLabel} id={labelId}>{label}</span>}
       {options.map((option) => (
         <RadioGroupItem key={option.value} value={option.value} className={item}>
           <RadioGroupItemControl className={control} />
@@ -72,6 +75,11 @@ const control = css({
   transition: "all 0.15s ease",
   _checked: {
     borderColor: "sunbeam.orange",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
   _before: {
     content: '""',

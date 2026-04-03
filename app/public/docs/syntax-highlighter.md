@@ -1,6 +1,6 @@
 # SyntaxHighlighter
 
-> Code syntax highlighting powered by Shiki with custom Beam light/dark themes.
+> SyntaxHighlighter component.
 
 > **[View rendered page](https://design.sunbeam.pt/components/syntax-highlighter?render=html)** — see the live component with full DOM structure and styling.
 
@@ -12,23 +12,12 @@ import { SyntaxHighlighter } from "@sunbeam/beam-ui/components/ui/syntax-highlig
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| code | `string` | Yes | Source code to highlight |
-| language | `string` | Yes | Language identifier (e.g. 'typescript') |
-| theme | `"light" | "dark"` | No | Color theme override |
-| showLineNumbers | `boolean` | No | Display line numbers |
-| highlightLines | `number[]` | No | Lines to highlight |
-| className | `string` | No | Additional CSS class |
-
-## Usage
-```tsx
-<SyntaxHighlighter code="const x = 1;" language="typescript" showLineNumbers />
-```
-
-## Features
-- Shiki-powered highlighting
-- Custom Beam dark/light themes
-- Line number gutter
-- Line highlighting
+| code | `string` | Yes |  |
+| language | `string` | Yes |  |
+| theme | `"light" | "dark"` | No |  |
+| showLineNumbers | `boolean` | No |  |
+| highlightLines | `number[]` | No |  |
+| className | `string` | No |  |
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

@@ -71,6 +71,8 @@ export function Avatar({ name, src, size = "md", className }: AvatarProps) {
 
   return (
     <span
+      role="img"
+      aria-label={name}
       className={cx(base, className)}
       style={{
         width: dim,

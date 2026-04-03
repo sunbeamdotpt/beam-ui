@@ -37,7 +37,7 @@ function PillToggle({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className={css({ display: "flex", backgroundColor: "sunbeam.black", borderRadius: "md", padding: "2px" })}>
+    <div role="group" className={css({ display: "flex", backgroundColor: "sunbeam.black", borderRadius: "md", padding: "2px" })}>
       {options.map((opt) => (
         <button
           key={opt}

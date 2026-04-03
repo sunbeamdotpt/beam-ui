@@ -76,7 +76,7 @@ export function ApiLayout() {
       <div className={sidebarWrapper}>
         <Sidebar sections={apiSidebar} />
       </div>
-      <main className={panels} role="main" id="main-content">
+      <main className={panels} id="main-content">
         <Outlet />
       </main>
     </div>

@@ -65,6 +65,11 @@ const control = css({
     backgroundColor: "sunbeam.orange",
     borderColor: "sunbeam.orange",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const thumb = css({

@@ -65,15 +65,20 @@ export function Skeleton({
   if (variant === "circle" && width && !height) style.height = width;
 
   const single = (
-    <div className={cx(base, variantStyle, className)} style={style} />
+    <div
+      role="status"
+      aria-label="Loading"
+      className={cx(base, variantStyle, className)}
+      style={style}
+    />
   );
 
   if (count <= 1) return single;
 
   return (
-    <div className={stackStyle}>
+    <div role="status" aria-label="Loading" className={stackStyle}>
       {Array.from({ length: count }, (_, i) => (
-        <div key={i} className={cx(base, variantStyle, className)} style={style} />
+        <div key={i} aria-hidden="true" className={cx(base, variantStyle, className)} style={style} />
       ))}
     </div>
   );

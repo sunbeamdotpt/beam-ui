@@ -35,7 +35,11 @@ const toggle = css({
   border: "1px solid",
   cursor: "pointer",
   transition: "all 0.15s ease",
-  outline: "none",
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const toggleUnpressed = css({

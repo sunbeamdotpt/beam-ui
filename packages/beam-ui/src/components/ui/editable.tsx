@@ -25,6 +25,7 @@ export function Editable({
       onValueChange={(details) => onChange(details.value)}
       activationMode="click"
       submitMode="enter"
+      placeholder={placeholder}
       className={cx(root, className)}
     >
       <EditableArea className={area}>
@@ -53,6 +54,11 @@ const preview = css({
   lineHeight: 1.5,
   _placeholder: {
     color: "text.muted",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
 });
 

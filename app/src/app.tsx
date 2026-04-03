@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { Shell } from "@sunbeam/beam-ui/components/shell/shell";
 import { DocsLayout } from "@sunbeam/beam-ui/components/layouts/docs-layout";
 import { pageDates } from "./generated/page-dates";
@@ -111,8 +112,16 @@ import { SidebarPage } from "./pages/shell/sidebar-page";
 import { RightRailPage } from "./pages/shell/right-rail-page";
 import { BreadcrumbsPage } from "./pages/shell/breadcrumbs-page";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 export function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       <Route element={<Shell />}>
         {/* Full-width pages (no sidebar) */}
@@ -249,5 +258,6 @@ export function App() {
         </Route>
       </Route>
     </Routes>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { css, cx } from "styled-system/css";
 import {
   PopoverRoot,
@@ -32,6 +32,7 @@ export function ColorPicker({
   label,
   className,
 }: ColorPickerProps) {
+  const hexInputId = useId();
   const [hexInput, setHexInput] = useState(value);
 
   const handleHexChange = (hex: string) => {
@@ -54,6 +55,7 @@ export function ColorPicker({
           <span
             className={triggerSwatch}
             style={{ backgroundColor: value }}
+            aria-hidden="true"
           />
           <span className={triggerHex}>{value.toUpperCase()}</span>
           <Icon name="expand_more" size={16} />
@@ -63,7 +65,7 @@ export function ColorPicker({
           <PopoverContent className={contentStyle}>
             <div className={popoverHeader}>
               <span className={popoverTitle}>Choose color</span>
-              <PopoverCloseTrigger className={closeBtn}>
+              <PopoverCloseTrigger className={closeBtn} aria-label="Close color picker">
                 <Icon name="close" size={16} />
               </PopoverCloseTrigger>
             </div>
@@ -72,6 +74,7 @@ export function ColorPicker({
               <span
                 className={previewSwatch}
                 style={{ backgroundColor: value }}
+                aria-hidden="true"
               />
               <span className={previewHex}>{value.toUpperCase()}</span>
             </div>
@@ -88,15 +91,16 @@ export function ColorPicker({
                   )}
                   style={{ backgroundColor: color }}
                   onClick={() => handleSwatchClick(color)}
-                  title={color}
+                  aria-label={`Select color ${color}`}
                   type="button"
                 />
               ))}
             </div>
 
             <div className={hexInputRow}>
-              <span className={hexLabel}>HEX</span>
+              <label htmlFor={hexInputId} className={hexLabel}>HEX</label>
               <input
+                id={hexInputId}
                 className={hexInputStyle}
                 value={hexInput}
                 onChange={(e) => handleHexChange(e.target.value)}
@@ -142,6 +146,11 @@ const triggerStyle = css({
   transition: "all 0.15s ease",
   _hover: {
     borderColor: "sunbeam.orange",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
 });
 
@@ -198,6 +207,11 @@ const closeBtn = css({
   _hover: {
     color: "sunbeam.orange",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const previewRow = css({
@@ -242,6 +256,11 @@ const swatchButton = css({
   outline: "none",
   _hover: {
     transform: "scale(1.15)",
+  },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
   },
 });
 

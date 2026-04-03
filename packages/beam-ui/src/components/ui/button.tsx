@@ -11,6 +11,8 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  "aria-disabled"?: boolean;
 }
 
 const base = css({
@@ -26,6 +28,11 @@ const base = css({
   textDecoration: "none",
   border: "none",
   lineHeight: 1,
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
 });
 
 const variants: Record<Variant, string> = {
@@ -73,6 +80,12 @@ const variants: Record<Variant, string> = {
   }),
 };
 
+const disabledStyle = css({
+  opacity: 0.5,
+  cursor: "not-allowed",
+  pointerEvents: "none",
+});
+
 export function Button({
   children,
   variant = "dark",
@@ -80,8 +93,10 @@ export function Button({
   className,
   onClick,
   type = "button",
+  disabled,
+  "aria-disabled": ariaDisabled,
 }: ButtonProps) {
-  const classes = cx(base, variants[variant], className);
+  const classes = cx(base, variants[variant], disabled && disabledStyle, className);
 
   if (href) {
     if (href.startsWith("http")) {
@@ -99,7 +114,7 @@ export function Button({
   }
 
   return (
-    <button type={type} className={classes} onClick={onClick}>
+    <button type={type} className={classes} onClick={onClick} disabled={disabled} aria-disabled={ariaDisabled}>
       {children}
     </button>
   );

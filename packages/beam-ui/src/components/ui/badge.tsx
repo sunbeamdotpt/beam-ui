@@ -124,6 +124,7 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">) {
         {children}
       </span>
       <div
+        aria-hidden="true"
         className={css({
           height: "1px",
           flex: 1,

@@ -74,8 +74,12 @@ const trigger = css({
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
-  outline: "none",
   transition: "color 0.15s ease",
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
   _hover: {
     color: "sunbeam.orange",
   },

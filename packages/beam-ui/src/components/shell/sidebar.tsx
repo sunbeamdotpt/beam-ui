@@ -35,6 +35,9 @@ const itemList = css({
   display: "flex",
   flexDirection: "column",
   gap: "2px",
+  listStyle: "none",
+  padding: 0,
+  margin: 0,
 });
 
 const itemLink = css({
@@ -129,6 +132,8 @@ const childList = css({
   flexDirection: "column",
   gap: "2px",
   paddingBlock: "2px",
+  listStyle: "none",
+  paddingInlineStart: 0,
 });
 
 const childLabel = css({
@@ -231,28 +236,29 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
         <span className={open ? chevronOpen : chevron}>&#x203A;</span>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className={childList}>
+        <ul className={childList} role="list">
           {item.children!.map((child) => {
             const sameAsParent = child.href === item.href;
             const onParentPage = sameAsParent && location.pathname === item.href;
             const cActive = !sameAsParent && location.pathname === child.href;
             return (
-              <Link
-                key={child.label}
-                to={child.href}
-                className={
-                  cActive ? childLinkActive
-                    : onParentPage ? childLabelOnPage
-                    : sameAsParent ? childLabel
-                    : childLink
-                }
-                {...(cActive ? { "aria-current": "page" as const } : {})}
-              >
-                {child.label}
-              </Link>
+              <li key={child.label}>
+                <Link
+                  to={child.href}
+                  className={
+                    cActive ? childLinkActive
+                      : onParentPage ? childLabelOnPage
+                      : sameAsParent ? childLabel
+                      : childLink
+                  }
+                  {...(cActive ? { "aria-current": "page" as const } : {})}
+                >
+                  {child.label}
+                </Link>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </CollapsibleContent>
     </CollapsibleRoot>
   );
@@ -270,11 +276,13 @@ export function Sidebar({ sections }: SidebarProps) {
       {sections.map((section) => (
         <div key={section.title} className={sectionGroup}>
           <h3 className={sectionHeader}>{section.title}</h3>
-          <div className={itemList}>
+          <ul className={itemList} role="list">
             {section.items.map((item) => (
-              <SidebarItem key={item.label} item={item} />
+              <li key={item.label}>
+                <SidebarItem item={item} />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       ))}
     </aside>

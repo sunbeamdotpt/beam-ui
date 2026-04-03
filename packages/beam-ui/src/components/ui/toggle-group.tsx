@@ -58,8 +58,13 @@ const itemBase = css({
   border: "1px solid",
   cursor: "pointer",
   transition: "all 0.15s ease",
-  outline: "none",
   marginLeft: "-1px",
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+    zIndex: 2,
+  },
   _first: { marginLeft: "0" },
 });
 

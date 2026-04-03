@@ -1,6 +1,6 @@
 # Beam Design Language
 
-> A comprehensive React component library by Sunbeam Studios for building design system interfaces.
+> A comprehensive React component library by Sunbeam Studios.
 
 ## Overview
 - Package: @sunbeam/beam-ui
@@ -16,97 +16,331 @@ npm install @sunbeam/beam-ui --registry=https://src.sunbeam.pt/api/packages/stud
 ## Stack
 React 19, Panda CSS, Ark UI v4, TypeScript
 
-## Components
-- **Button** - Primary action element with multiple visual variants.  
-  `import { Button } from "@sunbeam/beam-ui/components/ui/button"`
-- **Badge** - Status indicator label for tagging content with semantic meaning.  
-  `import { Badge } from "@sunbeam/beam-ui/components/ui/badge"`
-- **Card** - Content container with icon, title, description, and call-to-action link.  
-  `import { Card } from "@sunbeam/beam-ui/components/ui/card"`
-- **Icon** - Material Symbols icon wrapper with accessibility support.  
-  `import { Icon } from "@sunbeam/beam-ui/components/ui/icon"`
-- **Avatar** - User avatar with image support and initial fallback.  
-  `import { Avatar } from "@sunbeam/beam-ui/components/ui/avatar"`
-- **Callout** - Highlighted information block for tips, warnings, and info notices.  
-  `import { Callout } from "@sunbeam/beam-ui/components/ui/callout"`
-- **CodeBlock** - Tabbed code display with optional toggle groups for streaming, version, and mode variants.  
-  `import { CodeBlock } from "@sunbeam/beam-ui/components/ui/code-block"`
-- **Tabs** - Navigation tabs built on Ark UI with default and dark variants.  
-  `import { Tabs } from "@sunbeam/beam-ui/components/ui/tabs"`
-- **Tooltip** - Hoverable tooltip overlay built on Ark UI.  
-  `import { Tooltip } from "@sunbeam/beam-ui/components/ui/tooltip"`
-- **Dialog** - Modal dialog with title, content area, and optional action buttons. Built on Ark UI.  
-  `import { Dialog } from "@sunbeam/beam-ui/components/ui/dialog"`
-- **Select** - Dropdown select input built on Ark UI with search and custom styling.  
-  `import { Select } from "@sunbeam/beam-ui/components/ui/select"`
-- **Checkbox** - Checkbox input with label, indeterminate state, and Beam styling.  
-  `import { Checkbox } from "@sunbeam/beam-ui/components/ui/checkbox"`
-- **TextInput** - Text input field with label, error state, and multiple input types.  
-  `import { TextInput } from "@sunbeam/beam-ui/components/ui/text-input"`
-- **SearchInput** - Search input with icon and keyboard shortcut hint.  
-  `import { SearchInput } from "@sunbeam/beam-ui/components/ui/search-input"`
-- **Table** - Data table with sortable columns, row selection, and accessible caption.  
-  `import { Table } from "@sunbeam/beam-ui/components/ui/table"`
-- **List** - Flexible list component with icon support and multiple layout variants.  
-  `import { List } from "@sunbeam/beam-ui/components/ui/list"`
-- **Pagination** - Page navigation with page size selector and ellipsis collapse.  
-  `import { Pagination } from "@sunbeam/beam-ui/components/ui/pagination"`
-- **Accordion** - Collapsible content sections built on Ark UI with single or multiple expand modes.  
+## Components (86 total)
+
+### UI Components
+- **Accordion** — Accordion component.  
   `import { Accordion } from "@sunbeam/beam-ui/components/ui/accordion"`
-- **Toast** - Temporary notification message with auto-dismiss after 3 seconds.  
-  `import { Toast } from "@sunbeam/beam-ui/components/ui/toast"`
-- **Switch** - Toggle switch built on Ark UI for boolean settings.  
-  `import { Switch } from "@sunbeam/beam-ui/components/ui/switch"`
-- **ProgressBar** - Determinate progress indicator built on Ark UI with size and color variants.  
-  `import { ProgressBar } from "@sunbeam/beam-ui/components/ui/progress-bar"`
-- **EmptyState** - Placeholder for empty content areas with icon, message, and optional action.  
-  `import { EmptyState } from "@sunbeam/beam-ui/components/ui/empty-state"`
-- **Skeleton** - Loading placeholder with shimmer animation.  
-  `import { Skeleton } from "@sunbeam/beam-ui/components/ui/skeleton"`
-- **DatePicker** - Calendar date picker built on Ark UI with day/month/year navigation.  
-  `import { DatePicker } from "@sunbeam/beam-ui/components/ui/date-picker"`
-- **ColorPicker** - Color selection popover with preset palette and hex input.  
-  `import { ColorPicker } from "@sunbeam/beam-ui/components/ui/color-picker"`
-- **LabelPicker** - Multi-select popover for issue/PR labels with color indicators and search.  
-  `import { LabelPicker } from "@sunbeam/beam-ui/components/ui/label-picker"`
-- **AssigneePicker** - Multi-select popover for assigning users with avatar display and search.  
-  `import { AssigneePicker } from "@sunbeam/beam-ui/components/ui/assignee-picker"`
-- **MilestonePicker** - Single-select popover for milestones with progress indicators.  
-  `import { MilestonePicker } from "@sunbeam/beam-ui/components/ui/milestone-picker"`
-- **BranchSelector** - Branch/tag selector popover with tabs, search, and create-branch support.  
-  `import { BranchSelector } from "@sunbeam/beam-ui/components/ui/branch-selector"`
-- **SyntaxHighlighter** - Code syntax highlighting powered by Shiki with custom Beam light/dark themes.  
-  `import { SyntaxHighlighter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter"`
-- **CodeEditor** - Full code editor powered by CodeMirror 6 with Beam syntax themes and language support.  
-  `import { CodeEditor } from "@sunbeam/beam-ui/components/ui/code-editor"`
-- **MarkdownRenderer** - Renders GitHub Flavored Markdown to styled HTML using unified/remark/rehype pipeline.  
-  `import { MarkdownRenderer } from "@sunbeam/beam-ui/components/ui/markdown-renderer"`
-- **MarkdownEditor** - Write/preview markdown editor with formatting toolbar.  
-  `import { MarkdownEditor } from "@sunbeam/beam-ui/components/ui/markdown-editor"`
-- **DiffViewer** - Side-by-side or unified diff viewer for code review.  
-  `import { DiffViewer } from "@sunbeam/beam-ui/components/ui/diff-viewer"`
-- **CommentThread** - Threaded comment display with markdown rendering, reactions, and timeline events.  
-  `import { CommentThread } from "@sunbeam/beam-ui/components/ui/comment-thread"`
-- **KanbanBoard** - Drag-and-drop Kanban board built on dnd-kit with columns and cards.  
-  `import { KanbanBoard } from "@sunbeam/beam-ui/components/ui/kanban-board"`
-- **CommitGraph** - Git commit history visualization with branch lanes and merge paths.  
-  `import { CommitGraph } from "@sunbeam/beam-ui/components/ui/commit-graph"`
-- **Charts** - Chart components (Line, Bar, Pie, Area) built on Recharts with Beam theming.  
-  `import { Charts } from "@sunbeam/beam-ui/components/ui/charts"`
-- **DiagramRenderer** - Renders Mermaid diagram definitions to SVG with Beam theming.  
-  `import { DiagramRenderer } from "@sunbeam/beam-ui/components/ui/diagram-renderer"`
-- **MathRenderer** - Renders LaTeX math expressions using KaTeX.  
-  `import { MathRenderer } from "@sunbeam/beam-ui/components/ui/math-renderer"`
-- **ActivityHeatmap** - GitHub-style contribution activity heatmap for the past year.  
+- **ActivityHeatmap** — ActivityHeatmap component.  
   `import { ActivityHeatmap } from "@sunbeam/beam-ui/components/ui/activity-heatmap"`
-- **NotificationCenter** - Popover notification list with type icons and mark-read functionality.  
-  `import { NotificationCenter } from "@sunbeam/beam-ui/components/ui/notification-center"`
-- **FileList** - File browser with list/grid layouts, selection, and metadata display.  
+- **AssigneePicker** — AssigneePicker component.  
+  `import { AssigneePicker } from "@sunbeam/beam-ui/components/ui/assignee-picker"`
+- **Avatar** — Avatar component.  
+  `import { Avatar } from "@sunbeam/beam-ui/components/ui/avatar"`
+- **Badge** — Badge component.  
+  `import { Badge } from "@sunbeam/beam-ui/components/ui/badge"`
+- **BentoItem** — BentoItem component.  
+  `import { BentoItem } from "@sunbeam/beam-ui/components/ui/bento-item"`
+- **BranchSelector** — BranchSelector component.  
+  `import { BranchSelector } from "@sunbeam/beam-ui/components/ui/branch-selector"`
+- **Button** — Button component.  
+  `import { Button } from "@sunbeam/beam-ui/components/ui/button"`
+- **Callout** — Callout component.  
+  `import { Callout } from "@sunbeam/beam-ui/components/ui/callout"`
+- **CapabilityCard** — CapabilityCard component.  
+  `import { CapabilityCard } from "@sunbeam/beam-ui/components/ui/capability-card"`
+- **Card** — Card component.  
+  `import { Card } from "@sunbeam/beam-ui/components/ui/card"`
+- **Checkbox** — Checkbox component.  
+  `import { Checkbox } from "@sunbeam/beam-ui/components/ui/checkbox"`
+- **Clipboard** — Clipboard component.  
+  `import { Clipboard } from "@sunbeam/beam-ui/components/ui/clipboard"`
+- **CodeBlock** — Content keyed by toggle combo, e.g. "Non-streaming|V2|Synchronous". Falls back to "default". */
+  variants?: Record<string, ReactNode>;
+  /** Simple content (no variants) */
+  content?: ReactNode;
+}
+
+interface ToggleGroup {
+  options: string[];
+  defaultValue?: string;
+}
+
+interface CodeBlockProps {
+  tabs: CodeTab[];
+  streamToggle?: ToggleGroup;
+  versionToggle?: ToggleGroup;
+  modeToggle?: ToggleGroup;
+  className?: string;
+}
+
+/* ------------------------------------------------------------------ */
+/* Small pill toggle                                                   */
+/* ------------------------------------------------------------------ */
+function PillToggle({
+  options,
+  value,
+  onChange,
+}: {
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div role="group" className={css({ display: "flex", backgroundColor: "sunbeam.black", borderRadius: "md", padding: "2px" })}>
+      {options.map((opt) => (
+        <button
+          key={opt}
+          onClick={() => onChange(opt)}
+          aria-pressed={value === opt}
+          className={cx(
+            css({
+              padding: "4px 12px",
+              fontSize: "10px",
+              fontWeight: "button",
+              borderRadius: "md",
+              textTransform: "uppercase",
+              border: "none",
+              cursor: "pointer",
+              transition: "all 0.15s ease",
+              fontFamily: "body",
+            }),
+            value === opt
+              ? css({ backgroundColor: "code.activePill", color: "white" })
+              : css({ backgroundColor: "transparent", color: "rgba(255,255,255,0.35)", _hover: { color: "rgba(255,255,255,0.7)" } })
+          )}
+        >
+          {opt}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* CodeBlock                                                           */
+/* ------------------------------------------------------------------  
+  `import { CodeBlock } from "@sunbeam/beam-ui/components/ui/code-block"`
+- **CodeEditor** — CodeEditor component.  
+  `import { CodeEditor } from "@sunbeam/beam-ui/components/ui/code-editor"`
+- **ColorPicker** — ColorPicker component.  
+  `import { ColorPicker } from "@sunbeam/beam-ui/components/ui/color-picker"`
+- **Combobox** — Combobox component.  
+  `import { Combobox } from "@sunbeam/beam-ui/components/ui/combobox"`
+- **CommentThread** — CommentThread component.  
+  `import { CommentThread } from "@sunbeam/beam-ui/components/ui/comment-thread"`
+- **CommitGraph** — CommitGraph component.  
+  `import { CommitGraph } from "@sunbeam/beam-ui/components/ui/commit-graph"`
+- **ContextMenu** — ContextMenu component.  
+  `import { ContextMenu } from "@sunbeam/beam-ui/components/ui/context-menu"`
+- **DatePicker** — DatePicker component.  
+  `import { DatePicker } from "@sunbeam/beam-ui/components/ui/date-picker"`
+- **DiagramRenderer** — DiagramRenderer component.  
+  `import { DiagramRenderer } from "@sunbeam/beam-ui/components/ui/diagram-renderer"`
+- **Dialog** — Dialog component.  
+  `import { Dialog } from "@sunbeam/beam-ui/components/ui/dialog"`
+- **DropdownMenu** — DropdownMenu component.  
+  `import { DropdownMenu } from "@sunbeam/beam-ui/components/ui/dropdown-menu"`
+- **Editable** — Editable component.  
+  `import { Editable } from "@sunbeam/beam-ui/components/ui/editable"`
+- **EmptyState** — EmptyState component.  
+  `import { EmptyState } from "@sunbeam/beam-ui/components/ui/empty-state"`
+- **FeatureTile** — FeatureTile component.  
+  `import { FeatureTile } from "@sunbeam/beam-ui/components/ui/feature-tile"`
+- **FileList** — FileList component.  
   `import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"`
-- **FileUpload** - Drag-and-drop file upload zone with accept filter and keyboard support.  
+- **FileUpload** — FileUpload component.  
   `import { FileUpload } from "@sunbeam/beam-ui/components/ui/file-upload"`
-- **Form** - Type-safe form wrapper integrating Zod schema validation with React Hook Form.  
-  `import { Form } from "@sunbeam/beam-ui/form"`
+- **HoverCard** — HoverCard component.  
+  `import { HoverCard } from "@sunbeam/beam-ui/components/ui/hover-card"`
+- **Icon** — Icon component.  
+  `import { Icon } from "@sunbeam/beam-ui/components/ui/icon"`
+- **KanbanCardDetail** — KanbanCardDetail component.  
+  `import { KanbanCardDetail } from "@sunbeam/beam-ui/components/ui/kanban-card-detail"`
+- **KanbanCardView** — Standalone card display — usable outside the board (e.g., in lists, detail panels).  
+  `import { KanbanCardView } from "@sunbeam/beam-ui/components/ui/kanban-board"`
+- **Kbd** — Kbd component.  
+  `import { Kbd } from "@sunbeam/beam-ui/components/ui/kbd"`
+- **LabelPicker** — LabelPicker component.  
+  `import { LabelPicker } from "@sunbeam/beam-ui/components/ui/label-picker"`
+- **LineChart** — LineChart component.  
+  `import { LineChart } from "@sunbeam/beam-ui/components/ui/charts"`
+- **List** — List component.  
+  `import { List } from "@sunbeam/beam-ui/components/ui/list"`
+- **LoginForm** — LoginForm component.  
+  `import { LoginForm } from "@sunbeam/beam-ui/components/ui/auth-form"`
+- **MarkdownEditor** — MarkdownEditor component.  
+  `import { MarkdownEditor } from "@sunbeam/beam-ui/components/ui/markdown-editor"`
+- **MarkdownRenderer** — MarkdownRenderer component.  
+  `import { MarkdownRenderer } from "@sunbeam/beam-ui/components/ui/markdown-renderer"`
+- **MathRenderer** — MathRenderer component.  
+  `import { MathRenderer } from "@sunbeam/beam-ui/components/ui/math-renderer"`
+- **MilestonePicker** — MilestonePicker component.  
+  `import { MilestonePicker } from "@sunbeam/beam-ui/components/ui/milestone-picker"`
+- **ModelRow** — ModelRow component.  
+  `import { ModelRow } from "@sunbeam/beam-ui/components/ui/model-row"`
+- **NotificationItem** — Material Symbol icon name, or a ReactNode for custom icons */
+  icon?: string;
+  title: string;
+  /** Grouping key — notifications are grouped by this value (e.g., repo name, app name, channel) */
+  group?: string;
+  /** Secondary text — timestamp, sender, channel, etc. */
+  subtitle?: string;
+  /** Human-readable timestamp */
+  timestamp?: string;
+  read: boolean;
+  /** Optional action URL */
+  href?: string;
+  /** Any additional metadata the consumer wants to attach */
+  meta?: Record<string, unknown>;
+}
+
+interface NotificationCenterProps {
+  notifications: Notification[];
+  onMarkRead: (id: string) => void;
+  onMarkAllRead: () => void;
+  onClickNotification?: (notification: Notification) => void;
+  /** Header title. Defaults to "Notifications" */
+  title?: string;
+  /** Trigger icon. Defaults to "notifications" */
+  triggerIcon?: string;
+  /** Make groups collapsible with unread count badges. Defaults to false. */
+  collapsibleGroups?: boolean;
+  className?: string;
+}
+
+/** Built-in icon suggestions for common notification types */
+export const notificationIcons = {
+  // Code forge
+  issue: "bug_report",
+  pr: "merge",
+  release: "new_releases",
+  mention: "alternate_email",
+  review: "rate_review",
+  commit: "commit",
+  // Communication
+  email: "mail",
+  chat: "chat",
+  dm: "forum",
+  // Calendar
+  event: "event",
+  reminder: "alarm",
+  // Storage
+  upload: "cloud_upload",
+  share: "share",
+  // System
+  security: "security",
+  update: "system_update",
+  warning: "warning",
+  info: "info",
+} as const;
+
+/** Standalone notification row — usable outside the NotificationCenter dropdown.  
+  `import { NotificationItem } from "@sunbeam/beam-ui/components/ui/notification-center"`
+- **NumberInput** — NumberInput component.  
+  `import { NumberInput } from "@sunbeam/beam-ui/components/ui/number-input"`
+- **Pagination** — Pagination component.  
+  `import { Pagination } from "@sunbeam/beam-ui/components/ui/pagination"`
+- **parseDiff** — parseDiff component.  
+  `import { parseDiff } from "@sunbeam/beam-ui/components/ui/diff-viewer"`
+- **PinInput** — PinInput component.  
+  `import { PinInput } from "@sunbeam/beam-ui/components/ui/pin-input"`
+- **Popover** — Popover component.  
+  `import { Popover } from "@sunbeam/beam-ui/components/ui/popover"`
+- **ProgressBar** — ProgressBar component.  
+  `import { ProgressBar } from "@sunbeam/beam-ui/components/ui/progress-bar"`
+- **RadioGroup** — RadioGroup component.  
+  `import { RadioGroup } from "@sunbeam/beam-ui/components/ui/radio-group"`
+- **ReactionPicker** — ReactionPicker component.  
+  `import { ReactionPicker } from "@sunbeam/beam-ui/components/ui/reaction-picker"`
+- **ScrollArea** — ScrollArea component.  
+  `import { ScrollArea } from "@sunbeam/beam-ui/components/ui/scroll-area"`
+- **SearchInput** — SearchInput component.  
+  `import { SearchInput } from "@sunbeam/beam-ui/components/ui/search-input"`
+- **Select** — Select component.  
+  `import { Select } from "@sunbeam/beam-ui/components/ui/select"`
+- **Skeleton** — Skeleton component.  
+  `import { Skeleton } from "@sunbeam/beam-ui/components/ui/skeleton"`
+- **Slider** — Slider component.  
+  `import { Slider } from "@sunbeam/beam-ui/components/ui/slider"`
+- **Spinner** — Spinner component.  
+  `import { Spinner } from "@sunbeam/beam-ui/components/ui/spinner"`
+- **Splitter** — Splitter component.  
+  `import { Splitter } from "@sunbeam/beam-ui/components/ui/splitter"`
+- **StatBar** — StatBar component.  
+  `import { StatBar } from "@sunbeam/beam-ui/components/ui/stat-bar"`
+- **Steps** — Steps component.  
+  `import { Steps } from "@sunbeam/beam-ui/components/ui/steps"`
+- **Switch** — Switch component.  
+  `import { Switch } from "@sunbeam/beam-ui/components/ui/switch"`
+- **SyntaxHighlighter** — SyntaxHighlighter component.  
+  `import { SyntaxHighlighter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter"`
+- **Table** — Table component.  
+  `import { Table } from "@sunbeam/beam-ui/components/ui/table"`
+- **Tabs** — Tabs component.  
+  `import { Tabs } from "@sunbeam/beam-ui/components/ui/tabs"`
+- **TagsInput** — TagsInput component.  
+  `import { TagsInput } from "@sunbeam/beam-ui/components/ui/tags-input"`
+- **TextInput** — TextInput component.  
+  `import { TextInput } from "@sunbeam/beam-ui/components/ui/text-input"`
+- **ThemeToggle** — ThemeToggle component.  
+  `import { ThemeToggle } from "@sunbeam/beam-ui/components/ui/theme-toggle"`
+- **Toast** — Toast component.  
+  `import { Toast } from "@sunbeam/beam-ui/components/ui/toast"`
+- **Toggle** — Toggle component.  
+  `import { Toggle } from "@sunbeam/beam-ui/components/ui/toggle"`
+- **ToggleGroup** — ToggleGroup component.  
+  `import { ToggleGroup } from "@sunbeam/beam-ui/components/ui/toggle-group"`
+- **Tooltip** — Tooltip component.  
+  `import { Tooltip } from "@sunbeam/beam-ui/components/ui/tooltip"`
+- **TopicCard** — TopicCard component.  
+  `import { TopicCard } from "@sunbeam/beam-ui/components/ui/topic-card"`
+- **TransferList** — TransferList component.  
+  `import { TransferList } from "@sunbeam/beam-ui/components/ui/transfer-list"`
+- **TreeView** — TreeView component.  
+  `import { TreeView } from "@sunbeam/beam-ui/components/ui/tree-view"`
+- **Wizard** — If true, the Next button is disabled until the consumer sets it to false */
+  isValid?: boolean;
+}
+
+export interface WizardProps {
+  steps: WizardStep[];
+  onComplete: () => void;
+  onCancel?: () => void;
+  /** Called when step changes — receives the new step index */
+  onStepChange?: (step: number) => void;
+  /** Labels for the buttons */
+  nextLabel?: string;
+  backLabel?: string;
+  completeLabel?: string;
+  cancelLabel?: string;
+  className?: string;
+}
+
+export interface WizardModalProps extends WizardProps {
+  open: boolean;
+  onClose: () => void;
+  title?: string;
+}
+
+/* ------------------------------------------------------------------ */
+/* Wizard                                                              */
+/* ------------------------------------------------------------------  
+  `import { Wizard } from "@sunbeam/beam-ui/components/ui/wizard"`
+- **WorkItemList** — WorkItemList component.  
+  `import { WorkItemList } from "@sunbeam/beam-ui/components/ui/work-item-list"`
+
+### Shell
+- **Breadcrumbs** — Breadcrumbs component.  
+  `import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs"`
+- **Footer** — Footer component.  
+  `import { Footer } from "@sunbeam/beam-ui/components/shell/footer"`
+- **Header** — Header component.  
+  `import { Header } from "@sunbeam/beam-ui/components/shell/header"`
+- **RightRail** — RightRail component.  
+  `import { RightRail } from "@sunbeam/beam-ui/components/shell/right-rail"`
+- **Shell** — Shell component.  
+  `import { Shell } from "@sunbeam/beam-ui/components/shell/shell"`
+- **Sidebar** — Sidebar component.  
+  `import { Sidebar } from "@sunbeam/beam-ui/components/shell/sidebar"`
+
+### Layouts
+- **ApiLayout** — ApiLayout component.  
+  `import { ApiLayout } from "@sunbeam/beam-ui/components/layouts/api-layout"`
+- **FullwidthLayout** — FullwidthLayout component.  
+  `import { FullwidthLayout } from "@sunbeam/beam-ui/components/layouts/fullwidth-layout"`
+- **useDocsContext** — useDocsContext component.  
+  `import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout"`
 
 ## Foundations
 - **Colors**: Warm sunbeam palette with semantic tokens for light/dark mode (sunbeam.orange #fa520f, sunshine scale, ivory/cream surfaces)

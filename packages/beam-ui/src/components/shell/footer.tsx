@@ -94,7 +94,7 @@ export function Footer() {
           </p>
         </div>
         {footerSections.map((section) => (
-          <div key={section.title} className={sectionCol}>
+          <nav key={section.title} className={sectionCol} aria-label={section.title}>
             <span className={sectionTitle}>{section.title}</span>
             {section.links.map((link) => {
               const isExternal = link.href.startsWith("http") || link.href.startsWith("mailto:");
@@ -115,7 +115,7 @@ export function Footer() {
                 </Link>
               );
             })}
-          </div>
+          </nav>
         ))}
       </div>
     </footer>

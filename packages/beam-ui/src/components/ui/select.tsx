@@ -132,6 +132,11 @@ const item = css({
   _highlighted: {
     backgroundColor: "bg.card",
   },
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "-2px",
+  },
   _selected: {
     color: "sunbeam.orange",
   },

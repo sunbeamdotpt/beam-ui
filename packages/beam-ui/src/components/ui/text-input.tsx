@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { css, cx } from "styled-system/css";
 
 interface TextInputProps {
@@ -21,18 +22,25 @@ export function TextInput({
   type = "text",
   className,
 }: TextInputProps) {
+  const id = useId();
+  const inputId = `text-input-${id}`;
+  const errorId = `text-input-error-${id}`;
+
   return (
     <div className={cx(wrapper, className)}>
-      {label && <label className={labelStyle}>{label}</label>}
+      {label && <label htmlFor={inputId} className={labelStyle}>{label}</label>}
       <input
+        id={inputId}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
         className={cx(input, error ? inputError : undefined)}
       />
-      {error && <p className={errorText}>{error}</p>}
+      {error && <p id={errorId} className={errorText} role="alert">{error}</p>}
     </div>
   );
 }

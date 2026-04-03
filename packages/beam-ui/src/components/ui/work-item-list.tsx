@@ -47,8 +47,10 @@ function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange
       role="checkbox"
       aria-checked={checked}
       aria-label={ariaLabel}
+      tabIndex={0}
       className={cx(checkboxOuter, checked && checkboxChecked)}
       onClick={(e) => { e.stopPropagation(); onChange(); }}
+      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
     >
       {checked && <Icon name="check" size={14} />}
     </div>
@@ -145,7 +147,7 @@ export function WorkItemList({
             <div className={rightCol}>
               {item.status}
               {item.commentCount != null && item.commentCount > 0 && (
-                <span className={commentBadge}>
+                <span className={commentBadge} aria-label={`${item.commentCount} comment${item.commentCount !== 1 ? "s" : ""}`}>
                   <Icon name="chat_bubble_outline" size={14} />
                   {item.commentCount}
                 </span>
@@ -156,7 +158,7 @@ export function WorkItemList({
       })}
 
       {onLoadMore && (
-        <div className={loadMoreBtn} role="button" tabIndex={0} onClick={onLoadMore}>
+        <div className={loadMoreBtn} role="button" tabIndex={0} onClick={onLoadMore} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onLoadMore!(); } }}>
           Load more
         </div>
       )}

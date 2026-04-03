@@ -396,7 +396,7 @@ export function Header({ showThemeToggle = true }: HeaderProps = {}) {
             <Link to="/" className={brandLink}>
               Sunbeam Studios
             </Link>
-            <nav className={nav}>
+            <nav className={nav} aria-label="Main">
               {location.pathname !== "/" && headerLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -426,6 +426,11 @@ export function Header({ showThemeToggle = true }: HeaderProps = {}) {
                 className={searchInput}
                 type="text"
                 placeholder="Search docs..."
+                aria-label="Search docs"
+                role="combobox"
+                aria-expanded={showResults && query.trim().length > 0}
+                aria-controls={showResults && query.trim() ? "search-listbox" : undefined}
+                aria-autocomplete="list"
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value);
@@ -435,7 +440,7 @@ export function Header({ showThemeToggle = true }: HeaderProps = {}) {
               />
               <kbd className={kbdStyle}>&#x2318;K</kbd>
               {showResults && query.trim() && (
-                <div className={searchDropdown} role="listbox">
+                <div className={searchDropdown} role="listbox" id="search-listbox">
                   {filtered.length === 0 ? (
                     <div className={searchNoResults}>No results for "{query}"</div>
                   ) : (

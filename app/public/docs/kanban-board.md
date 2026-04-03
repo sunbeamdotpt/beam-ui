@@ -1,32 +1,24 @@
-# KanbanBoard
+# KanbanCardView
 
-> Drag-and-drop Kanban board built on dnd-kit with columns and cards.
+> Standalone card display — usable outside the board (e.g., in lists, detail panels).
 
 > **[View rendered page](https://design.sunbeam.pt/components/kanban-board?render=html)** — see the live component with full DOM structure and styling.
 
 ## Import
 ```tsx
-import { KanbanBoard } from "@sunbeam/beam-ui/components/ui/kanban-board"
+import { KanbanCardView } from "@sunbeam/beam-ui/components/ui/kanban-board"
 ```
 
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| columns | `KanbanColumn[]` | Yes | Column definitions with id, title, cardIds |
-| cards | `Record<string, KanbanCard>` | Yes | Card data keyed by id |
-| onMove | `(cardId: string, fromCol: string, toCol: string, index: number) => void` | No | Card move handler |
-| className | `string` | No | Additional CSS class |
+| columns | `KanbanColumn[]` | Yes |  |
+| onChange | `(columns: KanbanColumn[]) => void` | Yes |  |
+| onAddCard | `(columnId: string) => void` | No |  |
+| className | `string` | No |  |
 
-## Usage
-```tsx
-<KanbanBoard columns={cols} cards={cardMap} onMove={handleMove} />
-```
-
-## Features
-- Drag-and-drop via dnd-kit
-- Sortable cards within columns
-- Cross-column card movement
-- Card labels and assignee avatars
+## Also Exports
+- `KanbanBoard`
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

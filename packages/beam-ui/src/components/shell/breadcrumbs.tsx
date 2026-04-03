@@ -37,23 +37,25 @@ interface BreadcrumbsProps {
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <nav className={nav} aria-label="Breadcrumb">
-      {items.map((item, idx) => {
-        const isLast = idx === items.length - 1;
-        return (
-          <span key={item.label} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            {idx > 0 && <span className={separator}>&#x203A;</span>}
-            {item.href && !isLast ? (
-              <Link to={item.href} className={crumbLink}>
-                {item.label}
-              </Link>
-            ) : (
-              <span className={isLast ? crumbCurrent : crumbLink} {...(isLast ? { "aria-current": "page" as const } : {})}>
-                {item.label}
-              </span>
-            )}
-          </span>
-        );
-      })}
+      <ol style={{ display: "flex", alignItems: "center", gap: "8px", listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((item, idx) => {
+          const isLast = idx === items.length - 1;
+          return (
+            <li key={item.label} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              {idx > 0 && <span className={separator} aria-hidden="true">&#x203A;</span>}
+              {item.href && !isLast ? (
+                <Link to={item.href} className={crumbLink}>
+                  {item.label}
+                </Link>
+              ) : (
+                <span className={isLast ? crumbCurrent : crumbLink} {...(isLast ? { "aria-current": "page" as const } : {})}>
+                  {item.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

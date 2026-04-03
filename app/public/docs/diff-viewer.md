@@ -1,32 +1,25 @@
-# DiffViewer
+# parseDiff
 
-> Side-by-side or unified diff viewer for code review.
+> parseDiff component.
 
 > **[View rendered page](https://design.sunbeam.pt/components/diff-viewer?render=html)** — see the live component with full DOM structure and styling.
 
 ## Import
 ```tsx
-import { DiffViewer } from "@sunbeam/beam-ui/components/ui/diff-viewer"
+import { parseDiff } from "@sunbeam/beam-ui/components/ui/diff-viewer"
 ```
 
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| hunks | `DiffHunk[]` | Yes | Diff hunks with header and lines |
-| oldFileName | `string` | No | Original file name |
-| newFileName | `string` | No | New file name |
-| mode | `"unified" | "split"` | No | View mode |
-| className | `string` | No | Additional CSS class |
+| hunks | `DiffHunk[]` | Yes |  |
+| oldFileName | `string` | No |  |
+| newFileName | `string` | No |  |
+| mode | `"unified" | "split"` | No |  |
+| className | `string` | No |  |
 
-## Usage
-```tsx
-<DiffViewer hunks={diffHunks} oldFileName="old.ts" newFileName="new.ts" mode="split" />
-```
-
-## Features
-- Unified and split view modes
-- Line number gutters
-- Add/remove/context line coloring
+## Also Exports
+- `DiffViewer`
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

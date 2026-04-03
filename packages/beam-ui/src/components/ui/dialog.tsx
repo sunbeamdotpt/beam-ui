@@ -34,7 +34,7 @@ export function Dialog({
         <DialogContent className={content}>
           <div className={header}>
             <DialogTitle className={titleStyle}>{title}</DialogTitle>
-            <DialogCloseTrigger className={closeButton}>
+            <DialogCloseTrigger className={closeButton} aria-label="Close dialog">
               <Icon name="close" size={20} />
             </DialogCloseTrigger>
           </div>
