@@ -1,0 +1,153 @@
+import { type ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { css, cx } from "styled-system/css";
+import { Icon } from "./icon";
+
+interface ListItem {
+  label: string;
+  description?: string;
+  icon?: string;
+  href?: string;
+}
+
+type Variant = "default" | "compact" | "bordered";
+
+interface ListProps {
+  items: ListItem[];
+  ordered?: boolean;
+  variant?: Variant;
+  className?: string;
+}
+
+export function List({
+  items,
+  ordered,
+  variant = "default",
+  className,
+}: ListProps) {
+  const Tag = ordered ? "ol" : "ul";
+
+  return (
+    <Tag
+      className={cx(
+        listBase,
+        ordered ? orderedList : unorderedList,
+        variantStyles[variant],
+        className,
+      )}
+    >
+      {items.map((item, i) => (
+        <li key={i} className={cx(listItem, variant === "compact" && compactItem, variant === "bordered" && borderedItem)}>
+          <ItemContent item={item} variant={variant} />
+        </li>
+      ))}
+    </Tag>
+  );
+}
+
+function ItemContent({ item, variant }: { item: ListItem; variant: Variant }) {
+  const inner: ReactNode = (
+    <div className={itemInner}>
+      {item.icon && (
+        <Icon name={item.icon} size={18} className={css({ color: "text.secondary", flexShrink: 0 })} />
+      )}
+      <div>
+        <span className={labelStyle}>{item.label}</span>
+        {variant !== "compact" && item.description && (
+          <p className={descStyle}>{item.description}</p>
+        )}
+      </div>
+    </div>
+  );
+
+  if (item.href) {
+    if (item.href.startsWith("http")) {
+      return (
+        <a href={item.href} className={linkStyle} target="_blank" rel="noopener noreferrer">
+          {inner}
+        </a>
+      );
+    }
+    return <Link to={item.href} className={linkStyle}>{inner}</Link>;
+  }
+
+  return inner;
+}
+
+/* ------------------------------------------------------------------ */
+/* Styles                                                              */
+/* ------------------------------------------------------------------ */
+
+const listBase = css({
+  fontFamily: "body",
+  margin: 0,
+  paddingLeft: "24px",
+});
+
+const unorderedList = css({
+  listStyleType: "disc",
+  "& > li::marker": { color: "sunbeam.orange" },
+});
+
+const orderedList = css({
+  listStyleType: "decimal",
+  "& > li::marker": {
+    color: "sunbeam.orange",
+    fontWeight: "button",
+  },
+});
+
+const variantStyles: Record<Variant, string> = {
+  default: css({ display: "flex", flexDirection: "column", gap: "12px" }),
+  compact: css({ display: "flex", flexDirection: "column", gap: "4px" }),
+  bordered: css({
+    display: "flex",
+    flexDirection: "column",
+    gap: "0",
+    listStyleType: "none",
+    paddingLeft: "0",
+  }),
+};
+
+const listItem = css({
+  color: "text.primary",
+  fontSize: "14px",
+  lineHeight: "1.5",
+});
+
+const compactItem = css({
+  fontSize: "13px",
+});
+
+const borderedItem = css({
+  borderBottom: "1px solid",
+  borderColor: "border.default",
+  padding: "12px 0",
+  _first: { paddingTop: 0 },
+});
+
+const itemInner = css({
+  display: "flex",
+  alignItems: "flex-start",
+  gap: "8px",
+});
+
+const labelStyle = css({
+  fontWeight: "body",
+  color: "text.primary",
+});
+
+const descStyle = css({
+  margin: 0,
+  marginTop: "2px",
+  fontSize: "13px",
+  color: "text.secondary",
+  lineHeight: "1.4",
+});
+
+const linkStyle = css({
+  textDecoration: "none",
+  color: "inherit",
+  _hover: { color: "sunbeam.orange" },
+  transition: "color 0.15s ease",
+});
