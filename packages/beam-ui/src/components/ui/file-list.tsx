@@ -44,11 +44,12 @@ const checkboxChecked = css({
   color: "white",
 });
 
-function Checkbox({ checked, onChange }: { checked: boolean; onChange: () => void }) {
+function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string }) {
   return (
     <div
       role="checkbox"
       aria-checked={checked}
+      aria-label={ariaLabel}
       className={cx(checkboxOuter, checked && checkboxChecked)}
       onClick={(e) => { e.stopPropagation(); onChange(); }}
     >
@@ -148,9 +149,9 @@ function ListView({
   };
 
   return (
-    <div className={listContainer}>
+    <div className={listContainer} role="grid">
       <div className={listHeader}>
-        <Checkbox checked={allSelected} onChange={toggleAll} />
+        <Checkbox checked={allSelected} onChange={toggleAll} ariaLabel="Select all files" />
         <span />
         <span>Name</span>
         <span>Size</span>
@@ -162,7 +163,7 @@ function ListView({
           className={cx(listRow, selected.has(item.id) && listRowSelected)}
           onDoubleClick={() => onOpen?.(item)}
         >
-          <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} />
+          <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
           <Icon
             name={defaultIcon(item)}
             size={18}
@@ -238,7 +239,7 @@ function GridView({
   };
 
   return (
-    <div className={gridContainer}>
+    <div className={gridContainer} role="listbox" aria-label="Files">
       {items.map((item) => (
         <div
           key={item.id}
@@ -247,7 +248,7 @@ function GridView({
           onDoubleClick={() => onOpen?.(item)}
         >
           <div className={gridCheckbox}>
-            <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} />
+            <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
           </div>
           <Icon
             name={defaultIcon(item)}

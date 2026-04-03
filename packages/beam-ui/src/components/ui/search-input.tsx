@@ -15,6 +15,7 @@ export function SearchInput({ className }: SearchInputProps) {
         type="text"
         placeholder="Search docs..."
         readOnly
+        aria-label="Search"
         className={input}
       />
       <div className={kbdWrapper}>

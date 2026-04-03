@@ -23,7 +23,7 @@ export function Pagination({
   const pages = buildPageList(currentPage, totalPages);
 
   return (
-    <nav className={cx(wrapper, className)}>
+    <nav className={cx(wrapper, className)} aria-label="Pagination">
       <div className={pageButtons}>
         <button
           className={navBtn}
@@ -46,6 +46,7 @@ export function Pagination({
               type="button"
               className={cx(pageBtn, p === currentPage && activePage)}
               onClick={() => onPageChange(p as number)}
+              {...(p === currentPage ? { "aria-current": "page" as const } : {})}
             >
               {p}
             </button>

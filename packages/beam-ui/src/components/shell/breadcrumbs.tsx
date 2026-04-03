@@ -47,7 +47,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                 {item.label}
               </Link>
             ) : (
-              <span className={isLast ? crumbCurrent : crumbLink}>
+              <span className={isLast ? crumbCurrent : crumbLink} {...(isLast ? { "aria-current": "page" as const } : {})}>
                 {item.label}
               </span>
             )}

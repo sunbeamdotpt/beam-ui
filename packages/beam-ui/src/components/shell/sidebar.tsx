@@ -188,6 +188,7 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
       <Link
         to={item.href}
         className={isActive ? itemLinkActive : itemLink}
+        {...(isActive ? { "aria-current": "page" as const } : {})}
       >
         <span>{item.label}</span>
       </Link>
@@ -211,6 +212,7 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
                 key={child.label}
                 to={child.href}
                 className={cActive ? childLinkActive : childLink}
+                {...(cActive ? { "aria-current": "page" as const } : {})}
               >
                 {child.label}
               </Link>
@@ -224,7 +226,7 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
 
 export function Sidebar({ sections }: SidebarProps) {
   return (
-    <aside className={aside}>
+    <aside className={aside} aria-label="Documentation navigation">
       {sections.map((section) => (
         <div key={section.title} className={sectionGroup}>
           <h3 className={sectionHeader}>{section.title}</h3>

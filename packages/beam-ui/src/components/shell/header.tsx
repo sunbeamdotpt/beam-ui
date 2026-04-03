@@ -396,6 +396,7 @@ export function Header() {
                   key={link.label}
                   to={link.href}
                   className={isActive(link.label, link.href) ? navLinkActive : navLink}
+                  {...(isActive(link.label, link.href) ? { "aria-current": "page" as const } : {})}
                 >
                   {link.label}
                 </Link>
@@ -428,7 +429,7 @@ export function Header() {
               />
               <kbd className={kbdStyle}>&#x2318;K</kbd>
               {showResults && query.trim() && (
-                <div className={searchDropdown}>
+                <div className={searchDropdown} role="listbox">
                   {filtered.length === 0 ? (
                     <div className={searchNoResults}>No results for "{query}"</div>
                   ) : (
@@ -440,10 +441,11 @@ export function Header() {
                         return (
                           <div key={item.href + item.label}>
                             {showSection && (
-                              <div className={searchResultSection}>{item.section}</div>
+                              <div className={searchResultSection} role="presentation">{item.section}</div>
                             )}
                             <a
                               className={searchResultItem}
+                              role="option"
                               href={item.href}
                               onClick={(e) => {
                                 e.preventDefault();
@@ -460,7 +462,7 @@ export function Header() {
                 </div>
               )}
             </div>
-            <button className={themeBtn} onClick={toggle} aria-label="Toggle theme">
+            <button className={themeBtn} onClick={toggle} aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}>
               <span className="material-symbols-outlined">{theme === "light" ? "light_mode" : "dark_mode"}</span>
             </button>
           </div>

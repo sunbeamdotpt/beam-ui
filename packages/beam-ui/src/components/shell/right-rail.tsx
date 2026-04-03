@@ -213,6 +213,7 @@ export function RightRail({ items }: RightRailProps) {
               scrollTo(item.id);
             }}
             className={item.id === activeId ? navItemActive : navItem}
+            {...(item.id === activeId ? { "aria-current": "location" as const } : {})}
           >
             {item.label}
           </a>
@@ -225,6 +226,7 @@ export function RightRail({ items }: RightRailProps) {
       <div className={actionList}>
         <button
           className={actionBtn}
+          aria-label="Copy permalink"
           onClick={() => {
             const url = `${window.location.origin}${window.location.pathname}${activeId ? `#${activeId}` : ""}`;
             navigator.clipboard?.writeText(url);
@@ -235,6 +237,7 @@ export function RightRail({ items }: RightRailProps) {
         </button>
         <button
           className={actionBtn}
+          aria-label="Copy as markdown"
           onClick={() => {
             const el = document.querySelector('[data-content="center"]') ?? document.body;
             const clone = el.cloneNode(true) as HTMLElement;
@@ -253,11 +256,11 @@ export function RightRail({ items }: RightRailProps) {
           <Icon name="content_copy" size={14} />
           <span>Copy as markdown</span>
         </button>
-        <a className={actionBtn} href="https://src.sunbeam.pt/studio/beam-ui" target="_blank" rel="noopener noreferrer">
+        <a className={actionBtn} aria-label="Edit in source control" href="https://src.sunbeam.pt/studio/beam-ui" target="_blank" rel="noopener noreferrer">
           <Icon name="edit_note" size={14} />
           <span>Edit in source control</span>
         </a>
-        <button className={actionBtn} onClick={() => {}}>
+        <button className={actionBtn} aria-label="Report an issue" onClick={() => {}}>
           <Icon name="bug_report" size={14} />
           <span>Report an issue</span>
         </button>
