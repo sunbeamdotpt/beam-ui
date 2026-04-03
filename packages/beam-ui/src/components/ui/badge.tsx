@@ -1,6 +1,19 @@
 import { css, cx } from "styled-system/css";
 
-type BadgeVariant = "premier" | "open" | "section";
+type BadgeVariant =
+  | "premier"
+  | "open"
+  | "beta"
+  | "experimental"
+  | "deprecated"
+  | "new"
+  | "stable"
+  | "preview"
+  | "community"
+  | "partner"
+  | "verified"
+  | "featured"
+  | "section";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -15,7 +28,7 @@ const base = css({
   lineHeight: 1,
 });
 
-const variants: Record<BadgeVariant, string> = {
+const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   premier: css({
     backgroundColor: "sunbeam.orange",
     color: "white",
@@ -32,11 +45,89 @@ const variants: Record<BadgeVariant, string> = {
     borderRadius: "sm",
     display: "inline-block",
   }),
-  section: css({
+  beta: css({
+    backgroundColor: "sunshine.500",
+    color: "sunbeam.black",
     fontSize: "10px",
-    display: "inline-block",
     padding: "4px 8px",
     borderRadius: "sm",
+    display: "inline-block",
+  }),
+  experimental: css({
+    backgroundColor: "bright.yellow",
+    color: "sunbeam.black",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  deprecated: css({
+    backgroundColor: "rgba(127, 99, 21, 0.15)",
+    color: "text.secondary",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  new: css({
+    backgroundColor: "beam.gold",
+    color: "sunbeam.black",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  stable: css({
+    backgroundColor: "sunshine.300",
+    color: "sunbeam.black",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  preview: css({
+    backgroundColor: "sunbeam.flame",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  community: css({
+    backgroundColor: "transparent",
+    color: "sunshine.700",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+    border: "1px solid",
+    borderColor: "sunshine.700",
+  }),
+  partner: css({
+    backgroundColor: "beam.orange",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  verified: css({
+    backgroundColor: "sunshine.900",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  featured: css({
+    backgroundColor: "sunbeam.orange",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+    border: "1px solid",
+    borderColor: "bright.yellow",
   }),
 };
 

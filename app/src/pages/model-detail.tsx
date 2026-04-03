@@ -9,7 +9,7 @@ import { Tabs } from "@sunbeam/beam-ui/components/ui/tabs";
 import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";
 import { featuredModels } from "../data/models";
 
-const model = featuredModels.find((m) => m.name === "Solar Medium 3.1")!;
+const model = featuredModels.find((m) => m.name === "Solstice 4 Vision")!;
 
 /* ------------------------------------------------------------------ */
 /* Styles                                                              */
@@ -196,7 +196,7 @@ export function ModelDetailPage() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("solar-medium-3.1-2603").then(() => {
+    navigator.clipboard.writeText("solstice-4-vision-4.1.0").then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     });
@@ -209,7 +209,7 @@ export function ModelDetailPage() {
         <Breadcrumbs
           items={[
             { label: "Models", href: "/models" },
-            { label: "Solar Medium 3.1" },
+            { label: "Solstice 4 Vision" },
           ]}
         />
         <Link to="/models" className={tryStudio}>
@@ -236,7 +236,7 @@ export function ModelDetailPage() {
             </p>
             <div className={css({ display: "flex", alignItems: "center", flexWrap: "wrap" })}>
               <div className={modelIdPill}>
-                <span className={modelIdText}>solar-medium-3.1-2603</span>
+                <span className={modelIdText}>solstice-4-vision-4.1.0</span>
                 <button className={copyBtn} onClick={handleCopy} title="Copy model ID">
                   <Icon name={copied ? "check" : "content_copy"} size={14} />
                 </button>

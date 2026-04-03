@@ -192,7 +192,7 @@ export function ModelsIndexPage() {
             return (
               <Link
                 key={model.name}
-                to={model.name === "Solar Medium 3.1" ? "/models/solar-medium-3-1" : "/models"}
+                to={model.name === "Solstice 4 Vision" ? "/models/solstice-4-vision" : "/models"}
                 className={`${featuredCard} ${isOrange ? featuredCardOrange : featuredCardDark}`}
               >
                 <div className={`${featuredIcon} ${isOrange ? featuredIconLight : featuredIconDark}`}>

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
+import { Badge } from "./badge";
 
 interface ModelRowProps {
   name: string;
   icon: string;
-  tier: "premier" | "open";
+  tier: string;
   version: string;
   description: string;
   href?: string;
@@ -58,27 +59,6 @@ const nameText = css({
   fontSize: "14px",
 });
 
-const premierBadge = css({
-  fontSize: "10px",
-  bg: "rgba(250, 82, 15, 0.1)",
-  color: "sunbeam.orange",
-  paddingInline: "6px",
-  paddingBlock: "2px",
-  borderRadius: "sm",
-  fontWeight: "button",
-  lineHeight: 1.2,
-});
-
-const openBadge = css({
-  fontSize: "10px",
-  bg: "rgba(255, 161, 16, 0.1)",
-  color: "sunshine.700",
-  paddingInline: "6px",
-  paddingBlock: "2px",
-  borderRadius: "sm",
-  fontWeight: "button",
-  lineHeight: 1.2,
-});
 
 const desc = css({
   fontSize: "12px",
@@ -105,9 +85,7 @@ export function ModelRow({ name, icon: iconName, tier, version, description, hre
       <div className={info}>
         <div className={nameRow}>
           <span className={nameText}>{name}</span>
-          <span className={tier === "premier" ? premierBadge : openBadge}>
-            {tier.toUpperCase()}
-          </span>
+          <Badge variant={tier as any}>{tier.toUpperCase()}</Badge>
         </div>
         <p className={desc}>{description}</p>
       </div>
