@@ -211,7 +211,7 @@ export function AccessibilityPage() {
   useEffect(() => { setToc(TOC_ITEMS); return () => setToc([]); }, [setToc]);
 
   return (
-    <div className={page}>
+    <div>
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
