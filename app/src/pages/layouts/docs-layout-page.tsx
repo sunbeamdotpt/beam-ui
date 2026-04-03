@@ -1,36 +1,41 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Badge } from "@sunbeam/beam-ui/components/ui/badge";
+import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout";
+import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";
 
 /* ------------------------------------------------------------------ */
-/* TOC items for the right-rail demo                                   */
+/* TOC                                                                 */
 /* ------------------------------------------------------------------ */
 
 const TOC_ITEMS = [
   { label: "Overview", id: "overview" },
-  { label: "Anatomy", id: "anatomy" },
-  { label: "Sidebar", id: "sidebar" },
-  { label: "Center Column", id: "center-column" },
-  { label: "Right Rail", id: "right-rail" },
-  { label: "Scroll Behavior", id: "scroll-behavior" },
-  { label: "Responsive Notes", id: "responsive-notes" },
+  { label: "Visual Diagram", id: "diagram" },
+  { label: "Zones", id: "zones" },
+  { label: "Props & Slots", id: "props" },
+  { label: "Route Setup", id: "route-setup" },
+  { label: "Shell Integration", id: "shell-integration" },
+  { label: "Live Examples", id: "live-examples" },
 ];
 
 /* ------------------------------------------------------------------ */
 /* Styles                                                              */
 /* ------------------------------------------------------------------ */
 
-const pageTitle = css({
-  fontSize: "32px",
-  fontWeight: "heading",
+const title = css({
+  fontFamily: "heading",
+  fontSize: "48px",
+  fontWeight: "display",
+  lineHeight: 0.95,
   color: "text.primary",
   letterSpacing: "-0.02em",
-  marginBottom: "8px",
+  marginBottom: "16px",
 });
 
-const description = css({
-  fontSize: "16px",
+const subtitle = css({
+  fontSize: "18px",
   color: "text.secondary",
   lineHeight: 1.6,
   marginBottom: "48px",
@@ -41,6 +46,14 @@ const sectionTitle = css({
   fontWeight: "heading",
   color: "text.primary",
   marginBottom: "16px",
+  marginTop: "48px",
+});
+
+const subheading = css({
+  fontSize: "18px",
+  fontWeight: "heading",
+  color: "text.primary",
+  marginBottom: "8px",
 });
 
 const bodyText = css({
@@ -49,34 +62,127 @@ const bodyText = css({
   marginBottom: "24px",
 });
 
-const annotationBox = css({
-  padding: "24px",
-  bg: "bg.card",
-  border: "1px solid",
-  borderColor: "border.default",
-  marginBottom: "32px",
+const divider = css({
+  height: "1px",
+  bg: "border.default",
+  marginBlock: "48px",
 });
 
-const annotationLabel = css({
+/* Wireframe styles */
+const wireframe = css({
+  display: "flex",
+  height: "200px",
+  border: "2px solid",
+  borderColor: "border.default",
+  marginBottom: "32px",
+  borderRadius: "8px",
+  overflow: "hidden",
+});
+
+const zone = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+  border: "1px dashed",
+  borderColor: "border.default",
+  bg: "bg.card",
+  padding: "12px",
+});
+
+const zonePrimary = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+  border: "1px dashed",
+  borderColor: "sunbeam.orange",
+  bg: "rgba(250,82,15,0.05)",
+  padding: "12px",
+});
+
+const zoneLabel = css({
   fontFamily: "mono",
   fontSize: "11px",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.1em",
-  color: "sunbeam.orange",
-  marginBottom: "8px",
-});
-
-const annotationValue = css({
-  fontFamily: "mono",
-  fontSize: "13px",
   color: "text.primary",
 });
 
-const divider = css({
-  height: "1px",
-  bg: "border.default",
-  marginBlock: "48px",
+const zoneDim = css({
+  fontFamily: "mono",
+  fontSize: "10px",
+  color: "text.secondary",
+});
+
+/* Props table */
+const tableWrapper = css({
+  border: "1px solid",
+  borderColor: "border.default",
+  borderRadius: "8px",
+  overflow: "hidden",
+  marginBottom: "32px",
+});
+
+const tableHeader = css({
+  display: "flex",
+  bg: "bg.card",
+  padding: "12px 16px",
+  borderBottom: "1px solid",
+  borderColor: "border.default",
+  fontFamily: "mono",
+  fontSize: "11px",
+  fontWeight: "button",
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
+  color: "text.secondary",
+});
+
+const tableRow = css({
+  display: "flex",
+  padding: "12px 16px",
+  borderBottom: "1px solid",
+  borderColor: "border.default",
+  fontSize: "14px",
+  _last: { borderBottom: "none" },
+});
+
+const cellName = css({
+  fontFamily: "mono",
+  fontWeight: "button",
+  color: "text.primary",
+});
+
+const cellDesc = css({
+  color: "text.secondary",
+});
+
+const liveLink = css({
+  display: "block",
+  padding: "12px 16px",
+  border: "1px solid",
+  borderColor: "border.default",
+  borderRadius: "8px",
+  color: "text.primary",
+  textDecoration: "none",
+  marginBottom: "8px",
+  transition: "border-color 0.15s",
+  _hover: {
+    borderColor: "sunbeam.orange",
+  },
+});
+
+const liveLinkLabel = css({
+  fontWeight: "button",
+  marginBottom: "4px",
+});
+
+const liveLinkDesc = css({
+  fontSize: "13px",
+  color: "text.secondary",
 });
 
 /* ------------------------------------------------------------------ */
@@ -89,154 +195,223 @@ export function DocsLayoutPage() {
 
   return (
     <div>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Layouts" },
+          { label: "Docs Layout" },
+        ]}
+      />
+
       <Badge variant="section">LAYOUTS</Badge>
-      <h1 id="overview" className={pageTitle}>Docs Layout</h1>
-      <p className={description}>
-        Three-column layout with sidebar navigation, center content area
-        (max 720px), and right-rail table of contents.
+      <h1 id="overview" className={title}>Docs Layout</h1>
+      <p className={subtitle}>
+        Three-column layout with sidebar navigation, centered content area
+        (max 720px), and a right-rail table of contents. The primary layout
+        for all documentation and component pages.
       </p>
 
       <div className={divider} />
 
-      {/* Anatomy */}
-      <h2 id="anatomy" className={sectionTitle}>Anatomy</h2>
+      {/* ---- Visual Diagram ---- */}
+      <h2 id="diagram" className={sectionTitle}>Visual Diagram</h2>
       <p className={bodyText}>
-        The Docs Layout composes three regions horizontally: a fixed-width
-        sidebar for hierarchical navigation, a centered content column
-        constrained to 720px for optimal reading measure, and an optional
-        right rail that displays a table of contents generated from page
-        headings.
+        The DocsLayout arranges three horizontal zones within a 1440px
+        max-width container. The sidebar and right rail are sticky while the
+        center column scrolls freely.
       </p>
 
-      <div className={annotationBox}>
-        <div className={annotationLabel}>Structure</div>
-        <div className={annotationValue}>
-          Sidebar (240px) + Content (max 720px, flex 1) + Right Rail (200px)
+      <div className={wireframe}>
+        <div className={zone} style={{ width: "80px" }}>
+          <span className={zoneLabel}>Sidebar</span>
+          <span className={zoneDim}>240px</span>
         </div>
-      </div>
-
-      {/* Sidebar */}
-      <h2 id="sidebar" className={sectionTitle}>Sidebar</h2>
-      <p className={bodyText}>
-        The sidebar is a 240px fixed-width panel that provides persistent
-        hierarchical navigation across all documentation pages. It is
-        sticky-positioned below the header and scrolls independently from
-        the main content area.
-      </p>
-      <p className={bodyText}>
-        Navigation items are organized into collapsible sections (e.g.
-        Foundations, Components, Layouts) that map to the site's information
-        architecture. The active route is highlighted with an accent border
-        and background tint. Nested groupings up to two levels deep are
-        supported via the Ark UI Collapsible primitive.
-      </p>
-      <p className={bodyText}>
-        Sidebar data is defined in <code>navigation.ts</code> as an array
-        of <code>NavSection</code> objects, each containing a title and an
-        array of <code>NavItem</code> entries with label, href, and
-        optional children.
-      </p>
-
-      <div className={divider} />
-
-      {/* Center Column */}
-      <h2 id="center-column" className={sectionTitle}>Center Column</h2>
-      <p className={bodyText}>
-        The center column is the primary content area. It uses{" "}
-        <code>flex: 1</code> to fill the remaining horizontal space between
-        the sidebar and right rail, with an inner container capped at
-        720px for optimal reading measure (roughly 65-75 characters per
-        line at body font size).
-      </p>
-      <p className={bodyText}>
-        Content pages render inside this column via React Router's{" "}
-        <code>&lt;Outlet&gt;</code>. Each page receives a{" "}
-        <code>DocsContext</code> through <code>useOutletContext</code>,
-        which exposes <code>setToc()</code> for registering table-of-contents
-        entries with the right rail. A typical page sets its TOC items in
-        a <code>useEffect</code> on mount and clears them on unmount.
-      </p>
-
-      <div className={annotationBox}>
-        <div className={annotationLabel}>Usage</div>
-        <div className={annotationValue}>
-          {"const { setToc } = useDocsContext();"}<br />
-          {"useEffect(() => { setToc(items); return () => setToc([]); }, [setToc]);"}
+        <div className={zonePrimary} style={{ flex: 1 }}>
+          <span className={zoneLabel}>Content</span>
+          <span className={zoneDim}>max 720px</span>
+        </div>
+        <div className={zone} style={{ width: "60px" }}>
+          <span className={zoneLabel}>Right Rail</span>
+          <span className={zoneDim}>200px</span>
         </div>
       </div>
 
       <div className={divider} />
 
-      {/* Right Rail */}
-      <h2 id="right-rail" className={sectionTitle}>Right Rail</h2>
+      {/* ---- Zones ---- */}
+      <h2 id="zones" className={sectionTitle}>Zones</h2>
+
+      <h3 className={subheading}>Sidebar (240px)</h3>
       <p className={bodyText}>
-        The right rail is a 200px sticky panel that renders a
-        table-of-contents derived from the TOC items registered by the
-        current page. An <code>IntersectionObserver</code> tracks which
-        section heading is visible in the viewport and highlights the
-        corresponding entry in the rail.
+        Fixed-width panel on the left. Sticky-positioned below the header
+        (top: 64px) and independently scrollable when its content exceeds
+        the viewport. Displays the <code>docsSidebar</code> navigation tree
+        with collapsible sections via the <code>Sidebar</code> shell component.
+        Hidden on viewports below the <code>lg</code> breakpoint.
       </p>
+
+      <h3 className={subheading}>Content (flex 1, max 720px)</h3>
       <p className={bodyText}>
-        Clicking a TOC entry smooth-scrolls to the matching section and
-        updates the URL hash without a full navigation. The rail also
-        provides utility actions: copying a permalink, copying the page
-        content as markdown, and links to source control and issue
-        reporting.
+        The primary reading area. Fills the remaining width between sidebar
+        and right rail, with an inner container capped at 720px for an
+        optimal reading measure of 65-75 characters per line. Pages render
+        here via React Router's <code>&lt;Outlet&gt;</code>. Padding is
+        responsive: 24px on mobile, 48px on medium, 120px on large.
       </p>
+
+      <h3 className={subheading}>Right Rail (200px)</h3>
       <p className={bodyText}>
-        The right rail is conditionally rendered -- it only appears when
-        the current page has provided TOC items via <code>setToc()</code>.
-        Pages that do not call <code>setToc</code> will display a
-        two-column layout (sidebar + content) instead.
+        Sticky panel that renders a table-of-contents derived from TOC items
+        registered by the current page via <code>setToc()</code>. An
+        IntersectionObserver highlights the active section. Conditionally
+        rendered -- only appears when the page has provided TOC items. Hidden
+        on viewports below the <code>lg</code> breakpoint.
       </p>
 
       <div className={divider} />
 
-      {/* Scroll Behavior */}
-      <h2 id="scroll-behavior" className={sectionTitle}>Scroll Behavior</h2>
+      {/* ---- Props & Slots ---- */}
+      <h2 id="props" className={sectionTitle}>Props & Slots</h2>
       <p className={bodyText}>
-        Both the sidebar and right rail use <code>position: sticky</code>{" "}
-        with <code>top: 64px</code> (the header height) so they remain
-        visible while the center content scrolls. Each panel has its own
-        overflow-y scroll when its content exceeds the viewport height,
-        ensuring long navigation trees and long TOC lists remain accessible.
-      </p>
-      <p className={bodyText}>
-        Smooth scrolling is implemented via the native{" "}
-        <code>scrollIntoView({"{ behavior: 'smooth' }"})</code> API. When
-        the page loads with a URL hash, the layout scrolls to the matching
-        element after a short delay to allow rendering to settle.
+        DocsLayout is a zero-prop component. It manages internal state and
+        exposes context to child pages via <code>useDocsContext()</code>.
       </p>
 
-      <div className={annotationBox}>
-        <div className={annotationLabel}>Wiring a Page</div>
-        <div className={annotationValue}>
-          {"// In app.tsx, nest your route inside <DocsLayout>"}<br />
-          {'<Route element={<DocsLayout />}>'}<br />
-          {'  <Route path="my-page" element={<MyPage />} />'}<br />
-          {'</Route>'}
+      <div className={tableWrapper}>
+        <div className={tableHeader}>
+          <span style={{ flex: 1 }}>Export</span>
+          <span style={{ flex: 1 }}>Type</span>
+          <span style={{ flex: 2 }}>Description</span>
+        </div>
+        <div className={tableRow}>
+          <span className={cellName} style={{ flex: 1 }}>DocsLayout</span>
+          <span className={cellDesc} style={{ flex: 1 }}>Component</span>
+          <span className={cellDesc} style={{ flex: 2 }}>Layout wrapper. No props. Renders Sidebar, Outlet, and RightRail.</span>
+        </div>
+        <div className={tableRow}>
+          <span className={cellName} style={{ flex: 1 }}>useDocsContext()</span>
+          <span className={cellDesc} style={{ flex: 1 }}>Hook</span>
+          <span className={cellDesc} style={{ flex: 2 }}>
+            Returns <code>{`{ setToc }`}</code> to register TOC items with the right rail.
+          </span>
+        </div>
+        <div className={tableRow}>
+          <span className={cellName} style={{ flex: 1 }}>DocsTocItem</span>
+          <span className={cellDesc} style={{ flex: 1 }}>Interface</span>
+          <span className={cellDesc} style={{ flex: 2 }}>
+            <code>{`{ label: string; id: string }`}</code> -- shape for each TOC entry.
+          </span>
         </div>
       </div>
 
+      <p className={bodyText}>
+        Pages register their TOC in a <code>useEffect</code> and clear on unmount:
+      </p>
+
+      <CodeBlock
+        tabs={[{
+          label: "TSX",
+          content: (
+            <pre><code>
+              <span className={syn.keyword}>const</span> {"{ "}<span className={syn.fn}>setToc</span>{" } = "}<span className={syn.fn}>useDocsContext</span>{"();"}{"\n"}
+              {"\n"}
+              <span className={syn.fn}>useEffect</span>{"(() => {"}{"\n"}
+              {"  "}<span className={syn.fn}>setToc</span>{"(["}{"\n"}
+              {"    { "}<span className={syn.prop}>label</span>{": "}<span className={syn.string}>"Overview"</span>{", "}<span className={syn.prop}>id</span>{": "}<span className={syn.string}>"overview"</span>{" },"}{"\n"}
+              {"    { "}<span className={syn.prop}>label</span>{": "}<span className={syn.string}>"Usage"</span>{", "}<span className={syn.prop}>id</span>{": "}<span className={syn.string}>"usage"</span>{" },"}{"\n"}
+              {"  ]);"}{"\n"}
+              {"  "}<span className={syn.keyword}>return</span>{" () => "}<span className={syn.fn}>setToc</span>{"([]);"}{"\n"}
+              {"}, ["}<span className={syn.fn}>setToc</span>{"]);"}{"\n"}
+            </code></pre>
+          ),
+        }]}
+      />
+
       <div className={divider} />
 
-      {/* Responsive Notes */}
-      <h2 id="responsive-notes" className={sectionTitle}>Responsive Notes</h2>
+      {/* ---- Route Setup ---- */}
+      <h2 id="route-setup" className={sectionTitle}>Route Setup</h2>
       <p className={bodyText}>
-        The DocsLayout is designed for desktop viewports (1024px and above).
-        The three-column grid relies on a minimum viewport width of
-        roughly 1200px to display all three regions without overlap. On
-        narrower screens, the right rail is the first element to be hidden,
-        followed by the sidebar collapsing into a mobile drawer or
-        hamburger menu.
+        Nest page routes inside a <code>&lt;DocsLayout&gt;</code> route
+        element, which itself is a child of the <code>&lt;Shell&gt;</code> route.
+        All foundation, component, layout documentation, and shell pages use
+        this pattern.
+      </p>
+
+      <CodeBlock
+        tabs={[{
+          label: "app.tsx",
+          content: (
+            <pre><code>
+              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>DocsLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui/components/layouts/docs-layout"</span>{";"}{"\n"}
+              {"\n"}
+              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<Shell />"}</span>{"}>"}{"\n"}
+              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<DocsLayout />"}</span>{"}>"}{"\n"}
+              {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"foundations/colors"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ColorsPage />"}</span>{"} />"}{"\n"}
+              {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"components/button"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ButtonPage />"}</span>{"} />"}{"\n"}
+              {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"layouts/docs"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<DocsLayoutPage />"}</span>{"} />"}{"\n"}
+              {"  </"}<span className={syn.fn}>Route</span>{">"}{"\n"}
+              {"</"}<span className={syn.fn}>Route</span>{">"}{"\n"}
+            </code></pre>
+          ),
+        }]}
+      />
+
+      <div className={divider} />
+
+      {/* ---- Shell Integration ---- */}
+      <h2 id="shell-integration" className={sectionTitle}>Shell Integration</h2>
+      <p className={bodyText}>
+        The <code>Shell</code> component wraps DocsLayout from the outside,
+        providing the fixed <strong>Header</strong> (64px) at the top and the
+        <strong> Footer</strong> at the bottom. DocsLayout itself manages
+        only the three-column body between them.
       </p>
       <p className={bodyText}>
-        The outer container is capped at 1440px with auto horizontal
-        margins, centering the layout on ultra-wide displays. The sidebar
-        and right rail widths are fixed (240px and 200px respectively),
-        while the center column flexes to absorb the remaining space up
-        to its 720px max-width.
+        <strong>Sidebar</strong> is rendered internally by DocsLayout using
+        the <code>docsSidebar</code> navigation data. It is not a prop you
+        pass in -- the layout imports and renders it directly.
       </p>
+      <p className={bodyText}>
+        <strong>RightRail</strong> is also rendered internally. It receives
+        its TOC items from the <code>DocsContext</code> state managed by
+        the layout. Pages communicate with the right rail by calling{" "}
+        <code>setToc()</code> via the <code>useDocsContext()</code> hook.
+      </p>
+      <p className={bodyText}>
+        A <strong>skip-to-content</strong> link is included for accessibility.
+        It targets <code>#main-content</code> and becomes visible on focus,
+        allowing keyboard users to bypass the sidebar navigation.
+      </p>
+
+      <div className={divider} />
+
+      {/* ---- Live Examples ---- */}
+      <h2 id="live-examples" className={sectionTitle}>Live Examples</h2>
+      <p className={bodyText}>
+        These pages in the showcase app use DocsLayout:
+      </p>
+
+      <Link to="/foundations/colors" className={liveLink}>
+        <div className={liveLinkLabel}>Colors</div>
+        <div className={liveLinkDesc}>Foundation page -- demonstrates sidebar nav, centered content, and right-rail TOC.</div>
+      </Link>
+      <Link to="/foundations/typography" className={liveLink}>
+        <div className={liveLinkLabel}>Typography</div>
+        <div className={liveLinkDesc}>Foundation page with extensive sections and TOC navigation.</div>
+      </Link>
+      <Link to="/components/button" className={liveLink}>
+        <div className={liveLinkLabel}>Button</div>
+        <div className={liveLinkDesc}>Component page with preview, props table, and code examples.</div>
+      </Link>
+      <Link to="/foundations/accessibility" className={liveLink}>
+        <div className={liveLinkLabel}>Accessibility</div>
+        <div className={liveLinkDesc}>Foundation page with code blocks and callouts inside the docs layout.</div>
+      </Link>
+      <Link to="/docs" className={liveLink}>
+        <div className={liveLinkLabel}>Docs Home</div>
+        <div className={liveLinkDesc}>Landing page for the documentation section.</div>
+      </Link>
     </div>
   );
 }

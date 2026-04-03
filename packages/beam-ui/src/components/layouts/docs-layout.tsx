@@ -1,4 +1,4 @@
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext, useLocation } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Sidebar } from "../shell/sidebar";
 import { RightRail } from "../shell/right-rail";
@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const body = css({
   display: "flex",
-  alignItems: "flex-start",
+  alignItems: "stretch",
   maxWidth: "1440px",
   marginInline: "auto",
   width: "100%",
@@ -77,8 +77,10 @@ export function useDocsContext() {
   return useOutletContext<DocsContext>();
 }
 
-export function DocsLayout() {
+export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> } = {}) {
   const [toc, setToc] = useState<DocsTocItem[]>([]);
+  const location = useLocation();
+  const lastUpdated = pageDates?.[location.pathname];
 
   return (
     <>
@@ -94,7 +96,7 @@ export function DocsLayout() {
       </main>
       {toc.length > 0 && (
         <div className={rightRailWrapper}>
-          <RightRail items={toc} />
+          <RightRail items={toc} lastUpdated={lastUpdated} />
         </div>
       )}
     </div>

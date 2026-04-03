@@ -11,9 +11,13 @@ interface SkeletonProps {
 const shimmerName = "beam-shimmer";
 
 const base = css({
-  backgroundColor: "bg.card",
-  backgroundImage:
-    "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%)",
+  backgroundColor: { base: "rgba(127,99,21,0.10)", _dark: "rgba(255,255,255,0.06)" },
+  border: "1px solid",
+  borderColor: "border.default",
+  backgroundImage: {
+    base: "linear-gradient(90deg, transparent 0%, rgba(127,99,21,0.15) 50%, transparent 100%)",
+    _dark: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%)",
+  },
   backgroundSize: "200% 100%",
   animationName: shimmerName,
   animationDuration: "1.8s",

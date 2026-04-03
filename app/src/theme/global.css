@@ -22,14 +22,9 @@
 pre ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
 pre ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
 
-::selection {
-  background: var(--colors-sunbeam-orange);
-  color: white;
-}
-
-[data-theme="dark"] ::selection {
-  background: var(--colors-sunbeam-orange);
-  color: white;
+*::selection {
+  background: #fa520f !important;
+  color: #ffffff !important;
 }
 
 [id] {
@@ -38,6 +33,26 @@ pre ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
 
 html {
   scroll-behavior: smooth;
+}
+
+@keyframes beam-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Worm/slug motion — generated with smooth sine-based interpolation */
+@keyframes beam-spin-dash {
+  0%   { stroke-dasharray: 1 200; stroke-dashoffset: 0; }
+  10%  { stroke-dasharray: 10 200; stroke-dashoffset: -2; }
+  20%  { stroke-dasharray: 28 200; stroke-dashoffset: -8; }
+  30%  { stroke-dasharray: 48 200; stroke-dashoffset: -16; }
+  40%  { stroke-dasharray: 60 200; stroke-dashoffset: -26; }
+  50%  { stroke-dasharray: 58 200; stroke-dashoffset: -40; }
+  60%  { stroke-dasharray: 44 200; stroke-dashoffset: -58; }
+  70%  { stroke-dasharray: 28 200; stroke-dashoffset: -78; }
+  80%  { stroke-dasharray: 14 200; stroke-dashoffset: -100; }
+  90%  { stroke-dasharray: 4 200; stroke-dashoffset: -120; }
+  100% { stroke-dasharray: 1 200; stroke-dashoffset: -126; }
 }
 
 @keyframes beam-shimmer {
@@ -52,6 +67,24 @@ pre, code, kbd, samp, .cm-editor, .cm-editor * {
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   font-family: 'Material Symbols Outlined' !important;
+}
+
+/* Sidebar scrollbar — hidden by default, themed on hover */
+aside[aria-label="Documentation navigation"]::-webkit-scrollbar {
+  width: 4px;
+}
+aside[aria-label="Documentation navigation"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+aside[aria-label="Documentation navigation"]::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+}
+aside[aria-label="Documentation navigation"]:hover::-webkit-scrollbar-thumb {
+  background: rgba(255,161,16,0.25);
+}
+aside[aria-label="Documentation navigation"]:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,161,16,0.5);
 }
 
 /* ------------------------------------------------------------------ */

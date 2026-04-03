@@ -11,9 +11,10 @@ export interface NavSection {
 }
 
 export const headerLinks = [
-  { label: "FOUNDATIONS", href: "/foundations/colors" },
-  { label: "COMPONENTS", href: "/components/button" },
-  { label: "API", href: "/api" },
+  { label: "FOUNDATIONS", href: "/foundations/accessibility" },
+  { label: "SHELL", href: "/shell/shell" },
+  { label: "LAYOUTS", href: "/layouts/docs" },
+  { label: "COMPONENTS", href: "/components/accordion" },
 ] as const;
 
 export const docsSidebar: NavSection[] = [
@@ -26,6 +27,27 @@ export const docsSidebar: NavSection[] = [
       { label: "Spacing", href: "/foundations/spacing" },
       { label: "Elevation", href: "/foundations/elevation" },
       { label: "LLM Integration", href: "/foundations/llm-integration" },
+      { label: "Installation", href: "/foundations/installation" },
+    ],
+  },
+  {
+    title: "SHELL",
+    items: [
+      { label: "Shell", href: "/shell/shell" },
+      { label: "Header", href: "/shell/header" },
+      { label: "Footer", href: "/shell/footer" },
+      { label: "Sidebar", href: "/shell/sidebar" },
+      { label: "RightRail", href: "/shell/right-rail" },
+      { label: "Breadcrumbs", href: "/shell/breadcrumbs" },
+    ],
+  },
+  {
+    title: "LAYOUTS",
+    items: [
+      { label: "Docs Layout", href: "/layouts/docs" },
+      { label: "API Layout", href: "/layouts/api" },
+      { label: "Fullwidth Layout", href: "/layouts/fullwidth" },
+      { label: "Creations Layout", href: "/layouts/creators" },
     ],
   },
   {
@@ -114,6 +136,7 @@ export const docsSidebar: NavSection[] = [
       { label: "Select", href: "/components/select" },
       { label: "Skeleton", href: "/components/skeleton" },
       { label: "Slider", href: "/components/slider" },
+      { label: "Spinner", href: "/components/spinner" },
       { label: "Splitter", href: "/components/splitter" },
       { label: "Steps", href: "/components/steps" },
       { label: "Switch", href: "/components/switch" },
@@ -122,31 +145,15 @@ export const docsSidebar: NavSection[] = [
       { label: "Tabs", href: "/components/tabs" },
       { label: "TagsInput", href: "/components/tags-input" },
       { label: "TextInput", href: "/components/text-input" },
+      { label: "ThemeToggle", href: "/components/theme-toggle" },
       { label: "Toast", href: "/components/toast" },
       { label: "Toggle", href: "/components/toggle" },
       { label: "ToggleGroup", href: "/components/toggle-group" },
       { label: "Tooltip", href: "/components/tooltip" },
       { label: "TransferList", href: "/components/transfer-list" },
       { label: "TreeView", href: "/components/tree-view" },
-    ],
-  },
-  {
-    title: "LAYOUTS",
-    items: [
-      { label: "Docs Layout", href: "/layouts/docs" },
-      { label: "API Layout", href: "/layouts/api" },
-      { label: "Fullwidth Layout", href: "/layouts/fullwidth" },
-      { label: "Creators Layout", href: "/layouts/creators" },
-    ],
-  },
-  {
-    title: "SHELL",
-    items: [
-      { label: "Header", href: "/shell/header" },
-      { label: "Footer", href: "/shell/footer" },
-      { label: "Sidebar", href: "/shell/sidebar" },
-      { label: "RightRail", href: "/shell/right-rail" },
-      { label: "Breadcrumbs", href: "/shell/breadcrumbs" },
+      { label: "Wizard", href: "/components/wizard" },
+      { label: "WorkItemList", href: "/components/work-item-list" },
     ],
   },
   {
@@ -204,18 +211,17 @@ export const footerSections = [
   {
     title: "Product",
     links: [
-      { label: "Documentation", href: "/foundations/colors" },
-      { label: "API Reference", href: "/api" },
-      { label: "Components", href: "/components/button" },
+      { label: "Foundations", href: "/foundations/accessibility" },
+      { label: "Shell", href: "/shell/shell" },
+      { label: "Layouts", href: "/layouts/docs" },
+      { label: "Components", href: "/components/accordion" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Guides", href: "/guides/procedural-terrain" },
-      { label: "Foundations", href: "/foundations/colors" },
-      { label: "Layouts", href: "/layouts/docs" },
       { label: "Source Control", href: "https://src.sunbeam.pt/studio/beam-ui" },
+      { label: "Contact Us", href: "mailto:hello@sunbeam.pt?subject=Beam%20Design%20Language%20Question!&body=Hi!%0A%0AI%20have%20some%20questions%20about%20the%20Beam%20Design%20Language!%0A%0AMy%20question%20is%3A%20%0A%0AI%20look%20forward%20to%20hearing%20from%20you%20%3C3%0A%0ABest%2C%0A" },
     ],
   },
 ];

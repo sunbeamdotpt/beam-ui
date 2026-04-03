@@ -22,7 +22,7 @@ export function Editable({
   return (
     <EditableRoot
       value={value}
-      onValueCommit={(details) => onChange(details.value)}
+      onValueChange={(details) => onChange(details.value)}
       activationMode="click"
       submitMode="enter"
       className={cx(root, className)}
@@ -69,9 +69,11 @@ const input = css({
   outline: "none",
   lineHeight: 1.5,
   transition: "all 0.15s ease",
+  caretColor: "text.primary",
   _focus: {
     ringWidth: "2px",
     ringColor: "sunbeam.orange",
     borderColor: "transparent",
+    color: "text.primary",
   },
 });

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
+import { Spinner } from "./spinner";
 import { TextInput } from "./text-input";
 import { Checkbox } from "./checkbox";
 import { Button } from "./button";
@@ -68,7 +69,7 @@ export function LoginForm({
           />
         </div>
         <Button variant="primary" type="submit" className={fullWidth}>
-          {loading && <Icon name="progress_activity" size={16} />}
+          {loading && <Spinner size="sm" color="#ffffff" />}
           Sign In
         </Button>
       </form>
@@ -155,7 +156,7 @@ export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps
           disabled={loading}
         />
         <Button variant="primary" type="submit" className={fullWidth}>
-          {loading && <Icon name="progress_activity" size={16} />}
+          {loading && <Spinner size="sm" color="#ffffff" />}
           Create Account
         </Button>
       </form>
@@ -214,7 +215,7 @@ export function ForgotPasswordForm({
             disabled={loading}
           />
           <Button variant="primary" type="submit" className={fullWidth}>
-            {loading && <Icon name="progress_activity" size={16} />}
+            {loading && <Spinner size="sm" color="#ffffff" />}
             Send Reset Link
           </Button>
         </form>
@@ -260,7 +261,7 @@ export function TwoFactorForm({
           <PinInput length={6} value={code} onChange={setCode} />
         </div>
         <Button variant="primary" type="submit" className={fullWidth}>
-          {loading && <Icon name="progress_activity" size={16} />}
+          {loading && <Spinner size="sm" color="#ffffff" />}
           Verify
         </Button>
       </form>
@@ -281,13 +282,14 @@ const card = css({
   maxWidth: "400px",
   width: "100%",
   margin: "0 auto",
-  backgroundColor: "bg.card",
-  border: "1px solid",
+  backgroundColor: "bg.page",
+  border: "2px solid",
   borderColor: "border.default",
   padding: "32px",
   display: "flex",
   flexDirection: "column",
   gap: "16px",
+  shadow: "golden",
 });
 
 const title = css({

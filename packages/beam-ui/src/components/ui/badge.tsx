@@ -1,18 +1,33 @@
 import { css, cx } from "styled-system/css";
 
 type BadgeVariant =
+  // Tier / Recognition
+  | "featured"
   | "premier"
-  | "open"
+  | "verified"
+  | "partner"
+  | "community"
+  // Release Stage
+  | "stable"
+  | "new"
   | "beta"
+  | "preview"
   | "experimental"
   | "deprecated"
-  | "new"
-  | "stable"
-  | "preview"
-  | "community"
-  | "partner"
-  | "verified"
-  | "featured"
+  // Work Status
+  | "open"
+  | "draft"
+  | "review"
+  | "approved"
+  | "merged"
+  | "closed"
+  | "revision"
+  // Priority
+  | "critical"
+  | "high"
+  | "medium"
+  | "low"
+  // Utility
   | "section";
 
 interface BadgeProps {
@@ -28,107 +43,55 @@ const base = css({
   lineHeight: 1,
 });
 
+const pillBase = css({
+  fontSize: "10px",
+  padding: "4px 8px",
+  borderRadius: "sm",
+  display: "inline-block",
+});
+
+/** For token-based colors (Panda resolves these) */
+const pill = (bg: string, fg: string, border?: string) =>
+  css({
+    backgroundColor: bg,
+    color: fg,
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+    ...(border ? { border: "1px solid", borderColor: border } : {}),
+  });
+
 const variants: Record<Exclude<BadgeVariant, "section">, string> = {
-  premier: css({
-    backgroundColor: "sunbeam.orange",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  open: css({
-    backgroundColor: "sunshine.700",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  beta: css({
-    backgroundColor: "sunshine.500",
-    color: "sunbeam.black",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  experimental: css({
-    backgroundColor: "bright.yellow",
-    color: "sunbeam.black",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  deprecated: css({
-    backgroundColor: "rgba(127, 99, 21, 0.15)",
-    color: "text.secondary",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  new: css({
-    backgroundColor: "beam.gold",
-    color: "sunbeam.black",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  stable: css({
-    backgroundColor: "sunshine.300",
-    color: "sunbeam.black",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  preview: css({
-    backgroundColor: "sunbeam.flame",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  community: css({
-    backgroundColor: "transparent",
-    color: "sunshine.700",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-    border: "1px solid",
-    borderColor: "sunshine.700",
-  }),
-  partner: css({
-    backgroundColor: "beam.orange",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  verified: css({
-    backgroundColor: "sunshine.900",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  featured: css({
-    backgroundColor: "sunbeam.orange",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-    border: "1px solid",
-    borderColor: "bright.yellow",
-  }),
+  // Tier / Recognition — warm palette
+  featured:     pill("sunbeam.orange", "white", "bright.yellow"),
+  premier:      pill("sunbeam.orange", "white"),
+  verified:     pill("sunshine.900", "white"),
+  partner:      pill("beam.orange", "white"),
+  community:    pill("beam.gold", "sunbeam.black", "sunshine.500"),
+
+  // Release Stage — temperature progression
+  stable:       pill("sunshine.300", "sunbeam.black"),
+  new:          pill("beam.gold", "sunbeam.black"),
+  beta:         pill("sunshine.500", "sunbeam.black"),
+  preview:      pill("sunbeam.flame", "white"),
+  experimental: pill("bright.yellow", "sunbeam.black"),
+  deprecated:   pill("rgba(127, 99, 21, 0.15)", "text.secondary"),
+
+  // Work Status — solid, distinct, readable in both modes
+  open:         css({ backgroundColor: "#166534", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  draft:        css({ backgroundColor: "#525252", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  review:       css({ backgroundColor: "#92400e", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  approved:     css({ backgroundColor: "#15803d", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  merged:       css({ backgroundColor: "#7e22ce", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  closed:       css({ backgroundColor: "#991b1b", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  revision:     css({ backgroundColor: "#c2410c", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+
+  // Priority — solid, urgency-coded
+  critical:     css({ backgroundColor: "#dc2626", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  high:         css({ backgroundColor: "#ea580c", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  medium:       css({ backgroundColor: "#d97706", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  low:          css({ backgroundColor: "#0d9488", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
 };
 
 /** Section badge renders as a label on a horizontal rule */

@@ -15,10 +15,18 @@ const sizes = {
 } as const;
 
 const backgroundColors = [
-  token("colors.sunbeam.orange"),
-  token("colors.sunshine.700"),
-  token("colors.beam.orange"),
-  token("colors.sunshine.500"),
+  "#fa520f", // sunbeam orange
+  "#4a9eff", // steel blue
+  "#5bb8a6", // teal
+  "#a855f7", // purple
+  "#ef4444", // red
+  "#22c55e", // green
+  "#ec4899", // pink
+  "#f59e0b", // amber
+  "#6366f1", // indigo
+  "#14b8a6", // cyan
+  "#e11d48", // rose
+  "#8b5cf6", // violet
 ];
 
 function getInitials(name: string): string {

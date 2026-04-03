@@ -28,9 +28,9 @@ export function ProgressBarPage() {
       <SectionHeading id="preview">Preview</SectionHeading>
       <div className={previewBox}>
         <div className={controlRow}>
-          <Button variant="ghost" onClick={() => setValue((v) => Math.max(0, v - 10))}>-10</Button>
+          <Button variant="primary" onClick={() => setValue((v) => Math.max(0, v - 10))}>-10</Button>
           <span className={valueLabel}>{value}%</span>
-          <Button variant="ghost" onClick={() => setValue((v) => Math.min(100, v + 10))}>+10</Button>
+          <Button variant="primary" onClick={() => setValue((v) => Math.min(100, v + 10))}>+10</Button>
         </div>
         <div className={barStack}>
           {VARIANTS.map((v) => (

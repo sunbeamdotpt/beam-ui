@@ -46,8 +46,10 @@ export function DatePicker({
       <DatePickerRoot
         value={value ? [parseDate(value)] : undefined}
         onValueChange={(details) => {
-          if (details.valueAsString[0]) {
-            onChange?.(details.valueAsString[0]);
+          const dv = details.value[0];
+          if (dv) {
+            const iso = `${dv.year}-${String(dv.month).padStart(2, "0")}-${String(dv.day).padStart(2, "0")}`;
+            onChange?.(iso);
           }
         }}
         disabled={disabled}
@@ -60,7 +62,7 @@ export function DatePicker({
           </DatePickerTrigger>
         </DatePickerControl>
 
-        <DatePickerPositioner>
+        <DatePickerPositioner className={positionerStyle}>
           <DatePickerContent className={contentStyle}>
             <DatePickerView view="day">
               <DatePickerContext>
@@ -258,6 +260,10 @@ const triggerButton = css({
   },
 });
 
+const positionerStyle = css({
+  zIndex: 50,
+});
+
 const contentStyle = css({
   backgroundColor: "bg.page",
   border: "1px solid",
@@ -267,6 +273,9 @@ const contentStyle = css({
   zIndex: 50,
   outline: "none",
   minWidth: "280px",
+  "&[data-state=closed]": {
+    display: "none",
+  },
 });
 
 const navRow = css({

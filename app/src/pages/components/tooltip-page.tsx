@@ -57,7 +57,7 @@ export function TooltipPage() {
           <h3 className={variantLabel}>{pos}</h3>
           <div className={css({ marginBottom: "16px" })}>
             <Tooltip content={`This tooltip appears on ${pos}`} position={pos}>
-              <Button variant="ghost">Hover me ({pos})</Button>
+              <span><Button variant="ghost">Hover me ({pos})</Button></span>
             </Tooltip>
           </div>
           <CodeBlock

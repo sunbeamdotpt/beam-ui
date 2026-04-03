@@ -283,7 +283,8 @@ const dateStyle = css({
   fontSize: "11px",
   color: "text.muted",
   flexShrink: 0,
-  width: "72px",
+  minWidth: "100px",
   textAlign: "right",
   fontFamily: "mono",
+  whiteSpace: "nowrap",
 });

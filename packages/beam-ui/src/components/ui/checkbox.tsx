@@ -109,8 +109,8 @@ const box = css({
 });
 
 const boxChecked = css({
-  backgroundColor: "sunbeam.orange",
-  borderColor: "sunbeam.orange",
+  backgroundColor: "#fa520f",
+  borderColor: "#fa520f",
 });
 
 const labelStyle = css({

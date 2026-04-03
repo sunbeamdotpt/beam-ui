@@ -30,7 +30,7 @@ const checkboxOuter = css({
   height: "18px",
   minWidth: "18px",
   border: "1px solid",
-  borderColor: "border.default",
+  borderColor: { base: "rgba(127,99,21,0.3)", _dark: "rgba(255,161,16,0.35)" },
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

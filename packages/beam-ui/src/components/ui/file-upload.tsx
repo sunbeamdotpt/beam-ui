@@ -18,17 +18,28 @@ export function FileUpload({
   className,
 }: FileUploadProps) {
   const [dragOver, setDragOver] = useState(false);
-  const [fileCount, setFileCount] = useState(0);
+  const [files, setFiles] = useState<File[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = useCallback(
-    (files: FileList | null) => {
-      if (!files || files.length === 0) return;
-      const arr = Array.from(files);
-      setFileCount(arr.length);
-      onFiles(arr);
+    (fileList: FileList | null) => {
+      if (!fileList || fileList.length === 0) return;
+      const arr = Array.from(fileList);
+      const next = multiple ? [...files, ...arr] : arr;
+      setFiles(next);
+      onFiles(next);
     },
-    [onFiles]
+    [onFiles, files, multiple]
+  );
+
+  const removeFile = useCallback(
+    (index: number) => {
+      const next = files.filter((_, i) => i !== index);
+      setFiles(next);
+      onFiles(next);
+      if (inputRef.current) inputRef.current.value = "";
+    },
+    [files, onFiles]
   );
 
   const handleDragOver = useCallback(
@@ -53,7 +64,7 @@ export function FileUpload({
     [disabled, handleFiles]
   );
 
-  return (
+  return (<>
     <div
       className={cx(
         zone,
@@ -86,11 +97,29 @@ export function FileUpload({
       />
       <Icon name="cloud_upload" size={32} className={icon} />
       <p className={text}>
-        {fileCount > 0
-          ? `${fileCount} file${fileCount !== 1 ? "s" : ""} selected`
-          : "Drag files here or click to browse"}
+        Drag files here or click to browse
       </p>
     </div>
+    {files.length > 0 && (
+      <div className={fileListStyle}>
+        {files.map((f, i) => (
+          <div key={`${f.name}-${i}`} className={fileRow}>
+            <Icon name="description" size={16} className={fileIcon} />
+            <span className={fileName}>{f.name}</span>
+            <span className={fileSize}>{formatSize(f.size)}</span>
+            <button
+              type="button"
+              className={removeBtn}
+              onClick={() => removeFile(i)}
+              aria-label={`Remove ${f.name}`}
+            >
+              <Icon name="close" size={14} />
+            </button>
+          </div>
+        ))}
+      </div>
+    )}
+    </>
   );
 }
 
@@ -142,4 +171,70 @@ const text = css({
   fontFamily: "body",
   color: "text.secondary",
   margin: 0,
+});
+
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+const fileListStyle = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0",
+  marginTop: "8px",
+  border: "1px solid",
+  borderColor: "border.default",
+});
+
+const fileRow = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  padding: "8px 12px",
+  borderBottom: "1px solid",
+  borderColor: "border.subtle",
+  "&:last-child": {
+    borderBottom: "none",
+  },
+});
+
+const fileIcon = css({
+  color: "text.muted",
+  flexShrink: 0,
+});
+
+const fileName = css({
+  flex: 1,
+  fontSize: "13px",
+  fontFamily: "mono",
+  color: "text.primary",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
+
+const fileSize = css({
+  fontSize: "12px",
+  fontFamily: "mono",
+  color: "text.muted",
+  flexShrink: 0,
+});
+
+const removeBtn = css({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "24px",
+  height: "24px",
+  background: "none",
+  border: "none",
+  cursor: "pointer",
+  color: "text.muted",
+  flexShrink: 0,
+  transition: "color 0.15s ease",
+  _hover: {
+    color: "sunbeam.orange",
+  },
 });

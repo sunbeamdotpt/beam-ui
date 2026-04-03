@@ -11,7 +11,7 @@ export function SearchInputPage() {
   return (
     <ComponentPage
       name="SearchInput"
-      description="A decorative search input with a keyboard shortcut badge. Primarily used in the navigation header as a visual placeholder for command-palette activation."
+      description="A presentational search trigger with a keyboard shortcut badge. Clicking it or pressing ⌘K opens the header's command-palette search overlay. This is not a standalone input — it's the visual trigger used in the navigation header."
       importPath='import { SearchInput } from "@sunbeam/beam-ui"'
     >
       {/* Preview */}

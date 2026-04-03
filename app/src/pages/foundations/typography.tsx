@@ -14,6 +14,7 @@ const TOC_ITEMS = [
   { label: "Weight Scale", id: "weight-scale" },
   { label: "Type Scale", id: "type-scale" },
   { label: "Principles", id: "principles" },
+  { label: "Size Tokens", id: "size-tokens" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -35,6 +36,22 @@ const typeScale = [
   { size: "24px", weight: 575, lh: "1.33", ls: "normal", label: "Title", sample: "Card or Feature Title" },
   { size: "16px", weight: 647, lh: "1.50", ls: "normal", label: "Body", sample: "Standard paragraph text for content, navigation, and interface labels." },
   { size: "14px", weight: 647, lh: "1.43", ls: "normal", label: "Caption", sample: "Caption text, metadata, and secondary links" },
+];
+
+const sizeTokens = [
+  { token: "2xs", px: "10px", weight: 791, lh: "1.5", ls: "0.05em", textStyleName: "label", usage: "Badges, pills, filter counts", sample: "FILTER BADGES AND PILLS" },
+  { token: "xs", px: "12px", weight: 647, lh: "1.5", ls: "normal", textStyleName: "—", usage: "Meta lines, stats, timestamps", sample: "Meta lines, comment counts, timestamps" },
+  { token: "sm", px: "14px", weight: 647, lh: "1.43", ls: "normal", textStyleName: "caption", usage: "Descriptions, nav links, form labels", sample: "Caption text, metadata, and secondary links" },
+  { token: "md", px: "16px", weight: 647, lh: "1.50", ls: "normal", textStyleName: "body", usage: "Standard body, issue/PR titles", sample: "Standard paragraph text for content, navigation, and interface labels." },
+  { token: "lg", px: "18px", weight: 647, lh: "1.4", ls: "normal", textStyleName: "—", usage: "UI emphasis, settings headers", sample: "Emphasized body text and settings headers" },
+  { token: "lg", px: "18px", weight: 791, lh: "1.4", ls: "normal", textStyleName: "emphasis", usage: "Bold callouts, stat values, key numbers", sample: "Emphasis callout or stat value" },
+  { token: "xl", px: "20px", weight: 575, lh: "1.33", ls: "normal", textStyleName: "—", usage: "Header brand name, large UI text", sample: "Header brand name" },
+  { token: "2xl", px: "24px", weight: 575, lh: "1.33", ls: "normal", textStyleName: "title", usage: "Card titles, page headings", sample: "Card or Feature Title" },
+  { token: "2xl", px: "24px", weight: 791, lh: "1.33", ls: "normal", textStyleName: "strong-title", usage: "Pricing, hero stats, bold titles", sample: "Strong Title" },
+  { token: "3xl", px: "32px", weight: 575, lh: "1.15", ls: "normal", textStyleName: "sub-heading", usage: "Feature titles, sub-headings", sample: "Feature Title" },
+  { token: "4xl", px: "48px", weight: 431, lh: "0.95", ls: "normal", textStyleName: "sub-heading-lg", usage: "Page headings (h1)", sample: "Sub-heading" },
+  { token: "5xl", px: "56px", weight: 431, lh: "0.95", ls: "normal", textStyleName: "section", usage: "Section headings", sample: "Section Heading" },
+  { token: "6xl", px: "82px", weight: 431, lh: "1.0", ls: "-2.05px", textStyleName: "display", usage: "Hero / display headings", sample: "Beam" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -279,6 +296,59 @@ export function TypographyPage() {
           readability over visual impact.
         </p>
       </div>
+
+      {/* SIZE TOKENS */}
+      <h2 id="size-tokens" className={sectionTitle}>Size Tokens</h2>
+      <p className={css({ color: "text.secondary", fontSize: "15px", lineHeight: 1.7, marginBottom: "32px" })}>
+        Panda CSS tokens that map to the type scale above. Use <code className={css({ fontFamily: "mono", fontSize: "13px" })}>fontSize</code> for
+        the size alone, or <code className={css({ fontFamily: "mono", fontSize: "13px" })}>textStyle</code> for
+        the complete style (size + weight + line-height + letter-spacing).
+      </p>
+
+      <div className={css({ overflowX: "auto", marginBottom: "40px" })}>
+        <table className={css({ width: "100%", fontSize: "13px", borderCollapse: "collapse" })}>
+          <thead>
+            <tr>
+              <th className={css({ textAlign: "left", padding: "10px 12px", fontWeight: "button", fontSize: "11px", color: "text.muted", textTransform: "uppercase", letterSpacing: "0.1em", borderBottom: "1px solid", borderColor: "border.default" })}>Token</th>
+              <th className={css({ textAlign: "left", padding: "10px 12px", fontWeight: "button", fontSize: "11px", color: "text.muted", textTransform: "uppercase", letterSpacing: "0.1em", borderBottom: "1px solid", borderColor: "border.default" })}>Size</th>
+              <th className={css({ textAlign: "left", padding: "10px 12px", fontWeight: "button", fontSize: "11px", color: "text.muted", textTransform: "uppercase", letterSpacing: "0.1em", borderBottom: "1px solid", borderColor: "border.default" })}>Weight</th>
+              <th className={css({ textAlign: "left", padding: "10px 12px", fontWeight: "button", fontSize: "11px", color: "text.muted", textTransform: "uppercase", letterSpacing: "0.1em", borderBottom: "1px solid", borderColor: "border.default" })}>textStyle</th>
+              <th className={css({ textAlign: "left", padding: "10px 12px", fontWeight: "button", fontSize: "11px", color: "text.muted", textTransform: "uppercase", letterSpacing: "0.1em", borderBottom: "1px solid", borderColor: "border.default" })}>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sizeTokens.map((t, i) => (
+              <tr key={`${t.token}-${i}`}>
+                <td className={css({ padding: "10px 12px", fontFamily: "mono", fontSize: "13px", color: "text.primary", borderBottom: "1px solid", borderColor: "border.subtle" })}>{t.token}</td>
+                <td className={css({ padding: "10px 12px", fontFamily: "mono", fontSize: "13px", color: "text.primary", borderBottom: "1px solid", borderColor: "border.subtle" })}>{t.px}</td>
+                <td className={css({ padding: "10px 12px", fontFamily: "mono", fontSize: "13px", color: "text.primary", borderBottom: "1px solid", borderColor: "border.subtle" })}>{t.weight}</td>
+                <td className={css({ padding: "10px 12px", fontFamily: "mono", fontSize: "13px", color: "text.primary", borderBottom: "1px solid", borderColor: "border.subtle" })}>{t.textStyleName}</td>
+                <td className={css({ padding: "10px 12px", fontSize: "13px", color: "text.secondary", borderBottom: "1px solid", borderColor: "border.subtle" })}>{t.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {sizeTokens.map((t, i) => (
+        <div key={`${t.token}-${i}`} className={scaleItem}>
+          <div
+            style={{
+              fontFamily: token("fonts.heading"),
+              fontSize: t.px,
+              fontWeight: t.weight,
+              lineHeight: t.lh,
+              letterSpacing: t.ls === "normal" ? undefined : t.ls,
+            }}
+          >
+            {t.sample}
+          </div>
+          <div className={scaleMeta}>
+            {t.textStyleName !== "—" ? t.textStyleName : t.token} — {t.px} / {t.weight} / {t.lh}
+            {t.ls !== "normal" ? ` / ${t.ls}` : ""}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

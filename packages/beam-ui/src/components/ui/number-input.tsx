@@ -27,8 +27,12 @@ export function NumberInput({
 }: NumberInputProps) {
   return (
     <NumberInputRoot
-      value={String(value)}
-      onValueChange={(details) => onChange(details.valueAsNumber)}
+      value={value != null ? String(value) : ""}
+      onValueChange={(details) => {
+        const n = details.valueAsNumber;
+        onChange(Number.isNaN(n) ? 0 : n);
+      }}
+      allowMouseWheel
       min={min}
       max={max}
       step={step}
@@ -41,7 +45,7 @@ export function NumberInput({
             <path d="M0 1h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </NumberInputDecrementTrigger>
-        <NumberInputInput className={input} />
+        <NumberInputInput className={input} readOnly={false} />
         <NumberInputIncrementTrigger className={trigger}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M6 0v12M0 6h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

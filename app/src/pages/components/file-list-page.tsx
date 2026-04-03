@@ -36,6 +36,7 @@ const sampleItems: FileItem[] = [
 
 export function FileListPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [gridSelected, setGridSelected] = useState<Set<string>>(new Set());
   const [layout, setLayout] = useState<"list" | "grid">("list");
 
   return (
@@ -101,8 +102,8 @@ export function FileListPage() {
         <h3 className={variantLabel}>Grid layout</h3>
         <FileList
           items={sampleItems.slice(0, 6)}
-          selected={new Set()}
-          onSelect={() => {}}
+          selected={gridSelected}
+          onSelect={setGridSelected}
           layout="grid"
         />
       </div>

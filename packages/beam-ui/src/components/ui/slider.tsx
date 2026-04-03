@@ -74,6 +74,8 @@ const track = css({
   height: "6px",
   borderRadius: "full",
   backgroundColor: "bg.card",
+  border: "1px solid",
+  borderColor: "border.default",
   overflow: "hidden",
 });
 

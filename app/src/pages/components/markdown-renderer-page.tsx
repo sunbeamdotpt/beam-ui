@@ -57,11 +57,28 @@ console.log(greet("Sunbeam"));
 *End of preview.*
 `;
 
+const MATH_MARKDOWN = `## Math in Markdown
+
+The quadratic formula is $x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$, which gives us the roots of any quadratic equation.
+
+Here's a display equation — the Gaussian integral:
+
+$$
+\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}
+$$
+
+Some more inline math: Einstein's $E = mc^2$, the Pythagorean theorem $a^2 + b^2 = c^2$, and Euler's identity $e^{i\\pi} + 1 = 0$.
+
+$$
+\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}
+$$
+`;
+
 export function MarkdownRendererPage() {
   return (
     <ComponentPage
       name="MarkdownRenderer"
-      description="Client-side GFM Markdown renderer using unified/remark/rehype. Produces semantically correct, sanitized HTML with scoped styling."
+      description="Client-side GFM Markdown renderer using unified/remark/rehype. Produces semantically correct, sanitized HTML with scoped styling. Supports LaTeX math via KaTeX ($...$ inline, $$...$$ block)."
       importPath='import { MarkdownRenderer } from "@sunbeam/beam-ui"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -106,6 +123,44 @@ export function MarkdownRendererPage() {
           All rendered HTML uses semantic elements (headings, lists, tables)
           for proper screen reader support.
         </p>
+      </div>
+
+      <div className={variantBlock}>
+        <h3 className={variantLabel}>LaTeX Math</h3>
+        <p className={variantDesc}>
+          Use <code className={css({ fontFamily: "mono", fontSize: "xs" })}>$...$</code> for inline math
+          and <code className={css({ fontFamily: "mono", fontSize: "xs" })}>$$...$$</code> for display math.
+          KaTeX loads lazily only when math is detected.
+        </p>
+        <CodeBlock
+          tabs={[{
+            label: "Markdown",
+            content: (
+              <pre><code>
+                {"## Math in Markdown\n"}
+                {"\n"}
+                {"The quadratic formula is $x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$,\n"}
+                {"which gives us the roots of any quadratic equation.\n"}
+                {"\n"}
+                {"Here's a display equation — the Gaussian integral:\n"}
+                {"\n"}
+                {"$$\n"}
+                {"\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\n"}
+                {"$$\n"}
+                {"\n"}
+                {"Some more inline math: Einstein's $E = mc^2$, the Pythagorean\n"}
+                {"theorem $a^2 + b^2 = c^2$, and Euler's identity $e^{i\\pi} + 1 = 0$.\n"}
+                {"\n"}
+                {"$$\n"}
+                {"\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}\n"}
+                {"$$"}
+              </code></pre>
+            ),
+          }]}
+        />
+        <div className={previewBox}>
+          <MarkdownRenderer content={MATH_MARKDOWN} />
+        </div>
       </div>
     </ComponentPage>
   );

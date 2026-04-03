@@ -9,6 +9,7 @@ interface ToastProps {
   variant?: ToastVariant;
   visible: boolean;
   onDismiss?: () => void;
+  onShow?: () => void;
 }
 
 export function Toast({
@@ -16,10 +17,15 @@ export function Toast({
   variant = "info",
   visible,
   onDismiss,
+  onShow,
 }: ToastProps) {
   useEffect(() => {
+    if (visible && onShow) onShow();
+  }, [visible, onShow]);
+
+  useEffect(() => {
     if (!visible || !onDismiss) return;
-    const timer = setTimeout(onDismiss, 3000);
+    const timer = setTimeout(onDismiss, 4500);
     return () => clearTimeout(timer);
   }, [visible, onDismiss]);
 

@@ -1,8 +1,7 @@
-import { Routes, Route, Outlet } from "react-router-dom";
-import { css } from "styled-system/css";
-import { Header } from "@sunbeam/beam-ui/components/shell/header";
-import { Footer } from "@sunbeam/beam-ui/components/shell/footer";
+import { Routes, Route } from "react-router-dom";
+import { Shell } from "@sunbeam/beam-ui/components/shell/shell";
 import { DocsLayout } from "@sunbeam/beam-ui/components/layouts/docs-layout";
+import { pageDates } from "./generated/page-dates";
 import { ApiLayout } from "@sunbeam/beam-ui/components/layouts/api-layout";
 import { FullwidthLayout } from "@sunbeam/beam-ui/components/layouts/fullwidth-layout";
 import { TokensPage } from "./pages/tokens";
@@ -19,7 +18,9 @@ import { ColorsPage } from "./pages/foundations/colors";
 import { TypographyPage } from "./pages/foundations/typography";
 import { SpacingPage } from "./pages/foundations/spacing";
 import { ElevationPage } from "./pages/foundations/elevation";
+
 import { LlmIntegrationPage } from "./pages/foundations/llm-integration";
+import { InstallationPage } from "./pages/foundations/installation";
 import { DocsLayoutPage } from "./pages/layouts/docs-layout-page";
 import { ApiLayoutPage } from "./pages/layouts/api-layout-page";
 import { FullwidthLayoutPage } from "./pages/layouts/fullwidth-layout-page";
@@ -44,6 +45,7 @@ import { PaginationPage } from "./pages/components/pagination-page";
 import { CheckboxPage } from "./pages/components/checkbox-page";
 import { SelectPage } from "./pages/components/select-page";
 import { TextInputPage } from "./pages/components/text-input-page";
+import { ThemeTogglePage } from "./pages/components/theme-toggle-page";
 import { DialogPage } from "./pages/components/dialog-page";
 import { DropdownMenuPage } from "./pages/components/dropdown-menu-page";
 import { ToastPage } from "./pages/components/toast-page";
@@ -90,6 +92,7 @@ import { ReactionPickerPage } from "./pages/components/reaction-picker-page";
 import { ScrollAreaPage } from "./pages/components/scroll-area-page";
 import { SignUpFormPage } from "./pages/components/signup-form-page";
 import { SliderPage } from "./pages/components/slider-page";
+import { SpinnerPage } from "./pages/components/spinner-page";
 import { SplitterPage } from "./pages/components/splitter-page";
 import { StepsPage } from "./pages/components/steps-page";
 import { SwitchPage } from "./pages/components/switch-page";
@@ -99,35 +102,14 @@ import { TogglePage } from "./pages/components/toggle-page";
 import { ToggleGroupPage } from "./pages/components/toggle-group-page";
 import { TransferListPage } from "./pages/components/transfer-list-page";
 import { TwoFactorFormPage } from "./pages/components/two-factor-form-page";
+import { WizardPage } from "./pages/components/wizard-page";
+import { WorkItemListPage } from "./pages/components/work-item-list-page";
+import { ShellPage } from "./pages/shell/shell-page";
 import { HeaderPage } from "./pages/shell/header-page";
 import { FooterPage } from "./pages/shell/footer-page";
 import { SidebarPage } from "./pages/shell/sidebar-page";
 import { RightRailPage } from "./pages/shell/right-rail-page";
 import { BreadcrumbsPage } from "./pages/shell/breadcrumbs-page";
-
-const shell = css({
-  display: "flex",
-  flexDirection: "column",
-  minHeight: "100vh",
-});
-
-const main = css({
-  flex: 1,
-  paddingTop: "64px",
-});
-
-/** Single stable header + footer, inner layouts handle body only */
-function Shell() {
-  return (
-    <div className={shell}>
-      <Header />
-      <div className={main}>
-        <Outlet />
-      </div>
-      <Footer />
-    </div>
-  );
-}
 
 export function App() {
   return (
@@ -139,14 +121,16 @@ export function App() {
         <Route path="guides" element={<CookbooksPage />} />
 
         {/* Docs pages (sidebar + content + right-rail) */}
-        <Route element={<DocsLayout />}>
+        <Route element={<DocsLayout pageDates={pageDates} />}>
           {/* Foundations */}
           <Route path="foundations/accessibility" element={<AccessibilityPage />} />
           <Route path="foundations/colors" element={<ColorsPage />} />
           <Route path="foundations/typography" element={<TypographyPage />} />
           <Route path="foundations/spacing" element={<SpacingPage />} />
           <Route path="foundations/elevation" element={<ElevationPage />} />
+
           <Route path="foundations/llm-integration" element={<LlmIntegrationPage />} />
+          <Route path="foundations/installation" element={<InstallationPage />} />
 
           {/* Components */}
           <Route path="components/accordion" element={<AccordionPage />} />
@@ -209,6 +193,7 @@ export function App() {
           <Route path="components/signup-form" element={<SignUpFormPage />} />
           <Route path="components/skeleton" element={<SkeletonPage />} />
           <Route path="components/slider" element={<SliderPage />} />
+          <Route path="components/spinner" element={<SpinnerPage />} />
           <Route path="components/splitter" element={<SplitterPage />} />
           <Route path="components/steps" element={<StepsPage />} />
           <Route path="components/switch" element={<SwitchPage />} />
@@ -217,6 +202,7 @@ export function App() {
           <Route path="components/tabs" element={<TabsPage />} />
           <Route path="components/tags-input" element={<TagsInputPage />} />
           <Route path="components/text-input" element={<TextInputPage />} />
+          <Route path="components/theme-toggle" element={<ThemeTogglePage />} />
           <Route path="components/toast" element={<ToastPage />} />
           <Route path="components/toggle" element={<TogglePage />} />
           <Route path="components/toggle-group" element={<ToggleGroupPage />} />
@@ -224,6 +210,8 @@ export function App() {
           <Route path="components/tooltip" element={<TooltipPage />} />
           <Route path="components/tree-view" element={<TreeViewPage />} />
           <Route path="components/two-factor-form" element={<TwoFactorFormPage />} />
+          <Route path="components/wizard" element={<WizardPage />} />
+          <Route path="components/work-item-list" element={<WorkItemListPage />} />
 
           {/* Layout showcase (docs) */}
           <Route path="layouts/docs" element={<DocsLayoutPage />} />
@@ -232,6 +220,7 @@ export function App() {
           <Route path="layouts/creators" element={<CreatorsLayoutPage />} />
 
           {/* Shell */}
+          <Route path="shell/shell" element={<ShellPage />} />
           <Route path="shell/header" element={<HeaderPage />} />
           <Route path="shell/footer" element={<FooterPage />} />
           <Route path="shell/sidebar" element={<SidebarPage />} />

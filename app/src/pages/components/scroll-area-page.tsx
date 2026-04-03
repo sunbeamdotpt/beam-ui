@@ -5,7 +5,9 @@ import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
 const PROPS = [
   { name: "children", type: "ReactNode", required: true, description: "Scrollable content." },
-  { name: "maxHeight", type: "string", required: false, description: 'Maximum height before scrolling. Defaults to "300px".' },
+  { name: "maxHeight", type: "string", required: false, description: "Maximum height before scrolling." },
+  { name: "scrollbar", type: '"visible" | "hover" | "auto"', required: false, description: '"visible" always shows themed scrollbar, "hover" hides until hover, "auto" uses browser default with theme colors. Defaults to "visible".' },
+  { name: "direction", type: '"vertical" | "horizontal" | "both"', required: false, description: 'Scroll direction. Defaults to "vertical".' },
   { name: "className", type: "string", required: false, description: "Additional CSS class names." },
 ];
 
@@ -55,10 +57,23 @@ export function ScrollAreaPage() {
       <SectionHeading id="variants">Variants</SectionHeading>
       <div className={variantBlock}>
         <h3 className={variantLabel}>Horizontal scroll</h3>
-        <ScrollArea maxHeight="100px">
-          <div className={css({ display: "flex", gap: "12px", padding: "16px", whiteSpace: "nowrap", width: "max-content" })}>
+        <ScrollArea direction="horizontal">
+          <div className={css({ display: "flex", gap: "12px", padding: "16px", width: "max-content" })}>
             {Array.from({ length: 15 }, (_, i) => (
               <div key={i} className={card}>Card {i + 1}</div>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
+
+      <div className={variantBlock}>
+        <h3 className={variantLabel}>Hover scrollbar</h3>
+        <ScrollArea maxHeight="150px" scrollbar="hover">
+          <div className={css({ padding: "16px" })}>
+            {LONG_CONTENT.map((text, i) => (
+              <p key={i} className={css({ fontSize: "14px", color: "text.primary", marginBottom: "8px", lineHeight: 1.5 })}>
+                {text}
+              </p>
             ))}
           </div>
         </ScrollArea>

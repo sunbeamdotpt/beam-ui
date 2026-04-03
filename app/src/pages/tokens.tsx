@@ -202,10 +202,51 @@ export function TokensPage() {
           Beam Design Language
         </h1>
         <p className={heroSubtitle}>
-          The complete visual framework for Sunbeam Studios
+          A design language by humans, for humans
         </p>
 
         <div className={gradientBar} />
+      </section>
+
+      <hr className={sectionDivider} />
+
+      {/* ===== EXPLORE ===== */}
+      <section className={section}>
+        <div className={sectionLabel}>EXPLORE</div>
+        <h2 className={sectionHeading}>Discover the System</h2>
+        <p className={sectionDesc}>
+          Beam covers every layer of the design stack -- from foundational tokens to
+          full page layouts.
+        </p>
+
+        <div className={exploreGrid}>
+          <Link to="/foundations/accessibility" className={exploreCard}>
+            <div className={exploreCardLabel}>Foundations</div>
+            <div className={exploreCardTitle}>Colors &amp; Tokens</div>
+            <div className={exploreCardDesc}>
+              Warm ivories, golden ambers, and the signature Sunbeam Orange.
+              Explore the full palette and semantic color system.
+            </div>
+          </Link>
+
+          <Link to="/components/accordion" className={exploreCard}>
+            <div className={exploreCardLabel}>Components</div>
+            <div className={exploreCardTitle}>UI Components</div>
+            <div className={exploreCardDesc}>
+              Buttons, badges, cards, code blocks, and more -- every building
+              block styled with Beam tokens.
+            </div>
+          </Link>
+
+          <Link to="/layouts/docs" className={exploreCard}>
+            <div className={exploreCardLabel}>Layouts</div>
+            <div className={exploreCardTitle}>Page Layouts</div>
+            <div className={exploreCardDesc}>
+              Docs, API reference, and fullwidth layouts with sidebar navigation,
+              right-rail TOC, and responsive shells.
+            </div>
+          </Link>
+        </div>
       </section>
 
       <hr className={sectionDivider} />
@@ -231,19 +272,17 @@ export function TokensPage() {
         <CodeBlock
           tabs={[
             {
-              label: "Setup",
+              label: "App.tsx",
               content: (
                 <pre>
-                  <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Button</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>'@sunbeam/beam-ui/components/ui/button'</span>;{"\n"}
-                  <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Card</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>'@sunbeam/beam-ui/components/ui/card'</span>;{"\n"}
-                  <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>DocsLayout</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>'@sunbeam/beam-ui/components/layouts/docs-layout'</span>;{"\n"}
+                  <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Shell</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/components/shell/shell"</span>{"\n"}
                   {"\n"}
-                  <span className={syn.comment}>{"// Use Beam components with Panda CSS semantic tokens"}</span>{"\n"}
-                  <span className={syn.keyword}>function</span> <span className={syn.fn}>App</span>() {"{"}{"\n"}
+                  <span className={syn.comment}>{"// Shell renders Header + Footer by default"}</span>{"\n"}
+                  <span className={syn.keyword}>export default function</span> <span className={syn.fn}>App</span>() {"{"}{"\n"}
                   {"  "}<span className={syn.keyword}>return</span> ({"\n"}
-                  {"    "}<span className={syn.prop}>{"<Card"}</span> <span className={syn.fn}>shadow</span>=<span className={syn.string}>"golden"</span><span className={syn.prop}>{">"}</span>{"\n"}
-                  {"      "}<span className={syn.prop}>{"<Button"}</span> <span className={syn.fn}>variant</span>=<span className={syn.string}>"primary"</span><span className={syn.prop}>{">"}</span>Get Started<span className={syn.prop}>{"</Button>"}</span>{"\n"}
-                  {"    "}<span className={syn.prop}>{"</Card>"}</span>{"\n"}
+                  {"    "}{"<"}<span className={syn.fn}>Shell</span>{">"}{"\n"}
+                  {"      "}{"{"}<span className={syn.comment}>{" /* your routes or content */ "}</span>{"}"}{"\n"}
+                  {"    "}{"</"}<span className={syn.fn}>Shell</span>{">"}{"\n"}
                   {"  );"}{"\n"}
                   {"}"}{"\n"}
                 </pre>
@@ -253,56 +292,7 @@ export function TokensPage() {
         />
       </section>
 
-      <hr className={sectionDivider} />
-
-      {/* ===== EXPLORE ===== */}
-      <section className={section}>
-        <div className={sectionLabel}>EXPLORE</div>
-        <h2 className={sectionHeading}>Discover the System</h2>
-        <p className={sectionDesc}>
-          Beam covers every layer of the design stack -- from foundational tokens to
-          full page layouts.
-        </p>
-
-        <div className={exploreGrid}>
-          <Link to="/foundations/colors" className={exploreCard}>
-            <div className={exploreCardLabel}>Foundations</div>
-            <div className={exploreCardTitle}>Colors &amp; Tokens</div>
-            <div className={exploreCardDesc}>
-              Warm ivories, golden ambers, and the signature Sunbeam Orange.
-              Explore the full palette and semantic color system.
-            </div>
-          </Link>
-
-          <Link to="/components/button" className={exploreCard}>
-            <div className={exploreCardLabel}>Components</div>
-            <div className={exploreCardTitle}>UI Components</div>
-            <div className={exploreCardDesc}>
-              Buttons, badges, cards, code blocks, and more -- every building
-              block styled with Beam tokens.
-            </div>
-          </Link>
-
-          <Link to="/layouts/docs" className={exploreCard}>
-            <div className={exploreCardLabel}>Layouts</div>
-            <div className={exploreCardTitle}>Page Layouts</div>
-            <div className={exploreCardDesc}>
-              Docs, API reference, and fullwidth layouts with sidebar navigation,
-              right-rail TOC, and responsive shells.
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      {/* ===== BOTTOM GRADIENT ===== */}
-      <div
-        className={css({
-          height: "64px",
-          marginTop: "48px",
-          background:
-            "linear-gradient(to right, #ffd900, #ffe295, #ffa110, #ff8105, #fb6424, #fa520f)",
-        })}
-      />
+      <div className={css({ height: "48px" })} />
     </>
   );
 }

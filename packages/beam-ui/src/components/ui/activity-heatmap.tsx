@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
+import { ScrollArea } from "./scroll-area";
 
 export interface ActivityDay {
   date: string;
@@ -92,8 +93,12 @@ export function ActivityHeatmap({ data, className }: ActivityHeatmapProps) {
   const total = data.reduce((s, d) => s + d.count, 0);
 
   return (
-    <div
+    <ScrollArea
+      direction="horizontal"
+      scrollbar="hover"
       className={cx(wrapper, className)}
+    >
+    <div
       role="img"
       aria-label={`Activity heatmap: ${total} contributions in the last year`}
     >
@@ -181,12 +186,11 @@ export function ActivityHeatmap({ data, className }: ActivityHeatmapProps) {
       </svg>
       <span id="after-heatmap" />
     </div>
+    </ScrollArea>
   );
 }
 
-const wrapper = css({
-  overflowX: "auto",
-});
+const wrapper = css({});
 
 const svg = css({
   display: "block",

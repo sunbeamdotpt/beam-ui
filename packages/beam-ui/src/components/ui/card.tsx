@@ -37,7 +37,7 @@ export function Card({
         className={css({
           width: "48px",
           height: "48px",
-          backgroundColor: "rgba(250, 82, 15, 0.1)",
+          backgroundColor: "transparent",
           borderRadius: "0",
           display: "flex",
           alignItems: "center",

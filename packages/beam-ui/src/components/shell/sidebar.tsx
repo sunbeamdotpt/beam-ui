@@ -12,13 +12,10 @@ const aside = css({
   top: "64px",
   height: "calc(100vh - 64px)",
   overflowY: "auto",
+  alignSelf: "flex-start",
   bg: "bg.page",
   paddingInline: "24px",
   paddingBlock: "32px",
-  scrollbarWidth: "none",
-  "&::-webkit-scrollbar": {
-    display: "none",
-  },
 });
 
 const sectionGroup = css({
@@ -263,7 +260,13 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
 
 export function Sidebar({ sections }: SidebarProps) {
   return (
-    <aside className={aside} aria-label="Documentation navigation">
+    <aside
+      className={aside}
+      aria-label="Documentation navigation"
+      style={{ scrollbarWidth: "thin", scrollbarColor: "transparent transparent" } as React.CSSProperties}
+      onMouseEnter={(e) => { (e.currentTarget.style as any).scrollbarColor = "rgba(255,161,16,0.25) transparent"; }}
+      onMouseLeave={(e) => { (e.currentTarget.style as any).scrollbarColor = "transparent transparent"; }}
+    >
       {sections.map((section) => (
         <div key={section.title} className={sectionGroup}>
           <h3 className={sectionHeader}>{section.title}</h3>

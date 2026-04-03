@@ -78,7 +78,7 @@ export function EmptyStatePage() {
             icon="folder"
             title="No projects"
             description="Create your first project to get started with the platform."
-            action={<Button variant="dark">Create project</Button>}
+            action={<Button variant="primary">Create project</Button>}
           />
         </div>
       </div>

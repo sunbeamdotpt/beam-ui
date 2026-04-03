@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { css } from "styled-system/css";
 import { Kbd } from "@sunbeam/beam-ui/components/ui/kbd";
+import { Tabs } from "@sunbeam/beam-ui/components/ui/tabs";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
 const PROPS = [
-  { name: "children", type: "string", required: true, description: "The key or shortcut text to display." },
+  { name: "children", type: "string", required: true, description: "The key or shortcut text to display. Mac symbols (⌘, ⌥) are auto-converted to Windows equivalents (Ctrl, Alt) on non-Mac devices." },
+  { name: "platform", type: '"mac" | "windows" | "linux"', required: false, description: "Override platform detection. Defaults to auto-detect from user agent. Mac uses ⌘/⌥, Windows uses Ctrl/Alt, Linux uses Super/Alt." },
   { name: "className", type: "string", required: false, description: "Additional CSS class names." },
 ];
 
@@ -17,14 +20,27 @@ const SHORTCUTS = [
 ];
 
 export function KbdPage() {
+  const [platform, setPlatform] = useState<"mac" | "windows" | "linux">("mac");
+
   return (
     <ComponentPage
       name="Kbd"
-      description="A styled keyboard key indicator used to display shortcuts and key bindings. Renders with a subtle pressed-key appearance."
+      description="A styled keyboard key indicator used to display shortcuts and key bindings. Auto-detects the user's platform and converts Mac symbols (⌘, ⌥) to platform equivalents (Ctrl/Super, Alt)."
       importPath='import { Kbd } from "@sunbeam/beam-ui"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
+      <div className={css({ marginBottom: "12px" })}>
+        <Tabs
+          items={[
+            { value: "mac", label: "macOS" },
+            { value: "windows", label: "Windows" },
+            { value: "linux", label: "Linux" },
+          ]}
+          activeValue={platform}
+          onChange={(v) => setPlatform(v as "mac" | "windows" | "linux")}
+        />
+      </div>
       <div className={previewBox}>
         {SHORTCUTS.map(({ keys, label }) => (
           <div key={label} className={shortcutRow}>
@@ -32,7 +48,7 @@ export function KbdPage() {
             <span className={shortcutKeys}>
               {keys.map((k, i) => (
                 <span key={k + i}>
-                  <Kbd>{k}</Kbd>
+                  <Kbd platform={platform}>{k}</Kbd>
                   {i < keys.length - 1 && <span className={plusSign}>+</span>}
                 </span>
               ))}

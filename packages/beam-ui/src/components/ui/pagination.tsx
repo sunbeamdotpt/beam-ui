@@ -22,11 +22,18 @@ export function Pagination({
 }: PaginationProps) {
   const pages = buildPageList(currentPage, totalPages);
 
+  // Size buttons based on the widest possible page number
+  const digits = String(totalPages).length;
+  // ~10px per digit in mono at 13px + 16px padding + 2px border
+  const btnWidth = Math.max(36, digits * 10 + 18);
+  const cellStyle = { width: btnWidth, height: 36 };
+
   return (
     <nav className={cx(wrapper, className)} aria-label="Pagination">
       <div className={pageButtons}>
         <button
           className={navBtn}
+          style={cellStyle}
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
           type="button"
@@ -37,7 +44,7 @@ export function Pagination({
 
         {pages.map((p, i) =>
           p === "..." ? (
-            <span key={`ellipsis-${i}`} className={ellipsis}>
+            <span key={`ellipsis-${i}`} className={ellipsis} style={cellStyle}>
               ...
             </span>
           ) : (
@@ -45,6 +52,7 @@ export function Pagination({
               key={p}
               type="button"
               className={cx(pageBtn, p === currentPage && activePage)}
+              style={cellStyle}
               onClick={() => onPageChange(p as number)}
               {...(p === currentPage ? { "aria-current": "page" as const } : {})}
             >
@@ -55,6 +63,7 @@ export function Pagination({
 
         <button
           className={navBtn}
+          style={cellStyle}
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
           type="button"
@@ -66,7 +75,7 @@ export function Pagination({
 
       {pageSize !== undefined && onPageSizeChange && (
         <div className={sizeSelector}>
-          <label className={sizeLabel}>Rows</label>
+          <label className={sizeLabel}>Per page</label>
           <select
             value={pageSize}
             onChange={(e) => onPageSizeChange(Number(e.target.value))}
@@ -89,23 +98,23 @@ export function Pagination({
 /* ------------------------------------------------------------------ */
 
 function buildPageList(current: number, total: number): (number | "...")[] {
+  // Always show exactly 7 slots: [1] [..|n] [n] [current] [n] [..|n] [last]
   if (total <= 7) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
-  const pages: (number | "...")[] = [1];
+  // Near the start: 1 2 3 4 5 ... 20
+  if (current <= 4) {
+    return [1, 2, 3, 4, 5, "...", total];
+  }
 
-  if (current > 3) pages.push("...");
+  // Near the end: 1 ... 16 17 18 19 20
+  if (current >= total - 3) {
+    return [1, "...", total - 4, total - 3, total - 2, total - 1, total];
+  }
 
-  const start = Math.max(2, current - 1);
-  const end = Math.min(total - 1, current + 1);
-
-  for (let i = start; i <= end; i++) pages.push(i);
-
-  if (current < total - 2) pages.push("...");
-
-  pages.push(total);
-  return pages;
+  // Middle: 1 ... 4 5 6 ... 20
+  return [1, "...", current - 1, current, current + 1, "...", total];
 }
 
 /* ------------------------------------------------------------------ */
@@ -131,8 +140,8 @@ const navBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "32px",
-  height: "32px",
+  width: "36px",
+  height: "36px",
   border: "1px solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
@@ -147,10 +156,11 @@ const pageBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  minWidth: "32px",
-  height: "32px",
-  padding: "0 8px",
+  width: "36px",
+  height: "36px",
+  padding: "0",
   fontSize: "13px",
+  fontFamily: "mono",
   fontWeight: "button",
   border: "1px solid",
   borderColor: "border.default",
@@ -159,8 +169,6 @@ const pageBtn = css({
   cursor: "pointer",
   transition: "all 0.15s ease",
   _hover: { borderColor: "sunbeam.orange", color: "sunbeam.orange" },
-  // Compact on mobile
-  sm: { minWidth: "36px", height: "36px", fontSize: "14px" },
 });
 
 const activePage = css({
@@ -174,10 +182,14 @@ const ellipsis = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "24px",
+  width: "36px",
+  height: "36px",
+  padding: "0",
   fontSize: "14px",
+  fontFamily: "mono",
   color: "text.muted",
   userSelect: "none",
+  border: "1px solid transparent",
 });
 
 const sizeSelector = css({

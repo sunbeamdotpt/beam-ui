@@ -39,7 +39,7 @@ export { List } from "./components/ui/list";
 export { MilestonePicker } from "./components/ui/milestone-picker";
 export type { MilestoneOption } from "./components/ui/milestone-picker";
 export { ModelRow } from "./components/ui/model-row";
-export { NotificationCenter, NotificationItem } from "./components/ui/notification-center";
+export { NotificationCenter, NotificationItem, notificationIcons } from "./components/ui/notification-center";
 export type { Notification } from "./components/ui/notification-center";
 export { NumberInput } from "./components/ui/number-input";
 export { Pagination } from "./components/ui/pagination";
@@ -54,6 +54,7 @@ export { SearchInput } from "./components/ui/search-input";
 export { Select } from "./components/ui/select";
 export { Skeleton } from "./components/ui/skeleton";
 export { Slider } from "./components/ui/slider";
+export { Spinner } from "./components/ui/spinner";
 export { Splitter } from "./components/ui/splitter";
 export { StatBar } from "./components/ui/stat-bar";
 export type { ModelStats } from "./components/ui/stat-bar";
@@ -64,6 +65,7 @@ export { Tabs } from "./components/ui/tabs";
 export { TagsInput } from "./components/ui/tags-input";
 export { TextInput } from "./components/ui/text-input";
 export { Toast } from "./components/ui/toast";
+export { ThemeToggle } from "./components/ui/theme-toggle";
 export { Toggle } from "./components/ui/toggle";
 export { ToggleGroup } from "./components/ui/toggle-group";
 export { TransferList } from "./components/ui/transfer-list";
@@ -72,8 +74,13 @@ export { Tooltip } from "./components/ui/tooltip";
 export { TopicCard } from "./components/ui/topic-card";
 export { TreeView } from "./components/ui/tree-view";
 export type { TreeNode } from "./components/ui/tree-view";
+export { Wizard, WizardModal } from "./components/ui/wizard";
+export type { WizardStep, WizardProps, WizardModalProps } from "./components/ui/wizard";
+export { WorkItemList } from "./components/ui/work-item-list";
+export type { WorkItemRow, WorkItemLabel, WorkItemBranch, WorkItemListProps } from "./components/ui/work-item-list";
 
 // Shell components
+export { Shell } from "./components/shell/shell";
 export { Breadcrumbs } from "./components/shell/breadcrumbs";
 export { Footer } from "./components/shell/footer";
 export { Header } from "./components/shell/header";
@@ -112,3 +119,11 @@ export {
   footerSections,
 } from "./data/navigation";
 export type { NavItem, NavSection } from "./data/navigation";
+export {
+  issueStatuses,
+  prStatuses,
+  priorities,
+  releaseStages,
+  allStatuses,
+} from "./data/statuses";
+export type { StatusDef } from "./data/statuses";

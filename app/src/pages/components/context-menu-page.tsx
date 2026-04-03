@@ -34,7 +34,7 @@ export function ContextMenuPage() {
       <SectionHeading id="preview">Preview</SectionHeading>
       <ContextMenu items={sampleItems}>
         <div className={triggerZone}>
-          Right-click anywhere in this zone
+          Right-click (or long-press on mobile) anywhere in this zone
         </div>
       </ContextMenu>
 

@@ -1,82 +1,234 @@
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { docsSidebar } from "../../data/navigation";
 
 interface SearchInputProps {
   className?: string;
 }
 
+// Build a flat list of all nav items for search
+const allNavItems = docsSidebar.flatMap((section) =>
+  section.items.flatMap((item) => {
+    const results = [{ label: item.label, href: item.href, section: section.title }];
+    if (item.children) {
+      item.children.forEach((child) =>
+        results.push({ label: child.label, href: child.href, section: section.title })
+      );
+    }
+    return results;
+  })
+);
+
 export function SearchInput({ className }: SearchInputProps) {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Cmd+K / Ctrl+K to focus, Escape to blur
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+        setShowResults(true);
+      }
+      if (e.key === "Escape") {
+        setQuery("");
+        setShowResults(false);
+        inputRef.current?.blur();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setShowResults(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const filtered = query.trim()
+    ? allNavItems.filter((item) =>
+        item.label.toLowerCase().includes(query.toLowerCase())
+      )
+    : [];
+
+  const handleSelect = useCallback(
+    (href: string) => {
+      setQuery("");
+      setShowResults(false);
+      inputRef.current?.blur();
+      navigate(href);
+    },
+    [navigate]
+  );
+
   return (
-    <div className={cx(wrapper, className)}>
-      <div className={iconLeft}>
-        <Icon name="search" size={16} />
-      </div>
+    <div className={cx(wrapper, className)} ref={wrapperRef}>
+      <span className={`material-symbols-outlined ${iconStyle}`}>search</span>
       <input
+        ref={inputRef}
+        className={input}
         type="text"
         placeholder="Search docs..."
-        readOnly
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setShowResults(true);
+        }}
+        onFocus={() => setShowResults(true)}
         aria-label="Search"
-        className={input}
       />
-      <div className={kbdWrapper}>
-        <kbd className={kbd}>&#8984;K</kbd>
-      </div>
+      <kbd className={kbd}>⌘K</kbd>
+      {showResults && query.trim() && (
+        <div className={dropdown} role="listbox">
+          {filtered.length === 0 ? (
+            <div className={noResults}>No results for &ldquo;{query}&rdquo;</div>
+          ) : (
+            (() => {
+              let lastSection = "";
+              return filtered.map((item) => {
+                const showSection = item.section !== lastSection;
+                lastSection = item.section;
+                return (
+                  <div key={item.href + item.label}>
+                    {showSection && (
+                      <div className={sectionHeader} role="presentation">{item.section}</div>
+                    )}
+                    <a
+                      className={resultItem}
+                      role="option"
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSelect(item.href);
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  </div>
+                );
+              });
+            })()
+          )}
+        </div>
+      )}
     </div>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* Styles                                                              */
+/* ------------------------------------------------------------------ */
 
 const wrapper = css({
   position: "relative",
   display: "block",
 });
 
-const iconLeft = css({
+const iconStyle = css({
   position: "absolute",
-  top: 0,
-  bottom: 0,
+  top: "50%",
   left: "12px",
-  display: "flex",
-  alignItems: "center",
+  transform: "translateY(-50%)",
+  fontSize: "16px",
+  color: "text.muted",
   pointerEvents: "none",
-  opacity: 0.5,
 });
 
 const input = css({
-  backgroundColor: "rgba(255, 240, 194, 0.5)",
-  border: "1px solid rgba(255, 208, 106, 0.3)",
-  borderRadius: "0",
-  paddingLeft: "40px",
+  width: "240px",
+  paddingLeft: "36px",
   paddingRight: "48px",
-  paddingTop: "8px",
-  paddingBottom: "8px",
+  paddingBlock: "8px",
   fontSize: "14px",
-  width: "256px",
-  outline: "none",
   fontFamily: "body",
+  fontWeight: "body",
+  bg: "bg.card",
+  border: "1px solid",
+  borderColor: "border.subtle",
+  borderRadius: "sm",
+  outline: "none",
   color: "text.primary",
+  _placeholder: {
+    color: "text.muted",
+  },
   _focus: {
-    ringWidth: "2px",
-    ringColor: "sunbeam.orange",
-    borderColor: "transparent",
+    borderColor: "accent",
+    boxShadow: "0 0 0 2px rgba(250, 82, 15, 0.15)",
   },
 });
 
-const kbdWrapper = css({
+const kbd = css({
   position: "absolute",
-  top: 0,
-  bottom: 0,
+  top: "50%",
   right: "12px",
-  display: "flex",
-  alignItems: "center",
+  transform: "translateY(-50%)",
+  fontSize: "10px",
+  fontWeight: "button",
+  color: "text.muted",
+  border: "1px solid",
+  borderColor: "border.default",
+  paddingInline: "6px",
+  paddingBlock: "2px",
+  borderRadius: "sm",
+  fontFamily: "mono",
+  lineHeight: 1,
   pointerEvents: "none",
 });
 
-const kbd = css({
+const dropdown = css({
+  position: "absolute",
+  top: "100%",
+  left: 0,
+  right: 0,
+  marginTop: "4px",
+  backgroundColor: "bg.page",
+  border: "1px solid",
+  borderColor: "border.default",
+  shadow: "golden",
+  maxHeight: "320px",
+  overflowY: "auto",
+  zIndex: 100,
+});
+
+const sectionHeader = css({
+  padding: "8px 12px",
   fontSize: "10px",
   fontWeight: "button",
-  padding: "2px 6px",
-  borderRadius: "sm",
-  border: "1px solid rgba(255, 208, 106, 0.5)",
-  opacity: 0.5,
-  fontFamily: "body",
+  textTransform: "uppercase",
+  letterSpacing: "0.15em",
+  color: "text.muted",
+  backgroundColor: "bg.card",
+  borderBottom: "1px solid",
+  borderColor: "border.subtle",
+});
+
+const resultItem = css({
+  display: "block",
+  padding: "8px 12px",
+  fontSize: "14px",
+  color: "text.primary",
+  textDecoration: "none",
+  cursor: "pointer",
+  _hover: {
+    backgroundColor: "bg.card",
+    color: "sunbeam.orange",
+  },
+});
+
+const noResults = css({
+  padding: "16px",
+  fontSize: "13px",
+  color: "text.muted",
+  textAlign: "center",
 });

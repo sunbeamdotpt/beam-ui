@@ -30,6 +30,7 @@ export function Accordion({
 }: AccordionProps) {
   return (
     <AccordionRoot
+      collapsible
       multiple={multiple}
       defaultValue={defaultValue}
       className={cx(root, className)}

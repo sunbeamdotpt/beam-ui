@@ -16,6 +16,8 @@ export function PaginationPage() {
   const [page, setPage] = useState(1);
   const [pageWithSize, setPageWithSize] = useState(1);
   const [pageSize, setPageSize] = useState(25);
+  const [pageLarge, setPageLarge] = useState(1);
+  const [pageHuge, setPageHuge] = useState(1);
 
   return (
     <ComponentPage
@@ -111,6 +113,47 @@ export function PaginationPage() {
                 {"  "}<span className={syn.prop}>pageSize</span>={"{"}25{"}"}{"\n"}
                 {"  "}<span className={syn.prop}>onPageSizeChange</span>={"{"}setPageSize{"}"}{"\n"}
                 {"/>"}{"\n"}
+              </code></pre>
+            ),
+          }]}
+        />
+      </div>
+
+      <div className={variantBlock}>
+        <h3 className={variantLabel}>Adaptive button sizing</h3>
+        <p className={css({ fontSize: "14px", color: "text.secondary", marginBottom: "16px", lineHeight: 1.6 })}>
+          Button width automatically adapts to the digit count of <code className={css({ fontFamily: "mono", fontSize: "13px" })}>totalPages</code>.
+          This ensures consistent total width regardless of which page is active — no layout shifts.
+        </p>
+        <div className={css({ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "16px" })}>
+          <div>
+            <p className={css({ fontSize: "12px", fontFamily: "mono", color: "text.muted", marginBottom: "8px" })}>totalPages=20 (2 digits)</p>
+            <Pagination currentPage={page} totalPages={20} onPageChange={setPage} />
+          </div>
+          <div>
+            <p className={css({ fontSize: "12px", fontFamily: "mono", color: "text.muted", marginBottom: "8px" })}>totalPages=500 (3 digits)</p>
+            <Pagination currentPage={pageLarge} totalPages={500} onPageChange={setPageLarge} />
+          </div>
+          <div>
+            <p className={css({ fontSize: "12px", fontFamily: "mono", color: "text.muted", marginBottom: "8px" })}>totalPages=2500 (4 digits)</p>
+            <Pagination currentPage={pageHuge} totalPages={2500} onPageChange={setPageHuge} />
+          </div>
+        </div>
+        <CodeBlock
+          tabs={[{
+            label: "TSX",
+            content: (
+              <pre><code>
+                <span className={syn.comment}>{"// Buttons auto-size based on totalPages digit count"}</span>{"\n"}
+                <span className={syn.comment}>{"// 2 digits (≤99):  36px buttons"}</span>{"\n"}
+                <span className={syn.comment}>{"// 3 digits (≤999): 48px buttons"}</span>{"\n"}
+                <span className={syn.comment}>{"// 4 digits (≤9999): 58px buttons"}</span>{"\n"}
+                {"\n"}
+                {"<"}<span className={syn.fn}>Pagination</span>{"\n"}
+                {"  "}<span className={syn.prop}>totalPages</span>={"{"}2500{"}"}{"\n"}
+                {"  "}<span className={syn.prop}>currentPage</span>={"{"}page{"}"}{"\n"}
+                {"  "}<span className={syn.prop}>onPageChange</span>={"{"}setPage{"}"}{"\n"}
+                {"/>"}
               </code></pre>
             ),
           }]}

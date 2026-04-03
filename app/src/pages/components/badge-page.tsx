@@ -3,12 +3,11 @@ import { Badge } from "@sunbeam/beam-ui/components/ui/badge";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
-const ALL_VARIANTS = [
-  "featured", "premier", "verified", "partner",
-  "stable", "new", "open", "community",
-  "preview", "beta", "experimental", "deprecated",
-  "section",
-] as const;
+const TIER_VARIANTS = ["featured", "premier", "verified", "partner", "community"] as const;
+const RELEASE_VARIANTS = ["stable", "new", "beta", "preview", "experimental", "deprecated"] as const;
+const STATUS_VARIANTS = ["open", "draft", "review", "approved", "merged", "closed", "revision"] as const;
+const PRIORITY_VARIANTS = ["critical", "high", "medium", "low"] as const;
+const ALL_VARIANTS = [...TIER_VARIANTS, ...RELEASE_VARIANTS, ...STATUS_VARIANTS, ...PRIORITY_VARIANTS, "section"] as const;
 
 const PROPS = [
   {
@@ -25,7 +24,7 @@ export function BadgePage() {
   return (
     <ComponentPage
       name="Badge"
-      description="Compact labels for status, tier, category, or section dividers. Fourteen variants cover everything from model tiers to release stages."
+      description="Compact labels for status, tier, priority, and workflow states. 25 variants organized into four categories: Tier/Recognition, Release Stage, Work Status, and Priority. Plus a section divider utility."
       importPath='import { Badge } from "@sunbeam/beam-ui"'
     >
       {/* Preview */}
@@ -61,17 +60,29 @@ export function BadgePage() {
       {/* Variants */}
       <SectionHeading id="variants">Variants</SectionHeading>
 
-      <div className={variantGrid}>
-        {ALL_VARIANTS.filter(v => v !== "section").map((v) => (
-          <div key={v} className={variantItem}>
-            <Badge variant={v}>{v}</Badge>
-            <span className={variantName}>{v}</span>
+      {[
+        { title: "Tier / Recognition", desc: "Who you are — trust signals and community standing", variants: TIER_VARIANTS },
+        { title: "Release Stage", desc: "What state it's in — lifecycle from experimental to deprecated", variants: RELEASE_VARIANTS },
+        { title: "Work Status", desc: "What's happening — workflow states for issues and pull requests", variants: STATUS_VARIANTS },
+        { title: "Priority", desc: "How urgent — from critical to low", variants: PRIORITY_VARIANTS },
+      ].map((group) => (
+        <div key={group.title} className={css({ marginBottom: "32px" })}>
+          <h3 className={variantName} style={{ marginBottom: "4px", fontSize: "16px", color: "var(--colors-text\\.primary, #fff)" }}>{group.title}</h3>
+          <p className={css({ fontSize: "13px", color: "text.muted", marginBottom: "16px" })}>{group.desc}</p>
+          <div className={variantGrid}>
+            {group.variants.map((v) => (
+              <div key={v} className={variantItem}>
+                <Badge variant={v}>{v}</Badge>
+                <span className={variantName}>{v}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
 
-      <div className={css({ marginTop: "32px" })}>
-        <h3 className={variantName} style={{ marginBottom: "12px" }}>section</h3>
+      <div className={css({ marginTop: "16px" })}>
+        <h3 className={variantName} style={{ marginBottom: "4px", fontSize: "16px" }}>Utility</h3>
+        <p className={css({ fontSize: "13px", color: "text.muted", marginBottom: "12px" })}>Section divider with horizontal rule</p>
         <Badge variant="section">Section Label</Badge>
       </div>
     </ComponentPage>

@@ -1,6 +1,6 @@
 # Beam Design Language
 
-The complete visual framework for Sunbeam Studios.
+A design language by humans, for humans.
 
 ## Install
 
@@ -24,15 +24,33 @@ npm install react react-dom react-router-dom zustand @ark-ui/react @pandacss/dev
 ## Usage
 
 ```tsx
-import { Button, Card, CodeBlock } from "@sunbeam/beam-ui"
+import { Shell } from "@sunbeam/beam-ui/components/shell/shell"
+import { Button } from "@sunbeam/beam-ui/components/ui/button"
 import { useTheme } from "@sunbeam/beam-ui/hooks/use-theme"
 
+// Shell renders Header + Footer by default
 function App() {
   const { theme, toggle } = useTheme()
   return (
-    <Card icon="auto_awesome" title="Hello" description="Welcome to Beam" ctaLabel="Get Started" ctaHref="/docs" />
+    <Shell>
+      <Button variant="primary">Get Started</Button>
+    </Shell>
   )
 }
+```
+
+### Panda CSS Setup
+
+```ts
+// panda.config.ts
+import { defineConfig } from "@pandacss/dev"
+import { beamPreset } from "@sunbeam/beam-ui/preset"
+
+export default defineConfig({
+  presets: [beamPreset],
+  include: ["./src/**/*.tsx"],
+  jsxFramework: "react",
+})
 ```
 
 ## Structure
@@ -50,22 +68,57 @@ npm run dev
 
 The showcase site runs at `http://localhost:5173` and demonstrates every token, component, and layout in the design system.
 
-## Package Exports
+## Build & Deploy
 
-- **UI Components** — Button, Badge, Card, CodeBlock, Callout, Tabs, Icon, SearchInput, StatBar, ModelRow, FeatureTile, CapabilityCard, TopicCard, BentoItem
-- **Shell Components** — Header, Footer, Sidebar, RightRail, Breadcrumbs
-- **Layouts** — DocsLayout, ApiLayout, FullwidthLayout
-- **Hooks** — useTheme (light/dark mode)
-- **Data** — Navigation types and default structures
-
-## Docker
+### 1. Build the showcase site
 
 ```bash
-docker build -t beam-design .
-docker run -p 8080:8080 beam-design
+cd app
+npm run build
 ```
 
-Serves the showcase site at `http://localhost:8080`.
+### 2. Docker build & push (via remote BuildKit)
+
+```bash
+docker buildx build \
+  --builder sunbeam-remote \
+  --platform linux/amd64 \
+  -t src.sunbeam.pt/studio/beam-ui:latest \
+  -t src.sunbeam.pt/studio/beam-ui:<version> \
+  --push .
+```
+
+### 3. Deploy to cluster
+
+```bash
+sunbeam platform apply devtools --context production
+```
+
+### 4. Commit, tag, bump & publish
+
+```bash
+git add -A && git commit -m "feat: release description"
+
+# Bump version in packages/beam-ui/package.json
+git add packages/beam-ui/package.json
+git commit -m "chore(release): bump @sunbeam/beam-ui to v<version>"
+
+git tag -a v<version> -m "Release v<version> — summary"
+git push origin mainline --tags
+
+# Publish to Gitea npm registry
+cd packages/beam-ui
+npm publish
+```
+
+## Package Exports
+
+- **UI Components** — 70+ components (Accordion, Badge, Button, Card, Charts, CodeBlock, CodeEditor, DiffViewer, Dialog, Kanban, MarkdownRenderer, NotificationCenter, Wizard, WorkItemList, and more)
+- **Shell Components** — Shell, Header, Footer, Sidebar, RightRail, Breadcrumbs
+- **Layouts** — DocsLayout, ApiLayout, FullwidthLayout, CreatorsLayout
+- **Hooks** — useTheme (light/dark mode with cross-domain cookie)
+- **Data** — Navigation types, status vocabularies, default structures
+- **Preset** — `beamPreset` for Panda CSS (tokens, semantic tokens, text styles)
 
 ## License
 

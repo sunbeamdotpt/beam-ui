@@ -141,9 +141,10 @@ const metaText = css({
 
 interface RightRailProps {
   items: Array<{ label: string; id: string }>;
+  lastUpdated?: string;
 }
 
-export function RightRail({ items }: RightRailProps) {
+export function RightRail({ items, lastUpdated }: RightRailProps) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
 
   // Intersection Observer — track which section heading is in view
@@ -269,10 +270,12 @@ export function RightRail({ items }: RightRailProps) {
       <hr className={divider} />
 
       {/* Meta */}
-      <div className={metaText}>
-        <Icon name="schedule" size={12} />
-        <span>Last updated</span>
-      </div>
+      {lastUpdated && (
+        <div className={metaText}>
+          <Icon name="schedule" size={12} />
+          <span>Last updated {lastUpdated}</span>
+        </div>
+      )}
     </aside>
   );
 }

@@ -17,31 +17,27 @@ const NOTIFICATION_ITEM_PROPS = [
 ];
 
 const NOTIFICATION_INTERFACE = [
-  { name: "id", type: "string", required: true, description: "Unique identifier for the notification." },
-  { name: "type", type: '"issue" | "pr" | "release" | "mention" | "review"', required: true, description: "Notification type, determines the icon shown." },
+  { name: "id", type: "string", required: true, description: "Unique identifier." },
+  { name: "icon", type: "string", required: false, description: "Material Symbol icon name. Use notificationIcons for suggestions." },
   { name: "title", type: "string", required: true, description: "Notification title text." },
-  { name: "repo", type: "string", required: true, description: "Repository name (e.g. \"sunbeam/core\")." },
-  { name: "timestamp", type: "string", required: true, description: "Human-readable timestamp string." },
+  { name: "group", type: "string", required: false, description: "Grouping key — notifications are grouped by this value." },
+  { name: "subtitle", type: "string", required: false, description: "Secondary text (sender, channel, etc.)." },
+  { name: "timestamp", type: "string", required: false, description: "Human-readable timestamp." },
   { name: "read", type: "boolean", required: true, description: "Whether the notification has been read." },
+  { name: "href", type: "string", required: false, description: "Optional action URL." },
+  { name: "meta", type: "Record<string, unknown>", required: false, description: "Any additional metadata." },
 ];
 
-interface Notification {
-  id: string;
-  type: "issue" | "pr" | "release" | "mention" | "review";
-  title: string;
-  repo: string;
-  timestamp: string;
-  read: boolean;
-}
+import type { Notification } from "@sunbeam/beam-ui/components/ui/notification-center";
 
 const INITIAL_NOTIFICATIONS: Notification[] = [
-  { id: "1", type: "issue", title: "Fix memory leak in worker pool", repo: "sunbeam/core", timestamp: "2 min ago", read: false },
-  { id: "2", type: "pr", title: "Add retry logic to API client", repo: "sunbeam/core", timestamp: "15 min ago", read: false },
-  { id: "3", type: "mention", title: "@you mentioned in design review", repo: "sunbeam/beam-ui", timestamp: "1 hour ago", read: false },
-  { id: "4", type: "review", title: "Review requested on #482", repo: "sunbeam/beam-ui", timestamp: "3 hours ago", read: true },
-  { id: "5", type: "release", title: "v2.4.0 published", repo: "sunbeam/sdk", timestamp: "5 hours ago", read: true },
-  { id: "6", type: "pr", title: "Update token generation pipeline", repo: "sunbeam/sdk", timestamp: "1 day ago", read: true },
-  { id: "7", type: "issue", title: "Dark mode contrast issues", repo: "sunbeam/beam-ui", timestamp: "2 days ago", read: false },
+  { id: "1", icon: "bug_report", title: "Fix memory leak in worker pool", group: "sunbeam/core", timestamp: "2 min ago", read: false },
+  { id: "2", icon: "merge", title: "Add retry logic to API client", group: "sunbeam/core", timestamp: "15 min ago", read: false },
+  { id: "3", icon: "alternate_email", title: "@you mentioned in design review", group: "sunbeam/beam-ui", subtitle: "Elena Rivera", timestamp: "1 hour ago", read: false },
+  { id: "4", icon: "rate_review", title: "Review requested on #482", group: "sunbeam/beam-ui", timestamp: "3 hours ago", read: true },
+  { id: "5", icon: "new_releases", title: "v2.4.0 published", group: "sunbeam/sdk", timestamp: "5 hours ago", read: true },
+  { id: "6", icon: "mail", title: "Weekly digest from Sunbeam", group: "Email", timestamp: "1 day ago", read: true },
+  { id: "7", icon: "event", title: "Design review in 30 minutes", group: "Calendar", timestamp: "Just now", read: false },
 ];
 
 export function NotificationCenterPage() {
@@ -64,8 +60,8 @@ export function NotificationCenterPage() {
       importPath='import { NotificationCenter } from "@sunbeam/beam-ui"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
-      <div className={previewBox}>
-        <p className={previewLabel}>Click the bell icon to open the notification center:</p>
+      <div className={css({ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px 32px", backgroundColor: "bg.card", marginBottom: "32px" })}>
+        <span className={css({ fontSize: "sm", color: "text.muted" })}>Click the bell icon to open →</span>
         <NotificationCenter
           notifications={notifications}
           onMarkRead={handleMarkRead}
@@ -107,8 +103,8 @@ export function NotificationCenterPage() {
         <h3 className={variantLabel}>All Read</h3>
         <NotificationCenter
           notifications={[
-            { id: "1", type: "pr", title: "Merged: Update deps", repo: "sunbeam/core", timestamp: "1 day ago", read: true },
-            { id: "2", type: "release", title: "v1.0.0 released", repo: "sunbeam/core", timestamp: "2 days ago", read: true },
+            { id: "1", icon: "merge", title: "Merged: Update deps", group: "sunbeam/core", timestamp: "1 day ago", read: true },
+            { id: "2", icon: "new_releases", title: "v1.0.0 released", group: "sunbeam/core", timestamp: "2 days ago", read: true },
           ]}
           onMarkRead={() => {}}
           onMarkAllRead={() => {}}
@@ -127,37 +123,37 @@ export function NotificationCenterPage() {
       <h4 className={subHeading}>Notification Interface</h4>
       <PropsTable props={NOTIFICATION_INTERFACE} />
 
-      <h4 className={subHeading}>Standalone Preview</h4>
-      <div className={previewBox}>
+      <h4 className={subHeading}>Standalone NotificationItem</h4>
+      <div className={standaloneBox}>
         <NotificationItem
-          notification={{ id: "s1", type: "pr", title: "Add retry logic to API client", repo: "sunbeam/core", timestamp: "15 min ago", read: false }}
+          notification={{ id: "s1", icon: "merge", title: "Add retry logic to API client", subtitle: "by elena", timestamp: "15 min ago", read: false }}
           onMarkRead={(id) => alert(`Marked ${id} as read`)}
         />
         <NotificationItem
-          notification={{ id: "s2", type: "release", title: "v2.4.0 published", repo: "sunbeam/sdk", timestamp: "5 hours ago", read: true }}
+          notification={{ id: "s2", icon: "new_releases", title: "v2.4.0 published", timestamp: "5 hours ago", read: true }}
+        />
+        <NotificationItem
+          notification={{ id: "s3", icon: "mail", title: "Weekly digest from Sunbeam", subtitle: "hello@sunbeam.pt", timestamp: "1 day ago", read: false }}
+          onMarkRead={(id) => alert(`Marked ${id} as read`)}
         />
       </div>
 
-      <CodeBlock
-        tabs={[{
-          label: "TSX",
-          content: (
-            <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}NotificationItem{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
-              {"\n"}
-              {"<"}<span className={syn.fn}>NotificationItem</span>{"\n"}
-              {"  "}<span className={syn.prop}>notification</span>={"{"}{"{ "}id: <span className={syn.string}>"1"</span>, type: <span className={syn.string}>"pr"</span>, title: <span className={syn.string}>"..."</span>, ...{" }"}{"}"}{"\n"}
-              {"  "}<span className={syn.prop}>onMarkRead</span>={"{"}handleMarkRead{"}"}{"\n"}
-              {"/>"}
-            </code></pre>
-          ),
-        }]}
-      />
+      <h4 className={subHeading}>Collapsible groups with unread counts</h4>
+      <div className={css({ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px 32px", backgroundColor: "bg.card", marginBottom: "32px" })}>
+        <span className={css({ fontSize: "sm", color: "text.muted" })}>Groups collapse with unread badges →</span>
+        <NotificationCenter
+          notifications={INITIAL_NOTIFICATIONS}
+          onMarkRead={() => {}}
+          onMarkAllRead={() => {}}
+          onClickNotification={(n) => alert(`Clicked: ${n.title}`)}
+          collapsibleGroups
+        />
+      </div>
     </ComponentPage>
   );
 }
 
-const previewBox = css({ display: "flex", flexDirection: "column", gap: "12px", padding: "32px", backgroundColor: "bg.card", marginBottom: "32px" });
+const standaloneBox = css({ backgroundColor: "bg.card", marginBottom: "32px", border: "1px solid", borderColor: "border.default" });
 const previewLabel = css({ fontSize: "14px", color: "text.secondary", fontFamily: "body", margin: 0 });
 const variantBlock = css({ marginBottom: "40px" });
 const variantLabel = css({ fontSize: "18px", fontWeight: "heading", color: "text.primary", textTransform: "capitalize", marginBottom: "12px" });

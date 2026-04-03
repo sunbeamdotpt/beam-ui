@@ -13,6 +13,7 @@ import { Portal } from "@ark-ui/react/portal";
 import { headerLinks, docsSidebar } from "../../data/navigation";
 import { useTheme } from "../../hooks/use-theme";
 import { Sidebar } from "./sidebar";
+import { ThemeToggle } from "../ui/theme-toggle";
 
 const header = css({
   position: "fixed",
@@ -26,7 +27,7 @@ const header = css({
   height: "64px",
   backdropFilter: "blur(12px)",
   borderBottom: "1px solid",
-  borderColor: "border.default",
+  borderColor: "border.subtle",
   bg: "bg.nav",
   shadow: "nav",
 });
@@ -307,7 +308,12 @@ const allNavItems = docsSidebar.flatMap((section) =>
   })
 );
 
-export function Header() {
+interface HeaderProps {
+  /** Show a theme toggle button (right-aligned). Defaults to true. */
+  showThemeToggle?: boolean;
+}
+
+export function Header({ showThemeToggle = true }: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggle } = useTheme();
@@ -391,7 +397,7 @@ export function Header() {
               Sunbeam Studios
             </Link>
             <nav className={nav}>
-              {headerLinks.map((link) => (
+              {location.pathname !== "/" && headerLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.href}
@@ -462,9 +468,7 @@ export function Header() {
                 </div>
               )}
             </div>
-            <button className={themeBtn} onClick={toggle} aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}>
-              <span className="material-symbols-outlined" style={theme === "dark" ? { color: "#ffd06a" } : undefined}>{theme === "light" ? "light_mode" : "dark_mode"}</span>
-            </button>
+            {showThemeToggle && <ThemeToggle />}
           </div>
         </div>
       </header>

@@ -88,7 +88,7 @@ export function LineChart({ data, lines, height = 300, className }: LineChartPro
           />
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)" }}
+            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
           />
           {lines.map((line, i) => (
             <Line
@@ -137,7 +137,7 @@ export function BarChart({ data, bars, height = 300, className }: BarChartProps)
           />
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)" }}
+            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
           />
           {bars.map((bar, i) => (
             <Bar
@@ -188,7 +188,7 @@ export function PieChart({ data, height = 300, donut = false, className }: PieCh
           </Pie>
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)" }}
+            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
           />
         </RPieChart>
       </ResponsiveContainer>
@@ -225,7 +225,7 @@ export function AreaChart({ data, areas, height = 300, className }: AreaChartPro
           />
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)" }}
+            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
           />
           {areas.map((area, i) => {
             const color = area.color ?? DEFAULT_COLORS[i % DEFAULT_COLORS.length];

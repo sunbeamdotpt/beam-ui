@@ -4,8 +4,19 @@ import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
 const PROPS = [
-  { name: "commits", type: "CommitNode[]", required: true, description: "Array of commit objects in reverse-chronological order. Each has hash, shortHash, message, author, date, parents[], and optional branch/tags." },
+  { name: "commits", type: "CommitNode[]", required: true, description: "Array of commit objects in reverse-chronological order." },
   { name: "className", type: "string", required: false, description: "Additional CSS class names." },
+];
+
+const NODE_PROPS = [
+  { name: "hash", type: "string", required: true, description: "Full commit hash." },
+  { name: "shortHash", type: "string", required: true, description: "Short hash for display (e.g., 7 chars)." },
+  { name: "message", type: "string", required: true, description: "Commit message (first line)." },
+  { name: "author", type: "string", required: true, description: "Commit author name." },
+  { name: "date", type: "string", required: true, description: "Relative date string (e.g., '2 hours ago')." },
+  { name: "parents", type: "string[]", required: true, description: "Array of parent commit hashes. Empty for initial commit. Multiple for merges." },
+  { name: "branch", type: "string", required: false, description: "Branch name shown as a badge. Determines lane assignment." },
+  { name: "tags", type: "string[]", required: false, description: "Tag names shown as badges next to the commit." },
 ];
 
 const SAMPLE_COMMITS = [
@@ -125,6 +136,8 @@ export function CommitGraphPage() {
 
       <SectionHeading id="props">Props</SectionHeading>
       <PropsTable props={PROPS} />
+      <h3 className={variantLabel}>CommitNode</h3>
+      <PropsTable props={NODE_PROPS} />
 
       <SectionHeading id="usage">Usage</SectionHeading>
       <CodeBlock
@@ -164,6 +177,16 @@ export function CommitGraphPage() {
         <p className={variantDesc}>
           Each branch is assigned a lane with a distinct color from the sunbeam palette.
           Merge commits show converging curves between lanes.
+        </p>
+      </div>
+
+      <div className={variantBlock}>
+        <h3 className={variantLabel}>Linear history (no branches)</h3>
+        <div className={previewBox}>
+          <CommitGraph commits={SAMPLE_COMMITS.filter((c) => c.branch === "main").map((c) => ({ ...c, parents: c.parents.slice(0, 1) }))} />
+        </div>
+        <p className={variantDesc}>
+          When all commits are on a single branch with single parents, the graph renders as a straight line.
         </p>
       </div>
     </ComponentPage>

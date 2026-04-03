@@ -3,10 +3,15 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { execFileSync } from "child_process";
 
-function generateLlmsDocs() {
+function generateBuildAssets() {
   return {
-    name: "generate-llms-docs",
+    name: "generate-build-assets",
     buildStart() {
+      try {
+        execFileSync("npx", ["tsx", "scripts/generate-build-info.ts"], { cwd: __dirname, stdio: "inherit" });
+      } catch (e) {
+        console.warn("Warning: failed to generate build info", e);
+      }
       try {
         execFileSync("npx", ["tsx", "scripts/generate-llms-txt.ts"], { cwd: __dirname, stdio: "inherit" });
       } catch (e) {
@@ -16,8 +21,20 @@ function generateLlmsDocs() {
   };
 }
 
+function getBuildLabel() {
+  try {
+    const commit = execFileSync("git", ["rev-parse", "--short", "HEAD"], { cwd: __dirname }).toString().trim();
+    let dirty = false;
+    try { execFileSync("git", ["diff", "--quiet"], { cwd: __dirname }); } catch { dirty = true; }
+    return `${commit}${dirty ? "+dirty" : ""}`;
+  } catch { return "dev"; }
+}
+
 export default defineConfig({
-  plugins: [generateLlmsDocs(), react()],
+  plugins: [generateBuildAssets(), react()],
+  define: {
+    __BUILD_LABEL__: JSON.stringify(getBuildLabel()),
+  },
   resolve: {
     alias: {
       "styled-system": resolve(__dirname, "styled-system"),

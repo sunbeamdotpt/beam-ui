@@ -9,7 +9,8 @@ const PROPS = [
   { name: "message", type: "string", required: true, description: "The text content of the toast." },
   { name: "variant", type: '"success" | "error" | "info"', required: false, description: 'Visual style variant. Defaults to "info".' },
   { name: "visible", type: "boolean", required: true, description: "Controls whether the toast is shown." },
-  { name: "onDismiss", type: "() => void", required: false, description: "Callback fired when the toast is dismissed or auto-hides after 3 seconds." },
+  { name: "onDismiss", type: "() => void", required: false, description: "Callback fired when the toast is dismissed or auto-hides after 4.5 seconds." },
+  { name: "onShow", type: "() => void", required: false, description: "Callback fired when the toast becomes visible. Useful for logging, analytics, or piping into the NotificationCenter." },
 ];
 
 type ToastVariant = "success" | "error" | "info";

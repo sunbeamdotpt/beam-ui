@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { footerSections } from "../../data/navigation";
 
+declare const __BUILD_LABEL__: string | undefined;
+
 const footer = css({
   bg: "sunbeam.black",
   borderTop: "4px solid",
@@ -44,6 +46,12 @@ const copyright = css({
   marginTop: "16px",
 });
 
+const buildLabel = css({
+  fontFamily: "mono",
+  fontSize: "10px",
+  opacity: 0.6,
+});
+
 const sectionCol = css({
   display: "flex",
   flexDirection: "column",
@@ -76,19 +84,37 @@ export function Footer() {
         <div className={brandCol}>
           <span className={brandName}>Sunbeam Studios</span>
           <p className={brandDesc}>
-            Portuguese warmth in every pixel. Built for the global developer
-            community.
+            Olá de Portugal. Built for creators.
           </p>
-          <p className={copyright}>&copy; 2026 Sunbeam Studios</p>
+          <p className={copyright}>
+            &copy; 2026 Sunbeam Studios
+            {typeof __BUILD_LABEL__ !== "undefined" && (
+              <span className={buildLabel}> · {__BUILD_LABEL__}</span>
+            )}
+          </p>
         </div>
         {footerSections.map((section) => (
           <div key={section.title} className={sectionCol}>
             <span className={sectionTitle}>{section.title}</span>
-            {section.links.map((link) => (
-              <Link key={link.label} to={link.href} className={sectionLink}>
-                {link.label}
-              </Link>
-            ))}
+            {section.links.map((link) => {
+              const isExternal = link.href.startsWith("http") || link.href.startsWith("mailto:");
+              if (isExternal) {
+                // Inject build version into mailto subject if present
+                const href = link.href.startsWith("mailto:") && typeof __BUILD_LABEL__ !== "undefined"
+                  ? link.href.replace("Question!", `${__BUILD_LABEL__} Question!`)
+                  : link.href;
+                return (
+                  <a key={link.label} href={href} className={sectionLink} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                    {link.label}
+                  </a>
+                );
+              }
+              return (
+                <Link key={link.label} to={link.href} className={sectionLink}>
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         ))}
       </div>
