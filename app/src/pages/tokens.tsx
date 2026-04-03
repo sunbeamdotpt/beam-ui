@@ -213,7 +213,7 @@ export function TokensPage() {
       {/* ===== GET STARTED ===== */}
       <section className={section}>
         <div className={sectionLabel}>GET STARTED</div>
-        <h2 className={sectionHeading}>Installation</h2>
+        <h2 className={sectionHeading}>Quickstart</h2>
         <p className={sectionDesc}>
           Add the Beam Design Language to your project and start building with the
           warm, expressive visual system of Sunbeam Studios.

@@ -8,11 +8,12 @@ COPY packages/ packages/
 COPY app/package.json app/panda.config.ts app/postcss.config.cjs app/tsconfig.json app/vite.config.ts app/index.html ./app/
 COPY app/src/ app/src/
 
-# Install from app dir — fresh install gets correct platform binaries
+# Install deps at root (workspace) and app level
+RUN npm install
 WORKDIR /build/app
 RUN npm install
 RUN npx panda codegen
-RUN npx vite build
+RUN NODE_OPTIONS="--max-old-space-size=4096" npx vite build
 
 # Stage 2: Get Caddy binary
 FROM caddy:2-alpine AS caddy

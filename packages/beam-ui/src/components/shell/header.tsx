@@ -384,7 +384,7 @@ export function Header() {
               aria-label="Open navigation"
             >
               <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>
-                hive
+                menu
               </span>
             </button>
             <Link to="/" className={brandLink}>
@@ -463,7 +463,7 @@ export function Header() {
               )}
             </div>
             <button className={themeBtn} onClick={toggle} aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}>
-              <span className="material-symbols-outlined">{theme === "light" ? "light_mode" : "dark_mode"}</span>
+              <span className="material-symbols-outlined" style={theme === "dark" ? { color: "#ffd06a" } : undefined}>{theme === "light" ? "light_mode" : "dark_mode"}</span>
             </button>
           </div>
         </div>

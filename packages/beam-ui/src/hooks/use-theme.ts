@@ -9,7 +9,9 @@ interface ThemeStore {
 
 const getInitial = (): Theme => {
   if (typeof window === "undefined") return "light";
-  return (localStorage.getItem("sunbeam-theme") as Theme) ?? "light";
+  const stored = localStorage.getItem("sunbeam-theme") as Theme | null;
+  if (stored) return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 };
 
 export const useTheme = create<ThemeStore>((set) => ({

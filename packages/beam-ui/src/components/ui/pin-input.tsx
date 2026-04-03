@@ -22,7 +22,8 @@ export function PinInput({
   mask = false,
   label,
 }: PinInputProps) {
-  const values = value.split("");
+  // Pad the value array so Ark always sees the right number of slots
+  const values = Array.from({ length }, (_, i) => value[i] ?? "");
 
   return (
     <PinInputRoot

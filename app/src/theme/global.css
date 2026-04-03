@@ -45,8 +45,13 @@ html {
   100% { background-position: 200% 0; }
 }
 
+pre, code, kbd, samp, .cm-editor, .cm-editor * {
+  font-family: 'Monaspace Argon', 'SF Mono', 'Fira Code', monospace !important;
+}
+
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined' !important;
 }
 
 /* ------------------------------------------------------------------ */

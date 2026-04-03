@@ -5,6 +5,7 @@ import { Badge } from "@sunbeam/beam-ui/components/ui/badge";
 import { Icon } from "@sunbeam/beam-ui/components/ui/icon";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { Callout } from "@sunbeam/beam-ui/components/ui/callout";
+import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";
 
 const TOC_ITEMS = [
   { label: "Built-in Features", id: "features" },
@@ -25,11 +26,13 @@ const page = css({
 });
 
 const title = css({
-  fontSize: "36px",
+  fontFamily: "heading",
+  fontSize: "48px",
   fontWeight: "display",
+  lineHeight: 0.95,
   color: "text.primary",
   letterSpacing: "-0.02em",
-  marginBottom: "12px",
+  marginBottom: "16px",
 });
 
 const subtitle = css({
@@ -209,6 +212,13 @@ export function AccessibilityPage() {
 
   return (
     <div className={page}>
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Foundations" },
+          { label: "Accessibility" },
+        ]}
+      />
       <h1 className={title}>Accessibility</h1>
       <p className={subtitle}>
         Beam Design Language is built for Section 508 compliance and WCAG 2.1 AA

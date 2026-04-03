@@ -15,15 +15,9 @@ const aside = css({
   bg: "bg.page",
   paddingInline: "24px",
   paddingBlock: "32px",
+  scrollbarWidth: "none",
   "&::-webkit-scrollbar": {
-    width: "6px",
-  },
-  "&::-webkit-scrollbar-track": {
-    background: "transparent",
-  },
-  "&::-webkit-scrollbar-thumb": {
-    bg: "sunshine.300",
-    borderRadius: "10px",
+    display: "none",
   },
 });
 
@@ -140,6 +134,42 @@ const childList = css({
   paddingBlock: "2px",
 });
 
+const childLabel = css({
+  display: "block",
+  paddingBlock: "6px",
+  paddingLeft: "16px",
+  fontSize: "13px",
+  fontWeight: "body",
+  color: "text.secondary",
+  textDecoration: "none",
+  borderLeft: "1px solid",
+  borderLeftColor: "border.subtle",
+  marginLeft: "-1px",
+  cursor: "pointer",
+  transition: "color 0.15s",
+  _hover: {
+    color: "accent",
+  },
+});
+
+const childLabelOnPage = css({
+  display: "block",
+  paddingBlock: "6px",
+  paddingLeft: "16px",
+  fontSize: "13px",
+  fontWeight: "body",
+  color: "text.primary",
+  textDecoration: "none",
+  borderLeft: "2px solid",
+  borderLeftColor: "sunbeam.orange",
+  marginLeft: "-1px",
+  cursor: "pointer",
+  transition: "color 0.15s",
+  _hover: {
+    color: "accent",
+  },
+});
+
 const childLink = css({
   display: "block",
   paddingBlock: "8px",
@@ -206,12 +236,19 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
       <CollapsibleContent>
         <div className={childList}>
           {item.children!.map((child) => {
-            const cActive = location.pathname === child.href;
+            const sameAsParent = child.href === item.href;
+            const onParentPage = sameAsParent && location.pathname === item.href;
+            const cActive = !sameAsParent && location.pathname === child.href;
             return (
               <Link
                 key={child.label}
                 to={child.href}
-                className={cActive ? childLinkActive : childLink}
+                className={
+                  cActive ? childLinkActive
+                    : onParentPage ? childLabelOnPage
+                    : sameAsParent ? childLabel
+                    : childLink
+                }
                 {...(cActive ? { "aria-current": "page" as const } : {})}
               >
                 {child.label}
