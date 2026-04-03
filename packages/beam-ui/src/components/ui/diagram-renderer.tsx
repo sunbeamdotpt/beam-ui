@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useId } from "react";
-import mermaid from "mermaid";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
+
+let mermaidModule: any = null;
 
 interface DiagramRendererProps {
   code: string;
@@ -18,9 +19,11 @@ export function DiagramRenderer({ code, className }: DiagramRendererProps) {
   const idRef = useRef(0);
   const { theme } = useTheme();
 
-  // Initialize mermaid with Beam theme colors
+  // Initialize mermaid lazily with Beam theme colors
   useEffect(() => {
-    mermaid.initialize({
+    import("mermaid").then((mod) => {
+      mermaidModule = mod.default;
+      mermaidModule.initialize({
       startOnLoad: false,
       theme: "base",
       themeVariables: theme === "dark" ? {
@@ -121,7 +124,8 @@ export function DiagramRenderer({ code, className }: DiagramRendererProps) {
         fontSize: "14px",
       },
     });
-    mermaidInitialized = true;
+      mermaidInitialized = true;
+    });
   }, [theme]);
 
   useEffect(() => {
@@ -131,8 +135,12 @@ export function DiagramRenderer({ code, className }: DiagramRendererProps) {
     const uniqueId = `mermaid-${reactId.replace(/:/g, "")}-${idRef.current}`;
 
     async function render() {
+      if (!mermaidModule) {
+        const mod = await import("mermaid");
+        mermaidModule = mod.default;
+      }
       try {
-        const { svg: renderedSvg } = await mermaid.render(uniqueId, code);
+        const { svg: renderedSvg } = await mermaidModule.render(uniqueId, code);
         if (!cancelled) {
           setSvg(renderedSvg);
           setError(null);

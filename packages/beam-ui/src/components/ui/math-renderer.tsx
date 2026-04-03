@@ -1,7 +1,5 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { css, cx } from "styled-system/css";
-import katex from "katex";
-import "katex/dist/katex.min.css";
 
 export interface MathRendererProps {
   math: string;
@@ -9,11 +7,28 @@ export interface MathRendererProps {
   className?: string;
 }
 
+let katexModule: typeof import("katex") | null = null;
+let katexCssLoaded = false;
+
 export function MathRenderer({ math, display = false, className }: MathRendererProps) {
+  const [ready, setReady] = useState(!!katexModule);
+
+  useEffect(() => {
+    if (katexModule) return;
+    Promise.all([
+      import("katex"),
+      katexCssLoaded ? Promise.resolve() : import("katex/dist/katex.min.css" as any).then(() => { katexCssLoaded = true; }),
+    ]).then(([mod]) => {
+      katexModule = mod;
+      setReady(true);
+    });
+  }, []);
+
   const rendered = useMemo(() => {
+    if (!katexModule) return { html: "", error: false };
     try {
       return {
-        html: katex.renderToString(math, {
+        html: katexModule.default.renderToString(math, {
           displayMode: display,
           throwOnError: false,
         }),
@@ -22,7 +37,7 @@ export function MathRenderer({ math, display = false, className }: MathRendererP
     } catch {
       return { html: "", error: true };
     }
-  }, [math, display]);
+  }, [math, display, ready]);
 
   if (rendered.error) {
     return (
