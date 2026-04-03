@@ -1,0 +1,72 @@
+import { type ReactNode } from "react";
+import {
+  ClipboardRoot,
+  ClipboardTrigger,
+  ClipboardControl,
+  ClipboardIndicator,
+} from "@ark-ui/react/clipboard";
+import { css } from "styled-system/css";
+import { Icon } from "./icon";
+
+interface ClipboardProps {
+  value: string;
+  children?: ReactNode;
+  timeout?: number;
+}
+
+export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps) {
+  return (
+    <ClipboardRoot value={value} timeout={timeout}>
+      {children ? (
+        <ClipboardTrigger asChild>{children}</ClipboardTrigger>
+      ) : (
+        <ClipboardControl className={control}>
+          <ClipboardTrigger className={trigger}>
+            <ClipboardIndicator
+              className={indicator}
+              copied={
+                <>
+                  <Icon name="check" size={16} />
+                  <span>Copied!</span>
+                </>
+              }
+            >
+              <Icon name="content_copy" size={16} />
+              <span>Copy</span>
+            </ClipboardIndicator>
+          </ClipboardTrigger>
+        </ClipboardControl>
+      )}
+    </ClipboardRoot>
+  );
+}
+
+const indicator = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "6px",
+});
+
+const control = css({
+  display: "inline-flex",
+});
+
+const trigger = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "6px",
+  padding: "8px 14px",
+  fontSize: "13px",
+  fontFamily: "body",
+  fontWeight: "button",
+  color: "text.primary",
+  backgroundColor: "bg.card",
+  border: "1px solid",
+  borderColor: "border.default",
+  cursor: "pointer",
+  transition: "all 0.15s ease",
+  _hover: {
+    borderColor: "sunbeam.orange",
+    color: "sunbeam.orange",
+  },
+});
