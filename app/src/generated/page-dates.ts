@@ -38,7 +38,7 @@ export const pageDates: Record<string, string> = {
   "/components/dropdown-menu": "Apr 3, 2026",
   "/components/editable": "Apr 3, 2026",
   "/components/empty-state": "Apr 3, 2026",
-  "/components/file-list": "Apr 3, 2026",
+  "/components/file-list": "Apr 4, 2026",
   "/components/file-upload": "Apr 3, 2026",
   "/components/forgot-password-form": "Apr 3, 2026",
   "/components/hover-card": "Apr 3, 2026",
