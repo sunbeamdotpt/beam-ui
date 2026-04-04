@@ -1,0 +1,19 @@
+# FewItems
+
+> FewItems component.
+
+> **[View rendered page](https://design.sunbeam.pt/shell/right-rail.story?render=html)** — see the live component with full DOM structure and styling.
+
+## Import
+```tsx
+import { FewItems } from "@sunbeam/beam-ui/components/shell/right-rail.story"
+```
+
+## Props
+_No documented props._
+
+## Also Exports
+- `ManyItems`
+
+---
+*Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

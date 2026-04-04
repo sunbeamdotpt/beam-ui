@@ -7,6 +7,8 @@ import { Footer } from "./footer";
 interface ShellProps {
   /** Show the theme toggle in the header. Defaults to true. */
   showThemeToggle?: boolean;
+  /** Extra elements rendered in the header's right group before the theme toggle */
+  headerActions?: ReactNode;
   /** Replace the default Header with a custom element. */
   header?: ReactNode;
   /** Replace the default Footer with a custom element. */
@@ -29,6 +31,7 @@ const mainStyle = css({
 
 export function Shell({
   showThemeToggle = true,
+  headerActions,
   header,
   footer,
   children,
@@ -36,7 +39,7 @@ export function Shell({
 }: ShellProps) {
   return (
     <div className={className ?? shellStyle}>
-      {header !== undefined ? header : <Header showThemeToggle={showThemeToggle} />}
+      {header !== undefined ? header : <Header showThemeToggle={showThemeToggle} actions={headerActions} />}
       <div className={mainStyle}>
         {children ?? <Outlet />}
       </div>

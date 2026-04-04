@@ -13,6 +13,7 @@ import { Header } from "@sunbeam/beam-ui/components/shell/header"
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | showThemeToggle | `boolean` | No | Show a theme toggle button (right-aligned). Defaults to true. |
+| actions | `ReactNode` | No | Extra elements rendered in the right group before the theme toggle |
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

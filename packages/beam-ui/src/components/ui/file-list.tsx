@@ -18,6 +18,8 @@ interface FileListProps {
   onSelect: (selected: Set<string>) => void;
   onOpen?: (item: FileItem) => void;
   layout?: "list" | "grid";
+  /** Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) */
+  font?: "body" | "mono";
   className?: string;
 }
 
@@ -114,6 +116,11 @@ const fileName = css({
   whiteSpace: "nowrap",
 });
 
+const fileNameMono = css({
+  fontFamily: "mono",
+  fontSize: "13px",
+});
+
 const fileMeta = css({
   fontSize: "12px",
   color: "text.muted",
@@ -132,6 +139,7 @@ function ListView({
   selected,
   onSelect,
   onOpen,
+  font = "body",
 }: Omit<FileListProps, "layout" | "className">) {
   const allSelected = items.length > 0 && items.every((i) => selected.has(i.id));
 
@@ -172,7 +180,7 @@ function ListView({
             size={18}
             className={item.type === "folder" ? folderIcon : fileIcon}
           />
-          <span className={fileName}>{item.name}</span>
+          <span className={cx(fileName, font === "mono" && fileNameMono)}>{item.name}</span>
           <span className={fileMeta}>{item.size ?? "—"}</span>
           <span className={fileMeta}>{item.modified ?? "—"}</span>
         </div>
@@ -228,11 +236,17 @@ const gridName = css({
   width: "100%",
 });
 
+const gridNameMono = css({
+  fontFamily: "mono",
+  fontSize: "11px",
+});
+
 function GridView({
   items,
   selected,
   onSelect,
   onOpen,
+  font = "body",
 }: Omit<FileListProps, "layout" | "className">) {
   const toggle = (id: string) => {
     const next = new Set(selected);
@@ -262,7 +276,7 @@ function GridView({
             size={40}
             className={item.type === "folder" ? folderIcon : fileIcon}
           />
-          <span className={gridName}>{item.name}</span>
+          <span className={cx(gridName, font === "mono" && gridNameMono)}>{item.name}</span>
         </div>
       ))}
     </div>
@@ -279,13 +293,14 @@ export function FileList({
   onSelect,
   onOpen,
   layout = "list",
+  font = "body",
   className,
 }: FileListProps) {
   const inner =
     layout === "grid" ? (
-      <GridView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} />
+      <GridView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} font={font} />
     ) : (
-      <ListView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} />
+      <ListView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} font={font} />
     );
 
   return <div className={className}>{inner}</div>;

@@ -11,6 +11,7 @@ const PROPS = [
   { name: "onSelect", type: "(selected: Set<string>) => void", required: true, description: "Callback when selection changes." },
   { name: "onOpen", type: "(item: FileItem) => void", required: false, description: "Callback on double-click (e.g., navigate into folder)." },
   { name: "layout", type: '"list" | "grid"', required: false, description: 'Display layout. Defaults to "list".' },
+  { name: "font", type: '"body" | "mono"', required: false, description: 'Font family for file names. "body" uses Ysabeau Infant, "mono" uses Monaspace Argon. Defaults to "body".' },
   { name: "className", type: "string", required: false, description: "Additional CSS class names." },
 ];
 
@@ -105,6 +106,33 @@ export function FileListPage() {
           selected={gridSelected}
           onSelect={setGridSelected}
           layout="grid"
+        />
+      </div>
+
+      <div className={variantBlock}>
+        <h3 className={variantLabel}>Monospace font</h3>
+        <p className={css({ fontSize: "14px", color: "text.secondary", marginBottom: "12px", lineHeight: 1.6 })}>
+          Use <code className={css({ fontFamily: "mono", fontSize: "xs" })}>font="mono"</code> for
+          code-oriented file browsers where filenames benefit from a monospaced typeface.
+        </p>
+        <div className={previewBox}>
+          <FileList
+            items={sampleItems}
+            selected={selected}
+            onSelect={setSelected}
+            font="mono"
+          />
+        </div>
+      </div>
+
+      <div className={variantBlock}>
+        <h3 className={variantLabel}>Monospace grid</h3>
+        <FileList
+          items={sampleItems.slice(0, 6)}
+          selected={gridSelected}
+          onSelect={setGridSelected}
+          layout="grid"
+          font="mono"
         />
       </div>
     </ComponentPage>

@@ -6,6 +6,7 @@ WORKDIR /build
 COPY package.json ./
 COPY packages/ packages/
 COPY app/package.json app/panda.config.ts app/postcss.config.cjs app/tsconfig.json app/vite.config.ts app/index.html ./app/
+COPY app/.storybook/ app/.storybook/
 COPY app/src/ app/src/
 COPY app/public/ app/public/
 
@@ -15,6 +16,8 @@ WORKDIR /build/app
 RUN npm install
 RUN npx panda codegen
 RUN NODE_OPTIONS="--max-old-space-size=4096" npx vite build
+RUN npx panda cssgen --outfile .storybook/panda.css
+RUN STORYBOOK_BASE=/storybook/ npx storybook build -o dist/storybook
 
 # Stage 2: Get Caddy binary
 FROM caddy:2-alpine AS caddy
@@ -40,13 +43,27 @@ COPY <<'EOF' /etc/caddy/Caddyfile
 	}
 	rewrite @aiDocs /docs/{re.comp.2}.md
 
-	file_server
-	try_files {path} /index.html
-	encode gzip
-	header {
-		X-Content-Type-Options nosniff
-		X-Frame-Options DENY
-		Referrer-Policy strict-origin-when-cross-origin
+	# Bare /storybook → redirect to /storybook/
+	redir /storybook /storybook/ 308
+
+	# Storybook is a separate SPA at /storybook/
+	handle_path /storybook/* {
+		root * /srv/storybook
+		try_files {path} /index.html
+		file_server
+		encode gzip
+	}
+
+	# Main site (everything else)
+	handle {
+		file_server
+		try_files {path} /index.html
+		encode gzip
+		header {
+			X-Content-Type-Options nosniff
+			X-Frame-Options DENY
+			Referrer-Policy strict-origin-when-cross-origin
+		}
 	}
 }
 EOF

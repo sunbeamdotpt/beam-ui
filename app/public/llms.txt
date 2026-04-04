@@ -16,13 +16,15 @@ npm install @sunbeam/beam-ui --registry=https://src.sunbeam.pt/api/packages/stud
 ## Stack
 React 19, Panda CSS, Ark UI v4, TypeScript
 
-## Components (86 total)
+## Components (171 total)
 
 ### UI Components
 - **Accordion** — Accordion component.  
   `import { Accordion } from "@sunbeam/beam-ui/components/ui/accordion"`
 - **ActivityHeatmap** — ActivityHeatmap component.  
   `import { ActivityHeatmap } from "@sunbeam/beam-ui/components/ui/activity-heatmap"`
+- **AllRead** — AllRead component.  
+  `import { AllRead } from "@sunbeam/beam-ui/components/ui/notification-center.story"`
 - **AssigneePicker** — AssigneePicker component.  
   `import { AssigneePicker } from "@sunbeam/beam-ui/components/ui/assignee-picker"`
 - **Avatar** — Avatar component.  
@@ -43,6 +45,8 @@ React 19, Panda CSS, Ark UI v4, TypeScript
   `import { Card } from "@sunbeam/beam-ui/components/ui/card"`
 - **Checkbox** — Checkbox component.  
   `import { Checkbox } from "@sunbeam/beam-ui/components/ui/checkbox"`
+- **Checked** — Checked component.  
+  `import { Checked } from "@sunbeam/beam-ui/components/ui/checkbox.story"`
 - **Clipboard** — Clipboard component.  
   `import { Clipboard } from "@sunbeam/beam-ui/components/ui/clipboard"`
 - **CodeBlock** — Content keyed by toggle combo, e.g. "Non-streaming|V2|Synchronous". Falls back to "default". */
@@ -123,28 +127,351 @@ function PillToggle({
   `import { CommitGraph } from "@sunbeam/beam-ui/components/ui/commit-graph"`
 - **ContextMenu** — ContextMenu component.  
   `import { ContextMenu } from "@sunbeam/beam-ui/components/ui/context-menu"`
+- **Counter** — Counter component.  
+  `import { Counter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter.story"`
+- **CustomTrigger** — CustomTrigger component.  
+  `import { CustomTrigger } from "@sunbeam/beam-ui/components/ui/clipboard.story"`
 - **DatePicker** — DatePicker component.  
   `import { DatePicker } from "@sunbeam/beam-ui/components/ui/date-picker"`
+- **Default** — Default component.  
+  `import { Default } from "@sunbeam/beam-ui/components/ui/progress-bar.story"`
+- **Default** — Default component.  
+  `import { Default } from "@sunbeam/beam-ui/components/ui/text-input.story"`
+- **DefaultVariant** — DefaultVariant component.  
+  `import { DefaultVariant } from "@sunbeam/beam-ui/components/ui/list.story"`
+- **DefaultVariant** — DefaultVariant component.  
+  `import { DefaultVariant } from "@sunbeam/beam-ui/components/ui/tabs.story"`
 - **DiagramRenderer** — DiagramRenderer component.  
   `import { DiagramRenderer } from "@sunbeam/beam-ui/components/ui/diagram-renderer"`
 - **Dialog** — Dialog component.  
   `import { Dialog } from "@sunbeam/beam-ui/components/ui/dialog"`
+- **Disabled** — Disabled component.  
+  `import { Disabled } from "@sunbeam/beam-ui/components/ui/combobox.story"`
+- **Disabled** — Disabled component.  
+  `import { Disabled } from "@sunbeam/beam-ui/components/ui/select.story"`
 - **DropdownMenu** — DropdownMenu component.  
   `import { DropdownMenu } from "@sunbeam/beam-ui/components/ui/dropdown-menu"`
 - **Editable** — Editable component.  
   `import { Editable } from "@sunbeam/beam-ui/components/ui/editable"`
+- **Empty** — Empty component.  
+  `import { Empty } from "@sunbeam/beam-ui/components/ui/activity-heatmap.story"`
+- **Empty** — Empty component.  
+  `import { Empty } from "@sunbeam/beam-ui/components/ui/editable.story"`
+- **Empty** — Empty component.  
+  `import { Empty } from "@sunbeam/beam-ui/components/ui/markdown-editor.story"`
+- **Empty** — Empty component.  
+  `import { Empty } from "@sunbeam/beam-ui/components/ui/reaction-picker.story"`
+- **Empty** — Empty component.  
+  `import { Empty } from "@sunbeam/beam-ui/components/ui/tags-input.story"`
+- **EmptyBoard** — EmptyBoard component.  
+  `import { EmptyBoard } from "@sunbeam/beam-ui/components/ui/kanban-board.story"`
+- **EmptySelected** — EmptySelected component.  
+  `import { EmptySelected } from "@sunbeam/beam-ui/components/ui/transfer-list.story"`
 - **EmptyState** — EmptyState component.  
   `import { EmptyState } from "@sunbeam/beam-ui/components/ui/empty-state"`
+- **Featured** — Featured component.  
+  `import { Featured } from "@sunbeam/beam-ui/components/ui/badge.story"`
 - **FeatureTile** — FeatureTile component.  
   `import { FeatureTile } from "@sunbeam/beam-ui/components/ui/feature-tile"`
-- **FileList** — FileList component.  
+- **FileList** — Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) */
+  font?: "body" | "mono";
+  className?: string;
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared                                                              */
+/* ------------------------------------------------------------------ */
+
+const checkboxOuter = css({
+  width: "18px",
+  height: "18px",
+  minWidth: "18px",
+  border: "1px solid",
+  borderColor: { base: "rgba(127,99,21,0.3)", _dark: "rgba(255,161,16,0.35)" },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
+  transition: "all 0.15s ease",
+});
+
+const checkboxChecked = css({
+  backgroundColor: "sunbeam.orange",
+  borderColor: "sunbeam.orange",
+  color: "white",
+});
+
+function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string }) {
+  return (
+    <div
+      role="checkbox"
+      aria-checked={checked}
+      aria-label={ariaLabel}
+      tabIndex={0}
+      className={cx(checkboxOuter, checked && checkboxChecked)}
+      onClick={(e) => { e.stopPropagation(); onChange(); }}
+      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
+    >
+      {checked && <Icon name="check" size={14} />}
+    </div>
+  );
+}
+
+function defaultIcon(item: FileItem) {
+  if (item.icon) return item.icon;
+  return item.type === "folder" ? "folder" : "description";
+}
+
+/* ------------------------------------------------------------------ */
+/* List layout                                                         */
+/* ------------------------------------------------------------------ */
+
+const listContainer = css({
+  display: "flex",
+  flexDirection: "column",
+});
+
+const listHeader = css({
+  display: "grid",
+  gridTemplateColumns: "32px 24px 1fr 100px 140px",
+  gap: "8px",
+  alignItems: "center",
+  padding: "8px 12px",
+  fontSize: "11px",
+  fontWeight: "button",
+  color: "text.muted",
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
+  borderBottom: "1px solid",
+  borderColor: "border.default",
+});
+
+const listRow = css({
+  display: "grid",
+  gridTemplateColumns: "32px 24px 1fr 100px 140px",
+  gap: "8px",
+  alignItems: "center",
+  padding: "8px 12px",
+  cursor: "pointer",
+  transition: "background 0.1s ease",
+  _hover: { backgroundColor: "bg.card" },
+  borderBottom: "1px solid",
+  borderColor: "border.subtle",
+});
+
+const listRowSelected = css({
+  backgroundColor: "rgba(250, 82, 15, 0.06)",
+});
+
+const fileName = css({
+  fontSize: "14px",
+  color: "text.primary",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
+
+const fileNameMono = css({
+  fontFamily: "mono",
+  fontSize: "13px",
+});
+
+const fileMeta = css({
+  fontSize: "12px",
+  color: "text.muted",
+});
+
+const fileIcon = css({
+  color: "text.secondary",
+});
+
+const folderIcon = css({
+  color: "sunbeam.orange",
+});
+
+function ListView({
+  items,
+  selected,
+  onSelect,
+  onOpen,
+  font = "body",
+}: Omit<FileListProps, "layout" | "className">) {
+  const allSelected = items.length > 0 && items.every((i) => selected.has(i.id));
+
+  const toggleAll = () => {
+    if (allSelected) {
+      onSelect(new Set());
+    } else {
+      onSelect(new Set(items.map((i) => i.id)));
+    }
+  };
+
+  const toggle = (id: string) => {
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    onSelect(next);
+  };
+
+  return (
+    <div className={listContainer} role="grid">
+      <div className={listHeader} role="row">
+        <Checkbox checked={allSelected} onChange={toggleAll} ariaLabel="Select all files" />
+        <span />
+        <span>Name</span>
+        <span>Size</span>
+        <span>Modified</span>
+      </div>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          role="row"
+          className={cx(listRow, selected.has(item.id) && listRowSelected)}
+          onDoubleClick={() => onOpen?.(item)}
+        >
+          <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+          <Icon
+            name={defaultIcon(item)}
+            size={18}
+            className={item.type === "folder" ? folderIcon : fileIcon}
+          />
+          <span className={cx(fileName, font === "mono" && fileNameMono)}>{item.name}</span>
+          <span className={fileMeta}>{item.size ?? "—"}</span>
+          <span className={fileMeta}>{item.modified ?? "—"}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Grid layout                                                         */
+/* ------------------------------------------------------------------ */
+
+const gridContainer = css({
+  display: "grid",
+  gridTemplateColumns: {
+    base: "repeat(auto-fill, minmax(120px, 1fr))",
+    md: "repeat(auto-fill, minmax(140px, 1fr))",
+  },
+  gap: "12px",
+});
+
+const gridCell = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "8px",
+  padding: "16px 8px",
+  cursor: "pointer",
+  position: "relative",
+  transition: "background 0.1s ease",
+  border: "1px solid transparent",
+  _hover: { backgroundColor: "bg.card" },
+});
+
+const gridCellSelected = css({
+  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  borderColor: "sunbeam.orange",
+});
+
+const gridCheckbox = css({
+  position: "absolute",
+  top: "8px",
+  left: "8px",
+});
+
+const gridName = css({
+  fontSize: "12px",
+  color: "text.primary",
+  textAlign: "center",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  width: "100%",
+});
+
+const gridNameMono = css({
+  fontFamily: "mono",
+  fontSize: "11px",
+});
+
+function GridView({
+  items,
+  selected,
+  onSelect,
+  onOpen,
+  font = "body",
+}: Omit<FileListProps, "layout" | "className">) {
+  const toggle = (id: string) => {
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    onSelect(next);
+  };
+
+  return (
+    <div className={gridContainer} role="listbox" aria-label="Files">
+      {items.map((item) => (
+        <div
+          key={item.id}
+          role="option"
+          aria-selected={selected.has(item.id)}
+          className={cx(gridCell, selected.has(item.id) && gridCellSelected)}
+          onClick={() => toggle(item.id)}
+          onDoubleClick={() => onOpen?.(item)}
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(item.id); } }}
+        >
+          <div className={gridCheckbox}>
+            <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+          </div>
+          <Icon
+            name={defaultIcon(item)}
+            size={40}
+            className={item.type === "folder" ? folderIcon : fileIcon}
+          />
+          <span className={cx(gridName, font === "mono" && gridNameMono)}>{item.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* FileList                                                            */
+/* ------------------------------------------------------------------  
   `import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"`
 - **FileUpload** — FileUpload component.  
   `import { FileUpload } from "@sunbeam/beam-ui/components/ui/file-upload"`
+- **Filled** — Filled component.  
+  `import { Filled } from "@sunbeam/beam-ui/components/ui/icon.story"`
+- **FirstPage** — FirstPage component.  
+  `import { FirstPage } from "@sunbeam/beam-ui/components/ui/pagination.story"`
+- **FirstStep** — FirstStep component.  
+  `import { FirstStep } from "@sunbeam/beam-ui/components/ui/steps.story"`
+- **FlatItems** — FlatItems component.  
+  `import { FlatItems } from "@sunbeam/beam-ui/components/ui/dropdown-menu.story"`
+- **FlatNodes** — FlatNodes component.  
+  `import { FlatNodes } from "@sunbeam/beam-ui/components/ui/tree-view.story"`
+- **FourDigit** — FourDigit component.  
+  `import { FourDigit } from "@sunbeam/beam-ui/components/ui/pin-input.story"`
+- **greet** — greet component.  
+  `import { greet } from "@sunbeam/beam-ui/components/ui/markdown-renderer.story"`
+- **GridLayout** — GridLayout component.  
+  `import { GridLayout } from "@sunbeam/beam-ui/components/ui/file-list.story"`
+- **Horizontal** — Horizontal component.  
+  `import { Horizontal } from "@sunbeam/beam-ui/components/ui/splitter.story"`
 - **HoverCard** — HoverCard component.  
   `import { HoverCard } from "@sunbeam/beam-ui/components/ui/hover-card"`
+- **HoverScrollbar** — HoverScrollbar component.  
+  `import { HoverScrollbar } from "@sunbeam/beam-ui/components/ui/scroll-area.story"`
 - **Icon** — Icon component.  
   `import { Icon } from "@sunbeam/beam-ui/components/ui/icon"`
+- **IconVariant** — IconVariant component.  
+  `import { IconVariant } from "@sunbeam/beam-ui/components/ui/theme-toggle.story"`
+- **Inline** — Inline component.  
+  `import { Inline } from "@sunbeam/beam-ui/components/ui/math-renderer.story"`
 - **KanbanCardDetail** — KanbanCardDetail component.  
   `import { KanbanCardDetail } from "@sunbeam/beam-ui/components/ui/kanban-card-detail"`
 - **KanbanCardView** — Standalone card display — usable outside the board (e.g., in lists, detail panels).  
@@ -153,12 +480,20 @@ function PillToggle({
   `import { Kbd } from "@sunbeam/beam-ui/components/ui/kbd"`
 - **LabelPicker** — LabelPicker component.  
   `import { LabelPicker } from "@sunbeam/beam-ui/components/ui/label-picker"`
+- **LargeVariant** — LargeVariant component.  
+  `import { LargeVariant } from "@sunbeam/beam-ui/components/ui/bento-item.story"`
+- **LinearHistory** — LinearHistory component.  
+  `import { LinearHistory } from "@sunbeam/beam-ui/components/ui/commit-graph.story"`
 - **LineChart** — LineChart component.  
   `import { LineChart } from "@sunbeam/beam-ui/components/ui/charts"`
+- **LineChartOnly** — LineChartOnly component.  
+  `import { LineChartOnly } from "@sunbeam/beam-ui/components/ui/charts.story"`
 - **List** — List component.  
   `import { List } from "@sunbeam/beam-ui/components/ui/list"`
 - **LoginForm** — LoginForm component.  
   `import { LoginForm } from "@sunbeam/beam-ui/components/ui/auth-form"`
+- **LowPerformance** — LowPerformance component.  
+  `import { LowPerformance } from "@sunbeam/beam-ui/components/ui/stat-bar.story"`
 - **MarkdownEditor** — MarkdownEditor component.  
   `import { MarkdownEditor } from "@sunbeam/beam-ui/components/ui/markdown-editor"`
 - **MarkdownRenderer** — MarkdownRenderer component.  
@@ -169,6 +504,16 @@ function PillToggle({
   `import { MilestonePicker } from "@sunbeam/beam-ui/components/ui/milestone-picker"`
 - **ModelRow** — ModelRow component.  
   `import { ModelRow } from "@sunbeam/beam-ui/components/ui/model-row"`
+- **ModifierKey** — ModifierKey component.  
+  `import { ModifierKey } from "@sunbeam/beam-ui/components/ui/kbd.story"`
+- **MultipleTabs** — MultipleTabs component.  
+  `import { MultipleTabs } from "@sunbeam/beam-ui/components/ui/code-block.story"`
+- **NoSelection** — NoSelection component.  
+  `import { NoSelection } from "@sunbeam/beam-ui/components/ui/assignee-picker.story"`
+- **NoSelection** — NoSelection component.  
+  `import { NoSelection } from "@sunbeam/beam-ui/components/ui/label-picker.story"`
+- **NoSelection** — NoSelection component.  
+  `import { NoSelection } from "@sunbeam/beam-ui/components/ui/milestone-picker.story"`
 - **NotificationItem** — Material Symbol icon name, or a ReactNode for custom icons */
   icon?: string;
   title: string;
@@ -229,6 +574,10 @@ export const notificationIcons = {
   `import { NotificationItem } from "@sunbeam/beam-ui/components/ui/notification-center"`
 - **NumberInput** — NumberInput component.  
   `import { NumberInput } from "@sunbeam/beam-ui/components/ui/number-input"`
+- **On** — On component.  
+  `import { On } from "@sunbeam/beam-ui/components/ui/switch.story"`
+- **OnTag** — OnTag component.  
+  `import { OnTag } from "@sunbeam/beam-ui/components/ui/branch-selector.story"`
 - **Pagination** — Pagination component.  
   `import { Pagination } from "@sunbeam/beam-ui/components/ui/pagination"`
 - **parseDiff** — parseDiff component.  
@@ -237,30 +586,68 @@ export const notificationIcons = {
   `import { PinInput } from "@sunbeam/beam-ui/components/ui/pin-input"`
 - **Popover** — Popover component.  
   `import { Popover } from "@sunbeam/beam-ui/components/ui/popover"`
+- **Pressed** — Pressed component.  
+  `import { Pressed } from "@sunbeam/beam-ui/components/ui/toggle.story"`
+- **Primary** — Primary component.  
+  `import { Primary } from "@sunbeam/beam-ui/components/ui/button.story"`
 - **ProgressBar** — ProgressBar component.  
   `import { ProgressBar } from "@sunbeam/beam-ui/components/ui/progress-bar"`
 - **RadioGroup** — RadioGroup component.  
   `import { RadioGroup } from "@sunbeam/beam-ui/components/ui/radio-group"`
 - **ReactionPicker** — ReactionPicker component.  
   `import { ReactionPicker } from "@sunbeam/beam-ui/components/ui/reaction-picker"`
+- **ReadOnly** — ReadOnly component.  
+  `import { ReadOnly } from "@sunbeam/beam-ui/components/ui/code-editor.story"`
+- **ReadOnly** — ReadOnly component.  
+  `import { ReadOnly } from "@sunbeam/beam-ui/components/ui/kanban-card-detail.story"`
 - **ScrollArea** — ScrollArea component.  
   `import { ScrollArea } from "@sunbeam/beam-ui/components/ui/scroll-area"`
 - **SearchInput** — SearchInput component.  
   `import { SearchInput } from "@sunbeam/beam-ui/components/ui/search-input"`
 - **Select** — Select component.  
   `import { Select } from "@sunbeam/beam-ui/components/ui/select"`
+- **SequenceDiagram** — SequenceDiagram component.  
+  `import { SequenceDiagram } from "@sunbeam/beam-ui/components/ui/diagram-renderer.story"`
+- **SignUp** — SignUp component.  
+  `import { SignUp } from "@sunbeam/beam-ui/components/ui/auth-form.story"`
+- **SimpleMenu** — SimpleMenu component.  
+  `import { SimpleMenu } from "@sunbeam/beam-ui/components/ui/context-menu.story"`
+- **Single** — Single component.  
+  `import { Single } from "@sunbeam/beam-ui/components/ui/accordion.story"`
+- **SingleCard** — SingleCard component.  
+  `import { SingleCard } from "@sunbeam/beam-ui/components/ui/capability-card.story"`
+- **SingleCard** — SingleCard component.  
+  `import { SingleCard } from "@sunbeam/beam-ui/components/ui/card.story"`
+- **SingleCard** — SingleCard component.  
+  `import { SingleCard } from "@sunbeam/beam-ui/components/ui/topic-card.story"`
+- **SingleComment** — SingleComment component.  
+  `import { SingleComment } from "@sunbeam/beam-ui/components/ui/comment-thread.story"`
+- **SingleFile** — SingleFile component.  
+  `import { SingleFile } from "@sunbeam/beam-ui/components/ui/file-upload.story"`
+- **SingleRow** — SingleRow component.  
+  `import { SingleRow } from "@sunbeam/beam-ui/components/ui/model-row.story"`
+- **SingleTile** — SingleTile component.  
+  `import { SingleTile } from "@sunbeam/beam-ui/components/ui/feature-tile.story"`
 - **Skeleton** — Skeleton component.  
   `import { Skeleton } from "@sunbeam/beam-ui/components/ui/skeleton"`
 - **Slider** — Slider component.  
   `import { Slider } from "@sunbeam/beam-ui/components/ui/slider"`
+- **Small** — Small component.  
+  `import { Small } from "@sunbeam/beam-ui/components/ui/avatar.story"`
+- **Small** — Small component.  
+  `import { Small } from "@sunbeam/beam-ui/components/ui/spinner.story"`
 - **Spinner** — Spinner component.  
   `import { Spinner } from "@sunbeam/beam-ui/components/ui/spinner"`
+- **SplitMode** — SplitMode component.  
+  `import { SplitMode } from "@sunbeam/beam-ui/components/ui/diff-viewer.story"`
 - **Splitter** — Splitter component.  
   `import { Splitter } from "@sunbeam/beam-ui/components/ui/splitter"`
 - **StatBar** — StatBar component.  
   `import { StatBar } from "@sunbeam/beam-ui/components/ui/stat-bar"`
 - **Steps** — Steps component.  
   `import { Steps } from "@sunbeam/beam-ui/components/ui/steps"`
+- **SuccessToast** — SuccessToast component.  
+  `import { SuccessToast } from "@sunbeam/beam-ui/components/ui/toast.story"`
 - **Switch** — Switch component.  
   `import { Switch } from "@sunbeam/beam-ui/components/ui/switch"`
 - **SyntaxHighlighter** — SyntaxHighlighter component.  
@@ -273,8 +660,12 @@ export const notificationIcons = {
   `import { TagsInput } from "@sunbeam/beam-ui/components/ui/tags-input"`
 - **TextInput** — TextInput component.  
   `import { TextInput } from "@sunbeam/beam-ui/components/ui/text-input"`
+- **TextVariant** — TextVariant component.  
+  `import { TextVariant } from "@sunbeam/beam-ui/components/ui/skeleton.story"`
 - **ThemeToggle** — ThemeToggle component.  
   `import { ThemeToggle } from "@sunbeam/beam-ui/components/ui/theme-toggle"`
+- **Tip** — Tip component.  
+  `import { Tip } from "@sunbeam/beam-ui/components/ui/callout.story"`
 - **Toast** — Toast component.  
   `import { Toast } from "@sunbeam/beam-ui/components/ui/toast"`
 - **Toggle** — Toggle component.  
@@ -285,10 +676,40 @@ export const notificationIcons = {
   `import { Tooltip } from "@sunbeam/beam-ui/components/ui/tooltip"`
 - **TopicCard** — TopicCard component.  
   `import { TopicCard } from "@sunbeam/beam-ui/components/ui/topic-card"`
+- **TopPosition** — TopPosition component.  
+  `import { TopPosition } from "@sunbeam/beam-ui/components/ui/tooltip.story"`
 - **TransferList** — TransferList component.  
   `import { TransferList } from "@sunbeam/beam-ui/components/ui/transfer-list"`
 - **TreeView** — TreeView component.  
   `import { TreeView } from "@sunbeam/beam-ui/components/ui/tree-view"`
+- **TwoItems** — TwoItems component.  
+  `import { TwoItems } from "@sunbeam/beam-ui/components/ui/toggle-group.story"`
+- **TwoSteps** — TwoSteps component.  
+  `import { TwoSteps } from "@sunbeam/beam-ui/components/ui/wizard.story"`
+- **UserProfile** — UserProfile component.  
+  `import { UserProfile } from "@sunbeam/beam-ui/components/ui/hover-card.story"`
+- **WithCustomClass** — WithCustomClass component.  
+  `import { WithCustomClass } from "@sunbeam/beam-ui/components/ui/search-input.story"`
+- **WithoutAction** — WithoutAction component.  
+  `import { WithoutAction } from "@sunbeam/beam-ui/components/ui/empty-state.story"`
+- **WithoutActions** — WithoutActions component.  
+  `import { WithoutActions } from "@sunbeam/beam-ui/components/ui/dialog.story"`
+- **WithoutLabel** — WithoutLabel component.  
+  `import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/color-picker.story"`
+- **WithoutLabel** — WithoutLabel component.  
+  `import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/date-picker.story"`
+- **WithoutLabel** — WithoutLabel component.  
+  `import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/number-input.story"`
+- **WithoutLabel** — WithoutLabel component.  
+  `import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/radio-group.story"`
+- **WithoutLabel** — WithoutLabel component.  
+  `import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/slider.story"`
+- **WithoutSelection** — WithoutSelection component.  
+  `import { WithoutSelection } from "@sunbeam/beam-ui/components/ui/table.story"`
+- **WithoutSelection** — WithoutSelection component.  
+  `import { WithoutSelection } from "@sunbeam/beam-ui/components/ui/work-item-list.story"`
+- **WithoutTitle** — WithoutTitle component.  
+  `import { WithoutTitle } from "@sunbeam/beam-ui/components/ui/popover.story"`
 - **Wizard** — If true, the Next button is disabled until the consumer sets it to false */
   isValid?: boolean;
 }
@@ -323,6 +744,8 @@ export interface WizardModalProps extends WizardProps {
 ### Shell
 - **Breadcrumbs** — Breadcrumbs component.  
   `import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs"`
+- **FewItems** — FewItems component.  
+  `import { FewItems } from "@sunbeam/beam-ui/components/shell/right-rail.story"`
 - **Footer** — Footer component.  
   `import { Footer } from "@sunbeam/beam-ui/components/shell/footer"`
 - **Header** — Header component.  
@@ -333,12 +756,26 @@ export interface WizardModalProps extends WizardProps {
   `import { Shell } from "@sunbeam/beam-ui/components/shell/shell"`
 - **Sidebar** — Sidebar component.  
   `import { Sidebar } from "@sunbeam/beam-ui/components/shell/sidebar"`
+- **SingleItem** — SingleItem component.  
+  `import { SingleItem } from "@sunbeam/beam-ui/components/shell/breadcrumbs.story"`
+- **SingleSection** — SingleSection component.  
+  `import { SingleSection } from "@sunbeam/beam-ui/components/shell/sidebar.story"`
+- **Standalone** — Standalone component.  
+  `import { Standalone } from "@sunbeam/beam-ui/components/shell/footer.story"`
+- **Standalone** — Standalone component.  
+  `import { Standalone } from "@sunbeam/beam-ui/components/shell/header.story"`
+- **WithoutThemeToggle** — WithoutThemeToggle component.  
+  `import { WithoutThemeToggle } from "@sunbeam/beam-ui/components/shell/shell.story"`
 
 ### Layouts
 - **ApiLayout** — ApiLayout component.  
   `import { ApiLayout } from "@sunbeam/beam-ui/components/layouts/api-layout"`
 - **FullwidthLayout** — FullwidthLayout component.  
   `import { FullwidthLayout } from "@sunbeam/beam-ui/components/layouts/fullwidth-layout"`
+- **Standalone** — Standalone component.  
+  `import { Standalone } from "@sunbeam/beam-ui/components/layouts/api-layout.story"`
+- **Standalone** — Standalone component.  
+  `import { Standalone } from "@sunbeam/beam-ui/components/layouts/fullwidth-layout.story"`
 - **useDocsContext** — useDocsContext component.  
   `import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout"`
 

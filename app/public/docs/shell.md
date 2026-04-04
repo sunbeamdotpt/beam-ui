@@ -13,6 +13,7 @@ import { Shell } from "@sunbeam/beam-ui/components/shell/shell"
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | showThemeToggle | `boolean` | No | Show the theme toggle in the header. Defaults to true. |
+| headerActions | `ReactNode` | No | Extra elements rendered in the header's right group before the theme toggle |
 | header | `ReactNode` | No | Replace the default Header with a custom element. |
 | footer | `ReactNode` | No | Replace the default Footer with a custom element. |
 | children | `ReactNode` | No | Content to render. If omitted, renders <Outlet /> for React Router. |

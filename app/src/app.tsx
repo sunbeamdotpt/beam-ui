@@ -112,6 +112,28 @@ import { SidebarPage } from "./pages/shell/sidebar-page";
 import { RightRailPage } from "./pages/shell/right-rail-page";
 import { BreadcrumbsPage } from "./pages/shell/breadcrumbs-page";
 
+import { css } from "styled-system/css";
+
+const storybookLinkStyle = css({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "36px",
+  height: "36px",
+  color: "text.muted",
+  textDecoration: "none",
+  transition: "color 0.15s ease",
+  _hover: { color: "sunbeam.orange" },
+});
+
+function StorybookLink() {
+  return (
+    <a href="/storybook" className={storybookLinkStyle} aria-label="Open Storybook" title="Storybook">
+      <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>auto_stories</span>
+    </a>
+  );
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
@@ -123,7 +145,7 @@ export function App() {
     <>
     <ScrollToTop />
     <Routes>
-      <Route element={<Shell />}>
+      <Route element={<Shell headerActions={<StorybookLink />} />}>
         {/* Full-width pages (no sidebar) */}
         <Route index element={<TokensPage />} />
         <Route path="community" element={<CreatorsPage />} />

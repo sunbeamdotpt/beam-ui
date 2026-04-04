@@ -21,7 +21,7 @@ npm install @sunbeam/beam-ui --registry=https://src.sunbeam.pt/api/packages/stud
 - **Elevation:** Golden shadow system with hover lift effects
 - **Accessibility:** Section 508 + WCAG 2.1 AA compliant, keyboard navigable, screen reader tested
 
-## Components (86 total)
+## Components (171 total)
 
 ### Accordion
 
@@ -52,6 +52,20 @@ import { ActivityHeatmap } from "@sunbeam/beam-ui/components/ui/activity-heatmap
 |------|------|----------|-------------|
 | data | `ActivityDay[]` | Yes |  |
 | className | `string` | No |  |
+
+---
+
+### AllRead
+
+> AllRead component.
+
+```tsx
+import { AllRead } from "@sunbeam/beam-ui/components/ui/notification-center.story"
+```
+
+_No documented props._
+
+**Also exports:** `EmptyNotifications`
 
 ---
 
@@ -234,6 +248,20 @@ import { Checkbox } from "@sunbeam/beam-ui/components/ui/checkbox"
 | disabled | `boolean` | No |  |
 | indeterminate | `boolean` | No |  |
 | className | `string` | No |  |
+
+---
+
+### Checked
+
+> Checked component.
+
+```tsx
+import { Checked } from "@sunbeam/beam-ui/components/ui/checkbox.story"
+```
+
+_No documented props._
+
+**Also exports:** `Unchecked`, `Disabled`, `DisabledChecked`, `Indeterminate`, `WithoutLabel`
 
 ---
 
@@ -444,6 +472,34 @@ import { ContextMenu } from "@sunbeam/beam-ui/components/ui/context-menu"
 
 ---
 
+### Counter
+
+> Counter component.
+
+```tsx
+import { Counter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithoutLineNumbers`, `PythonCode`, `WithHighlightedLines`, `LightTheme`, `DarkTheme`
+
+---
+
+### CustomTrigger
+
+> CustomTrigger component.
+
+```tsx
+import { CustomTrigger } from "@sunbeam/beam-ui/components/ui/clipboard.story"
+```
+
+_No documented props._
+
+**Also exports:** `LongValue`
+
+---
+
 ### DatePicker
 
 > DatePicker component.
@@ -460,6 +516,62 @@ import { DatePicker } from "@sunbeam/beam-ui/components/ui/date-picker"
 | placeholder | `string` | No |  |
 | disabled | `boolean` | No |  |
 | className | `string` | No |  |
+
+---
+
+### Default
+
+> Default component.
+
+```tsx
+import { Default } from "@sunbeam/beam-ui/components/ui/progress-bar.story"
+```
+
+_No documented props._
+
+**Also exports:** `Success`, `Error`, `SmallSize`, `MediumSize`, `SmallDefault`, `SmallSuccess`, `SmallError`, `MediumDefault`, `MediumSuccess`, `MediumError`, `WithoutLabel`, `Empty`, `Full`
+
+---
+
+### Default
+
+> Default component.
+
+```tsx
+import { Default } from "@sunbeam/beam-ui/components/ui/text-input.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithError`, `Disabled`, `Password`, `EmailType`, `NumberType`, `TextType`
+
+---
+
+### DefaultVariant
+
+> DefaultVariant component.
+
+```tsx
+import { DefaultVariant } from "@sunbeam/beam-ui/components/ui/list.story"
+```
+
+_No documented props._
+
+**Also exports:** `CompactVariant`, `BorderedVariant`, `Ordered`, `Unordered`, `WithDescriptions`, `WithIcons`, `OrderedCompact`, `OrderedBordered`
+
+---
+
+### DefaultVariant
+
+> DefaultVariant component.
+
+```tsx
+import { DefaultVariant } from "@sunbeam/beam-ui/components/ui/tabs.story"
+```
+
+_No documented props._
+
+**Also exports:** `DarkVariant`
 
 ---
 
@@ -496,6 +608,34 @@ import { Dialog } from "@sunbeam/beam-ui/components/ui/dialog"
 
 ---
 
+### Disabled
+
+> Disabled component.
+
+```tsx
+import { Disabled } from "@sunbeam/beam-ui/components/ui/combobox.story"
+```
+
+_No documented props._
+
+**Also exports:** `EmptyState`
+
+---
+
+### Disabled
+
+> Disabled component.
+
+```tsx
+import { Disabled } from "@sunbeam/beam-ui/components/ui/select.story"
+```
+
+_No documented props._
+
+**Also exports:** `CustomPlaceholder`, `Default`, `ManyOptions`
+
+---
+
 ### DropdownMenu
 
 > DropdownMenu component.
@@ -529,6 +669,104 @@ import { Editable } from "@sunbeam/beam-ui/components/ui/editable"
 
 ---
 
+### Empty
+
+> Empty component.
+
+```tsx
+import { Empty } from "@sunbeam/beam-ui/components/ui/activity-heatmap.story"
+```
+
+_No documented props._
+
+**Also exports:** `HighActivity`
+
+---
+
+### Empty
+
+> Empty component.
+
+```tsx
+import { Empty } from "@sunbeam/beam-ui/components/ui/editable.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithLongText`
+
+---
+
+### Empty
+
+> Empty component.
+
+```tsx
+import { Empty } from "@sunbeam/beam-ui/components/ui/markdown-editor.story"
+```
+
+_No documented props._
+
+**Also exports:** `TallEditor`
+
+---
+
+### Empty
+
+> Empty component.
+
+```tsx
+import { Empty } from "@sunbeam/beam-ui/components/ui/reaction-picker.story"
+```
+
+_No documented props._
+
+**Also exports:** `ManyReactions`
+
+---
+
+### Empty
+
+> Empty component.
+
+```tsx
+import { Empty } from "@sunbeam/beam-ui/components/ui/tags-input.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithMax`, `WithoutLabel`
+
+---
+
+### EmptyBoard
+
+> EmptyBoard component.
+
+```tsx
+import { EmptyBoard } from "@sunbeam/beam-ui/components/ui/kanban-board.story"
+```
+
+_No documented props._
+
+**Also exports:** `SingleColumn`
+
+---
+
+### EmptySelected
+
+> EmptySelected component.
+
+```tsx
+import { EmptySelected } from "@sunbeam/beam-ui/components/ui/transfer-list.story"
+```
+
+_No documented props._
+
+**Also exports:** `AllSelected`
+
+---
+
 ### EmptyState
 
 > EmptyState component.
@@ -543,6 +781,20 @@ import { EmptyState } from "@sunbeam/beam-ui/components/ui/empty-state"
 | title | `string` | Yes |  |
 | description | `string` | No |  |
 | action | `ReactNode` | No |  |
+
+---
+
+### Featured
+
+> Featured component.
+
+```tsx
+import { Featured } from "@sunbeam/beam-ui/components/ui/badge.story"
+```
+
+_No documented props._
+
+**Also exports:** `Premier`, `Verified`, `Partner`, `Community`, `Stable`, `New`, `Beta`, `Preview`, `Experimental`, `Deprecated`, `Open`, `Draft`, `Review`, `Approved`, `Merged`, `Closed`, `Revision`, `Critical`, `High`, `Medium`, `Low`, `Section`, `AllTier`, `AllReleaseStage`, `AllWorkStatus`, `AllPriority`
 
 ---
 
@@ -564,7 +816,274 @@ import { FeatureTile } from "@sunbeam/beam-ui/components/ui/feature-tile"
 
 ### FileList
 
-> FileList component.
+> Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) */
+  font?: "body" | "mono";
+  className?: string;
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared                                                              */
+/* ------------------------------------------------------------------ */
+
+const checkboxOuter = css({
+  width: "18px",
+  height: "18px",
+  minWidth: "18px",
+  border: "1px solid",
+  borderColor: { base: "rgba(127,99,21,0.3)", _dark: "rgba(255,161,16,0.35)" },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
+  transition: "all 0.15s ease",
+});
+
+const checkboxChecked = css({
+  backgroundColor: "sunbeam.orange",
+  borderColor: "sunbeam.orange",
+  color: "white",
+});
+
+function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string }) {
+  return (
+    <div
+      role="checkbox"
+      aria-checked={checked}
+      aria-label={ariaLabel}
+      tabIndex={0}
+      className={cx(checkboxOuter, checked && checkboxChecked)}
+      onClick={(e) => { e.stopPropagation(); onChange(); }}
+      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
+    >
+      {checked && <Icon name="check" size={14} />}
+    </div>
+  );
+}
+
+function defaultIcon(item: FileItem) {
+  if (item.icon) return item.icon;
+  return item.type === "folder" ? "folder" : "description";
+}
+
+/* ------------------------------------------------------------------ */
+/* List layout                                                         */
+/* ------------------------------------------------------------------ */
+
+const listContainer = css({
+  display: "flex",
+  flexDirection: "column",
+});
+
+const listHeader = css({
+  display: "grid",
+  gridTemplateColumns: "32px 24px 1fr 100px 140px",
+  gap: "8px",
+  alignItems: "center",
+  padding: "8px 12px",
+  fontSize: "11px",
+  fontWeight: "button",
+  color: "text.muted",
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
+  borderBottom: "1px solid",
+  borderColor: "border.default",
+});
+
+const listRow = css({
+  display: "grid",
+  gridTemplateColumns: "32px 24px 1fr 100px 140px",
+  gap: "8px",
+  alignItems: "center",
+  padding: "8px 12px",
+  cursor: "pointer",
+  transition: "background 0.1s ease",
+  _hover: { backgroundColor: "bg.card" },
+  borderBottom: "1px solid",
+  borderColor: "border.subtle",
+});
+
+const listRowSelected = css({
+  backgroundColor: "rgba(250, 82, 15, 0.06)",
+});
+
+const fileName = css({
+  fontSize: "14px",
+  color: "text.primary",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
+
+const fileNameMono = css({
+  fontFamily: "mono",
+  fontSize: "13px",
+});
+
+const fileMeta = css({
+  fontSize: "12px",
+  color: "text.muted",
+});
+
+const fileIcon = css({
+  color: "text.secondary",
+});
+
+const folderIcon = css({
+  color: "sunbeam.orange",
+});
+
+function ListView({
+  items,
+  selected,
+  onSelect,
+  onOpen,
+  font = "body",
+}: Omit<FileListProps, "layout" | "className">) {
+  const allSelected = items.length > 0 && items.every((i) => selected.has(i.id));
+
+  const toggleAll = () => {
+    if (allSelected) {
+      onSelect(new Set());
+    } else {
+      onSelect(new Set(items.map((i) => i.id)));
+    }
+  };
+
+  const toggle = (id: string) => {
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    onSelect(next);
+  };
+
+  return (
+    <div className={listContainer} role="grid">
+      <div className={listHeader} role="row">
+        <Checkbox checked={allSelected} onChange={toggleAll} ariaLabel="Select all files" />
+        <span />
+        <span>Name</span>
+        <span>Size</span>
+        <span>Modified</span>
+      </div>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          role="row"
+          className={cx(listRow, selected.has(item.id) && listRowSelected)}
+          onDoubleClick={() => onOpen?.(item)}
+        >
+          <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+          <Icon
+            name={defaultIcon(item)}
+            size={18}
+            className={item.type === "folder" ? folderIcon : fileIcon}
+          />
+          <span className={cx(fileName, font === "mono" && fileNameMono)}>{item.name}</span>
+          <span className={fileMeta}>{item.size ?? "—"}</span>
+          <span className={fileMeta}>{item.modified ?? "—"}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Grid layout                                                         */
+/* ------------------------------------------------------------------ */
+
+const gridContainer = css({
+  display: "grid",
+  gridTemplateColumns: {
+    base: "repeat(auto-fill, minmax(120px, 1fr))",
+    md: "repeat(auto-fill, minmax(140px, 1fr))",
+  },
+  gap: "12px",
+});
+
+const gridCell = css({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "8px",
+  padding: "16px 8px",
+  cursor: "pointer",
+  position: "relative",
+  transition: "background 0.1s ease",
+  border: "1px solid transparent",
+  _hover: { backgroundColor: "bg.card" },
+});
+
+const gridCellSelected = css({
+  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  borderColor: "sunbeam.orange",
+});
+
+const gridCheckbox = css({
+  position: "absolute",
+  top: "8px",
+  left: "8px",
+});
+
+const gridName = css({
+  fontSize: "12px",
+  color: "text.primary",
+  textAlign: "center",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  width: "100%",
+});
+
+const gridNameMono = css({
+  fontFamily: "mono",
+  fontSize: "11px",
+});
+
+function GridView({
+  items,
+  selected,
+  onSelect,
+  onOpen,
+  font = "body",
+}: Omit<FileListProps, "layout" | "className">) {
+  const toggle = (id: string) => {
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    onSelect(next);
+  };
+
+  return (
+    <div className={gridContainer} role="listbox" aria-label="Files">
+      {items.map((item) => (
+        <div
+          key={item.id}
+          role="option"
+          aria-selected={selected.has(item.id)}
+          className={cx(gridCell, selected.has(item.id) && gridCellSelected)}
+          onClick={() => toggle(item.id)}
+          onDoubleClick={() => onOpen?.(item)}
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(item.id); } }}
+        >
+          <div className={gridCheckbox}>
+            <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+          </div>
+          <Icon
+            name={defaultIcon(item)}
+            size={40}
+            className={item.type === "folder" ? folderIcon : fileIcon}
+          />
+          <span className={cx(gridName, font === "mono" && gridNameMono)}>{item.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* FileList                                                            */
+/* ------------------------------------------------------------------
 
 ```tsx
 import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"
@@ -577,6 +1096,7 @@ import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"
 | onSelect | `(selected: Set<string>) => void` | Yes |  |
 | onOpen | `(item: FileItem) => void` | No |  |
 | layout | `"list" | "grid"` | No |  |
+| font | `"body" | "mono"` | No | Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) |
 | className | `string` | No |  |
 
 ---
@@ -599,6 +1119,132 @@ import { FileUpload } from "@sunbeam/beam-ui/components/ui/file-upload"
 
 ---
 
+### Filled
+
+> Filled component.
+
+```tsx
+import { Filled } from "@sunbeam/beam-ui/components/ui/icon.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithLabel`, `Large`, `Small`, `CustomSize`
+
+---
+
+### FirstPage
+
+> FirstPage component.
+
+```tsx
+import { FirstPage } from "@sunbeam/beam-ui/components/ui/pagination.story"
+```
+
+_No documented props._
+
+**Also exports:** `LastPage`, `WithPageSize`
+
+---
+
+### FirstStep
+
+> FirstStep component.
+
+```tsx
+import { FirstStep } from "@sunbeam/beam-ui/components/ui/steps.story"
+```
+
+_No documented props._
+
+**Also exports:** `LastStep`, `TwoSteps`
+
+---
+
+### FlatItems
+
+> FlatItems component.
+
+```tsx
+import { FlatItems } from "@sunbeam/beam-ui/components/ui/dropdown-menu.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithDisabledItem`
+
+---
+
+### FlatNodes
+
+> FlatNodes component.
+
+```tsx
+import { FlatNodes } from "@sunbeam/beam-ui/components/ui/tree-view.story"
+```
+
+_No documented props._
+
+**Also exports:** `DeepNesting`
+
+---
+
+### FourDigit
+
+> FourDigit component.
+
+```tsx
+import { FourDigit } from "@sunbeam/beam-ui/components/ui/pin-input.story"
+```
+
+_No documented props._
+
+**Also exports:** `SixDigit`, `Masked`
+
+---
+
+### greet
+
+> greet component.
+
+```tsx
+import { greet } from "@sunbeam/beam-ui/components/ui/markdown-renderer.story"
+```
+
+_No documented props._
+
+**Also exports:** `SimpleText`, `CodeOnly`, `TableContent`
+
+---
+
+### GridLayout
+
+> GridLayout component.
+
+```tsx
+import { GridLayout } from "@sunbeam/beam-ui/components/ui/file-list.story"
+```
+
+_No documented props._
+
+**Also exports:** `BodyFont`, `ListLayout`, `MonoFont`, `GridMonoFont`, `EmptyList`
+
+---
+
+### Horizontal
+
+> Horizontal component.
+
+```tsx
+import { Horizontal } from "@sunbeam/beam-ui/components/ui/splitter.story"
+```
+
+_No documented props._
+
+**Also exports:** `Vertical`
+
+---
+
 ### HoverCard
 
 > HoverCard component.
@@ -612,6 +1258,20 @@ import { HoverCard } from "@sunbeam/beam-ui/components/ui/hover-card"
 | trigger | `ReactNode` | Yes |  |
 | children | `ReactNode` | Yes |  |
 | className | `string` | No |  |
+
+---
+
+### HoverScrollbar
+
+> HoverScrollbar component.
+
+```tsx
+import { HoverScrollbar } from "@sunbeam/beam-ui/components/ui/scroll-area.story"
+```
+
+_No documented props._
+
+**Also exports:** `Horizontal`, `AutoScrollbar`, `VisibleScrollbar`, `VerticalDirection`, `BothDirections`
 
 ---
 
@@ -630,6 +1290,34 @@ import { Icon } from "@sunbeam/beam-ui/components/ui/icon"
 | filled | `boolean` | No |  |
 | className | `string` | No |  |
 | label | `string` | No | When provided, the icon is treated as meaningful: role="img" + aria-label. Otherwise aria-hidden="true". |
+
+---
+
+### IconVariant
+
+> IconVariant component.
+
+```tsx
+import { IconVariant } from "@sunbeam/beam-ui/components/ui/theme-toggle.story"
+```
+
+_No documented props._
+
+**Also exports:** `SwitchVariant`, `PillVariant`
+
+---
+
+### Inline
+
+> Inline component.
+
+```tsx
+import { Inline } from "@sunbeam/beam-ui/components/ui/math-renderer.story"
+```
+
+_No documented props._
+
+**Also exports:** `DisplayMode`, `Matrix`
 
 ---
 
@@ -706,6 +1394,34 @@ import { LabelPicker } from "@sunbeam/beam-ui/components/ui/label-picker"
 
 ---
 
+### LargeVariant
+
+> LargeVariant component.
+
+```tsx
+import { LargeVariant } from "@sunbeam/beam-ui/components/ui/bento-item.story"
+```
+
+_No documented props._
+
+**Also exports:** `HorizontalVariant`, `SmallVariant`
+
+---
+
+### LinearHistory
+
+> LinearHistory component.
+
+```tsx
+import { LinearHistory } from "@sunbeam/beam-ui/components/ui/commit-graph.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithTags`
+
+---
+
 ### LineChart
 
 > LineChart component.
@@ -721,6 +1437,20 @@ import { LineChart } from "@sunbeam/beam-ui/components/ui/charts"
 | color | `string` | No |  |
 
 **Also exports:** `BarChart`, `PieChart`, `AreaChart`
+
+---
+
+### LineChartOnly
+
+> LineChartOnly component.
+
+```tsx
+import { LineChartOnly } from "@sunbeam/beam-ui/components/ui/charts.story"
+```
+
+_No documented props._
+
+**Also exports:** `BarChartOnly`, `PieChartExample`, `DonutChart`, `AreaChartExample`
 
 ---
 
@@ -757,6 +1487,20 @@ import { LoginForm } from "@sunbeam/beam-ui/components/ui/auth-form"
 | loading | `boolean` | No |  |
 
 **Also exports:** `SignUpForm`, `ForgotPasswordForm`, `TwoFactorForm`
+
+---
+
+### LowPerformance
+
+> LowPerformance component.
+
+```tsx
+import { LowPerformance } from "@sunbeam/beam-ui/components/ui/stat-bar.story"
+```
+
+_No documented props._
+
+**Also exports:** `Multimodal`
 
 ---
 
@@ -843,6 +1587,76 @@ import { ModelRow } from "@sunbeam/beam-ui/components/ui/model-row"
 | version | `string` | Yes |  |
 | description | `string` | Yes |  |
 | href | `string` | No |  |
+
+---
+
+### ModifierKey
+
+> ModifierKey component.
+
+```tsx
+import { ModifierKey } from "@sunbeam/beam-ui/components/ui/kbd.story"
+```
+
+_No documented props._
+
+**Also exports:** `Shortcut`, `ArrowKeys`, `WindowsPlatform`, `LinuxPlatform`, `MacPlatform`
+
+---
+
+### MultipleTabs
+
+> MultipleTabs component.
+
+```tsx
+import { MultipleTabs } from "@sunbeam/beam-ui/components/ui/code-block.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithStreamToggle`
+
+---
+
+### NoSelection
+
+> NoSelection component.
+
+```tsx
+import { NoSelection } from "@sunbeam/beam-ui/components/ui/assignee-picker.story"
+```
+
+_No documented props._
+
+**Also exports:** `MultipleSelected`
+
+---
+
+### NoSelection
+
+> NoSelection component.
+
+```tsx
+import { NoSelection } from "@sunbeam/beam-ui/components/ui/label-picker.story"
+```
+
+_No documented props._
+
+**Also exports:** `MultipleSelected`
+
+---
+
+### NoSelection
+
+> NoSelection component.
+
+```tsx
+import { NoSelection } from "@sunbeam/beam-ui/components/ui/milestone-picker.story"
+```
+
+_No documented props._
+
+**Also exports:** `SingleOption`
 
 ---
 
@@ -944,6 +1758,34 @@ import { NumberInput } from "@sunbeam/beam-ui/components/ui/number-input"
 
 ---
 
+### On
+
+> On component.
+
+```tsx
+import { On } from "@sunbeam/beam-ui/components/ui/switch.story"
+```
+
+_No documented props._
+
+**Also exports:** `Off`, `Disabled`, `DisabledChecked`, `WithoutLabel`
+
+---
+
+### OnTag
+
+> OnTag component.
+
+```tsx
+import { OnTag } from "@sunbeam/beam-ui/components/ui/branch-selector.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithoutCreateBranch`
+
+---
+
 ### Pagination
 
 > Pagination component.
@@ -1018,6 +1860,34 @@ import { Popover } from "@sunbeam/beam-ui/components/ui/popover"
 
 ---
 
+### Pressed
+
+> Pressed component.
+
+```tsx
+import { Pressed } from "@sunbeam/beam-ui/components/ui/toggle.story"
+```
+
+_No documented props._
+
+**Also exports:** `Unpressed`
+
+---
+
+### Primary
+
+> Primary component.
+
+```tsx
+import { Primary } from "@sunbeam/beam-ui/components/ui/button.story"
+```
+
+_No documented props._
+
+**Also exports:** `Dark`, `Cream`, `Ghost`, `Text`, `Disabled`, `DisabledDark`, `DisabledCream`, `DisabledGhost`, `AsLink`, `SubmitType`, `ResetType`
+
+---
+
 ### ProgressBar
 
 > ProgressBar component.
@@ -1067,6 +1937,34 @@ import { ReactionPicker } from "@sunbeam/beam-ui/components/ui/reaction-picker"
 | onToggle | `(emoji: string) => void` | Yes |  |
 | onAdd | `(emoji: string) => void` | Yes |  |
 | className | `string` | No |  |
+
+---
+
+### ReadOnly
+
+> ReadOnly component.
+
+```tsx
+import { ReadOnly } from "@sunbeam/beam-ui/components/ui/code-editor.story"
+```
+
+_No documented props._
+
+**Also exports:** `NoLineNumbers`, `PythonLanguage`, `WithPlaceholder`
+
+---
+
+### ReadOnly
+
+> ReadOnly component.
+
+```tsx
+import { ReadOnly } from "@sunbeam/beam-ui/components/ui/kanban-card-detail.story"
+```
+
+_No documented props._
+
+**Also exports:** `MinimalCard`, `CriticalPriority`
 
 ---
 
@@ -1121,6 +2019,152 @@ import { Select } from "@sunbeam/beam-ui/components/ui/select"
 
 ---
 
+### SequenceDiagram
+
+> SequenceDiagram component.
+
+```tsx
+import { SequenceDiagram } from "@sunbeam/beam-ui/components/ui/diagram-renderer.story"
+```
+
+_No documented props._
+
+**Also exports:** `PieChart`
+
+---
+
+### SignUp
+
+> SignUp component.
+
+```tsx
+import { SignUp } from "@sunbeam/beam-ui/components/ui/auth-form.story"
+```
+
+_No documented props._
+
+**Also exports:** `ForgotPassword`, `ForgotPasswordSuccess`, `TwoFactor`, `LoginWithError`, `LoginLoading`, `SignUpWithError`, `SignUpLoading`, `ForgotPasswordWithError`, `ForgotPasswordLoading`, `TwoFactorWithError`, `TwoFactorLoading`
+
+---
+
+### SimpleMenu
+
+> SimpleMenu component.
+
+```tsx
+import { SimpleMenu } from "@sunbeam/beam-ui/components/ui/context-menu.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithDangerItem`
+
+---
+
+### Single
+
+> Single component.
+
+```tsx
+import { Single } from "@sunbeam/beam-ui/components/ui/accordion.story"
+```
+
+_No documented props._
+
+**Also exports:** `AllExpanded`
+
+---
+
+### SingleCard
+
+> SingleCard component.
+
+```tsx
+import { SingleCard } from "@sunbeam/beam-ui/components/ui/capability-card.story"
+```
+
+_No documented props._
+
+---
+
+### SingleCard
+
+> SingleCard component.
+
+```tsx
+import { SingleCard } from "@sunbeam/beam-ui/components/ui/card.story"
+```
+
+_No documented props._
+
+---
+
+### SingleCard
+
+> SingleCard component.
+
+```tsx
+import { SingleCard } from "@sunbeam/beam-ui/components/ui/topic-card.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithoutHref`
+
+---
+
+### SingleComment
+
+> SingleComment component.
+
+```tsx
+import { SingleComment } from "@sunbeam/beam-ui/components/ui/comment-thread.story"
+```
+
+_No documented props._
+
+**Also exports:** `TimelineOnly`
+
+---
+
+### SingleFile
+
+> SingleFile component.
+
+```tsx
+import { SingleFile } from "@sunbeam/beam-ui/components/ui/file-upload.story"
+```
+
+_No documented props._
+
+**Also exports:** `Disabled`, `ImagesOnly`, `Multiple`
+
+---
+
+### SingleRow
+
+> SingleRow component.
+
+```tsx
+import { SingleRow } from "@sunbeam/beam-ui/components/ui/model-row.story"
+```
+
+_No documented props._
+
+---
+
+### SingleTile
+
+> SingleTile component.
+
+```tsx
+import { SingleTile } from "@sunbeam/beam-ui/components/ui/feature-tile.story"
+```
+
+_No documented props._
+
+---
+
 ### Skeleton
 
 > Skeleton component.
@@ -1158,6 +2202,34 @@ import { Slider } from "@sunbeam/beam-ui/components/ui/slider"
 
 ---
 
+### Small
+
+> Small component.
+
+```tsx
+import { Small } from "@sunbeam/beam-ui/components/ui/avatar.story"
+```
+
+_No documented props._
+
+**Also exports:** `Medium`, `Large`, `WithImage`, `SmallWithImage`, `LargeWithImage`, `SingleName`
+
+---
+
+### Small
+
+> Small component.
+
+```tsx
+import { Small } from "@sunbeam/beam-ui/components/ui/spinner.story"
+```
+
+_No documented props._
+
+**Also exports:** `Medium`, `Large`, `Accent`, `WithLabel`, `CustomColor`
+
+---
+
 ### Spinner
 
 > Spinner component.
@@ -1173,6 +2245,26 @@ import { Spinner } from "@sunbeam/beam-ui/components/ui/spinner"
 | accent | `boolean` | No | Use brand color instead of muted |
 | color | `string` | No | Custom color for the spinner arc (overrides accent) |
 | className | `string` | No |  |
+
+---
+
+### SplitMode
+
+> SplitMode component.
+
+```tsx
+import { SplitMode } from "@sunbeam/beam-ui/components/ui/diff-viewer.story"
+```
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| children | `React.ReactNode` | Yes |  |
+| variant | `"primary" | "secondary"` | No |  |
+| variant | `"primary" | "secondary" | "ghost"` | No |  |
+| disabled | `boolean` | No |  |
+| className | `string` | No |  |
+
+**Also exports:** `UnifiedMode`
 
 ---
 
@@ -1219,6 +2311,20 @@ import { Steps } from "@sunbeam/beam-ui/components/ui/steps"
 | steps | `StepItem[]` | Yes |  |
 | currentStep | `number` | Yes |  |
 | onChange | `(step: number) => void` | No |  |
+
+---
+
+### SuccessToast
+
+> SuccessToast component.
+
+```tsx
+import { SuccessToast } from "@sunbeam/beam-ui/components/ui/toast.story"
+```
+
+_No documented props._
+
+**Also exports:** `ErrorToast`, `InfoToast`, `Dismissible`
 
 ---
 
@@ -1336,6 +2442,20 @@ import { TextInput } from "@sunbeam/beam-ui/components/ui/text-input"
 
 ---
 
+### TextVariant
+
+> TextVariant component.
+
+```tsx
+import { TextVariant } from "@sunbeam/beam-ui/components/ui/skeleton.story"
+```
+
+_No documented props._
+
+**Also exports:** `CircleVariant`, `RectVariant`, `SingleLine`, `LargeCircle`
+
+---
+
 ### ThemeToggle
 
 > ThemeToggle component.
@@ -1348,6 +2468,20 @@ import { ThemeToggle } from "@sunbeam/beam-ui/components/ui/theme-toggle"
 |------|------|----------|-------------|
 | variant | `"icon" | "switch" | "pill"` | No | "icon" shows sun/moon, "switch" shows a labeled toggle, "pill" shows a segmented control |
 | className | `string` | No |  |
+
+---
+
+### Tip
+
+> Tip component.
+
+```tsx
+import { Tip } from "@sunbeam/beam-ui/components/ui/callout.story"
+```
+
+_No documented props._
+
+**Also exports:** `Warning`, `Info`
 
 ---
 
@@ -1436,6 +2570,20 @@ import { TopicCard } from "@sunbeam/beam-ui/components/ui/topic-card"
 
 ---
 
+### TopPosition
+
+> TopPosition component.
+
+```tsx
+import { TopPosition } from "@sunbeam/beam-ui/components/ui/tooltip.story"
+```
+
+_No documented props._
+
+**Also exports:** `BottomPosition`, `LeftPosition`, `RightPosition`
+
+---
+
 ### TransferList
 
 > TransferList component.
@@ -1468,6 +2616,198 @@ import { TreeView } from "@sunbeam/beam-ui/components/ui/tree-view"
 | nodes | `TreeNode[]` | Yes |  |
 | activeId | `string` | No |  |
 | className | `string` | No |  |
+
+---
+
+### TwoItems
+
+> TwoItems component.
+
+```tsx
+import { TwoItems } from "@sunbeam/beam-ui/components/ui/toggle-group.story"
+```
+
+_No documented props._
+
+**Also exports:** `ManyItems`
+
+---
+
+### TwoSteps
+
+> TwoSteps component.
+
+```tsx
+import { TwoSteps } from "@sunbeam/beam-ui/components/ui/wizard.story"
+```
+
+_No documented props._
+
+**Also exports:** `ModalWizard`, `CustomLabels`
+
+---
+
+### UserProfile
+
+> UserProfile component.
+
+```tsx
+import { UserProfile } from "@sunbeam/beam-ui/components/ui/hover-card.story"
+```
+
+_No documented props._
+
+---
+
+### WithCustomClass
+
+> WithCustomClass component.
+
+```tsx
+import { WithCustomClass } from "@sunbeam/beam-ui/components/ui/search-input.story"
+```
+
+_No documented props._
+
+---
+
+### WithoutAction
+
+> WithoutAction component.
+
+```tsx
+import { WithoutAction } from "@sunbeam/beam-ui/components/ui/empty-state.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithoutDescription`, `WithButtonAction`
+
+---
+
+### WithoutActions
+
+> WithoutActions component.
+
+```tsx
+import { WithoutActions } from "@sunbeam/beam-ui/components/ui/dialog.story"
+```
+
+_No documented props._
+
+**Also exports:** `LongContent`
+
+---
+
+### WithoutLabel
+
+> WithoutLabel component.
+
+```tsx
+import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/color-picker.story"
+```
+
+_No documented props._
+
+**Also exports:** `CustomPresets`
+
+---
+
+### WithoutLabel
+
+> WithoutLabel component.
+
+```tsx
+import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/date-picker.story"
+```
+
+_No documented props._
+
+**Also exports:** `Disabled`, `CustomPlaceholder`
+
+---
+
+### WithoutLabel
+
+> WithoutLabel component.
+
+```tsx
+import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/number-input.story"
+```
+
+_No documented props._
+
+**Also exports:** `LargeStep`
+
+---
+
+### WithoutLabel
+
+> WithoutLabel component.
+
+```tsx
+import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/radio-group.story"
+```
+
+_No documented props._
+
+**Also exports:** `ManyOptions`
+
+---
+
+### WithoutLabel
+
+> WithoutLabel component.
+
+```tsx
+import { WithoutLabel } from "@sunbeam/beam-ui/components/ui/slider.story"
+```
+
+_No documented props._
+
+**Also exports:** `CustomRange`
+
+---
+
+### WithoutSelection
+
+> WithoutSelection component.
+
+```tsx
+import { WithoutSelection } from "@sunbeam/beam-ui/components/ui/table.story"
+```
+
+_No documented props._
+
+**Also exports:** `Sortable`, `Selectable`, `WithCaption`
+
+---
+
+### WithoutSelection
+
+> WithoutSelection component.
+
+```tsx
+import { WithoutSelection } from "@sunbeam/beam-ui/components/ui/work-item-list.story"
+```
+
+_No documented props._
+
+**Also exports:** `EmptyList`, `SingleItem`, `Selectable`, `WithLoadMore`
+
+---
+
+### WithoutTitle
+
+> WithoutTitle component.
+
+```tsx
+import { WithoutTitle } from "@sunbeam/beam-ui/components/ui/popover.story"
+```
+
+_No documented props._
+
+**Also exports:** `RichContent`
 
 ---
 
@@ -1554,6 +2894,20 @@ import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs"
 
 ---
 
+### FewItems
+
+> FewItems component.
+
+```tsx
+import { FewItems } from "@sunbeam/beam-ui/components/shell/right-rail.story"
+```
+
+_No documented props._
+
+**Also exports:** `ManyItems`
+
+---
+
 ### Footer
 
 > Footer component.
@@ -1577,6 +2931,7 @@ import { Header } from "@sunbeam/beam-ui/components/shell/header"
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | showThemeToggle | `boolean` | No | Show a theme toggle button (right-aligned). Defaults to true. |
+| actions | `ReactNode` | No | Extra elements rendered in the right group before the theme toggle |
 
 ---
 
@@ -1605,6 +2960,7 @@ import { Shell } from "@sunbeam/beam-ui/components/shell/shell"
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | showThemeToggle | `boolean` | No | Show the theme toggle in the header. Defaults to true. |
+| headerActions | `ReactNode` | No | Extra elements rendered in the header's right group before the theme toggle |
 | header | `ReactNode` | No | Replace the default Header with a custom element. |
 | footer | `ReactNode` | No | Replace the default Footer with a custom element. |
 | children | `ReactNode` | No | Content to render. If omitted, renders <Outlet /> for React Router. |
@@ -1623,6 +2979,72 @@ import { Sidebar } from "@sunbeam/beam-ui/components/shell/sidebar"
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | sections | `NavSection[]` | Yes |  |
+
+---
+
+### SingleItem
+
+> SingleItem component.
+
+```tsx
+import { SingleItem } from "@sunbeam/beam-ui/components/shell/breadcrumbs.story"
+```
+
+_No documented props._
+
+**Also exports:** `DeepPath`
+
+---
+
+### SingleSection
+
+> SingleSection component.
+
+```tsx
+import { SingleSection } from "@sunbeam/beam-ui/components/shell/sidebar.story"
+```
+
+_No documented props._
+
+**Also exports:** `ManySections`
+
+---
+
+### Standalone
+
+> Standalone component.
+
+```tsx
+import { Standalone } from "@sunbeam/beam-ui/components/shell/footer.story"
+```
+
+_No documented props._
+
+---
+
+### Standalone
+
+> Standalone component.
+
+```tsx
+import { Standalone } from "@sunbeam/beam-ui/components/shell/header.story"
+```
+
+_No documented props._
+
+---
+
+### WithoutThemeToggle
+
+> WithoutThemeToggle component.
+
+```tsx
+import { WithoutThemeToggle } from "@sunbeam/beam-ui/components/shell/shell.story"
+```
+
+_No documented props._
+
+**Also exports:** `WithHeaderActions`
 
 ---
 
@@ -1646,6 +3068,30 @@ _No documented props._
 
 ```tsx
 import { FullwidthLayout } from "@sunbeam/beam-ui/components/layouts/fullwidth-layout"
+```
+
+_No documented props._
+
+---
+
+### Standalone
+
+> Standalone component.
+
+```tsx
+import { Standalone } from "@sunbeam/beam-ui/components/layouts/api-layout.story"
+```
+
+_No documented props._
+
+---
+
+### Standalone
+
+> Standalone component.
+
+```tsx
+import { Standalone } from "@sunbeam/beam-ui/components/layouts/fullwidth-layout.story"
 ```
 
 _No documented props._

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { css } from "styled-system/css";
 import { token } from "styled-system/tokens";
@@ -311,9 +311,11 @@ const allNavItems = docsSidebar.flatMap((section) =>
 interface HeaderProps {
   /** Show a theme toggle button (right-aligned). Defaults to true. */
   showThemeToggle?: boolean;
+  /** Extra elements rendered in the right group before the theme toggle */
+  actions?: ReactNode;
 }
 
-export function Header({ showThemeToggle = true }: HeaderProps = {}) {
+export function Header({ showThemeToggle = true, actions }: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggle } = useTheme();
@@ -473,6 +475,7 @@ export function Header({ showThemeToggle = true }: HeaderProps = {}) {
                 </div>
               )}
             </div>
+            {actions}
             {showThemeToggle && <ThemeToggle />}
           </div>
         </div>
