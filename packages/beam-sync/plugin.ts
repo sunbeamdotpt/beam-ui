@@ -27,7 +27,7 @@ penpot.ui.onMessage(async (msg: any) => {
       // UI already fetched the component data — we just import it
       const data: ComponentData = msg.content;
       try {
-        const group = await importComponent(data, penpot, penpotUtils, {
+        const group = await importComponent(data, penpot, {
           x: penpot.viewport.center.x,
           y: penpot.viewport.center.y,
         });
@@ -61,7 +61,7 @@ penpot.ui.onMessage(async (msg: any) => {
             lastComponent = data.component;
           }
 
-          await importComponent(data, penpot, penpotUtils, { x, y });
+          await importComponent(data, penpot, { x, y });
           y += data.height + spacing;
           done++;
 

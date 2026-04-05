@@ -11,6 +11,7 @@
 import { applyShadows } from "./shadows.ts";
 import { replaceText, type TextData } from "./text-replacer.ts";
 import { alignArrows } from "./arrow-aligner.ts";
+import { findShapes, setParentXY } from "./penpot-helpers.ts";
 
 export interface ComponentData {
   component: string;
@@ -28,19 +29,18 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 export async function importComponent(
   data: ComponentData,
   penpot: any,
-  penpotUtils: any,
   position: { x: number; y: number } = { x: 0, y: 0 },
 ): Promise<any> {
   // Step 1: Import cleaned SVG
   const group = penpot.createShapeFromSvg(data.svg);
-  if (!group) throw new Error("createShapeFromSvg returned null");
+  if (!group) throw new Error("SVG is invalid or malformed");
 
   group.name = `${data.component} / ${data.variant}${data.theme === "dark" ? " (dark)" : ""}`;
   group.x = position.x;
   group.y = position.y;
 
   // Step 2: Fix fillOpacity on ALL shapes
-  const allShapes = penpotUtils.findShapes(() => true, group);
+  const allShapes = findShapes(() => true, group);
   for (const s of allShapes) {
     if (s.fills && Array.isArray(s.fills) && s.fills.length > 0) {
       s.fills = s.fills.map((f: any) => ({ ...f, fillOpacity: f.fillOpacity ?? 1 }));
@@ -49,16 +49,16 @@ export async function importComponent(
 
   // Step 3: Apply native Penpot shadows
   if (data.shadows.length > 0) {
-    applyShadows(group, data.shadows, penpotUtils.findShapes);
+    applyShadows(group, data.shadows, findShapes);
   }
 
   // Step 4: Replace path-text with editable Text
   if (data.texts.length > 0) {
-    replaceText(group, data.texts, penpot, penpotUtils.findShapes);
+    replaceText(group, data.texts, penpot, findShapes);
   }
 
   // Step 5: Reparent arrow paths (must happen before sleep)
-  const paths = penpotUtils.findShapes((s: any) => s.type === "path", group);
+  const paths = findShapes((s: any) => s.type === "path", group);
   for (const p of paths) {
     if (p.width < 15) group.appendChild(p);
   }
@@ -67,7 +67,7 @@ export async function importComponent(
   await sleep(200);
 
   // Step 7: Align arrows to matching-color text
-  alignArrows(group, penpotUtils.findShapes, penpotUtils.setParentXY);
+  alignArrows(group, findShapes, setParentXY);
 
   // Store sync metadata
   group.setPluginData("beam-sync", JSON.stringify({
