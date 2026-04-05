@@ -103,14 +103,15 @@ async function handler(req: Request): Promise<Response> {
     return Response.redirect(url.origin + "/beam-sync/", 308);
   }
   if (path.startsWith("/beam-sync/")) {
-    const pluginPath = `${PLUGIN}${path.slice(10) || "/index.html"}`;
-    if (await fileExists(pluginPath)) {
-      return serveFile(pluginPath, {
-        "access-control-allow-origin": "*",
-      });
+    const subPath = path.slice(10) || "/index.html";
+    if (subPath.endsWith("/")) {
+      return serveFile(`${PLUGIN}${subPath}index.html`, { "access-control-allow-origin": "*" });
     }
-    // SPA fallback for plugin
-    return serveFile(`${PLUGIN}/index.html`);
+    const pluginPath = `${PLUGIN}${subPath}`;
+    if (await fileExists(pluginPath)) {
+      return serveFile(pluginPath, { "access-control-allow-origin": "*" });
+    }
+    return serveFile(`${PLUGIN}/index.html`, { "access-control-allow-origin": "*" });
   }
 
   // Storybook — redirect /storybook to /storybook/
@@ -118,7 +119,11 @@ async function handler(req: Request): Promise<Response> {
     return Response.redirect(url.origin + "/storybook/", 308);
   }
   if (path.startsWith("/storybook/")) {
-    const sbPath = `${STORYBOOK}${path.slice(10)}`;
+    const subPath = path.slice(10) || "/index.html";
+    const sbPath = `${STORYBOOK}${subPath}`;
+    if (subPath.endsWith("/")) {
+      return serveFile(`${STORYBOOK}${subPath}index.html`);
+    }
     if (await fileExists(sbPath)) {
       return serveFile(sbPath);
     }
