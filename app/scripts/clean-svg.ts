@@ -237,8 +237,12 @@ export function cleanSvg(rawSvg: string): CleanedComponent {
     if (!removed) break;
   }
 
-  // ── Serialize ──
-  const output = svg.outerHTML;
+  // ── Serialize as proper XML (not HTML) ──
+  // linkedom's outerHTML uses HTML serialization which doesn't self-close void elements.
+  // We need XML serialization for valid SVG.
+  let output = svg.outerHTML;
+  // Fix void elements that HTML serialization leaves unclosed: line, rect, path, circle, ellipse, use, image
+  output = output.replace(/<(line|rect|path|circle|ellipse|use|image|polygon|polyline)(\s[^>]*?)(?<!\/)>/g, "<$1$2 />");
 
   // ── Validate ──
   if (!svg.querySelector("rect, path, circle, ellipse, text, line")) {
