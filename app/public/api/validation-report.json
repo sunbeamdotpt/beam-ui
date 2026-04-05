@@ -12,7 +12,7 @@
         "no-visual-content"
       ],
       "textCount": 0,
-      "svgSize": 149
+      "svgSize": 303
     },
     {
       "component": "WorkItemList",
@@ -23,11 +23,91 @@
         "no-visual-content"
       ],
       "textCount": 0,
-      "svgSize": 149
+      "svgSize": 303
     }
   ],
   "warnings": [
     {
+      "component": "ActivityHeatmap",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ActivityHeatmap",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ActivityHeatmap",
+      "variant": "Empty",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ActivityHeatmap",
+      "variant": "Empty",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ActivityHeatmap",
+      "variant": "High Activity",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ActivityHeatmap",
+      "variant": "High Activity",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ApiLayout",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ApiLayout",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ApiLayout",
+      "variant": "Standalone",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "ApiLayout",
+      "variant": "Standalone",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
       "component": "Avatar",
       "variant": "Default",
       "theme": "dark",
@@ -96,6 +176,7 @@
       "variant": "Default",
       "theme": "dark",
       "warnings": [
+        "external-image",
         "has-gradients"
       ]
     },
@@ -104,6 +185,7 @@
       "variant": "Default",
       "theme": "light",
       "warnings": [
+        "external-image",
         "has-gradients"
       ]
     },
@@ -112,6 +194,7 @@
       "variant": "Horizontal Variant",
       "theme": "dark",
       "warnings": [
+        "external-image",
         "has-gradients"
       ]
     },
@@ -120,6 +203,7 @@
       "variant": "Horizontal Variant",
       "theme": "light",
       "warnings": [
+        "external-image",
         "has-gradients"
       ]
     },
@@ -128,6 +212,7 @@
       "variant": "Large Variant",
       "theme": "dark",
       "warnings": [
+        "external-image",
         "has-gradients"
       ]
     },
@@ -136,7 +221,104 @@
       "variant": "Large Variant",
       "theme": "light",
       "warnings": [
+        "external-image",
         "has-gradients"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Small Variant",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Small Variant",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Breadcrumbs",
+      "variant": "Deep Path",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Breadcrumbs",
+      "variant": "Deep Path",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Breadcrumbs",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Breadcrumbs",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Button",
+      "variant": "As Link",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Button",
+      "variant": "As Link",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Card",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Card",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Card",
+      "variant": "Single Card",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Card",
+      "variant": "Single Card",
+      "theme": "light",
+      "warnings": [
+        "external-image"
       ]
     },
     {
@@ -153,6 +335,246 @@
       "theme": "light",
       "warnings": [
         "has-gradients"
+      ]
+    },
+    {
+      "component": "Footer",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Footer",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Footer",
+      "variant": "Standalone",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Footer",
+      "variant": "Standalone",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "FullwidthLayout",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "FullwidthLayout",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "FullwidthLayout",
+      "variant": "Standalone",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "FullwidthLayout",
+      "variant": "Standalone",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Header",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Header",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Header",
+      "variant": "Standalone",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Header",
+      "variant": "Standalone",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "RightRail",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "RightRail",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "RightRail",
+      "variant": "Few Items",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "RightRail",
+      "variant": "Few Items",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "RightRail",
+      "variant": "Many Items",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "RightRail",
+      "variant": "Many Items",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Shell",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Shell",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Shell",
+      "variant": "With Header Actions",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Shell",
+      "variant": "With Header Actions",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Shell",
+      "variant": "Without Theme Toggle",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Shell",
+      "variant": "Without Theme Toggle",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Sidebar",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Sidebar",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Sidebar",
+      "variant": "Many Sections",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Sidebar",
+      "variant": "Many Sections",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Sidebar",
+      "variant": "Single Section",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Sidebar",
+      "variant": "Single Section",
+      "theme": "light",
+      "warnings": [
+        "external-image"
       ]
     },
     {
@@ -249,6 +671,54 @@
       "theme": "light",
       "warnings": [
         "has-gradients"
+      ]
+    },
+    {
+      "component": "TopicCard",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "TopicCard",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "TopicCard",
+      "variant": "Single Card",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "TopicCard",
+      "variant": "Single Card",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "TopicCard",
+      "variant": "Without Href",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "TopicCard",
+      "variant": "Without Href",
+      "theme": "light",
+      "warnings": [
+        "external-image"
       ]
     },
     {
