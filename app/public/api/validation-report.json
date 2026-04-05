@@ -1,0 +1,271 @@
+{
+  "total": 758,
+  "passed": 756,
+  "failed": 2,
+  "failures": [
+    {
+      "component": "WorkItemList",
+      "variant": "Empty List",
+      "theme": "dark",
+      "passed": false,
+      "warnings": [
+        "no-visual-content"
+      ],
+      "textCount": 0,
+      "svgSize": 149
+    },
+    {
+      "component": "WorkItemList",
+      "variant": "Empty List",
+      "theme": "light",
+      "passed": false,
+      "warnings": [
+        "no-visual-content"
+      ],
+      "textCount": 0,
+      "svgSize": 149
+    }
+  ],
+  "warnings": [
+    {
+      "component": "Avatar",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "Large With Image",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "Large With Image",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "Small With Image",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "Small With Image",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "With Image",
+      "theme": "dark",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "Avatar",
+      "variant": "With Image",
+      "theme": "light",
+      "warnings": [
+        "external-image"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Horizontal Variant",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Horizontal Variant",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Large Variant",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "BentoItem",
+      "variant": "Large Variant",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "DiagramRenderer",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "DiagramRenderer",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Circle Variant",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Circle Variant",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Default",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Default",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Large Circle",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Large Circle",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Rect Variant",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Rect Variant",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Single Line",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Single Line",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Text Variant",
+      "theme": "dark",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "Skeleton",
+      "variant": "Text Variant",
+      "theme": "light",
+      "warnings": [
+        "has-gradients"
+      ]
+    },
+    {
+      "component": "WorkItemList",
+      "variant": "Empty List",
+      "theme": "dark",
+      "warnings": [
+        "no-visual-content"
+      ]
+    },
+    {
+      "component": "WorkItemList",
+      "variant": "Empty List",
+      "theme": "light",
+      "warnings": [
+        "no-visual-content"
+      ]
+    }
+  ]
+}

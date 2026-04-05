@@ -1,0 +1,3168 @@
+{
+  "buildLabel": "2026-04-05T18:16:44.846Z",
+  "components": [
+    {
+      "name": "Accordion",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "All Expanded",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ActivityHeatmap",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "High Activity",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ApiLayout",
+      "category": "layout",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Standalone",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AssigneePicker",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Multiple Selected",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "No Selection",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AuthForms",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Forgot Password Loading",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Forgot Password Success",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Forgot Password With Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Forgot Password",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Login Loading",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Login With Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Sign Up Loading",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Sign Up With Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Sign Up",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Two Factor Loading",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Two Factor With Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Two Factor",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Avatar",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large With Image",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Name",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small With Image",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Image",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Badge",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "All Priority",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "All Release Stage",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "All Tier",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "All Work Status",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Approved",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Beta",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Closed",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Community",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Critical",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Deprecated",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Draft",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Experimental",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Featured",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "High",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Low",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Merged",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "New",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Open",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Partner",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Premier",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Preview",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Review",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Revision",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Section",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Stable",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Verified",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BentoItem",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Horizontal Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BranchSelector",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "On Tag",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Create Branch",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Breadcrumbs",
+      "category": "shell",
+      "variants": [
+        {
+          "name": "Deep Path",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Item",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Button",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "As Link",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Cream",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Dark",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled Cream",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled Dark",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled Ghost",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Ghost",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Primary",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Reset Type",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Submit Type",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Text",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Callout",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Info",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Tip",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Warning",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CapabilityCard",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Card",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Card",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Card",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Charts",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Area Chart Example",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Bar Chart Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Donut Chart",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Line Chart Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Pie Chart Example",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Checked",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled Checked",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Indeterminate",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Unchecked",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clipboard",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Trigger",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Long Value",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CodeBlock",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Multiple Tabs",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Stream Toggle",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CodeEditor",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "No Line Numbers",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Python Language",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Read Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Placeholder",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ColorPicker",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Presets",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Combobox",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty State",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CommentThread",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Comment",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Timeline Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CommitGraph",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Linear History",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Tags",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ContextMenu",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Simple Menu",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Danger Item",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DatePicker",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Placeholder",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DiagramRenderer",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Pie Chart",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Sequence Diagram",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dialog",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Long Content",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Actions",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DiffViewer",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Split Mode",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Unified Mode",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DropdownMenu",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Flat Items",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Disabled Item",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Editable",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Long Text",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EmptyState",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Button Action",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Action",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Description",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FeatureTile",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Tile",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FileList",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Body Font",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty List",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Grid Layout",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Grid Mono Font",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "List Layout",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Mono Font",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FileUpload",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Images Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Multiple",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single File",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Footer",
+      "category": "shell",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Standalone",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FullwidthLayout",
+      "category": "layout",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Standalone",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Header",
+      "category": "shell",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Standalone",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HoverCard",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "User Profile",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Icon",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Size",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Filled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "KanbanBoard",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty Board",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Column",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "KanbanCardDetail",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Critical Priority",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Minimal Card",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Read Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kbd",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Arrow Keys",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Linux Platform",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Mac Platform",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Modifier Key",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Shortcut",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Windows Platform",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LabelPicker",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Multiple Selected",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "No Selection",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Bordered Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Compact Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Ordered Bordered",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Ordered Compact",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Ordered",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Unordered",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Descriptions",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Icons",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MarkdownEditor",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Tall Editor",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MarkdownRenderer",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Code Only",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Simple Text",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Table Content",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MathRenderer",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Display Mode",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Inline",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Matrix",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MilestonePicker",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "No Selection",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Option",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ModelRow",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Row",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NotificationCenter",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "All Read",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty Notifications",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NumberInput",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large Step",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pagination",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "First Page",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Last Page",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Page Size",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PinInput",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Four Digit",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Masked",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Six Digit",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Popover",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Rich Content",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Title",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ProgressBar",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Full",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium Size",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium Success",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small Size",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small Success",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Success",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RadioGroup",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Many Options",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ReactionPicker",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Many Reactions",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RightRail",
+      "category": "shell",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Few Items",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Many Items",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ScrollArea",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Auto Scrollbar",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Both Directions",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Horizontal",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Hover Scrollbar",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Vertical Direction",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Visible Scrollbar",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SearchInput",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Custom Class",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Select",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Placeholder",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Many Options",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shell",
+      "category": "shell",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Header Actions",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Theme Toggle",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sidebar",
+      "category": "shell",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Many Sections",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Section",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Circle Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large Circle",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Rect Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Line",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Text Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Slider",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Range",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spinner",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Accent",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Custom Color",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Large",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Medium",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Small",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Splitter",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Horizontal",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Vertical",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "StatBar",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Low Performance",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Multimodal",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Steps",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "First Step",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Last Step",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Two Steps",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Switch",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled Checked",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Off",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "On",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SyntaxHighlighter",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Dark Theme",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Light Theme",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Python Code",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Highlighted Lines",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Line Numbers",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Selectable",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Sortable",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Caption",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Selection",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tabs",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Dark Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TagsInput",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Max",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Label",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TextInput",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Disabled",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Email Type",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Number Type",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Password",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Text Type",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Error",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ThemeToggle",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Icon Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Pill Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Switch Variant",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Toast",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Dismissible",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Error Toast",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Info Toast",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Success Toast",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Toggle",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Pressed",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Unpressed",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ToggleGroup",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Many Items",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Two Items",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Bottom Position",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Left Position",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Right Position",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Top Position",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TopicCard",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Card",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Href",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TransferList",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "All Selected",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty Selected",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TreeView",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Deep Nesting",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Flat Nodes",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wizard",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Custom Labels",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Modal Wizard",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Two Steps",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "WorkItemList",
+      "category": "ui",
+      "variants": [
+        {
+          "name": "Default",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Empty List",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Selectable",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Single Item",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "With Load More",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "Without Selection",
+          "themes": [
+            "dark",
+            "light"
+          ]
+        }
+      ]
+    }
+  ]
+}

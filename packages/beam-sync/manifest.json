@@ -1,0 +1,8 @@
+{
+  "name": "Beam Sync",
+  "version": 2,
+  "code": "assets/plugin.js",
+  "icon": "assets/icon.png",
+  "description": "Sync Beam Design Language components into your Penpot project with editable text",
+  "permissions": ["content:read", "content:write"]
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beam Sync</title>
+  <link rel="stylesheet" href="/src/ui/styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1 class="title">Beam Sync</h1>
+      <div class="theme-toggle">
+        <button id="theme-light" class="theme-btn active">Light</button>
+        <button id="theme-dark" class="theme-btn">Dark</button>
+      </div>
+    </header>
+
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search components..." />
+    </div>
+
+    <div class="actions">
+      <button id="import-all" class="btn primary">Import All</button>
+      <button id="sync" class="btn secondary">Sync Changes</button>
+    </div>
+
+    <div id="progress" class="progress" hidden>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      <span id="progress-text" class="progress-text">0/0</span>
+    </div>
+
+    <div id="component-list" class="component-list">
+      <div class="loading">Loading components...</div>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+  <script type="module" src="/src/ui/app.ts"></script>
+</body>
+</html>

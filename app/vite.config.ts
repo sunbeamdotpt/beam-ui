@@ -17,6 +17,11 @@ function generateBuildAssets() {
       } catch (e) {
         console.warn("Warning: failed to generate llms.txt", e);
       }
+      try {
+        execFileSync("npx", ["tsx", "scripts/generate-component-api.ts"], { cwd: __dirname, stdio: "inherit" });
+      } catch (e) {
+        console.warn("Warning: failed to generate component API", e);
+      }
     },
   };
 }

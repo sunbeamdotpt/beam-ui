@@ -406,6 +406,86 @@ async function prepareDom(page, theme = "light") {
 
 /* ─── Main pipeline ───────────────────────────────────────────────────── */
 
+/* ─── Semaphore for concurrency control ───────────────────────────────── */
+
+function createSemaphore(concurrency) {
+  let count = 0;
+  const queue = [];
+  return {
+    async acquire() {
+      if (count < concurrency) { count++; return; }
+      await new Promise((resolve) => queue.push(resolve));
+      count++;
+    },
+    release() {
+      count--;
+      if (queue.length > 0) queue.shift()();
+    },
+  };
+}
+
+/* ─── Single task capture ─────────────────────────────────────────────── */
+
+async function captureOneTask({ story, variant, theme, browser, semaphore, stats }) {
+  await semaphore.acquire();
+
+  const suffix = theme === "dark" ? ".dark" : "";
+  const compDir = resolve(OUTPUT_DIR, story.componentName);
+  const outPath = resolve(compDir, `${variant.name}${suffix}.svg`);
+  const url = `${STORYBOOK_URL}/iframe.html?id=${variant.id}&viewMode=story`;
+  const vpWidth = story.strategy === "layout" ? 1440 : 1280;
+
+  let page;
+  try {
+    page = await browser.newPage();
+    page.setDefaultTimeout(30000);
+    await page.setViewport({ width: vpWidth, height: 900 });
+
+    await page.goto(url, { waitUntil: "networkidle0", timeout: 15000 });
+    await prepareDom(page, theme);
+
+    if (story.strategy === "portal-trigger") {
+      await triggerPortal(page, story.componentName);
+    }
+    if (story.strategy === "portal-open") {
+      await new Promise((r) => setTimeout(r, 500));
+    }
+
+    await new Promise((r) => setTimeout(r, 300));
+    await page.addScriptTag({ path: DOM_TO_SVG_BUNDLE });
+    await new Promise((r) => setTimeout(r, 200));
+
+    const bounds = await getContentBounds(page, story.strategy);
+    const svg = await captureSvg(page, EMBEDDED_FONTS, story.strategy);
+
+    if (!svg || svg.length < 200 || svg.startsWith("ERROR:")) {
+      if (theme === "light") stats.failed++;
+    } else {
+      let finalSvg = svg;
+      if (story.strategy !== "layout" && bounds) {
+        finalSvg = cropSvgViewBox(finalSvg, bounds);
+      }
+      finalSvg = injectShadowFilters(finalSvg);
+      writeFileSync(outPath, finalSvg, "utf-8");
+      if (theme === "light") stats.captured++;
+    }
+  } catch (err) {
+    if (theme === "light") stats.failed++;
+  }
+
+  try { await page.close(); } catch {}
+  semaphore.release();
+
+  const done = stats.captured + stats.failed;
+  if (done > 0 && done % 50 === 0) {
+    console.log(`  progress: ${done}/${stats.total} (${stats.captured} ok, ${stats.failed} fail)`);
+  }
+}
+
+/* ─── Main pipeline ───────────────────────────────────────────────────── */
+
+const CONCURRENCY = parseInt(process.env.CAPTURE_CONCURRENCY || "6", 10);
+
 async function main() {
   console.log("Fetching story index...");
   let stories;
@@ -421,110 +501,45 @@ async function main() {
   for (const s of stories) strategyCounts[s.strategy] = (strategyCounts[s.strategy] || 0) + s.variants.length;
   console.log(`Found ${stories.length} components, ${totalVariants} variants`);
   console.log(`Strategies: ${JSON.stringify(strategyCounts)}`);
+  console.log(`Concurrency: ${CONCURRENCY} parallel pages`);
 
   mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  let browser = await puppeteer.launch({
+  // Create output directories upfront
+  for (const story of stories) {
+    mkdirSync(resolve(OUTPUT_DIR, story.componentName), { recursive: true });
+  }
+
+  const browser = await puppeteer.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     protocolTimeout: 60000,
   });
 
-  let captured = 0;
-  let failed = 0;
+  const semaphore = createSemaphore(CONCURRENCY);
+  const stats = { captured: 0, failed: 0, total: totalVariants };
 
+  // Build flat task list
+  const tasks = [];
   for (const story of stories) {
-    const compDir = resolve(OUTPUT_DIR, story.componentName);
-    mkdirSync(compDir, { recursive: true });
-
     for (const variant of story.variants) {
-      const url = `${STORYBOOK_URL}/iframe.html?id=${variant.id}&viewMode=story`;
-      const vpWidth = story.strategy === "layout" ? 1440 : 1280;
-      const vpHeight = 900;
-
       for (const theme of ["light", "dark"]) {
-        const suffix = theme === "dark" ? ".dark" : "";
-        const outPath = resolve(compDir, `${variant.name}${suffix}.svg`);
-
-        let page;
-        try {
-          page = await browser.newPage();
-        } catch {
-          browser = await puppeteer.launch({
-            headless: true,
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
-            protocolTimeout: 60000,
-          });
-          page = await browser.newPage();
-        }
-        page.setDefaultTimeout(30000);
-        await page.setViewport({ width: vpWidth, height: vpHeight });
-
-        try {
-          await page.goto(url, { waitUntil: "networkidle0", timeout: 15000 });
-
-          // Shared DOM preparation (fonts, icons, form inputs, theme)
-          await prepareDom(page, theme);
-
-          // Strategy-specific: trigger portal if needed
-          if (story.strategy === "portal-trigger") {
-            const triggered = await triggerPortal(page, story.componentName);
-            if (!triggered) {
-              console.log(`  WARN ${story.componentName}/${variant.name} [${theme}]: portal trigger failed`);
-            }
-          }
-
-          // Wait for portal content to settle
-          if (story.strategy === "portal-open") {
-            await new Promise((r) => setTimeout(r, 500));
-          }
-
-          await new Promise((r) => setTimeout(r, 300));
-          await page.addScriptTag({ path: DOM_TO_SVG_BUNDLE });
-          await new Promise((r) => setTimeout(r, 200));
-
-          const bounds = await getContentBounds(page, story.strategy);
-          const svg = await captureSvg(page, EMBEDDED_FONTS, story.strategy);
-
-          if (!svg || svg.length < 200 || svg.startsWith("ERROR:")) {
-            console.log(`  SKIP ${story.componentName}/${variant.name} [${theme}]: ${svg?.slice(0, 60) || "empty"}`);
-            if (theme === "light") failed++;
-          } else {
-            let finalSvg = svg;
-            if (story.strategy !== "layout" && bounds) {
-              finalSvg = cropSvgViewBox(finalSvg, bounds);
-            }
-            finalSvg = injectShadowFilters(finalSvg);
-            writeFileSync(outPath, finalSvg, "utf-8");
-            if (theme === "light") captured++;
-          }
-        } catch (err) {
-          console.log(`  FAIL ${story.componentName}/${variant.name} [${theme}]: ${err.message.slice(0, 80)}`);
-          if (theme === "light") failed++;
-        }
-
-        try { await page.close(); } catch {}
-
-        if (!browser.connected) {
-          console.log("  Browser crashed, relaunching...");
-          browser = await puppeteer.launch({
-            headless: true,
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
-            protocolTimeout: 60000,
-          });
-        }
-      }
-
-      if ((captured + failed) % 50 === 0) {
-        console.log(`  progress: ${captured + failed}/${totalVariants} (${captured} ok, ${failed} fail)`);
+        tasks.push({ story, variant, theme, browser, semaphore, stats });
       }
     }
-
-    console.log(`  ${story.componentName}: ${story.variants.length} variants [${story.strategy}]`);
   }
 
+  console.log(`Capturing ${tasks.length} SVGs (${totalVariants} variants × 2 themes)...`);
+  const startTime = Date.now();
+
+  // Run all tasks with concurrency limit
+  await Promise.all(tasks.map((task) => captureOneTask(task)));
+
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+
   try { await browser.close(); } catch {}
-  console.log(`\nDone: ${captured} captured, ${failed} failed out of ${totalVariants}`);
+  console.log(`\nDone: ${stats.captured} captured, ${stats.failed} failed out of ${totalVariants}`);
+  console.log(`Time: ${elapsed}s (${CONCURRENCY} concurrent pages)`);
   console.log(`Output: ${OUTPUT_DIR}`);
 }
 
