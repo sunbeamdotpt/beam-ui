@@ -487,9 +487,54 @@ cd beam-ui
 node app/scripts/capture-stories.mjs
 ```
 
-### 3. (Future) Build with Capture
-Capture integrated into Vite build, runs in parallel during `npm run build`.
+### 3. Generate Component API
+```bash
+cd beam-ui/app
+npx tsx scripts/generate-component-api.ts
+```
+Outputs 758 JSON files to `app/public/api/components/` plus index and validation report.
+Also runs automatically during `vite build` via the `generateBuildAssets()` plugin.
 
-### 4. (Future) Deploy
-SVGs + cleaned metadata deployed with the design language site.
-Plugin fetches from `design.sunbeam.pt/api/components`.
+### 4. Build Plugin
+```bash
+cd beam-ui/packages/beam-sync
+npm install
+npm run build
+```
+Outputs to `dist/` — deploy alongside the design language site.
+
+### 5. Deploy
+- SVGs + cleaned metadata served from `design.sunbeam.pt/api/components/`
+- Plugin served from `design.sunbeam.pt/beam-sync/`
+- Designers add `design.sunbeam.pt/beam-sync/manifest.json` in Penpot Plugin Manager
+
+---
+
+## Lessons Learned (Implementation Log)
+
+### Parallel Capture Performance
+Semaphore-based concurrency (6 pages, 1 browser) is functionally correct but doesn't
+speed up capture significantly (~9 min vs ~8 min sequential). The bottleneck is that
+all pages share one Chromium renderer process. Real speedup requires either:
+- Multiple browser instances (higher memory)
+- Reducing per-page work (skip `networkidle0`, cache dom-to-svg bundle)
+- Prebuilding the icon cache (currently each page fetches icons independently)
+
+### SVG Cleaning Validation Results (758 files)
+- 728 clean passes (no warnings)
+- 8 external-image warnings (Avatar With Image variants) — expected
+- 20 gradient warnings (Skeleton, BentoItem, DiagramRenderer) — expected
+- 2 no-visual-content (WorkItemList/Empty List) — correct, it's an empty state
+
+### Penpot Plugin SDK Notes
+- Plugins are standalone web apps loaded as iframes
+- `plugin.ts` runs in isolated sandbox with `penpot` global
+- UI communicates via `parent.postMessage()` / `penpot.ui.onMessage()`
+- Can be built with any framework (we use vanilla TS + Vite)
+- Must be hosted at HTTPS URL (except localhost for dev)
+- `@penpot/plugin-types` provides TypeScript definitions
+
+### API Serving via Deno
+Decision: host the API from Deno runtime instead of Caddy static files.
+This allows on-demand SVG cleaning and reduces build complexity.
+Static JSON generation is kept as a fallback for environments without Deno.
