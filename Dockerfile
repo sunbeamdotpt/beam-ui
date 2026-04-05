@@ -1,14 +1,16 @@
-# Stage 1: Build the static site
+# Stage 1: Build the static site + Storybook + plugin
 FROM node:22-alpine AS build
 WORKDIR /build
 
-# Copy workspace structure (without lockfile — it has macOS-specific optional deps)
+# Copy workspace structure
 COPY package.json ./
 COPY packages/ packages/
 COPY app/package.json app/panda.config.ts app/postcss.config.cjs app/tsconfig.json app/vite.config.ts app/index.html ./app/
 COPY app/.storybook/ app/.storybook/
 COPY app/src/ app/src/
 COPY app/public/ app/public/
+COPY app/scripts/ app/scripts/
+COPY app/captured-svgs/ app/captured-svgs/
 
 # Install deps at root (workspace) and app level
 RUN npm install
@@ -19,55 +21,25 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npx vite build
 RUN npx panda cssgen --outfile .storybook/panda.css
 RUN STORYBOOK_BASE=/storybook/ npx storybook build -o dist/storybook
 
-# Stage 2: Get Caddy binary
-FROM caddy:2-alpine AS caddy
+# Build Beam Sync plugin
+WORKDIR /build/packages/beam-sync
+RUN npm install 2>/dev/null || true
+RUN npx esbuild plugin.ts --bundle --format=esm --minify --outfile=dist/assets/plugin.js 2>/dev/null || true
+RUN npx vite build 2>/dev/null || true
+RUN cp manifest.json dist/ 2>/dev/null || true
+RUN cp -r assets dist/ 2>/dev/null || true
 
-# Stage 3: Distroless production
-FROM gcr.io/distroless/static-debian12:nonroot
+# Copy plugin build to main dist
+WORKDIR /build
+RUN cp -r packages/beam-sync/dist app/dist/beam-sync 2>/dev/null || true
 
-COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
-COPY --from=build /build/app/dist /srv
+# Stage 2: Deno runtime
+FROM denoland/deno:2.3.2
 
-COPY <<'EOF' /etc/caddy/Caddyfile
-:8080 {
-	root * /srv
-
-	# AI user-agent matcher (single regex, OR logic)
-	@ai header_regexp User-Agent (?i)(GPTBot|ChatGPT|OAI-SearchBot|ClaudeBot|Claude-User|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|Google-Extended|Gemini|PhindBot|YouBot|Devin|FirecrawlAgent|Crawl4AI)
-
-	# Serve per-component markdown to AI user-agents (skip if ?render=html)
-	@aiDocs {
-		header_regexp User-Agent (?i)(GPTBot|ChatGPT|OAI-SearchBot|ClaudeBot|Claude-User|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|Google-Extended|Gemini|PhindBot|YouBot|Devin|FirecrawlAgent|Crawl4AI)
-		not query render=html
-		path_regexp comp ^/(components|foundations)/(.+)$
-	}
-	rewrite @aiDocs /docs/{re.comp.2}.md
-
-	# Bare /storybook → redirect to /storybook/
-	redir /storybook /storybook/ 308
-
-	# Storybook is a separate SPA at /storybook/
-	handle_path /storybook/* {
-		root * /srv/storybook
-		try_files {path} /index.html
-		file_server
-		encode gzip
-	}
-
-	# Main site (everything else)
-	handle {
-		file_server
-		try_files {path} /index.html
-		encode gzip
-		header {
-			X-Content-Type-Options nosniff
-			X-Frame-Options DENY
-			Referrer-Policy strict-origin-when-cross-origin
-		}
-	}
-}
-EOF
+WORKDIR /app
+COPY --from=build /build/app/dist /app/dist
+COPY server.ts /app/server.ts
 
 EXPOSE 8080
-USER nonroot
-ENTRYPOINT ["/usr/bin/caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+USER deno
+CMD ["deno", "run", "--allow-net", "--allow-read", "--allow-env", "server.ts"]
