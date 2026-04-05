@@ -7,8 +7,6 @@
 
 import { importComponent, type ComponentData } from "./src/lib/importer.ts";
 
-const API_BASE = "https://design.sunbeam.pt/api";
-
 // Open plugin UI
 penpot.ui.open("Beam Sync", `?theme=${penpot.theme}`, {
   width: 360,
@@ -21,26 +19,14 @@ penpot.on("themechange", (theme) => {
 });
 
 // Handle messages from UI
+// NOTE: fetch() is done in the UI iframe (browser context), not here (sandbox).
+// The UI sends the fetched data to plugin.ts for Penpot API operations.
 penpot.ui.onMessage(async (msg: any) => {
   switch (msg.type) {
-    case "fetch-components": {
-      try {
-        const resp = await fetch(`${API_BASE}/components.json`);
-        const data = await resp.json();
-        penpot.ui.sendMessage({ type: "components-loaded", content: data });
-      } catch (e: any) {
-        penpot.ui.sendMessage({ type: "error", content: `Failed to fetch components: ${e.message}` });
-      }
-      break;
-    }
-
     case "import-component": {
-      const { component, variant, theme } = msg.content;
+      // UI already fetched the component data — we just import it
+      const data: ComponentData = msg.content;
       try {
-        const suffix = theme === "dark" ? ".dark" : "";
-        const resp = await fetch(`${API_BASE}/components/${component}/${variant}${suffix}.json`);
-        const data: ComponentData = await resp.json();
-
         const group = await importComponent(data, penpot, penpotUtils, {
           x: penpot.viewport.center.x,
           y: penpot.viewport.center.y,
@@ -48,45 +34,42 @@ penpot.ui.onMessage(async (msg: any) => {
 
         penpot.ui.sendMessage({
           type: "import-complete",
-          content: { component, variant, theme, id: group.id },
+          content: { component: data.component, variant: data.variant, theme: data.theme, id: group.id },
         });
       } catch (e: any) {
         penpot.ui.sendMessage({
           type: "error",
-          content: `Failed to import ${component}/${variant}: ${e.message}`,
+          content: `Failed to import ${data.component}/${data.variant}: ${e.message}`,
         });
       }
       break;
     }
 
-    case "import-all": {
-      const { components, theme } = msg.content;
+    case "import-batch": {
+      // UI sends an array of pre-fetched component data
+      const { items } = msg.content;
       let done = 0;
       let x = 0;
       let y = 0;
       const spacing = 100;
+      let lastComponent = "";
 
-      for (const comp of components) {
-        for (const variant of comp.variants) {
-          if (!variant.themes.includes(theme)) continue;
-          try {
-            const suffix = theme === "dark" ? ".dark" : "";
-            const resp = await fetch(`${API_BASE}/components/${comp.name}/${variant.name}${suffix}.json`);
-            const data: ComponentData = await resp.json();
+      for (const data of items) {
+        try {
+          if (data.component !== lastComponent) {
+            if (lastComponent) { x += 1500; y = 0; }
+            lastComponent = data.component;
+          }
 
-            await importComponent(data, penpot, penpotUtils, { x, y });
+          await importComponent(data, penpot, penpotUtils, { x, y });
+          y += data.height + spacing;
+          done++;
 
-            y += data.height + spacing;
-            done++;
-
-            penpot.ui.sendMessage({
-              type: "import-progress",
-              content: { done, total: components.length },
-            });
-          } catch {}
-        }
-        x += 1500;
-        y = 0;
+          penpot.ui.sendMessage({
+            type: "import-progress",
+            content: { done, total: items.length },
+          });
+        } catch {}
       }
 
       penpot.ui.sendMessage({ type: "import-all-complete", content: { done } });
