@@ -318,10 +318,10 @@ const actionBtn = css({
   justifyContent: "center",
   width: "36px",
   height: "36px",
-  backgroundColor: "transparent",
+  backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
-  color: "text.secondary",
+  color: { base: "text.secondary", _dark: "warm.ivory" },
   cursor: "pointer",
   transition: "all 0.15s ease",
   _hover: {

@@ -380,8 +380,8 @@ const fileNameArrow = css({
 
 const hunkHeaderStyle = css({
   padding: "6px 16px",
-  backgroundColor: "rgba(130, 130, 160, 0.08)",
-  color: "text.muted",
+  backgroundColor: { base: "rgba(130, 130, 160, 0.08)", _dark: "rgba(130, 130, 160, 0.15)" },
+  color: "text.secondary",
   fontSize: "12px",
   fontFamily: "mono",
   borderBottom: "1px solid",
@@ -402,7 +402,7 @@ const lineNumCell = css({
   width: "48px",
   minWidth: "48px",
   padding: "0 8px",
-  color: "text.muted",
+  color: "text.secondary",
   fontSize: "11px",
   userSelect: "none",
   borderRight: "1px solid",
@@ -429,11 +429,13 @@ const contentCell = css({
 });
 
 const addBg = css({
-  backgroundColor: "rgba(46, 160, 67, 0.15)",
+  backgroundColor: { base: "rgba(46, 160, 67, 0.15)", _dark: "rgba(46, 160, 67, 0.2)" },
+  color: { _dark: "rgba(255, 255, 255, 0.9)" },
 });
 
 const removeBg = css({
-  backgroundColor: "rgba(248, 81, 73, 0.15)",
+  backgroundColor: { base: "rgba(248, 81, 73, 0.15)", _dark: "rgba(248, 81, 73, 0.2)" },
+  color: { _dark: "rgba(255, 255, 255, 0.9)" },
 });
 
 const splitRowStyle = css({

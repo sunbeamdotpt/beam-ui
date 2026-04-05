@@ -288,7 +288,7 @@ const toolbarButton = css({
   background: "none",
   border: "1px solid transparent",
   cursor: "pointer",
-  color: "text.secondary",
+  color: "text.primary",
   transition: "all 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
