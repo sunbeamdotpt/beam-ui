@@ -12,7 +12,7 @@
         "no-visual-content"
       ],
       "textCount": 0,
-      "svgSize": 303
+      "svgSize": 132
     },
     {
       "component": "WorkItemList",
@@ -23,7 +23,7 @@
         "no-visual-content"
       ],
       "textCount": 0,
-      "svgSize": 303
+      "svgSize": 132
     }
   ],
   "warnings": [

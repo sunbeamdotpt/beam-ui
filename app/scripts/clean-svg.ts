@@ -55,8 +55,13 @@ function convertRgbColors(value: string): string {
 export function cleanSvg(rawSvg: string): CleanedComponent {
   const warnings: string[] = [];
 
+  // Pre-clean: remove comments and @font-face (easier as string before DOM parsing)
+  let preCleaned = rawSvg;
+  preCleaned = preCleaned.replace(/<!--.*?-->/gs, "");
+  preCleaned = preCleaned.replace(/@font-face\s*\{[^}]+\}/g, "");
+
   // Parse into DOM
-  const { document } = parseHTML(`<!DOCTYPE html><html><body>${rawSvg}</body></html>`);
+  const { document } = parseHTML(`<!DOCTYPE html><html><body>${preCleaned}</body></html>`);
   const svg = document.querySelector("svg");
   if (!svg) {
     return { svg: rawSvg, texts: [], shadows: [], width: 0, height: 0, warnings: ["No SVG element found"] };
@@ -162,7 +167,9 @@ export function cleanSvg(rawSvg: string): CleanedComponent {
     "textLength", "lengthAdjust", "xml:space",
   ];
 
-  for (const el of svg.querySelectorAll("*")) {
+  // Process ALL elements including the SVG root
+  const elementsToProcess = [svg, ...svg.querySelectorAll("*")];
+  for (const el of elementsToProcess) {
     // Remove metadata attributes
     for (const attr of metadataAttrs) el.removeAttribute(attr);
 
