@@ -93,6 +93,10 @@ export interface CodeEditorProps {
   softWrap?: boolean;
   placeholder?: string;
   className?: string;
+  /** Extra CodeMirror extensions to append. Typed as unknown[] to avoid
+   *  Extension symbol mismatch when the caller uses a different @codemirror/state
+   *  instance (e.g. a file:-linked monorepo package). */
+  extensions?: readonly unknown[];
 }
 
 /* ------------------------------------------------------------------ */
@@ -268,6 +272,7 @@ export function CodeEditor({
   softWrap = false,
   placeholder,
   className,
+  extensions,
 }: CodeEditorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
@@ -280,7 +285,7 @@ export function CodeEditor({
   const buildExtensions = useCallback(
     async () => {
       const isDark = theme === "dark";
-      const extensions = [
+      const exts = [
         createBeamTheme(isDark),
         syntaxHighlighting(isDark ? beamHighlightDark : beamHighlightLight),
         indentOnInput(),
@@ -295,30 +300,33 @@ export function CodeEditor({
       ];
 
       if (showLineNumbers) {
-        extensions.push(lineNumbers());
+        exts.push(lineNumbers());
       }
 
       if (softWrap) {
-        extensions.push(EditorView.lineWrapping);
+        exts.push(EditorView.lineWrapping);
       }
 
       if (placeholder) {
-        extensions.push(cmPlaceholder(placeholder));
+        exts.push(cmPlaceholder(placeholder));
       }
 
       if (readOnly) {
-        extensions.push(EditorState.readOnly.of(true));
-        extensions.push(EditorView.editable.of(false));
+        exts.push(EditorState.readOnly.of(true));
+        exts.push(EditorView.editable.of(false));
       }
 
       const langExtension = await loadLanguage(language);
       if (langExtension) {
-        extensions.push(langExtension);
+        exts.push(langExtension);
       }
 
-      return extensions;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (extensions?.length) exts.push(...(extensions as any[]));
+
+      return exts;
     },
-    [theme, showLineNumbers, softWrap, placeholder, readOnly, language],
+    [theme, showLineNumbers, softWrap, placeholder, readOnly, language, extensions],
   );
 
   // Create / recreate the editor when config changes
