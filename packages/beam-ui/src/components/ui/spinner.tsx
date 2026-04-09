@@ -34,7 +34,6 @@ export function Spinner({
   const dim = sizes[size];
   const stroke = strokes[size];
   const r = (dim - stroke) / 2;
-  const circumference = 2 * Math.PI * r;
 
   return (
     <div className={cx(wrapper, className)} role="status" aria-label={label ?? "Loading"}>

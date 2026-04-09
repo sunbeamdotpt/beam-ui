@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { css, cx } from "styled-system/css";
+import { css } from "styled-system/css";
 import { Icon } from "./icon";
 import { Spinner } from "./spinner";
 import { TextInput } from "./text-input";

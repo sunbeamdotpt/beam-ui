@@ -9,7 +9,6 @@ interface DiagramRendererProps {
   className?: string;
 }
 
-let mermaidInitialized = false;
 
 export function DiagramRenderer({ code, className }: DiagramRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -124,7 +123,6 @@ export function DiagramRenderer({ code, className }: DiagramRendererProps) {
         fontSize: "14px",
       },
     });
-      mermaidInitialized = true;
     });
   }, [theme]);
 

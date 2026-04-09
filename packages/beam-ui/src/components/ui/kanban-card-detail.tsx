@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DialogRoot,
-  DialogTrigger,
   DialogBackdrop,
   DialogPositioner,
   DialogContent,
   DialogCloseTrigger,
   DialogTitle,
-  DialogDescription,
 } from "@ark-ui/react/dialog";
 import { Icon } from "./icon";
 import { Button } from "./button";

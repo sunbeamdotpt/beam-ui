@@ -43,13 +43,6 @@ const base = css({
   lineHeight: 1,
 });
 
-const pillBase = css({
-  fontSize: "10px",
-  padding: "4px 8px",
-  borderRadius: "sm",
-  display: "inline-block",
-});
-
 /** For token-based colors (Panda resolves these) */
 const pill = (bg: string, fg: string, border?: string) =>
   css({

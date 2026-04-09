@@ -212,8 +212,6 @@ export function NotificationCenter({
               </div>
             ) : (
               Object.entries(grouped).map(([group, items]) => {
-                const groupUnread = items.filter((n) => !n.read).length;
-
                 if (collapsibleGroups && group) {
                   return (
                     <CollapsibleGroup
@@ -388,11 +386,6 @@ const groupUnreadBadge = css({
   justifyContent: "center",
   padding: "0 4px",
   lineHeight: 1,
-});
-
-const body = css({
-  maxHeight: "400px",
-  overflowY: "auto",
 });
 
 const emptyState = css({

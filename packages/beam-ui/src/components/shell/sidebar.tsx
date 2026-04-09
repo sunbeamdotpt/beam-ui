@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "@ark-ui/react/collapsible";
 import { css } from "styled-system/css";
-import { token } from "styled-system/tokens";
 import type { NavSection } from "../../data/navigation";
 
 const aside = css({

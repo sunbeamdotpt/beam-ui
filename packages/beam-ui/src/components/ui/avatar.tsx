@@ -1,5 +1,4 @@
 import { css, cx } from "styled-system/css";
-import { token } from "styled-system/tokens";
 
 interface AvatarProps {
   name: string;

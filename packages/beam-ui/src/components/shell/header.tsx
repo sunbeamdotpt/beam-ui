@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { css } from "styled-system/css";
-import { token } from "styled-system/tokens";
 import {
   DialogRoot,
   DialogBackdrop,
@@ -11,7 +10,6 @@ import {
 } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { headerLinks, docsSidebar } from "../../data/navigation";
-import { useTheme } from "../../hooks/use-theme";
 import { Sidebar } from "./sidebar";
 import { ThemeToggle } from "../ui/theme-toggle";
 
@@ -232,23 +230,6 @@ const kbdStyle = css({
   pointerEvents: "none",
 });
 
-const themeBtn = css({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "36px",
-  height: "36px",
-  bg: "transparent",
-  border: "none",
-  cursor: "pointer",
-  color: "text.secondary",
-  fontSize: "20px",
-  transition: "color 0.2s",
-  _hover: {
-    color: "accent",
-  },
-});
-
 const searchDropdown = css({
   position: "absolute",
   top: "100%",
@@ -318,7 +299,6 @@ interface HeaderProps {
 export function Header({ showThemeToggle = true, actions }: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { theme, toggle } = useTheme();
   const [query, setQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);

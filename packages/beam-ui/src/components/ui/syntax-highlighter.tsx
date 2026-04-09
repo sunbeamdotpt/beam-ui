@@ -243,7 +243,6 @@ const wrapper = css({
   lineHeight: 1.7,
 });
 
-const monoFont = "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace";
 
 const shikiWrapper = css({
   "& pre": {
