@@ -16,6 +16,8 @@ export { Card } from "./components/ui/card";
 export { Checkbox } from "./components/ui/checkbox";
 export { Clipboard } from "./components/ui/clipboard";
 export { CodeBlock, syn } from "./components/ui/code-block";
+export { CodeEditor } from "./components/ui/code-editor";
+export type { CodeEditorProps } from "./components/ui/code-editor";
 export { DiagramRenderer } from "./components/ui/diagram-renderer";
 export { ColorPicker } from "./components/ui/color-picker";
 export { Combobox } from "./components/ui/combobox";
