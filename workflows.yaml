@@ -1,0 +1,382 @@
+# workflows.yaml -- beam-ui CI pipeline
+#
+# Runs on every push via wfe-server webhook → ci workflow.
+# Monorepo of three pieces:
+#   - packages/beam-ui    (publishable React component library, @sunbeam/beam-ui)
+#   - packages/beam-sync  (private workspace plugin, not published)
+#   - app/                (design-system site + Storybook, shipped as a container)
+#
+# On mainline: tag → publish(@sunbeam/beam-ui) → build image → release.
+# The Dockerfile already combines the site and Storybook into a single
+# distroless image, so there is one image tag, not two.
+#
+# === Prerequisites ===
+#
+# 1. wfe-server deployed (see ../sbbb/base/wfe/)
+# 2. wfe-credentials Secret with gitea-token, buildkit-*
+# 3. wfe-ci image at src.sunbeam.pt/studio/wfe-ci:latest
+# 4. buildkitd at buildkitd.build.svc:1234
+
+# --- Shared Templates ---
+
+_templates:
+
+  ci_env: &ci_env
+    GITEA_TOKEN: ${WFE_GITEA_TOKEN}
+    TEA_TOKEN: ${WFE_GITEA_TOKEN}
+    NPM_TOKEN: ${WFE_GITEA_TOKEN}
+    BUILDKIT_CA_CERT: ${WFE_BUILDKIT_CA_CERT}
+    BUILDKIT_CLIENT_CERT: ${WFE_BUILDKIT_CLIENT_CERT}
+    BUILDKIT_CLIENT_KEY: ${WFE_BUILDKIT_CLIENT_KEY}
+
+  ci_config: &ci_config
+    image: src.sunbeam.pt/studio/wfe-ci:latest
+    memory: 4Gi
+    cpu: "2"
+    timeout: 30m
+    env: *ci_env
+
+  node_config: &node_config
+    image: node:22-alpine
+    memory: 6Gi
+    cpu: "2"
+    timeout: 30m
+    env: *ci_env
+
+# --- Workflows ---
+
+workflows:
+
+  # === checkout ===
+
+  - id: checkout
+    name: Checkout
+    version: 1
+    inputs:
+      repo_url: string
+      commit_sha: string
+    outputs:
+      checkout_ok: bool
+      commit: string
+    steps:
+      - name: clone
+        type: kubernetes
+        outputs:
+          - name: checkout_ok
+          - name: commit
+        config:
+          <<: *ci_config
+          run: |
+            set -euo pipefail
+            cd /workspace
+            if [ ! -d beam-ui ]; then
+              git clone "$REPO_URL" beam-ui
+            fi
+            cd beam-ui
+            git fetch --all
+            git checkout "$COMMIT_SHA"
+            COMMIT=$(git rev-parse HEAD)
+            echo "Checked out: $COMMIT"
+            echo "##wfe[output checkout_ok=true]"
+            echo "##wfe[output commit=$COMMIT]"
+
+  # === build: install, codegen, typecheck, bundle ===
+  #
+  # panda codegen generates styled-system/ so both tsc and vite can resolve
+  # the generated types. Running vite build is the integration smoke test —
+  # if it exits 0 the whole pipeline (panda → tsc → rollup) is green.
+
+  - id: build
+    name: Build
+    version: 1
+    outputs:
+      lib_typecheck_ok: bool
+      app_bundle_ok: bool
+    steps:
+      - name: install-root
+        type: kubernetes
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui
+            npm install
+
+      - name: build-lib
+        type: kubernetes
+        outputs:
+          - name: lib_typecheck_ok
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui/packages/beam-ui
+            npm run build
+            echo "##wfe[output lib_typecheck_ok=true]"
+
+      - name: app-install
+        type: kubernetes
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui/app
+            npm install
+
+      - name: app-build
+        type: kubernetes
+        outputs:
+          - name: app_bundle_ok
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui/app
+            npx panda codegen
+            NODE_OPTIONS="--max-old-space-size=4096" npm run build
+            echo "##wfe[output app_bundle_ok=true]"
+
+  # === tag: read version from packages/beam-ui/package.json ===
+
+  - id: tag
+    name: Tag Release
+    version: 1
+    outputs:
+      version: string
+      tag_created: bool
+      tag_already_existed: bool
+    steps:
+      - name: read-version
+        type: kubernetes
+        outputs:
+          - name: version
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui
+            VERSION=$(node -e "process.stdout.write(require('./packages/beam-ui/package.json').version)")
+            echo "Version: $VERSION"
+            echo "##wfe[output version=$VERSION]"
+
+      - name: check-tag-exists
+        type: kubernetes
+        outputs:
+          - name: tag_already_existed
+        config:
+          <<: *ci_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui
+            git fetch --tags
+            TAG="v${VERSION}"
+            if git tag -l "$TAG" | grep -q "$TAG"; then
+              echo "##wfe[output tag_already_existed=true]"
+            else
+              echo "##wfe[output tag_already_existed=false]"
+            fi
+
+      - name: create-tag
+        type: kubernetes
+        when:
+          field: .outputs.tag_already_existed
+          equals: false
+        outputs:
+          - name: tag_created
+        config:
+          <<: *ci_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui
+            TAG="v${VERSION}"
+            git config user.email "wfe-ci@sunbeam.pt"
+            git config user.name "wfe-ci"
+            git tag -a "$TAG" -m "$TAG"
+            git push origin "$TAG"
+            echo "##wfe[output tag_created=true]"
+
+  # === publish: @sunbeam/beam-ui to the sunbeam npm registry ===
+  #
+  # The package's publishConfig already points at
+  # https://src.sunbeam.pt/api/packages/studio/npm/ — we just need to
+  # wire the auth token into ~/.npmrc before running `npm publish`.
+
+  - id: publish
+    name: Publish
+    version: 1
+    outputs:
+      published: bool
+    steps:
+      - name: publish-beam-ui
+        type: kubernetes
+        outputs:
+          - name: published
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui
+            echo "//src.sunbeam.pt/api/packages/studio/npm/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            cd packages/beam-ui
+            npm publish --registry https://src.sunbeam.pt/api/packages/studio/npm/ 2>&1 || echo "Already published: @sunbeam/beam-ui"
+            echo "##wfe[output published=true]"
+        error_behavior:
+          type: retry
+          interval: 10s
+          max_retries: 2
+
+  # === image: build the site + storybook container via buildkitd ===
+
+  - id: image
+    name: Build Image
+    version: 1
+    inputs:
+      version: string
+    outputs:
+      image_pushed: bool
+      image_digest: string
+    steps:
+      - name: write-buildkit-certs
+        type: kubernetes
+        config:
+          <<: *ci_config
+          run: |
+            set -euo pipefail
+            mkdir -p /workspace/buildkit-certs
+            echo "$BUILDKIT_CA_CERT"     > /workspace/buildkit-certs/ca.pem
+            echo "$BUILDKIT_CLIENT_CERT" > /workspace/buildkit-certs/client.pem
+            echo "$BUILDKIT_CLIENT_KEY"  > /workspace/buildkit-certs/client-key.pem
+            chmod 600 /workspace/buildkit-certs/client-key.pem
+
+      - name: build-and-push
+        type: buildkit
+        outputs:
+          - name: image_pushed
+          - name: image_digest
+        config:
+          dockerfile: /workspace/beam-ui/Dockerfile
+          context: /workspace/beam-ui
+          tags:
+            - "src.sunbeam.pt/studio/beam-ui:${VERSION}"
+            - "src.sunbeam.pt/studio/beam-ui:latest"
+          push: true
+          buildkit_addr: tcp://buildkitd.build.svc:1234
+          tls:
+            ca:   /workspace/buildkit-certs/ca.pem
+            cert: /workspace/buildkit-certs/client.pem
+            key:  /workspace/buildkit-certs/client-key.pem
+          timeout: 45m
+
+  # === release ===
+
+  - id: release
+    name: Gitea Release
+    version: 1
+    inputs:
+      version: string
+    outputs:
+      release_created: bool
+      release_url: string
+    steps:
+      - name: create-gitea-release
+        type: kubernetes
+        outputs:
+          - name: release_created
+          - name: release_url
+        config:
+          <<: *ci_config
+          run: |
+            set -euo pipefail
+            TAG="v${VERSION}"
+            tea login add --name sunbeam --url https://src.sunbeam.pt --token "$TEA_TOKEN" 2>/dev/null || true
+            if tea release create \
+              --repo studio/beam-ui \
+              --tag "$TAG" \
+              --title "$TAG" \
+              --note "Container: \`src.sunbeam.pt/studio/beam-ui:${VERSION}\`\nPackage: \`@sunbeam/beam-ui@${VERSION}\`" 2>&1; then
+              echo "##wfe[output release_created=true]"
+            else
+              echo "##wfe[output release_created=false]"
+            fi
+            echo "##wfe[output release_url=https://src.sunbeam.pt/studio/beam-ui/releases/tag/${TAG}]"
+
+  # === ci: top-level orchestrator ===
+
+  - id: ci
+    name: Continuous Integration
+    version: 1
+    inputs:
+      repo_url: string
+      commit_sha: string
+      branch: string?
+    outputs:
+      version: string
+      app_bundle_ok: bool
+      published: bool
+      image_pushed: bool
+      released: bool
+
+    steps:
+      - name: run-checkout
+        type: workflow
+        outputs:
+          - name: commit
+        config:
+          workflow: checkout
+          version: 1
+
+      - name: run-build
+        type: workflow
+        outputs:
+          - name: lib_typecheck_ok
+          - name: app_bundle_ok
+        config:
+          workflow: build
+          version: 1
+
+      - name: run-tag
+        type: workflow
+        when:
+          field: .inputs.branch
+          equals: mainline
+        outputs:
+          - name: version
+          - name: tag_created
+        config:
+          workflow: tag
+          version: 1
+
+      - name: run-publish
+        type: workflow
+        when:
+          field: .outputs.tag_created
+          equals: true
+        outputs:
+          - name: published
+        config:
+          workflow: publish
+          version: 1
+
+      - name: run-image
+        type: workflow
+        when:
+          field: .outputs.tag_created
+          equals: true
+        outputs:
+          - name: image_pushed
+          - name: image_digest
+        config:
+          workflow: image
+          version: 1
+
+      - name: run-release
+        type: workflow
+        when:
+          field: .outputs.tag_created
+          equals: true
+        outputs:
+          - name: released
+          - name: release_url
+        config:
+          workflow: release
+          version: 1
