@@ -59,8 +59,8 @@ async function serveFile(path: string, headers?: Record<string, string>): Promis
 
 async function fileExists(path: string): Promise<boolean> {
   try {
-    await Deno.stat(path);
-    return true;
+    const stat = await Deno.stat(path);
+    return stat.isFile;
   } catch {
     return false;
   }
