@@ -4,3 +4,9 @@ app/styled-system/
 app/node_modules/
 *.local
 .DS_Store
+
+# Playwright visual suite
+app/tests/__screenshots__/
+app/test-results/
+app/playwright-report/
+app/playwright/.cache/
