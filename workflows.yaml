@@ -6,7 +6,8 @@
 #   - packages/beam-sync  (private workspace plugin, not published)
 #   - app/                (design-system site + Storybook, shipped as a container)
 #
-# On mainline: tag → publish(@sunbeam/beam-ui) → build image → release.
+# On every push:  build → test (playwright visual capture).
+# On mainline:     tag → publish(@sunbeam/beam-ui) → build image → release.
 # The Dockerfile already combines the site and Storybook into a single
 # distroless image, so there is one image tag, not two.
 #
@@ -135,6 +136,87 @@ workflows:
             npx panda codegen
             NODE_OPTIONS="--max-old-space-size=4096" npm run build
             echo "##wfe[output app_bundle_ok=true]"
+
+  # === test: playwright visual capture against the built dist ===
+  #
+  # Uses the official Playwright image so chromium + system deps come
+  # pre-installed — installing them on node:22-alpine balloons the step to
+  # several minutes and occasionally flakes on apt mirror availability.
+  #
+  # The suite launches `vite preview` itself via playwright.config.ts
+  # webServer, visits every route in tests/routes.ts, and fails on any
+  # non-200 or missing Shell chrome. Screenshots land in
+  # app/tests/__screenshots__/ and are published as an artifact so
+  # reviewers can eyeball diffs without re-running the job.
+
+  - id: test
+    name: Test
+    version: 1
+    outputs:
+      tests_ok: bool
+      screenshots_artifact: string
+    steps:
+      - name: build-storybook
+        type: kubernetes
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui/app
+            npx panda cssgen --outfile .storybook/panda.css
+            STORYBOOK_BASE=/storybook/ npx storybook build -o dist/storybook
+
+      - name: build-beam-sync
+        type: kubernetes
+        config:
+          <<: *node_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui
+            # Mirrors the equivalent Dockerfile steps so tests cover the same
+            # Beam Sync artifacts that ship in the production image.
+            npx esbuild packages/beam-sync/plugin.ts \
+              --bundle --format=esm --minify \
+              --outfile=packages/beam-sync/dist/assets/plugin.js
+            mkdir -p packages/beam-sync/dist/assets
+            cp packages/beam-sync/manifest.json packages/beam-sync/dist/manifest.json
+            cp packages/beam-sync/src/ui/styles.css packages/beam-sync/dist/assets/styles.css
+            npx esbuild packages/beam-sync/src/ui/app.ts \
+              --bundle --format=esm --minify \
+              --outfile=packages/beam-sync/dist/assets/app.js
+            # The Dockerfile inlines this index.html via a printf; keep the
+            # two in sync so the test environment matches the shipped image.
+            printf '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>Beam Sync</title>\n<link rel="stylesheet" href="assets/styles.css">\n</head>\n<body>\n<div id="app">\n<header class="header"><h1 class="title">Beam Sync</h1><div class="theme-toggle"><button id="theme-light" class="theme-btn active">Light</button><button id="theme-dark" class="theme-btn">Dark</button></div></header>\n<div class="search-bar"><input type="text" id="search" placeholder="Search components..." /></div>\n<div class="actions"><button id="import-all" class="btn primary">Import All</button><button id="sync" class="btn secondary">Sync Changes</button></div>\n<div id="progress" class="progress" hidden><div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div><span id="progress-text" class="progress-text">0/0</span></div>\n<div id="component-list" class="component-list"><div class="loading">Loading components...</div></div>\n<div id="status" class="status"></div>\n</div>\n<script type="module" src="assets/app.js"></script>\n</body>\n</html>' > packages/beam-sync/dist/index.html
+            mkdir -p app/dist/beam-sync
+            cp -r packages/beam-sync/dist/* app/dist/beam-sync/
+
+      - name: visual-capture
+        type: kubernetes
+        outputs:
+          - name: tests_ok
+        config:
+          image: mcr.microsoft.com/playwright:v1.48.0-noble
+          memory: 6Gi
+          cpu: "4"
+          timeout: 20m
+          env: *ci_env
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui/app
+            # Node deps should be present from the app-install build step,
+            # but guard against a fresh pod with cold /workspace.
+            [ -d node_modules ] || npm install
+            CI=1 npm run test:visual
+            echo "##wfe[output tests_ok=true]"
+
+      - name: publish-artifact
+        type: artifact
+        outputs:
+          - name: screenshots_artifact
+        config:
+          path: /workspace/beam-ui/app/tests/__screenshots__
+          name: beam-ui-screenshots
+          retention_days: 30
 
   # === tag: read version from packages/beam-ui/package.json ===
 
@@ -312,6 +394,7 @@ workflows:
     outputs:
       version: string
       app_bundle_ok: bool
+      tests_ok: bool
       published: bool
       image_pushed: bool
       released: bool
@@ -334,11 +417,23 @@ workflows:
           workflow: build
           version: 1
 
+      - name: run-test
+        type: workflow
+        when:
+          field: .outputs.app_bundle_ok
+          equals: true
+        outputs:
+          - name: tests_ok
+          - name: screenshots_artifact
+        config:
+          workflow: test
+          version: 1
+
       - name: run-tag
         type: workflow
         when:
-          field: .inputs.branch
-          equals: mainline
+          field: .outputs.tests_ok
+          equals: true
         outputs:
           - name: version
           - name: tag_created
