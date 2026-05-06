@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   PopoverRoot,
   PopoverTrigger,
@@ -53,7 +53,7 @@ export function LabelPicker({
   onChange,
   placeholder = "Labels",
   className,
-}: LabelPickerProps) {
+}: LabelPickerProps): ReactNode {
   const [query, setQuery] = useState("");
 
   const filtered = options.filter(

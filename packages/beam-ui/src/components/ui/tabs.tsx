@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { TabsRoot, TabList, TabTrigger, TabIndicator, TabContent } from "@ark-ui/react/tabs";
 import { css } from "styled-system/css";
 
@@ -97,7 +98,7 @@ const tabTriggerDark = css({
  * />
  * ```
  */
-export function Tabs({ items, activeValue, onChange, variant = "default" }: TabsProps) {
+export function Tabs({ items, activeValue, onChange, variant = "default" }: TabsProps): ReactNode {
   const isDark = variant === "dark";
 
   return (

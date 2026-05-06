@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /**
@@ -106,7 +107,7 @@ const variants: Record<Exclude<BadgeVariant, "section">, string> = {
  * Used to visually separate sections in long-form content. The label is left-aligned
  * with an orange background, and a decorative line extends to the right.
  */
-function SectionBadge({ children, className }: Omit<BadgeProps, "variant">) {
+function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): ReactNode {
   return (
     <div
       className={cx(
@@ -159,7 +160,7 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">) {
  * <Badge variant="section">Documentation</Badge>
  * ```
  */
-export function Badge({ children, variant = "premier", className }: BadgeProps) {
+export function Badge({ children, variant = "premier", className }: BadgeProps): ReactNode {
   if (variant === "section") {
     return <SectionBadge className={className}>{children}</SectionBadge>;
   }

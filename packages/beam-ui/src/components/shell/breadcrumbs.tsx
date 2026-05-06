@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 
@@ -49,7 +50,7 @@ interface BreadcrumbsProps {
  * ]} />
  * ```
  */
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export function Breadcrumbs({ items }: BreadcrumbsProps): ReactNode {
   return (
     <nav className={nav} aria-label="Breadcrumb">
       <ol style={{ display: "flex", alignItems: "center", gap: "8px", listStyle: "none", padding: 0, margin: 0 }}>

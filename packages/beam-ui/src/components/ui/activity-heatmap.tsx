@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 import { ScrollArea } from "./scroll-area";
@@ -68,7 +68,7 @@ const LABEL_W = 32;
  * <ActivityHeatmap data={data} />
  * ```
  */
-export function ActivityHeatmap({ data, className }: ActivityHeatmapProps) {
+export function ActivityHeatmap({ data, className }: ActivityHeatmapProps): ReactNode {
   const { theme } = useTheme();
   const colors = theme === "dark" ? LEVEL_COLORS_DARK : LEVEL_COLORS_LIGHT;
 

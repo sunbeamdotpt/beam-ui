@@ -53,7 +53,7 @@ export function Accordion({
   multiple = false,
   defaultValue,
   className,
-}: AccordionProps) {
+}: AccordionProps): ReactNode {
   return (
     <AccordionRoot
       collapsible

@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DatePickerRoot,
@@ -58,7 +58,7 @@ export function DatePicker({
   placeholder = "Select date",
   disabled = false,
   className,
-}: DatePickerProps) {
+}: DatePickerProps): ReactNode {
   const inputId = useId();
   return (
     <div className={cx(wrapper, className)}>

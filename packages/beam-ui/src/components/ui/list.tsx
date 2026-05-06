@@ -50,7 +50,7 @@ export function List({
   ordered,
   variant = "default",
   className,
-}: ListProps) {
+}: ListProps): ReactNode {
   const Tag = ordered ? "ol" : "ul";
 
   return (

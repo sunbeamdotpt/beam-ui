@@ -32,7 +32,7 @@ export function ScrollArea({
   scrollbar = "visible",
   direction = "vertical",
   className,
-}: ScrollAreaProps) {
+}: ScrollAreaProps): ReactNode {
   const dirClass =
     direction === "horizontal" ? dirHorizontal
     : direction === "both" ? dirBoth

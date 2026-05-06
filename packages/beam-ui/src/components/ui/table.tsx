@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -60,7 +60,7 @@ export function Table({
   rowKey = "id",
   className,
   caption,
-}: TableProps) {
+}: TableProps): ReactNode {
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [selected, setSelected] = useState<Set<string>>(new Set());

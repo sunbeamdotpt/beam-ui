@@ -1,5 +1,5 @@
 import { type ReactNode, createElement } from "react";
-import { create } from "zustand";
+import { create, type UseBoundStore, type StoreApi } from "zustand";
 import { persist } from "zustand/middleware";
 import { Navigate } from "react-router-dom";
 
@@ -65,7 +65,7 @@ interface AuthState {
  * const isLoading = useAuth((s) => s.isLoading);
  * ```
  */
-export const useAuth = create<AuthState>()(
+export const useAuth: UseBoundStore<StoreApi<AuthState>> = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
@@ -123,7 +123,7 @@ interface RequireAuthProps {
  * </Routes>
  * ```
  */
-export function RequireAuth({ children, redirectTo = "/login" }: RequireAuthProps) {
+export function RequireAuth({ children, redirectTo = "/login" }: RequireAuthProps): ReactNode {
   const isAuthenticated = useAuth((s) => s.isAuthenticated);
 
   if (!isAuthenticated) {

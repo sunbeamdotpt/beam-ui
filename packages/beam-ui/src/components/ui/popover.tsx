@@ -38,7 +38,7 @@ export function Popover({
   children,
   title,
   className,
-}: PopoverProps) {
+}: PopoverProps): ReactNode {
   return (
     <PopoverRoot positioning={{ placement: "bottom" }}>
       <PopoverTrigger asChild>

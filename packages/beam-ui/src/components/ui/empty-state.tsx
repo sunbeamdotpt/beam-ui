@@ -64,7 +64,7 @@ const actionStyle = css({
 });
 
 // EmptyState is documented above, before const containerStyle
-export function EmptyState({ icon, title, description, action }: EmptyStateProps) {
+export function EmptyState({ icon, title, description, action }: EmptyStateProps): ReactNode {
   return (
     <div className={containerStyle}>
       {icon && <Icon name={icon} size={48} className={iconStyle} />}

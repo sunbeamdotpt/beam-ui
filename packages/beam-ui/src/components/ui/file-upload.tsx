@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, type DragEvent, type KeyboardEvent } from "react";
+import { useState, useRef, useCallback, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -34,7 +34,7 @@ export function FileUpload({
   multiple = false,
   disabled = false,
   className,
-}: FileUploadProps) {
+}: FileUploadProps): ReactNode {
   const [dragOver, setDragOver] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);

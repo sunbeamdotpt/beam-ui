@@ -1,3 +1,37 @@
+/**
+ * Form helpers built on `react-hook-form` + `zod`.
+ *
+ * Exposes a typed {@link Form} wrapper that connects a Zod schema to RHF and
+ * a {@link FormField} primitive for individual fields. Re-exports `useForm`,
+ * `zodResolver`, and `z` so consumers only need a single dependency for the
+ * common form-validation flow.
+ *
+ * @example
+ * ```tsx
+ * import { Form, FormField, z } from "@sunbeam/beam-ui/form";
+ *
+ * const schema = z.object({
+ *   email: z.string().email(),
+ *   password: z.string().min(8),
+ * });
+ *
+ * export function SignIn() {
+ *   return (
+ *     <Form schema={schema} onSubmit={(values) => console.log(values)}>
+ *       {(methods) => (
+ *         <>
+ *           <FormField name="email" label="Email" methods={methods} />
+ *           <FormField name="password" label="Password" methods={methods} />
+ *           <button type="submit">Sign in</button>
+ *         </>
+ *       )}
+ *     </Form>
+ *   );
+ * }
+ * ```
+ *
+ * @module
+ */
 import { type ReactNode } from "react";
 import { useForm, type UseFormReturn, type FieldValues, type DefaultValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,7 +100,7 @@ export function Form<T extends FieldValues>({
   onSubmit,
   children,
   className,
-}: FormProps<T>) {
+}: FormProps<T>): ReactNode {
   const methods = useForm<T>({
     resolver: zodResolver(schema as any) as any,
     defaultValues,
@@ -117,7 +151,7 @@ interface FormFieldProps {
  * </Form>
  * ```
  */
-export function FormField({ name, label, methods, className }: FormFieldProps) {
+export function FormField({ name, label, methods, className }: FormFieldProps): ReactNode {
   const { register, formState: { errors } } = methods;
   const error = errors[name];
 

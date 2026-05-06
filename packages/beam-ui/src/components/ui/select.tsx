@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   SelectRoot,
   SelectTrigger,
@@ -60,7 +61,7 @@ export function Select({
   placeholder = "Select…",
   disabled = false,
   className,
-}: SelectProps) {
+}: SelectProps): ReactNode {
   const collection = createListCollection({
     items: options,
     itemToValue: (item) => item.value,

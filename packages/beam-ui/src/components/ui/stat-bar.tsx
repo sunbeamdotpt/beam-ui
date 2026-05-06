@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -132,7 +133,7 @@ interface StatBarProps {
  * }} />
  * ```
  */
-export function StatBar({ stats }: StatBarProps) {
+export function StatBar({ stats }: StatBarProps): ReactNode {
   return (
     <section className={grid}>
       {/* Speed */}

@@ -1,3 +1,31 @@
+/**
+ * Sunbeam Studios design system — main entry point.
+ *
+ * Re-exports every UI component, layout shell, hook, store, and curated
+ * navigation/status data set. Components are unstyled at import time and pick
+ * up styling from a consumer's Panda CSS pipeline; wire {@link beamPreset}
+ * (from `@sunbeam/beam-ui/preset`) into your `panda.config.ts` to get the
+ * full design language.
+ *
+ * @example
+ * ```tsx
+ * import { Button, Card, useTheme } from "@sunbeam/beam-ui";
+ *
+ * export function Hero() {
+ *   const { theme, toggle } = useTheme();
+ *   return (
+ *     <Card>
+ *       <Button variant="primary" onClick={toggle}>
+ *         Switch to {theme === "dark" ? "light" : "dark"} mode
+ *       </Button>
+ *     </Card>
+ *   );
+ * }
+ * ```
+ *
+ * @module
+ */
+
 // UI components
 export { Accordion } from "./components/ui/accordion";
 export { ActivityHeatmap } from "./components/ui/activity-heatmap";

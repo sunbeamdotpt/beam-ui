@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link Avatar}. */
@@ -70,7 +71,7 @@ const base = css({
   flexShrink: 0,
 });
 
-export function Avatar({ name, src, size = "md", className }: AvatarProps) {
+export function Avatar({ name, src, size = "md", className }: AvatarProps): ReactNode {
   const dim = sizes[size];
   const fontSize = Math.round(dim * 0.38);
 

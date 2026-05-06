@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type ReactNode } from "react";
 import TurndownService from "turndown";
 import { css } from "styled-system/css";
 import { Icon } from "../ui/icon";
@@ -162,7 +162,7 @@ interface RightRailProps {
  * />
  * ```
  */
-export function RightRail({ items, lastUpdated }: RightRailProps) {
+export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
 
   // Intersection Observer — track which section heading is in view

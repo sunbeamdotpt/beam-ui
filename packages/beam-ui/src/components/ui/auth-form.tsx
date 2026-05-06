@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 import { Spinner } from "./spinner";
@@ -48,7 +48,7 @@ export function LoginForm({
   oauthProviders,
   error,
   loading = false,
-}: LoginFormProps) {
+}: LoginFormProps): ReactNode {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -152,7 +152,7 @@ interface SignUpFormProps {
  * />
  * ```
  */
-export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps) {
+export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps): ReactNode {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -238,7 +238,7 @@ export function ForgotPasswordForm({
   error,
   loading = false,
   success = false,
-}: ForgotPasswordFormProps) {
+}: ForgotPasswordFormProps): ReactNode {
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -314,7 +314,7 @@ export function TwoFactorForm({
   onScratchCode,
   error,
   loading = false,
-}: TwoFactorFormProps) {
+}: TwoFactorFormProps): ReactNode {
   const [code, setCode] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {

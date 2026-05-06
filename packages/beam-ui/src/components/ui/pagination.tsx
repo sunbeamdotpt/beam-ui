@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -41,7 +42,7 @@ export function Pagination({
   pageSize,
   onPageSizeChange,
   className,
-}: PaginationProps) {
+}: PaginationProps): ReactNode {
   const pages = buildPageList(currentPage, totalPages);
 
   // Size buttons based on the widest possible page number

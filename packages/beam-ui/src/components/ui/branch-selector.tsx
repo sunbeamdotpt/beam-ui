@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   PopoverRoot,
   PopoverTrigger,
@@ -54,7 +54,7 @@ export function BranchSelector({
   onChange,
   onCreateBranch,
   className,
-}: BranchSelectorProps) {
+}: BranchSelectorProps): ReactNode {
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState("branches");
 

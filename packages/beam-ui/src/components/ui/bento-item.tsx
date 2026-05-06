@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
@@ -259,7 +260,7 @@ export function BentoItem({
   difficulty,
   category,
   href = "/guides",
-}: BentoItemProps) {
+}: BentoItemProps): ReactNode {
   if (variant === "large") {
     return (
       <Link to={href} className={cx(largeCard, css({ _hover: { "& .arrow": { transform: "translateX(8px)" } } }))} aria-label={`${title} — ${category}`}>

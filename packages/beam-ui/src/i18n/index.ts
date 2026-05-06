@@ -1,3 +1,38 @@
+/**
+ * Lightweight i18n context for Sunbeam apps.
+ *
+ * Provides {@link I18nProvider} (a context provider that owns the active locale +
+ * dictionary) and {@link useTranslation} (a hook returning `t()` plus the
+ * locale setter). Pluralization is handled via `.one` / `.other` keys.
+ *
+ * @example
+ * ```tsx
+ * import { I18nProvider, useTranslation } from "@sunbeam/beam-ui/i18n";
+ *
+ * const config = {
+ *   defaultLocale: "en",
+ *   locales: {
+ *     en: { greeting: "Hello, {name}!", "items.one": "1 item", "items.other": "{count} items" },
+ *     pt: { greeting: "Olá, {name}!", "items.one": "1 item", "items.other": "{count} itens" },
+ *   },
+ * };
+ *
+ * function Greeting() {
+ *   const { t } = useTranslation();
+ *   return <p>{t("greeting", { name: "Sienna" })}</p>;
+ * }
+ *
+ * export function App() {
+ *   return (
+ *     <I18nProvider config={config} locale="en">
+ *       <Greeting />
+ *     </I18nProvider>
+ *   );
+ * }
+ * ```
+ *
+ * @module
+ */
 import {
   createContext,
   useContext,
@@ -86,7 +121,7 @@ interface I18nProviderProps {
  * </I18nProvider>
  * ```
  */
-export function I18nProvider({ config, locale: initialLocale, children }: I18nProviderProps) {
+export function I18nProvider({ config, locale: initialLocale, children }: I18nProviderProps): ReactNode {
   const [locale, setLocale] = useState(initialLocale);
 
   const t = useCallback(

@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link Spinner}. */
@@ -41,7 +42,7 @@ export function Spinner({
   accent = false,
   color,
   className,
-}: SpinnerProps) {
+}: SpinnerProps): ReactNode {
   const dim = sizes[size];
   const stroke = strokes[size];
   const r = (dim - stroke) / 2;

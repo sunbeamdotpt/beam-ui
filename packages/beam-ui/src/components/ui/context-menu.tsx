@@ -88,7 +88,7 @@ const separatorStyle = css({
 });
 
 // ContextMenu function is documented above, before the const contentStyle declaration
-export function ContextMenu({ items, children }: ContextMenuProps) {
+export function ContextMenu({ items, children }: ContextMenuProps): ReactNode {
   return (
     <MenuRoot>
       <MenuContextTrigger asChild>{children}</MenuContextTrigger>

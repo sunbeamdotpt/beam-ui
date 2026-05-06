@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   SwitchRoot,
   SwitchControl,
@@ -36,7 +37,7 @@ export function Switch({
   label,
   disabled = false,
   className,
-}: SwitchProps) {
+}: SwitchProps): ReactNode {
   return (
     <SwitchRoot
       checked={checked}

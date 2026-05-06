@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import {
   RadioGroupRoot,
   RadioGroupItem,
@@ -44,7 +44,7 @@ interface RadioGroupProps {
  * />
  * ```
  */
-export function RadioGroup({ options, value, onChange, label }: RadioGroupProps) {
+export function RadioGroup({ options, value, onChange, label }: RadioGroupProps): ReactNode {
   const labelId = useId();
   return (
     <RadioGroupRoot

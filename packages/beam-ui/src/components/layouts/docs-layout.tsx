@@ -3,7 +3,7 @@ import { css } from "styled-system/css";
 import { Sidebar } from "../shell/sidebar";
 import { RightRail } from "../shell/right-rail";
 import { docsSidebar } from "../../data/navigation";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 const body = css({
   display: "flex",
@@ -82,7 +82,7 @@ interface DocsContext {
  *
  * @returns Object with `setToc` function to update the visible TOC.
  */
-export function useDocsContext() {
+export function useDocsContext(): DocsContext {
   return useOutletContext<DocsContext>();
 }
 
@@ -99,7 +99,7 @@ export function useDocsContext() {
  * </DocsLayout>
  * ```
  */
-export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> } = {}) {
+export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> } = {}): ReactNode {
   const [toc, setToc] = useState<DocsTocItem[]>([]);
   const location = useLocation();
   const lastUpdated = pageDates?.[location.pathname];

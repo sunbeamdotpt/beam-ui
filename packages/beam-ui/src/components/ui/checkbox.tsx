@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link Checkbox}. */
@@ -40,7 +40,7 @@ export function Checkbox({
   disabled = false,
   indeterminate = false,
   className,
-}: CheckboxProps) {
+}: CheckboxProps): ReactNode {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {

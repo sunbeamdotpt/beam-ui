@@ -32,7 +32,7 @@ export function Splitter({
   children,
   direction = "horizontal",
   defaultSize = 50,
-}: SplitterProps) {
+}: SplitterProps): ReactNode {
   const orientation = direction === "horizontal" ? "horizontal" : "vertical";
 
   return (

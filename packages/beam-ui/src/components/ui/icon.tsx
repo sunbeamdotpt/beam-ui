@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link Icon}. */
@@ -23,7 +24,7 @@ interface IconProps {
  * <Icon name="settings" filled label="Settings" />
  * ```
  */
-export function Icon({ name, size, filled, className, label }: IconProps) {
+export function Icon({ name, size, filled, className, label }: IconProps): ReactNode {
   const style: React.CSSProperties = {
     fontSize: typeof size === "number" ? `${size}px` : size,
     lineHeight: 1,

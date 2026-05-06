@@ -113,7 +113,7 @@ export function WorkItemList({
   selectable = false,
   onLoadMore,
   className,
-}: WorkItemListProps) {
+}: WorkItemListProps): ReactNode {
   const sel = selected ?? new Set<string>();
 
   const toggle = (id: string) => {

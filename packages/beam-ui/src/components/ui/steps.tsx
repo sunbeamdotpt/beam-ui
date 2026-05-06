@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   StepsRoot,
   StepsList,
@@ -44,7 +45,7 @@ interface StepsProps {
  * />
  * ```
  */
-export function Steps({ steps, currentStep, onChange }: StepsProps) {
+export function Steps({ steps, currentStep, onChange }: StepsProps): ReactNode {
   return (
     <StepsRoot
       count={steps.length}

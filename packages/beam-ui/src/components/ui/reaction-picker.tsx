@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   PopoverRoot,
@@ -52,7 +53,7 @@ export function ReactionPicker({
   onToggle,
   onAdd,
   className,
-}: ReactionPickerProps) {
+}: ReactionPickerProps): ReactNode {
   return (
     <div className={cx(wrapper, className)}>
       {reactions.map((reaction) => (

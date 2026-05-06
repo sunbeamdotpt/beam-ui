@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "@ark-ui/react/collapsible";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
@@ -45,7 +45,7 @@ interface TreeViewProps {
  * <TreeView nodes={nodes} activeId="index.ts" />
  * ```
  */
-export function TreeView({ nodes, activeId, className }: TreeViewProps) {
+export function TreeView({ nodes, activeId, className }: TreeViewProps): ReactNode {
   return (
     <div className={cx(root, className)} role="tree">
       {nodes.map((node) => (

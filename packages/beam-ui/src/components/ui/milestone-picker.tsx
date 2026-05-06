@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   PopoverRoot,
   PopoverTrigger,
@@ -59,7 +59,7 @@ export function MilestonePicker({
   onChange,
   placeholder = "Milestone",
   className,
-}: MilestonePickerProps) {
+}: MilestonePickerProps): ReactNode {
   const [query, setQuery] = useState("");
 
   const filtered = options.filter((opt) =>

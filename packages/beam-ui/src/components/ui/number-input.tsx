@@ -6,6 +6,7 @@ import {
   NumberInputIncrementTrigger,
   NumberInputDecrementTrigger,
 } from "@ark-ui/react/number-input";
+import { type ReactNode } from "react";
 import { css } from "styled-system/css";
 
 /** Props for {@link NumberInput}. */
@@ -47,7 +48,7 @@ export function NumberInput({
   max,
   step = 1,
   label,
-}: NumberInputProps) {
+}: NumberInputProps): ReactNode {
   return (
     <NumberInputRoot
       value={value != null ? String(value) : ""}

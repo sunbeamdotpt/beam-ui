@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create, type UseBoundStore, type StoreApi } from "zustand";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */
@@ -126,7 +126,7 @@ async function doFetch(fetchFn: () => Promise<NotificationItem[]>) {
  * }
  * ```
  */
-export const useNotifications = create<NotificationState>((set, get) => ({
+export const useNotifications: UseBoundStore<StoreApi<NotificationState>> = create<NotificationState>((set, get) => ({
   notifications: [],
   unreadCount: 0,
   isPolling: false,

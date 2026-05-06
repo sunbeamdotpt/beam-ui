@@ -107,7 +107,7 @@ const kbdStyle = css({
  * <Kbd>Enter</Kbd>
  * ```
  */
-export function Kbd({ children, platform, className }: KbdProps) {
+export function Kbd({ children, platform, className }: KbdProps): ReactNode {
   const detected = platform ?? detectPlatform();
   const content = resolveKey(children, detected);
 

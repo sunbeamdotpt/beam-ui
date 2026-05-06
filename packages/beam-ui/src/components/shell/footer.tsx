@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { footerSections } from "../../data/navigation";
@@ -86,7 +87,7 @@ const sectionLink = css({
  * <Footer />
  * ```
  */
-export function Footer() {
+export function Footer(): ReactNode {
   return (
     <footer className={footer}>
       <div className={grid}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "@ark-ui/react/collapsible";
 import { css } from "styled-system/css";
@@ -277,7 +277,7 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
  * <Sidebar sections={docsSidebar} />
  * ```
  */
-export function Sidebar({ sections }: SidebarProps) {
+export function Sidebar({ sections }: SidebarProps): ReactNode {
   return (
     <aside
       className={aside}

@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
@@ -61,7 +62,7 @@ const descStyle = css({
  * />
  * ```
  */
-export function TopicCard({ title, icon: iconName, description, href = "/guides" }: TopicCardProps) {
+export function TopicCard({ title, icon: iconName, description, href = "/guides" }: TopicCardProps): ReactNode {
   return (
     <Link to={href} className={card}>
       <Icon name={iconName} size={36} className={iconStyle} />

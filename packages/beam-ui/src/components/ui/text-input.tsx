@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link TextInput}. */
@@ -47,7 +47,7 @@ export function TextInput({
   disabled = false,
   type = "text",
   className,
-}: TextInputProps) {
+}: TextInputProps): ReactNode {
   const id = useId();
   const inputId = `text-input-${id}`;
   const errorId = `text-input-error-${id}`;

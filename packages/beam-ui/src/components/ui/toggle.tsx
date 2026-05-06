@@ -28,7 +28,7 @@ interface ToggleProps {
  * </Toggle>
  * ```
  */
-export function Toggle({ pressed, onChange, children, className }: ToggleProps) {
+export function Toggle({ pressed, onChange, children, className }: ToggleProps): ReactNode {
   return (
     <ToggleRoot
       pressed={pressed}

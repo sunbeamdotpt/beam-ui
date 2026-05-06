@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -53,7 +54,7 @@ const tileEndpoint = css({
 });
 
 // FeatureTile function is documented above, before const tile
-export function FeatureTile({ name, endpoint, icon: iconName }: FeatureTileProps) {
+export function FeatureTile({ name, endpoint, icon: iconName }: FeatureTileProps): ReactNode {
   return (
     <div className={tile}>
       <Icon name={iconName} size={24} className={tileIcon} aria-hidden="true" />

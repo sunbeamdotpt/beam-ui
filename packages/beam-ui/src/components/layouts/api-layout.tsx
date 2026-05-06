@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Sidebar } from "../shell/sidebar";
@@ -55,7 +56,7 @@ const panels = css({
 });
 
 /** CSS class for API layout's left content panel (55% width on desktop). */
-export const apiLeftPanel = css({
+export const apiLeftPanel: string = css({
   width: { base: "100%", lg: "55%" },
   overflowY: "auto",
   bg: "bg.page",
@@ -63,7 +64,7 @@ export const apiLeftPanel = css({
 });
 
 /** CSS class for API layout's right panel (45% width on desktop, dark background). */
-export const apiRightPanel = css({
+export const apiRightPanel: string = css({
   width: { base: "100%", lg: "45%" },
   overflowY: "auto",
   bg: "sunbeam.black",
@@ -79,7 +80,7 @@ export const apiRightPanel = css({
  * <ApiLayout />
  * ```
  */
-export function ApiLayout() {
+export function ApiLayout(): ReactNode {
   return (
     <>
     <a href="#main-content" className={srOnly}>Skip to main content</a>

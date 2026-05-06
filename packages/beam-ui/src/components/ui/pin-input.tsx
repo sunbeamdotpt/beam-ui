@@ -5,6 +5,7 @@ import {
   PinInputHiddenInput,
   PinInputLabel,
 } from "@ark-ui/react/pin-input";
+import { type ReactNode } from "react";
 import { css } from "styled-system/css";
 
 /** Props for {@link PinInput}. */
@@ -36,7 +37,7 @@ export function PinInput({
   onChange,
   mask = false,
   label,
-}: PinInputProps) {
+}: PinInputProps): ReactNode {
   // Pad the value array so Ark always sees the right number of slots
   const values = Array.from({ length }, (_, i) => value[i] ?? "");
 

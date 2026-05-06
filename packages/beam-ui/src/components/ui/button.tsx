@@ -126,7 +126,7 @@ export function Button({
   type = "button",
   disabled,
   "aria-disabled": ariaDisabled,
-}: ButtonProps) {
+}: ButtonProps): ReactNode {
   const classes = cx(base, variants[variant], disabled && disabledStyle, className);
 
   if (href) {

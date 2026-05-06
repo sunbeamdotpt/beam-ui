@@ -27,7 +27,7 @@ interface HoverCardProps {
  * </HoverCard>
  * ```
  */
-export function HoverCard({ trigger, children, className }: HoverCardProps) {
+export function HoverCard({ trigger, children, className }: HoverCardProps): ReactNode {
   return (
     <HoverCardRoot openDelay={300} closeDelay={100}>
       <HoverCardTrigger asChild>

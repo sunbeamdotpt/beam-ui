@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Sidebar } from "../shell/sidebar";
@@ -63,7 +64,7 @@ const content = css({
  * <FullwidthLayout />
  * ```
  */
-export function FullwidthLayout() {
+export function FullwidthLayout(): ReactNode {
   return (
     <>
     <a href="#main-content" className={srOnly}>Skip to main content</a>

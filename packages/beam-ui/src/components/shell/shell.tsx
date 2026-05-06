@@ -51,7 +51,7 @@ export function Shell({
   footer,
   children,
   className,
-}: ShellProps) {
+}: ShellProps): ReactNode {
   return (
     <div className={className ?? shellStyle}>
       {header !== undefined ? header : <Header showThemeToggle={showThemeToggle} actions={headerActions} />}

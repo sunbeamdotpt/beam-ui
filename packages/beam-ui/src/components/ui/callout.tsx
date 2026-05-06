@@ -65,7 +65,7 @@ const roleMap: Record<CalloutVariant, string> = {
  * <Callout variant="info">New feature available in v2.0.</Callout>
  * ```
  */
-export function Callout({ children, variant = "tip", className }: CalloutProps) {
+export function Callout({ children, variant = "tip", className }: CalloutProps): ReactNode {
   return (
     <div
       role={roleMap[variant]}

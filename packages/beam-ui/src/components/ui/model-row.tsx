@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
@@ -99,7 +100,7 @@ const versionText = css({
  * />
  * ```
  */
-export function ModelRow({ name, icon: iconName, tier, version, description, href }: ModelRowProps) {
+export function ModelRow({ name, icon: iconName, tier, version, description, href }: ModelRowProps): ReactNode {
   const content = (
     <>
       <div className={iconBox}>

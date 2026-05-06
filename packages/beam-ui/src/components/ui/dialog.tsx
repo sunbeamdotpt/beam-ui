@@ -47,7 +47,7 @@ export function Dialog({
   title,
   children,
   actions,
-}: DialogProps) {
+}: DialogProps): ReactNode {
   return (
     <DialogRoot open={open} onOpenChange={(details) => {
       if (!details.open) onClose();

@@ -328,7 +328,7 @@ export function FileList({
   layout = "list",
   font = "body",
   className,
-}: FileListProps) {
+}: FileListProps): ReactNode {
   const inner =
     layout === "grid" ? (
       <GridView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} font={font} />

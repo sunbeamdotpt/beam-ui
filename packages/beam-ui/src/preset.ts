@@ -1,4 +1,28 @@
-import { definePreset } from "@pandacss/dev";
+/**
+ * Beam Design Language — Panda CSS preset.
+ *
+ * Wires the Sunbeam color palette (warm yellows + sunbeam orange + flame),
+ * typography (Ysabeau Infant + Monaspace Argon), text styles, semantic light/dark
+ * tokens, breakpoints, radii, shadows, and global body styles into a Panda
+ * preset that consumers compose via `panda.config.ts`.
+ *
+ * @example
+ * ```ts
+ * // panda.config.ts
+ * import { defineConfig } from "@pandacss/dev";
+ * import { beamPreset } from "@sunbeam/beam-ui/preset";
+ *
+ * export default defineConfig({
+ *   preflight: true,
+ *   presets: [beamPreset],
+ *   include: ["./src/**\/*.{ts,tsx}"],
+ *   outdir: "styled-system",
+ * });
+ * ```
+ *
+ * @module
+ */
+import { definePreset, type Preset } from "@pandacss/dev";
 
 /**
  * Beam Design Language Panda CSS Preset
@@ -13,7 +37,7 @@ import { definePreset } from "@pandacss/dev";
  * })
  * ```
  */
-export const beamPreset = definePreset({
+export const beamPreset: Preset = definePreset({
   name: "beam",
   conditions: {
     extend: {

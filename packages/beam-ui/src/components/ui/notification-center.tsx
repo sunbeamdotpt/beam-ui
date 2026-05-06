@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   CollapsibleRoot,
@@ -104,7 +104,7 @@ export function NotificationItem({
   notification: Notification;
   onMarkRead?: (id: string) => void;
   onClick?: (notification: Notification) => void;
-}) {
+}): ReactNode {
   return (
     <div
       className={cx(notifRow, !notification.read ? notifUnread : undefined, onClick && clickableRow)}
@@ -204,7 +204,7 @@ export function NotificationCenter({
   triggerIcon = "notifications",
   collapsibleGroups = false,
   className,
-}: NotificationCenterProps) {
+}: NotificationCenterProps): ReactNode {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   // Group by group field (ungrouped items go under "")

@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   TagsInputRoot,
   TagsInputControl,
@@ -46,7 +47,7 @@ export function TagsInput({
   placeholder = "Add tag...",
   max,
   label,
-}: TagsInputProps) {
+}: TagsInputProps): ReactNode {
   return (
     <TagsInputRoot
       value={value}

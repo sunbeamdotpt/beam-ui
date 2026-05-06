@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -33,7 +34,7 @@ export function CapabilityCard({
   title,
   description,
   className,
-}: CapabilityCardProps) {
+}: CapabilityCardProps): ReactNode {
   return (
     <article
       className={cx(

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -41,7 +41,7 @@ export function Toast({
   visible,
   onDismiss,
   onShow,
-}: ToastProps) {
+}: ToastProps): ReactNode {
   useEffect(() => {
     if (visible && onShow) onShow();
   }, [visible, onShow]);

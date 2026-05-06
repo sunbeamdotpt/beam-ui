@@ -306,7 +306,7 @@ interface HeaderProps {
  * <Header showThemeToggle actions={<ProfileMenu />} />
  * ```
  */
-export function Header({ showThemeToggle = true, actions }: HeaderProps = {}) {
+export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): ReactNode {
   const location = useLocation();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");

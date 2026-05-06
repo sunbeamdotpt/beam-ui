@@ -32,7 +32,7 @@ interface ClipboardProps {
  * </Clipboard>
  * ```
  */
-export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps) {
+export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps): ReactNode {
   return (
     <ClipboardRoot value={value} timeout={timeout}>
       {children ? (

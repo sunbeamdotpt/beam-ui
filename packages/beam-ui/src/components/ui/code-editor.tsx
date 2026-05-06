@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { EditorState } from "@codemirror/state";
 import {
@@ -299,7 +299,7 @@ export function CodeEditor({
   placeholder,
   className,
   extensions,
-}: CodeEditorProps) {
+}: CodeEditorProps): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
   const onChangeRef = useRef(onChange);

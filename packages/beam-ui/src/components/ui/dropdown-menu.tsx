@@ -142,7 +142,7 @@ export function DropdownMenu({
   groups,
   children,
   positioning,
-}: DropdownMenuProps) {
+}: DropdownMenuProps): ReactNode {
   return (
     <MenuRoot positioning={positioning as any}>
       <MenuTrigger asChild>{children}</MenuTrigger>

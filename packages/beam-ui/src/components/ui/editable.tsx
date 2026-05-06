@@ -4,6 +4,7 @@ import {
   EditableInput,
   EditablePreview,
 } from "@ark-ui/react/editable";
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link Editable}. */
@@ -34,7 +35,7 @@ export function Editable({
   onChange,
   placeholder = "Click to edit...",
   className,
-}: EditableProps) {
+}: EditableProps): ReactNode {
   return (
     <EditableRoot
       value={value}

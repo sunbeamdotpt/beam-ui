@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import {
   ComboboxRoot,
   ComboboxControl,
@@ -59,7 +59,7 @@ export function Combobox({
   placeholder = "Search...",
   disabled = false,
   className,
-}: ComboboxProps) {
+}: ComboboxProps): ReactNode {
   const [inputValue, setInputValue] = useState("");
 
   const filtered = useMemo(() => {

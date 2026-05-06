@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   ProgressRoot,
   ProgressTrack,
@@ -43,7 +44,7 @@ export function ProgressBar({
   showLabel = false,
   size = "md",
   className,
-}: ProgressBarProps) {
+}: ProgressBarProps): ReactNode {
   const clamped = Math.max(0, Math.min(100, value));
   const height = size === "sm" ? "4px" : "8px";
 

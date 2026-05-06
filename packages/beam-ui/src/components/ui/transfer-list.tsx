@@ -1,4 +1,4 @@
-import { useState, useCallback, useId } from "react";
+import { useState, useCallback, useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -53,7 +53,7 @@ export function TransferList({
   availableTitle = "Available",
   selectedTitle = "Selected",
   className,
-}: TransferListProps) {
+}: TransferListProps): ReactNode {
   const instanceId = useId();
   const availableLabelId = `${instanceId}-available`;
   const selectedLabelId = `${instanceId}-selected`;

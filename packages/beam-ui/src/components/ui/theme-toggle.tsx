@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 import { Icon } from "./icon";
@@ -27,7 +28,7 @@ interface ThemeToggleProps {
  * <ThemeToggle variant="pill" />
  * ```
  */
-export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps) {
+export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): ReactNode {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
 

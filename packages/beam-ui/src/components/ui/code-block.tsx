@@ -114,7 +114,7 @@ export function CodeBlock({
   versionToggle,
   modeToggle,
   className,
-}: CodeBlockProps) {
+}: CodeBlockProps): ReactNode {
   const [stream, setStream] = useState(streamToggle?.defaultValue ?? streamToggle?.options[0] ?? "");
   const [version, setVersion] = useState(versionToggle?.defaultValue ?? versionToggle?.options[0] ?? "");
   const [mode, setMode] = useState(modeToggle?.defaultValue ?? modeToggle?.options[0] ?? "");
@@ -312,7 +312,7 @@ const codeBody = css({
 /* ------------------------------------------------------------------ */
 /* Syntax span helpers (use as className on <span>)                    */
 /* ------------------------------------------------------------------ */
-export const syn = {
+export const syn: Record<"keyword" | "fn" | "string" | "prop" | "number" | "builtin" | "comment", string> = {
   keyword: css({ color: "syn.keyword" }),
   fn: css({ color: "syn.fn" }),
   string: css({ color: "syn.string" }),

@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create, type UseBoundStore, type StoreApi } from "zustand";
 
 /** Theme variant: light or dark mode. */
 type Theme = "light" | "dark";
@@ -63,7 +63,7 @@ const getInitial = (): Theme => {
  * }
  * ```
  */
-export const useTheme = create<ThemeStore>((set) => ({
+export const useTheme: UseBoundStore<StoreApi<ThemeStore>> = create<ThemeStore>((set) => ({
   theme: getInitial(),
   toggle: () =>
     set((s) => {

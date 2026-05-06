@@ -90,7 +90,7 @@ export function Wizard({
   completeLabel = "Finish",
   cancelLabel = "Cancel",
   className,
-}: WizardProps) {
+}: WizardProps): ReactNode {
   const [current, setCurrent] = useState(0);
   const step = steps[current];
   const isFirst = current === 0;
@@ -212,7 +212,7 @@ export function WizardModal({
   title,
   onCancel,
   ...wizardProps
-}: WizardModalProps) {
+}: WizardModalProps): ReactNode {
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {

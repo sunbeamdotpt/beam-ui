@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   SliderRoot,
   SliderControl,
@@ -41,7 +42,7 @@ export function Slider({
   max = 100,
   step = 1,
   label,
-}: SliderProps) {
+}: SliderProps): ReactNode {
   return (
     <SliderRoot
       value={[value]}

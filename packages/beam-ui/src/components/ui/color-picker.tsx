@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState, useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   PopoverRoot,
@@ -48,7 +48,7 @@ export function ColorPicker({
   presets = DEFAULT_PRESETS,
   label,
   className,
-}: ColorPickerProps) {
+}: ColorPickerProps): ReactNode {
   const hexInputId = useId();
   const [hexInput, setHexInput] = useState(value);
 

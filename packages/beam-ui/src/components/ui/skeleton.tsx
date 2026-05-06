@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link Skeleton}. */
@@ -69,7 +70,7 @@ export function Skeleton({
   variant = "text",
   count = 1,
   className,
-}: SkeletonProps) {
+}: SkeletonProps): ReactNode {
   const variantStyle =
     variant === "text"
       ? textStyle

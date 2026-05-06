@@ -46,7 +46,7 @@ const arrowStyle = css({
  * </Tooltip>
  * ```
  */
-export function Tooltip({ content, children, position = "top" }: TooltipProps) {
+export function Tooltip({ content, children, position = "top" }: TooltipProps): ReactNode {
   return (
     <TooltipRoot openDelay={200} positioning={{ placement: position }}>
       <TooltipTrigger asChild>{children}</TooltipTrigger>

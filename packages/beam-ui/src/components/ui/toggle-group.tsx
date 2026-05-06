@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   ToggleGroupRoot,
   ToggleGroupItem,
@@ -41,7 +42,7 @@ interface ToggleGroupProps {
  * />
  * ```
  */
-export function ToggleGroup({ items, value, onChange, className }: ToggleGroupProps) {
+export function ToggleGroup({ items, value, onChange, className }: ToggleGroupProps): ReactNode {
   return (
     <ToggleGroupRoot
       value={[value]}

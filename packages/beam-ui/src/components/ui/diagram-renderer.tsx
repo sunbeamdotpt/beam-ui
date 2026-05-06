@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useId } from "react";
+import { useEffect, useRef, useState, useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 
@@ -24,7 +24,7 @@ interface DiagramRendererProps {
  * <DiagramRenderer code="flowchart LR\n  A[Start] --> B[End]" />
  * ```
  */
-export function DiagramRenderer({ code, className }: DiagramRendererProps) {
+export function DiagramRenderer({ code, className }: DiagramRendererProps): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [svg, setSvg] = useState<string>("");
