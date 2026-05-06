@@ -10,18 +10,46 @@ import {
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Single menu item in a {@link ContextMenu}. */
 interface ContextMenuItem {
+  /** Display label for the menu item. */
   label: string;
+  /** Optional Material Design icon name. */
   icon?: string;
+  /** Callback fired when the user clicks this item. */
   onClick: () => void;
+  /** If true, the item is styled as a destructive action (e.g., delete, remove). */
   danger?: boolean;
+  /** If true, a separator line is drawn above this item. */
   divider?: boolean;
 }
 
+/** Props for {@link ContextMenu}. */
 interface ContextMenuProps {
+  /** Array of menu items to display. */
   items: ContextMenuItem[];
+  /** Element or component that triggers the context menu on right-click. */
   children: ReactNode;
 }
+
+/**
+ * Right-click context menu with optional icons and danger styling.
+ *
+ * Wraps Ark UI's MenuRoot with contextual positioning. Provides danger item styling for
+ * destructive actions. Renders below or above the pointer based on viewport space.
+ *
+ * @example
+ * ```tsx
+ * <ContextMenu
+ *   items={[
+ *     { label: "Edit", icon: "edit", onClick: () => edit() },
+ *     { label: "Delete", icon: "delete", onClick: () => delete(), danger: true }
+ *   ]}
+ * >
+ *   <span>Right-click me</span>
+ * </ContextMenu>
+ * ```
+ */
 
 const contentStyle = css({
   backgroundColor: "bg.page",
@@ -59,6 +87,7 @@ const separatorStyle = css({
   margin: "4px 0",
 });
 
+// ContextMenu function is documented above, before the const contentStyle declaration
 export function ContextMenu({ items, children }: ContextMenuProps) {
   return (
     <MenuRoot>

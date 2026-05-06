@@ -9,11 +9,17 @@ import {
 } from "@ark-ui/react/popover";
 import { Icon } from "./icon";
 
+/** Props for {@link ColorPicker}. */
 interface ColorPickerProps {
+  /** Current hex color value (e.g., `"#FF5733"`). */
   value: string;
+  /** Callback fired when the user selects a color; receives the hex string. */
   onChange: (value: string) => void;
+  /** Array of preset hex colors to display in the swatch grid. Defaults to a curated palette. */
   presets?: string[];
+  /** Optional label shown above the color picker. */
   label?: string;
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
@@ -25,6 +31,17 @@ const DEFAULT_PRESETS = [
   "#DC2626", "#EA580C", "#D97706", "#059669",
 ];
 
+/**
+ * Popover-based color picker with hex input and preset swatches.
+ *
+ * Displays a trigger button showing the current color; opens a popover with a preset swatch grid,
+ * live preview, and manual hex input. Only accepts valid 6-digit hex colors.
+ *
+ * @example
+ * ```tsx
+ * <ColorPicker value={color} onChange={setColor} label="Brand Color" />
+ * ```
+ */
 export function ColorPicker({
   value,
   onChange,

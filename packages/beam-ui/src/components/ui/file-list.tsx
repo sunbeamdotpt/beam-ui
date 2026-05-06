@@ -2,24 +2,39 @@ import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Single file or folder in a {@link FileList}. */
 export interface FileItem {
+  /** Unique identifier for this item. */
   id: string;
+  /** Display name of the file or folder. */
   name: string;
+  /** Optional Material Design icon name (overrides default folder/file icons). */
   icon?: string;
+  /** Type of item: "file" or "folder". Defaults to "file". */
   type?: "file" | "folder";
+  /** Human-readable file size (e.g., "1.2 MB"). */
   size?: string;
+  /** Human-readable modification time (e.g., "2 days ago"). */
   modified?: string;
+  /** Optional extra metadata content. */
   meta?: ReactNode;
 }
 
+/** Props for {@link FileList}. */
 interface FileListProps {
+  /** Array of files and folders to display. */
   items: FileItem[];
+  /** Set of currently selected item IDs. */
   selected: Set<string>;
+  /** Callback fired when the selection changes; receives the new Set of selected IDs. */
   onSelect: (selected: Set<string>) => void;
+  /** Callback fired when the user double-clicks an item; receives the FileItem. */
   onOpen?: (item: FileItem) => void;
+  /** Render layout: "list" (detailed table) or "grid" (icon grid). Defaults to `"list"`. */
   layout?: "list" | "grid";
-  /** Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) */
+  /** Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon). Defaults to `"body"`. */
   font?: "body" | "mono";
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
@@ -287,6 +302,24 @@ function GridView({
 /* FileList                                                            */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Multi-select file browser with list and grid layout options.
+ *
+ * Displays files and folders with icons, sizes, and modification times.
+ * Supports checkbox multi-select, double-click to open, and layout toggle.
+ * List mode shows detailed metadata; grid mode is compact and icon-focused.
+ *
+ * @example
+ * ```tsx
+ * <FileList
+ *   items={files}
+ *   selected={selected}
+ *   onSelect={setSelected}
+ *   onOpen={(item) => openFile(item.id)}
+ *   layout="list"
+ * />
+ * ```
+ */
 export function FileList({
   items,
   selected,

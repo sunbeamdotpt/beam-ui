@@ -1,11 +1,27 @@
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link FeatureTile}. */
 interface FeatureTileProps {
+  /** Display name of the feature (e.g., "Analytics", "File Upload"). */
   name: string;
+  /** URL endpoint or path for this feature. */
   endpoint: string;
+  /** Material Design icon name to display above the name. */
   icon: string;
 }
+
+/**
+ * Compact feature tile with icon, name, and endpoint.
+ *
+ * Typically used in a grid of available features or services.
+ * Displays a large icon, feature name, and endpoint path with hover effect.
+ *
+ * @example
+ * ```tsx
+ * <FeatureTile name="Analytics" endpoint="/api/analytics" icon="analytics" />
+ * ```
+ */
 
 const tile = css({
   padding: "20px",
@@ -36,6 +52,7 @@ const tileEndpoint = css({
   color: "text.muted",
 });
 
+// FeatureTile function is documented above, before const tile
 export function FeatureTile({ name, endpoint, icon: iconName }: FeatureTileProps) {
   return (
     <div className={tile}>

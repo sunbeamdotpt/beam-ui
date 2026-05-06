@@ -3,12 +3,19 @@ import { css } from "styled-system/css";
 import { Icon } from "./icon";
 import { Badge } from "./badge";
 
+/** Props for {@link ModelRow}. */
 interface ModelRowProps {
+  /** Model name / display label. */
   name: string;
+  /** Material Symbol icon name for the model. */
   icon: string;
+  /** Tier/category badge text (e.g., "PREMIUM", "STANDARD", "BETA"). */
   tier: string;
+  /** Version string (e.g., "1.0", "2.5-alpha"). */
   version: string;
+  /** Short description of the model. */
   description: string;
+  /** Optional link target. If provided, row becomes a link (internal route or external URL). */
   href?: string;
 }
 
@@ -76,6 +83,22 @@ const versionText = css({
   whiteSpace: "nowrap",
 });
 
+/**
+ * Single-row display for a model with icon, name, tier badge, version, and description.
+ * Optionally renders as a link if href is provided.
+ *
+ * @example
+ * ```tsx
+ * <ModelRow
+ *   name="GPT-4"
+ *   icon="auto_awesome"
+ *   tier="premium"
+ *   version="1.0"
+ *   description="Advanced language model"
+ *   href="/models/gpt-4"
+ * />
+ * ```
+ */
 export function ModelRow({ name, icon: iconName, tier, version, description, href }: ModelRowProps) {
   const content = (
     <>

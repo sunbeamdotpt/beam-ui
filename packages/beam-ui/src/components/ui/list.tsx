@@ -3,22 +3,48 @@ import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** A single list item with optional icon, description, and link. */
 interface ListItem {
+  /** Primary text for the list item. */
   label: string;
+  /** Optional secondary text. Hidden in compact variant. */
   description?: string;
+  /** Optional Material Symbol icon name. */
   icon?: string;
+  /** Optional href (internal route or external URL). If provided, item becomes a link. */
   href?: string;
 }
 
+/** Visual style variant for the list. */
 type Variant = "default" | "compact" | "bordered";
 
+/** Props for {@link List}. */
 interface ListProps {
+  /** Array of items to display. */
   items: ListItem[];
+  /** If true, render as `<ol>` (numbered). Defaults to `<ul>` (unordered). */
   ordered?: boolean;
+  /** Visual style. Defaults to `"default"`. */
   variant?: Variant;
+  /** Optional CSS class for the list container. */
   className?: string;
 }
 
+/**
+ * Semantic list with optional icons, descriptions, and links in three visual styles.
+ * Items may link to internal routes or external URLs.
+ *
+ * @example
+ * ```tsx
+ * <List
+ *   variant="default"
+ *   items={[
+ *     { label: "Home", icon: "home", href: "/" },
+ *     { label: "Settings", description: "Configure your account", icon: "settings", href: "/settings" },
+ *   ]}
+ * />
+ * ```
+ */
 export function List({
   items,
   ordered,

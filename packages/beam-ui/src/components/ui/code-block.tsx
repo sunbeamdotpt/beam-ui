@@ -3,24 +3,35 @@ import { TabsRoot, TabList, TabTrigger, TabContent } from "@ark-ui/react/tabs";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Represents a single code tab. */
 interface CodeTab {
+  /** Tab label (e.g., "JavaScript", "Python"). */
   label: string;
-  /** Content keyed by toggle combo, e.g. "Non-streaming|V2|Synchronous". Falls back to "default". */
+  /** Content keyed by toggle combo (e.g., "Non-streaming|V2|Synchronous"). Falls back to "default" key if no exact match. */
   variants?: Record<string, ReactNode>;
-  /** Simple content (no variants) */
+  /** Static content when no variants are used. */
   content?: ReactNode;
 }
 
+/** Toggle control group for filtering code variants. */
 interface ToggleGroup {
+  /** Array of option strings (e.g., ["Streaming", "Non-streaming"]). */
   options: string[];
+  /** Initially selected option. Defaults to first option. */
   defaultValue?: string;
 }
 
+/** Props for {@link CodeBlock}. */
 interface CodeBlockProps {
+  /** Array of code tabs to display. */
   tabs: CodeTab[];
+  /** Optional streaming mode toggle (appears in top bar). */
   streamToggle?: ToggleGroup;
+  /** Optional version toggle (appears in controls bar as pill group). */
   versionToggle?: ToggleGroup;
+  /** Optional mode toggle (appears in controls bar as pill group). */
   modeToggle?: ToggleGroup;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
@@ -70,6 +81,33 @@ function PillToggle({
 /* ------------------------------------------------------------------ */
 /* CodeBlock                                                           */
 /* ------------------------------------------------------------------ */
+
+/**
+ * Tabbed code block with copy button and optional variant toggles.
+ *
+ * Renders multiple language/framework tabs. Each tab can have static content or
+ * variant-keyed content selected by toggles (stream mode, version, execution mode).
+ * Includes a copy button and syntax highlighting helpers via the `syn` export.
+ *
+ * Variant resolution: exact key match first, then partial matches, then "default" fallback.
+ *
+ * @example
+ * ```tsx
+ * <CodeBlock
+ *   tabs={[
+ *     {
+ *       label: "JavaScript",
+ *       variants: {
+ *         "Streaming|V2": <code>// streaming v2 code</code>,
+ *         "default": <code>// fallback code</code>
+ *       }
+ *     }
+ *   ]}
+ *   streamToggle={{ options: ["Streaming", "Non-streaming"] }}
+ *   versionToggle={{ options: ["V1", "V2"] }}
+ * />
+ * ```
+ */
 export function CodeBlock({
   tabs,
   streamToggle,

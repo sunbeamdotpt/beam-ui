@@ -6,13 +6,20 @@ import {
 } from "@ark-ui/react/progress";
 import { css, cx } from "styled-system/css";
 
+/** Progress bar visual variant. */
 type ProgressVariant = "default" | "success" | "error";
 
+/** Props for {@link ProgressBar}. */
 interface ProgressBarProps {
+  /** Numeric progress value (0–100). Clamped automatically. */
   value: number;
+  /** Visual style. Defaults to `"default"`. */
   variant?: ProgressVariant;
+  /** Show percentage label. Defaults to `false`. */
   showLabel?: boolean;
+  /** Bar height. Defaults to `"md"`. */
   size?: "sm" | "md";
+  /** Additional CSS class. */
   className?: string;
 }
 
@@ -22,6 +29,14 @@ const fillColors: Record<ProgressVariant, string> = {
   error: "sunbeam.flame",
 };
 
+/**
+ * Horizontal progress bar with optional percentage label and three color variants.
+ *
+ * @example
+ * ```tsx
+ * <ProgressBar value={65} variant="default" showLabel size="md" />
+ * ```
+ */
 export function ProgressBar({
   value,
   variant = "default",

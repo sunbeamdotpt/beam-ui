@@ -1,14 +1,16 @@
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Spinner}. */
 interface SpinnerProps {
-  /** Size of the spinner */
+  /** Size. Defaults to `"md"`. */
   size?: "sm" | "md" | "lg";
-  /** Optional label shown below the spinner */
+  /** Optional label shown below spinner. */
   label?: string;
-  /** Use brand color instead of muted */
+  /** Use brand orange color instead of muted gold. Defaults to `false`. */
   accent?: boolean;
-  /** Custom color for the spinner arc (overrides accent) */
+  /** Custom color hex (overrides accent). */
   color?: string;
+  /** Additional CSS class. */
   className?: string;
 }
 
@@ -24,6 +26,15 @@ const strokes = {
   lg: 3.5,
 } as const;
 
+/**
+ * SVG spinner with animated arc and optional label.
+ * Three sizes and customizable color.
+ *
+ * @example
+ * ```tsx
+ * <Spinner size="md" label="Loading..." accent />
+ * ```
+ */
 export function Spinner({
   size = "md",
   label,

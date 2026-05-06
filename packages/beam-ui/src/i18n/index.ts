@@ -11,14 +11,29 @@ import {
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Configuration object for the i18n system.
+ *
+ * Maps locales to message catalogs with optional pluralization support.
+ */
 export interface I18nConfig {
+  /** Fallback locale when requested locale has missing messages. */
   defaultLocale: string;
+  /** Dictionary of locales, each containing message key-value pairs. For pluralization, use `.one` and `.other` suffixes (e.g., `"items.one"`, `"items.other"`). */
   locales: Record<string, Record<string, string>>;
 }
 
+/**
+ * Value provided by {@link I18nProvider} context.
+ *
+ * Contains the translation function and locale management.
+ */
 interface I18nContextValue {
+  /** Translate a message key with optional variable interpolation. Supports `{{varName}}` placeholders and `.one`/`.other` pluralization. */
   t: (key: string, vars?: Record<string, string | number>) => string;
+  /** Current active locale. */
   locale: string;
+  /** Change the active locale and notify all consumers. */
   setLocale: (locale: string) => void;
 }
 
@@ -32,12 +47,45 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 /* Provider                                                            */
 /* ------------------------------------------------------------------ */
 
+/** Props for {@link I18nProvider}. */
 interface I18nProviderProps {
+  /** i18n configuration with locale dictionaries and default locale. */
   config: I18nConfig;
+  /** Initial active locale. */
   locale: string;
+  /** App content to wrap. */
   children: ReactNode;
 }
 
+/**
+ * Provider component for internationalization (i18n) support.
+ *
+ * Wraps your app to enable translation via {@link useTranslation} hook.
+ * Handles locale switching and message lookups with fallback to default locale.
+ *
+ * @example
+ * ```tsx
+ * const config: I18nConfig = {
+ *   defaultLocale: "en",
+ *   locales: {
+ *     en: {
+ *       "hello": "Hello, {{name}}!",
+ *       "items.one": "1 item",
+ *       "items.other": "{{count}} items",
+ *     },
+ *     es: {
+ *       "hello": "Hola, {{name}}!",
+ *       "items.one": "1 elemento",
+ *       "items.other": "{{count}} elementos",
+ *     },
+ *   },
+ * };
+ *
+ * <I18nProvider config={config} locale="en">
+ *   <App />
+ * </I18nProvider>
+ * ```
+ */
 export function I18nProvider({ config, locale: initialLocale, children }: I18nProviderProps) {
   const [locale, setLocale] = useState(initialLocale);
 
@@ -80,6 +128,27 @@ export function I18nProvider({ config, locale: initialLocale, children }: I18nPr
 /* Hook                                                                */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Hook to access translation function and locale management.
+ *
+ * Must be used within an {@link I18nProvider} context.
+ * Throws an error if context is not available.
+ *
+ * @example
+ * ```tsx
+ * function Greeting() {
+ *   const { t, locale, setLocale } = useTranslation();
+ *
+ *   return (
+ *     <div>
+ *       <p>{t("hello", { name: "World" })}</p>
+ *       <p>Current locale: {locale}</p>
+ *       <button onClick={() => setLocale("es")}>Español</button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ */
 export function useTranslation(): I18nContextValue {
   const ctx = useContext(I18nContext);
   if (!ctx) {

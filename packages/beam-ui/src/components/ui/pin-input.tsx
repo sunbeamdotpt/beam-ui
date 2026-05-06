@@ -7,14 +7,29 @@ import {
 } from "@ark-ui/react/pin-input";
 import { css } from "styled-system/css";
 
+/** Props for {@link PinInput}. */
 interface PinInputProps {
+  /** Number of input slots. Defaults to `4`. */
   length?: number;
+  /** Current value as a concatenated string. */
   value: string;
+  /** Fired when value changes. */
   onChange: (value: string) => void;
+  /** Mask input (show dots instead of digits). Defaults to `false`. */
   mask?: boolean;
+  /** Optional label above the input. */
   label?: string;
 }
 
+/**
+ * PIN/OTP input with customizable length and optional masking.
+ *
+ * @example
+ * ```tsx
+ * const [pin, setPin] = useState("");
+ * <PinInput value={pin} onChange={setPin} length={6} label="Verification Code" />
+ * ```
+ */
 export function PinInput({
   length = 4,
   value,

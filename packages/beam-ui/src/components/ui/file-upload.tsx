@@ -2,14 +2,32 @@ import { useState, useRef, useCallback, type DragEvent, type KeyboardEvent } fro
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link FileUpload}. */
 interface FileUploadProps {
+  /** Callback fired when the user selects or drops files; receives an array of File objects. */
   onFiles: (files: File[]) => void;
+  /** MIME type or file extension filter (e.g., `"image/*"`, `".pdf,.docx"`). */
   accept?: string;
+  /** If true, multiple files can be selected at once. If false, only one file at a time. Defaults to false. */
   multiple?: boolean;
+  /** If true, the upload zone is disabled and cannot accept files. Defaults to false. */
   disabled?: boolean;
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
+/**
+ * Drag-and-drop file upload zone with file list and remove buttons.
+ *
+ * Displays a large drop zone with cloud upload icon. Supports drag-and-drop or click-to-browse.
+ * Shows uploaded files below the zone with file names, sizes, and remove buttons.
+ * Maintains a list of selected files and invokes callback on each change.
+ *
+ * @example
+ * ```tsx
+ * <FileUpload onFiles={setFiles} accept="image/*" multiple />
+ * ```
+ */
 export function FileUpload({
   onFiles,
   accept,
@@ -123,6 +141,13 @@ export function FileUpload({
   );
 }
 
+// Helper function to format file sizes (not exported or documented separately)
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 const zone = css({
   display: "flex",
   flexDirection: "column",
@@ -177,12 +202,6 @@ const text = css({
   color: "text.secondary",
   margin: 0,
 });
-
-function formatSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
 
 const fileListStyle = css({
   display: "flex",

@@ -54,6 +54,15 @@ const content = css({
   overflow: "visible",
 });
 
+/**
+ * Two-column layout with sidebar and full-width centered content.
+ * Sidebar hides on tablet and below. No right rail or additional columns.
+ *
+ * @example
+ * ```tsx
+ * <FullwidthLayout />
+ * ```
+ */
 export function FullwidthLayout() {
   return (
     <>

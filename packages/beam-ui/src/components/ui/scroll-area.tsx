@@ -1,16 +1,31 @@
 import { type ReactNode, type CSSProperties } from "react";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link ScrollArea}. */
 interface ScrollAreaProps {
+  /** Content to scroll. */
   children: ReactNode;
+  /** Max height before scrolling (CSS string). */
   maxHeight?: string;
-  /** "visible" always shows themed scrollbar, "hover" hides until hover, "auto" uses browser default with theme colors */
+  /** Scrollbar visibility mode. `"visible"` always shows themed scrollbar, `"hover"` hides until hover, `"auto"` uses browser default. Defaults to `"visible"`. */
   scrollbar?: "visible" | "hover" | "auto";
-  /** Scroll direction */
+  /** Scroll direction. Defaults to `"vertical"`. */
   direction?: "vertical" | "horizontal" | "both";
+  /** Additional CSS class. */
   className?: string;
 }
 
+/**
+ * Native scrollable container with themed golden scrollbars (Webkit & Firefox).
+ * Supports three scrollbar modes and flexible scroll directions.
+ *
+ * @example
+ * ```tsx
+ * <ScrollArea maxHeight="400px" scrollbar="hover" direction="vertical">
+ *   <LongContent />
+ * </ScrollArea>
+ * ```
+ */
 export function ScrollArea({
   children,
   maxHeight,

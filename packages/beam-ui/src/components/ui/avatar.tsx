@@ -1,9 +1,14 @@
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Avatar}. */
 interface AvatarProps {
+  /** Person's name (used for initials fallback and accessibility). */
   name: string;
+  /** Image URL; if omitted, renders initials on a colored background. */
   src?: string;
+  /** Avatar size. Defaults to `"md"` (40px). */
   size?: "sm" | "md" | "lg";
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
@@ -42,6 +47,18 @@ function getColor(name: string): string {
   return backgroundColors[Math.abs(hash) % backgroundColors.length];
 }
 
+/**
+ * User avatar: displays an image or generates initials on a color-coded background.
+ *
+ * If `src` is provided, renders an `<img>`. Otherwise, extracts initials from the name and assigns
+ * a consistent background color based on a hash of the name.
+ *
+ * @example
+ * ```tsx
+ * <Avatar name="Alice Smith" src="https://example.com/alice.jpg" size="md" />
+ * <Avatar name="Bob Jones" size="lg" />
+ * ```
+ */
 const base = css({
   display: "inline-flex",
   alignItems: "center",

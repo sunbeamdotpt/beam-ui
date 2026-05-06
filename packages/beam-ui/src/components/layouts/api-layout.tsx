@@ -54,6 +54,7 @@ const panels = css({
   flexDirection: { base: "column", lg: "row" },
 });
 
+/** CSS class for API layout's left content panel (55% width on desktop). */
 export const apiLeftPanel = css({
   width: { base: "100%", lg: "55%" },
   overflowY: "auto",
@@ -61,6 +62,7 @@ export const apiLeftPanel = css({
   paddingInline: "24px",
 });
 
+/** CSS class for API layout's right panel (45% width on desktop, dark background). */
 export const apiRightPanel = css({
   width: { base: "100%", lg: "45%" },
   overflowY: "auto",
@@ -68,6 +70,15 @@ export const apiRightPanel = css({
   color: "white",
 });
 
+/**
+ * Two-column layout for API documentation. Sidebar on the left (hidden on mobile),
+ * split main content area with left panel for prose and right panel for code examples.
+ *
+ * @example
+ * ```tsx
+ * <ApiLayout />
+ * ```
+ */
 export function ApiLayout() {
   return (
     <>

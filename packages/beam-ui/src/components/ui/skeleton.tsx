@@ -1,10 +1,16 @@
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Skeleton}. */
 interface SkeletonProps {
+  /** Width (CSS string). */
   width?: string;
+  /** Height (CSS string). */
   height?: string;
+  /** Skeleton shape. Defaults to `"text"`. */
   variant?: "text" | "circle" | "rect";
+  /** Number of skeletons to render (stacked vertically). Defaults to `1`. */
   count?: number;
+  /** Additional CSS class. */
   className?: string;
 }
 
@@ -45,6 +51,18 @@ const stackStyle = css({
   gap: "12px",
 });
 
+/**
+ * Animated loading placeholder with shimmer effect.
+ * Renders as text line (100% width, 16px), circle, or rect by default.
+ * Circle defaults to square (set height = width). Multiple skeletons stack vertically.
+ *
+ * @example
+ * ```tsx
+ * <Skeleton variant="text" width="100%" />
+ * <Skeleton variant="circle" width="48px" />
+ * <Skeleton variant="rect" width="200px" height="100px" count={3} />
+ * ```
+ */
 export function Skeleton({
   width,
   height,

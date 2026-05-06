@@ -4,12 +4,26 @@ import { useTheme } from "../../hooks/use-theme";
 
 let mermaidModule: any = null;
 
+/** Props for {@link DiagramRenderer}. */
 interface DiagramRendererProps {
+  /** Mermaid diagram syntax (flowchart, sequence, gantt, etc.). */
   code: string;
+  /** Extra CSS class names to apply to the container. */
   className?: string;
 }
 
-
+/**
+ * Mermaid diagram renderer with Beam-themed dark and light modes.
+ *
+ * Lazily loads the mermaid library and renders diagram code to SVG.
+ * Automatically responds to theme changes. Shows error state with fallback if rendering fails.
+ * Supports all mermaid diagram types (flowchart, sequence, gantt, class, state, etc.).
+ *
+ * @example
+ * ```tsx
+ * <DiagramRenderer code="flowchart LR\n  A[Start] --> B[End]" />
+ * ```
+ */
 export function DiagramRenderer({ code, className }: DiagramRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);

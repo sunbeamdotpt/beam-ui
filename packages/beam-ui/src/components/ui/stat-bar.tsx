@@ -1,12 +1,19 @@
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Model statistics for display in a stat bar. */
 export interface ModelStats {
+  /** Speed rating (0–5). */
   speed: number;
+  /** Performance rating (0–5). */
   performance: number;
+  /** Array of modality strings (e.g., "text", "image", "audio"). */
   modalities: string[];
+  /** Context window display (e.g., "200K"). */
   context: string;
+  /** Input price per token. */
   priceIn: string;
+  /** Output price per token. */
   priceOut: string;
 }
 
@@ -102,10 +109,29 @@ const modalityIconMap: Record<string, string> = {
   audio: "mic",
 };
 
+/** Props for {@link StatBar}. */
 interface StatBarProps {
+  /** Model statistics to display. */
   stats: ModelStats;
 }
 
+/**
+ * Five-column comparison bar showing model speed, performance, modalities, context, and pricing.
+ * Speed and performance display as filled/empty bars (0–5). Modalities show icons (text, image, audio).
+ * Responsive: 2 cols on mobile, 3 on tablet, 5 on desktop.
+ *
+ * @example
+ * ```tsx
+ * <StatBar stats={{
+ *   speed: 4,
+ *   performance: 5,
+ *   modalities: ["text", "image"],
+ *   context: "200K",
+ *   priceIn: "$0.50",
+ *   priceOut: "$1.50",
+ * }} />
+ * ```
+ */
 export function StatBar({ stats }: StatBarProps) {
   return (
     <section className={grid}>

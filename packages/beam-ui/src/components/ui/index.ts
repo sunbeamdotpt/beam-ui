@@ -1,3 +1,9 @@
+/**
+ * @module components/ui
+ * UI components library: reusable React components for form inputs, dialogs, charts, markdown, and more.
+ * Each component is documented in its source file. Re-exports are listed below.
+ */
+
 export { Avatar } from "./avatar";
 export { Badge } from "./badge";
 export { BentoItem } from "./bento-item";

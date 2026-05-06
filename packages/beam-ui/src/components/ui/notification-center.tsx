@@ -15,35 +15,45 @@ import {
 import { Icon } from "./icon";
 import { ScrollArea } from "./scroll-area";
 
+/** A single notification in the notification center. */
 export interface Notification {
+  /** Unique notification identifier. */
   id: string;
-  /** Material Symbol icon name, or a ReactNode for custom icons */
+  /** Material Symbol icon name (e.g., from {@link notificationIcons}). */
   icon?: string;
+  /** Primary notification text. */
   title: string;
-  /** Grouping key — notifications are grouped by this value (e.g., repo name, app name, channel) */
+  /** Grouping key — notifications are grouped by this value (e.g., repo name, app name, channel). */
   group?: string;
-  /** Secondary text — timestamp, sender, channel, etc. */
+  /** Secondary text — sender, channel, etc. */
   subtitle?: string;
-  /** Human-readable timestamp */
+  /** Human-readable timestamp. */
   timestamp?: string;
+  /** Whether the notification has been marked as read. */
   read: boolean;
-  /** Optional action URL */
+  /** Optional action URL. */
   href?: string;
-  /** Any additional metadata the consumer wants to attach */
+  /** Any additional metadata the consumer wants to attach. */
   meta?: Record<string, unknown>;
 }
 
+/** Props for {@link NotificationCenter}. */
 interface NotificationCenterProps {
+  /** Array of notifications to display. */
   notifications: Notification[];
+  /** Called when user marks a single notification as read. */
   onMarkRead: (id: string) => void;
+  /** Called when user clicks "Mark all as read" button. */
   onMarkAllRead: () => void;
+  /** Optional callback when user clicks a notification. */
   onClickNotification?: (notification: Notification) => void;
-  /** Header title. Defaults to "Notifications" */
+  /** Header title. Defaults to `"Notifications"`. */
   title?: string;
-  /** Trigger icon. Defaults to "notifications" */
+  /** Trigger icon name. Defaults to `"notifications"`. */
   triggerIcon?: string;
-  /** Make groups collapsible with unread count badges. Defaults to false. */
+  /** If true, groups are collapsible with unread count badges. Defaults to `false`. */
   collapsibleGroups?: boolean;
+  /** Optional CSS class for the trigger button. */
   className?: string;
 }
 
@@ -73,7 +83,19 @@ export const notificationIcons = {
   info: "info",
 } as const;
 
-/** Standalone notification row — usable outside the NotificationCenter dropdown. */
+/**
+ * Standalone notification row — usable outside the {@link NotificationCenter} dropdown.
+ * Displays icon, title, subtitle, timestamp, and optional read-mark button.
+ *
+ * @example
+ * ```tsx
+ * <NotificationItem
+ *   notification={notif}
+ *   onMarkRead={(id) => markAsRead(id)}
+ *   onClick={(notif) => openNotification(notif)}
+ * />
+ * ```
+ */
 export function NotificationItem({
   notification,
   onMarkRead,
@@ -157,6 +179,22 @@ function CollapsibleGroup({
   );
 }
 
+/**
+ * Notification dropdown center with unread badge, grouping support, and bulk mark-as-read.
+ * Optionally collapses groups with unread count badges.
+ * Comes with built-in icon suggestions via {@link notificationIcons}.
+ *
+ * @example
+ * ```tsx
+ * <NotificationCenter
+ *   notifications={notifications}
+ *   onMarkRead={(id) => markAsRead(id)}
+ *   onMarkAllRead={() => markAllAsRead()}
+ *   onClickNotification={(notif) => navigate(notif.href)}
+ *   collapsibleGroups
+ * />
+ * ```
+ */
 export function NotificationCenter({
   notifications,
   onMarkRead,

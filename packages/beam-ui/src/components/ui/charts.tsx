@@ -62,15 +62,35 @@ function BeamTooltip({ active, payload, label }: any) {
 /* ------------------------------------------------------------------ */
 /* LineChart                                                           */
 /* ------------------------------------------------------------------ */
+
+/** Props for {@link LineChart}. */
 interface LineChartProps {
+  /** Array of data points with a `label` key and numeric data series. */
   data: ChartDataPoint[];
+  /** Array of line series; each specifies a data `key`, optional `color`, and optional `label`. */
   lines: { key: string; color?: string; label?: string }[];
+  /** Chart height in pixels. Defaults to 300. */
   height?: number;
+  /** Additional Panda CSS classes. */
   className?: string;
-  /** Accessible description of the chart for screen readers */
+  /** Accessible description of the chart for screen readers. */
   "aria-label"?: string;
 }
 
+/**
+ * Recharts line chart wrapper with beam-ui styling.
+ *
+ * Displays one or more lines with grid, axes, legend, and tooltip. Custom tooltip shows
+ * data values with consistent formatting. Colors cycle from a warm palette if not specified.
+ *
+ * @example
+ * ```tsx
+ * <LineChart
+ *   data={[{ label: "Jan", revenue: 4000 }, { label: "Feb", revenue: 5200 }]}
+ *   lines={[{ key: "revenue", label: "Monthly Revenue" }]}
+ * />
+ * ```
+ */
 export function LineChart({ data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps) {
   const defaultLabel = `Line chart with ${data.length} data points`;
   return (
@@ -114,14 +134,35 @@ export function LineChart({ data, lines, height = 300, className, "aria-label": 
 /* ------------------------------------------------------------------ */
 /* BarChart                                                            */
 /* ------------------------------------------------------------------ */
+
+/** Props for {@link BarChart}. */
 interface BarChartProps {
+  /** Array of data points with a `label` key and numeric data series. */
   data: ChartDataPoint[];
+  /** Array of bar series; each specifies a data `key`, optional `color`, and optional `label`. */
   bars: { key: string; color?: string; label?: string }[];
+  /** Chart height in pixels. Defaults to 300. */
   height?: number;
+  /** Additional Panda CSS classes. */
   className?: string;
+  /** Accessible description of the chart for screen readers. */
   "aria-label"?: string;
 }
 
+/**
+ * Recharts bar chart wrapper with beam-ui styling.
+ *
+ * Displays grouped or stacked bars with grid, axes, legend, and tooltip. Bars have
+ * subtle rounded corners. Colors cycle from warm palette if not specified.
+ *
+ * @example
+ * ```tsx
+ * <BarChart
+ *   data={[{ label: "Q1", sales: 2400, costs: 1800 }]}
+ *   bars={[{ key: "sales" }, { key: "costs" }]}
+ * />
+ * ```
+ */
 export function BarChart({ data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps) {
   const defaultLabel = `Bar chart with ${data.length} data points`;
   return (
@@ -162,14 +203,39 @@ export function BarChart({ data, bars, height = 300, className, "aria-label": ar
 /* ------------------------------------------------------------------ */
 /* PieChart                                                            */
 /* ------------------------------------------------------------------ */
+
+/** Props for {@link PieChart}. */
 interface PieChartProps {
+  /** Array of segments; each with `name`, `value`, and optional `color`. */
   data: { name: string; value: number; color?: string }[];
+  /** Chart height in pixels. Defaults to 300. */
   height?: number;
+  /** If true, renders as a donut (hollow center) instead of a pie. Defaults to false. */
   donut?: boolean;
+  /** Additional Panda CSS classes. */
   className?: string;
+  /** Accessible description of the chart for screen readers. */
   "aria-label"?: string;
 }
 
+/**
+ * Recharts pie/donut chart wrapper with beam-ui styling.
+ *
+ * Displays proportional segments with legend and tooltip. Donut mode adds a hollow center
+ * and slight spacing between slices. Colors cycle from warm palette if not specified.
+ *
+ * @example
+ * ```tsx
+ * <PieChart
+ *   data={[
+ *     { name: "Completed", value: 65 },
+ *     { name: "In Progress", value: 25 },
+ *     { name: "Blocked", value: 10 },
+ *   ]}
+ *   donut={true}
+ * />
+ * ```
+ */
 export function PieChart({ data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps) {
   const defaultLabel = `${donut ? "Donut" : "Pie"} chart with ${data.length} segments`;
   return (
@@ -206,14 +272,35 @@ export function PieChart({ data, height = 300, donut = false, className, "aria-l
 /* ------------------------------------------------------------------ */
 /* AreaChart                                                           */
 /* ------------------------------------------------------------------ */
+
+/** Props for {@link AreaChart}. */
 interface AreaChartProps {
+  /** Array of data points with a `label` key and numeric data series. */
   data: ChartDataPoint[];
+  /** Array of area series; each specifies a data `key`, optional `color`, and optional `label`. */
   areas: { key: string; color?: string; label?: string }[];
+  /** Chart height in pixels. Defaults to 300. */
   height?: number;
+  /** Additional Panda CSS classes. */
   className?: string;
+  /** Accessible description of the chart for screen readers. */
   "aria-label"?: string;
 }
 
+/**
+ * Recharts area chart wrapper with beam-ui styling.
+ *
+ * Displays stacked or overlapping areas with grid, axes, legend, and tooltip. Fill color
+ * is semi-transparent (15% opacity) for visibility when stacked. Colors cycle from warm palette if not specified.
+ *
+ * @example
+ * ```tsx
+ * <AreaChart
+ *   data={[{ label: "Mon", desktop: 400, mobile: 240 }]}
+ *   areas={[{ key: "desktop" }, { key: "mobile" }]}
+ * />
+ * ```
+ */
 export function AreaChart({ data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps) {
   const defaultLabel = `Area chart with ${data.length} data points`;
   return (

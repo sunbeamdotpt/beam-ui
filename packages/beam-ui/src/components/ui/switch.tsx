@@ -7,14 +7,29 @@ import {
 } from "@ark-ui/react/switch";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Switch}. */
 interface SwitchProps {
+  /** Checked state. */
   checked: boolean;
+  /** Fired when toggled. */
   onChange: (checked: boolean) => void;
+  /** Optional label beside the toggle. */
   label?: string;
+  /** Disable interaction. Defaults to `false`. */
   disabled?: boolean;
+  /** Additional CSS class. */
   className?: string;
 }
 
+/**
+ * Accessible toggle switch with optional label using Ark UI.
+ * Animated thumb with orange accent when checked.
+ *
+ * @example
+ * ```tsx
+ * <Switch checked={enabled} onChange={setEnabled} label="Dark mode" />
+ * ```
+ */
 export function Switch({
   checked,
   onChange,

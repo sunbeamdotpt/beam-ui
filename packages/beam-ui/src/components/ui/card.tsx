@@ -2,15 +2,39 @@ import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link Card}. */
 interface CardProps {
+  /** Material icon name for the card header. */
   icon: string;
+  /** Card heading (uppercase). */
   title: string;
+  /** Card description text. */
   description: string;
+  /** Call-to-action button label. */
   ctaLabel: string;
+  /** Internal or external link target for CTA. */
   ctaHref: string;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
+/**
+ * Standalone feature or service card with shadow and hover lift.
+ *
+ * Displays an icon, title, description, and a React Router or external link CTA.
+ * Hover effect translates card up slightly. Responsive padding.
+ *
+ * @example
+ * ```tsx
+ * <Card
+ *   icon="analytics"
+ *   title="Analytics"
+ *   description="Real-time insights into your data."
+ *   ctaLabel="View Dashboard"
+ *   ctaHref="/dashboard"
+ * />
+ * ```
+ */
 export function Card({
   icon,
   title,

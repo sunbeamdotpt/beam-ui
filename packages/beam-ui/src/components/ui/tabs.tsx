@@ -1,15 +1,23 @@
 import { TabsRoot, TabList, TabTrigger, TabIndicator, TabContent } from "@ark-ui/react/tabs";
 import { css } from "styled-system/css";
 
+/** Tab definition for {@link Tabs}. */
 interface TabItem {
+  /** Unique identifier for the tab. */
   value: string;
+  /** Display label for the tab trigger. */
   label: string;
 }
 
+/** Props for {@link Tabs}. */
 interface TabsProps {
+  /** Array of tab items with value and label. */
   items: TabItem[];
+  /** Currently active tab value. */
   activeValue: string;
+  /** Called when a tab is clicked with its value. */
   onChange: (value: string) => void;
+  /** Visual style. Defaults to `"default"`. */
   variant?: "default" | "dark";
 }
 
@@ -71,6 +79,24 @@ const tabTriggerDark = css({
   },
 });
 
+/**
+ * Accessible tab component using Ark UI primitives with customizable visual variants.
+ * Manages tab selection state and triggers content display via controlled value.
+ *
+ * @example
+ * ```tsx
+ * const [active, setActive] = useState("overview");
+ * <Tabs
+ *   items={[
+ *     { value: "overview", label: "Overview" },
+ *     { value: "details", label: "Details" },
+ *   ]}
+ *   activeValue={active}
+ *   onChange={setActive}
+ *   variant="default"
+ * />
+ * ```
+ */
 export function Tabs({ items, activeValue, onChange, variant = "default" }: TabsProps) {
   const isDark = variant === "dark";
 

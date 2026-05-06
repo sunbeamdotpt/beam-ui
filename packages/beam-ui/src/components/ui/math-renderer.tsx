@@ -1,15 +1,29 @@
 import { useMemo, useState, useEffect } from "react";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link MathRenderer}. */
 export interface MathRendererProps {
+  /** LaTeX math string (e.g., `"E = mc^2"`, `"\\int_0^\\infty e^{-x^2} dx"`). */
   math: string;
+  /** If true, renders as block (centered, full-width). Defaults to `false` (inline). */
   display?: boolean;
+  /** Optional CSS class for the container. */
   className?: string;
 }
 
 let katexModule: typeof import("katex") | null = null;
 let katexCssLoaded = false;
 
+/**
+ * Renders LaTeX math expressions using KaTeX (lazy-loaded on first use).
+ * Supports both inline and display (block) modes with automatic error fallback to code rendering.
+ *
+ * @example
+ * ```tsx
+ * <MathRenderer math="E = mc^2" />
+ * <MathRenderer math="\\int_0^\\infty e^{-x^2} dx" display />
+ * ```
+ */
 export function MathRenderer({ math, display = false, className }: MathRendererProps) {
   const [ready, setReady] = useState(!!katexModule);
 

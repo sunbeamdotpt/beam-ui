@@ -64,8 +64,11 @@ const center = css({
   maxWidth: "720px",
 });
 
+/** Single item in the table of contents shown in {@link RightRail}. */
 export interface DocsTocItem {
+  /** Display label for the heading. */
   label: string;
+  /** Unique ID matching the heading's `id` attribute for smooth scrolling. */
   id: string;
 }
 
@@ -73,10 +76,29 @@ interface DocsContext {
   setToc: (items: DocsTocItem[]) => void;
 }
 
+/**
+ * Retrieve the table-of-contents setter from {@link DocsLayout} outlet context.
+ * Used by child pages to populate the right-rail navigation.
+ *
+ * @returns Object with `setToc` function to update the visible TOC.
+ */
 export function useDocsContext() {
   return useOutletContext<DocsContext>();
 }
 
+/**
+ * Three-column docs layout: sidebar (navigation), center (content), and right rail (TOC).
+ * Sidebar and right rail hide on tablet and below. Manages table-of-contents state via outlet context.
+ *
+ * @param pageDates Optional map of route paths to last-updated timestamps, shown in the right rail.
+ *
+ * @example
+ * ```tsx
+ * <DocsLayout pageDates={{ "/docs/intro": "2026-05-01" }}>
+ *   <Outlet />
+ * </DocsLayout>
+ * ```
+ */
 export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> } = {}) {
   const [toc, setToc] = useState<DocsTocItem[]>([]);
   const location = useLocation();

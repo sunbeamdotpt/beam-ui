@@ -4,18 +4,43 @@ import {
 } from "@ark-ui/react/toggle-group";
 import { css, cx } from "styled-system/css";
 
+/** Option for {@link ToggleGroup}. */
 interface ToggleGroupOption {
+  /** Unique identifier for the option. */
   value: string;
+  /** Display label. */
   label: string;
 }
 
+/** Props for {@link ToggleGroup}. */
 interface ToggleGroupProps {
+  /** Array of toggle options with value and label. */
   items: ToggleGroupOption[];
+  /** Currently selected option value. */
   value: string;
+  /** Called when an option is clicked with its value. */
   onChange: (value: string) => void;
+  /** Optional CSS class applied to the root container. */
   className?: string;
 }
 
+/**
+ * Radio-style toggle group using Ark UI primitives with borderless button layout.
+ * Single-select; only one option can be active at a time.
+ *
+ * @example
+ * ```tsx
+ * const [view, setView] = useState("grid");
+ * <ToggleGroup
+ *   items={[
+ *     { value: "grid", label: "Grid" },
+ *     { value: "list", label: "List" },
+ *   ]}
+ *   value={view}
+ *   onChange={setView}
+ * />
+ * ```
+ */
 export function ToggleGroup({ items, value, onChange, className }: ToggleGroupProps) {
   return (
     <ToggleGroupRoot

@@ -1,9 +1,13 @@
 import { create } from "zustand";
 
+/** Theme variant: light or dark mode. */
 type Theme = "light" | "dark";
 
+/** State shape for the Zustand theme store. */
 interface ThemeStore {
+  /** Current theme mode. */
   theme: Theme;
+  /** Toggle between light and dark modes, persisting to cookie and localStorage. */
   toggle: () => void;
 }
 
@@ -41,6 +45,24 @@ const getInitial = (): Theme => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 };
 
+/**
+ * Zustand store for theme persistence across all `*.sunbeam.pt` subdomains.
+ *
+ * Reads and writes theme via:
+ * 1. Cross-domain cookie (broadest domain, shared across subdomains)
+ * 2. localStorage (same-origin fallback)
+ * 3. System preference (initial fallback if neither cookie nor storage is set)
+ *
+ * Applies the theme to document root via `data-theme` attribute on load and after toggle.
+ *
+ * @example
+ * ```tsx
+ * function ThemeToggle() {
+ *   const { theme, toggle } = useTheme();
+ *   return <button onClick={toggle}>Toggle (current: {theme})</button>;
+ * }
+ * ```
+ */
 export const useTheme = create<ThemeStore>((set) => ({
   theme: getInitial(),
   toggle: () =>

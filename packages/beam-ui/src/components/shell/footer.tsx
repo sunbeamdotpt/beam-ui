@@ -77,6 +77,15 @@ const sectionLink = css({
   },
 });
 
+/**
+ * Application footer with multi-column navigation and branding.
+ * Consumes {@link footerSections} from navigation data. Shows optional build label if defined.
+ *
+ * @example
+ * ```tsx
+ * <Footer />
+ * ```
+ */
 export function Footer() {
   return (
     <footer className={footer}>

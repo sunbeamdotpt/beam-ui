@@ -1,15 +1,36 @@
+/**
+ * A single navigation item with optional nested children.
+ *
+ * Used in navigation structures (headers, sidebars, breadcrumbs).
+ */
 export interface NavItem {
+  /** Display label text. */
   label: string;
+  /** Navigation target URL path. */
   href: string;
+  /** Optional icon identifier (used with Icon component). */
   icon?: string;
+  /** Optional nested child items (for collapsible menus). */
   children?: NavItem[];
 }
 
+/**
+ * A group of related navigation items under a single section heading.
+ *
+ * Used to organize navigation into categories (e.g., "Foundations", "Components").
+ */
 export interface NavSection {
+  /** Section heading text. */
   title: string;
+  /** Array of navigation items in this section. */
   items: NavItem[];
 }
 
+/**
+ * Top-level navigation menu items displayed in the page header.
+ *
+ * Consumers render these as a horizontal nav bar linking to major documentation sections.
+ */
 export const headerLinks = [
   { label: "FOUNDATIONS", href: "/foundations/accessibility" },
   { label: "SHELL", href: "/shell/shell" },
@@ -17,6 +38,13 @@ export const headerLinks = [
   { label: "COMPONENTS", href: "/components/accordion" },
 ] as const;
 
+/**
+ * Navigation tree for the Beam Design Language documentation site.
+ *
+ * Rendered by {@link Sidebar} component in the left rail.
+ * Organizes all design foundations, shell components, layouts, and component library items.
+ * Supports nested collapsible sections (e.g., "AuthForms", "Charts").
+ */
 export const docsSidebar: NavSection[] = [
   {
     title: "FOUNDATIONS",
@@ -177,6 +205,12 @@ export const docsSidebar: NavSection[] = [
   },
 ];
 
+/**
+ * Navigation tree for the API reference documentation site.
+ *
+ * Rendered by {@link Sidebar} component in the left rail.
+ * Organizes API endpoints and features (chat, embeddings, files, batch operations, etc.).
+ */
 export const apiSidebar: NavSection[] = [
   {
     title: "GETTING STARTED",
@@ -207,6 +241,12 @@ export const apiSidebar: NavSection[] = [
   },
 ];
 
+/**
+ * Navigation structure for the page footer.
+ *
+ * Organized into labeled sections (e.g., "Product", "Resources") with internal links and external references.
+ * Rendered by Footer component across documentation and API reference sites.
+ */
 export const footerSections = [
   {
     title: "Product",

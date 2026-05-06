@@ -5,23 +5,37 @@ import { css, cx } from "styled-system/css";
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
+/** Single line in a diff hunk. */
 export interface DiffLine {
+  /** Type of change: "add" (new), "remove" (deleted), or "context" (unchanged). */
   type: "add" | "remove" | "context";
+  /** The text content of the line (without leading +/- prefix). */
   content: string;
+  /** Line number in the old file (for remove or context lines). */
   oldLineNumber?: number;
+  /** Line number in the new file (for add or context lines). */
   newLineNumber?: number;
 }
 
+/** Single hunk (contiguous block of changes) in a unified diff. */
 export interface DiffHunk {
+  /** The hunk header line from the diff (e.g., `@@ -10,5 +12,6 @@`). */
   header: string;
+  /** Array of diff lines in this hunk. */
   lines: DiffLine[];
 }
 
+/** Props for {@link DiffViewer}. */
 interface DiffViewerProps {
+  /** Array of hunks to display. */
   hunks: DiffHunk[];
+  /** Optional old file name (shown in unified mode or when different from newFileName). */
   oldFileName?: string;
+  /** Optional new file name (shown in all modes). */
   newFileName?: string;
+  /** Render mode: "unified" (single column) or "split" (side-by-side). Defaults to `"unified"`. */
   mode?: "unified" | "split";
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
@@ -29,6 +43,17 @@ interface DiffViewerProps {
 /* parseDiff utility                                                    */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Parse unified diff text into hunks and lines.
+ *
+ * @param diffText - Raw unified diff output (e.g., from `git diff` or `git show`).
+ * @returns Array of DiffHunk objects.
+ *
+ * @example
+ * ```ts
+ * const hunks = parseDiff(unifiedDiffText);
+ * ```
+ */
 export function parseDiff(diffText: string): DiffHunk[] {
   const lines = diffText.split("\n");
   const hunks: DiffHunk[] = [];
@@ -124,6 +149,23 @@ function segmentLines(lines: DiffLine[]): DisplaySegment[] {
 /* DiffViewer                                                          */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Git diff viewer with unified or side-by-side rendering.
+ *
+ * Displays file hunks with line numbers, change indicators (+/−), and automatic collapsing
+ * of long context sections. Supports both unified (single column) and split (side-by-side) modes.
+ * Includes keyboard navigation and accessibility labels.
+ *
+ * @example
+ * ```tsx
+ * <DiffViewer
+ *   hunks={parseDiff(diffText)}
+ *   oldFileName="old.ts"
+ *   newFileName="new.ts"
+ *   mode="split"
+ * />
+ * ```
+ */
 export function DiffViewer({
   hunks,
   oldFileName,

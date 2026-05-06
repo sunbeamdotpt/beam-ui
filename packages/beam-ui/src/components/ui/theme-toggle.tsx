@@ -2,12 +2,31 @@ import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 import { Icon } from "./icon";
 
+/** Props for {@link ThemeToggle}. */
 interface ThemeToggleProps {
-  /** "icon" shows sun/moon, "switch" shows a labeled toggle, "pill" shows a segmented control */
+  /** Visual variant. Defaults to `"icon"`. */
   variant?: "icon" | "switch" | "pill";
+  /** Optional CSS class applied to the button or container. */
   className?: string;
 }
 
+/**
+ * Theme toggle button that reads and updates theme via `useTheme` hook.
+ * Three variants: icon (sun/moon in header), switch (with label), pill (segmented control).
+ * Consumer must wrap in a theme provider for `useTheme` to work.
+ *
+ * @example
+ * ```tsx
+ * // Icon variant (minimal, suitable for header)
+ * <ThemeToggle variant="icon" />
+ *
+ * // Switch variant (with label)
+ * <ThemeToggle variant="switch" />
+ *
+ * // Pill variant (segmented radio buttons)
+ * <ThemeToggle variant="pill" />
+ * ```
+ */
 export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps) {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";

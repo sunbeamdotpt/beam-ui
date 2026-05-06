@@ -2,10 +2,15 @@ import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link TopicCard}. */
 interface TopicCardProps {
+  /** Card title. */
   title: string;
+  /** Material Symbols icon name. */
   icon: string;
+  /** Short description text. */
   description: string;
+  /** Link destination. Defaults to `"/guides"`. */
   href?: string;
 }
 
@@ -42,6 +47,20 @@ const descStyle = css({
   lineHeight: 1.6,
 });
 
+/**
+ * Clickable card linking to a guide or topic with icon, title, and description.
+ * Renders as a React Router Link with hover styling on border color.
+ *
+ * @example
+ * ```tsx
+ * <TopicCard
+ *   title="Getting Started"
+ *   icon="auto_awesome"
+ *   description="Learn the basics of beam-ui components"
+ *   href="/guides/getting-started"
+ * />
+ * ```
+ */
 export function TopicCard({ title, icon: iconName, description, href = "/guides" }: TopicCardProps) {
   return (
     <Link to={href} className={card}>

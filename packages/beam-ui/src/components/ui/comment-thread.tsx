@@ -11,32 +11,51 @@ import { Button } from "./button";
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
+/** Single comment in a {@link CommentThread}. */
 interface Comment {
+  /** Unique identifier for this comment. */
   id: string;
+  /** Author metadata including username, display name, and optional avatar URL. */
   author: {
     username: string;
     displayName: string;
     avatarUrl?: string;
   };
+  /** Markdown body of the comment. */
   body: string;
+  /** ISO 8601 timestamp when the comment was created. */
   createdAt: string;
+  /** ISO 8601 timestamp when the comment was last updated (if different from created). */
   updatedAt?: string;
+  /** Array of emoji reactions with counts and user's reaction status. */
   reactions?: { emoji: string; count: number; reacted: boolean }[];
 }
 
+/** Timeline event (label, assignee, merge, etc.) in a {@link CommentThread}. */
 interface TimelineEvent {
+  /** Unique identifier for this event. */
   id: string;
+  /** Event type (e.g., "merge", "close", "label"). */
   type: "label" | "assignee" | "milestone" | "merge" | "close" | "reopen" | "reference";
+  /** Username of the actor who triggered the event. */
   actor: string;
+  /** Human-readable detail of the event (e.g., "closed this" or "added label bug"). */
   detail: string;
+  /** ISO 8601 timestamp when the event occurred. */
   createdAt: string;
 }
 
+/** Props for {@link CommentThread}. */
 interface CommentThreadProps {
+  /** Array of comments and timeline events, rendered in chronological order. */
   items: (Comment | TimelineEvent)[];
+  /** Callback fired when the user submits a reply; receives the markdown body. */
   onReply?: (body: string) => void;
+  /** Callback fired when the user edits a comment; receives the comment ID and new body. */
   onEdit?: (id: string, body: string) => void;
+  /** Callback fired when the user adds or toggles a reaction; receives the comment ID and emoji. */
   onReaction?: (commentId: string, emoji: string) => void;
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
@@ -179,6 +198,23 @@ function TimelineEventItem({ event }: { event: TimelineEvent }) {
 /* Main component                                                      */
 /* ------------------------------------------------------------------ */
 
+/**
+ * GitHub-style comment thread with editable comments, timeline events, and reactions.
+ *
+ * Renders comments with author avatars, timestamps, and inline edit capability.
+ * Interleaves timeline events (merges, label changes, etc.) with human visual distinction.
+ * Includes an optional reply box for adding new comments.
+ *
+ * @example
+ * ```tsx
+ * <CommentThread
+ *   items={comments}
+ *   onReply={(body) => addComment(body)}
+ *   onEdit={(id, body) => updateComment(id, body)}
+ *   onReaction={(id, emoji) => toggleReaction(id, emoji)}
+ * />
+ * ```
+ */
 export function CommentThread({
   items,
   onReply,

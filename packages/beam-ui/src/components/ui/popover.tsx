@@ -10,13 +10,29 @@ import {
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link Popover}. */
 interface PopoverProps {
+  /** Element or text that triggers the popover on click. */
   trigger: ReactNode;
+  /** Content displayed inside the popover body. */
   children: ReactNode;
+  /** Optional header title. */
   title?: string;
+  /** Additional CSS class. */
   className?: string;
 }
 
+/**
+ * Floating popover with trigger, optional title, and close button using Ark UI.
+ * Opens on trigger click, closes on outside click or close button.
+ *
+ * @example
+ * ```tsx
+ * <Popover trigger={<button>Info</button>} title="Help">
+ *   <p>Additional information here</p>
+ * </Popover>
+ * ```
+ */
 export function Popover({
   trigger,
   children,

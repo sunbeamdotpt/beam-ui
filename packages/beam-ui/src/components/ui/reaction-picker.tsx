@@ -7,16 +7,25 @@ import {
   PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
 
+/** A single reaction with count and user toggle state. */
 export interface Reaction {
+  /** Emoji string. */
   emoji: string;
+  /** Number of users who reacted with this emoji. */
   count: number;
+  /** Whether the current user has reacted. */
   reacted: boolean;
 }
 
+/** Props for {@link ReactionPicker}. */
 interface ReactionPickerProps {
+  /** Array of existing reactions to display. */
   reactions: Reaction[];
+  /** Fired when existing reaction is clicked (toggle on/off). */
   onToggle: (emoji: string) => void;
+  /** Fired when a new emoji is selected from the picker. */
   onAdd: (emoji: string) => void;
+  /** Additional CSS class. */
   className?: string;
 }
 
@@ -25,6 +34,19 @@ const COMMON_EMOJIS = [
   "\u{1F615}", "\u{2764}\u{FE0F}", "\u{1F680}", "\u{1F440}",
 ];
 
+/**
+ * Reaction picker with existing reactions displayed and popover for adding new ones.
+ * Shows common emoji grid (8 selections) in the add popover.
+ *
+ * @example
+ * ```tsx
+ * <ReactionPicker
+ *   reactions={[{ emoji: "👍", count: 3, reacted: true }]}
+ *   onToggle={(emoji) => console.log("Toggle:", emoji)}
+ *   onAdd={(emoji) => console.log("Add:", emoji)}
+ * />
+ * ```
+ */
 export function ReactionPicker({
   reactions,
   onToggle,

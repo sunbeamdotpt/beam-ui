@@ -2,13 +2,21 @@ import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link BentoItem}. */
 interface BentoItemProps {
+  /** Layout variant: `large` (2x2 grid cell), `horizontal` (2-col row), or `small` (compact). */
   variant: "large" | "horizontal" | "small";
+  /** Card heading. */
   title: string;
+  /** Card description text. */
   description: string;
+  /** Difficulty level (e.g., "Beginner", "Advanced"); displayed in label. */
   difficulty: string;
+  /** Category tag (e.g., "Web Development"); displayed as badge. */
   category: string;
+  /** Alt text for image (currently unused). */
   imageAlt?: string;
+  /** Internal or external link target. Defaults to "/guides". */
   href?: string;
 }
 
@@ -222,6 +230,28 @@ const smallFooter = css({
 /* Component                                                           */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Grid card for bento-style layouts with three visual variants.
+ *
+ * **Variants:**
+ * - `large`: 2x2 grid cell with full-height image, title, description, and footer (category + difficulty + CTA).
+ * - `horizontal`: 2-column row with side image, category badge, title, description, and inline CTA.
+ * - `small`: Compact 1-column card with title, description, difficulty, and arrow icon.
+ *
+ * All variants render as React Router `<Link>` elements.
+ *
+ * @example
+ * ```tsx
+ * <BentoItem
+ *   variant="large"
+ *   title="Advanced Patterns"
+ *   description="Master complex React patterns..."
+ *   difficulty="Advanced"
+ *   category="React"
+ *   href="/guides/patterns"
+ * />
+ * ```
+ */
 export function BentoItem({
   variant,
   title,

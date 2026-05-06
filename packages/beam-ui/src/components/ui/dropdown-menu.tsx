@@ -12,26 +12,59 @@ import {
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Single menu item in a {@link DropdownMenu}. */
 export interface DropdownMenuItem {
+  /** Display label for the menu item. */
   label: string;
+  /** Optional Material Design icon name. */
   icon?: string;
+  /** Callback fired when the user clicks this item. */
   onClick: () => void;
+  /** If true, the item is styled as a destructive action (e.g., delete, remove). */
   danger?: boolean;
+  /** If true, the item cannot be clicked and is visually disabled. */
   disabled?: boolean;
 }
 
+/** Group of menu items in a {@link DropdownMenu}}. */
 export interface DropdownMenuGroup {
+  /** Optional label displayed above the group. */
   label?: string;
+  /** Array of items in this group. */
   items: DropdownMenuItem[];
 }
 
+/** Props for {@link DropdownMenu}. */
 interface DropdownMenuProps {
-  /** Flat list of items, or grouped items */
+  /** Flat list of items (mutually exclusive with `groups`). */
   items?: DropdownMenuItem[];
+  /** Grouped list of items (mutually exclusive with `items`). */
   groups?: DropdownMenuGroup[];
+  /** Element or component that triggers the dropdown on click. */
   children: ReactNode;
+  /** Positioning options for Ark UI's MenuRoot (e.g., `{ placement: "bottom-start" }`). */
   positioning?: { placement?: string };
 }
+
+/**
+ * Dropdown menu with optional grouping, icons, and disabled/danger styling.
+ *
+ * Displays a trigger button that opens a dropdown menu below/above the button.
+ * Supports flat or grouped items; provides visual distinction for disabled and danger items.
+ * Integrates with Ark UI for accessibility and keyboard navigation.
+ *
+ * @example
+ * ```tsx
+ * <DropdownMenu
+ *   items={[
+ *     { label: "Edit", icon: "edit", onClick: () => edit() },
+ *     { label: "Delete", icon: "delete", onClick: () => delete(), danger: true }
+ *   ]}
+ * >
+ *   <Button>Menu</Button>
+ * </DropdownMenu>
+ * ```
+ */
 
 const contentStyle = css({
   backgroundColor: "bg.page",
@@ -84,6 +117,7 @@ const groupLabelStyle = css({
   padding: "6px 12px 4px",
 });
 
+// Helper function for rendering individual menu items (not exported or documented separately)
 function renderItem(item: DropdownMenuItem, i: number) {
   return (
     <MenuItem

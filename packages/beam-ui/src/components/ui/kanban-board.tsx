@@ -19,24 +19,39 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+/** A single card within a Kanban column. */
 export interface KanbanCard {
+  /** Unique identifier for the card. */
   id: string;
+  /** Card title / heading. */
   title: string;
+  /** Optional labels (tags) with custom colors. */
   labels?: { name: string; color: string }[];
+  /** Optional assignees with optional avatar URLs. */
   assignees?: { name: string; avatarUrl?: string }[];
+  /** Optional milestone reference. */
   milestone?: string;
 }
 
+/** A column (swimlane) in the Kanban board containing cards. */
 export interface KanbanColumn {
+  /** Unique identifier for the column. */
   id: string;
+  /** Column title / header. */
   title: string;
+  /** Ordered list of cards in this column. */
   cards: KanbanCard[];
 }
 
+/** Props for {@link KanbanBoard}. */
 interface KanbanBoardProps {
+  /** Array of columns with their cards. */
   columns: KanbanColumn[];
+  /** Called whenever cards are reordered (within or between columns). Receives updated columns array. */
   onChange: (columns: KanbanColumn[]) => void;
+  /** Optional callback when user clicks "+ Add card" button for a specific column. */
   onAddCard?: (columnId: string) => void;
+  /** Optional CSS class for the board container. */
   className?: string;
 }
 
@@ -69,7 +84,15 @@ function SortableCard({ card }: { card: KanbanCard }) {
 /* ------------------------------------------------------------------ */
 /* Card content (shared between sortable + overlay)                    */
 /* ------------------------------------------------------------------ */
-/** Standalone card display — usable outside the board (e.g., in lists, detail panels). */
+
+/**
+ * Standalone card display — usable outside the board (e.g., in lists, detail panels).
+ *
+ * @example
+ * ```tsx
+ * <KanbanCardView card={myCard} />
+ * ```
+ */
 export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }) {
   return (
     <div className={cx(cardStyle, ghost && cardGhostStyle)}>
@@ -164,6 +187,20 @@ function Column({
 /* ------------------------------------------------------------------ */
 /* Board                                                               */
 /* ------------------------------------------------------------------ */
+
+/**
+ * Interactive Kanban board with drag-and-drop card reordering within and between columns.
+ * Uses dnd-kit for smooth DnD and vertical list sorting within each column.
+ *
+ * @example
+ * ```tsx
+ * <KanbanBoard
+ *   columns={myColumns}
+ *   onChange={setColumns}
+ *   onAddCard={(colId) => addCardToColumn(colId)}
+ * />
+ * ```
+ */
 export function KanbanBoard({
   columns,
   onChange,

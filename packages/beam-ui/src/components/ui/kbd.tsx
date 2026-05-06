@@ -1,10 +1,13 @@
 import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Kbd}. */
 interface KbdProps {
+  /** Keyboard key name or symbol (e.g., "Ctrl", "⌘", "Enter", "⌘K"). */
   children: string;
-  /** Override platform detection. Defaults to auto-detect. */
+  /** Override platform detection. Defaults to auto-detect based on user agent. */
   platform?: "mac" | "windows" | "linux";
+  /** Optional CSS class for additional styling. */
   className?: string;
 }
 
@@ -93,6 +96,17 @@ const kbdStyle = css({
   verticalAlign: "middle",
 });
 
+/**
+ * Keyboard key badge with platform-aware rendering (Mac command symbols, Windows/Linux Ctrl, etc.).
+ * Renders Material Symbol icons for special keys and cross-platform transliteration for modifiers.
+ *
+ * @example
+ * ```tsx
+ * <Kbd>⌘K</Kbd>
+ * <Kbd platform="windows">Ctrl+S</Kbd>
+ * <Kbd>Enter</Kbd>
+ * ```
+ */
 export function Kbd({ children, platform, className }: KbdProps) {
   const detected = platform ?? detectPlatform();
   const content = resolveKey(children, detected);

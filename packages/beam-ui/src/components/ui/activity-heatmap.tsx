@@ -3,13 +3,19 @@ import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 import { ScrollArea } from "./scroll-area";
 
+/** Single day in the activity heatmap. */
 export interface ActivityDay {
+  /** ISO 8601 date string (YYYY-MM-DD). */
   date: string;
+  /** Number of contributions or activities on this day. */
   count: number;
 }
 
+/** Props for {@link ActivityHeatmap}. */
 interface ActivityHeatmapProps {
+  /** Array of daily activity data (last 365 days). */
   data: ActivityDay[];
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
@@ -47,6 +53,21 @@ const GAP = 2;
 const STEP = CELL + GAP;
 const LABEL_W = 32;
 
+/**
+ * GitHub-style activity heatmap showing contributions over the last 365 days.
+ *
+ * Renders an SVG grid where each cell represents one day, colored by intensity (0–5 levels).
+ * Includes month labels, day-of-week labels, and a legend. Horizontally scrollable on small screens.
+ *
+ * @example
+ * ```tsx
+ * const data = [
+ *   { date: "2026-01-01", count: 3 },
+ *   { date: "2026-01-02", count: 0 },
+ * ];
+ * <ActivityHeatmap data={data} />
+ * ```
+ */
 export function ActivityHeatmap({ data, className }: ActivityHeatmapProps) {
   const { theme } = useTheme();
   const colors = theme === "dark" ? LEVEL_COLORS_DARK : LEVEL_COLORS_LIGHT;

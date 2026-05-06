@@ -1,5 +1,14 @@
 import { css, cx } from "styled-system/css";
 
+/**
+ * Visual variant tokens for {@link Badge}.
+ *
+ * **Tier / Recognition**: `featured`, `premier`, `verified`, `partner`, `community` — warm gold/orange palette for status.
+ * **Release Stage**: `stable`, `new`, `beta`, `preview`, `experimental`, `deprecated` — temperature progression from cool to hot.
+ * **Work Status**: `open`, `draft`, `review`, `approved`, `merged`, `closed`, `revision` — solid, distinct status colors.
+ * **Priority**: `critical`, `high`, `medium`, `low` — urgency-coded reds and greens.
+ * **Utility**: `section` — renders as a horizontal rule with label (special layout).
+ */
 type BadgeVariant =
   // Tier / Recognition
   | "featured"
@@ -30,9 +39,13 @@ type BadgeVariant =
   // Utility
   | "section";
 
+/** Props for {@link Badge}. */
 interface BadgeProps {
+  /** Badge label text. */
   children: React.ReactNode;
+  /** Visual style. Defaults to `"premier"`. */
   variant?: BadgeVariant;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
@@ -87,7 +100,12 @@ const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   low:          css({ backgroundColor: "#0d9488", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
 };
 
-/** Section badge renders as a label on a horizontal rule */
+/**
+ * Section badge renders as a label on a horizontal rule.
+ *
+ * Used to visually separate sections in long-form content. The label is left-aligned
+ * with an orange background, and a decorative line extends to the right.
+ */
 function SectionBadge({ children, className }: Omit<BadgeProps, "variant">) {
   return (
     <div
@@ -128,6 +146,19 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">) {
   );
 }
 
+/**
+ * Compact labeled badge for status, priority, and release stage tagging.
+ *
+ * Supports 25+ semantic variants organized by tier, release stage, work status, and priority.
+ * The `section` variant renders a horizontal divider instead.
+ *
+ * @example
+ * ```tsx
+ * <Badge variant="new">New Feature</Badge>
+ * <Badge variant="critical">Urgent</Badge>
+ * <Badge variant="section">Documentation</Badge>
+ * ```
+ */
 export function Badge({ children, variant = "premier", className }: BadgeProps) {
   if (variant === "section") {
     return <SectionBadge className={className}>{children}</SectionBadge>;

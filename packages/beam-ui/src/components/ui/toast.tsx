@@ -2,16 +2,39 @@ import { useEffect } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Toast notification style variant. */
 type ToastVariant = "success" | "error" | "info";
 
+/** Props for {@link Toast}. */
 interface ToastProps {
+  /** Message text displayed in the toast. */
   message: string;
+  /** Visual variant. Defaults to `"info"`. */
   variant?: ToastVariant;
+  /** Whether the toast is visible. Controls slide-in/out animation. */
   visible: boolean;
+  /** Called when the user clicks the close button or auto-dismiss timer expires (4.5s). */
   onDismiss?: () => void;
+  /** Called when the toast becomes visible. */
   onShow?: () => void;
 }
 
+/**
+ * Fixed-position toast notification with auto-dismiss and manual close.
+ * Positioned bottom-right; auto-hides after 4.5 seconds if `onDismiss` is provided.
+ * Fires `onShow` when toast becomes visible and `onDismiss` on timer or close click.
+ *
+ * @example
+ * ```tsx
+ * const [visible, setVisible] = useState(false);
+ * <Toast
+ *   message="Changes saved"
+ *   variant="success"
+ *   visible={visible}
+ *   onDismiss={() => setVisible(false)}
+ * />
+ * ```
+ */
 export function Toast({
   message,
   variant = "info",

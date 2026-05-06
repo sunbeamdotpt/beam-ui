@@ -201,7 +201,9 @@ const childLinkActive = css({
   bg: "rgba(255, 240, 194, 0.3)",
 });
 
+/** Props for {@link Sidebar}. */
 interface SidebarProps {
+  /** Navigation sections to render. Each section has a title and list of items. */
   sections: NavSection[];
 }
 
@@ -263,6 +265,18 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
   );
 }
 
+/**
+ * Left-side navigation rail for documentation and API reference sites.
+ *
+ * Renders a sticky sidebar with collapsible sections and nested links.
+ * Handles active state based on current URL pathname.
+ * Cross-references {@link docsSidebar} and {@link apiSidebar} from data/navigation.
+ *
+ * @example
+ * ```tsx
+ * <Sidebar sections={docsSidebar} />
+ * ```
+ */
 export function Sidebar({ sections }: SidebarProps) {
   return (
     <aside

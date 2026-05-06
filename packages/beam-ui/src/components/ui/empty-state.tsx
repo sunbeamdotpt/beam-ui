@@ -2,12 +2,34 @@ import { type ReactNode } from "react";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link EmptyState}. */
 interface EmptyStateProps {
+  /** Optional Material Design icon name (e.g., "inbox_zero", "search"). */
   icon?: string;
+  /** Main heading displayed in the empty state. */
   title: string;
+  /** Optional explanatory text shown below the title. */
   description?: string;
+  /** Optional call-to-action button or element (e.g., a "Create" button). */
   action?: ReactNode;
 }
+
+/**
+ * Centered empty state with icon, title, description, and optional action button.
+ *
+ * Used to inform users when a list, search result, or section is empty.
+ * Provides a clear message and optional next steps via an action element.
+ *
+ * @example
+ * ```tsx
+ * <EmptyState
+ *   icon="inbox_zero"
+ *   title="No items"
+ *   description="Create a new item to get started."
+ *   action={<Button onClick={onCreate}>Create Item</Button>}
+ * />
+ * ```
+ */
 
 const containerStyle = css({
   display: "flex",
@@ -41,6 +63,7 @@ const actionStyle = css({
   marginTop: "8px",
 });
 
+// EmptyState is documented above, before const containerStyle
 export function EmptyState({ icon, title, description, action }: EmptyStateProps) {
   return (
     <div className={containerStyle}>

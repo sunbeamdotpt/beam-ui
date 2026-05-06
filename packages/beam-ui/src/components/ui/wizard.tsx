@@ -15,31 +15,47 @@ import { Icon } from "./icon";
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
+/** Step in a {@link Wizard} or {@link WizardModal}. */
 export interface WizardStep {
+  /** Step title displayed in the indicator and header. */
   title: string;
+  /** Optional description displayed above the step content. */
   description?: string;
+  /** Step content (form, text, or other React nodes). */
   content: ReactNode;
-  /** If true, the Next button is disabled until the consumer sets it to false */
+  /** Whether the step is valid. If false, the Next button is disabled. Defaults to `true`. */
   isValid?: boolean;
 }
 
+/** Props for {@link Wizard}. */
 export interface WizardProps {
+  /** Array of wizard steps with title and content. */
   steps: WizardStep[];
+  /** Called when the final step is completed. */
   onComplete: () => void;
+  /** Called when the user clicks Cancel (only shown on first step). */
   onCancel?: () => void;
-  /** Called when step changes — receives the new step index */
+  /** Called when the user advances to a new step with its index. */
   onStepChange?: (step: number) => void;
-  /** Labels for the buttons */
+  /** Button label for advancing to the next step. Defaults to `"Continue"`. */
   nextLabel?: string;
+  /** Button label for returning to the previous step. Defaults to `"Back"`. */
   backLabel?: string;
+  /** Button label on the final step. Defaults to `"Finish"`. */
   completeLabel?: string;
+  /** Button label for canceling (first step only). Defaults to `"Cancel"`. */
   cancelLabel?: string;
+  /** Optional CSS class applied to the root container. */
   className?: string;
 }
 
+/** Props for {@link WizardModal}. */
 export interface WizardModalProps extends WizardProps {
+  /** Whether the modal is open. */
   open: boolean;
+  /** Called when the user closes the modal (via close button or Escape). */
   onClose: () => void;
+  /** Optional title displayed in the modal header. */
   title?: string;
 }
 
@@ -47,6 +63,23 @@ export interface WizardModalProps extends WizardProps {
 /* Wizard                                                              */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Multi-step wizard with progress indicator and navigation buttons.
+ * Shows one step at a time with title, optional description, and custom content.
+ * Back button disabled on first step; Cancel only shown on first step.
+ *
+ * @example
+ * ```tsx
+ * <Wizard
+ *   steps={[
+ *     { title: "Profile", content: <ProfileForm /> },
+ *     { title: "Preferences", content: <PreferencesForm /> },
+ *   ]}
+ *   onComplete={() => console.log("done")}
+ *   onCancel={() => console.log("cancelled")}
+ * />
+ * ```
+ */
 export function Wizard({
   steps,
   onComplete,
@@ -157,6 +190,22 @@ export function Wizard({
 /* WizardModal                                                         */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Wizard wrapped in an Ark UI dialog modal using fixed positioning and backdrop.
+ * Closes on backdrop click, close button, or Escape key. Inherits all Wizard behavior.
+ *
+ * @example
+ * ```tsx
+ * const [open, setOpen] = useState(false);
+ * <WizardModal
+ *   open={open}
+ *   onClose={() => setOpen(false)}
+ *   title="Setup Wizard"
+ *   steps={[...]}
+ *   onComplete={() => { setOpen(false); console.log("done"); }}
+ * />
+ * ```
+ */
 export function WizardModal({
   open,
   onClose,

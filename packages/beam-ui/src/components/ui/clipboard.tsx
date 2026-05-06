@@ -8,12 +8,30 @@ import {
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link Clipboard}. */
 interface ClipboardProps {
+  /** Text to copy to clipboard when triggered. */
   value: string;
+  /** Custom trigger element (e.g., button or icon). If omitted, renders a default "Copy" button. */
   children?: ReactNode;
+  /** Duration (ms) to show "Copied!" feedback. Defaults to 2000. */
   timeout?: number;
 }
 
+/**
+ * Copy-to-clipboard button with visual feedback.
+ *
+ * Wraps ark-ui's Clipboard component. Shows "Copy" with icon by default, or renders
+ * custom children as the trigger. Displays "Copied!" checkmark for the specified timeout.
+ *
+ * @example
+ * ```tsx
+ * <Clipboard value="npm install @sunbeam/beam-ui" />
+ * <Clipboard value="token123" timeout={1500}>
+ *   <button>Copy Token</button>
+ * </Clipboard>
+ * ```
+ */
 export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps) {
   return (
     <ClipboardRoot value={value} timeout={timeout}>

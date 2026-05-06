@@ -4,6 +4,7 @@ import { css } from "styled-system/css";
 import { Header } from "./header";
 import { Footer } from "./footer";
 
+/** Props for {@link Shell}. */
 interface ShellProps {
   /** Show the theme toggle in the header. Defaults to true. */
   showThemeToggle?: boolean;
@@ -29,6 +30,20 @@ const mainStyle = css({
   paddingTop: "64px",
 });
 
+/**
+ * Top-level layout component combining Header, main content area, and Footer.
+ *
+ * Arranges content in a flexible column with fixed header (64px) and footer.
+ * Accepts custom Header and Footer via props, or renders defaults.
+ * Automatically renders children into a Router Outlet if not provided.
+ *
+ * @example
+ * ```tsx
+ * <Shell showThemeToggle={true} headerActions={<Settings />}>
+ *   <MyPageContent />
+ * </Shell>
+ * ```
+ */
 export function Shell({
   showThemeToggle = true,
   headerActions,

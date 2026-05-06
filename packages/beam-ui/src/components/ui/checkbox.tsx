@@ -1,15 +1,38 @@
 import { useRef, useEffect } from "react";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Checkbox}. */
 interface CheckboxProps {
+  /** Whether the checkbox is checked. */
   checked: boolean;
+  /** Called with the new checked state when the user toggles the checkbox. */
   onChange: (checked: boolean) => void;
+  /** Optional label text displayed next to the checkbox. */
   label?: string;
+  /** If true, disables interaction. Defaults to false. */
   disabled?: boolean;
+  /** If true, shows a dash (indeterminate state) instead of a checkmark. Defaults to false. */
   indeterminate?: boolean;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
+/**
+ * Custom checkbox with optional label, indeterminate state, and focus styling.
+ *
+ * Uses a hidden native input with styled visual box. Supports three states: unchecked,
+ * checked (with checkmark), and indeterminate (with dash). Hover and focus-visible styling included.
+ *
+ * @example
+ * ```tsx
+ * <Checkbox
+ *   checked={agreed}
+ *   onChange={setAgreed}
+ *   label="I agree to the terms"
+ *   indeterminate={someButNotAll}
+ * />
+ * ```
+ */
 export function Checkbox({
   checked,
   onChange,

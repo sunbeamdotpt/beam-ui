@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { docsSidebar } from "../../data/navigation";
 
+/** Props for {@link SearchInput}. */
 interface SearchInputProps {
+  /** Additional CSS class. */
   className?: string;
 }
 
@@ -20,6 +22,15 @@ const allNavItems = docsSidebar.flatMap((section) =>
   })
 );
 
+/**
+ * Searchable documentation input with keyboard shortcuts and live filtering.
+ * Responds to Cmd+K / Ctrl+K, displays filtered results grouped by section.
+ *
+ * @example
+ * ```tsx
+ * <SearchInput />
+ * ```
+ */
 export function SearchInput({ className }: SearchInputProps) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");

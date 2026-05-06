@@ -9,19 +9,45 @@ import {
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Represents a single accordion section. */
 interface AccordionEntry {
+  /** Unique identifier for the accordion item. */
   value: string;
+  /** Visible heading text. */
   title: string;
+  /** Content displayed when the item is expanded. */
   content: ReactNode;
 }
 
+/** Props for {@link Accordion}. */
 interface AccordionProps {
+  /** Array of accordion items to render. */
   items: AccordionEntry[];
+  /** If true, multiple sections can be expanded simultaneously; otherwise only one. Defaults to false. */
   multiple?: boolean;
+  /** Section(s) expanded by default; array of `value` strings. */
   defaultValue?: string[];
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
+/**
+ * Collapsible accordion with one or many expandable sections.
+ *
+ * Each section shows a title and expands on click to reveal content. The expand/collapse
+ * icon rotates 180° when open.
+ *
+ * @example
+ * ```tsx
+ * <Accordion
+ *   items={[
+ *     { value: "q1", title: "How does it work?", content: "..." },
+ *     { value: "q2", title: "Is it free?", content: "..." },
+ *   ]}
+ *   multiple={false}
+ * />
+ * ```
+ */
 export function Accordion({
   items,
   multiple = false,

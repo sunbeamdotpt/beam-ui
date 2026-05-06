@@ -7,12 +7,26 @@ import {
 } from "@ark-ui/react/hover-card";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link HoverCard}. */
 interface HoverCardProps {
+  /** Content that triggers the hover card on mouse hover. */
   trigger: ReactNode;
+  /** Content displayed in the popover when hovering. */
   children: ReactNode;
+  /** Optional CSS class for the popover content container. */
   className?: string;
 }
 
+/**
+ * Popover that appears on hover with a 300ms open delay and 100ms close delay.
+ *
+ * @example
+ * ```tsx
+ * <HoverCard trigger={<span>Hover me</span>}>
+ *   <p>This appears on hover</p>
+ * </HoverCard>
+ * ```
+ */
 export function HoverCard({ trigger, children, className }: HoverCardProps) {
   return (
     <HoverCardRoot openDelay={300} closeDelay={100}>

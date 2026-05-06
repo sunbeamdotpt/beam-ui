@@ -289,13 +289,23 @@ const allNavItems = docsSidebar.flatMap((section) =>
   })
 );
 
+/** Props for {@link Header}. */
 interface HeaderProps {
   /** Show a theme toggle button (right-aligned). Defaults to true. */
   showThemeToggle?: boolean;
-  /** Extra elements rendered in the right group before the theme toggle */
+  /** Extra elements rendered in the right group before the theme toggle. */
   actions?: ReactNode;
 }
 
+/**
+ * Fixed top navigation header with logo, nav links (desktop), search (with Cmd+K support),
+ * mobile menu drawer, and optional theme toggle. Consumes {@link headerLinks} from navigation data.
+ *
+ * @example
+ * ```tsx
+ * <Header showThemeToggle actions={<ProfileMenu />} />
+ * ```
+ */
 export function Header({ showThemeToggle = true, actions }: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();

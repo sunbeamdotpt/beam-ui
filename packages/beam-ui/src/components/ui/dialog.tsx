@@ -10,14 +10,37 @@ import {
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link Dialog}. */
 interface DialogProps {
+  /** If true, the dialog is visible; if false, it is hidden. */
   open: boolean;
+  /** Callback fired when the user closes the dialog (via close button or backdrop click). */
   onClose: () => void;
+  /** Title displayed at the top of the dialog. */
   title: string;
+  /** Main content of the dialog (typically text, form fields, or other components). */
   children: ReactNode;
+  /** Optional action buttons (typically rendered at the bottom right of the dialog). */
   actions?: ReactNode;
 }
 
+/**
+ * Modal dialog with title, body, and optional action buttons.
+ *
+ * Renders a centered modal over a semi-transparent backdrop. Supports keyboard escape
+ * to close. Integrates with Ark UI's DialogRoot for accessibility.
+ *
+ * @example
+ * ```tsx
+ * <Dialog open={show} onClose={() => setShow(false)} title="Confirm Action">
+ *   <p>Are you sure?</p>
+ *   <div style={{ display: "flex", gap: "8px" }}>
+ *     <Button onClick={confirm}>Yes</Button>
+ *     <Button variant="ghost" onClick={() => setShow(false)}>Cancel</Button>
+ *   </div>
+ * </Dialog>
+ * ```
+ */
 export function Dialog({
   open,
   onClose,

@@ -83,19 +83,27 @@ const beamHighlightLight = HighlightStyle.define([
   { tag: tags.emphasis, fontStyle: "italic" },
 ]);
 
+/** Props for {@link CodeEditor}. */
 export interface CodeEditorProps {
+  /** Controlled text value (the code being edited). */
   value: string;
+  /** Callback fired when the user edits the code; receives the new text. */
   onChange: (value: string) => void;
+  /** Language for syntax highlighting (e.g., "javascript", "typescript", "python", "rust"). Defaults to no highlighting. */
   language?: string;
+  /** CSS height of the editor viewport. Defaults to `"300px"`. */
   height?: string;
+  /** If true, the editor is read-only and cannot be modified. Defaults to false. */
   readOnly?: boolean;
+  /** If true, line numbers are shown in the left gutter. Defaults to true. */
   showLineNumbers?: boolean;
+  /** If true, long lines wrap instead of scrolling horizontally. Defaults to false. */
   softWrap?: boolean;
+  /** Placeholder text shown when the editor is empty. */
   placeholder?: string;
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
-  /** Extra CodeMirror extensions to append. Typed as unknown[] to avoid
-   *  Extension symbol mismatch when the caller uses a different @codemirror/state
-   *  instance (e.g. a file:-linked monorepo package). */
+  /** Extra CodeMirror extensions to append. Typed as unknown[] to avoid Extension symbol mismatch when the caller uses a different @codemirror/state instance (e.g. a file:-linked monorepo package). */
   extensions?: readonly unknown[];
 }
 
@@ -262,6 +270,24 @@ function createBeamTheme(isDark: boolean) {
 /* ------------------------------------------------------------------ */
 /* Component                                                           */
 /* ------------------------------------------------------------------ */
+
+/**
+ * CodeMirror-based syntax-highlighting code editor with theme-aware Beam colors.
+ *
+ * Supports 15+ languages with smart indentation, search, history, line numbers, and soft wrapping.
+ * Automatically responds to dark/light theme changes.
+ *
+ * @example
+ * ```tsx
+ * <CodeEditor
+ *   value={code}
+ *   onChange={setCode}
+ *   language="typescript"
+ *   height="400px"
+ *   showLineNumbers
+ * />
+ * ```
+ */
 export function CodeEditor({
   value,
   onChange,

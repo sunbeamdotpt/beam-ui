@@ -8,17 +8,42 @@ import {
 } from "@ark-ui/react/steps";
 import { css, cx } from "styled-system/css";
 
+/** Single step in a steps component. */
 interface StepItem {
+  /** Step title. */
   title: string;
+  /** Optional step description. */
   description?: string;
 }
 
+/** Props for {@link Steps}. */
 interface StepsProps {
+  /** Array of steps. */
   steps: StepItem[];
+  /** Currently active step index (0-based). */
   currentStep: number;
+  /** Optional callback when user clicks a step. */
   onChange?: (step: number) => void;
 }
 
+/**
+ * Horizontal step indicator with titles, optional descriptions, and completion markers.
+ * Completed steps show a checkmark, current step has a highlighted ring, upcoming steps are muted.
+ * Steps are clickable if onChange handler is provided.
+ *
+ * @example
+ * ```tsx
+ * <Steps
+ *   steps={[
+ *     { title: "Personal", description: "Your info" },
+ *     { title: "Payment" },
+ *     { title: "Review" },
+ *   ]}
+ *   currentStep={1}
+ *   onChange={(i) => setStep(i)}
+ * />
+ * ```
+ */
 export function Steps({ steps, currentStep, onChange }: StepsProps) {
   return (
     <StepsRoot

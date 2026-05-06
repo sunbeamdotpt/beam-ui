@@ -9,21 +9,50 @@ import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 import { Avatar } from "./avatar";
 
+/** Represents a single user option in the picker. */
 export interface UserOption {
+  /** Unique user identifier. */
   id: string;
+  /** Login username. */
   username: string;
+  /** Display name. */
   displayName: string;
+  /** Avatar image URL (optional). */
   avatarUrl?: string;
 }
 
+/** Props for {@link AssigneePicker}. */
 interface AssigneePickerProps {
+  /** List of available users to pick from. */
   options: UserOption[];
+  /** Array of selected user IDs. */
   selected: string[];
+  /** Called with updated array of selected user IDs when selection changes. */
   onChange: (selected: string[]) => void;
+  /** Placeholder text shown when no users are selected. Defaults to "Assignees". */
   placeholder?: string;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
+/**
+ * Multi-select dropdown for assigning users.
+ *
+ * Shows selected avatars inline. Clicking opens a popover with a search input and checkbox list.
+ * Multiple users can be selected simultaneously.
+ *
+ * @example
+ * ```tsx
+ * <AssigneePicker
+ *   options={[
+ *     { id: "1", username: "alice", displayName: "Alice Smith" },
+ *     { id: "2", username: "bob", displayName: "Bob Jones" },
+ *   ]}
+ *   selected={["1"]}
+ *   onChange={(ids) => setSprint({ ...sprint, assignees: ids })}
+ * />
+ * ```
+ */
 export function AssigneePicker({
   options,
   selected,

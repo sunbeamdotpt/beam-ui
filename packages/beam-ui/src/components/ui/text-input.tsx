@@ -1,17 +1,43 @@
 import { useId } from "react";
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link TextInput}. */
 interface TextInputProps {
+  /** Current input value. */
   value: string;
+  /** Called when the input value changes. */
   onChange: (value: string) => void;
+  /** Placeholder text displayed when empty. */
   placeholder?: string;
+  /** Optional label displayed above the input. */
   label?: string;
+  /** Error message displayed below the input with orange accent. */
   error?: string;
+  /** Whether the input is disabled. Defaults to `false`. */
   disabled?: boolean;
+  /** HTML input type. Defaults to `"text"`. */
   type?: "text" | "password" | "email" | "number";
+  /** Optional CSS class applied to the wrapper. */
   className?: string;
 }
 
+/**
+ * Foundational text input with optional label, error message, and type variants.
+ * Supports accessibility attributes and automatic error styling.
+ *
+ * @example
+ * ```tsx
+ * const [email, setEmail] = useState("");
+ * <TextInput
+ *   type="email"
+ *   value={email}
+ *   onChange={setEmail}
+ *   label="Email"
+ *   placeholder="name@example.com"
+ *   error={emailError ? "Invalid email" : undefined}
+ * />
+ * ```
+ */
 export function TextInput({
   value,
   onChange,

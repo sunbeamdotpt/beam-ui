@@ -9,16 +9,43 @@ import { TabsRoot, TabList, TabTrigger, TabContent } from "@ark-ui/react/tabs";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Props for {@link BranchSelector}. */
 interface BranchSelectorProps {
+  /** Array of branch names to choose from. */
   branches: string[];
+  /** Array of tag names to choose from. */
   tags: string[];
+  /** Currently selected branch or tag name. */
   current: string;
+  /** Name of the default/main branch (shown with "default" badge). */
   defaultBranch?: string;
+  /** Called with selected branch or tag name. */
   onChange: (ref: string) => void;
+  /** Optional callback to create a new branch with the given name. */
   onCreateBranch?: (name: string) => void;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
+/**
+ * Dropdown for selecting Git branches or tags with optional branch creation.
+ *
+ * Shows two tabs (Branches, Tags), a search input, and a list of options. If `onCreateBranch`
+ * is provided and the search matches no existing branch, a "Create branch" button appears.
+ * The current selection is marked with a checkmark and highlighted in orange.
+ *
+ * @example
+ * ```tsx
+ * <BranchSelector
+ *   branches={["main", "develop", "feature/auth"]}
+ *   tags={["v1.0.0", "v1.1.0"]}
+ *   current="main"
+ *   defaultBranch="main"
+ *   onChange={(ref) => checkout(ref)}
+ *   onCreateBranch={(name) => createBranch(name)}
+ * />
+ * ```
+ */
 export function BranchSelector({
   branches,
   tags,

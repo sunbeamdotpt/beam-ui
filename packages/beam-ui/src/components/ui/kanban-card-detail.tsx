@@ -19,27 +19,47 @@ import { Avatar } from "./avatar";
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
+/** Extended card data for detail view with timestamps, status, and priority. */
 export interface KanbanCardData {
+  /** Unique identifier for the card. */
   id: string;
+  /** Card title / heading. */
   title: string;
+  /** Markdown-formatted description. */
   description?: string;
+  /** Optional labels (tags) with custom colors. */
   labels?: { name: string; color: string }[];
+  /** Optional assignees with optional avatar URLs. */
   assignees?: { name: string; avatarUrl?: string }[];
+  /** Optional milestone reference. */
   milestone?: string;
+  /** ISO date string for due date. */
   dueDate?: string;
+  /** Status badge (e.g., "open", "in-progress", "done"). */
   status?: string;
+  /** Priority level. */
   priority?: "low" | "medium" | "high" | "critical";
+  /** ISO timestamp when the card was created. */
   createdAt?: string;
+  /** ISO timestamp of last update. */
   updatedAt?: string;
 }
 
+/** Props for {@link KanbanCardDetail}. */
 interface KanbanCardDetailProps {
+  /** The card data to display and edit. */
   card: KanbanCardData;
+  /** Whether the dialog is open. */
   open: boolean;
+  /** Called when user closes the dialog (via Escape, close button, or backdrop). */
   onClose: () => void;
+  /** Called when user saves title and description changes. Receives updated card. */
   onSave?: (card: KanbanCardData) => void;
+  /** Called when user deletes the card. Receives card id. */
   onDelete?: (id: string) => void;
+  /** If true, hides edit and delete buttons. Defaults to `false`. */
   readOnly?: boolean;
+  /** Optional CSS class for the dialog content. */
   className?: string;
 }
 
@@ -58,6 +78,21 @@ const PRIORITY_COLORS: Record<string, string> = {
 /* Component                                                           */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Modal dialog for viewing and editing detailed Kanban card information.
+ * Displays title, description (with markdown editor), assignees, labels, milestone, and priority.
+ * Supports inline edit mode with Save/Cancel buttons.
+ *
+ * @example
+ * ```tsx
+ * <KanbanCardDetail
+ *   card={selectedCard}
+ *   open={isOpen}
+ *   onClose={() => setIsOpen(false)}
+ *   onSave={(card) => updateCard(card)}
+ * />
+ * ```
+ */
 export function KanbanCardDetail({
   card,
   open,

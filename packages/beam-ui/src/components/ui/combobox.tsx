@@ -13,20 +13,45 @@ import {
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Single option in a {@link Combobox}. */
 interface ComboboxOption {
+  /** Internal identifier for this option. */
   value: string;
+  /** Display label shown in the dropdown and input. */
   label: string;
 }
 
+/** Props for {@link Combobox}. */
 interface ComboboxProps {
+  /** Array of options to display in the dropdown. */
   options: ComboboxOption[];
+  /** Currently selected option value. */
   value: string;
+  /** Callback fired when the user selects an option; receives the option's value. */
   onChange: (value: string) => void;
+  /** Placeholder text shown in the input when no option is selected. Defaults to `"Search..."`. */
   placeholder?: string;
+  /** If true, the combobox is disabled and cannot be interacted with. Defaults to false. */
   disabled?: boolean;
+  /** Extra CSS class names to apply to the root component. */
   className?: string;
 }
 
+/**
+ * Searchable dropdown combobox with filter-as-you-type and keyboard navigation.
+ *
+ * Typing in the input filters the options list by label. Arrow keys navigate, Enter selects.
+ * Supports disabled state. Integrates with Ark UI's ComboboxRoot for accessibility.
+ *
+ * @example
+ * ```tsx
+ * <Combobox
+ *   options={[{ value: "ts", label: "TypeScript" }]}
+ *   value={lang}
+ *   onChange={setLang}
+ * />
+ * ```
+ */
 export function Combobox({
   options,
   value,

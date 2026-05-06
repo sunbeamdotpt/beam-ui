@@ -9,15 +9,31 @@ import {
 } from "@ark-ui/react/slider";
 import { css } from "styled-system/css";
 
+/** Props for {@link Slider}. */
 interface SliderProps {
+  /** Current slider value. */
   value: number;
+  /** Fired when value changes. */
   onChange: (value: number) => void;
+  /** Minimum value. Defaults to `0`. */
   min?: number;
+  /** Maximum value. Defaults to `100`. */
   max?: number;
+  /** Increment step. Defaults to `1`. */
   step?: number;
+  /** Optional label above slider. */
   label?: string;
 }
 
+/**
+ * Horizontal slider with optional label using Ark UI.
+ * Supports keyboard navigation (arrow keys, Home, End).
+ *
+ * @example
+ * ```tsx
+ * <Slider value={50} onChange={setValue} min={0} max={100} label="Volume" />
+ * ```
+ */
 export function Slider({
   value,
   onChange,

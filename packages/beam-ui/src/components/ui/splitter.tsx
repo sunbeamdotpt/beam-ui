@@ -6,12 +6,28 @@ import {
 } from "@ark-ui/react/splitter";
 import { css } from "styled-system/css";
 
+/** Props for {@link Splitter}. */
 interface SplitterProps {
+  /** Exactly two child elements to split. */
   children: [ReactNode, ReactNode];
+  /** Split direction. Defaults to `"horizontal"`. */
   direction?: "horizontal" | "vertical";
+  /** Initial size of left/top panel as percentage (0–100). Defaults to `50`. */
   defaultSize?: number;
 }
 
+/**
+ * Resizable two-panel splitter using Ark UI.
+ * Drag handle shows on hover and highlights on drag.
+ *
+ * @example
+ * ```tsx
+ * <Splitter direction="horizontal" defaultSize={30}>
+ *   <LeftPanel />
+ *   <RightPanel />
+ * </Splitter>
+ * ```
+ */
 export function Splitter({
   children,
   direction = "horizontal",

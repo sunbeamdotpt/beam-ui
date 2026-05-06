@@ -8,15 +8,38 @@ import {
 } from "@ark-ui/react/number-input";
 import { css } from "styled-system/css";
 
+/** Props for {@link NumberInput}. */
 interface NumberInputProps {
+  /** Current numeric value. */
   value: number;
+  /** Called when user types or clicks increment/decrement buttons. Receives new number. */
   onChange: (value: number) => void;
+  /** Minimum allowed value (inclusive). */
   min?: number;
+  /** Maximum allowed value (inclusive). */
   max?: number;
+  /** Increment/decrement step size. Defaults to `1`. */
   step?: number;
+  /** Optional label text above the input. */
   label?: string;
 }
 
+/**
+ * Spinbox input for numeric values with increment/decrement buttons and optional min/max constraints.
+ * Supports mouse wheel for scrolling adjustment.
+ *
+ * @example
+ * ```tsx
+ * <NumberInput
+ *   value={count}
+ *   onChange={setCount}
+ *   min={0}
+ *   max={100}
+ *   step={5}
+ *   label="Quantity"
+ * />
+ * ```
+ */
 export function NumberInput({
   value,
   onChange,

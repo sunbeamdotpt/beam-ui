@@ -24,15 +24,33 @@ import {
 } from "@ark-ui/react/date-picker";
 import { Icon } from "./icon";
 
+/** Props for {@link DatePicker}. */
 interface DatePickerProps {
+  /** Current date value as ISO 8601 string (e.g., `"2024-12-25"`). */
   value?: string;
+  /** Callback fired when the user selects a date; receives the ISO date string. */
   onChange?: (value: string) => void;
+  /** Optional label shown above the date input. */
   label?: string;
+  /** Placeholder text shown in the input when no date is selected. Defaults to `"Select date"`. */
   placeholder?: string;
+  /** If true, the date picker is disabled and cannot be interacted with. Defaults to false. */
   disabled?: boolean;
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
+/**
+ * Ark UI date picker with day/month/year views and calendar navigation.
+ *
+ * Displays a trigger button with a calendar icon; opens a popover with day, month, and year views.
+ * Supports keyboard navigation and locale-aware formatting. Closes automatically on selection.
+ *
+ * @example
+ * ```tsx
+ * <DatePicker value={date} onChange={setDate} label="Start Date" />
+ * ```
+ */
 export function DatePicker({
   value,
   onChange,

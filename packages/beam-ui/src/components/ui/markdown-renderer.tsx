@@ -9,8 +9,11 @@ import rehypeSanitize from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
 import { useTheme } from "../../hooks/use-theme";
 
+/** Props for {@link MarkdownRenderer}. */
 export interface MarkdownRendererProps {
+  /** Markdown source string (CommonMark + GitHub Flavored Markdown). Supports inline/block LaTeX with `$...$` (inline) and `$$...$$` (display). */
   content: string;
+  /** Optional CSS class for the wrapper div. */
   className?: string;
 }
 
@@ -66,6 +69,16 @@ function extractMath(md: string): { processed: string; blocks: { id: string; mat
   return { processed, blocks };
 }
 
+/**
+ * Renders CommonMark + GitHub Flavored Markdown with sanitization and LaTeX math support.
+ * Converts markdown to HTML via a unified pipeline (remark → rehype → sanitize).
+ * LaTeX blocks (`$$...$$`) and inline math (`$...$`) are lazily loaded and rendered with KaTeX.
+ *
+ * @example
+ * ```tsx
+ * <MarkdownRenderer content="# Hello\n\n$E = mc^2$" />
+ * ```
+ */
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
   const { theme } = useTheme();
   const [katex, setKatex] = useState<any>(null);

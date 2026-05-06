@@ -12,20 +12,47 @@ import {
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
+/** Single select option. */
 interface SelectOption {
+  /** Unique value. */
   value: string;
+  /** Display label. */
   label: string;
 }
 
+/** Props for {@link Select}. */
 interface SelectProps {
+  /** Array of available options. */
   options: SelectOption[];
+  /** Currently selected value. */
   value: string;
+  /** Fired when selection changes. */
   onChange: (value: string) => void;
+  /** Placeholder text. Defaults to `"Select…"`. */
   placeholder?: string;
+  /** Disable the select. Defaults to `false`. */
   disabled?: boolean;
+  /** Additional CSS class. */
   className?: string;
 }
 
+/**
+ * Dropdown select using Ark UI with keyboard navigation and custom styling.
+ * Displays dropdown below trigger by default.
+ *
+ * @example
+ * ```tsx
+ * <Select
+ *   options={[
+ *     { value: "a", label: "Option A" },
+ *     { value: "b", label: "Option B" },
+ *   ]}
+ *   value={selected}
+ *   onChange={setSelected}
+ *   placeholder="Choose..."
+ * />
+ * ```
+ */
 export function Select({
   options,
   value,

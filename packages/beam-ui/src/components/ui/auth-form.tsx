@@ -18,13 +18,31 @@ interface OAuthProvider {
   onClick: () => void;
 }
 
+/** Props for {@link LoginForm}. */
 interface LoginFormProps {
+  /** Called with username, password, and remember-me flag on form submission. */
   onSubmit: (username: string, password: string, remember: boolean) => void;
+  /** OAuth provider buttons to display (optional). */
   oauthProviders?: OAuthProvider[];
+  /** Error message displayed in a callout (optional). */
   error?: string;
+  /** If true, inputs are disabled and submit button shows spinner. Defaults to false. */
   loading?: boolean;
 }
 
+/**
+ * Login form with username/password fields and optional OAuth providers.
+ *
+ * Includes "Remember me" checkbox, links to sign up and forgot password. Shows error callout if provided.
+ *
+ * @example
+ * ```tsx
+ * <LoginForm
+ *   onSubmit={(u, p, r) => signIn(u, p, r)}
+ *   oauthProviders={[{ name: "GitHub", icon: "github", onClick: () => signInWithGH() }]}
+ * />
+ * ```
+ */
 export function LoginForm({
   onSubmit,
   oauthProviders,
@@ -111,12 +129,29 @@ export function LoginForm({
 /* SignUpForm                                                           */
 /* ------------------------------------------------------------------ */
 
+/** Props for {@link SignUpForm}. */
 interface SignUpFormProps {
+  /** Called with username, email, and password on form submission. */
   onSubmit: (data: { username: string; email: string; password: string }) => void;
+  /** Error message displayed in a callout (optional). */
   error?: string;
+  /** If true, inputs are disabled and submit button shows spinner. Defaults to false. */
   loading?: boolean;
 }
 
+/**
+ * Sign-up form for account creation.
+ *
+ * Collects username, email, and password. Includes link to sign in page.
+ *
+ * @example
+ * ```tsx
+ * <SignUpForm
+ *   onSubmit={(data) => createAccount(data)}
+ *   loading={isCreating}
+ * />
+ * ```
+ */
 export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -173,13 +208,31 @@ export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps
 /* ForgotPasswordForm                                                  */
 /* ------------------------------------------------------------------ */
 
+/** Props for {@link ForgotPasswordForm}. */
 interface ForgotPasswordFormProps {
+  /** Called with email address on form submission. */
   onSubmit: (email: string) => void;
+  /** Error message displayed in a callout (optional). */
   error?: string;
+  /** If true, input is disabled and submit button shows spinner. Defaults to false. */
   loading?: boolean;
+  /** If true, shows success message instead of the form. Defaults to false. */
   success?: boolean;
 }
 
+/**
+ * Password recovery form.
+ *
+ * Collects email address and shows confirmation message after submission. Includes link back to sign in.
+ *
+ * @example
+ * ```tsx
+ * <ForgotPasswordForm
+ *   onSubmit={(email) => requestReset(email)}
+ *   success={resetSent}
+ * />
+ * ```
+ */
 export function ForgotPasswordForm({
   onSubmit,
   error,
@@ -231,13 +284,31 @@ export function ForgotPasswordForm({
 /* TwoFactorForm                                                       */
 /* ------------------------------------------------------------------ */
 
+/** Props for {@link TwoFactorForm}. */
 interface TwoFactorFormProps {
+  /** Called with the 6-digit code on form submission. */
   onSubmit: (code: string) => void;
+  /** Called when user clicks "Use a scratch code instead" button. */
   onScratchCode: () => void;
+  /** Error message displayed in a callout (optional). */
   error?: string;
+  /** If true, input is disabled and submit button shows spinner. Defaults to false. */
   loading?: boolean;
 }
 
+/**
+ * Two-factor authentication code verification form.
+ *
+ * Uses a 6-digit PIN input component. Includes link to use a backup scratch code instead.
+ *
+ * @example
+ * ```tsx
+ * <TwoFactorForm
+ *   onSubmit={(code) => verify2FA(code)}
+ *   onScratchCode={() => switchToScratchCode()}
+ * />
+ * ```
+ */
 export function TwoFactorForm({
   onSubmit,
   onScratchCode,

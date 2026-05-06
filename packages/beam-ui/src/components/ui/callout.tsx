@@ -3,11 +3,22 @@ import { css, cx } from "styled-system/css";
 import { token } from "styled-system/tokens";
 import { Icon } from "./icon";
 
+/**
+ * Visual variant tokens for {@link Callout}.
+ *
+ * - `tip` — PRO TIP label with sunbeam orange left border (lightbulb icon).
+ * - `warning` — WARNING label with sunshine red left border (warning icon).
+ * - `info` — INFO label with sunshine yellow left border (info icon).
+ */
 type CalloutVariant = "tip" | "warning" | "info";
 
+/** Props for {@link Callout}. */
 interface CalloutProps {
+  /** Callout message content. */
   children: ReactNode;
+  /** Visual style and semantics. Defaults to `"tip"`. */
   variant?: CalloutVariant;
+  /** Additional Panda CSS classes. */
   className?: string;
 }
 
@@ -41,6 +52,19 @@ const roleMap: Record<CalloutVariant, string> = {
   info: "note",
 };
 
+/**
+ * Highlighted callout box with icon and label for emphasis.
+ *
+ * Three semantic variants (tip, warning, info) each with distinct color and accessibility role.
+ * Content is italicized and secondary-colored; the label is uppercase and bold.
+ *
+ * @example
+ * ```tsx
+ * <Callout variant="tip">Use this technique for better performance.</Callout>
+ * <Callout variant="warning">This change is irreversible.</Callout>
+ * <Callout variant="info">New feature available in v2.0.</Callout>
+ * ```
+ */
 export function Callout({ children, variant = "tip", className }: CalloutProps) {
   return (
     <div

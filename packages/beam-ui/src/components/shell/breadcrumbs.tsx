@@ -30,10 +30,25 @@ const separator = css({
   userSelect: "none",
 });
 
+/** Props for {@link Breadcrumbs}. */
 interface BreadcrumbsProps {
+  /** Array of breadcrumb items. Last item is rendered as current page (no link). */
   items: Array<{ label: string; href?: string }>;
 }
 
+/**
+ * Hierarchical breadcrumb navigation showing the current page location within a site structure.
+ * Last item is always shown as the current page without a link. Interactive items use routing links.
+ *
+ * @example
+ * ```tsx
+ * <Breadcrumbs items={[
+ *   { label: "Home", href: "/" },
+ *   { label: "Docs", href: "/docs" },
+ *   { label: "Components" }
+ * ]} />
+ * ```
+ */
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <nav className={nav} aria-label="Breadcrumb">

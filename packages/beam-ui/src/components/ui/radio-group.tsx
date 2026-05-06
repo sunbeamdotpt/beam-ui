@@ -8,18 +8,42 @@ import {
 } from "@ark-ui/react/radio-group";
 import { css } from "styled-system/css";
 
+/** Single radio option. */
 interface RadioOption {
+  /** Unique value for this option. */
   value: string;
+  /** Display label. */
   label: string;
 }
 
+/** Props for {@link RadioGroup}. */
 interface RadioGroupProps {
+  /** Array of radio options. */
   options: RadioOption[];
+  /** Currently selected value. */
   value: string;
+  /** Fired when selection changes. */
   onChange: (value: string) => void;
+  /** Optional group label. */
   label?: string;
 }
 
+/**
+ * Radio button group with keyboard navigation and optional label.
+ *
+ * @example
+ * ```tsx
+ * <RadioGroup
+ *   options={[
+ *     { value: "opt1", label: "Option 1" },
+ *     { value: "opt2", label: "Option 2" },
+ *   ]}
+ *   value={selected}
+ *   onChange={setSelected}
+ *   label="Choose one:"
+ * />
+ * ```
+ */
 export function RadioGroup({ options, value, onChange, label }: RadioGroupProps) {
   const labelId = useId();
   return (

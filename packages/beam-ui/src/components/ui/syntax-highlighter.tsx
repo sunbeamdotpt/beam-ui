@@ -2,12 +2,19 @@ import { useEffect, useState, useRef } from "react";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 
+/** Props for {@link SyntaxHighlighter}. */
 interface SyntaxHighlighterProps {
+  /** Source code string to highlight. */
   code: string;
+  /** Language identifier (e.g., "javascript", "python", "rust"). */
   language: string;
+  /** Theme override. Defaults to theme from `useTheme()`. */
   theme?: "light" | "dark";
+  /** Show line numbers in a gutter. Defaults to `false`. */
   showLineNumbers?: boolean;
+  /** Array of 1-based line numbers to highlight (e.g., `[1, 3, 5]`). */
   highlightLines?: number[];
+  /** Additional CSS class. */
   className?: string;
 }
 
@@ -97,9 +104,22 @@ async function getOrCreateHighlighter() {
   return highlighterPromise;
 }
 
-/* ------------------------------------------------------------------ */
-/* SyntaxHighlighter                                                   */
-/* ------------------------------------------------------------------ */
+/**
+ * Syntax highlighter using Shiki with beam-branded light/dark themes.
+ * Supports 19+ languages, optional line numbers, and per-line highlighting.
+ * Falls back to plain text while loading.
+ *
+ * @example
+ * ```tsx
+ * <SyntaxHighlighter
+ *   code="const x = 42;"
+ *   language="javascript"
+ *   showLineNumbers
+ *   highlightLines={[1]}
+ *   theme="dark"
+ * />
+ * ```
+ */
 export function SyntaxHighlighter({
   code,
   language,

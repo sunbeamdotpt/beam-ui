@@ -1,19 +1,31 @@
 import { useMemo } from "react";
 import { css, cx } from "styled-system/css";
 
+/** Single commit in a {@link CommitGraph}. */
 export interface CommitNode {
+  /** Full commit hash (SHA-1 or equivalent). */
   hash: string;
+  /** Abbreviated commit hash (first 7 characters, typically). */
   shortHash: string;
+  /** Commit message (subject line). */
   message: string;
+  /** Commit author name or email. */
   author: string;
+  /** Human-readable date string (e.g., "2 days ago"). */
   date: string;
+  /** Array of parent commit hashes; empty for root commits. */
   parents: string[];
+  /** Optional branch name (e.g., "main", "feature/foo"). */
   branch?: string;
+  /** Optional array of tag names attached to this commit. */
   tags?: string[];
 }
 
+/** Props for {@link CommitGraph}. */
 interface CommitGraphProps {
+  /** Array of commits to display, in chronological order. */
   commits: CommitNode[];
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
@@ -90,6 +102,22 @@ function layoutCommits(commits: CommitNode[]) {
   return { nodes, hashToNode, maxLane: nextLane };
 }
 
+/**
+ * Git commit history visualizer with lane-based graph and metadata columns.
+ *
+ * Renders commits as a scrollable SVG graph with colored lanes for branches.
+ * Each commit row displays the hash (abbreviated), message, author, and date.
+ * Handles merge commits with curved lines; branch and tag badges shown inline.
+ *
+ * @example
+ * ```tsx
+ * <CommitGraph
+ *   commits={[
+ *     { hash: "abc123...", shortHash: "abc123", message: "Initial commit", author: "Alice", date: "2 days ago", parents: [], branch: "main" }
+ *   ]}
+ * />
+ * ```
+ */
 export function CommitGraph({ commits, className }: CommitGraphProps) {
   const { nodes, hashToNode, maxLane } = useMemo(
     () => layoutCommits(commits),

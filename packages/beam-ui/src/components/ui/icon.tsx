@@ -1,14 +1,28 @@
 import { css, cx } from "styled-system/css";
 
+/** Props for {@link Icon}. */
 interface IconProps {
+  /** Material Symbol icon name (e.g., "home", "settings", "check"). */
   name: string;
+  /** Icon size in pixels or CSS unit string. If numeric, converted to `px`. */
   size?: number | string;
+  /** Apply filled variant (FILL 1 font-variation). Defaults to `false`. */
   filled?: boolean;
+  /** Optional CSS class for additional styling. */
   className?: string;
   /** When provided, the icon is treated as meaningful: role="img" + aria-label. Otherwise aria-hidden="true". */
   label?: string;
 }
 
+/**
+ * Material Symbol icon with optional filled variant and accessibility support.
+ *
+ * @example
+ * ```tsx
+ * <Icon name="home" size={20} />
+ * <Icon name="settings" filled label="Settings" />
+ * ```
+ */
 export function Icon({ name, size, filled, className, label }: IconProps) {
   const style: React.CSSProperties = {
     fontSize: typeof size === "number" ? `${size}px` : size,

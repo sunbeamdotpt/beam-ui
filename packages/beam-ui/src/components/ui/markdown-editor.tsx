@@ -3,11 +3,17 @@ import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 import { MarkdownRenderer } from "./markdown-renderer";
 
+/** Props for {@link MarkdownEditor}. */
 interface MarkdownEditorProps {
+  /** Current markdown content. */
   value: string;
+  /** Called when user edits the markdown text. Receives new content string. */
   onChange: (value: string) => void;
+  /** Placeholder text in the textarea. Defaults to `"Write your markdown here..."`. */
   placeholder?: string;
+  /** Minimum height of the editor area. Defaults to `"200px"`. */
   minHeight?: string;
+  /** Optional CSS class for the container. */
   className?: string;
 }
 
@@ -140,6 +146,20 @@ const TOOLBAR_ACTIONS: ToolbarAction[] = [
   },
 ];
 
+/**
+ * Split-pane markdown editor with Write and Preview tabs.
+ * Write tab provides formatting toolbar (bold, italic, headings, code, links, lists, tables, quotes).
+ * Preview tab renders markdown with syntax highlighting and live LaTeX math support.
+ *
+ * @example
+ * ```tsx
+ * <MarkdownEditor
+ *   value={markdown}
+ *   onChange={setMarkdown}
+ *   minHeight="400px"
+ * />
+ * ```
+ */
 export function MarkdownEditor({
   value,
   onChange,
