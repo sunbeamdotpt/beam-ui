@@ -16,7 +16,7 @@
     "noFallthroughCasesInSwitch": true,
     "rootDir": "src",
     "paths": {
-      "styled-system/*": ["../../app/styled-system/*"]
+      "styled-system/*": ["./styled-system/*"]
     }
   },
   "include": ["src"]

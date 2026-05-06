@@ -1,0 +1,24 @@
+{
+  "name": "@sunbeam/beam-ui",
+  "version": "0.8.6",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts",
+    "./preset": "./src/preset.ts",
+    "./form": "./src/form/index.tsx",
+    "./i18n": "./src/i18n/index.ts"
+  },
+  "imports": {
+    "styled-system/css": "./styled-system/css/index.mjs",
+    "styled-system/tokens": "./styled-system/tokens/index.mjs"
+  },
+  "publish": {
+    "include": [
+      "src/**",
+      "styled-system/**",
+      "jsr.json",
+      "package.json",
+      "README.md"
+    ]
+  }
+}
