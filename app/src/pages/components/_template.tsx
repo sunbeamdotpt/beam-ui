@@ -1,3 +1,9 @@
+/**
+ * Component page template and shared helpers.
+ *
+ * Provides `ComponentPage`, `PropsTable`, and `SectionHeading` used by
+ * every individual component documentation page.
+ */
 import { type ReactNode, useEffect } from "react";
 import { css } from "styled-system/css";
 import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";

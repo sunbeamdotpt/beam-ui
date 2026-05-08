@@ -1,3 +1,8 @@
+/**
+ * Shell component documentation page.
+ *
+ * Documents the top-level application shell: header, footer, sidebar, and theme toggle.
+ */
 import { useEffect } from "react";
 import { css } from "styled-system/css";
 import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout";

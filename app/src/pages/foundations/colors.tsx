@@ -1,3 +1,9 @@
+/**
+ * Colors foundation page.
+ *
+ * Displays the Beam color palette: primary colors, sunshine scale, surface tokens,
+ * and semantic color definitions with copy-to-clipboard hex values.
+ */
 import { useEffect, useState } from "react";
 import { css } from "styled-system/css";
 import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout";

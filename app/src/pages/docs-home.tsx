@@ -1,3 +1,8 @@
+/**
+ * Docs home page — introduction and getting-started landing.
+ *
+ * Displays hero section, feature cards, and quick links into the design system docs.
+ */
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { css } from "styled-system/css";

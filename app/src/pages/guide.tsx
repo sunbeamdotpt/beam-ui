@@ -1,3 +1,8 @@
+/**
+ * Guide page — detailed walkthroughs and tutorials.
+ *
+ * Provides step-by-step guides with TOC navigation, callouts, and code snippets.
+ */
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { css } from "styled-system/css";

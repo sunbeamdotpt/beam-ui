@@ -1,3 +1,8 @@
+/**
+ * DocsLayout documentation page.
+ *
+ * Describes the two-column documentation layout, its zones, props, and shell integration.
+ */
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { css } from "styled-system/css";

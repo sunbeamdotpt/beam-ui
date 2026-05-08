@@ -1,3 +1,8 @@
+/**
+ * Beam UI showcase application.
+ *
+ * Defines routes for component docs, shell docs, layout docs, and foundations.
+ */
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Shell } from "@sunbeam/beam-ui/components/shell/shell";

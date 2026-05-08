@@ -1,3 +1,9 @@
+/**
+ * Interior documentation page template.
+ *
+ * Renders long-form docs with a generated table of contents, breadcrumbs,
+ * and code-block examples for core features like chat completions.
+ */
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { css } from "styled-system/css";

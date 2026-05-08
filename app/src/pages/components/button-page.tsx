@@ -1,3 +1,8 @@
+/**
+ * Button component documentation page.
+ *
+ * Live preview of all button variants with props table and usage examples.
+ */
 import { css } from "styled-system/css";
 import { Button } from "@sunbeam/beam-ui/components/ui/button";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
