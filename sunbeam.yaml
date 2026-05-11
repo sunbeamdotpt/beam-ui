@@ -1,0 +1,18 @@
+schema: 1
+project:
+  name: beam-ui
+  kind: node-ui
+  description: "Beam Design Language — React component library and Storybook monorepo."
+targets:
+  build:
+    exec: "npm run build"
+    cwd: packages/beam-ui
+  dev:
+    exec: "npm run storybook"
+    cwd: app
+  clean:
+    exec: "rm -rf packages/beam-ui/dist app/dist"
+  package:
+    exec: "docker buildx build --push -t src.${SUNBEAM_REGISTRY}/studio/beam-ui:latest ."
+outputs:
+  - packages/beam-ui/dist
