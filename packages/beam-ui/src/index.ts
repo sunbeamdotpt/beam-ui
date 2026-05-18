@@ -9,15 +9,12 @@
  *
  * @example
  * ```tsx
- * import { Button, Card, useTheme } from "@sunbeam/beam-ui";
+ * import { Button, Card } from "@sunbeam/beam-ui";
  *
  * export function Hero() {
- *   const { theme, toggle } = useTheme();
  *   return (
  *     <Card>
- *       <Button variant="primary" onClick={toggle}>
- *         Switch to {theme === "dark" ? "light" : "dark"} mode
- *       </Button>
+ *       <Button variant="primary">Get started</Button>
  *     </Card>
  *   );
  * }
@@ -126,17 +123,8 @@ export { FullwidthLayout } from "./components/layouts/fullwidth-layout";
 // Form
 export { Form, FormField, z, useForm, zodResolver } from "./form";
 
-// Stores
-export { useAuth, RequireAuth } from "./stores/auth-store";
-export type { User } from "./stores/auth-store";
-export { useNotifications } from "./stores/notification-store";
-export type { NotificationItem as NotificationStoreItem } from "./stores/notification-store";
-
 // i18n
 export { I18nProvider, useTranslation } from "./i18n";
-
-// Hooks
-export { useTheme } from "./hooks/use-theme";
 
 // Data
 export {
