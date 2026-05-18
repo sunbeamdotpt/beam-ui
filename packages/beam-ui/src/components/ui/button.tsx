@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 
 /**
@@ -138,9 +137,9 @@ export function Button({
       );
     }
     return (
-      <Link to={href} className={classes}>
+      <a href={href} className={classes}>
         {children}
-      </Link>
+      </a>
     );
   }
 

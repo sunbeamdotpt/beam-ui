@@ -1,52 +1,53 @@
 import { useEffect, useState, useCallback, type ReactNode } from "react";
-import TurndownService from "turndown";
 import { css } from "styled-system/css";
 import { Icon } from "../ui/icon";
 
-const turndown = new TurndownService({
-  headingStyle: "atx",
-  codeBlockStyle: "fenced",
-  bulletListMarker: "-",
-});
-// Strip material icons
-turndown.addRule("materialIcons", {
-  filter: (node) => node.classList?.contains("material-symbols-outlined") ?? false,
-  replacement: () => "",
-});
-// Strip buttons (tab triggers, copy buttons, etc.)
-turndown.addRule("buttons", {
-  filter: "button",
-  replacement: () => "",
-});
-// Strip nav/breadcrumb elements
-turndown.addRule("navs", {
-  filter: "nav",
-  replacement: () => "",
-});
-// Strip small badge/pill elements (tag pills, read time, section badges)
-turndown.addRule("badges", {
-  filter: (node) => {
-    const fontSize = node.style?.fontSize || "";
-    const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase()
-      && (node.textContent?.trim().length ?? 0) < 20;
-    const isBadge = fontSize === "10px" || fontSize === "11px" || fontSize === "12px";
-    return (isBadge && isSmallCaps) || false;
-  },
-  replacement: () => "",
-});
-// Convert callout boxes to blockquotes
-turndown.addRule("callouts", {
-  filter: (node) => {
-    return node.getAttribute?.("style")?.includes("border-left")
-      && node.getAttribute?.("style")?.includes("4px") || false;
-  },
-  replacement: (_content, node) => {
-    const text = (node as HTMLElement).textContent?.trim() ?? "";
-    // Remove the label (PRO TIP, OPTIMIZATION TIP, etc.)
-    const cleaned = text.replace(/^(PRO TIP|OPTIMIZATION TIP|WARNING|INFO|TIP)\s*/i, "");
-    return `\n> **Tip:** ${cleaned}\n\n`;
-  },
-});
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let turndownInstance: any | null = null;
+
+function getTurndown() {
+  if (turndownInstance) return turndownInstance;
+  const TurndownService = require("turndown");
+  turndownInstance = new TurndownService({
+    headingStyle: "atx",
+    codeBlockStyle: "fenced",
+    bulletListMarker: "-",
+  });
+  turndownInstance.addRule("materialIcons", {
+    filter: (node: HTMLElement) => node.classList?.contains("material-symbols-outlined") ?? false,
+    replacement: () => "",
+  });
+  turndownInstance.addRule("buttons", {
+    filter: "button",
+    replacement: () => "",
+  });
+  turndownInstance.addRule("navs", {
+    filter: "nav",
+    replacement: () => "",
+  });
+  turndownInstance.addRule("badges", {
+    filter: (node: HTMLElement) => {
+      const fontSize = node.style?.fontSize || "";
+      const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase()
+        && (node.textContent?.trim().length ?? 0) < 20;
+      const isBadge = fontSize === "10px" || fontSize === "11px" || fontSize === "12px";
+      return (isBadge && isSmallCaps) || false;
+    },
+    replacement: () => "",
+  });
+  turndownInstance.addRule("callouts", {
+    filter: (node: HTMLElement) => {
+      return node.getAttribute?.("style")?.includes("border-left")
+        && node.getAttribute?.("style")?.includes("4px") || false;
+    },
+    replacement: (_content: string, node: HTMLElement) => {
+      const text = node.textContent?.trim() ?? "";
+      const cleaned = text.replace(/^(PRO TIP|OPTIMIZATION TIP|WARNING|INFO|TIP)\s*/i, "");
+      return `\n> **Tip:** ${cleaned}\n\n`;
+    },
+  });
+  return turndownInstance;
+}
 
 const aside = css({
   width: "200px",
@@ -265,7 +266,7 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
             const clone = el.cloneNode(true) as HTMLElement;
             // Remove elements that shouldn't be in the markdown
             clone.querySelectorAll('[data-breadcrumbs], [data-meta-bar]').forEach(n => n.remove());
-            let md = turndown.turndown(clone.innerHTML);
+            let md = getTurndown().turndown(clone.innerHTML);
             // Clean up badge text that leaked (ALL CAPS short strings on their own line)
             md = md.replace(/^[A-Z][A-Z\s]{1,25}$/gm, "");
             // Clean up empty link brackets

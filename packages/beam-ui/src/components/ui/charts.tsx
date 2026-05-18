@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   ResponsiveContainer,
@@ -91,7 +92,7 @@ interface LineChartProps {
  * />
  * ```
  */
-export function LineChart({ data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps) {
+export function LineChart({ data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps): ReactNode {
   const defaultLabel = `Line chart with ${data.length} data points`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
@@ -163,7 +164,7 @@ interface BarChartProps {
  * />
  * ```
  */
-export function BarChart({ data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps) {
+export function BarChart({ data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps): ReactNode {
   const defaultLabel = `Bar chart with ${data.length} data points`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
@@ -236,7 +237,7 @@ interface PieChartProps {
  * />
  * ```
  */
-export function PieChart({ data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps) {
+export function PieChart({ data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps): ReactNode {
   const defaultLabel = `${donut ? "Donut" : "Pie"} chart with ${data.length} segments`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
@@ -301,7 +302,7 @@ interface AreaChartProps {
  * />
  * ```
  */
-export function AreaChart({ data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps) {
+export function AreaChart({ data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps): ReactNode {
   const defaultLabel = `Area chart with ${data.length} data points`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>

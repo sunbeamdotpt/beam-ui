@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DndContext,
@@ -93,7 +93,7 @@ function SortableCard({ card }: { card: KanbanCard }) {
  * <KanbanCardView card={myCard} />
  * ```
  */
-export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }) {
+export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }): ReactNode {
   return (
     <div className={cx(cardStyle, ghost && cardGhostStyle)}>
       <p className={cardTitleStyle}>{card.title}</p>
@@ -206,7 +206,7 @@ export function KanbanBoard({
   onChange,
   onAddCard,
   className,
-}: KanbanBoardProps) {
+}: KanbanBoardProps): ReactNode {
   const [activeCard, setActiveCard] = useState<KanbanCard | null>(null);
 
   const sensors = useSensors(

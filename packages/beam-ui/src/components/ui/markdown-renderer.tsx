@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -79,7 +79,7 @@ function extractMath(md: string): { processed: string; blocks: { id: string; mat
  * <MarkdownRenderer content="# Hello\n\n$E = mc^2$" />
  * ```
  */
-export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, className }: MarkdownRendererProps): ReactNode {
   const { theme } = useTheme();
   const [katex, setKatex] = useState<any>(null);
 

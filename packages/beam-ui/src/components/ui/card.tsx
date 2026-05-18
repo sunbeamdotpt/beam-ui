@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -94,8 +93,8 @@ export function Card({
       >
         {description}
       </p>
-      <Link
-        to={ctaHref}
+      <a
+        href={ctaHref}
         className={css({
           color: "sunbeam.orange",
           fontWeight: "button",
@@ -111,7 +110,7 @@ export function Card({
         })}
       >
         {ctaLabel} <Icon name="arrow_forward" size={14} />
-      </Link>
+      </a>
     </article>
   );
 }

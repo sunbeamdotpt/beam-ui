@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { docsSidebar } from "../../data/navigation";
 
@@ -32,7 +31,6 @@ const allNavItems = docsSidebar.flatMap((section) =>
  * ```
  */
 export function SearchInput({ className }: SearchInputProps): ReactNode {
-  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -78,9 +76,9 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
       setQuery("");
       setShowResults(false);
       inputRef.current?.blur();
-      navigate(href);
+      window.location.href = href;
     },
-    [navigate]
+    []
   );
 
   return (

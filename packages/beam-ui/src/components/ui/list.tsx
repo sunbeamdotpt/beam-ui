@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -94,7 +93,7 @@ function ItemContent({ item, variant }: { item: ListItem; variant: Variant }) {
         </a>
       );
     }
-    return <Link to={item.href} className={linkStyle}>{inner}</Link>;
+    return <a href={item.href} className={linkStyle}>{inner}</a>;
   }
 
   return inner;

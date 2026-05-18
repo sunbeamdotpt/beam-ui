@@ -1,11 +1,14 @@
 /**
  * Sunbeam Studios design system — main entry point.
  *
- * Re-exports every UI component, layout shell, hook, store, and curated
- * navigation/status data set. Components are unstyled at import time and pick
- * up styling from a consumer's Panda CSS pipeline; wire {@link beamPreset}
+ * Re-exports lightweight UI primitives, hooks, and layout helpers.
+ * Components are unstyled at import time and pick up styling from a
+ * consumer's Panda CSS pipeline; wire {@link beamPreset}
  * (from `@sunbeam/beam-ui/preset`) into your `panda.config.ts` to get the
  * full design language.
+ *
+ * Heavy components (code-editor, charts, markdown, etc.) are available via
+ * dedicated subpath exports so consumers only pay for what they use.
  *
  * @example
  * ```tsx
@@ -23,7 +26,7 @@
  * @module
  */
 
-// UI components
+// UI primitives
 export { Accordion } from "./components/ui/accordion";
 export { ActivityHeatmap } from "./components/ui/activity-heatmap";
 export type { ActivityDay } from "./components/ui/activity-heatmap";
@@ -41,9 +44,6 @@ export { Card } from "./components/ui/card";
 export { Checkbox } from "./components/ui/checkbox";
 export { Clipboard } from "./components/ui/clipboard";
 export { CodeBlock, syn } from "./components/ui/code-block";
-export { CodeEditor } from "./components/ui/code-editor";
-export type { CodeEditorProps } from "./components/ui/code-editor";
-export { DiagramRenderer } from "./components/ui/diagram-renderer";
 export { ColorPicker } from "./components/ui/color-picker";
 export { Combobox } from "./components/ui/combobox";
 export { ContextMenu } from "./components/ui/context-menu";
@@ -106,39 +106,5 @@ export type { WizardStep, WizardProps, WizardModalProps } from "./components/ui/
 export { WorkItemList } from "./components/ui/work-item-list";
 export type { WorkItemRow, WorkItemLabel, WorkItemBranch, WorkItemListProps } from "./components/ui/work-item-list";
 
-// Shell components
-export { Shell } from "./components/shell/shell";
-export { Breadcrumbs } from "./components/shell/breadcrumbs";
-export { Footer } from "./components/shell/footer";
-export { Header } from "./components/shell/header";
-export { RightRail } from "./components/shell/right-rail";
-export { Sidebar } from "./components/shell/sidebar";
-
-// Layouts
-export { ApiLayout, apiLeftPanel, apiRightPanel } from "./components/layouts/api-layout";
-export { DocsLayout, useDocsContext } from "./components/layouts/docs-layout";
-export type { DocsTocItem } from "./components/layouts/docs-layout";
-export { FullwidthLayout } from "./components/layouts/fullwidth-layout";
-
-// Form
-export { Form, FormField, z, useForm, zodResolver } from "./form";
-
-// i18n
-export { I18nProvider, useTranslation } from "./i18n";
-
-// Data
-export {
-  headerLinks,
-  docsSidebar,
-  apiSidebar,
-  footerSections,
-} from "./data/navigation";
-export type { NavItem, NavSection } from "./data/navigation";
-export {
-  issueStatuses,
-  prStatuses,
-  priorities,
-  releaseStages,
-  allStatuses,
-} from "./data/statuses";
-export type { StatusDef } from "./data/statuses";
+// Hooks
+export { useTheme } from "./hooks/use-theme";

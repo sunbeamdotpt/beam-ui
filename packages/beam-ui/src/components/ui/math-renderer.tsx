@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Props for {@link MathRenderer}. */
@@ -24,7 +24,7 @@ let katexCssLoaded = false;
  * <MathRenderer math="\\int_0^\\infty e^{-x^2} dx" display />
  * ```
  */
-export function MathRenderer({ math, display = false, className }: MathRendererProps) {
+export function MathRenderer({ math, display = false, className }: MathRendererProps): ReactNode {
   const [ready, setReady] = useState(!!katexModule);
 
   useEffect(() => {

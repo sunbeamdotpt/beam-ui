@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { useTheme } from "../../hooks/use-theme";
 
@@ -127,7 +127,7 @@ export function SyntaxHighlighter({
   showLineNumbers = false,
   highlightLines = [],
   className,
-}: SyntaxHighlighterProps) {
+}: SyntaxHighlighterProps): ReactNode {
   const { theme: currentTheme } = useTheme();
   const resolvedTheme = themeProp ?? currentTheme;
   const [html, setHtml] = useState<string | null>(null);

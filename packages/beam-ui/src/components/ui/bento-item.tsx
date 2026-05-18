@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 
@@ -263,7 +262,7 @@ export function BentoItem({
 }: BentoItemProps): ReactNode {
   if (variant === "large") {
     return (
-      <Link to={href} className={cx(largeCard, css({ _hover: { "& .arrow": { transform: "translateX(8px)" } } }))} aria-label={`${title} — ${category}`}>
+      <a href={href} className={cx(largeCard, css({ _hover: { "& .arrow": { transform: "translateX(8px)" } } }))} aria-label={`${title} — ${category}`}>
         <div className={largeImage}>
           <div className={largeImagePlaceholder}>
             <Icon name="auto_awesome" size={48} aria-hidden="true" />
@@ -282,13 +281,13 @@ export function BentoItem({
             </span>
           </div>
         </div>
-      </Link>
+      </a>
     );
   }
 
   if (variant === "horizontal") {
     return (
-      <Link to={href} className={horizontalCard} aria-label={`${title} — ${category}`}>
+      <a href={href} className={horizontalCard} aria-label={`${title} — ${category}`}>
         <div className={horizontalImage}>
           <Icon name="developer_board" size={40} aria-hidden="true" />
         </div>
@@ -298,19 +297,19 @@ export function BentoItem({
           <p className={horizontalDesc}>{description}</p>
           <span className={horizontalCta}>Explore Cookbook</span>
         </div>
-      </Link>
+      </a>
     );
   }
 
   // small
   return (
-    <Link to={href} className={smallCard} aria-label={`${title} — ${difficulty}`}>
+    <a href={href} className={smallCard} aria-label={`${title} — ${difficulty}`}>
       <h3 className={smallTitle}>{title}</h3>
       <p className={smallDesc}>{description}</p>
       <div className={smallFooter}>
         <span className={difficultyLabel}>{difficulty}</span>
         <Icon name="east" size={20} className={arrowIcon} aria-hidden="true" />
       </div>
-    </Link>
+    </a>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "@sunbeam/beam-ui",
-  "version": "0.8.10",
+  "version": "0.9.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -42,6 +42,41 @@
       "@sunbeam/source": "./src/i18n/index.ts",
       "default": "./dist/i18n/index.js"
     },
+    "./code-editor": {
+      "types": "./dist/components/ui/code-editor.d.ts",
+      "@sunbeam/source": "./src/components/ui/code-editor.tsx",
+      "default": "./dist/components/ui/code-editor.js"
+    },
+    "./charts": {
+      "types": "./dist/components/ui/charts.d.ts",
+      "@sunbeam/source": "./src/components/ui/charts.tsx",
+      "default": "./dist/components/ui/charts.js"
+    },
+    "./diagram": {
+      "types": "./dist/components/ui/diagram-renderer.d.ts",
+      "@sunbeam/source": "./src/components/ui/diagram-renderer.tsx",
+      "default": "./dist/components/ui/diagram-renderer.js"
+    },
+    "./markdown": {
+      "types": "./dist/components/ui/markdown-renderer.d.ts",
+      "@sunbeam/source": "./src/components/ui/markdown-renderer.tsx",
+      "default": "./dist/components/ui/markdown-renderer.js"
+    },
+    "./math": {
+      "types": "./dist/components/ui/math-renderer.d.ts",
+      "@sunbeam/source": "./src/components/ui/math-renderer.tsx",
+      "default": "./dist/components/ui/math-renderer.js"
+    },
+    "./kanban": {
+      "types": "./dist/components/ui/kanban-board.d.ts",
+      "@sunbeam/source": "./src/components/ui/kanban-board.tsx",
+      "default": "./dist/components/ui/kanban-board.js"
+    },
+    "./syntax-highlighter": {
+      "types": "./dist/components/ui/syntax-highlighter.d.ts",
+      "@sunbeam/source": "./src/components/ui/syntax-highlighter.tsx",
+      "default": "./dist/components/ui/syntax-highlighter.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -72,51 +107,50 @@
     "url": "https://src.sunbeam.pt/studio/beam-ui"
   },
   "license": "MIT",
-  "dependencies": {
-    "@codemirror/commands": "^6.10.3",
-    "@codemirror/lang-cpp": "^6.0.3",
-    "@codemirror/lang-css": "^6.3.1",
-    "@codemirror/lang-go": "^6.0.1",
-    "@codemirror/lang-html": "^6.4.11",
-    "@codemirror/lang-java": "^6.0.2",
-    "@codemirror/lang-javascript": "^6.2.5",
-    "@codemirror/lang-json": "^6.0.2",
-    "@codemirror/lang-markdown": "^6.5.0",
-    "@codemirror/lang-php": "^6.0.2",
-    "@codemirror/lang-python": "^6.2.1",
-    "@codemirror/lang-rust": "^6.0.2",
-    "@codemirror/lang-sql": "^6.10.0",
-    "@codemirror/lang-xml": "^6.1.0",
-    "@codemirror/lang-yaml": "^6.1.3",
-    "@codemirror/language": "^6.12.3",
-    "@codemirror/search": "^6.6.0",
-    "@codemirror/state": "^6.6.0",
-    "@codemirror/view": "^6.41.0",
-    "@dnd-kit/core": "^6.3.1",
-    "@dnd-kit/sortable": "^10.0.0",
-    "@dnd-kit/utilities": "^3.2.2",
-    "@hookform/resolvers": "^5.2.2",
-    "@lezer/highlight": "^1.2.1",
-    "katex": "^0.16.44",
-    "mermaid": "^11.14.0",
-    "react-hook-form": "^7.72.1",
-    "recharts": "^3.8.1",
-    "rehype-raw": "^7.0.0",
-    "rehype-sanitize": "^6.0.0",
-    "rehype-stringify": "^10.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.2",
-    "shiki": "^4.0.2",
-    "turndown": "^7.2.2",
-    "unified": "^11.0.5",
-    "zod": "^4.3.6"
-  },
   "peerDependencies": {
     "@ark-ui/react": "^4.0.0",
     "@pandacss/dev": "^1.9.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.0"
+    "react-dom": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@codemirror/commands": { "optional": true },
+    "@codemirror/lang-cpp": { "optional": true },
+    "@codemirror/lang-css": { "optional": true },
+    "@codemirror/lang-go": { "optional": true },
+    "@codemirror/lang-html": { "optional": true },
+    "@codemirror/lang-java": { "optional": true },
+    "@codemirror/lang-javascript": { "optional": true },
+    "@codemirror/lang-json": { "optional": true },
+    "@codemirror/lang-markdown": { "optional": true },
+    "@codemirror/lang-php": { "optional": true },
+    "@codemirror/lang-python": { "optional": true },
+    "@codemirror/lang-rust": { "optional": true },
+    "@codemirror/lang-sql": { "optional": true },
+    "@codemirror/lang-xml": { "optional": true },
+    "@codemirror/lang-yaml": { "optional": true },
+    "@codemirror/language": { "optional": true },
+    "@codemirror/search": { "optional": true },
+    "@codemirror/state": { "optional": true },
+    "@codemirror/view": { "optional": true },
+    "@dnd-kit/core": { "optional": true },
+    "@dnd-kit/sortable": { "optional": true },
+    "@dnd-kit/utilities": { "optional": true },
+    "@hookform/resolvers": { "optional": true },
+    "@lezer/highlight": { "optional": true },
+    "katex": { "optional": true },
+    "mermaid": { "optional": true },
+    "react-hook-form": { "optional": true },
+    "recharts": { "optional": true },
+    "rehype-raw": { "optional": true },
+    "rehype-sanitize": { "optional": true },
+    "rehype-stringify": { "optional": true },
+    "remark-gfm": { "optional": true },
+    "remark-parse": { "optional": true },
+    "remark-rehype": { "optional": true },
+    "shiki": { "optional": true },
+    "turndown": { "optional": true },
+    "unified": { "optional": true },
+    "zod": { "optional": true }
   }
 }

@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { css } from "styled-system/css";
 import { Icon } from "./icon";
 import { Badge } from "./badge";
@@ -119,9 +118,9 @@ export function ModelRow({ name, icon: iconName, tier, version, description, hre
 
   if (href) {
     return (
-      <Link to={href} className={row} aria-label={`View ${name} model details`}>
+      <a href={href} className={row} aria-label={`View ${name} model details`}>
         {content}
-      </Link>
+      </a>
     );
   }
 
