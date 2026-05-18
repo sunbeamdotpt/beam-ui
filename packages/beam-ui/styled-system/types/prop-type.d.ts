@@ -1,7 +1,7 @@
 /* eslint-disable */
-import type { ConditionalValue } from './conditions';
-import type { CssProperties } from './system-types';
-import type { Tokens } from '../tokens/index';
+import type { ConditionalValue } from './conditions.d.ts';
+import type { CssProperties } from './system-types.d.ts';
+import type { Tokens } from '../tokens/index.mjs';
 
 export interface UtilityValues {
 	inset: "auto";

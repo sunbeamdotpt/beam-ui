@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type {  Pseudos  } from './csstype';
+import type {  Pseudos  } from './csstype.d.ts';
 
 type AriaAttributes =
   | '[aria-disabled]'

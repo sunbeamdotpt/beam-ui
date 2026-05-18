@@ -1,7 +1,7 @@
 /* eslint-disable */
-import type {  ConditionalValue, Nested  } from './conditions';
-import type {  AtRule, Globals, PropertiesFallback  } from './csstype';
-import type {  SystemProperties, CssVarProperties  } from './style-props';
+import type {  ConditionalValue, Nested  } from './conditions.d.ts';
+import type {  AtRule, Globals, PropertiesFallback  } from './csstype.d.ts';
+import type {  SystemProperties, CssVarProperties  } from './style-props.d.ts';
 
 type String = string & {}
 type Number = number & {}

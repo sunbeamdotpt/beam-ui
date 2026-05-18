@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type {  CompositionStyleObject  } from './system-types';
+import type {  CompositionStyleObject  } from './system-types.d.ts';
 
 interface Token<T> {
   value: T
