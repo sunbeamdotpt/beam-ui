@@ -188,7 +188,6 @@ export function DiffViewer({
 
   return (
     <div
-      role="table"
       aria-label={`Diff: ${oldFileName ?? ""} ${newFileName ? `to ${newFileName}` : ""}`}
       className={cx(rootStyle, className)}
     >
@@ -264,7 +263,6 @@ function renderUnified(
         <div
           key={`${key}-${lineIdx}`}
           className={cx(unifiedRow, bg)}
-          role="row"
           aria-label={ariaLabel}
         >
           <span className={lineNumCell}>{line.oldLineNumber ?? ""}</span>
@@ -341,7 +339,7 @@ function renderSplit(
 
     const splitRows = buildSplitRows(seg.lines);
     return splitRows.map((row, rowIdx) => (
-      <div key={`${key}-${rowIdx}`} className={splitRowStyle} role="row">
+      <div key={`${key}-${rowIdx}`} className={splitRowStyle}>
         {/* Left (old) */}
         <div
           className={cx(
