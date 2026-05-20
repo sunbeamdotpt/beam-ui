@@ -1,9 +1,9 @@
-import { Outlet, useOutletContext, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "@tanstack/react-router";
 import { css } from "styled-system/css";
 import { Sidebar } from "../shell/sidebar";
 import { RightRail } from "../shell/right-rail";
 import { docsSidebar } from "../../data/navigation";
-import { useState, type ReactNode } from "react";
+import { useState, createContext, useContext, type ReactNode } from "react";
 
 const body = css({
   display: "flex",
@@ -72,18 +72,24 @@ export interface DocsTocItem {
   id: string;
 }
 
-interface DocsContext {
+interface DocsContextValue {
   setToc: (items: DocsTocItem[]) => void;
 }
 
+const DocsContext = createContext<DocsContextValue | null>(null);
+
 /**
- * Retrieve the table-of-contents setter from {@link DocsLayout} outlet context.
+ * Retrieve the table-of-contents setter from {@link DocsLayout} context.
  * Used by child pages to populate the right-rail navigation.
  *
  * @returns Object with `setToc` function to update the visible TOC.
  */
-export function useDocsContext(): DocsContext {
-  return useOutletContext<DocsContext>();
+export function useDocsContext(): DocsContextValue {
+  const ctx = useContext(DocsContext);
+  if (!ctx) {
+    throw new Error("useDocsContext must be used within a DocsLayout");
+  }
+  return ctx;
 }
 
 /**
@@ -113,7 +119,9 @@ export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> }
       </div>
       <main className={content} id="main-content">
         <div className={center} data-content="center">
-          <Outlet context={{ setToc } satisfies DocsContext} />
+          <DocsContext.Provider value={{ setToc }}>
+            <Outlet />
+          </DocsContext.Provider>
         </div>
       </main>
       {toc.length > 0 && (

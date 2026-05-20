@@ -5,9 +5,9 @@ import { Icon } from "../ui/icon";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let turndownInstance: any | null = null;
 
-function getTurndown() {
+async function getTurndown() {
   if (turndownInstance) return turndownInstance;
-  const TurndownService = require("turndown");
+  const { default: TurndownService } = await import("turndown");
   turndownInstance = new TurndownService({
     headingStyle: "atx",
     codeBlockStyle: "fenced",
@@ -261,12 +261,13 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
         <button
           className={actionBtn}
           aria-label="Copy as markdown"
-          onClick={() => {
+          onClick={async () => {
             const el = document.querySelector('[data-content="center"]') ?? document.body;
             const clone = el.cloneNode(true) as HTMLElement;
             // Remove elements that shouldn't be in the markdown
             clone.querySelectorAll('[data-breadcrumbs], [data-meta-bar]').forEach(n => n.remove());
-            let md = getTurndown().turndown(clone.innerHTML);
+            const turndown = await getTurndown();
+            let md = turndown.turndown(clone.innerHTML);
             // Clean up badge text that leaked (ALL CAPS short strings on their own line)
             md = md.replace(/^[A-Z][A-Z\s]{1,25}$/gm, "");
             // Clean up empty link brackets

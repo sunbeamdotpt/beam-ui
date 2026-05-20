@@ -17,7 +17,7 @@ Peer dependencies (you supply these):
 
 - `react` ^19
 - `react-dom` ^19
-- `react-router-dom` ^7
+- `@tanstack/react-router` ^1
 - `@ark-ui/react` ^4
 - `@pandacss/dev` ^1.9
 - `zustand` ^5

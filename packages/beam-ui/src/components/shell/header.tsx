@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { css } from "styled-system/css";
 import {
   DialogRoot,
@@ -366,7 +366,7 @@ export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): R
       setQuery("");
       setShowResults(false);
       inputRef.current?.blur();
-      navigate(href);
+      navigate({ to: href });
     },
     [navigate]
   );
