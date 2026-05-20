@@ -1,5 +1,5 @@
 // @storyName AuthForms
-import { LoginForm, SignUpForm, ForgotPasswordForm, TwoFactorForm } from "./auth-form";
+import { LoginForm, SignUpForm, ForgotPasswordForm, TwoFactorForm } from "./auth-form.tsx";
 
 export default function AuthFormsStory() {
   return (

@@ -1,5 +1,5 @@
-import { Dialog } from "./dialog";
-import { Button } from "./button";
+import { Dialog } from "./dialog.tsx";
+import { Button } from "./button.tsx";
 
 export default function DialogStory() {
   return (

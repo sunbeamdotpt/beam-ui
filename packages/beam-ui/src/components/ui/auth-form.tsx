@@ -1,12 +1,12 @@
 import { useState, type ReactNode } from "react";
 import { css } from "styled-system/css";
-import { Icon } from "./icon";
-import { Spinner } from "./spinner";
-import { TextInput } from "./text-input";
-import { Checkbox } from "./checkbox";
-import { Button } from "./button";
-import { PinInput } from "./pin-input";
-import { Callout } from "./callout";
+import { Icon } from "./icon.tsx";
+import { Spinner } from "./spinner.tsx";
+import { TextInput } from "./text-input.tsx";
+import { Checkbox } from "./checkbox.tsx";
+import { Button } from "./button.tsx";
+import { PinInput } from "./pin-input.tsx";
+import { Callout } from "./callout.tsx";
 
 /* ------------------------------------------------------------------ */
 /* LoginForm                                                           */

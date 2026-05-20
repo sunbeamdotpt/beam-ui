@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Toggle } from "./toggle";
+import { Toggle } from "./toggle.tsx";
 
 export default function ToggleStory() {
   const [pressed, setPressed] = useState(false);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PinInput } from "./pin-input";
+import { PinInput } from "./pin-input.tsx";
 
 export default function PinInputStory() {
   const [value, setValue] = useState("");

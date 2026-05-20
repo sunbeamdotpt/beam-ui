@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { Outlet } from "@tanstack/react-router";
 import { css } from "styled-system/css";
-import { Sidebar } from "../shell/sidebar";
-import { docsSidebar } from "../../data/navigation";
+import { Sidebar } from "../shell/sidebar.tsx";
+import { docsSidebar } from "../../data/navigation.ts";
 
 const srOnly = css({
   position: "absolute",

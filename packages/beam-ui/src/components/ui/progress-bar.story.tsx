@@ -1,4 +1,4 @@
-import { ProgressBar } from "./progress-bar";
+import { ProgressBar } from "./progress-bar.tsx";
 
 export default function ProgressBarStory() {
   return (

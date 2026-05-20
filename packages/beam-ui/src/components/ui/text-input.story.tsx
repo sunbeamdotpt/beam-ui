@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput } from "./text-input";
+import { TextInput } from "./text-input.tsx";
 
 export default function TextInputStory() {
   const [value, setValue] = useState("");

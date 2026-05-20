@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Steps } from "./steps";
+import { Steps } from "./steps.tsx";
 
 export default function StepsStory() {
   const [current, setCurrent] = useState(1);

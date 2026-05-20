@@ -1,4 +1,4 @@
-import { Badge } from "./badge";
+import { Badge } from "./badge.tsx";
 
 const categories = {
   "Tier / Recognition": ["featured", "premier", "verified", "partner", "community"] as const,

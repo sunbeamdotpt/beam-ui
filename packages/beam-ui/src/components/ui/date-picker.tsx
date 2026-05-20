@@ -22,7 +22,7 @@ import {
   DatePickerContext,
   parseDate,
 } from "@ark-ui/react/date-picker";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link DatePicker}. */
 interface DatePickerProps {

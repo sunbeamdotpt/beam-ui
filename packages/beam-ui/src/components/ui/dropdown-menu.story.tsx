@@ -1,5 +1,5 @@
-import { DropdownMenu } from "./dropdown-menu";
-import { Button } from "./button";
+import { DropdownMenu } from "./dropdown-menu.tsx";
+import { Button } from "./button.tsx";
 
 export default function DropdownMenuStory() {
   return (

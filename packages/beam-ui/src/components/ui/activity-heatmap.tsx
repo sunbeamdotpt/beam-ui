@@ -1,7 +1,7 @@
 import { useMemo, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { useTheme } from "../../hooks/use-theme";
-import { ScrollArea } from "./scroll-area";
+import { useTheme } from "../../hooks/use-theme.ts";
+import { ScrollArea } from "./scroll-area.tsx";
 
 /** Single day in the activity heatmap. */
 export interface ActivityDay {

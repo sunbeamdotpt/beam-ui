@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileList, type FileItem } from "./file-list";
+import { FileList, type FileItem } from "./file-list.tsx";
 
 const items: FileItem[] = [
   { id: "1", name: "src", type: "folder", modified: "Apr 1, 2026" },

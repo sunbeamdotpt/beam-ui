@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Switch } from "./switch";
+import { Switch } from "./switch.tsx";
 
 export default function SwitchStory() {
   const [checked, setChecked] = useState(true);

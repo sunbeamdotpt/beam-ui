@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { css } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link FeatureTile}. */
 interface FeatureTileProps {

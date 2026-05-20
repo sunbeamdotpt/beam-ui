@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tabs } from "./tabs";
+import { Tabs } from "./tabs.tsx";
 
 export default function TabsStory() {
   const [active, setActive] = useState("overview");

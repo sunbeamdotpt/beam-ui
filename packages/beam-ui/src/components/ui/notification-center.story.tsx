@@ -1,6 +1,6 @@
 // @storyName NotificationCenter
 import { useState } from "react";
-import { NotificationCenter, type Notification, notificationIcons } from "./notification-center";
+import { NotificationCenter, type Notification, notificationIcons } from "./notification-center.tsx";
 
 const initial: Notification[] = [
   {

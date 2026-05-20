@@ -1,5 +1,5 @@
 // @storyName KanbanCardDetail
-import { KanbanCardDetail, type KanbanCardData } from "./kanban-card-detail";
+import { KanbanCardDetail, type KanbanCardData } from "./kanban-card-detail.tsx";
 
 const sampleCard: KanbanCardData = {
   id: "card-1",

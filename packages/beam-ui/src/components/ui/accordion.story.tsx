@@ -1,4 +1,4 @@
-import { Accordion } from "./accordion";
+import { Accordion } from "./accordion.tsx";
 
 export default function AccordionStory() {
   return (

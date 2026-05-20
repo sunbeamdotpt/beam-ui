@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MarkdownEditor } from "./markdown-editor";
+import { MarkdownEditor } from "./markdown-editor.tsx";
 
 const initial = `## Welcome
 

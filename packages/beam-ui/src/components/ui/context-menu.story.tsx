@@ -1,4 +1,4 @@
-import { ContextMenu } from "./context-menu";
+import { ContextMenu } from "./context-menu.tsx";
 
 export default function ContextMenuStory() {
   return (

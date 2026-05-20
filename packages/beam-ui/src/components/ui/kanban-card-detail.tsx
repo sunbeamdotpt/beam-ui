@@ -8,12 +8,12 @@ import {
   DialogCloseTrigger,
   DialogTitle,
 } from "@ark-ui/react/dialog";
-import { Icon } from "./icon";
-import { Button } from "./button";
-import { TextInput } from "./text-input";
-import { MarkdownEditor } from "./markdown-editor";
-import { MarkdownRenderer } from "./markdown-renderer";
-import { Avatar } from "./avatar";
+import { Icon } from "./icon.tsx";
+import { Button } from "./button.tsx";
+import { TextInput } from "./text-input.tsx";
+import { MarkdownEditor } from "./markdown-editor.tsx";
+import { MarkdownRenderer } from "./markdown-renderer.tsx";
+import { Avatar } from "./avatar.tsx";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */

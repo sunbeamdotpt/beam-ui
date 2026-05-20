@@ -16,7 +16,7 @@ import {
 } from "@codemirror/language";
 import { tags } from "@lezer/highlight";
 import { searchKeymap } from "@codemirror/search";
-import { useTheme } from "../../hooks/use-theme";
+import { useTheme } from "../../hooks/use-theme.ts";
 
 /* Beam syntax highlighting — matches syn.* tokens */
 const beamHighlightDark = HighlightStyle.define([

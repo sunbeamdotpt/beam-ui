@@ -1,4 +1,4 @@
-import { Footer } from "./footer";
+import { Footer } from "./footer.tsx";
 
 export default function FooterStory() {
   return <Footer />;

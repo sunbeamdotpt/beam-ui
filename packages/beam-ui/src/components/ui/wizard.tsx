@@ -8,8 +8,8 @@ import {
   DialogCloseTrigger,
   DialogTitle,
 } from "@ark-ui/react/dialog";
-import { Button } from "./button";
-import { Icon } from "./icon";
+import { Button } from "./button.tsx";
+import { Icon } from "./icon.tsx";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */

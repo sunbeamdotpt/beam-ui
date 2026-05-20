@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Slider } from "./slider";
+import { Slider } from "./slider.tsx";
 
 export default function SliderStory() {
   const [value, setValue] = useState(40);

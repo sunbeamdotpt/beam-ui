@@ -1,4 +1,4 @@
-import { BentoItem } from "./bento-item";
+import { BentoItem } from "./bento-item.tsx";
 
 export default function BentoItemStory() {
   return (

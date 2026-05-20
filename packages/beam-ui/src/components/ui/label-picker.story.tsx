@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LabelPicker, type LabelOption } from "./label-picker";
+import { LabelPicker, type LabelOption } from "./label-picker.tsx";
 
 const options: LabelOption[] = [
   { id: "bug", name: "Bug", color: "#ef4444", description: "Something isn't working" },

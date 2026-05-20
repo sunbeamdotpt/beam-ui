@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DatePicker } from "./date-picker";
+import { DatePicker } from "./date-picker.tsx";
 
 export default function DatePickerStory() {
   const [value, setValue] = useState("2026-04-03");

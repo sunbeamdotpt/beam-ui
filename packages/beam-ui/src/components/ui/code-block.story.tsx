@@ -1,4 +1,4 @@
-import { CodeBlock, syn } from "./code-block";
+import { CodeBlock, syn } from "./code-block.tsx";
 
 const pythonCode = (
   <pre>

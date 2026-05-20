@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Combobox } from "./combobox";
+import { Combobox } from "./combobox.tsx";
 
 const languages = [
   { value: "ts", label: "TypeScript" },

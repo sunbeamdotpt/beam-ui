@@ -1,4 +1,4 @@
-import { Tooltip } from "./tooltip";
+import { Tooltip } from "./tooltip.tsx";
 
 export default function TooltipStory() {
   return (

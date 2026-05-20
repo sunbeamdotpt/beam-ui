@@ -7,7 +7,7 @@ import {
 } from "@ark-ui/react/popover";
 import { TabsRoot, TabList, TabTrigger, TabContent } from "@ark-ui/react/tabs";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link BranchSelector}. */
 interface BranchSelectorProps {

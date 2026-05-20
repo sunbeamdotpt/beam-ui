@@ -1,4 +1,4 @@
-import { Button } from "./button";
+import { Button } from "./button.tsx";
 
 export default function ButtonStory() {
   return (

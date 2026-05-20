@@ -1,4 +1,4 @@
-import { Kbd } from "./kbd";
+import { Kbd } from "./kbd.tsx";
 
 export default function KbdStory() {
   return (

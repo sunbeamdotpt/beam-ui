@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link FileUpload}. */
 interface FileUploadProps {

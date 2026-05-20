@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TransferList, type TransferItem } from "./transfer-list";
+import { TransferList, type TransferItem } from "./transfer-list.tsx";
 
 const initialAvailable: TransferItem[] = [
   { id: "1", label: "TypeScript", icon: "code" },

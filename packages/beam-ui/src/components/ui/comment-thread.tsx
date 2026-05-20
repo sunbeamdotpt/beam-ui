@@ -1,11 +1,11 @@
 import { useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Avatar } from "./avatar";
-import { Icon } from "./icon";
-import { MarkdownRenderer } from "./markdown-renderer";
-import { MarkdownEditor } from "./markdown-editor";
-import { ReactionPicker } from "./reaction-picker";
-import { Button } from "./button";
+import { Avatar } from "./avatar.tsx";
+import { Icon } from "./icon.tsx";
+import { MarkdownRenderer } from "./markdown-renderer.tsx";
+import { MarkdownEditor } from "./markdown-editor.tsx";
+import { ReactionPicker } from "./reaction-picker.tsx";
+import { Button } from "./button.tsx";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */

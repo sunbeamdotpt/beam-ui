@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { css } from "styled-system/css";
-import { footerSections } from "../../data/navigation";
+import { footerSections } from "../../data/navigation.ts";
 
 declare const __BUILD_LABEL__: string | undefined;
 

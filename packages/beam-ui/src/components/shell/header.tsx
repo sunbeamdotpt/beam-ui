@@ -9,9 +9,9 @@ import {
   DialogCloseTrigger,
 } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
-import { headerLinks, docsSidebar } from "../../data/navigation";
-import { Sidebar } from "./sidebar";
-import { ThemeToggle } from "../ui/theme-toggle";
+import { headerLinks, docsSidebar } from "../../data/navigation.ts";
+import { Sidebar } from "./sidebar.tsx";
+import { ThemeToggle } from "../ui/theme-toggle.tsx";
 
 const header = css({
   position: "fixed",

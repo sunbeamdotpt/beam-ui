@@ -6,7 +6,7 @@ import {
   PopoverContent,
 } from "@ark-ui/react/popover";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** A milestone option with progress tracking and completion counts. */
 export interface MilestoneOption {

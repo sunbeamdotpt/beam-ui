@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pagination } from "./pagination";
+import { Pagination } from "./pagination.tsx";
 
 export default function PaginationStory() {
   const [page, setPage] = useState(5);

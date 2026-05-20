@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ColorPicker } from "./color-picker";
+import { ColorPicker } from "./color-picker.tsx";
 
 export default function ColorPickerStory() {
   const [color, setColor] = useState("#FA520F");

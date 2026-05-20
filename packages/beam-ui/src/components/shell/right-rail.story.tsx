@@ -1,4 +1,4 @@
-import { RightRail } from "./right-rail";
+import { RightRail } from "./right-rail.tsx";
 
 export default function RightRailStory() {
   return (

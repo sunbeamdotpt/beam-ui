@@ -1,4 +1,4 @@
-import { DiagramRenderer } from "./diagram-renderer";
+import { DiagramRenderer } from "./diagram-renderer.tsx";
 
 const mermaidCode = `graph TD
     A[Push to main] --> B{CI Passes?}

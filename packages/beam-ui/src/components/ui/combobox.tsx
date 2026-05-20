@@ -11,7 +11,7 @@ import {
   createListCollection,
 } from "@ark-ui/react/combobox";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Single option in a {@link Combobox}. */
 interface ComboboxOption {

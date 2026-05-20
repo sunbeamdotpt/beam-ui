@@ -1,4 +1,4 @@
-import { MarkdownRenderer } from "./markdown-renderer";
+import { MarkdownRenderer } from "./markdown-renderer.tsx";
 
 const sample = `# Beam Design System
 

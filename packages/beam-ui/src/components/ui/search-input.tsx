@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { docsSidebar } from "../../data/navigation";
+import { docsSidebar } from "../../data/navigation.ts";
 
 /** Props for {@link SearchInput}. */
 interface SearchInputProps {

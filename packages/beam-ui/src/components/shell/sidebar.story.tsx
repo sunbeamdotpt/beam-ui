@@ -1,4 +1,4 @@
-import { Sidebar } from "./sidebar";
+import { Sidebar } from "./sidebar.tsx";
 
 export default function SidebarStory() {
   return (

@@ -1,4 +1,4 @@
-import { StatBar } from "./stat-bar";
+import { StatBar } from "./stat-bar.tsx";
 
 export default function StatBarStory() {
   return (

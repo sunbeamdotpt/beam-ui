@@ -8,7 +8,7 @@ import {
   PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link Popover}. */
 interface PopoverProps {

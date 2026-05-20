@@ -1,7 +1,7 @@
 // @storyName WorkItemList
 import { useState } from "react";
-import { WorkItemList, type WorkItemRow } from "./work-item-list";
-import { Icon } from "./icon";
+import { WorkItemList, type WorkItemRow } from "./work-item-list.tsx";
+import { Icon } from "./icon.tsx";
 
 const items: WorkItemRow[] = [
   {

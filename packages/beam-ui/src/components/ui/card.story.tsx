@@ -1,4 +1,4 @@
-import { Card } from "./card";
+import { Card } from "./card.tsx";
 
 export default function CardStory() {
   return (

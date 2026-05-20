@@ -1,5 +1,5 @@
 // @storyName Charts
-import { LineChart, BarChart, PieChart, AreaChart } from "./charts";
+import { LineChart, BarChart, PieChart, AreaChart } from "./charts.tsx";
 
 const lineData = [
   { label: "Jan", commits: 120, issues: 45 },

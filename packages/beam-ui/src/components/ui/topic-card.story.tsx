@@ -1,4 +1,4 @@
-import { TopicCard } from "./topic-card";
+import { TopicCard } from "./topic-card.tsx";
 
 export default function TopicCardStory() {
   return (

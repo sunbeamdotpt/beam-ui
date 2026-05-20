@@ -1,4 +1,4 @@
-import { Spinner } from "./spinner";
+import { Spinner } from "./spinner.tsx";
 
 export default function SpinnerStory() {
   return (

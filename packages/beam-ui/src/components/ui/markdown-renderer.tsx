@@ -7,7 +7,7 @@ import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
-import { useTheme } from "../../hooks/use-theme";
+import { useTheme } from "../../hooks/use-theme.ts";
 
 /** Props for {@link MarkdownRenderer}. */
 export interface MarkdownRendererProps {

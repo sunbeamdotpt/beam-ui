@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Checkbox } from "./checkbox";
+import { Checkbox } from "./checkbox.tsx";
 
 export default function CheckboxStory() {
   const [checked, setChecked] = useState(false);

@@ -1,4 +1,4 @@
-import { FileUpload } from "./file-upload";
+import { FileUpload } from "./file-upload.tsx";
 
 export default function FileUploadStory() {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Toast notification style variant. */
 type ToastVariant = "success" | "error" | "info";

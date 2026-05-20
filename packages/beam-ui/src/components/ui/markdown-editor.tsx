@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
-import { MarkdownRenderer } from "./markdown-renderer";
+import { Icon } from "./icon.tsx";
+import { MarkdownRenderer } from "./markdown-renderer.tsx";
 
 /** Props for {@link MarkdownEditor}. */
 interface MarkdownEditorProps {

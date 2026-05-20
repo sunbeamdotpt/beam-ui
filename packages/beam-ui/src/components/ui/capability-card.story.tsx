@@ -1,4 +1,4 @@
-import { CapabilityCard } from "./capability-card";
+import { CapabilityCard } from "./capability-card.tsx";
 
 export default function CapabilityCardStory() {
   return (

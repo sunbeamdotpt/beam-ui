@@ -1,5 +1,5 @@
-import { ActivityHeatmap } from "./activity-heatmap";
-import type { ActivityDay } from "./activity-heatmap";
+import { ActivityHeatmap } from "./activity-heatmap.tsx";
+import type { ActivityDay } from "./activity-heatmap.tsx";
 
 function generateSampleData(): ActivityDay[] {
   const data: ActivityDay[] = [];

@@ -1,11 +1,10 @@
 {
   "name": "@sunbeam/beam-ui",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "license": "MIT",
   "exports": {
     ".": "./src/index.ts",
     "./preset": "./src/preset.ts",
-
     "./form": "./src/form/index.tsx",
     "./i18n": "./src/i18n/index.ts",
     "./code-editor": "./src/components/ui/code-editor.tsx",
@@ -19,13 +18,14 @@
   "imports": {
     "styled-system/css": "./styled-system/css/index.mjs",
     "styled-system/tokens": "./styled-system/tokens/index.mjs",
-
     "react": "npm:react@^19.0.0",
+    "@types/react": "npm:@types/react@^19.0.0",
     "react/jsx-runtime": "npm:react@^19.0.0/jsx-runtime",
     "react-dom": "npm:react-dom@^19.0.0",
-
+    "@tanstack/react-router": "npm:@tanstack/react-router@^1.0.0",
     "@ark-ui/react/": "npm:/@ark-ui/react@^4.0.0/",
-
+    "@pandacss/dev": "npm:@pandacss/dev@^1.9.1",
+    "@legendapp/state": "npm:@legendapp/state@^1.0.0",
     "@codemirror/commands": "npm:@codemirror/commands@^6.10.3",
     "@codemirror/language": "npm:@codemirror/language@^6.12.3",
     "@codemirror/search": "npm:@codemirror/search@^6.6.0",
@@ -45,25 +45,19 @@
     "@codemirror/lang-sql": "npm:@codemirror/lang-sql@^6.10.0",
     "@codemirror/lang-xml": "npm:@codemirror/lang-xml@^6.1.0",
     "@codemirror/lang-yaml": "npm:@codemirror/lang-yaml@^6.1.3",
-
     "@dnd-kit/core": "npm:@dnd-kit/core@^6.3.1",
     "@dnd-kit/sortable": "npm:@dnd-kit/sortable@^10.0.0",
     "@dnd-kit/utilities": "npm:@dnd-kit/utilities@^3.2.2",
-
     "@hookform/resolvers/zod": "npm:@hookform/resolvers@^5.2.2/zod",
     "@lezer/highlight": "npm:@lezer/highlight@^1.2.1",
-
     "react-hook-form": "npm:react-hook-form@^7.72.1",
     "recharts": "npm:recharts@^3.8.1",
-
     "rehype-raw": "npm:rehype-raw@^7.0.0",
     "rehype-sanitize": "npm:rehype-sanitize@^6.0.0",
     "rehype-stringify": "npm:rehype-stringify@^10.0.1",
-
     "remark-gfm": "npm:remark-gfm@^4.0.1",
     "remark-parse": "npm:remark-parse@^11.0.0",
     "remark-rehype": "npm:remark-rehype@^11.1.2",
-
     "turndown": "npm:turndown@^7.2.2",
     "unified": "npm:unified@^11.0.5",
     "zod": "npm:zod@^4.3.6",
@@ -72,12 +66,18 @@
     "mermaid": "npm:mermaid@^11.14.0",
     "shiki": "npm:shiki@^4.0.2"
   },
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react"
+  },
   "publish": {
     "include": [
       "src/**",
       "styled-system/**",
-      "jsr.json",
-      "package.json",
+      "dist/panda.buildinfo.json",
+      "deno.json",
       "README.md"
     ]
   }

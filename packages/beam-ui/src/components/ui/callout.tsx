@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { token } from "styled-system/tokens";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /**
  * Visual variant tokens for {@link Callout}.

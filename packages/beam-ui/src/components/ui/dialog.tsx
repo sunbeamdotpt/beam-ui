@@ -8,7 +8,7 @@ import {
   DialogCloseTrigger,
 } from "@ark-ui/react/dialog";
 import { css } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link Dialog}. */
 interface DialogProps {

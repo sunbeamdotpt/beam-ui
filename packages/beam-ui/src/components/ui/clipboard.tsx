@@ -6,7 +6,7 @@ import {
   ClipboardIndicator,
 } from "@ark-ui/react/clipboard";
 import { css } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link Clipboard}. */
 interface ClipboardProps {

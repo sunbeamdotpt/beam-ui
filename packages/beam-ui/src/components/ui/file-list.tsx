@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Single file or folder in a {@link FileList}. */
 export interface FileItem {

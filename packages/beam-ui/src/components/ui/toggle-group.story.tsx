@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToggleGroup } from "./toggle-group";
+import { ToggleGroup } from "./toggle-group.tsx";
 
 export default function ToggleGroupStory() {
   const [value, setValue] = useState("grid");

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NumberInput } from "./number-input";
+import { NumberInput } from "./number-input.tsx";
 
 export default function NumberInputStory() {
   const [value, setValue] = useState(5);

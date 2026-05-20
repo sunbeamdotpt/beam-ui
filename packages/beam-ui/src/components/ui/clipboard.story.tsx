@@ -1,4 +1,4 @@
-import { Clipboard } from "./clipboard";
+import { Clipboard } from "./clipboard.tsx";
 
 export default function ClipboardStory() {
   return <Clipboard value="git clone https://sunbeam.dev/org/repo.git" />;

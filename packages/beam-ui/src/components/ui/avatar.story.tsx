@@ -1,4 +1,4 @@
-import { Avatar } from "./avatar";
+import { Avatar } from "./avatar.tsx";
 
 export default function AvatarStory() {
   return (

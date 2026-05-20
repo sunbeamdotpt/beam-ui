@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CodeEditor } from "./code-editor";
+import { CodeEditor } from "./code-editor.tsx";
 
 const initialCode = `function fibonacci(n: number): number {
   if (n <= 1) return n;

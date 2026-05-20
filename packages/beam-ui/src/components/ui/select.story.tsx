@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Select } from "./select";
+import { Select } from "./select.tsx";
 
 export default function SelectStory() {
   const [value, setValue] = useState("ts");

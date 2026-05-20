@@ -1,4 +1,4 @@
-import { Splitter } from "./splitter";
+import { Splitter } from "./splitter.tsx";
 
 export default function SplitterStory() {
   return (

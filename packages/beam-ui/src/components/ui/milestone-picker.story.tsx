@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MilestonePicker, type MilestoneOption } from "./milestone-picker";
+import { MilestonePicker, type MilestoneOption } from "./milestone-picker.tsx";
 
 const options: MilestoneOption[] = [
   { id: "m1", title: "v1.0 Launch", dueDate: "May 1, 2026", progress: 85, open: 3, closed: 17 },

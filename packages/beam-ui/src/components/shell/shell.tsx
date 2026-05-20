@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { Outlet } from "@tanstack/react-router";
 import { css } from "styled-system/css";
-import { Header } from "./header";
-import { Footer } from "./footer";
+import { Header } from "./header.tsx";
+import { Footer } from "./footer.tsx";
 
 /** Props for {@link Shell}. */
 interface ShellProps {

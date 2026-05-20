@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ReactionPicker, type Reaction } from "./reaction-picker";
+import { ReactionPicker, type Reaction } from "./reaction-picker.tsx";
 
 export default function ReactionPickerStory() {
   const [reactions, setReactions] = useState<Reaction[]>([

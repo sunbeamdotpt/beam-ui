@@ -1,5 +1,5 @@
-import { CommitGraph } from "./commit-graph";
-import type { CommitNode } from "./commit-graph";
+import { CommitGraph } from "./commit-graph.tsx";
+import type { CommitNode } from "./commit-graph.tsx";
 
 const commits: CommitNode[] = [
   {

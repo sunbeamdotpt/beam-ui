@@ -1,6 +1,6 @@
 import { useState, useCallback, useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Item in a transfer list. */
 export interface TransferItem {

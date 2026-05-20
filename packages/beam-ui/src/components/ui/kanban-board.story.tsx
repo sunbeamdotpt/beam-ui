@@ -1,6 +1,6 @@
 // @storyName KanbanBoard
 import { useState } from "react";
-import { KanbanBoard, type KanbanColumn } from "./kanban-board";
+import { KanbanBoard, type KanbanColumn } from "./kanban-board.tsx";
 
 const initialColumns: KanbanColumn[] = [
   {

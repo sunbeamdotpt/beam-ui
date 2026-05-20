@@ -1,4 +1,4 @@
-import { ModelRow } from "./model-row";
+import { ModelRow } from "./model-row.tsx";
 
 export default function ModelRowStory() {
   return (

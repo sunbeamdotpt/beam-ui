@@ -1,4 +1,4 @@
-import { HoverCard } from "./hover-card";
+import { HoverCard } from "./hover-card.tsx";
 
 export default function HoverCardStory() {
   return (

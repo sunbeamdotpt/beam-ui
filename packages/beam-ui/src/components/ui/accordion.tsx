@@ -7,7 +7,7 @@ import {
   AccordionItemIndicator,
 } from "@ark-ui/react/accordion";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Represents a single accordion section. */
 interface AccordionEntry {

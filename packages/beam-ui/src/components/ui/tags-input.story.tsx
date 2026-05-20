@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TagsInput } from "./tags-input";
+import { TagsInput } from "./tags-input.tsx";
 
 export default function TagsInputStory() {
   const [tags, setTags] = useState(["react", "typescript"]);

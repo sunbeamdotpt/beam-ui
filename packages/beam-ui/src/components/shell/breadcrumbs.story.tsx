@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "./breadcrumbs";
+import { Breadcrumbs } from "./breadcrumbs.tsx";
 
 export default function BreadcrumbsStory() {
   return (

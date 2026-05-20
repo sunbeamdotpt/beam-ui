@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AssigneePicker } from "./assignee-picker";
-import type { UserOption } from "./assignee-picker";
+import { AssigneePicker } from "./assignee-picker.tsx";
+import type { UserOption } from "./assignee-picker.tsx";
 
 const users: UserOption[] = [
   { id: "1", username: "sienna", displayName: "Sienna Park" },

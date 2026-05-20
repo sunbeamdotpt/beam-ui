@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { TabsRoot, TabList, TabTrigger, TabContent } from "@ark-ui/react/tabs";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Represents a single code tab. */
 interface CodeTab {

@@ -1,4 +1,4 @@
-import { ApiLayout } from "./api-layout";
+import { ApiLayout } from "./api-layout.tsx";
 
 export default function ApiLayoutStory() {
   return <ApiLayout />;

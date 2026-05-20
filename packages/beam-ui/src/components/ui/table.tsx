@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Column configuration for {@link Table}. */
 interface Column {

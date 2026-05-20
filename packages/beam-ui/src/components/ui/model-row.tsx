@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { css } from "styled-system/css";
-import { Icon } from "./icon";
-import { Badge } from "./badge";
+import { Icon } from "./icon.tsx";
+import { Badge } from "./badge.tsx";
 
 /** Props for {@link ModelRow}. */
 interface ModelRowProps {

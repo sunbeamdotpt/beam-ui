@@ -6,8 +6,8 @@ import {
   PopoverContent,
 } from "@ark-ui/react/popover";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
-import { Avatar } from "./avatar";
+import { Icon } from "./icon.tsx";
+import { Avatar } from "./avatar.tsx";
 
 /** Represents a single user option in the picker. */
 export interface UserOption {

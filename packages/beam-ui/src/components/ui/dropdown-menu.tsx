@@ -10,7 +10,7 @@ import {
   MenuItemGroupLabel,
 } from "@ark-ui/react/menu";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Single menu item in a {@link DropdownMenu}. */
 export interface DropdownMenuItem {

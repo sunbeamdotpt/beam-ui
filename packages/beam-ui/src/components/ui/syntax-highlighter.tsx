@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { useTheme } from "../../hooks/use-theme";
+import { useTheme } from "../../hooks/use-theme.ts";
 
 /** Props for {@link SyntaxHighlighter}. */
 interface SyntaxHighlighterProps {

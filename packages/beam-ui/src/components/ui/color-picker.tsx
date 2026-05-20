@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link ColorPicker}. */
 interface ColorPickerProps {

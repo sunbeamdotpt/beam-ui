@@ -1,4 +1,4 @@
-import { FeatureTile } from "./feature-tile";
+import { FeatureTile } from "./feature-tile.tsx";
 
 export default function FeatureTileStory() {
   return (

@@ -1,4 +1,4 @@
-import { CommentThread } from "./comment-thread";
+import { CommentThread } from "./comment-thread.tsx";
 
 const now = new Date();
 const hourAgo = new Date(now.getTime() - 3600000).toISOString();

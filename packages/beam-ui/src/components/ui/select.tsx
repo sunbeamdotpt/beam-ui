@@ -11,7 +11,7 @@ import {
   createListCollection,
 } from "@ark-ui/react/select";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Single select option. */
 interface SelectOption {

@@ -1,5 +1,5 @@
-import { EmptyState } from "./empty-state";
-import { Button } from "./button";
+import { EmptyState } from "./empty-state.tsx";
+import { Button } from "./button.tsx";
 
 export default function EmptyStateStory() {
   return (

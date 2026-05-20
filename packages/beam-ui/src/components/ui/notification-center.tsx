@@ -12,8 +12,8 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@ark-ui/react/collapsible";
-import { Icon } from "./icon";
-import { ScrollArea } from "./scroll-area";
+import { Icon } from "./icon.tsx";
+import { ScrollArea } from "./scroll-area.tsx";
 
 /** A single notification in the notification center. */
 export interface Notification {

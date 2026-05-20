@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useId, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { useTheme } from "../../hooks/use-theme";
+import { useTheme } from "../../hooks/use-theme.ts";
 
 let mermaidModule: any = null;
 

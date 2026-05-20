@@ -1,4 +1,4 @@
-import { ScrollArea } from "./scroll-area";
+import { ScrollArea } from "./scroll-area.tsx";
 
 export default function ScrollAreaStory() {
   return (

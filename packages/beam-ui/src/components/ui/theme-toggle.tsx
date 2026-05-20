@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
-import { useTheme } from "../../hooks/use-theme";
-import { Icon } from "./icon";
+import { useTheme } from "../../hooks/use-theme.ts";
+import { Icon } from "./icon.tsx";
 
 /** Props for {@link ThemeToggle}. */
 interface ThemeToggleProps {

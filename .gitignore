@@ -10,3 +10,5 @@ app/tests/__screenshots__/
 app/test-results/
 app/playwright-report/
 app/playwright/.cache/
+deno.lock
+!packages/beam-ui/dist/panda.buildinfo.json

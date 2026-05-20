@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "@ark-ui/react/collapsible";
 import { css, cx } from "styled-system/css";
-import { Icon } from "./icon";
+import { Icon } from "./icon.tsx";
 
 /** Node in a tree hierarchy. */
 export interface TreeNode {

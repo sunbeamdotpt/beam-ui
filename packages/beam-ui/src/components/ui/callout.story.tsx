@@ -1,4 +1,4 @@
-import { Callout } from "./callout";
+import { Callout } from "./callout.tsx";
 
 export default function CalloutStory() {
   return (

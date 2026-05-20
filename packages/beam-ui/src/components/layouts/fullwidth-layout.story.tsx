@@ -1,4 +1,4 @@
-import { FullwidthLayout } from "./fullwidth-layout";
+import { FullwidthLayout } from "./fullwidth-layout.tsx";
 
 export default function FullwidthLayoutStory() {
   return <FullwidthLayout />;

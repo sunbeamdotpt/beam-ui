@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "@tanstack/react-router";
 import { css } from "styled-system/css";
-import { Sidebar } from "../shell/sidebar";
-import { RightRail } from "../shell/right-rail";
-import { docsSidebar } from "../../data/navigation";
+import { Sidebar } from "../shell/sidebar.tsx";
+import { RightRail } from "../shell/right-rail.tsx";
+import { docsSidebar } from "../../data/navigation.ts";
 import { useState, createContext, useContext, type ReactNode } from "react";
 
 const body = css({

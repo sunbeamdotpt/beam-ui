@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Editable } from "./editable";
+import { Editable } from "./editable.tsx";
 
 export default function EditableStory() {
   const [value, setValue] = useState("Click me to edit");

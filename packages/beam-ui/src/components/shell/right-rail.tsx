@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, type ReactNode } from "react";
 import { css } from "styled-system/css";
-import { Icon } from "../ui/icon";
+import { Icon } from "../ui/icon.tsx";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let turndownInstance: any | null = null;

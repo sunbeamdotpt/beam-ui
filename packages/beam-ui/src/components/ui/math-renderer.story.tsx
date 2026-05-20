@@ -1,4 +1,4 @@
-import { MathRenderer } from "./math-renderer";
+import { MathRenderer } from "./math-renderer.tsx";
 
 export default function MathRendererStory() {
   return (

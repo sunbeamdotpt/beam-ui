@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RadioGroup } from "./radio-group";
+import { RadioGroup } from "./radio-group.tsx";
 
 export default function RadioGroupStory() {
   const [value, setValue] = useState("monthly");

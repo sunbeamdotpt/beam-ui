@@ -1,4 +1,4 @@
-import { Toast } from "./toast";
+import { Toast } from "./toast.tsx";
 
 export default function ToastStory() {
   return (

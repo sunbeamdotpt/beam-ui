@@ -1,4 +1,4 @@
-import { Wizard, WizardModal } from "./wizard";
+import { Wizard, WizardModal } from "./wizard.tsx";
 
 export default function WizardStory() {
   return (
