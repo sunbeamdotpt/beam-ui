@@ -1,6 +1,6 @@
 {
   "name": "@sunbeam/beam-ui",
-  "version": "0.10.0",
+  "version": "0.10.2",
   "license": "MIT",
   "exports": {
     ".": "./src/index.ts",
@@ -11,9 +11,9 @@
     "./code-editor": "./src/components/ui/code-editor.tsx",
     "./charts": "./src/components/ui/charts.tsx",
     "./diagram": "./src/components/ui/diagram-renderer.tsx",
-    "./markdown": "./src/components/ui/markdown-renderer.tsx",
     "./math": "./src/components/ui/math-renderer.tsx",
-    "./kanban": "./src/components/ui/kanban-board.tsx",
+    "./kanban": "./src/kanban/index.ts",
+    "./markdown": "./src/markdown/index.ts",
     "./syntax-highlighter": "./src/components/ui/syntax-highlighter.tsx"
   },
   "imports": {

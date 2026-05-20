@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Avatar } from "./avatar";
 import { Icon } from "./icon";
@@ -221,7 +221,7 @@ export function CommentThread({
   onEdit,
   onReaction,
   className,
-}: CommentThreadProps) {
+}: CommentThreadProps): ReactNode {
   const [replyBody, setReplyBody] = useState("");
 
   const handleSubmitReply = () => {

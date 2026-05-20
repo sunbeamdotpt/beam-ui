@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /* ------------------------------------------------------------------ */
@@ -172,7 +172,7 @@ export function DiffViewer({
   newFileName,
   mode = "unified",
   className,
-}: DiffViewerProps) {
+}: DiffViewerProps): ReactNode {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
 
   const toggleExpand = (key: string) => {

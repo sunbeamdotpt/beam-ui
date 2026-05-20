@@ -46,8 +46,13 @@ export { Clipboard } from "./components/ui/clipboard";
 export { CodeBlock, syn } from "./components/ui/code-block";
 export { ColorPicker } from "./components/ui/color-picker";
 export { Combobox } from "./components/ui/combobox";
+export { CommentThread } from "./components/ui/comment-thread";
+export { CommitGraph } from "./components/ui/commit-graph";
+export type { CommitNode } from "./components/ui/commit-graph";
 export { ContextMenu } from "./components/ui/context-menu";
 export { DatePicker } from "./components/ui/date-picker";
+export { DiffViewer, parseDiff } from "./components/ui/diff-viewer";
+export type { DiffLine, DiffHunk } from "./components/ui/diff-viewer";
 export { Dialog } from "./components/ui/dialog";
 export { DropdownMenu } from "./components/ui/dropdown-menu";
 export type { DropdownMenuItem, DropdownMenuGroup } from "./components/ui/dropdown-menu";
@@ -95,16 +100,36 @@ export { Toast } from "./components/ui/toast";
 export { ThemeToggle } from "./components/ui/theme-toggle";
 export { Toggle } from "./components/ui/toggle";
 export { ToggleGroup } from "./components/ui/toggle-group";
-export { TransferList } from "./components/ui/transfer-list";
-export type { TransferItem } from "./components/ui/transfer-list";
 export { Tooltip } from "./components/ui/tooltip";
 export { TopicCard } from "./components/ui/topic-card";
+export { TransferList } from "./components/ui/transfer-list";
+export type { TransferItem } from "./components/ui/transfer-list";
 export { TreeView } from "./components/ui/tree-view";
 export type { TreeNode } from "./components/ui/tree-view";
 export { Wizard, WizardModal } from "./components/ui/wizard";
 export type { WizardStep, WizardProps, WizardModalProps } from "./components/ui/wizard";
 export { WorkItemList } from "./components/ui/work-item-list";
 export type { WorkItemRow, WorkItemLabel, WorkItemBranch, WorkItemListProps } from "./components/ui/work-item-list";
+
+// Shell
+export { Breadcrumbs } from "./components/shell/breadcrumbs";
+export { Footer } from "./components/shell/footer";
+export { Header } from "./components/shell/header";
+export { RightRail } from "./components/shell/right-rail";
+export { Shell } from "./components/shell/shell";
+export { Sidebar } from "./components/shell/sidebar";
+
+// Layouts
+export { ApiLayout, apiLeftPanel, apiRightPanel } from "./components/layouts/api-layout";
+export { DocsLayout, useDocsContext } from "./components/layouts/docs-layout";
+export type { DocsTocItem } from "./components/layouts/docs-layout";
+export { FullwidthLayout } from "./components/layouts/fullwidth-layout";
+
+// Data
+export { headerLinks, docsSidebar, apiSidebar, footerSections } from "./data/navigation";
+export type { NavItem, NavSection } from "./data/navigation";
+export { issueStatuses, prStatuses, priorities, releaseStages, allStatuses } from "./data/statuses";
+export type { StatusDef } from "./data/statuses";
 
 // Hooks
 export { useTheme } from "./hooks/use-theme";

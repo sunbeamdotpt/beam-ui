@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 
 /** Single commit in a {@link CommitGraph}. */
@@ -118,7 +118,7 @@ function layoutCommits(commits: CommitNode[]) {
  * />
  * ```
  */
-export function CommitGraph({ commits, className }: CommitGraphProps) {
+export function CommitGraph({ commits, className }: CommitGraphProps): ReactNode {
   const { nodes, hashToNode, maxLane } = useMemo(
     () => layoutCommits(commits),
     [commits],

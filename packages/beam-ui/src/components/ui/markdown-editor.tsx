@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import { Icon } from "./icon";
 import { MarkdownRenderer } from "./markdown-renderer";
@@ -166,7 +166,7 @@ export function MarkdownEditor({
   placeholder = "Write your markdown here...",
   minHeight = "200px",
   className,
-}: MarkdownEditorProps) {
+}: MarkdownEditorProps): ReactNode {
   const [activeTab, setActiveTab] = useState<ActiveTab>("write");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
