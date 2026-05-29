@@ -43,7 +43,7 @@
 
 #focus-slide(tone: "accent")[
   #text(size: slide-size-4xl)[10×]
-  #v(space-sm)
+  #v(space-xs)
   #text(size: slide-size-lg)[faster iteration cycles]
 ]
 

@@ -1018,7 +1018,7 @@
   show link: it => text(fill: accent, it)
   set list(marker: ([•], [◦], [▪]))
   show list: set block(spacing: space-sm)
-  show list.item: it => block(spacing: space-xs, it)
+  show list.item: it => block(spacing: space-md, it)
   set block(spacing: space-lg)
 
   doc
@@ -1045,7 +1045,7 @@
       title,
     )
     if subtitle != none {
-      v(space-lg)
+      v(space-md)
       text(
         font: font-heading,
         size: slide-size-xl,
@@ -1078,8 +1078,6 @@
   set align(center + horizon)
   block(width: 100%, {
     set par(leading: (line-height-display - 1) * 1em)
-    line(length: 60%, stroke: 1pt + accent)
-    v(space-xl)
     text(
       font: font-heading,
       size: slide-size-3xl,
@@ -1087,6 +1085,7 @@
       fill: accent,
       title,
     )
+    line(length: 60%, stroke: 1pt + accent)
     if subtitle != none {
       v(space-md)
       text(
@@ -1220,7 +1219,7 @@
 
   set align(center + horizon)
   block(width: 80%, {
-    set par(leading: (line-height-heading - 1) * 1em)
+    set par(leading: (line-height-tight - 1) * 1em)
     body
   })
 }
@@ -1243,7 +1242,7 @@
       title,
     )
     if subtitle != none {
-      v(space-lg)
+      v(space-md)
       text(
         font: font-heading,
         size: slide-size-xl,
