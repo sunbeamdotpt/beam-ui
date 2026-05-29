@@ -1045,7 +1045,7 @@
       title,
     )
     if subtitle != none {
-      v(space-md)
+      v(space-sm)
       text(
         font: font-heading,
         size: slide-size-xl,
@@ -1085,6 +1085,7 @@
       fill: accent,
       title,
     )
+    v(space-sm)
     line(length: 60%, stroke: 1pt + accent)
     if subtitle != none {
       v(space-md)
