@@ -15,6 +15,8 @@
 #title-slide(
   "Sunbeam",
   subtitle: "The open platform for creative studios",
+  author: "Sunbeam Studios",
+  date: datetime.today(),
 )
 
 #section-slide("The Problem")
