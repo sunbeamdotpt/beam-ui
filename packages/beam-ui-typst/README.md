@@ -326,6 +326,7 @@ Font weights: `weight-display` (431) · `weight-heading` (575) · `weight-body` 
 | `section-slide(title, subtitle)` | Section divider, centered |
 | `content-slide(title, body)` | Standard slide with title + body |
 | `split-slide(title, left, right, ratio)` | Two-column layout |
+| `columns-slide(title, ..bodies)` | N-column vertical cards (tiers, products, pricing) |
 | `image-slide(title, image-path, caption, position)` | Image-dominant slide (`"full"`, `"left"`, `"right"`) |
 | `focus-slide(body, tone)` | Full-bleed impact slide (`"accent"` or `"dark"`) |
 | `closing-slide(title, subtitle, cta)` | Final slide with optional CTA |

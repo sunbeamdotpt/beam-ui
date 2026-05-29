@@ -1056,14 +1056,15 @@
     }
     if author != none or date != none {
       v(space-xl)
-      let meta-parts = ()
-      if author != none { meta-parts.push(author) }
-      if date != none { meta-parts.push(date.display("[year]-[month]-[day]")) }
       text(
         size: slide-size-sm,
         fill: text-muted,
         weight: weight-button,
-        meta-parts.join("  ·  "),
+        {
+          if author != none { author }
+          if author != none and date != none { "  ·  " }
+          if date != none { date.display("[year]-[month]-[day]") }
+        },
       )
     }
   })
@@ -1279,4 +1280,37 @@
 ) = {
   slide-pagebreak()
   body
+}
+
+/// Multi-column slide — equal-width vertical cards for tiers, products,
+/// pricing tables, or any N-column comparison. Each body argument becomes
+/// one column with a cream card background.
+#let columns-slide(
+  title,
+  ..bodies,
+) = {
+  slide-pagebreak()
+  block(width: 100%, height: 100%, {
+    text(
+      font: font-heading,
+      size: slide-size-xl,
+      weight: weight-heading,
+      fill: accent,
+      title,
+    )
+    v(space-xl)
+    let cols = bodies.pos()
+    grid(
+      columns: cols.map(_ => 1fr),
+      column-gutter: space-lg,
+      align: top,
+      ..cols.map(body => block(
+        width: 100%,
+        fill: bg-card,
+        inset: space-lg,
+        radius: radius-md,
+        body,
+      )),
+    )
+  })
 }

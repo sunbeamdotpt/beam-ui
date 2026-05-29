@@ -43,6 +43,22 @@
   ]
 ]
 
+#columns-slide("Pricing")[
+  == Free
+  - 3 projects
+  - Community support
+][
+  == Pro
+  - Unlimited projects
+  - Priority support
+  - Custom domains
+][
+  == Enterprise
+  - SSO & SAML
+  - Dedicated infra
+  - SLA guarantee
+]
+
 #focus-slide(tone: "accent")[
   #text(size: slide-size-4xl)[10×] \
   #text(size: slide-size-lg)[faster iteration cycles]
