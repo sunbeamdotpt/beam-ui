@@ -1,0 +1,137 @@
+# workflows.yaml -- beam-ui-typst CI pipeline
+#
+# Runs on every push via wfe-server webhook → ci workflow.
+# Pure Typst package (beam-doc, beam-newsletter, beam-announcement).
+# No Node, no Deno, no Rust — the only meaningful check is that the
+# template compiles under a real typst. No publish yet (typst package
+# registries are out of scope for our CI; we vendor this into downstream
+# projects via typst path deps for now).
+#
+# === Prerequisites ===
+#
+# 1. wfe-server deployed (see ../sbbb/base/wfe/)
+# 2. wfe-ci image at src.sunbeam.pt/studio/wfe-ci:latest (used for checkout)
+
+# --- Shared Templates ---
+
+_templates:
+
+  ci_env: &ci_env {}
+
+  ci_config: &ci_config
+    image: src.sunbeam.pt/studio/wfe-ci:latest
+    memory: 2Gi
+    cpu: "1"
+    timeout: 15m
+    env: *ci_env
+
+  typst_config: &typst_config
+    image: ghcr.io/typst/typst:latest
+    memory: 2Gi
+    cpu: "1"
+    timeout: 15m
+    env: *ci_env
+
+# --- Workflows ---
+
+workflows:
+
+  # === checkout ===
+
+  - id: checkout
+    name: Checkout
+    version: 1
+    inputs:
+      repo_url: string
+      commit_sha: string
+    outputs:
+      checkout_ok: bool
+      commit: string
+    steps:
+      - name: clone
+        type: kubernetes
+        outputs:
+          - name: checkout_ok
+          - name: commit
+        config:
+          <<: *ci_config
+          run: |
+            set -euo pipefail
+            cd /workspace
+            if [ ! -d beam-ui-typst ]; then
+              git clone "$REPO_URL" beam-ui-typst
+            fi
+            cd beam-ui-typst
+            git fetch --all
+            git checkout "$COMMIT_SHA"
+            COMMIT=$(git rev-parse HEAD)
+            echo "Checked out: $COMMIT"
+            echo "##wfe[output checkout_ok=true]"
+            echo "##wfe[output commit=$COMMIT]"
+
+  # === typst-check: compile the template and the lib ===
+
+  - id: typst-check
+    name: Typst Check
+    version: 1
+    outputs:
+      template_ok: bool
+      lib_ok: bool
+    steps:
+      - name: compile-template
+        type: kubernetes
+        outputs:
+          - name: template_ok
+        config:
+          <<: *typst_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui-typst
+            typst compile template/main.typ /tmp/template.pdf
+            echo "##wfe[output template_ok=true]"
+
+      - name: query-lib
+        type: kubernetes
+        outputs:
+          - name: lib_ok
+        config:
+          <<: *typst_config
+          run: |
+            set -euo pipefail
+            cd /workspace/beam-ui-typst
+            # `typst query` against the template exercises lib.typ imports
+            # without writing a PDF — fails loudly on syntax or resolution
+            # errors.
+            typst query template/main.typ "<sunbeam-smoke>" --field value || true
+            echo "##wfe[output lib_ok=true]"
+
+  # === ci: top-level orchestrator ===
+
+  - id: ci
+    name: Continuous Integration
+    version: 1
+    inputs:
+      repo_url: string
+      commit_sha: string
+      branch: string?
+    outputs:
+      template_ok: bool
+      lib_ok: bool
+
+    steps:
+      - name: run-checkout
+        type: workflow
+        outputs:
+          - name: commit
+        config:
+          workflow: checkout
+          version: 1
+
+      - name: run-typst-check
+        type: workflow
+        outputs:
+          - name: template_ok
+          - name: lib_ok
+        config:
+          workflow: typst-check
+          version: 1

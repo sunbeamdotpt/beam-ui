@@ -1,0 +1,12 @@
+schema: 1
+project:
+  name: beam-ui-typst
+  kind: typst-pkg
+  description: "Beam Design Language — Typst document templates (beam-doc, beam-newsletter, beam-announcement)."
+targets:
+  build:
+    exec: "typst compile --root . template/main.typ"
+  clean:
+    exec: "rm -f template/main.pdf"
+outputs:
+  - template/main.pdf
