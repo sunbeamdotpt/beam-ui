@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DialogRoot,
@@ -149,7 +149,7 @@ export function KanbanCardDetail({
   onDelete,
   readOnly = false,
   className,
-}: KanbanCardDetailProps) {
+}: KanbanCardDetailProps): ReactNode {
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingDesc, setEditingDesc] = useState(false);
   const [title, setTitle] = useState(card.title);

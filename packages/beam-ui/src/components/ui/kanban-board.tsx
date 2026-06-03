@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DndContext,
@@ -189,7 +189,7 @@ const LABEL_STYLES: Record<string, { bg: string; color: string; border: string }
   purple: { bg: "rgba(126, 34, 206, 0.08)", color: "rgb(126, 34, 206)", border: "rgba(126, 34, 206, 0.25)" },
 };
 
-export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }) {
+export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }): ReactNode {
   const checklistPct = card.checklist
     ? Math.round((card.checklist.done / Math.max(card.checklist.total, 1)) * 100)
     : null;
@@ -493,7 +493,7 @@ export function KanbanBoard({
   onAddCard,
   onCardClick,
   className,
-}: KanbanBoardProps) {
+}: KanbanBoardProps): ReactNode {
   const [activeCard, setActiveCard] = useState<KanbanCard | null>(null);
 
   const sensors = useSensors(

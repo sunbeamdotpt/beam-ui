@@ -10,7 +10,7 @@ const turndown = new TurndownService({
 });
 // Strip material icons
 turndown.addRule("materialIcons", {
-  filter: (node) => node.classList?.contains("material-symbols-outlined") ?? false,
+  filter: (node: HTMLElement) => node.classList?.contains("material-symbols-outlined") ?? false,
   replacement: () => "",
 });
 // Strip buttons (tab triggers, copy buttons, etc.)
@@ -25,7 +25,7 @@ turndown.addRule("navs", {
 });
 // Strip small badge/pill elements (tag pills, read time, section badges)
 turndown.addRule("badges", {
-  filter: (node) => {
+  filter: (node: HTMLElement) => {
     const fontSize = node.style?.fontSize || "";
     const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase()
       && (node.textContent?.trim().length ?? 0) < 20;
@@ -36,11 +36,11 @@ turndown.addRule("badges", {
 });
 // Convert callout boxes to blockquotes
 turndown.addRule("callouts", {
-  filter: (node) => {
+  filter: (node: HTMLElement) => {
     return node.getAttribute?.("style")?.includes("border-left")
       && node.getAttribute?.("style")?.includes("4px") || false;
   },
-  replacement: (_content, node) => {
+  replacement: (_content: string, node: HTMLElement) => {
     const text = (node as HTMLElement).textContent?.trim() ?? "";
     // Remove the label (PRO TIP, OPTIMIZATION TIP, etc.)
     const cleaned = text.replace(/^(PRO TIP|OPTIMIZATION TIP|WARNING|INFO|TIP)\s*/i, "");

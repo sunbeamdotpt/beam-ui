@@ -400,7 +400,7 @@ export function Header({
   searchPlaceholder = "Search docs...",
   showSearch = true,
   fullWidth = false,
-}: HeaderProps = {}) {
+}: HeaderProps = {}): ReactNode {
   const location = useLocation();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");

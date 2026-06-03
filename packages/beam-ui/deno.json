@@ -1,6 +1,6 @@
 {
   "name": "@sunbeam/beam-ui",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "license": "MIT",
   "exports": {
     ".": "./src/index.ts",
@@ -69,6 +69,7 @@
     "katex/dist/katex.min.css": "npm:katex@^0.16.44/dist/katex.min.css",
     "mermaid": "npm:mermaid@^11.14.0",
     "shiki": "npm:shiki@^4.0.2",
+    "@zag-js/splitter": "npm:@zag-js/splitter@^0.82.2",
     "vitest": "npm:vitest@^2.0.0",
     "@testing-library/react": "npm:@testing-library/react@^16.0.0",
     "@testing-library/user-event": "npm:@testing-library/user-event@^14.5.1",
