@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DialogRoot,
@@ -6,11 +6,9 @@ import {
   DialogPositioner,
   DialogContent,
   DialogCloseTrigger,
-  DialogTitle,
 } from "@ark-ui/react/dialog";
 import { Icon } from "./icon.tsx";
 import { Button } from "./button.tsx";
-import { TextInput } from "./text-input.tsx";
 import { MarkdownEditor } from "./markdown-editor.tsx";
 import { MarkdownRenderer } from "./markdown-renderer.tsx";
 import { Avatar } from "./avatar.tsx";
@@ -19,7 +17,7 @@ import { Avatar } from "./avatar.tsx";
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
-/** Extended card data for detail view with timestamps, status, and priority. */
+/** Extended card data for detail view. */
 export interface KanbanCardData {
   /** Unique identifier for the card. */
   id: string;
@@ -27,7 +25,7 @@ export interface KanbanCardData {
   title: string;
   /** Markdown-formatted description. */
   description?: string;
-  /** Optional labels (tags) with custom colors. */
+  /** Optional labels (tags) with color token names. */
   labels?: { name: string; color: string }[];
   /** Optional assignees with optional avatar URLs. */
   assignees?: { name: string; avatarUrl?: string }[];
@@ -35,7 +33,7 @@ export interface KanbanCardData {
   milestone?: string;
   /** ISO date string for due date. */
   dueDate?: string;
-  /** Status badge (e.g., "open", "in-progress", "done"). */
+  /** Status badge. */
   status?: string;
   /** Priority level. */
   priority?: "low" | "medium" | "high" | "critical";
@@ -43,35 +41,95 @@ export interface KanbanCardData {
   createdAt?: string;
   /** ISO timestamp of last update. */
   updatedAt?: string;
+  /** Checklist subtasks. */
+  checklist?: { id: string; title: string; done: boolean }[];
+  /** Activity comments. */
+  comments?: {
+    id: string;
+    author: string;
+    avatarColor?: string;
+    text: string;
+    createdAt: string;
+  }[];
+  /** File attachments. */
+  attachments?: { id: string; name: string; sizeBytes?: number; url?: string }[];
+  /** Breadcrumb path, e.g. "Beam UI / Components". */
+  breadcrumb?: string;
+  /** Column/status title, e.g. "Backlog". */
+  columnTitle?: string;
+  /** Short display ID, e.g. "BEAM-204". */
+  shortId?: string;
 }
 
 /** Props for {@link KanbanCardDetail}. */
 interface KanbanCardDetailProps {
-  /** The card data to display and edit. */
   card: KanbanCardData;
-  /** Whether the dialog is open. */
   open: boolean;
-  /** Called when user closes the dialog (via Escape, close button, or backdrop). */
   onClose: () => void;
-  /** Called when user saves title and description changes. Receives updated card. */
   onSave?: (card: KanbanCardData) => void;
-  /** Called when user deletes the card. Receives card id. */
   onDelete?: (id: string) => void;
-  /** If true, hides edit and delete buttons. Defaults to `false`. */
   readOnly?: boolean;
-  /** Optional CSS class for the dialog content. */
   className?: string;
+}
+
+/* ------------------------------------------------------------------ */
+/* Label color mapping (matches ref .lb--* classes)                   */
+/* ------------------------------------------------------------------ */
+
+const LABEL_STYLE: Record<string, { background: string; color: string; border: string }> = {
+  orange: {
+    background: "rgba(250,82,15,0.12)",
+    color: "#fa520f",
+    border: "1px solid rgba(250,82,15,0.3)",
+  },
+  gold: {
+    background: "oklab(0.82 0.04 0.15 / 0.5)",
+    color: "oklab(0.42 0.08 0.14)",
+    border: "1px solid oklab(0.7 0.06 0.14 / 0.4)",
+  },
+  feature: {
+    background: "rgba(250,82,15,0.12)",
+    color: "#fa520f",
+    border: "1px solid rgba(250,82,15,0.3)",
+  },
+  design: {
+    background: "oklab(0.82 0.04 0.15 / 0.5)",
+    color: "oklab(0.42 0.08 0.14)",
+    border: "1px solid oklab(0.7 0.06 0.14 / 0.4)",
+  },
+};
+
+function getLabelStyle(color: string) {
+  if (LABEL_STYLE[color]) return LABEL_STYLE[color];
+  // hex fallback
+  return { background: color + "22", color, border: `1px solid ${color}66` };
 }
 
 /* ------------------------------------------------------------------ */
 /* Priority badge                                                      */
 /* ------------------------------------------------------------------ */
 
-const PRIORITY_COLORS: Record<string, string> = {
-  low: "#5bb8a6",
-  medium: "#4a9eff",
-  high: "#f59e0b",
-  critical: "#ef4444",
+const PRIORITY_STYLE: Record<string, { background: string; color: string; border: string }> = {
+  low: {
+    background: "rgba(13,148,136,0.1)",
+    color: "rgb(15,118,110)",
+    border: "1px solid rgba(13,148,136,0.25)",
+  },
+  medium: {
+    background: "rgba(217,119,6,0.12)",
+    color: "rgb(180,83,9)",
+    border: "1px solid rgba(217,119,6,0.3)",
+  },
+  high: {
+    background: "rgba(250,82,15,0.12)",
+    color: "#fa520f",
+    border: "1px solid rgba(250,82,15,0.3)",
+  },
+  critical: {
+    background: "rgb(254,226,226)",
+    color: "rgb(153,27,27)",
+    border: "1px solid rgb(252,165,165)",
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -80,18 +138,8 @@ const PRIORITY_COLORS: Record<string, string> = {
 
 /**
  * Modal dialog for viewing and editing detailed Kanban card information.
- * Displays title, description (with markdown editor), assignees, labels, milestone, and priority.
- * Supports inline edit mode with Save/Cancel buttons.
- *
- * @example
- * ```tsx
- * <KanbanCardDetail
- *   card={selectedCard}
- *   open={isOpen}
- *   onClose={() => setIsOpen(false)}
- *   onSave={(card) => updateCard(card)}
- * />
- * ```
+ * Matches the Sunbeam Kanban reference design: 880px centered drawer with
+ * head (meta + title) and body (main column + side column).
  */
 export function KanbanCardDetail({
   card,
@@ -101,12 +149,20 @@ export function KanbanCardDetail({
   onDelete,
   readOnly = false,
   className,
-}: KanbanCardDetailProps): ReactNode {
-  const [editing, setEditing] = useState(false);
+}: KanbanCardDetailProps) {
+  const [editingTitle, setEditingTitle] = useState(false);
+  const [editingDesc, setEditingDesc] = useState(false);
   const [title, setTitle] = useState(card.title);
   const [description, setDescription] = useState(card.description ?? "");
+  const [commentText, setCommentText] = useState("");
 
-  // Escape key closes the modal (safety net alongside Ark Dialog's built-in handler)
+  // Sync state when card prop changes (e.g. after save)
+  useEffect(() => {
+    setTitle(card.title);
+    setDescription(card.description ?? "");
+  }, [card.title, card.description]);
+
+  // Safety-net Escape handler alongside Ark's built-in
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
@@ -118,174 +174,297 @@ export function KanbanCardDetail({
 
   const handleSave = () => {
     onSave?.({ ...card, title, description });
-    setEditing(false);
+    setEditingTitle(false);
+    setEditingDesc(false);
   };
 
-  const handleCancel = () => {
-    setTitle(card.title);
+  const handleCancelDesc = () => {
     setDescription(card.description ?? "");
-    setEditing(false);
+    setEditingDesc(false);
   };
+
+  const doneCount = (card.checklist ?? []).filter((i) => i.done).length;
+  const totalCount = (card.checklist ?? []).length;
+  const checklistPct = totalCount > 0 ? (doneCount / totalCount) * 100 : 0;
+  const checklistDone = totalCount > 0 && doneCount === totalCount;
 
   return (
     <DialogRoot open={open} onOpenChange={(d) => { if (!d.open) onClose(); }}>
       <DialogBackdrop className={backdrop} />
       <DialogPositioner className={positioner}>
-        <DialogContent className={cx(content, className)}>
-          {/* Header */}
-          <div className={header}>
-            <div className={headerLeft}>
-              {card.status && (
-                <span className={statusBadge}>{card.status}</span>
-              )}
-              {card.priority && (
-                <span
-                  className={priorityBadge}
-                  style={{ backgroundColor: PRIORITY_COLORS[card.priority] }}
-                >
-                  {card.priority}
-                </span>
-              )}
-            </div>
-            <DialogCloseTrigger className={closeBtn}>
-              <Icon name="close" size={20} />
-            </DialogCloseTrigger>
-          </div>
+        <DialogContent className={cx(drawerPanel, className)} data-testid="card-detail-modal">
 
-          {/* Title */}
-          {editing ? (
-            <div className={titleEditArea}>
-              <TextInput value={title} onChange={setTitle} label="Title" />
+          {/* ── Head ── */}
+          <div className={drawerHead}>
+            <div className={drawerHeadTop}>
+              {/* Meta: BEAM-204 · Beam UI / Components · Backlog */}
+              <div className={headMeta}>
+                {card.shortId && <span className={headId}>{card.shortId}</span>}
+                {card.shortId && <span className={headSep}>·</span>}
+                {card.breadcrumb && <span>{card.breadcrumb}</span>}
+                {card.breadcrumb && card.columnTitle && <span className={headSep}>·</span>}
+                {card.columnTitle && <span>{card.columnTitle}</span>}
+              </div>
+              {/* Actions: link / more / close */}
+              <div className={headActions}>
+                <button className={iconBtn} title="Copy link" type="button">
+                  <Icon name="link" size={18} />
+                </button>
+                <button className={iconBtn} title="More" type="button">
+                  <Icon name="more_horiz" size={18} />
+                </button>
+                <DialogCloseTrigger className={iconBtn} title="Close">
+                  <Icon name="close" size={18} />
+                </DialogCloseTrigger>
+              </div>
             </div>
-          ) : (
-            <DialogTitle className={titleStyle}>{card.title}</DialogTitle>
-          )}
 
-          {/* Meta row */}
-          <div className={metaRow}>
-            {card.createdAt && (
-              <span className={metaItem}>
-                <Icon name="schedule" size={14} />
-                Created {card.createdAt}
-              </span>
-            )}
-            {card.dueDate && (
-              <span className={metaItem}>
-                <Icon name="event" size={14} />
-                Due {card.dueDate}
-              </span>
-            )}
-            {card.updatedAt && (
-              <span className={metaItem}>
-                <Icon name="update" size={14} />
-                Updated {card.updatedAt}
-              </span>
+            {/* Editable title */}
+            {editingTitle && !readOnly ? (
+              <textarea
+                className={titleInput}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                onBlur={handleSave}
+                autoFocus
+                rows={2}
+              />
+            ) : (
+              <h2
+                className={titleDisplay}
+                onClick={() => { if (!readOnly) setEditingTitle(true); }}
+                style={{ cursor: readOnly ? "default" : "text" }}
+              >
+                {title}
+              </h2>
             )}
           </div>
 
-          {/* Body — two columns */}
-          <div className={body}>
-            {/* Left: Description */}
-            <div className={descriptionCol}>
-              <h3 className={sectionLabel}>Description</h3>
-              {editing ? (
-                <MarkdownEditor
-                  value={description}
-                  onChange={setDescription}
-                  placeholder="Add a description..."
-                  minHeight="200px"
-                />
-              ) : (
-                <div className={descriptionBody}>
-                  {card.description ? (
-                    <MarkdownRenderer content={card.description} />
-                  ) : (
-                    <p className={emptyText}>No description provided.</p>
+          {/* ── Body ── */}
+          <div className={drawerBody}>
+
+            {/* ── Main column ── */}
+            <div className={drawerMain}>
+
+              {/* Description */}
+              <div className={drawerSection}>
+                <h4 className={sectionH4}>
+                  <Icon name="notes" size={14} />
+                  Description
+                </h4>
+                {editingDesc && !readOnly ? (
+                  <>
+                    <MarkdownEditor
+                      value={description}
+                      onChange={setDescription}
+                      placeholder="Add a more detailed description…"
+                      minHeight="100px"
+                    />
+                    <div className={descEditActions}>
+                      <Button variant="primary" onClick={handleSave}>Save</Button>
+                      <Button variant="ghost" onClick={handleCancelDesc}>Cancel</Button>
+                    </div>
+                  </>
+                ) : (
+                  <div
+                    className={descView}
+                    onClick={() => { if (!readOnly) setEditingDesc(true); }}
+                    role={readOnly ? undefined : "button"}
+                    tabIndex={readOnly ? undefined : 0}
+                    onKeyDown={(e) => { if (!readOnly && (e.key === "Enter" || e.key === " ")) setEditingDesc(true); }}
+                  >
+                    {description ? (
+                      <MarkdownRenderer content={description} />
+                    ) : (
+                      <span className={descPlaceholder}>Add a more detailed description…</span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Checklist */}
+              {(card.checklist && card.checklist.length > 0) && (
+                <div className={drawerSection}>
+                  <h4 className={sectionH4}>
+                    <Icon name="check_box" size={14} />
+                    Checklist · {doneCount}/{totalCount}
+                  </h4>
+                  <div className={progressBar}>
+                    <div
+                      className={cx(progressFill, checklistDone ? progressFillDone : "")}
+                      style={{ width: `${checklistPct}%` }}
+                    />
+                  </div>
+                  {card.checklist.map((item) => (
+                    <label key={item.id} className={cx(checklistItem, item.done ? checklistItemDone : "")}>
+                      <input
+                        type="checkbox"
+                        defaultChecked={item.done}
+                        style={{ accentColor: "#fa520f", width: 14, height: 14, marginTop: 3, flexShrink: 0 }}
+                        readOnly={readOnly}
+                      />
+                      <span className={checklistLabel}>{item.title}</span>
+                    </label>
+                  ))}
+                  {!readOnly && (
+                    <button className={checklistAdd} type="button">
+                      <Icon name="add" size={14} />
+                      Add subtask
+                    </button>
                   )}
+                </div>
+              )}
+
+              {/* Activity / Comments */}
+              <div className={drawerSection}>
+                <h4 className={sectionH4}>
+                  <Icon name="forum" size={14} />
+                  Activity{card.comments && card.comments.length > 0 ? ` · ${card.comments.length}` : ""}
+                </h4>
+                {(card.comments ?? []).map((c) => (
+                  <div key={c.id} className={comment}>
+                    <Avatar
+                      name={c.author}
+                      size="sm"
+                      {...(c.avatarColor ? { style: { backgroundColor: c.avatarColor } } as any : {})}
+                    />
+                    <div>
+                      <div className={commentHead}>
+                        <span className={commentAuthor}>{c.author}</span>
+                        <span className={commentTime}>{c.createdAt}</span>
+                      </div>
+                      <div className={commentBody}>{c.text}</div>
+                    </div>
+                  </div>
+                ))}
+                {!readOnly && (
+                  <div className={commentForm}>
+                    <textarea
+                      className={commentTextarea}
+                      placeholder="Write a comment…"
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                    />
+                    <div className={commentFormActions}>
+                      <Button variant="ghost" onClick={() => setCommentText("")}>Cancel</Button>
+                      <Button variant="primary">Comment</Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Delete action (bottom of main, non-readOnly) */}
+              {!readOnly && onDelete && (
+                <div>
+                  <Button variant="ghost" onClick={() => onDelete(card.id)}>
+                    <Icon name="delete" size={16} /> Delete
+                  </Button>
                 </div>
               )}
             </div>
 
-            {/* Right: Sidebar */}
-            <div className={sidebar}>
+            {/* ── Side column ── */}
+            <div className={drawerSide}>
+
               {/* Assignees */}
-              <div className={sidebarSection}>
-                <h4 className={sidebarLabel}>
-                  <Icon name="group" size={16} />
-                  Assignees
-                </h4>
-                {card.assignees && card.assignees.length > 0 ? (
-                  <div className={assigneeList}>
-                    {card.assignees.map((a) => (
-                      <div key={a.name} className={assigneeRow}>
-                        <Avatar name={a.name} src={a.avatarUrl} size="sm" />
-                        <span className={assigneeName}>{a.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className={emptyText}>No assignees</p>
-                )}
+              <div className={field}>
+                <span className={fieldLabel}>Assignees</span>
+                <button className={fieldValue} type="button">
+                  {card.assignees && card.assignees.length > 0 ? (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                      {card.assignees.map((a) => (
+                        <Avatar key={a.name} name={a.name} src={a.avatarUrl} size="sm" />
+                      ))}
+                    </div>
+                  ) : (
+                    <span className={fieldEmpty}>None</span>
+                  )}
+                </button>
               </div>
 
               {/* Labels */}
-              <div className={sidebarSection}>
-                <h4 className={sidebarLabel}>
-                  <Icon name="label" size={16} />
-                  Labels
-                </h4>
-                {card.labels && card.labels.length > 0 ? (
-                  <div className={labelList}>
-                    {card.labels.map((l) => (
-                      <span
-                        key={l.name}
-                        className={labelPill}
-                        style={{ backgroundColor: l.color }}
-                      >
-                        {l.name}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <p className={emptyText}>No labels</p>
-                )}
+              <div className={field}>
+                <span className={fieldLabel}>Labels</span>
+                <button className={fieldValue} type="button">
+                  {card.labels && card.labels.length > 0 ? (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                      {card.labels.map((l) => {
+                        const s = getLabelStyle(l.color);
+                        return (
+                          <span
+                            key={l.name}
+                            className={labelChip}
+                            style={{ background: s.background, color: s.color, border: s.border }}
+                          >
+                            {l.name}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <span className={fieldEmpty}>None</span>
+                  )}
+                </button>
+              </div>
+
+              {/* Priority */}
+              <div className={field}>
+                <span className={fieldLabel}>Priority</span>
+                <button className={fieldValue} type="button">
+                  {card.priority ? (
+                    <span
+                      className={priorityChip}
+                      style={PRIORITY_STYLE[card.priority]}
+                    >
+                      {card.priority}
+                    </span>
+                  ) : (
+                    <span className={fieldEmpty}>None</span>
+                  )}
+                </button>
+              </div>
+
+              {/* Due date */}
+              <div className={field}>
+                <span className={fieldLabel}>Due date</span>
+                <button className={fieldValue} type="button">
+                  {card.dueDate ? (
+                    <span>{card.dueDate}</span>
+                  ) : (
+                    <span className={fieldEmpty}>No date</span>
+                  )}
+                </button>
               </div>
 
               {/* Milestone */}
-              <div className={sidebarSection}>
-                <h4 className={sidebarLabel}>
-                  <Icon name="flag" size={16} />
-                  Milestone
-                </h4>
-                <p className={card.milestone ? sidebarValue : emptyText}>
-                  {card.milestone ?? "No milestone"}
-                </p>
+              <div className={field}>
+                <span className={fieldLabel}>Milestone</span>
+                <button className={fieldValue} type="button">
+                  {card.milestone ? (
+                    <>
+                      <Icon name="flag" size={14} />
+                      {card.milestone}
+                    </>
+                  ) : (
+                    <span className={fieldEmpty}>None</span>
+                  )}
+                </button>
+              </div>
+
+              {/* Attachments */}
+              <div className={field}>
+                <span className={fieldLabel}>Attachments</span>
+                <button className={fieldValue} type="button">
+                  {card.attachments && card.attachments.length > 0 ? (
+                    <span>{card.attachments.length} file{card.attachments.length !== 1 ? "s" : ""}</span>
+                  ) : (
+                    <span className={fieldEmpty}>None</span>
+                  )}
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Actions */}
-          {!readOnly && (
-            <div className={actions}>
-              {editing ? (
-                <>
-                  <Button variant="primary" onClick={handleSave}>Save</Button>
-                  <Button variant="ghost" onClick={handleCancel}>Cancel</Button>
-                </>
-              ) : (
-                <>
-                  <Button variant="ghost" onClick={() => setEditing(true)}>
-                    <Icon name="edit" size={16} /> Edit
-                  </Button>
-                  {onDelete && (
-                    <Button variant="ghost" onClick={() => onDelete(card.id)}>
-                      <Icon name="delete" size={16} /> Delete
-                    </Button>
-                  )}
-                </>
-              )}
-            </div>
-          )}
         </DialogContent>
       </DialogPositioner>
     </DialogRoot>
@@ -293,14 +472,18 @@ export function KanbanCardDetail({
 }
 
 /* ------------------------------------------------------------------ */
-/* Styles                                                              */
+/* Styles — matching ref-styles.css verbatim                          */
 /* ------------------------------------------------------------------ */
 
 const backdrop = css({
   position: "fixed",
   inset: 0,
-  backgroundColor: "rgba(0,0,0,0.5)",
+  background: "rgba(31,31,31,0.45)",
+  backdropFilter: "blur(3px)",
   zIndex: 50,
+  animationName: "beam-fadeIn",
+  animationDuration: "0.15s",
+  animationTimingFunction: "ease",
 });
 
 const positioner = css({
@@ -309,195 +492,359 @@ const positioner = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  padding: "40px 20px",
   zIndex: 51,
-  padding: "24px",
+  overflowY: "auto",
 });
 
-const content = css({
-  backgroundColor: "bg.page",
+const drawerPanel = css({
+  position: "relative",
+  width: "880px",
+  maxWidth: "100%",
+  maxHeight: "calc(100vh - 80px)",
+  background: "bg.page",
   border: "1px solid",
   borderColor: "border.default",
+  borderRadius: "md",
   shadow: "golden",
-  width: "100%",
-  maxWidth: "720px",
-  maxHeight: "85vh",
-  overflowY: "auto",
-  padding: "24px",
+  zIndex: 60,
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  animationName: "beam-modalIn",
+  animationDuration: "0.22s",
+  animationTimingFunction: "ease",
+  overflow: "hidden",
 });
 
-const header = css({
+const drawerHead = css({
+  padding: "18px 24px 14px",
+  borderBottom: "1px solid",
+  borderColor: "border.subtle",
+  background: "bg.card",
+  position: "relative",
+});
+
+const drawerHeadTop = css({
   display: "flex",
+  alignItems: "center",
   justifyContent: "space-between",
-  alignItems: "center",
-});
-
-const headerLeft = css({
-  display: "flex",
-  gap: "8px",
-  alignItems: "center",
-});
-
-const statusBadge = css({
-  fontSize: "11px",
-  fontWeight: "button",
-  textTransform: "uppercase",
-  letterSpacing: "0.1em",
-  color: "text.muted",
-  padding: "2px 8px",
-  border: "1px solid",
-  borderColor: "border.default",
-});
-
-const priorityBadge = css({
-  fontSize: "10px",
-  fontWeight: "button",
-  textTransform: "uppercase",
-  letterSpacing: "0.05em",
-  color: "white",
-  padding: "2px 8px",
-  borderRadius: "sm",
-});
-
-const closeBtn = css({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-  color: "text.muted",
-  padding: "4px",
-  _hover: { color: "sunbeam.orange" },
-});
-
-const titleStyle = css({
-  fontSize: "24px",
-  fontWeight: "heading",
-  fontFamily: "heading",
-  color: "text.primary",
-  margin: 0,
-});
-
-const titleEditArea = css({
   marginBottom: "8px",
 });
 
-const metaRow = css({
+const headMeta = css({
   display: "flex",
-  gap: "16px",
-  flexWrap: "wrap",
+  alignItems: "center",
+  gap: "8px",
+  fontFamily: "mono",
+  fontSize: "11px",
+  color: "text.muted",
 });
 
-const metaItem = css({
+const headId = css({
+  color: "sunbeam.orange",
+  fontWeight: "600",
+});
+
+const headSep = css({
+  color: "text.muted",
+});
+
+const headActions = css({
+  display: "flex",
+  gap: "4px",
+});
+
+const iconBtn = css({
+  width: "32px",
+  height: "32px",
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
-  fontSize: "12px",
-  color: "text.muted",
-  fontFamily: "mono",
+  justifyContent: "center",
+  background: "transparent",
+  border: "1px solid transparent",
+  cursor: "pointer",
+  color: "text.secondary",
+  borderRadius: "sm",
+  transition: "color 0.15s, border-color 0.15s, background 0.15s",
+  _hover: {
+    color: "sunbeam.orange",
+    borderColor: "border.default",
+    background: "bg.page",
+  },
 });
 
-const body = css({
-  display: "flex",
-  gap: "24px",
-  flexDirection: { base: "column", md: "row" },
+const titleDisplay = css({
+  fontFamily: "heading",
+  fontSize: "24px",
+  fontWeight: "heading",
+  lineHeight: "1.2",
+  margin: 0,
+  color: "text.primary",
 });
 
-const descriptionCol = css({
-  flex: 1,
+const titleInput = css({
+  width: "100%",
+  background: "bg.page",
+  border: "1px solid",
+  borderColor: "sunbeam.orange",
+  borderRadius: "sm",
+  fontFamily: "heading",
+  fontSize: "24px",
+  fontWeight: "heading",
+  lineHeight: "1.2",
+  color: "text.primary",
+  padding: "4px 6px",
+  margin: "-4px -6px",
+  resize: "none",
+  outline: "none",
+});
+
+const drawerBody = css({
+  flex: "1 1 0%",
+  overflowY: "auto",
+  display: "grid",
+  gridTemplateColumns: "1fr 240px",
+  gap: 0,
+});
+
+const drawerMain = css({
+  padding: "22px 28px",
+  borderRight: "1px solid",
+  borderColor: "border.subtle",
   minWidth: 0,
 });
 
-const sectionLabel = css({
-  fontSize: "12px",
-  fontWeight: "button",
-  textTransform: "uppercase",
-  letterSpacing: "0.1em",
-  color: "text.muted",
-  marginBottom: "12px",
+const drawerSide = css({
+  padding: "22px",
+  background: "bg.card",
 });
 
-const descriptionBody = css({
-  padding: "16px",
-  backgroundColor: "bg.card",
+const drawerSection = css({
+  marginBottom: "22px",
+});
+
+const sectionH4 = css({
+  fontFamily: "body",
+  fontSize: "10px",
+  fontWeight: "button",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  color: "sunbeam.orange",
+  margin: "0 0 8px",
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+});
+
+const descView = css({
+  fontFamily: "body",
+  fontSize: "14px",
+  lineHeight: "1.5",
+  color: "text.secondary",
+  background: "bg.card",
   border: "1px solid",
   borderColor: "border.subtle",
-  minHeight: "120px",
+  borderRadius: "sm",
+  padding: "12px 14px",
+  whiteSpace: "pre-wrap",
+  cursor: "text",
+  minHeight: "60px",
 });
 
-const emptyText = css({
-  fontSize: "13px",
+const descPlaceholder = css({
   color: "text.muted",
   fontStyle: "italic",
-  margin: 0,
 });
 
-const sidebar = css({
-  width: { base: "100%", md: "200px" },
-  flexShrink: 0,
+const descEditActions = css({
   display: "flex",
-  flexDirection: "column",
-  gap: "20px",
-});
-
-const sidebarSection = css({});
-
-const sidebarLabel = css({
-  display: "flex",
-  alignItems: "center",
-  gap: "6px",
-  fontSize: "12px",
-  fontWeight: "button",
-  textTransform: "uppercase",
-  letterSpacing: "0.1em",
-  color: "text.muted",
-  marginBottom: "8px",
-});
-
-const sidebarValue = css({
-  fontSize: "13px",
-  color: "text.primary",
-  margin: 0,
-});
-
-const assigneeList = css({
-  display: "flex",
-  flexDirection: "column",
-  gap: "6px",
-});
-
-const assigneeRow = css({
-  display: "flex",
-  alignItems: "center",
   gap: "8px",
+  marginTop: "8px",
 });
 
-const assigneeName = css({
-  fontSize: "13px",
-  color: "text.primary",
-});
+/* ── Checklist ── */
 
-const labelList = css({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "6px",
-});
-
-const labelPill = css({
-  fontSize: "11px",
-  fontWeight: "button",
-  color: "white",
-  padding: "2px 8px",
+const progressBar = css({
+  height: "5px",
   borderRadius: "sm",
+  background: "rgba(127,99,21,0.1)",
+  marginBottom: "10px",
+  overflow: "hidden",
 });
 
-const actions = css({
+const progressFill = css({
+  height: "100%",
+  background: "sunshine.700",
+  transition: "width 0.3s",
+});
+
+const progressFillDone = css({
+  background: "rgb(21,128,61)",
+});
+
+const checklistItem = css({
   display: "flex",
+  alignItems: "flex-start",
   gap: "8px",
-  paddingTop: "8px",
-  borderTop: "1px solid",
+  padding: "6px 4px",
+  borderRadius: "sm",
+  cursor: "pointer",
+  _hover: { background: "bg.card" },
+});
+
+const checklistItemDone = css({
+  "& span": { color: "text.muted", textDecoration: "line-through" },
+});
+
+const checklistLabel = css({
+  fontFamily: "body",
+  fontSize: "13.5px",
+  color: "text.primary",
+  lineHeight: "1.4",
+  flex: "1 1 0%",
+});
+
+const checklistAdd = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  background: "transparent",
+  border: "none",
+  padding: "6px 4px",
+  fontFamily: "body",
+  fontSize: "12px",
+  color: "text.muted",
+  cursor: "pointer",
+  _hover: { color: "sunbeam.orange" },
+});
+
+/* ── Comments ── */
+
+const comment = css({
+  display: "grid",
+  gridTemplateColumns: "32px 1fr",
+  gap: "10px",
+  padding: "10px 0",
+  borderBottom: "1px solid",
   borderColor: "border.subtle",
+  "&:last-of-type": { borderBottom: "none" },
+});
+
+const commentHead = css({
+  display: "flex",
+  alignItems: "baseline",
+  gap: "8px",
+  marginBottom: "4px",
+});
+
+const commentAuthor = css({
+  fontFamily: "body",
+  fontWeight: "button",
+  fontSize: "13px",
+  color: "text.primary",
+});
+
+const commentTime = css({
+  fontFamily: "mono",
+  fontSize: "11px",
+  color: "text.muted",
+});
+
+const commentBody = css({
+  fontFamily: "body",
+  fontSize: "13.5px",
+  color: "text.secondary",
+  lineHeight: "1.5",
+});
+
+const commentForm = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "8px",
+  marginTop: "12px",
+});
+
+const commentTextarea = css({
+  fontFamily: "body",
+  fontSize: "13.5px",
+  border: "1px solid",
+  borderColor: "border.default",
+  background: "bg.page",
+  borderRadius: "sm",
+  padding: "10px 12px",
+  resize: "vertical",
+  minHeight: "64px",
+  outline: "none",
+  color: "text.primary",
+  _focus: { borderColor: "sunbeam.orange" },
+});
+
+const commentFormActions = css({
+  display: "flex",
+  justifyContent: "flex-end",
+  gap: "6px",
+});
+
+/* ── Side fields ── */
+
+const field = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "6px",
+  marginBottom: "16px",
+});
+
+const fieldLabel = css({
+  fontFamily: "body",
+  fontSize: "10px",
+  fontWeight: "button",
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  color: "text.muted",
+});
+
+const fieldValue = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  padding: "6px 8px",
+  background: "transparent",
+  border: "1px solid transparent",
+  borderRadius: "sm",
+  cursor: "pointer",
+  fontFamily: "body",
+  fontSize: "13px",
+  color: "text.primary",
+  textAlign: "left",
+  width: "100%",
+  _hover: { borderColor: "border.default", background: "bg.card" },
+});
+
+const fieldEmpty = css({
+  color: "text.muted",
+  fontStyle: "italic",
+});
+
+const labelChip = css({
+  display: "inline-block",
+  fontFamily: "mono",
+  fontSize: "10px",
+  fontWeight: "600",
+  padding: "1px 6px",
+  borderRadius: "sm",
+  lineHeight: "1.5",
+  letterSpacing: "0.01em",
+  whiteSpace: "nowrap",
+});
+
+const priorityChip = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "3px",
+  padding: "1px 5px",
+  borderRadius: "sm",
+  fontFamily: "mono",
+  fontSize: "9.5px",
+  fontWeight: "600",
+  letterSpacing: "0.04em",
 });

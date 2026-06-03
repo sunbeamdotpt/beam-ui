@@ -1,4 +1,4 @@
-import { useState, useMemo, type ReactNode } from "react";
+import { useState, useMemo } from "react";
 import { css, cx } from "styled-system/css";
 import {
   DndContext,
@@ -19,18 +19,44 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+/** Priority level for a Kanban card. Maps to CardPriority proto enum. */
+export type KanbanCardPriority = "low" | "medium" | "high" | "urgent";
+
 /** A single card within a Kanban column. */
 export interface KanbanCard {
   /** Unique identifier for the card. */
   id: string;
   /** Card title / heading. */
   title: string;
-  /** Optional labels (tags) with custom colors. */
+  /** Optional labels (tags) with custom colors. Rendered above the title. */
   labels?: { name: string; color: string }[];
   /** Optional assignees with optional avatar URLs. */
   assignees?: { name: string; avatarUrl?: string }[];
-  /** Optional milestone reference. */
+  /** Optional milestone name shown in the meta row. */
   milestone?: string;
+  /**
+   * Optional CSS background value for the cover strip rendered at the top of the card.
+   * Accepts any valid CSS background: linear-gradient, url(), hex color, etc.
+   * When omitted, no cover strip is rendered.
+   */
+  cover?: string;
+  /**
+   * When true, renders a "BLOCKED" badge in the card header row.
+   * Defaults to `false` (no badge rendered).
+   */
+  blocked?: boolean;
+  /** Optional checklist progress (e.g., subtasks). Renders a progress bar under the title. */
+  checklist?: { done: number; total: number };
+  /** Optional human-readable due date or activity timestamp shown in the meta line. */
+  dueDate?: string;
+  /** Optional comment count rendered in the meta line. */
+  commentCount?: number;
+  /** Optional attachment count rendered in the meta line. */
+  attachmentCount?: number;
+  /** Optional short card identifier (e.g., "BEAM-210") rendered in the meta line. */
+  shortId?: string;
+  /** Optional priority level. Renders a colored chip below the title. */
+  priority?: KanbanCardPriority;
 }
 
 /** A column (swimlane) in the Kanban board containing cards. */
@@ -41,6 +67,36 @@ export interface KanbanColumn {
   title: string;
   /** Ordered list of cards in this column. */
   cards: KanbanCard[];
+  /** Optional accent color for the column's top tab. Defaults to sunbeam.orange. */
+  accentColor?: string;
+  /** Optional WIP limit shown next to the column count. */
+  wipLimit?: number;
+  /**
+   * Optional column members rendered as a stacked avatar group on the right
+   * of the header. Each member can carry an explicit `color` to colour their
+   * avatar chip; otherwise a deterministic palette slot is used.
+   */
+  members?: { name: string; avatarUrl?: string; color?: string }[];
+}
+
+const AVATAR_PALETTE = [
+  "#fa520f",
+  "#1abc9c",
+  "#7c3aed",
+  "#fb6424",
+  "#ffb83e",
+  "#9ec5fe",
+  "#c084fc",
+  "#86efac",
+];
+
+function avatarColorFor(name: string, fallbackIdx: number): string {
+  if (!name) return AVATAR_PALETTE[fallbackIdx % AVATAR_PALETTE.length];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = (hash * 31 + name.charCodeAt(i)) | 0;
+  }
+  return AVATAR_PALETTE[Math.abs(hash) % AVATAR_PALETTE.length];
 }
 
 /** Props for {@link KanbanBoard}. */
@@ -51,6 +107,8 @@ interface KanbanBoardProps {
   onChange: (columns: KanbanColumn[]) => void;
   /** Optional callback when user clicks "+ Add card" button for a specific column. */
   onAddCard?: (columnId: string) => void;
+  /** Optional callback when user clicks a card (not drag). Receives the card id. */
+  onCardClick?: (cardId: string) => void;
   /** Optional CSS class for the board container. */
   className?: string;
 }
@@ -58,7 +116,13 @@ interface KanbanBoardProps {
 /* ------------------------------------------------------------------ */
 /* Sortable card                                                       */
 /* ------------------------------------------------------------------ */
-function SortableCard({ card }: { card: KanbanCard }) {
+function SortableCard({
+  card,
+  onClick,
+}: {
+  card: KanbanCard;
+  onClick?: (cardId: string) => void;
+}) {
   const {
     attributes,
     listeners,
@@ -75,7 +139,16 @@ function SortableCard({ card }: { card: KanbanCard }) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      data-card-id={card.id}
+      role="article"
+      aria-label={card.title}
+      onClick={() => onClick?.(card.id)}
+    >
       <KanbanCardView card={card} />
     </div>
   );
@@ -91,53 +164,208 @@ function SortableCard({ card }: { card: KanbanCard }) {
  * @example
  * ```tsx
  * <KanbanCardView card={myCard} />
+ * <KanbanCardView card={myCard} cover="linear-gradient(135deg, #fffaeb, #fa520f)" blocked />
  * ```
  */
-export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }): ReactNode {
+const PRIORITY_CONFIG: Record<
+  KanbanCardPriority,
+  { label: string; color: string; bg: string; border: string; icon: string }
+> = {
+  low:    { label: "Low",    color: "rgb(15, 118, 110)",  bg: "rgba(13, 148, 136, 0.1)",   border: "rgba(13, 148, 136, 0.25)",  icon: "keyboard_arrow_down" },
+  medium: { label: "Medium", color: "rgb(180, 83, 9)",    bg: "rgba(217, 119, 6, 0.12)",   border: "rgba(217, 119, 6, 0.3)",     icon: "keyboard_arrow_up" },
+  high:   { label: "High",   color: "#fa520f",            bg: "rgba(250, 82, 15, 0.12)",   border: "rgba(250, 82, 15, 0.3)",     icon: "priority_high" },
+  urgent: { label: "Urgent", color: "rgb(153, 27, 27)",   bg: "rgb(254, 226, 226)",       border: "rgb(252, 165, 165)",         icon: "priority_high" },
+};
+
+/** Map label style token → reference colours. */
+const LABEL_STYLES: Record<string, { bg: string; color: string; border: string }> = {
+  orange: { bg: "rgba(250, 82, 15, 0.12)", color: "#fa520f", border: "rgba(250, 82, 15, 0.3)" },
+  gold:   { bg: "oklab(0.82 0.04 0.15 / 0.5)", color: "oklab(0.42 0.08 0.14)", border: "oklab(0.7 0.06 0.14 / 0.4)" },
+  sand:   { bg: "oklab(0.85 0.02 0.09 / 0.5)", color: "oklab(0.36 0.03 0.05)", border: "oklab(0.72 0.02 0.06 / 0.45)" },
+  rust:   { bg: "oklab(0.58 0.11 0.1 / 0.14)", color: "oklab(0.45 0.12 0.12)", border: "oklab(0.55 0.11 0.1 / 0.3)" },
+  olive:  { bg: "oklab(0.65 -0.05 0.09 / 0.18)", color: "oklab(0.4 -0.04 0.08)", border: "oklab(0.55 -0.05 0.08 / 0.3)" },
+  ink:    { bg: "rgba(31, 31, 31, 0.08)", color: "hsl(0,0%,24%)", border: "rgba(31, 31, 31, 0.15)" },
+  green:  { bg: "rgba(21, 128, 61, 0.1)", color: "rgb(21, 128, 61)", border: "rgba(21, 128, 61, 0.3)" },
+  purple: { bg: "rgba(126, 34, 206, 0.08)", color: "rgb(126, 34, 206)", border: "rgba(126, 34, 206, 0.25)" },
+};
+
+export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }) {
+  const checklistPct = card.checklist
+    ? Math.round((card.checklist.done / Math.max(card.checklist.total, 1)) * 100)
+    : null;
+
+  const priorityCfg = card.priority ? PRIORITY_CONFIG[card.priority] : null;
+
   return (
     <div className={cx(cardStyle, ghost && cardGhostStyle)}>
-      <p className={cardTitleStyle}>{card.title}</p>
+      {card.cover && (
+        <div
+          data-part="cover"
+          className={cardCoverStyle}
+          style={{ background: card.cover }}
+        />
+      )}
+
+      {card.blocked && (
+        <span data-part="blocked-badge" className={blockedBadgeStyle}>
+          <span className="material-symbols-outlined" style={{ fontSize: "12px" }} aria-hidden="true">block</span>
+          BLOCKED
+        </span>
+      )}
 
       {card.labels && card.labels.length > 0 && (
         <div className={labelsRow}>
-          {card.labels.map((l) => (
+          {card.labels.map((l) => {
+            const s = LABEL_STYLES[l.color] ?? {
+              bg: l.color,
+              color: "rgba(31,31,31,0.85)",
+              border: l.color,
+            };
+            return (
+              <span
+                key={l.name}
+                className={labelPill}
+                style={{ backgroundColor: s.bg, color: s.color, borderColor: s.border }}
+              >
+                {l.name}
+              </span>
+            );
+          })}
+        </div>
+      )}
+
+      <p className={cardTitleStyle}>{card.title}</p>
+
+      {priorityCfg && (
+        <div className={priorityRow}>
+          <span
+            className={priorityChip}
+            style={{
+              color: priorityCfg.color,
+              backgroundColor: priorityCfg.bg,
+              borderColor: priorityCfg.border,
+            }}
+          >
             <span
-              key={l.name}
-              className={labelPill}
-              style={{ backgroundColor: l.color }}
+              className="material-symbols-outlined"
+              aria-hidden="true"
+              style={{ fontSize: "11px", lineHeight: 1 }}
             >
-              {l.name}
+              {priorityCfg.icon}
             </span>
-          ))}
+            {priorityCfg.label}
+          </span>
+        </div>
+      )}
+
+      {card.checklist && (
+        <div className={checklistRow}>
+          <div className={checklistMetaRow}>
+            <span className={checklistCount}>
+              <span
+                className="material-symbols-outlined"
+                aria-hidden="true"
+                style={{ fontSize: "10px", lineHeight: 1, verticalAlign: "middle" }}
+              >
+                check_box_outline_blank
+              </span>
+              {" "}{card.checklist.done}/{card.checklist.total}
+            </span>
+            <span className={checklistPctText}>{checklistPct}%</span>
+          </div>
+          <div className={checklistTrack}>
+            <div
+              className={checklistFill}
+              style={{ width: `${checklistPct}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {card.milestone && (
+        <div className={cardMetaRow}>
+          <span className={milestonePill}>
+            <span
+              className="material-symbols-outlined"
+              aria-hidden="true"
+              style={{ fontSize: "11px", lineHeight: 1 }}
+            >
+              flag
+            </span>
+            {card.milestone}
+          </span>
         </div>
       )}
 
       <div className={cardFooter}>
+        <div className={metaIcons}>
+          {card.shortId && <span className={shortIdText}>{card.shortId}</span>}
+          {card.dueDate && (
+            <span className={dueDateText} style={{ display: "inline-flex", alignItems: "center", gap: "2px" }}>
+              <span
+                className="material-symbols-outlined"
+                aria-hidden="true"
+                style={{ fontSize: "10px", lineHeight: 1 }}
+              >
+                event
+              </span>
+              {card.dueDate}
+            </span>
+          )}
+          {typeof card.commentCount === "number" && card.commentCount > 0 && (
+            <span className={metaIconText}>
+              <span
+                className="material-symbols-outlined"
+                aria-hidden="true"
+                style={{ fontSize: "10px", lineHeight: 1 }}
+              >
+                chat_bubble_outline
+              </span>
+              {card.commentCount}
+            </span>
+          )}
+          {typeof card.attachmentCount === "number" &&
+            card.attachmentCount > 0 && (
+              <span className={metaIconText}>
+                <span
+                  className="material-symbols-outlined"
+                  aria-hidden="true"
+                  style={{ fontSize: "10px", lineHeight: 1 }}
+                >
+                  attach_file
+                </span>
+                {card.attachmentCount}
+              </span>
+            )}
+        </div>
+
         {card.assignees && card.assignees.length > 0 && (
           <div className={avatarStack}>
-            {card.assignees.map((a, i) => (
-              <div
-                key={a.name}
-                className={avatarCircle}
-                style={{ zIndex: card.assignees!.length - i }}
-                title={a.name}
-                role="img"
-                aria-label={a.name}
-              >
-                {a.avatarUrl ? (
-                  <img src={a.avatarUrl} alt={a.name} className={avatarImg} />
-                ) : (
-                  <span className={avatarInitial} aria-hidden="true">
-                    {a.name.charAt(0).toUpperCase()}
-                  </span>
-                )}
-              </div>
-            ))}
+            {card.assignees.map((a, i) => {
+              const bg = avatarColorFor(a.name, i);
+              return (
+                <div
+                  key={a.name}
+                  className={avatarCircle}
+                  style={{
+                    zIndex: card.assignees!.length - i,
+                    background: bg,
+                  }}
+                  title={a.name}
+                  role="img"
+                  aria-label={a.name}
+                >
+                  {a.avatarUrl ? (
+                    <img src={a.avatarUrl} alt={a.name} className={avatarImg} />
+                  ) : (
+                    <span className={avatarInitial} aria-hidden="true">
+                      {a.name.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        )}
-
-        {card.milestone && (
-          <span className={milestoneText}>{card.milestone}</span>
         )}
       </div>
     </div>
@@ -150,23 +378,80 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
 function Column({
   column,
   onAddCard,
+  onCardClick,
 }: {
   column: KanbanColumn;
   onAddCard?: (columnId: string) => void;
+  onCardClick?: (cardId: string) => void;
 }) {
   const cardIds = useMemo(() => column.cards.map((c) => c.id), [column.cards]);
+  const accent = column.accentColor ?? "var(--colors-sunbeam-orange, #fa520f)";
+
+  const visibleMembers = column.members?.slice(0, 4) ?? [];
+  const overflowMembers =
+    (column.members?.length ?? 0) - visibleMembers.length;
+
+  const hasAccent = Boolean(column.accentColor);
 
   return (
-    <div className={columnStyle} role="group" aria-label={`${column.title} column, ${column.cards.length} card${column.cards.length !== 1 ? "s" : ""}`}>
+    <div
+      className={columnStyle}
+      role="group"
+      aria-label={`${column.title} column, ${column.cards.length} card${column.cards.length !== 1 ? "s" : ""}`}
+      data-accent={hasAccent}
+      style={hasAccent ? { borderTop: `3px solid ${accent}` } : undefined}
+    >
       <div className={columnHeader}>
-        <span className={columnTitle}>{column.title}</span>
-        <span className={columnCount}>{column.cards.length}</span>
+        <div className={columnHeaderLeft}>
+          <span className={columnTitle}>{column.title}</span>
+          <span className={columnCount}>{column.cards.length}</span>
+          {typeof column.wipLimit === "number" && (
+            <span className={wipPill}>WIP {column.wipLimit}</span>
+          )}
+        </div>
+        {column.members && column.members.length > 0 && (
+          <div className={memberStack}>
+            {visibleMembers.map((m, i) => {
+              const bg = m.color ?? avatarColorFor(m.name, i);
+              return (
+                <div
+                  key={m.name}
+                  className={memberCircle}
+                  style={{
+                    zIndex: column.members!.length - i,
+                    background: bg,
+                  }}
+                  title={m.name}
+                  role="img"
+                  aria-label={m.name}
+                >
+                  {m.avatarUrl ? (
+                    <img src={m.avatarUrl} alt={m.name} className={avatarImg} />
+                  ) : (
+                    <span className={memberInitial} aria-hidden="true">
+                      {m.name.charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+            {overflowMembers > 0 && (
+              <div
+                className={memberOverflow}
+                title={`${overflowMembers} more`}
+                aria-label={`${overflowMembers} more members`}
+              >
+                +{overflowMembers}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>
         <div className={columnBody}>
           {column.cards.map((card) => (
-            <SortableCard key={card.id} card={card} />
+            <SortableCard key={card.id} card={card} onClick={onCardClick} />
           ))}
         </div>
       </SortableContext>
@@ -176,6 +461,7 @@ function Column({
           className={addCardBtn}
           onClick={() => onAddCard(column.id)}
           type="button"
+          aria-label={`Add card to ${column.title}`}
         >
           + Add card
         </button>
@@ -205,8 +491,9 @@ export function KanbanBoard({
   columns,
   onChange,
   onAddCard,
+  onCardClick,
   className,
-}: KanbanBoardProps): ReactNode {
+}: KanbanBoardProps) {
   const [activeCard, setActiveCard] = useState<KanbanCard | null>(null);
 
   const sensors = useSensors(
@@ -286,7 +573,7 @@ export function KanbanBoard({
     >
       <div className={cx(boardStyle, className)} role="region" aria-label="Kanban board">
         {columns.map((col) => (
-          <Column key={col.id} column={col} onAddCard={onAddCard} />
+          <Column key={col.id} column={col} onAddCard={onAddCard} onCardClick={onCardClick} />
         ))}
       </div>
 
@@ -302,68 +589,178 @@ export function KanbanBoard({
 /* ------------------------------------------------------------------ */
 const boardStyle = css({
   display: "flex",
-  gap: "16px",
+  gap: "14px",
   overflowX: "auto",
-  padding: "8px 0",
+  minHeight: "100%",
+  alignItems: "flex-start",
 });
 
 const columnStyle = css({
-  minWidth: "260px",
-  maxWidth: "320px",
-  flex: "1 0 260px",
-  backgroundColor: "bg.card",
+  width: "296px",
+  minWidth: "296px",
+  backgroundColor: "cream",
   border: "1px solid",
-  borderColor: "border.default",
+  borderColor: "border.warm",
+  borderRadius: "sm",
   display: "flex",
   flexDirection: "column",
+  position: "relative",
+  gap: "8px",
+  padding: "10px 10px 8px",
+  maxHeight: "calc(100vh - 220px)",
 });
 
 const columnHeader = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "12px 16px",
+  padding: "4px 4px 8px",
   borderBottom: "1px solid",
-  borderColor: "border.default",
+  borderColor: "border.subtle",
+  gap: "8px",
+});
+
+const columnHeaderLeft = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  minWidth: 0,
 });
 
 const columnTitle = css({
-  fontSize: "10px",
+  fontSize: "11px",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
   color: "text.muted",
+  whiteSpace: "nowrap",
+  flex: "1 1 0%",
 });
 
 const columnCount = css({
-  fontSize: "11px",
+  fontSize: "10.5px",
   fontFamily: "mono",
   color: "text.muted",
   backgroundColor: "bg.page",
-  padding: "2px 8px",
   border: "1px solid",
-  borderColor: "border.default",
+  borderColor: "border.subtle",
+  padding: "1px 7px",
+  borderRadius: "full",
+});
+
+const wipPill = css({
+  fontSize: "10.5px",
+  fontFamily: "mono",
+  color: "text.muted",
+  backgroundColor: "rgba(250, 82, 15, 0.08)",
+  border: "1px solid",
+  borderColor: "rgba(250, 82, 15, 0.2)",
+  padding: "1px 7px",
+  borderRadius: "full",
+  whiteSpace: "nowrap",
+});
+
+const memberStack = css({
+  display: "flex",
+  alignItems: "center",
+  flexShrink: 0,
+});
+
+const memberCircle = css({
+  width: "22px",
+  height: "22px",
+  borderRadius: "50%",
+  border: "2px solid",
+  borderColor: "cream",
+  backgroundColor: "warm.ivory",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginRight: "-5px",
+  overflow: "hidden",
+  flexShrink: 0,
+});
+
+const memberInitial = css({
+  fontSize: "9px",
+  fontWeight: "button",
+  color: "#fff",
+  textTransform: "uppercase",
+  lineHeight: 1,
+});
+
+const memberOverflow = css({
+  width: "22px",
+  height: "22px",
+  borderRadius: "50%",
+  border: "2px solid",
+  borderColor: "cream",
+  backgroundColor: "warm.ivory",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "8px",
+  fontWeight: "button",
+  color: "text.muted",
+  fontFamily: "mono",
+  flexShrink: 0,
+  marginLeft: "0",
 });
 
 const columnBody = css({
   flex: 1,
-  padding: "8px",
+  padding: "2px",
+  margin: "-2px",
   display: "flex",
   flexDirection: "column",
   gap: "8px",
   minHeight: "60px",
+  overflowY: "auto",
+});
+
+const cardCoverStyle = css({
+  height: "64px",
+  margin: "-10px -12px 0px",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  borderBottom: "1px solid",
+  borderColor: "border.warm",
+  position: "relative",
+  overflow: "hidden",
+});
+
+const blockedBadgeStyle = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "4px",
+  fontSize: "10px",
+  fontWeight: 600,
+  letterSpacing: "0.05em",
+  textTransform: "uppercase",
+  padding: "2px 6px",
+  backgroundColor: "rgb(254, 242, 242)",
+  color: "rgb(153, 27, 27)",
+  border: "1px solid",
+  borderColor: "rgb(252, 165, 165)",
+  borderRadius: "sm",
+  fontFamily: "mono",
 });
 
 const cardStyle = css({
   backgroundColor: "bg.page",
   border: "1px solid",
-  borderColor: "border.default",
-  padding: "12px",
+  borderColor: "border.warm",
+  borderRadius: "sm",
+  padding: "10px 12px",
   cursor: "grab",
-  transition: "box-shadow 0.15s ease, border-color 0.15s ease",
-  shadow: "xs",
+  transition: "border-color 0.12s, box-shadow 0.12s, transform 0.12s",
+  display: "flex",
+  flexDirection: "column",
+  gap: "8px",
+  position: "relative",
   _hover: {
     borderColor: "sunbeam.orange",
+    shadow: "nav",
   },
   _active: {
     cursor: "grabbing",
@@ -371,31 +768,137 @@ const cardStyle = css({
 });
 
 const cardGhostStyle = css({
-  boxShadow: "0 4px 20px rgba(250, 82, 15, 0.25)",
-  borderColor: "sunbeam.orange",
+  opacity: 0.4,
 });
 
 const cardTitleStyle = css({
-  fontSize: "13px",
+  fontSize: "14px",
   fontWeight: "button",
   color: "text.primary",
-  lineHeight: 1.4,
-  marginBottom: "8px",
+  lineHeight: "1.32",
+  overflowWrap: "break-word",
 });
 
 const labelsRow = css({
   display: "flex",
   flexWrap: "wrap",
   gap: "4px",
-  marginBottom: "8px",
 });
 
 const labelPill = css({
+  display: "inline-block",
+  fontFamily: "mono",
   fontSize: "10px",
-  padding: "1px 8px",
-  color: "#fff",
-  fontWeight: "button",
-  letterSpacing: "0.02em",
+  fontWeight: 600,
+  padding: "1px 6px",
+  borderRadius: "sm",
+  lineHeight: "1.5",
+  letterSpacing: "0.01em",
+  whiteSpace: "nowrap",
+  border: "1px solid",
+});
+
+const checklistRow = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "4px",
+});
+
+const checklistMetaRow = css({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "8px",
+});
+
+const checklistCount = css({
+  fontSize: "10.5px",
+  color: "text.muted",
+  fontFamily: "mono",
+});
+
+const checklistPctText = css({
+  fontSize: "10.5px",
+  color: "text.muted",
+  fontFamily: "mono",
+});
+
+const checklistTrack = css({
+  height: "4px",
+  borderRadius: "sm",
+  background: "rgba(127,99,21,0.1)",
+  width: "100%",
+  overflow: "hidden",
+});
+
+const checklistFill = css({
+  height: "100%",
+  backgroundColor: "sunshine.700",
+  transition: "width 0.3s",
+});
+
+const priorityRow = css({
+  display: "flex",
+  alignItems: "center",
+});
+
+const priorityChip = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "3px",
+  fontSize: "9.5px",
+  fontFamily: "mono",
+  fontWeight: 600,
+  letterSpacing: "0.04em",
+  padding: "1px 5px",
+  borderRadius: "sm",
+  textTransform: "uppercase",
+});
+
+const cardMetaRow = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+});
+
+const milestonePill = css({
+  fontSize: "10.5px",
+  color: "text.muted",
+  fontFamily: "mono",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "4px",
+});
+
+const metaIcons = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "8px",
+  flexWrap: "wrap",
+  fontSize: "10.5px",
+  color: "text.muted",
+  fontFamily: "mono",
+});
+
+const shortIdText = css({
+  fontSize: "10.5px",
+  color: "text.muted",
+  fontFamily: "mono",
+  fontWeight: 500,
+});
+
+const dueDateText = css({
+  fontSize: "10.5px",
+  color: "text.muted",
+  fontFamily: "mono",
+});
+
+const metaIconText = css({
+  fontSize: "10.5px",
+  color: "text.muted",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "3px",
 });
 
 const cardFooter = css({
@@ -403,23 +906,26 @@ const cardFooter = css({
   alignItems: "center",
   justifyContent: "space-between",
   gap: "8px",
+  paddingTop: "4px",
+  borderTop: "1px dashed",
+  borderColor: "border.subtle",
 });
 
 const avatarStack = css({
-  display: "flex",
+  display: "inline-flex",
 });
 
 const avatarCircle = css({
   width: "22px",
   height: "22px",
   borderRadius: "50%",
-  border: "2px solid",
+  border: "1.5px solid",
   borderColor: "bg.page",
   backgroundColor: "bg.card",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginRight: "-6px",
+  marginLeft: "-6px",
   overflow: "hidden",
 });
 
@@ -432,28 +938,27 @@ const avatarImg = css({
 const avatarInitial = css({
   fontSize: "9px",
   fontWeight: "button",
-  color: "text.muted",
+  color: "#fff",
   textTransform: "uppercase",
-});
-
-const milestoneText = css({
-  fontSize: "10px",
-  color: "text.muted",
-  fontFamily: "mono",
+  lineHeight: 1,
 });
 
 const addCardBtn = css({
-  padding: "8px 16px",
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  padding: "6px 8px",
   fontSize: "12px",
   color: "text.muted",
-  background: "none",
+  background: "transparent",
   border: "none",
-  borderTop: "1px solid",
-  borderColor: "border.default",
   cursor: "pointer",
   textAlign: "left",
-  transition: "color 0.15s ease",
+  borderRadius: "sm",
+  fontFamily: "body",
+  transition: "color 0.15s, background 0.15s",
   _hover: {
     color: "sunbeam.orange",
+    backgroundColor: "bg.page",
   },
 });
