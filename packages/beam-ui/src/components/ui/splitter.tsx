@@ -1,9 +1,6 @@
-import { type ReactNode } from "react";
-import {
-  SplitterRoot,
-  SplitterPanel,
-  SplitterResizeTrigger,
-} from "@ark-ui/react/splitter";
+import { type ReactNode, useEffect, useRef } from "react";
+import { useSplitter } from "@ark-ui/react/splitter";
+import type { SizeChangeDetails } from "@zag-js/splitter";
 import { css } from "styled-system/css";
 
 /** Props for {@link Splitter}. */
@@ -14,6 +11,12 @@ interface SplitterProps {
   direction?: "horizontal" | "vertical";
   /** Initial size of left/top panel as percentage (0–100). Defaults to `50`. */
   defaultSize?: number;
+  /** Called when the user finishes resizing a panel. */
+  onSizeChangeEnd?: (details: SizeChangeDetails) => void;
+  /** Whether the first panel is collapsed to its minimum size. */
+  collapsed?: boolean;
+  /** Size of the first panel when collapsed, in percent. Defaults to `0`. */
+  collapsedSize?: number;
 }
 
 /**
@@ -32,30 +35,60 @@ export function Splitter({
   children,
   direction = "horizontal",
   defaultSize = 50,
+  onSizeChangeEnd,
+  collapsed,
+  collapsedSize = 0,
 }: SplitterProps): ReactNode {
   const orientation = direction === "horizontal" ? "horizontal" : "vertical";
+  const initialSize = collapsed ? collapsedSize : defaultSize;
+
+  const splitter = useSplitter({
+    id: "splitter",
+    orientation,
+    defaultSize: [
+      { id: "panel-a", size: initialSize, minSize: 0 },
+      { id: "panel-b", size: 100 - initialSize },
+    ],
+    onSizeChangeEnd,
+  });
+
+  const splitterRef = useRef(splitter);
+  splitterRef.current = splitter;
+
+  useEffect(() => {
+    if (collapsed !== undefined) {
+      splitterRef.current.setSize(
+        "panel-a",
+        collapsed ? collapsedSize : defaultSize,
+      );
+    }
+  }, [collapsed, collapsedSize, defaultSize]);
 
   return (
-    <SplitterRoot
-      orientation={orientation}
-      size={[
-        { id: "panel-a", size: defaultSize },
-        { id: "panel-b", size: 100 - defaultSize },
-      ]}
-      className={root}
-    >
-      <SplitterPanel id="panel-a" className={panel}>
+    <div {...splitter.getRootProps()} className={root}>
+      <div
+        {...splitter.getPanelProps({ id: "panel-a" })}
+        className={panel}
+      >
         {children[0]}
-      </SplitterPanel>
+      </div>
 
-      <SplitterResizeTrigger id="panel-a:panel-b" className={direction === "horizontal" ? handleH : handleV}>
-        <div className={direction === "horizontal" ? handleBarH : handleBarV} />
-      </SplitterResizeTrigger>
+      <button
+        {...splitter.getResizeTriggerProps({ id: "panel-a:panel-b" })}
+        className={direction === "horizontal" ? handleH : handleV}
+      >
+        <div
+          className={direction === "horizontal" ? handleBarH : handleBarV}
+        />
+      </button>
 
-      <SplitterPanel id="panel-b" className={panel}>
+      <div
+        {...splitter.getPanelProps({ id: "panel-b" })}
+        className={panel}
+      >
         {children[1]}
-      </SplitterPanel>
-    </SplitterRoot>
+      </div>
+    </div>
   );
 }
 

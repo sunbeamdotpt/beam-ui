@@ -10,7 +10,9 @@ import {
 } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { headerLinks, docsSidebar } from "../../data/navigation.ts";
+import type { NavSection } from "../../data/navigation.ts";
 import { Sidebar } from "./sidebar.tsx";
+import { Breadcrumbs } from "./breadcrumbs.tsx";
 import { ThemeToggle } from "../ui/theme-toggle.tsx";
 
 const header = css({
@@ -39,6 +41,14 @@ const inner = css({
   paddingInline: { base: "16px", md: "24px", lg: "32px" },
 });
 
+const innerFullWidth = css({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
+  paddingInline: { base: "16px", md: "24px", lg: "32px" },
+});
+
 const leftGroup = css({
   display: "flex",
   alignItems: "center",
@@ -58,6 +68,15 @@ const nav = css({
   display: { base: "none", lg: "flex" },
   alignItems: "center",
   gap: "24px",
+});
+
+const breadcrumbsNav = css({
+  display: { base: "none", md: "flex" },
+  alignItems: "center",
+  gap: "8px",
+  fontSize: "13px",
+  fontWeight: "body",
+  marginBottom: "0",
 });
 
 const menuBtn = css({
@@ -276,37 +295,112 @@ const searchNoResults = css({
   textAlign: "center",
 });
 
-// Build a flat list of all nav items for search
-const allNavItems = docsSidebar.flatMap((section) =>
-  section.items.flatMap((item) => {
-    const results = [{ label: item.label, href: item.href, section: section.title }];
-    if (item.children) {
-      item.children.forEach((child) =>
-        results.push({ label: child.label, href: child.href, section: section.title })
-      );
-    }
-    return results;
-  })
-);
+/** A single item that can appear in the header search dropdown. */
+export interface HeaderSearchItem {
+  /** Display label. */
+  label: string;
+  /** Navigation target URL path. */
+  href: string;
+  /** Optional section heading for grouping results. */
+  section?: string;
+}
+
+/** A simple navigation link rendered in the desktop header bar. */
+export interface HeaderNavLink {
+  /** Display label. */
+  label: string;
+  /** Navigation target URL path. */
+  href: string;
+}
+
+/** A single breadcrumb item. */
+export interface HeaderBreadcrumbItem {
+  /** Display label. */
+  label: string;
+  /** Optional navigation target. Omit for the current page. */
+  href?: string;
+}
+
+function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
+  if (!sections) return [];
+  return sections.flatMap((section) =>
+    section.items.flatMap((item) => {
+      const results: HeaderSearchItem[] = [
+        { label: item.label, href: item.href, section: section.title },
+      ];
+      if (item.children) {
+        item.children.forEach((child) =>
+          results.push({ label: child.label, href: child.href, section: section.title })
+        );
+      }
+      return results;
+    })
+  );
+}
+
+
 
 /** Props for {@link Header}. */
-interface HeaderProps {
+export interface HeaderProps {
   /** Show a theme toggle button (right-aligned). Defaults to true. */
   showThemeToggle?: boolean;
   /** Extra elements rendered in the right group before the theme toggle. */
   actions?: ReactNode;
+  /** Replace the default brand link with a custom element. */
+  brand?: ReactNode;
+  /** Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set. */
+  navLinks?: HeaderNavLink[];
+  /** Breadcrumb items shown in place of nav links. When set, nav links are hidden. */
+  breadcrumbs?: HeaderBreadcrumbItem[];
+  /** Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar. */
+  drawerSections?: NavSection[];
+  /** Searchable items for the Cmd+K search. Defaults to items derived from drawerSections. */
+  searchItems?: HeaderSearchItem[];
+  /** Placeholder text for the search input. Defaults to "Search docs...". */
+  searchPlaceholder?: string;
+  /** Show the search input and Cmd+K shortcut. Defaults to true. */
+  showSearch?: boolean;
+  /** Remove the max-width constraint so the header spans the full viewport. Defaults to false. */
+  fullWidth?: boolean;
 }
 
 /**
- * Fixed top navigation header with logo, nav links (desktop), search (with Cmd+K support),
- * mobile menu drawer, and optional theme toggle. Consumes {@link headerLinks} from navigation data.
+ * Fixed top navigation header with logo, nav links or breadcrumbs (desktop), search
+ * (with Cmd+K support), mobile menu drawer, and optional theme toggle.
+ *
+ * All data sources are configurable via props. When omitted, sensible defaults
+ * (beam-ui documentation navigation) are used so the component works out of the box.
  *
  * @example
  * ```tsx
- * <Header showThemeToggle actions={<ProfileMenu />} />
+ * <Header
+ *   brand={<Link to="/">My App</Link>}
+ *   navLinks={[{ label: "Dashboard", href: "/" }, { label: "Settings", href: "/settings" }]}
+ *   searchPlaceholder="Search..."
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <Header
+ *   brand={<Link to="/">My App</Link>}
+ *   breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings" }]}
+ *   showSearch={false}
+ * />
  * ```
  */
-export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): ReactNode {
+export function Header({
+  showThemeToggle = true,
+  actions,
+  brand,
+  navLinks: navLinksProp,
+  breadcrumbs,
+  drawerSections: drawerSectionsProp,
+  searchItems: searchItemsProp,
+  searchPlaceholder = "Search docs...",
+  showSearch = true,
+  fullWidth = false,
+}: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -314,6 +408,10 @@ export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): R
   const [drawerOpen, setDrawerOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const resolvedNavLinks = navLinksProp ?? headerLinks;
+  const resolvedDrawerSections = drawerSectionsProp ?? docsSidebar;
+  const allNavItems = searchItemsProp ?? buildSearchItems(resolvedDrawerSections);
 
   // Close drawer on route change
   useEffect(() => {
@@ -371,10 +469,16 @@ export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): R
     [navigate]
   );
 
+  const defaultBrand = (
+    <Link to="/" className={brandLink}>
+      Sunbeam Studios
+    </Link>
+  );
+
   return (
     <>
       <header className={header}>
-        <div className={inner}>
+        <div className={fullWidth ? innerFullWidth : inner}>
           <div className={leftGroup}>
             <button
               className={menuBtn}
@@ -385,86 +489,92 @@ export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): R
                 menu
               </span>
             </button>
-            <Link to="/" className={brandLink}>
-              Sunbeam Studios
-            </Link>
-            <nav className={nav} aria-label="Main">
-              {location.pathname !== "/" && headerLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={isActive(link.label, link.href) ? navLinkActive : navLink}
-                  {...(isActive(link.label, link.href) ? { "aria-current": "page" as const } : {})}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            {brand !== undefined ? brand : defaultBrand}
+            {breadcrumbs ? (
+              <Breadcrumbs items={breadcrumbs} className={breadcrumbsNav} />
+            ) : (
+              <nav className={nav} aria-label="Main">
+                {location.pathname !== "/" && resolvedNavLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className={isActive(link.label, link.href) ? navLinkActive : navLink}
+                    {...(isActive(link.label, link.href) ? { "aria-current": "page" as const } : {})}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            )}
           </div>
           <div className={rightGroup}>
-            <button
-              className={searchTriggerMobile}
-              onClick={() => inputRef.current?.focus()}
-              aria-label="Search"
-            >
-              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
-                search
-              </span>
-            </button>
-            <div className={searchWrapper} ref={wrapperRef}>
-              <span className={`material-symbols-outlined ${searchIcon}`}>search</span>
-              <input
-                ref={inputRef}
-                className={searchInput}
-                type="text"
-                placeholder="Search docs..."
-                aria-label="Search docs"
-                role="combobox"
-                aria-expanded={showResults && query.trim().length > 0}
-                aria-controls={showResults && query.trim() ? "search-listbox" : undefined}
-                aria-autocomplete="list"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setShowResults(true);
-                }}
-                onFocus={() => setShowResults(true)}
-              />
-              <kbd className={kbdStyle}>&#x2318;K</kbd>
-              {showResults && query.trim() && (
-                <div className={searchDropdown} role="listbox" id="search-listbox">
-                  {filtered.length === 0 ? (
-                    <div className={searchNoResults}>No results for "{query}"</div>
-                  ) : (
-                    (() => {
-                      let lastSection = "";
-                      return filtered.map((item) => {
-                        const showSection = item.section !== lastSection;
-                        lastSection = item.section;
-                        return (
-                          <div key={item.href + item.label}>
-                            {showSection && (
-                              <div className={searchResultSection} role="presentation">{item.section}</div>
-                            )}
-                            <a
-                              className={searchResultItem}
-                              role="option"
-                              href={item.href}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                handleSelect(item.href);
-                              }}
-                            >
-                              {item.label}
-                            </a>
-                          </div>
-                        );
-                      });
-                    })()
+            {showSearch && (
+              <>
+                <button
+                  className={searchTriggerMobile}
+                  onClick={() => inputRef.current?.focus()}
+                  aria-label="Search"
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
+                    search
+                  </span>
+                </button>
+                <div className={searchWrapper} ref={wrapperRef}>
+                  <span className={`material-symbols-outlined ${searchIcon}`}>search</span>
+                  <input
+                    ref={inputRef}
+                    className={searchInput}
+                    type="text"
+                    placeholder={searchPlaceholder}
+                    aria-label={searchPlaceholder}
+                    role="combobox"
+                    aria-expanded={showResults && query.trim().length > 0}
+                    aria-controls={showResults && query.trim() ? "search-listbox" : undefined}
+                    aria-autocomplete="list"
+                    value={query}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setShowResults(true);
+                    }}
+                    onFocus={() => setShowResults(true)}
+                  />
+                  <kbd className={kbdStyle}>&#x2318;K</kbd>
+                  {showResults && query.trim() && (
+                    <div className={searchDropdown} role="listbox" id="search-listbox">
+                      {filtered.length === 0 ? (
+                        <div className={searchNoResults}>No results for "{query}"</div>
+                      ) : (
+                        (() => {
+                          let lastSection = "";
+                          return filtered.map((item) => {
+                            const showSection = item.section !== lastSection;
+                            lastSection = item.section ?? lastSection;
+                            return (
+                              <div key={item.href + item.label}>
+                                {showSection && item.section && (
+                                  <div className={searchResultSection} role="presentation">{item.section}</div>
+                                )}
+                                <a
+                                  className={searchResultItem}
+                                  role="option"
+                                  href={item.href}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    handleSelect(item.href);
+                                  }}
+                                >
+                                  {item.label}
+                                </a>
+                              </div>
+                            );
+                          });
+                        })()
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
+              </>
+            )}
             {actions}
             {showThemeToggle && <ThemeToggle />}
           </div>
@@ -480,7 +590,7 @@ export function Header({ showThemeToggle = true, actions }: HeaderProps = {}): R
               <DialogCloseTrigger className={drawerCloseBtn} aria-label="Close navigation">
                 <span className="material-symbols-outlined">close</span>
               </DialogCloseTrigger>
-              <Sidebar sections={docsSidebar} />
+              <Sidebar sections={resolvedDrawerSections} />
             </DialogContent>
           </DialogPositioner>
         </Portal>

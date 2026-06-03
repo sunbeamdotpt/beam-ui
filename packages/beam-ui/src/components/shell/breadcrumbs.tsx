@@ -32,9 +32,11 @@ const separator = css({
 });
 
 /** Props for {@link Breadcrumbs}. */
-interface BreadcrumbsProps {
+export interface BreadcrumbsProps {
   /** Array of breadcrumb items. Last item is rendered as current page (no link). */
   items: Array<{ label: string; href?: string }>;
+  /** Optional class name to override or extend default styles. */
+  className?: string;
 }
 
 /**
@@ -50,9 +52,9 @@ interface BreadcrumbsProps {
  * ]} />
  * ```
  */
-export function Breadcrumbs({ items }: BreadcrumbsProps): ReactNode {
+export function Breadcrumbs({ items, className }: BreadcrumbsProps): ReactNode {
   return (
-    <nav className={nav} aria-label="Breadcrumb">
+    <nav className={className ?? nav} aria-label="Breadcrumb">
       <ol style={{ display: "flex", alignItems: "center", gap: "8px", listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;

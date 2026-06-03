@@ -249,5 +249,13 @@ export const beamPreset: Preset = definePreset({
       lineHeight: "1.5",
       WebkitFontSmoothing: "antialiased",
     },
+    "@keyframes beam-fadeIn": {
+      "0%": { opacity: "0" },
+      "100%": { opacity: "1" },
+    },
+    "@keyframes beam-modalIn": {
+      "0%": { transform: "translateY(8px) scale(0.98)", opacity: "0" },
+      "100%": { transform: "translateY(0) scale(1)", opacity: "1" },
+    },
   },
 });

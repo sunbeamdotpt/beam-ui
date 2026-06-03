@@ -1,20 +1,29 @@
 import { type ReactNode } from "react";
-import { Outlet } from "@tanstack/react-router";
 import { css } from "styled-system/css";
 import { Header } from "./header.tsx";
 import { Footer } from "./footer.tsx";
+import type { HeaderProps } from "./header.tsx";
 
 /** Props for {@link Shell}. */
-interface ShellProps {
-  /** Show the theme toggle in the header. Defaults to true. */
-  showThemeToggle?: boolean;
+export interface ShellProps extends Pick<
+  HeaderProps,
+  | "showThemeToggle"
+  | "brand"
+  | "navLinks"
+  | "breadcrumbs"
+  | "drawerSections"
+  | "searchItems"
+  | "searchPlaceholder"
+  | "showSearch"
+  | "fullWidth"
+> {
   /** Extra elements rendered in the header's right group before the theme toggle */
   headerActions?: ReactNode;
   /** Replace the default Header with a custom element. */
   header?: ReactNode;
   /** Replace the default Footer with a custom element. */
   footer?: ReactNode;
-  /** Content to render. If omitted, renders <Outlet /> for React Router. */
+  /** Content to render. */
   children?: ReactNode;
   className?: string;
 }
@@ -27,15 +36,16 @@ const shellStyle = css({
 
 const mainStyle = css({
   flex: 1,
-  paddingTop: "64px",
+  minHeight: 0,
+  overflow: "hidden",
+  position: "relative",
 });
 
 /**
  * Top-level layout component combining Header, main content area, and Footer.
  *
- * Arranges content in a flexible column with fixed header (64px) and footer.
+ * Arranges content in a flexible column.
  * Accepts custom Header and Footer via props, or renders defaults.
- * Automatically renders children into a Router Outlet if not provided.
  *
  * @example
  * ```tsx
@@ -51,12 +61,33 @@ export function Shell({
   footer,
   children,
   className,
+  brand,
+  navLinks,
+  breadcrumbs,
+  drawerSections,
+  searchItems,
+  searchPlaceholder,
+  showSearch,
+  fullWidth,
 }: ShellProps): ReactNode {
   return (
     <div className={className ?? shellStyle}>
-      {header !== undefined ? header : <Header showThemeToggle={showThemeToggle} actions={headerActions} />}
+      {header !== undefined ? header : (
+        <Header
+          showThemeToggle={showThemeToggle}
+          actions={headerActions}
+          brand={brand}
+          navLinks={navLinks}
+          breadcrumbs={breadcrumbs}
+          drawerSections={drawerSections}
+          searchItems={searchItems}
+          searchPlaceholder={searchPlaceholder}
+          showSearch={showSearch}
+          fullWidth={fullWidth}
+        />
+      )}
       <div className={mainStyle}>
-        {children ?? <Outlet />}
+        {children}
       </div>
       {footer !== undefined ? footer : <Footer />}
     </div>

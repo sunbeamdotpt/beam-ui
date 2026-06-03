@@ -31,12 +31,7 @@ export interface NavSection {
  *
  * Consumers render these as a horizontal nav bar linking to major documentation sections.
  */
-export const headerLinks = [
-  { label: "FOUNDATIONS", href: "/foundations/accessibility" },
-  { label: "SHELL", href: "/shell/shell" },
-  { label: "LAYOUTS", href: "/layouts/docs" },
-  { label: "COMPONENTS", href: "/components/accordion" },
-] as const;
+export const headerLinks: NavItem[] = [];
 
 /**
  * Navigation tree for the Beam Design Language documentation site.

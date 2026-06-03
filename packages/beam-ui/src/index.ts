@@ -1,23 +1,23 @@
 /**
  * Sunbeam Studios design system — main entry point.
  *
- * Re-exports lightweight UI primitives, hooks, and layout helpers.
- * Components are unstyled at import time and pick up styling from a
- * consumer's Panda CSS pipeline; wire {@link beamPreset}
+ * Re-exports every UI component, layout shell, hook, and curated
+ * navigation/status data set. Components are unstyled at import time and pick
+ * up styling from a consumer's Panda CSS pipeline; wire {@link beamPreset}
  * (from `@sunbeam/beam-ui/preset`) into your `panda.config.ts` to get the
  * full design language.
  *
- * Heavy components (code-editor, charts, markdown, etc.) are available via
- * dedicated subpath exports so consumers only pay for what they use.
- *
  * @example
  * ```tsx
- * import { Button, Card } from "@sunbeam/beam-ui";
+ * import { Button, Card, useTheme } from "@sunbeam/beam-ui";
  *
  * export function Hero() {
+ *   const { theme, toggle } = useTheme();
  *   return (
  *     <Card>
- *       <Button variant="primary">Get started</Button>
+ *       <Button variant="primary" onClick={toggle}>
+ *         Switch to {theme === "dark" ? "light" : "dark"} mode
+ *       </Button>
  *     </Card>
  *   );
  * }
@@ -44,6 +44,9 @@ export { Card } from "./components/ui/card.tsx";
 export { Checkbox } from "./components/ui/checkbox.tsx";
 export { Clipboard } from "./components/ui/clipboard.tsx";
 export { CodeBlock, syn } from "./components/ui/code-block.tsx";
+export { CodeEditor } from "./components/ui/code-editor.tsx";
+export type { CodeEditorProps } from "./components/ui/code-editor.tsx";
+export { DiagramRenderer } from "./components/ui/diagram-renderer.tsx";
 export { ColorPicker } from "./components/ui/color-picker.tsx";
 export { Combobox } from "./components/ui/combobox.tsx";
 export { CommentThread } from "./components/ui/comment-thread.tsx";
@@ -64,6 +67,8 @@ export type { FileItem } from "./components/ui/file-list.tsx";
 export { FileUpload } from "./components/ui/file-upload.tsx";
 export { HoverCard } from "./components/ui/hover-card.tsx";
 export { Icon } from "./components/ui/icon.tsx";
+export { KanbanBoard, KanbanCardView } from "./components/ui/kanban-board.tsx";
+export type { KanbanCard, KanbanColumn } from "./components/ui/kanban-board.tsx";
 export { Kbd } from "./components/ui/kbd.tsx";
 export { LabelPicker } from "./components/ui/label-picker.tsx";
 export type { LabelOption } from "./components/ui/label-picker.tsx";
@@ -104,6 +109,7 @@ export { Tooltip } from "./components/ui/tooltip.tsx";
 export { TopicCard } from "./components/ui/topic-card.tsx";
 export { TransferList } from "./components/ui/transfer-list.tsx";
 export type { TransferItem } from "./components/ui/transfer-list.tsx";
+export { TweakSection, TweakRadio, TweakToggle } from "./components/tweak/index.ts";
 export { TreeView } from "./components/ui/tree-view.tsx";
 export type { TreeNode } from "./components/ui/tree-view.tsx";
 export { Wizard, WizardModal } from "./components/ui/wizard.tsx";
@@ -111,12 +117,18 @@ export type { WizardStep, WizardProps, WizardModalProps } from "./components/ui/
 export { WorkItemList } from "./components/ui/work-item-list.tsx";
 export type { WorkItemRow, WorkItemLabel, WorkItemBranch, WorkItemListProps } from "./components/ui/work-item-list.tsx";
 
+// Command palette
+export * from "./components/command-palette/index.ts";
+
 // Shell
 export { Breadcrumbs } from "./components/shell/breadcrumbs.tsx";
+export type { BreadcrumbsProps } from "./components/shell/breadcrumbs.tsx";
 export { Footer } from "./components/shell/footer.tsx";
 export { Header } from "./components/shell/header.tsx";
+export type { HeaderProps, HeaderSearchItem, HeaderNavLink, HeaderBreadcrumbItem } from "./components/shell/header.tsx";
 export { RightRail } from "./components/shell/right-rail.tsx";
 export { Shell } from "./components/shell/shell.tsx";
+export type { ShellProps } from "./components/shell/shell.tsx";
 export { Sidebar } from "./components/shell/sidebar.tsx";
 
 // Layouts
@@ -124,6 +136,9 @@ export { ApiLayout, apiLeftPanel, apiRightPanel } from "./components/layouts/api
 export { DocsLayout, useDocsContext } from "./components/layouts/docs-layout.tsx";
 export type { DocsTocItem } from "./components/layouts/docs-layout.tsx";
 export { FullwidthLayout } from "./components/layouts/fullwidth-layout.tsx";
+
+// Form
+export { Form, FormField, z, useForm, zodResolver } from "./form/index.tsx";
 
 // Data
 export { headerLinks, docsSidebar, apiSidebar, footerSections } from "./data/navigation.ts";
