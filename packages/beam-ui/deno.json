@@ -15,6 +15,10 @@
     "./markdown": "./src/markdown/index.ts",
     "./syntax-highlighter": "./src/components/ui/syntax-highlighter.tsx"
   },
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "test": "deno run -A npm:vitest run"
+  },
   "imports": {
     "styled-system/css": "./styled-system/css/index.mjs",
     "styled-system/tokens": "./styled-system/tokens/index.mjs",
@@ -64,7 +68,14 @@
     "katex": "npm:katex@^0.16.44",
     "katex/dist/katex.min.css": "npm:katex@^0.16.44/dist/katex.min.css",
     "mermaid": "npm:mermaid@^11.14.0",
-    "shiki": "npm:shiki@^4.0.2"
+    "shiki": "npm:shiki@^4.0.2",
+    "vitest": "npm:vitest@^2.0.0",
+    "@testing-library/react": "npm:@testing-library/react@^16.0.0",
+    "@testing-library/user-event": "npm:@testing-library/user-event@^14.5.1",
+    "@testing-library/jest-dom": "npm:@testing-library/jest-dom@^6.1.0",
+    "@testing-library/jest-dom/vitest": "npm:@testing-library/jest-dom@^6.1.0/vitest",
+    "jsdom": "npm:jsdom@^24.0.0",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.2.0"
   },
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
