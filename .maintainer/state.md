@@ -6,56 +6,50 @@ tags: [state]
 timestamp: 2026-07-22T00:00:00Z
 ---
 
-# State — 2026-07-23 (late-night session, updated ~00:45 local)
+# State — 2026-07-23 (after push)
 
 ## In flight
 
-- **Overnight push: multi-arch image to `ghcr.io/sunbeamdotpt/beam-ui:latest`.**
-  Code work is DONE and verified; awaiting the human's local-demo sign-off,
-  then commit (logical split was pre-approved) + push, which triggers the new
-  GitHub Actions multi-arch build.
-- **Maintainer system bootstrap**: bundle created 2026-07-22; beam-ui
-  enrolled in agent-mail.
+- **Multi-arch image pipeline**: mainline pushed (`a7ffd3b`); the
+  Release Container workflow is building and pushing
+  `ghcr.io/sunbeamdotpt/beam-ui:latest` (linux/amd64+arm64).
+- Scratch from the verification work (`.visual-diff/`, `.baseline-worktree/`)
+  has been removed. Visual reports are gone; the method is documented in
+  log.md if it needs repeating.
 
-## Done tonight (uncommitted, on top of `ec19f07`)
+## Done and pushed (4 commits on top of the Jun-3 line)
 
-- Recovered + repaired the 2026-07-02 tree: 11 quote-corrupted component
-  files fixed by hand; 6 scratch `*.py` scripts deleted; `deno task ci`,
-  vite build, storybook build all green.
-- **Three systemic Panda bugs found by visual regression and fixed** (see
-  log.md and fragile-areas.md): extractor skipping the `system.ts` barrel
-  (fixed via `importMap` in `app/panda.config.ts`), invalid `padding: "N M"`
-  shorthands (21 occurrences → `paddingBlock`/`paddingInline`), and bare
-  width/height tokens emitting literal px (fixed by adding `sizes` mirroring
-  `spacing` in `beamPreset`).
-- Visual regression vs HEAD baseline: 208 screen pairs, **PASS** — only
-  documented text updates + intentional changes differ. Method + reports in
-  `.visual-diff/` (untracked, delete after sign-off; `.baseline-worktree`
-  likewise).
-- Docs site + Storybook updated for the modernization (JSR install docs,
-  children-based Shell/layout API, new prop tables).
-- `.github/workflows/release.yml`: multi-arch (amd64+arm64) buildx pipeline
-  to ghcr.io, modeled on sso-gateway; `:latest` on mainline pushes, version
-  tags on `v*`.
+- `0dcbcdf` feat(beam-ui): modernization + repairs
+- `80f0f36` docs(app): showcase/storybook updates
+- `e113f91` chore: this `.maintainer` bundle + AGENTS.md
+- `a7ffd3b` ci: multi-arch release workflow
+
+Verification behind them: `deno task ci` green, app + storybook builds
+green, and a 208-screen visual regression vs the old baseline that caught
+and fixed three systemic Panda bugs (see log.md 2026-07-23 entry).
 
 ## Known loose ends
 
 - The user's unanswered 2026-07-02 message: *"huge issues with bundling our
   font and getting the typography right"* — font/typography bundling is an
-  open problem, not addressed tonight.
-- Token migration (px → `beamPreset` spacing) is still only half-applied
-  across component source (valid but inconsistent). Charter rule 4 applies
-  when resuming it.
+  open problem, not addressed.
+- Token migration (px → `beamPreset` spacing) is only half-applied across
+  component source (valid but inconsistent). Charter rule 4 applies when
+  resuming it.
 - `workflows.yaml` / `sunbeam.yaml` (Gitea pipeline) are stale.
 - Plan items #4–#8 and phases 5–7 (Preact/Fresh migration, release prep)
   never started.
+- GitHub reports 46 dependabot vulnerabilities on the default branch
+  (8 high) — not yet triaged.
+- Untracked/modified files under `packages/beam-ui-typst/` are the human's
+  own WIP — do not commit or revert them.
 
 ## Blocked / waiting
 
-- Human sign-off on the local demo, then commit + push.
+- Nothing, once the image is verified on ghcr.io.
 
 ## Pick up first
 
 - Check for open mail: `agent-mail inbox`.
-- If handed off mid-flow: rebuild `app/dist` + storybook, serve `server.ts`
-  from `app/` for the demo, then commit in the approved 4-commit split.
+- Triaged dependabot alerts and the font/typography question are the most
+  valuable next items.

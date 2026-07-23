@@ -48,3 +48,21 @@ them that they aren't intentional empty-state renders.
 
 `app/styled-system/` is generated. Regenerate with `npx panda codegen` in
 `app/` after touching `preset.ts` or token usage; don't hand-edit its output.
+
+## npm install prunes Deno's node_modules links
+
+Root `node_modules` is shared between npm (workspaces: app + packages) and
+Deno (`.deno/` store + symlinks for `packages/beam-ui`'s npm deps). Every
+`npm install` at the root prunes Deno's top-level symlinks and leaves empty
+scope dirs behind, which breaks `deno task test` ("Failed to resolve import
+@testing-library/react", "Could not find referrer npm package", or duplicate
+`@playwright/test` version errors). Repair after any root npm install:
+
+```sh
+rm -rf packages/beam-ui/node_modules/.deno packages/beam-ui/node_modules/.bin
+cd packages/beam-ui && deno install
+```
+
+Keep `@playwright/test` versions aligned between npm (`app/package.json`)
+and the Deno store — `npx playwright` resolves the root `.bin` symlink
+(Deno-managed), while test files import the npm copy.

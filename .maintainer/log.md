@@ -76,3 +76,19 @@ Shell/layout API, prop tables), `.github/workflows/release.yml` added
 (sso-gateway-model multi-arch pipeline to ghcr.io), and a node_modules
 corruption from the baseline work (npm pruning deno's symlinks) was repaired
 by rebuilding `packages/beam-ui/node_modules/.deno` via `deno install`.
+
+## 2026-07-23 — pushed; image pipeline live
+
+Human signed off after the local demo; pushed mainline in the approved
+4-commit split (`0dcbcdf` feat, `80f0f36` docs, `e113f91` chore, `a7ffd3b`
+ci). Note: the Jun-3 commits (tests, v0.12.0) had never been pushed either —
+the push fast-forwarded the remote from `cfbb75c` to `a7ffd3b`. The Release
+Container workflow now builds `:latest` (amd64+arm64) on every mainline push.
+
+Scratch verification dirs (`.visual-diff/`, `.baseline-worktree/`) were
+deleted post-sign-off. To re-run the visual regression: build the baseline
+from a worktree at the old ref, capture with `npx playwright test` in both
+trees (kill port 4173 between runs), diff with pixelmatch+pngjs.
+
+GitHub flags 46 dependabot vulnerabilities on the default branch (8 high) —
+recorded in state.md as untriaged.
