@@ -1,7 +1,8 @@
-import { type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { footerSections } from "../../data/navigation.ts";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 declare const __BUILD_LABEL__: string | undefined;
 
@@ -78,16 +79,24 @@ const sectionLink = css({
   },
 });
 
+/** Props for {@link Footer}. */
+export interface FooterProps {
+  /** Component used to render internal links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
+}
+
 /**
  * Application footer with multi-column navigation and branding.
  * Consumes {@link footerSections} from navigation data. Shows optional build label if defined.
+ * Internal links are rendered with the consumer's link component when `linkAs` is provided.
  *
  * @example
  * ```tsx
  * <Footer />
  * ```
  */
-export function Footer(): ReactNode {
+export function Footer({ linkAs }: FooterProps = {}): ReactNode {
+  const LinkAs = linkAs ?? DefaultLink;
   return (
     <footer className={footer}>
       <div className={grid}>
@@ -99,7 +108,7 @@ export function Footer(): ReactNode {
           <p className={copyright}>
             &copy; 2026 Sunbeam Studios
             {typeof __BUILD_LABEL__ !== "undefined" && (
-              <span className={buildLabel}> · {__BUILD_LABEL__}</span>
+              <span className={buildLabel}>· {__BUILD_LABEL__}</span>
             )}
           </p>
         </div>
@@ -110,24 +119,49 @@ export function Footer(): ReactNode {
               const isExternal = link.href.startsWith("http") || link.href.startsWith("mailto:");
               if (isExternal) {
                 // Inject build version into mailto subject if present
-                const href = link.href.startsWith("mailto:") && typeof __BUILD_LABEL__ !== "undefined"
-                  ? link.href.replace("Question!", `${__BUILD_LABEL__} Question!`)
-                  : link.href;
+                const href =
+                  link.href.startsWith("mailto:") && typeof __BUILD_LABEL__ !== "undefined"
+                    ? link.href.replace("Question!", `${__BUILD_LABEL__} Question!`)
+                    : link.href;
                 return (
-                  <a key={link.label} href={href} className={sectionLink} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                  <a
+                    key={link.label}
+                    href={href}
+                    className={sectionLink}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  >
                     {link.label}
                   </a>
                 );
               }
               return (
-                <Link key={link.label} to={link.href} className={sectionLink}>
+                <LinkAs key={link.label} href={link.href} className={sectionLink}>
                   {link.label}
-                </Link>
+                </LinkAs>
               );
             })}
           </nav>
         ))}
       </div>
     </footer>
+  );
+}
+
+function DefaultLink({
+  href,
+  children,
+  className,
+  ...rest
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}): ReactNode {
+  return (
+    <a href={href} className={className} {...rest}>
+      {children}
+    </a>
   );
 }

@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 
 /** Props for {@link TweakSection}. */
 interface TweakSectionProps {

@@ -1,11 +1,12 @@
-import { useState, type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import {
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
 } from "@ark-ui/react/popover";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 import { Avatar } from "./avatar.tsx";
 
@@ -22,7 +23,7 @@ export interface UserOption {
 }
 
 /** Props for {@link AssigneePicker}. */
-interface AssigneePickerProps {
+export interface AssigneePickerProps {
   /** List of available users to pick from. */
   options: UserOption[];
   /** Array of selected user IDs. */
@@ -81,22 +82,22 @@ export function AssigneePicker({
   return (
     <PopoverRoot positioning={{ placement: "bottom-start" }} onOpenChange={() => setQuery("")}>
       <PopoverTrigger asChild>
-        <button className={cx(triggerStyle, className)}>
-          {selectedOptions.length === 0 ? (
-            <span className={placeholderStyle}>{placeholder}</span>
-          ) : (
-            <span className={avatarRow}>
-              {selectedOptions.map((opt) => (
-                <Avatar
-                  key={opt.id}
-                  name={opt.displayName}
-                  src={opt.avatarUrl}
-                  size="sm"
-                  className={avatarSmall}
-                />
-              ))}
-            </span>
-          )}
+        <button className={cx(triggerStyle, className)} type="button">
+          {selectedOptions.length === 0
+            ? <span className={placeholderStyle}>{placeholder}</span>
+            : (
+              <span className={avatarRow}>
+                {selectedOptions.map((opt) => (
+                  <Avatar
+                    key={opt.id}
+                    name={opt.displayName}
+                    src={opt.avatarUrl}
+                    size="sm"
+                    className={avatarSmall}
+                  />
+                ))}
+              </span>
+            )}
           <Icon name="expand_more" size={18} className={chevron} />
         </button>
       </PopoverTrigger>
@@ -120,6 +121,7 @@ export function AssigneePicker({
                   key={opt.id}
                   className={optionRow}
                   onClick={() => toggle(opt.id)}
+                  type="button"
                 >
                   <Avatar
                     name={opt.displayName}
@@ -131,15 +133,11 @@ export function AssigneePicker({
                     <span className={displayName}>{opt.displayName}</span>
                     <span className={username}>@{opt.username}</span>
                   </span>
-                  {isSelected && (
-                    <Icon name="check" size={16} className={checkIcon} />
-                  )}
+                  {isSelected && <Icon name="check" size={16} className={checkIcon} />}
                 </button>
               );
             })}
-            {filtered.length === 0 && (
-              <span className={emptyText}>No users found</span>
-            )}
+            {filtered.length === 0 && <span className={emptyText}>No users found</span>}
           </div>
         </PopoverContent>
       </PopoverPositioner>

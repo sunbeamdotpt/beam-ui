@@ -1,17 +1,18 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
+  ProgressRange,
   ProgressRoot,
   ProgressTrack,
-  ProgressRange,
   ProgressValueText,
 } from "@ark-ui/react/progress";
-import { css, cx } from "styled-system/css";
 
 /** Progress bar visual variant. */
 type ProgressVariant = "default" | "success" | "error";
 
 /** Props for {@link ProgressBar}. */
-interface ProgressBarProps {
+export interface ProgressBarProps {
   /** Numeric progress value (0–100). Clamped automatically. */
   value: number;
   /** Visual style. Defaults to `"default"`. */
@@ -61,9 +62,7 @@ export function ProgressBar({
           )}
         />
       </ProgressTrack>
-      {showLabel && (
-        <ProgressValueText className={labelStyle} />
-      )}
+      {showLabel && <ProgressValueText className={labelStyle} />}
     </ProgressRoot>
   );
 }
@@ -71,7 +70,7 @@ export function ProgressBar({
 const wrapperStyle = css({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
+  gap: "3",
 });
 
 const trackStyle = css({
@@ -88,7 +87,7 @@ const fillStyle = css({
 });
 
 const labelStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   color: "text.secondary",
   whiteSpace: "nowrap",

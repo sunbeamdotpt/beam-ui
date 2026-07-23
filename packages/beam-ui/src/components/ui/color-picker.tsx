@@ -1,16 +1,17 @@
-import { useState, useId, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useId, useState } from "react";
 import {
+  PopoverCloseTrigger,
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
-  PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link ColorPicker}. */
-interface ColorPickerProps {
+export interface ColorPickerProps {
   /** Current hex color value (e.g., `"#FF5733"`). */
   value: string;
   /** Callback fired when the user selects a color; receives the hex string. */
@@ -24,11 +25,26 @@ interface ColorPickerProps {
 }
 
 const DEFAULT_PRESETS = [
-  "#EF4444", "#F97316", "#F59E0B", "#EAB308",
-  "#84CC16", "#22C55E", "#14B8A6", "#06B6D4",
-  "#3B82F6", "#6366F1", "#8B5CF6", "#A855F7",
-  "#D946EF", "#EC4899", "#F43F5E", "#78716C",
-  "#DC2626", "#EA580C", "#D97706", "#059669",
+  "#EF4444",
+  "#F97316",
+  "#F59E0B",
+  "#EAB308",
+  "#84CC16",
+  "#22C55E",
+  "#14B8A6",
+  "#06B6D4",
+  "#3B82F6",
+  "#6366F1",
+  "#8B5CF6",
+  "#A855F7",
+  "#D946EF",
+  "#EC4899",
+  "#F43F5E",
+  "#78716C",
+  "#DC2626",
+  "#EA580C",
+  "#D97706",
+  "#059669",
 ];
 
 /**
@@ -102,9 +118,7 @@ export function ColorPicker({
                   key={color}
                   className={cx(
                     swatchButton,
-                    value.toUpperCase() === color.toUpperCase()
-                      ? swatchSelected
-                      : undefined
+                    value.toUpperCase() === color.toUpperCase() ? swatchSelected : undefined,
                   )}
                   style={{ backgroundColor: color }}
                   onClick={() => handleSwatchClick(color)}

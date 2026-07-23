@@ -11,5 +11,9 @@ export default function ToggleStory() {
   );
 }
 
-export function Pressed() { return <Toggle pressed={true} onChange={() => {}}>Active</Toggle>; }
-export function Unpressed() { return <Toggle pressed={false} onChange={() => {}}>Inactive</Toggle>; }
+export function Pressed() {
+  return <Toggle pressed onChange={() => {}}>Active</Toggle>;
+}
+export function Unpressed() {
+  return <Toggle pressed={false} onChange={() => {}}>Inactive</Toggle>;
+}

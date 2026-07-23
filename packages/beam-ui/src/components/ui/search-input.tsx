@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { docsSidebar } from "../../data/navigation.ts";
 
 /** Props for {@link SearchInput}. */
-interface SearchInputProps {
+export interface SearchInputProps {
   /** Additional CSS class. */
   className?: string;
 }
@@ -66,9 +67,7 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
   }, []);
 
   const filtered = query.trim()
-    ? allNavItems.filter((item) =>
-        item.label.toLowerCase().includes(query.toLowerCase())
-      )
+    ? allNavItems.filter((item) => item.label.toLowerCase().includes(query.toLowerCase()))
     : [];
 
   const handleSelect = useCallback(
@@ -76,9 +75,9 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
       setQuery("");
       setShowResults(false);
       inputRef.current?.blur();
-      window.location.href = href;
+      globalThis.location.href = href;
     },
-    []
+    [],
   );
 
   return (
@@ -100,35 +99,35 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
       <kbd className={kbd}>⌘K</kbd>
       {showResults && query.trim() && (
         <div className={dropdown} role="listbox">
-          {filtered.length === 0 ? (
-            <div className={noResults}>No results for &ldquo;{query}&rdquo;</div>
-          ) : (
-            (() => {
-              let lastSection = "";
-              return filtered.map((item) => {
-                const showSection = item.section !== lastSection;
-                lastSection = item.section;
-                return (
-                  <div key={item.href + item.label}>
-                    {showSection && (
-                      <div className={sectionHeader} role="presentation">{item.section}</div>
-                    )}
-                    <a
-                      className={resultItem}
-                      role="option"
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSelect(item.href);
-                      }}
-                    >
-                      {item.label}
-                    </a>
-                  </div>
-                );
-              });
-            })()
-          )}
+          {filtered.length === 0
+            ? <div className={noResults}>No results for &ldquo;{query}&rdquo;</div>
+            : (
+              (() => {
+                let lastSection = "";
+                return filtered.map((item) => {
+                  const showSection = item.section !== lastSection;
+                  lastSection = item.section;
+                  return (
+                    <div key={item.href + item.label}>
+                      {showSection && (
+                        <div className={sectionHeader} role="presentation">{item.section}</div>
+                      )}
+                      <a
+                        className={resultItem}
+                        role="option"
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSelect(item.href);
+                        }}
+                      >
+                        {item.label}
+                      </a>
+                    </div>
+                  );
+                });
+              })()
+            )}
         </div>
       )}
     </div>
@@ -147,19 +146,19 @@ const wrapper = css({
 const iconStyle = css({
   position: "absolute",
   top: "50%",
-  left: "12px",
+  left: "3",
   transform: "translateY(-50%)",
-  fontSize: "16px",
+  fontSize: "md",
   color: "text.muted",
   pointerEvents: "none",
 });
 
 const input = css({
-  width: "240px",
-  paddingLeft: "36px",
-  paddingRight: "48px",
-  paddingBlock: "8px",
-  fontSize: "14px",
+  width: "60",
+  paddingLeft: "9",
+  paddingRight: "12",
+  paddingBlock: "2",
+  fontSize: "sm",
   fontFamily: "body",
   fontWeight: "body",
   bg: "bg.card",
@@ -180,15 +179,15 @@ const input = css({
 const kbd = css({
   position: "absolute",
   top: "50%",
-  right: "12px",
+  right: "3",
   transform: "translateY(-50%)",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "text.muted",
   border: "1px solid",
   borderColor: "border.default",
-  paddingInline: "6px",
-  paddingBlock: "2px",
+  paddingInline: "1.5",
+  paddingBlock: "0.5",
   borderRadius: "sm",
   fontFamily: "mono",
   lineHeight: 1,
@@ -200,19 +199,20 @@ const dropdown = css({
   top: "100%",
   left: 0,
   right: 0,
-  marginTop: "4px",
+  marginTop: "1",
   backgroundColor: "bg.page",
   border: "1px solid",
   borderColor: "border.default",
   shadow: "golden",
-  maxHeight: "320px",
+  maxHeight: "80",
   overflowY: "auto",
   zIndex: 100,
 });
 
 const sectionHeader = css({
-  padding: "8px 12px",
-  fontSize: "10px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
@@ -224,8 +224,9 @@ const sectionHeader = css({
 
 const resultItem = css({
   display: "block",
-  padding: "8px 12px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "sm",
   color: "text.primary",
   textDecoration: "none",
   cursor: "pointer",
@@ -236,7 +237,7 @@ const resultItem = css({
 });
 
 const noResults = css({
-  padding: "16px",
+  padding: "4",
   fontSize: "13px",
   color: "text.muted",
   textAlign: "center",

@@ -1,5 +1,5 @@
 // @storyName KanbanCardDetail
-import { KanbanCardDetail, type KanbanCardData } from "./kanban-card-detail.tsx";
+import { type KanbanCardData, KanbanCardDetail } from "./kanban-card-detail.tsx";
 
 const sampleCard: KanbanCardData = {
   id: "card-1",
@@ -24,7 +24,7 @@ export default function KanbanCardDetailStory() {
     <div style={{ position: "relative", minHeight: "500px" }}>
       <KanbanCardDetail
         card={sampleCard}
-        open={true}
+        open
         onClose={() => {}}
         onSave={(card) => console.log("Saved:", card)}
         onDelete={(id) => console.log("Deleted:", id)}
@@ -36,7 +36,7 @@ export default function KanbanCardDetailStory() {
 export function ReadOnly() {
   return (
     <div style={{ position: "relative", minHeight: "500px" }}>
-      <KanbanCardDetail card={sampleCard} open={true} onClose={() => {}} readOnly />
+      <KanbanCardDetail card={sampleCard} open onClose={() => {}} readOnly />
     </div>
   );
 }
@@ -45,16 +45,20 @@ export function MinimalCard() {
   const minimal: KanbanCardData = { id: "card-2", title: "Simple task" };
   return (
     <div style={{ position: "relative", minHeight: "500px" }}>
-      <KanbanCardDetail card={minimal} open={true} onClose={() => {}} onSave={() => {}} />
+      <KanbanCardDetail card={minimal} open onClose={() => {}} onSave={() => {}} />
     </div>
   );
 }
 
 export function CriticalPriority() {
-  const critical: KanbanCardData = { ...sampleCard, priority: "critical", title: "Critical production bug" };
+  const critical: KanbanCardData = {
+    ...sampleCard,
+    priority: "critical",
+    title: "Critical production bug",
+  };
   return (
     <div style={{ position: "relative", minHeight: "500px" }}>
-      <KanbanCardDetail card={critical} open={true} onClose={() => {}} />
+      <KanbanCardDetail card={critical} open onClose={() => {}} />
     </div>
   );
 }

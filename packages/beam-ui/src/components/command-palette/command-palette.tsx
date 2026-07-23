@@ -1,17 +1,7 @@
-import {
-  type JSX,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
-import {
-  DialogRoot,
-  DialogBackdrop,
-  DialogPositioner,
-  DialogContent,
-} from "@ark-ui/react/dialog";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import { type JSX, useCallback, useEffect, useRef, useState } from "react";
+import { DialogBackdrop, DialogContent, DialogPositioner, DialogRoot } from "@ark-ui/react/dialog";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -82,13 +72,10 @@ export function CommandPalette({
 
   // When onQueryChange is provided the caller owns filtering — pass items
   // through as-is. Otherwise apply client-side substring matching.
-  const filtered = onQueryChange
-    ? items
-    : items.filter((item) => matchesQuery(item.label, query));
+  const filtered = onQueryChange ? items : items.filter((item) => matchesQuery(item.label, query));
 
   // Build grouped structure for rendering
-  const grouped: { group: string | undefined; items: CommandPaletteItem[] }[] =
-    [];
+  const grouped: { group: string | undefined; items: CommandPaletteItem[] }[] = [];
   for (const item of filtered) {
     const last = grouped[grouped.length - 1];
     if (last && last.group === item.group) {
@@ -139,7 +126,7 @@ export function CommandPalette({
       item.onSelect();
       onOpenChange(false);
     },
-    [filtered, onOpenChange]
+    [filtered, onOpenChange],
   );
 
   const handleKeyDown = useCallback(
@@ -173,7 +160,7 @@ export function CommandPalette({
         }
       }
     },
-    [filtered.length, activeIndex, select, onOpenChange]
+    [filtered.length, activeIndex, select, onOpenChange],
   );
 
   // Flat index of each item for activeIndex tracking
@@ -210,11 +197,9 @@ export function CommandPalette({
               aria-expanded={filtered.length > 0}
               aria-autocomplete="list"
               aria-controls="cp-listbox"
-              aria-activedescendant={
-                filtered[activeIndex]
-                  ? `cp-item-${filtered[activeIndex].id}`
-                  : undefined
-              }
+              aria-activedescendant={filtered[activeIndex]
+                ? `cp-item-${filtered[activeIndex].id}`
+                : undefined}
             />
           </div>
 
@@ -225,52 +210,52 @@ export function CommandPalette({
             role="listbox"
             className={list}
           >
-            {filtered.length === 0 ? (
-              <li className={emptyState} role="option" aria-selected={false}>
-                {emptyMessage}
-              </li>
-            ) : (
-              grouped.map(({ group, items: groupItems }) => {
-                const nodes = groupItems.map((item) => {
-                  const thisIndex = flatIndex++;
-                  const isActive = thisIndex === activeIndex;
-                  return (
-                    <li
-                      key={item.id}
-                      id={`cp-item-${item.id}`}
-                      role="option"
-                      aria-selected={isActive}
-                      data-active={isActive}
-                      className={`${rowBase} ${isActive ? rowActive : ""}`}
-                      onClick={() => select(thisIndex)}
-                    >
-                      {item.icon && (
-                        <span
-                          className={`material-symbols-outlined ${rowIcon}`}
-                        >
-                          {item.icon}
-                        </span>
-                      )}
-                      <span className={rowLabel}>{item.label}</span>
-                      {item.hint && (
-                        <span className={rowHint}>{item.hint}</span>
-                      )}
-                    </li>
-                  );
-                });
+            {filtered.length === 0
+              ? (
+                <li className={emptyState} role="option" aria-selected={false}>
+                  {emptyMessage}
+                </li>
+              )
+              : (
+                grouped.map(({ group, items: groupItems }) => {
+                  const nodes = groupItems.map((item) => {
+                    const thisIndex = flatIndex++;
+                    const isActive = thisIndex === activeIndex;
+                    return (
+                      <li
+                        key={item.id}
+                        id={`cp-item-${item.id}`}
+                        role="option"
+                        aria-selected={isActive}
+                        data-active={isActive}
+                        className={`${rowBase} ${isActive ? rowActive : ""}`}
+                        onClick={() => select(thisIndex)}
+                      >
+                        {item.icon && (
+                          <span
+                            className={`material-symbols-outlined ${rowIcon}`}
+                          >
+                            {item.icon}
+                          </span>
+                        )}
+                        <span className={rowLabel}>{item.label}</span>
+                        {item.hint && <span className={rowHint}>{item.hint}</span>}
+                      </li>
+                    );
+                  });
 
-                return group ? (
-                  <li key={group} role="presentation">
-                    <div className={groupLabel}>{group}</div>
-                    <ul role="group" className={groupList}>
-                      {nodes}
-                    </ul>
-                  </li>
-                ) : (
-                  nodes
-                );
-              })
-            )}
+                  return group
+                    ? (
+                      <li key={group} role="presentation">
+                        <div className={groupLabel}>{group}</div>
+                        <ul role="group" className={groupList}>
+                          {nodes}
+                        </ul>
+                      </li>
+                    )
+                    : nodes;
+                })
+              )}
           </ul>
         </DialogContent>
       </DialogPositioner>

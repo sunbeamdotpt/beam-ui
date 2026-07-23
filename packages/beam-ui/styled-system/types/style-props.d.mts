@@ -1621,7 +1621,7 @@ borderWidth?: ConditionalValue<CssProperties["borderWidth"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
    */
-bottom?: ConditionalValue<CssProperties["bottom"] | AnyString>
+bottom?: ConditionalValue<UtilityValues["bottom"] | CssVars | CssProperties["bottom"] | AnyString>
  boxAlign?: ConditionalValue<CssProperties["boxAlign"] | AnyString>
  /**
    * This feature is not Baseline because it does not work in some of the most widely-used browsers.
@@ -1888,7 +1888,7 @@ columnFill?: ConditionalValue<CssVars | CssProperties["columnFill"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
-columnGap?: ConditionalValue<CssProperties["columnGap"] | AnyString>
+columnGap?: ConditionalValue<UtilityValues["columnGap"] | CssVars | CssProperties["columnGap"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since March 2017.
    *
@@ -2902,7 +2902,7 @@ forcedColorAdjust?: ConditionalValue<CssVars | CssProperties["forcedColorAdjust"
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
    */
-gap?: ConditionalValue<CssProperties["gap"] | AnyString>
+gap?: ConditionalValue<UtilityValues["gap"] | CssVars | CssProperties["gap"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since October 2017.
    *
@@ -2995,7 +2995,7 @@ gridColumn?: ConditionalValue<CssProperties["gridColumn"] | AnyString>
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-end
    */
 gridColumnEnd?: ConditionalValue<CssProperties["gridColumnEnd"] | AnyString>
- gridColumnGap?: ConditionalValue<CssProperties["gridColumnGap"] | AnyString>
+ gridColumnGap?: ConditionalValue<UtilityValues["gridColumnGap"] | CssVars | CssProperties["gridColumnGap"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since October 2017.
    *
@@ -3010,7 +3010,7 @@ gridColumnEnd?: ConditionalValue<CssProperties["gridColumnEnd"] | AnyString>
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-start
    */
 gridColumnStart?: ConditionalValue<CssProperties["gridColumnStart"] | AnyString>
- gridGap?: ConditionalValue<CssProperties["gridGap"] | AnyString>
+ gridGap?: ConditionalValue<UtilityValues["gridGap"] | CssVars | CssProperties["gridGap"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since October 2017.
    *
@@ -3037,7 +3037,7 @@ gridRow?: ConditionalValue<CssProperties["gridRow"] | AnyString>
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-end
    */
 gridRowEnd?: ConditionalValue<CssProperties["gridRowEnd"] | AnyString>
- gridRowGap?: ConditionalValue<CssProperties["gridRowGap"] | AnyString>
+ gridRowGap?: ConditionalValue<UtilityValues["gridRowGap"] | CssVars | CssProperties["gridRowGap"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since October 2017.
    *
@@ -3273,7 +3273,7 @@ inset?: ConditionalValue<UtilityValues["inset"] | CssVars | CssProperties["inset
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
    */
-insetBlock?: ConditionalValue<CssProperties["insetBlock"] | AnyString>
+insetBlock?: ConditionalValue<UtilityValues["insetBlock"] | CssVars | CssProperties["insetBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -3287,7 +3287,7 @@ insetBlock?: ConditionalValue<CssProperties["insetBlock"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-end
    */
-insetBlockEnd?: ConditionalValue<CssProperties["insetBlockEnd"] | AnyString>
+insetBlockEnd?: ConditionalValue<UtilityValues["insetBlockEnd"] | CssVars | CssProperties["insetBlockEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -3301,7 +3301,7 @@ insetBlockEnd?: ConditionalValue<CssProperties["insetBlockEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-start
    */
-insetBlockStart?: ConditionalValue<CssProperties["insetBlockStart"] | AnyString>
+insetBlockStart?: ConditionalValue<UtilityValues["insetBlockStart"] | CssVars | CssProperties["insetBlockStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -3313,7 +3313,7 @@ insetBlockStart?: ConditionalValue<CssProperties["insetBlockStart"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
    */
-insetInline?: ConditionalValue<CssProperties["insetInline"] | AnyString>
+insetInline?: ConditionalValue<UtilityValues["insetInline"] | CssVars | CssProperties["insetInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -3327,7 +3327,7 @@ insetInline?: ConditionalValue<CssProperties["insetInline"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
    */
-insetInlineEnd?: ConditionalValue<CssProperties["insetInlineEnd"] | AnyString>
+insetInlineEnd?: ConditionalValue<UtilityValues["insetInlineEnd"] | CssVars | CssProperties["insetInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -3341,7 +3341,7 @@ insetInlineEnd?: ConditionalValue<CssProperties["insetInlineEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
-insetInlineStart?: ConditionalValue<CssProperties["insetInlineStart"] | AnyString>
+insetInlineStart?: ConditionalValue<UtilityValues["insetInlineStart"] | CssVars | CssProperties["insetInlineStart"] | AnyString>
  /**
    * This feature is not Baseline because it does not work in some of the most widely-used browsers.
    *
@@ -3432,7 +3432,7 @@ justifyTracks?: ConditionalValue<CssProperties["justifyTracks"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
    */
-left?: ConditionalValue<CssProperties["left"] | AnyString>
+left?: ConditionalValue<UtilityValues["left"] | CssVars | CssProperties["left"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -3504,7 +3504,7 @@ lineClamp?: ConditionalValue<CssProperties["lineClamp"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height
    */
-lineHeight?: ConditionalValue<CssProperties["lineHeight"] | AnyString>
+lineHeight?: ConditionalValue<UtilityValues["lineHeight"] | CssVars | CssProperties["lineHeight"] | AnyString>
  /**
    * The **`line-height-step`** CSS property sets the step unit for line box heights. When the property is set, line box heights are rounded up to the closest multiple of the unit.
    *
@@ -4405,7 +4405,7 @@ outlineColor?: ConditionalValue<UtilityValues["outlineColor"] | CssVars | CssPro
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-offset
    */
-outlineOffset?: ConditionalValue<CssProperties["outlineOffset"] | AnyString>
+outlineOffset?: ConditionalValue<UtilityValues["outlineOffset"] | CssVars | CssProperties["outlineOffset"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -4648,7 +4648,7 @@ overscrollBehaviorY?: ConditionalValue<CssProperties["overscrollBehaviorY"] | An
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
    */
-padding?: ConditionalValue<CssProperties["padding"] | AnyString>
+padding?: ConditionalValue<UtilityValues["padding"] | CssVars | CssProperties["padding"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -4660,7 +4660,7 @@ padding?: ConditionalValue<CssProperties["padding"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
    */
-paddingBlock?: ConditionalValue<CssProperties["paddingBlock"] | AnyString>
+paddingBlock?: ConditionalValue<UtilityValues["paddingBlock"] | CssVars | CssProperties["paddingBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -4674,7 +4674,7 @@ paddingBlock?: ConditionalValue<CssProperties["paddingBlock"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
    */
-paddingBlockEnd?: ConditionalValue<CssProperties["paddingBlockEnd"] | AnyString>
+paddingBlockEnd?: ConditionalValue<UtilityValues["paddingBlockEnd"] | CssVars | CssProperties["paddingBlockEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -4688,7 +4688,7 @@ paddingBlockEnd?: ConditionalValue<CssProperties["paddingBlockEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
    */
-paddingBlockStart?: ConditionalValue<CssProperties["paddingBlockStart"] | AnyString>
+paddingBlockStart?: ConditionalValue<UtilityValues["paddingBlockStart"] | CssVars | CssProperties["paddingBlockStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -4702,7 +4702,7 @@ paddingBlockStart?: ConditionalValue<CssProperties["paddingBlockStart"] | AnyStr
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    */
-paddingBottom?: ConditionalValue<CssProperties["paddingBottom"] | AnyString>
+paddingBottom?: ConditionalValue<UtilityValues["paddingBottom"] | CssVars | CssProperties["paddingBottom"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -4714,7 +4714,7 @@ paddingBottom?: ConditionalValue<CssProperties["paddingBottom"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
    */
-paddingInline?: ConditionalValue<CssProperties["paddingInline"] | AnyString>
+paddingInline?: ConditionalValue<UtilityValues["paddingInline"] | CssVars | CssProperties["paddingInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -4729,7 +4729,7 @@ paddingInline?: ConditionalValue<CssProperties["paddingInline"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
-paddingInlineEnd?: ConditionalValue<CssProperties["paddingInlineEnd"] | AnyString>
+paddingInlineEnd?: ConditionalValue<UtilityValues["paddingInlineEnd"] | CssVars | CssProperties["paddingInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -4744,7 +4744,7 @@ paddingInlineEnd?: ConditionalValue<CssProperties["paddingInlineEnd"] | AnyStrin
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
-paddingInlineStart?: ConditionalValue<CssProperties["paddingInlineStart"] | AnyString>
+paddingInlineStart?: ConditionalValue<UtilityValues["paddingInlineStart"] | CssVars | CssProperties["paddingInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -4758,7 +4758,7 @@ paddingInlineStart?: ConditionalValue<CssProperties["paddingInlineStart"] | AnyS
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
    */
-paddingLeft?: ConditionalValue<CssProperties["paddingLeft"] | AnyString>
+paddingLeft?: ConditionalValue<UtilityValues["paddingLeft"] | CssVars | CssProperties["paddingLeft"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -4772,7 +4772,7 @@ paddingLeft?: ConditionalValue<CssProperties["paddingLeft"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
    */
-paddingRight?: ConditionalValue<CssProperties["paddingRight"] | AnyString>
+paddingRight?: ConditionalValue<UtilityValues["paddingRight"] | CssVars | CssProperties["paddingRight"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -4786,7 +4786,7 @@ paddingRight?: ConditionalValue<CssProperties["paddingRight"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
-paddingTop?: ConditionalValue<CssProperties["paddingTop"] | AnyString>
+paddingTop?: ConditionalValue<UtilityValues["paddingTop"] | CssVars | CssProperties["paddingTop"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since February 2023.
    *
@@ -5064,7 +5064,7 @@ resize?: ConditionalValue<CssVars | CssProperties["resize"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
    */
-right?: ConditionalValue<CssProperties["right"] | AnyString>
+right?: ConditionalValue<UtilityValues["right"] | CssVars | CssProperties["right"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since August 2022.
    *
@@ -5092,7 +5092,7 @@ rotate?: ConditionalValue<UtilityValues["rotate"] | CssVars | CssProperties["rot
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
    */
-rowGap?: ConditionalValue<CssProperties["rowGap"] | AnyString>
+rowGap?: ConditionalValue<UtilityValues["rowGap"] | CssVars | CssProperties["rowGap"] | AnyString>
  /**
    * Since December 2024, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
    *
@@ -5196,7 +5196,7 @@ scrollBehavior?: ConditionalValue<CssVars | CssProperties["scrollBehavior"] | An
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
-scrollMargin?: ConditionalValue<CssProperties["scrollMargin"] | AnyString>
+scrollMargin?: ConditionalValue<UtilityValues["scrollMargin"] | CssVars | CssProperties["scrollMargin"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5208,7 +5208,7 @@ scrollMargin?: ConditionalValue<CssProperties["scrollMargin"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
    */
-scrollMarginBlock?: ConditionalValue<CssProperties["scrollMarginBlock"] | AnyString>
+scrollMarginBlock?: ConditionalValue<UtilityValues["scrollMarginBlock"] | CssVars | CssProperties["scrollMarginBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5222,7 +5222,7 @@ scrollMarginBlock?: ConditionalValue<CssProperties["scrollMarginBlock"] | AnyStr
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
    */
-scrollMarginBlockEnd?: ConditionalValue<CssProperties["scrollMarginBlockEnd"] | AnyString>
+scrollMarginBlockEnd?: ConditionalValue<UtilityValues["scrollMarginBlockEnd"] | CssVars | CssProperties["scrollMarginBlockEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5236,7 +5236,7 @@ scrollMarginBlockEnd?: ConditionalValue<CssProperties["scrollMarginBlockEnd"] | 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
    */
-scrollMarginBlockStart?: ConditionalValue<CssProperties["scrollMarginBlockStart"] | AnyString>
+scrollMarginBlockStart?: ConditionalValue<UtilityValues["scrollMarginBlockStart"] | CssVars | CssProperties["scrollMarginBlockStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5251,7 +5251,7 @@ scrollMarginBlockStart?: ConditionalValue<CssProperties["scrollMarginBlockStart"
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    */
-scrollMarginBottom?: ConditionalValue<CssProperties["scrollMarginBottom"] | AnyString>
+scrollMarginBottom?: ConditionalValue<UtilityValues["scrollMarginBottom"] | CssVars | CssProperties["scrollMarginBottom"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5263,7 +5263,7 @@ scrollMarginBottom?: ConditionalValue<CssProperties["scrollMarginBottom"] | AnyS
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
    */
-scrollMarginInline?: ConditionalValue<CssProperties["scrollMarginInline"] | AnyString>
+scrollMarginInline?: ConditionalValue<UtilityValues["scrollMarginInline"] | CssVars | CssProperties["scrollMarginInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5277,7 +5277,7 @@ scrollMarginInline?: ConditionalValue<CssProperties["scrollMarginInline"] | AnyS
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
    */
-scrollMarginInlineEnd?: ConditionalValue<CssProperties["scrollMarginInlineEnd"] | AnyString>
+scrollMarginInlineEnd?: ConditionalValue<UtilityValues["scrollMarginInlineEnd"] | CssVars | CssProperties["scrollMarginInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5291,7 +5291,7 @@ scrollMarginInlineEnd?: ConditionalValue<CssProperties["scrollMarginInlineEnd"] 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
    */
-scrollMarginInlineStart?: ConditionalValue<CssProperties["scrollMarginInlineStart"] | AnyString>
+scrollMarginInlineStart?: ConditionalValue<UtilityValues["scrollMarginInlineStart"] | CssVars | CssProperties["scrollMarginInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5306,7 +5306,7 @@ scrollMarginInlineStart?: ConditionalValue<CssProperties["scrollMarginInlineStar
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    */
-scrollMarginLeft?: ConditionalValue<CssProperties["scrollMarginLeft"] | AnyString>
+scrollMarginLeft?: ConditionalValue<UtilityValues["scrollMarginLeft"] | CssVars | CssProperties["scrollMarginLeft"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5321,7 +5321,7 @@ scrollMarginLeft?: ConditionalValue<CssProperties["scrollMarginLeft"] | AnyStrin
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
-scrollMarginRight?: ConditionalValue<CssProperties["scrollMarginRight"] | AnyString>
+scrollMarginRight?: ConditionalValue<UtilityValues["scrollMarginRight"] | CssVars | CssProperties["scrollMarginRight"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5336,7 +5336,7 @@ scrollMarginRight?: ConditionalValue<CssProperties["scrollMarginRight"] | AnyStr
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
-scrollMarginTop?: ConditionalValue<CssProperties["scrollMarginTop"] | AnyString>
+scrollMarginTop?: ConditionalValue<UtilityValues["scrollMarginTop"] | CssVars | CssProperties["scrollMarginTop"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5348,7 +5348,7 @@ scrollMarginTop?: ConditionalValue<CssProperties["scrollMarginTop"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
    */
-scrollPadding?: ConditionalValue<CssProperties["scrollPadding"] | AnyString>
+scrollPadding?: ConditionalValue<UtilityValues["scrollPadding"] | CssVars | CssProperties["scrollPadding"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5360,7 +5360,7 @@ scrollPadding?: ConditionalValue<CssProperties["scrollPadding"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
    */
-scrollPaddingBlock?: ConditionalValue<CssProperties["scrollPaddingBlock"] | AnyString>
+scrollPaddingBlock?: ConditionalValue<UtilityValues["scrollPaddingBlock"] | CssVars | CssProperties["scrollPaddingBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5374,7 +5374,7 @@ scrollPaddingBlock?: ConditionalValue<CssProperties["scrollPaddingBlock"] | AnyS
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
    */
-scrollPaddingBlockEnd?: ConditionalValue<CssProperties["scrollPaddingBlockEnd"] | AnyString>
+scrollPaddingBlockEnd?: ConditionalValue<UtilityValues["scrollPaddingBlockEnd"] | CssVars | CssProperties["scrollPaddingBlockEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5388,7 +5388,7 @@ scrollPaddingBlockEnd?: ConditionalValue<CssProperties["scrollPaddingBlockEnd"] 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
    */
-scrollPaddingBlockStart?: ConditionalValue<CssProperties["scrollPaddingBlockStart"] | AnyString>
+scrollPaddingBlockStart?: ConditionalValue<UtilityValues["scrollPaddingBlockStart"] | CssVars | CssProperties["scrollPaddingBlockStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5402,7 +5402,7 @@ scrollPaddingBlockStart?: ConditionalValue<CssProperties["scrollPaddingBlockStar
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
    */
-scrollPaddingBottom?: ConditionalValue<CssProperties["scrollPaddingBottom"] | AnyString>
+scrollPaddingBottom?: ConditionalValue<UtilityValues["scrollPaddingBottom"] | CssVars | CssProperties["scrollPaddingBottom"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5414,7 +5414,7 @@ scrollPaddingBottom?: ConditionalValue<CssProperties["scrollPaddingBottom"] | An
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
    */
-scrollPaddingInline?: ConditionalValue<CssProperties["scrollPaddingInline"] | AnyString>
+scrollPaddingInline?: ConditionalValue<UtilityValues["scrollPaddingInline"] | CssVars | CssProperties["scrollPaddingInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5428,7 +5428,7 @@ scrollPaddingInline?: ConditionalValue<CssProperties["scrollPaddingInline"] | An
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
    */
-scrollPaddingInlineEnd?: ConditionalValue<CssProperties["scrollPaddingInlineEnd"] | AnyString>
+scrollPaddingInlineEnd?: ConditionalValue<UtilityValues["scrollPaddingInlineEnd"] | CssVars | CssProperties["scrollPaddingInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -5442,7 +5442,7 @@ scrollPaddingInlineEnd?: ConditionalValue<CssProperties["scrollPaddingInlineEnd"
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
    */
-scrollPaddingInlineStart?: ConditionalValue<CssProperties["scrollPaddingInlineStart"] | AnyString>
+scrollPaddingInlineStart?: ConditionalValue<UtilityValues["scrollPaddingInlineStart"] | CssVars | CssProperties["scrollPaddingInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5456,7 +5456,7 @@ scrollPaddingInlineStart?: ConditionalValue<CssProperties["scrollPaddingInlineSt
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
    */
-scrollPaddingLeft?: ConditionalValue<CssProperties["scrollPaddingLeft"] | AnyString>
+scrollPaddingLeft?: ConditionalValue<UtilityValues["scrollPaddingLeft"] | CssVars | CssProperties["scrollPaddingLeft"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5470,7 +5470,7 @@ scrollPaddingLeft?: ConditionalValue<CssProperties["scrollPaddingLeft"] | AnyStr
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
    */
-scrollPaddingRight?: ConditionalValue<CssProperties["scrollPaddingRight"] | AnyString>
+scrollPaddingRight?: ConditionalValue<UtilityValues["scrollPaddingRight"] | CssVars | CssProperties["scrollPaddingRight"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -5484,7 +5484,7 @@ scrollPaddingRight?: ConditionalValue<CssProperties["scrollPaddingRight"] | AnyS
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
    */
-scrollPaddingTop?: ConditionalValue<CssProperties["scrollPaddingTop"] | AnyString>
+scrollPaddingTop?: ConditionalValue<UtilityValues["scrollPaddingTop"] | CssVars | CssProperties["scrollPaddingTop"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -6103,7 +6103,7 @@ textEmphasisStyle?: ConditionalValue<CssProperties["textEmphasisStyle"] | AnyStr
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
    */
-textIndent?: ConditionalValue<CssProperties["textIndent"] | AnyString>
+textIndent?: ConditionalValue<UtilityValues["textIndent"] | CssVars | CssProperties["textIndent"] | AnyString>
  /**
    * This feature is not Baseline because it does not work in some of the most widely-used browsers.
    *
@@ -6315,7 +6315,7 @@ timelineScope?: ConditionalValue<CssProperties["timelineScope"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
-top?: ConditionalValue<CssProperties["top"] | AnyString>
+top?: ConditionalValue<UtilityValues["top"] | CssVars | CssProperties["top"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2019.
    *
@@ -6833,7 +6833,7 @@ pos?: ConditionalValue<CssProperties["position"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
    */
-insetX?: ConditionalValue<CssProperties["insetInline"] | AnyString>
+insetX?: ConditionalValue<UtilityValues["insetInline"] | CssVars | CssProperties["insetInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -6845,7 +6845,7 @@ insetX?: ConditionalValue<CssProperties["insetInline"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
    */
-insetY?: ConditionalValue<CssProperties["insetBlock"] | AnyString>
+insetY?: ConditionalValue<UtilityValues["insetBlock"] | CssVars | CssProperties["insetBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -6859,7 +6859,7 @@ insetY?: ConditionalValue<CssProperties["insetBlock"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
    */
-insetEnd?: ConditionalValue<CssProperties["insetInlineEnd"] | AnyString>
+insetEnd?: ConditionalValue<UtilityValues["insetInlineEnd"] | CssVars | CssProperties["insetInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -6873,7 +6873,7 @@ insetEnd?: ConditionalValue<CssProperties["insetInlineEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
    */
-end?: ConditionalValue<CssProperties["insetInlineEnd"] | AnyString>
+end?: ConditionalValue<UtilityValues["insetInlineEnd"] | CssVars | CssProperties["insetInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -6887,7 +6887,7 @@ end?: ConditionalValue<CssProperties["insetInlineEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
-insetStart?: ConditionalValue<CssProperties["insetInlineStart"] | AnyString>
+insetStart?: ConditionalValue<UtilityValues["insetInlineStart"] | CssVars | CssProperties["insetInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -6901,7 +6901,7 @@ insetStart?: ConditionalValue<CssProperties["insetInlineStart"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
-start?: ConditionalValue<CssProperties["insetInlineStart"] | AnyString>
+start?: ConditionalValue<UtilityValues["insetInlineStart"] | CssVars | CssProperties["insetInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2015.
    *
@@ -6928,7 +6928,7 @@ flexDir?: ConditionalValue<CssProperties["flexDirection"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
    */
-p?: ConditionalValue<CssProperties["padding"] | AnyString>
+p?: ConditionalValue<UtilityValues["padding"] | CssVars | CssProperties["padding"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -6942,7 +6942,7 @@ p?: ConditionalValue<CssProperties["padding"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
    */
-pl?: ConditionalValue<CssProperties["paddingLeft"] | AnyString>
+pl?: ConditionalValue<UtilityValues["paddingLeft"] | CssVars | CssProperties["paddingLeft"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -6956,7 +6956,7 @@ pl?: ConditionalValue<CssProperties["paddingLeft"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
    */
-pr?: ConditionalValue<CssProperties["paddingRight"] | AnyString>
+pr?: ConditionalValue<UtilityValues["paddingRight"] | CssVars | CssProperties["paddingRight"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -6970,7 +6970,7 @@ pr?: ConditionalValue<CssProperties["paddingRight"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
-pt?: ConditionalValue<CssProperties["paddingTop"] | AnyString>
+pt?: ConditionalValue<UtilityValues["paddingTop"] | CssVars | CssProperties["paddingTop"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -6984,7 +6984,7 @@ pt?: ConditionalValue<CssProperties["paddingTop"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    */
-pb?: ConditionalValue<CssProperties["paddingBottom"] | AnyString>
+pb?: ConditionalValue<UtilityValues["paddingBottom"] | CssVars | CssProperties["paddingBottom"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -6996,7 +6996,7 @@ pb?: ConditionalValue<CssProperties["paddingBottom"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
    */
-py?: ConditionalValue<CssProperties["paddingBlock"] | AnyString>
+py?: ConditionalValue<UtilityValues["paddingBlock"] | CssVars | CssProperties["paddingBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -7008,7 +7008,7 @@ py?: ConditionalValue<CssProperties["paddingBlock"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
    */
-paddingY?: ConditionalValue<CssProperties["paddingBlock"] | AnyString>
+paddingY?: ConditionalValue<UtilityValues["paddingBlock"] | CssVars | CssProperties["paddingBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -7020,7 +7020,7 @@ paddingY?: ConditionalValue<CssProperties["paddingBlock"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
    */
-paddingX?: ConditionalValue<CssProperties["paddingInline"] | AnyString>
+paddingX?: ConditionalValue<UtilityValues["paddingInline"] | CssVars | CssProperties["paddingInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -7032,7 +7032,7 @@ paddingX?: ConditionalValue<CssProperties["paddingInline"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
    */
-px?: ConditionalValue<CssProperties["paddingInline"] | AnyString>
+px?: ConditionalValue<UtilityValues["paddingInline"] | CssVars | CssProperties["paddingInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -7047,7 +7047,7 @@ px?: ConditionalValue<CssProperties["paddingInline"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
-pe?: ConditionalValue<CssProperties["paddingInlineEnd"] | AnyString>
+pe?: ConditionalValue<UtilityValues["paddingInlineEnd"] | CssVars | CssProperties["paddingInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -7062,7 +7062,7 @@ pe?: ConditionalValue<CssProperties["paddingInlineEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
-paddingEnd?: ConditionalValue<CssProperties["paddingInlineEnd"] | AnyString>
+paddingEnd?: ConditionalValue<UtilityValues["paddingInlineEnd"] | CssVars | CssProperties["paddingInlineEnd"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -7077,7 +7077,7 @@ paddingEnd?: ConditionalValue<CssProperties["paddingInlineEnd"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
-ps?: ConditionalValue<CssProperties["paddingInlineStart"] | AnyString>
+ps?: ConditionalValue<UtilityValues["paddingInlineStart"] | CssVars | CssProperties["paddingInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -7092,7 +7092,7 @@ ps?: ConditionalValue<CssProperties["paddingInlineStart"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
-paddingStart?: ConditionalValue<CssProperties["paddingInlineStart"] | AnyString>
+paddingStart?: ConditionalValue<UtilityValues["paddingInlineStart"] | CssVars | CssProperties["paddingInlineStart"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -7322,7 +7322,7 @@ ring?: ConditionalValue<CssProperties["outline"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-offset
    */
-ringOffset?: ConditionalValue<CssProperties["outlineOffset"] | AnyString>
+ringOffset?: ConditionalValue<UtilityValues["outlineOffset"] | CssVars | CssProperties["outlineOffset"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -7906,7 +7906,7 @@ shadow?: ConditionalValue<UtilityValues["boxShadow"] | CssVars | CssProperties["
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
    */
-scrollMarginY?: ConditionalValue<CssProperties["scrollMarginBlock"] | AnyString>
+scrollMarginY?: ConditionalValue<UtilityValues["scrollMarginBlock"] | CssVars | CssProperties["scrollMarginBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -7918,7 +7918,7 @@ scrollMarginY?: ConditionalValue<CssProperties["scrollMarginBlock"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
    */
-scrollMarginX?: ConditionalValue<CssProperties["scrollMarginInline"] | AnyString>
+scrollMarginX?: ConditionalValue<UtilityValues["scrollMarginInline"] | CssVars | CssProperties["scrollMarginInline"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -7930,7 +7930,7 @@ scrollMarginX?: ConditionalValue<CssProperties["scrollMarginInline"] | AnyString
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
    */
-scrollPaddingY?: ConditionalValue<CssProperties["scrollPaddingBlock"] | AnyString>
+scrollPaddingY?: ConditionalValue<UtilityValues["scrollPaddingBlock"] | CssVars | CssProperties["scrollPaddingBlock"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since September 2021.
    *
@@ -7942,7 +7942,7 @@ scrollPaddingY?: ConditionalValue<CssProperties["scrollPaddingBlock"] | AnyStrin
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
    */
-scrollPaddingX?: ConditionalValue<CssProperties["scrollPaddingInline"] | AnyString>
+scrollPaddingX?: ConditionalValue<UtilityValues["scrollPaddingInline"] | CssVars | CssProperties["scrollPaddingInline"] | AnyString>
  hideFrom?: ConditionalValue<UtilityValues["hideFrom"] | CssVars | AnyString>
  hideBelow?: ConditionalValue<UtilityValues["hideBelow"] | CssVars | AnyString>
  spaceX?: ConditionalValue<UtilityValues["spaceX"] | CssVars | AnyString>
@@ -7950,7 +7950,7 @@ scrollPaddingX?: ConditionalValue<CssProperties["scrollPaddingInline"] | AnyStri
  focusRing?: ConditionalValue<UtilityValues["focusRing"] | CssVars | AnyString>
  focusVisibleRing?: ConditionalValue<UtilityValues["focusVisibleRing"] | CssVars | AnyString>
  focusRingColor?: ConditionalValue<UtilityValues["focusRingColor"] | CssVars | AnyString>
- focusRingOffset?: ConditionalValue<string | number | AnyString>
+ focusRingOffset?: ConditionalValue<UtilityValues["focusRingOffset"] | CssVars | AnyString>
  focusRingWidth?: ConditionalValue<UtilityValues["focusRingWidth"] | CssVars | AnyString>
  focusRingStyle?: ConditionalValue<UtilityValues["focusRingStyle"] | CssVars | AnyString>
  divideX?: ConditionalValue<string | number | AnyString>
@@ -7996,8 +7996,8 @@ scrollPaddingX?: ConditionalValue<CssProperties["scrollPaddingInline"] | AnyStri
  backdropOpacity?: ConditionalValue<string | number | AnyString>
  backdropSaturate?: ConditionalValue<string | number | AnyString>
  backdropSepia?: ConditionalValue<string | number | AnyString>
- borderSpacingX?: ConditionalValue<string | number | AnyString>
- borderSpacingY?: ConditionalValue<string | number | AnyString>
+ borderSpacingX?: ConditionalValue<UtilityValues["borderSpacingX"] | CssVars | AnyString>
+ borderSpacingY?: ConditionalValue<UtilityValues["borderSpacingY"] | CssVars | AnyString>
  animationState?: ConditionalValue<string | number | AnyString>
  rotateX?: ConditionalValue<UtilityValues["rotateX"] | CssVars | AnyString>
  rotateY?: ConditionalValue<UtilityValues["rotateY"] | CssVars | AnyString>
@@ -8021,7 +8021,7 @@ scrollPaddingX?: ConditionalValue<CssProperties["scrollPaddingInline"] | AnyStri
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
-scrollSnapMargin?: ConditionalValue<string | number | AnyString>
+scrollSnapMargin?: ConditionalValue<UtilityValues["scrollSnapMargin"] | CssVars | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -8036,7 +8036,7 @@ scrollSnapMargin?: ConditionalValue<string | number | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
-scrollSnapMarginTop?: ConditionalValue<string | number | AnyString>
+scrollSnapMarginTop?: ConditionalValue<UtilityValues["scrollSnapMarginTop"] | CssVars | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -8051,7 +8051,7 @@ scrollSnapMarginTop?: ConditionalValue<string | number | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    */
-scrollSnapMarginBottom?: ConditionalValue<string | number | AnyString>
+scrollSnapMarginBottom?: ConditionalValue<UtilityValues["scrollSnapMarginBottom"] | CssVars | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -8066,7 +8066,7 @@ scrollSnapMarginBottom?: ConditionalValue<string | number | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    */
-scrollSnapMarginLeft?: ConditionalValue<string | number | AnyString>
+scrollSnapMarginLeft?: ConditionalValue<UtilityValues["scrollSnapMarginLeft"] | CssVars | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -8081,7 +8081,7 @@ scrollSnapMarginLeft?: ConditionalValue<string | number | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
-scrollSnapMarginRight?: ConditionalValue<string | number | AnyString>
+scrollSnapMarginRight?: ConditionalValue<UtilityValues["scrollSnapMarginRight"] | CssVars | AnyString>
  srOnly?: ConditionalValue<UtilityValues["srOnly"] | CssVars | AnyString>
  debug?: ConditionalValue<UtilityValues["debug"] | CssVars | AnyString>
  colorPalette?: ConditionalValue<UtilityValues["colorPalette"] | CssVars | AnyString>

@@ -60,17 +60,66 @@ export default function CommitGraphStory() {
 
 export function LinearHistory() {
   const linear: CommitNode[] = [
-    { hash: "aaa", shortHash: "aaa", message: "Third commit", author: "alice", date: "2026-04-03", parents: ["bbb"], branch: "main" },
-    { hash: "bbb", shortHash: "bbb", message: "Second commit", author: "bob", date: "2026-04-02", parents: ["ccc"], branch: "main" },
-    { hash: "ccc", shortHash: "ccc", message: "Initial commit", author: "alice", date: "2026-04-01", parents: [], branch: "main" },
+    {
+      hash: "aaa",
+      shortHash: "aaa",
+      message: "Third commit",
+      author: "alice",
+      date: "2026-04-03",
+      parents: ["bbb"],
+      branch: "main",
+    },
+    {
+      hash: "bbb",
+      shortHash: "bbb",
+      message: "Second commit",
+      author: "bob",
+      date: "2026-04-02",
+      parents: ["ccc"],
+      branch: "main",
+    },
+    {
+      hash: "ccc",
+      shortHash: "ccc",
+      message: "Initial commit",
+      author: "alice",
+      date: "2026-04-01",
+      parents: [],
+      branch: "main",
+    },
   ];
-  return <div style={{ maxWidth: 900 }}><CommitGraph commits={linear} /></div>;
+  return (
+    <div style={{ maxWidth: 900 }}>
+      <CommitGraph commits={linear} />
+    </div>
+  );
 }
 
 export function WithTags() {
   const tagged: CommitNode[] = [
-    { hash: "aaa", shortHash: "aaa", message: "Release v1.0", author: "alice", date: "2026-04-03", parents: ["bbb"], branch: "main", tags: ["v1.0.0", "latest"] },
-    { hash: "bbb", shortHash: "bbb", message: "Initial", author: "alice", date: "2026-04-01", parents: [], branch: "main" },
+    {
+      hash: "aaa",
+      shortHash: "aaa",
+      message: "Release v1.0",
+      author: "alice",
+      date: "2026-04-03",
+      parents: ["bbb"],
+      branch: "main",
+      tags: ["v1.0.0", "latest"],
+    },
+    {
+      hash: "bbb",
+      shortHash: "bbb",
+      message: "Initial",
+      author: "alice",
+      date: "2026-04-01",
+      parents: [],
+      branch: "main",
+    },
   ];
-  return <div style={{ maxWidth: 900 }}><CommitGraph commits={tagged} /></div>;
+  return (
+    <div style={{ maxWidth: 900 }}>
+      <CommitGraph commits={tagged} />
+    </div>
+  );
 }

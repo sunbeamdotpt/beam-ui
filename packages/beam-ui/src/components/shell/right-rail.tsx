@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback, type ReactNode } from "react";
+import { css } from "../../system.ts";
+
+import { type ReactNode, useCallback, useEffect, useState } from "react";
 import TurndownService from "turndown";
-import { css } from "styled-system/css";
 import { Icon } from "../ui/icon.tsx";
 
 const turndown = new TurndownService({
@@ -27,8 +28,8 @@ turndown.addRule("navs", {
 turndown.addRule("badges", {
   filter: (node: HTMLElement) => {
     const fontSize = node.style?.fontSize || "";
-    const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase()
-      && (node.textContent?.trim().length ?? 0) < 20;
+    const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase() &&
+      (node.textContent?.trim().length ?? 0) < 20;
     const isBadge = fontSize === "10px" || fontSize === "11px" || fontSize === "12px";
     return (isBadge && isSmallCaps) || false;
   },
@@ -37,8 +38,8 @@ turndown.addRule("badges", {
 // Convert callout boxes to blockquotes
 turndown.addRule("callouts", {
   filter: (node: HTMLElement) => {
-    return node.getAttribute?.("style")?.includes("border-left")
-      && node.getAttribute?.("style")?.includes("4px") || false;
+    return node.getAttribute?.("style")?.includes("border-left") &&
+        node.getAttribute?.("style")?.includes("4px") || false;
   },
   replacement: (_content: string, node: HTMLElement) => {
     const text = (node as HTMLElement).textContent?.trim() ?? "";
@@ -140,7 +141,7 @@ const metaText = css({
 });
 
 /** Props for {@link RightRail}. */
-interface RightRailProps {
+export interface RightRailProps {
   /** Table-of-contents items: each must correspond to a section heading with a matching `id`. */
   items: Array<{ label: string; id: string }>;
   /** Optional timestamp (e.g., "May 1, 2026") shown at the bottom. */
@@ -189,7 +190,7 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
         // Observe within the top 30% of viewport
         rootMargin: "-64px 0px -70% 0px",
         threshold: 0,
-      }
+      },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -208,7 +209,7 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
 
   // On mount, check if URL has a hash and scroll to it
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
+    const hash = globalThis.location.hash.slice(1);
     if (hash) {
       const el = document.getElementById(hash);
       if (el) {
@@ -223,7 +224,17 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
       {/* Section navigation */}
       <h4 className={heading}>On This Page</h4>
       <nav className={navList} aria-label="On this page">
-        <ul role="list" style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+        <ul
+          role="list"
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
           {items.map((item) => (
             <li key={item.id}>
               <a
@@ -250,21 +261,27 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
           className={actionBtn}
           aria-label="Copy permalink"
           onClick={() => {
-            const url = `${window.location.origin}${window.location.pathname}${activeId ? `#${activeId}` : ""}`;
+            const url = `${globalThis.location.origin}${globalThis.location.pathname}${
+              activeId ? `#${activeId}` : ""
+            }`;
             navigator.clipboard?.writeText(url);
           }}
+          type="button"
         >
           <Icon name="link" size={14} />
           <span>Copy permalink</span>
         </button>
         <button
+          type="button"
           className={actionBtn}
           aria-label="Copy as markdown"
           onClick={() => {
             const el = document.querySelector('[data-content="center"]') ?? document.body;
             const clone = el.cloneNode(true) as HTMLElement;
             // Remove elements that shouldn't be in the markdown
-            clone.querySelectorAll('[data-breadcrumbs], [data-meta-bar]').forEach(n => n.remove());
+            clone.querySelectorAll("[data-breadcrumbs], [data-meta-bar]").forEach((n) =>
+              n.remove()
+            );
             let md = turndown.turndown(clone.innerHTML);
             // Clean up badge text that leaked (ALL CAPS short strings on their own line)
             md = md.replace(/^[A-Z][A-Z\s]{1,25}$/gm, "");
@@ -278,11 +295,17 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
           <Icon name="content_copy" size={14} />
           <span>Copy as markdown</span>
         </button>
-        <a className={actionBtn} aria-label="Edit in source control" href="https://src.sunbeam.pt/studio/beam-ui" target="_blank" rel="noopener noreferrer">
+        <a
+          className={actionBtn}
+          aria-label="Edit in source control"
+          href="https://src.sunbeam.pt/studio/beam-ui"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Icon name="edit_note" size={14} />
           <span>Edit in source control</span>
         </a>
-        <button className={actionBtn} aria-label="Report an issue" onClick={() => {}}>
+        <button type="button" className={actionBtn} aria-label="Report an issue" onClick={() => {}}>
           <Icon name="bug_report" size={14} />
           <span>Report an issue</span>
         </button>

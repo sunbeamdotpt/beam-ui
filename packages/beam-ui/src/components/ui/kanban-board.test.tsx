@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import { KanbanCardView } from "./kanban-board.tsx";
@@ -54,7 +54,7 @@ describe("KanbanCardView — regression", () => {
 describe("KanbanCardView — cover prop", () => {
   it("renders_cover_strip_when_cover_prop_is_set", () => {
     const { container } = render(
-      <KanbanCardView card={{ ...baseCard, cover: "#fa520f" }} />
+      <KanbanCardView card={{ ...baseCard, cover: "#fa520f" }} />,
     );
     expect(container.querySelector('[data-part="cover"]')).toBeInTheDocument();
   });
@@ -67,7 +67,7 @@ describe("KanbanCardView — cover prop", () => {
   it("cover_supports_linear_gradient_string", () => {
     const gradient = "linear-gradient(135deg, #fffaeb, #fa520f)";
     const { container } = render(
-      <KanbanCardView card={{ ...baseCard, cover: gradient }} />
+      <KanbanCardView card={{ ...baseCard, cover: gradient }} />,
     );
     const coverEl = container.querySelector('[data-part="cover"]') as HTMLElement;
     expect(coverEl).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe("KanbanCardView — cover prop", () => {
 
   it("cover_supports_plain_color_string", () => {
     const { container } = render(
-      <KanbanCardView card={{ ...baseCard, cover: "#fffaeb" }} />
+      <KanbanCardView card={{ ...baseCard, cover: "#fffaeb" }} />,
     );
     const coverEl = container.querySelector('[data-part="cover"]') as HTMLElement;
     expect(coverEl).toBeInTheDocument();
@@ -90,7 +90,7 @@ describe("KanbanCardView — cover prop", () => {
 describe("KanbanCardView — blocked prop", () => {
   it("renders_blocked_badge_when_blocked_is_true", () => {
     const { container } = render(
-      <KanbanCardView card={{ ...baseCard, blocked: true }} />
+      <KanbanCardView card={{ ...baseCard, blocked: true }} />,
     );
     const badge = container.querySelector('[data-part="blocked-badge"]');
     expect(badge).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe("KanbanCardView — blocked prop", () => {
 
   it("does_not_render_blocked_badge_when_blocked_is_false", () => {
     const { container } = render(
-      <KanbanCardView card={{ ...baseCard, blocked: false }} />
+      <KanbanCardView card={{ ...baseCard, blocked: false }} />,
     );
     expect(container.querySelector('[data-part="blocked-badge"]')).not.toBeInTheDocument();
   });
@@ -119,7 +119,7 @@ describe("KanbanCardView — cover and blocked combined", () => {
     const { container } = render(
       <KanbanCardView
         card={{ ...baseCard, cover: gradient, blocked: true }}
-      />
+      />,
     );
     expect(container.querySelector('[data-part="cover"]')).toBeInTheDocument();
     expect(container.querySelector('[data-part="blocked-badge"]')).toBeInTheDocument();

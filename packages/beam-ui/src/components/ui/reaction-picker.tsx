@@ -1,11 +1,12 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
+  PopoverCloseTrigger,
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
-  PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
 
 /** A single reaction with count and user toggle state. */
@@ -19,7 +20,7 @@ export interface Reaction {
 }
 
 /** Props for {@link ReactionPicker}. */
-interface ReactionPickerProps {
+export interface ReactionPickerProps {
   /** Array of existing reactions to display. */
   reactions: Reaction[];
   /** Fired when existing reaction is clicked (toggle on/off). */
@@ -31,8 +32,14 @@ interface ReactionPickerProps {
 }
 
 const COMMON_EMOJIS = [
-  "\u{1F44D}", "\u{1F44E}", "\u{1F604}", "\u{1F389}",
-  "\u{1F615}", "\u{2764}\u{FE0F}", "\u{1F680}", "\u{1F440}",
+  "\u{1F44D}",
+  "\u{1F44E}",
+  "\u{1F604}",
+  "\u{1F389}",
+  "\u{1F615}",
+  "\u{2764}\u{FE0F}",
+  "\u{1F680}",
+  "\u{1F440}",
 ];
 
 /**
@@ -61,7 +68,7 @@ export function ReactionPicker({
           key={reaction.emoji}
           className={cx(
             reactionButton,
-            reaction.reacted ? reactionActive : undefined
+            reaction.reacted ? reactionActive : undefined,
           )}
           onClick={() => onToggle(reaction.emoji)}
           type="button"

@@ -37,6 +37,47 @@ import { definePreset, type Preset } from "@pandacss/dev";
  * })
  * ```
  */
+/**
+ * Beam spacing scale — token N = N×4px. Used for both `spacing` and `sizes`
+ * tokens so bare numeric values (`width: "10"`, `p: "4"`) resolve identically
+ * across every CSS property, matching Panda's default-preset convention.
+ */
+const spacingScale = {
+  0: { value: "0px" },
+  0.5: { value: "2px" },
+  1: { value: "4px" },
+  1.5: { value: "6px" },
+  2: { value: "8px" },
+  2.5: { value: "10px" },
+  3: { value: "12px" },
+  3.5: { value: "14px" },
+  4: { value: "16px" },
+  5: { value: "20px" },
+  6: { value: "24px" },
+  7: { value: "28px" },
+  8: { value: "32px" },
+  9: { value: "36px" },
+  10: { value: "40px" },
+  12: { value: "48px" },
+  14: { value: "56px" },
+  16: { value: "64px" },
+  20: { value: "80px" },
+  24: { value: "96px" },
+  28: { value: "112px" },
+  32: { value: "128px" },
+  36: { value: "144px" },
+  40: { value: "160px" },
+  44: { value: "176px" },
+  48: { value: "192px" },
+  52: { value: "208px" },
+  56: { value: "224px" },
+  60: { value: "240px" },
+  64: { value: "256px" },
+  72: { value: "288px" },
+  80: { value: "320px" },
+  96: { value: "384px" },
+} as const;
+
 export const beamPreset: Preset = definePreset({
   name: "beam",
   conditions: {
@@ -103,31 +144,49 @@ export const beamPreset: Preset = definePreset({
           button: { value: "791" },
         },
         shadows: {
-          golden: { value: "-3px 5px 13px rgba(127,99,21,0.15), -11px 21px 32px rgba(127,99,21,0.11), -21px 43px 53px rgba(127,99,21,0.08), -43px 85px 80px rgba(127,99,21,0.05)" },
-          goldenDark: { value: "-3px 5px 13px rgba(127,99,21,0.12), -11px 21px 32px rgba(127,99,21,0.09), -21px 43px 53px rgba(127,99,21,0.06), -43px 85px 80px rgba(127,99,21,0.04)" },
+          golden: {
+            value:
+              "-3px 5px 13px rgba(127,99,21,0.15), -11px 21px 32px rgba(127,99,21,0.11), -21px 43px 53px rgba(127,99,21,0.08), -43px 85px 80px rgba(127,99,21,0.05)",
+          },
+          goldenDark: {
+            value:
+              "-3px 5px 13px rgba(127,99,21,0.12), -11px 21px 32px rgba(127,99,21,0.09), -21px 43px 53px rgba(127,99,21,0.06), -43px 85px 80px rgba(127,99,21,0.04)",
+          },
           nav: { value: "0 3px 13px rgba(127,99,21,0.08)" },
           code: { value: "0 7px 20px -7px rgba(0,0,0,0.5)" },
         },
         fontSizes: {
           // UI utility sizes
-          "2xs": { value: "0.625rem" },    // 10px — badges, pills, filter counts
-          xs: { value: "0.75rem" },        // 12px — meta lines, stats, timestamps
+          "2xs": { value: "0.625rem" }, // 10px — badges, pills, filter counts
+          xs: { value: "0.75rem" }, // 12px — meta lines, stats, timestamps
           // Typography scale (matches Type Scale in foundations/typography)
-          sm: { value: "0.875rem" },       // 14px — Caption (weight 647 / line 1.43)
-          md: { value: "1rem" },           // 16px — Body (weight 647 / line 1.50)
-          lg: { value: "1.125rem" },       // 18px — UI emphasis
-          xl: { value: "1.25rem" },        // 20px — UI emphasis
-          "2xl": { value: "1.5rem" },      // 24px — Title (weight 575 / line 1.33)
-          "3xl": { value: "2rem" },        // 32px — Sub-heading (weight 575 / line 1.15)
-          "4xl": { value: "3rem" },        // 48px — Sub-heading Large (weight 431 / line 0.95)
-          "5xl": { value: "3.5rem" },      // 56px — Section (weight 431 / line 0.95)
-          "6xl": { value: "5.125rem" },    // 82px — Display (weight 431 / line 1.0 / ls -2.05px)
+          sm: { value: "0.875rem" }, // 14px — Caption (weight 647 / line 1.43)
+          md: { value: "1rem" }, // 16px — Body (weight 647 / line 1.50)
+          lg: { value: "1.125rem" }, // 18px — UI emphasis
+          xl: { value: "1.25rem" }, // 20px — UI emphasis
+          "2xl": { value: "1.5rem" }, // 24px — Title (weight 575 / line 1.33)
+          "3xl": { value: "2rem" }, // 32px — Sub-heading (weight 575 / line 1.15)
+          "4xl": { value: "3rem" }, // 48px — Sub-heading Large (weight 431 / line 0.95)
+          "5xl": { value: "3.5rem" }, // 56px — Section (weight 431 / line 0.95)
+          "6xl": { value: "5.125rem" }, // 82px — Display (weight 431 / line 1.0 / ls -2.05px)
         },
         radii: {
           sm: { value: "2px" },
           md: { value: "4px" },
           lg: { value: "12px" },
           full: { value: "9999px" },
+        },
+        spacing: spacingScale,
+        // Width/height resolve against `sizes`; mirror the spacing scale so
+        // numeric sizing tokens behave exactly like numeric spacing tokens.
+        sizes: { ...spacingScale },
+        lineHeights: {
+          none: { value: "1" },
+          tight: { value: "1.25" },
+          snug: { value: "1.375" },
+          normal: { value: "1.5" },
+          relaxed: { value: "1.625" },
+          loose: { value: "2" },
         },
       },
       textStyles: {
@@ -231,10 +290,16 @@ export const beamPreset: Preset = definePreset({
           "text.primary": { value: { base: "{colors.sunbeam.black}", _dark: "#ffffff" } },
           "text.secondary": { value: { base: "hsl(0,0%,24%)", _dark: "rgba(255,255,255,0.7)" } },
           "text.muted": { value: { base: "#7f6315", _dark: "rgba(255,255,255,0.4)" } },
-          "border.default": { value: { base: "{colors.border.warm}", _dark: "{colors.border.warmDark}" } },
-          "border.subtle": { value: { base: "{colors.border.warmSubtle}", _dark: "rgba(255,161,16,0.08)" } },
+          "border.default": {
+            value: { base: "{colors.border.warm}", _dark: "{colors.border.warmDark}" },
+          },
+          "border.subtle": {
+            value: { base: "{colors.border.warmSubtle}", _dark: "rgba(255,161,16,0.08)" },
+          },
           accent: { value: { base: "{colors.sunbeam.orange}", _dark: "{colors.sunbeam.orange}" } },
-          sectionLabel: { value: { base: "{colors.sunbeam.orange}", _dark: "{colors.sunshine.700}" } },
+          sectionLabel: {
+            value: { base: "{colors.sunbeam.orange}", _dark: "{colors.sunshine.700}" },
+          },
         },
       },
     },

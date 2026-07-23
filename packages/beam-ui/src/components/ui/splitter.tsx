@@ -1,10 +1,11 @@
+import { css } from "../../system.ts";
+
 import { type ReactNode, useEffect, useRef } from "react";
 import { useSplitter } from "@ark-ui/react/splitter";
 import type { SizeChangeDetails } from "@zag-js/splitter";
-import { css } from "styled-system/css";
 
 /** Props for {@link Splitter}. */
-interface SplitterProps {
+export interface SplitterProps {
   /** Exactly two child elements to split. */
   children: [ReactNode, ReactNode];
   /** Split direction. Defaults to `"horizontal"`. */
@@ -76,6 +77,7 @@ export function Splitter({
       <button
         {...splitter.getResizeTriggerProps({ id: "panel-a:panel-b" })}
         className={direction === "horizontal" ? handleH : handleV}
+        type="button"
       >
         <div
           className={direction === "horizontal" ? handleBarH : handleBarV}

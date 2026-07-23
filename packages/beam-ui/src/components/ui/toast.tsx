@@ -1,12 +1,13 @@
-import { useEffect, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Toast notification style variant. */
 type ToastVariant = "success" | "error" | "info";
 
 /** Props for {@link Toast}. */
-interface ToastProps {
+export interface ToastProps {
   /** Message text displayed in the toast. */
   message: string;
   /** Visual variant. Defaults to `"info"`. */
@@ -57,7 +58,7 @@ export function Toast({
       className={cx(
         wrapper,
         borderVariants[variant],
-        visible ? visibleStyle : hiddenStyle
+        visible ? visibleStyle : hiddenStyle,
       )}
       role={variant === "error" ? "alert" : "status"}
       aria-live={variant === "error" ? "assertive" : "polite"}
@@ -65,7 +66,12 @@ export function Toast({
     >
       <span className={messageStyle}>{message}</span>
       {onDismiss && (
-        <button className={closeBtn} onClick={onDismiss} type="button" aria-label="Close notification">
+        <button
+          className={closeBtn}
+          onClick={onDismiss}
+          type="button"
+          aria-label="Close notification"
+        >
           <Icon name="close" size={16} />
         </button>
       )}
@@ -75,12 +81,13 @@ export function Toast({
 
 const wrapper = css({
   position: "fixed",
-  bottom: "24px",
-  right: "24px",
+  bottom: "6",
+  right: "6",
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  padding: "12px 16px",
+  gap: "3",
+  paddingBlock: "3",
+  paddingInline: "4",
   backgroundColor: "bg.card",
   shadow: "golden",
   borderLeft: "3px solid",
@@ -113,7 +120,7 @@ const borderVariants: Record<ToastVariant, string> = {
 };
 
 const messageStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   flex: 1,
@@ -127,7 +134,7 @@ const closeBtn = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  padding: "2px",
+  padding: "0.5",
   flexShrink: 0,
   _hover: {
     color: "sunbeam.orange",

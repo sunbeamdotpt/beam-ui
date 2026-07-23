@@ -10,6 +10,12 @@ export default function ThemeToggleStory() {
   );
 }
 
-export function IconVariant() { return <ThemeToggle variant="icon" />; }
-export function SwitchVariant() { return <ThemeToggle variant="switch" />; }
-export function PillVariant() { return <ThemeToggle variant="pill" />; }
+export function IconVariant() {
+  return <ThemeToggle variant="icon" />;
+}
+export function SwitchVariant() {
+  return <ThemeToggle variant="switch" />;
+}
+export function PillVariant() {
+  return <ThemeToggle variant="pill" />;
+}

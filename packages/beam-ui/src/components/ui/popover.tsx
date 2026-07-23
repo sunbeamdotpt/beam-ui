@@ -1,17 +1,18 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  PopoverRoot,
-  PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
-  PopoverTitle,
   PopoverCloseTrigger,
+  PopoverContent,
+  PopoverPositioner,
+  PopoverRoot,
+  PopoverTitle,
+  PopoverTrigger,
 } from "@ark-ui/react/popover";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link Popover}. */
-interface PopoverProps {
+export interface PopoverProps {
   /** Element or text that triggers the popover on click. */
   trigger: ReactNode;
   /** Content displayed inside the popover body. */
@@ -28,7 +29,7 @@ interface PopoverProps {
  *
  * @example
  * ```tsx
- * <Popover trigger={<button>Info</button>} title="Help">
+ * <Popover trigger={<button type="button">Info</button>} title="Help">
  *   <p>Additional information here</p>
  * </Popover>
  * ```

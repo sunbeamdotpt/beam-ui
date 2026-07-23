@@ -13,10 +13,18 @@ export default function SliderStory() {
 
 export function WithoutLabel() {
   const [value, setValue] = useState(50);
-  return <div style={{ maxWidth: 320 }}><Slider value={value} onChange={setValue} /></div>;
+  return (
+    <div style={{ maxWidth: 320 }}>
+      <Slider value={value} onChange={setValue} />
+    </div>
+  );
 }
 
 export function CustomRange() {
   const [value, setValue] = useState(500);
-  return <div style={{ maxWidth: 320 }}><Slider value={value} onChange={setValue} min={0} max={1000} step={50} label={`$${value}`} /></div>;
+  return (
+    <div style={{ maxWidth: 320 }}>
+      <Slider value={value} onChange={setValue} min={0} max={1000} step={50} label={`$${value}`} />
+    </div>
+  );
 }

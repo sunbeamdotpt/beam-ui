@@ -28,8 +28,19 @@ export default function ContextMenuStory() {
 
 export function SimpleMenu() {
   return (
-    <ContextMenu items={[{ label: "Copy", onClick: () => {} }, { label: "Paste", onClick: () => {} }]}>
-      <div style={{ padding: "40px 60px", border: "1px dashed #ccc", textAlign: "center", cursor: "context-menu", fontSize: 14, color: "#888" }}>
+    <ContextMenu
+      items={[{ label: "Copy", onClick: () => {} }, { label: "Paste", onClick: () => {} }]}
+    >
+      <div
+        style={{
+          padding: "40px 60px",
+          border: "1px dashed #ccc",
+          textAlign: "center",
+          cursor: "context-menu",
+          fontSize: 14,
+          color: "#888",
+        }}
+      >
         Simple context menu
       </div>
     </ContextMenu>
@@ -39,7 +50,16 @@ export function SimpleMenu() {
 export function WithDangerItem() {
   return (
     <ContextMenu items={[{ label: "Remove", icon: "delete", onClick: () => {}, danger: true }]}>
-      <div style={{ padding: "40px 60px", border: "1px dashed #ccc", textAlign: "center", cursor: "context-menu", fontSize: 14, color: "#888" }}>
+      <div
+        style={{
+          padding: "40px 60px",
+          border: "1px dashed #ccc",
+          textAlign: "center",
+          cursor: "context-menu",
+          fontSize: 14,
+          color: "#888",
+        }}
+      >
         Danger item only
       </div>
     </ContextMenu>

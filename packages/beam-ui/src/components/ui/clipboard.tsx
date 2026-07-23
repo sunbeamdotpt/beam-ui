@@ -1,15 +1,16 @@
-import { type ReactNode } from "react";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  ClipboardRoot,
-  ClipboardTrigger,
   ClipboardControl,
   ClipboardIndicator,
+  ClipboardRoot,
+  ClipboardTrigger,
 } from "@ark-ui/react/clipboard";
-import { css } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link Clipboard}. */
-interface ClipboardProps {
+export interface ClipboardProps {
   /** Text to copy to clipboard when triggered. */
   value: string;
   /** Custom trigger element (e.g., button or icon). If omitted, renders a default "Copy" button. */
@@ -28,33 +29,33 @@ interface ClipboardProps {
  * ```tsx
  * <Clipboard value="npm install @sunbeam/beam-ui" />
  * <Clipboard value="token123" timeout={1500}>
- *   <button>Copy Token</button>
+ *   <button type="button">Copy Token</button>
  * </Clipboard>
  * ```
  */
 export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps): ReactNode {
   return (
     <ClipboardRoot value={value} timeout={timeout}>
-      {children ? (
-        <ClipboardTrigger asChild>{children}</ClipboardTrigger>
-      ) : (
-        <ClipboardControl className={control}>
-          <ClipboardTrigger className={trigger}>
-            <ClipboardIndicator
-              className={indicator}
-              copied={
-                <>
-                  <Icon name="check" size={16} />
-                  <span>Copied!</span>
-                </>
-              }
-            >
-              <Icon name="content_copy" size={16} />
-              <span>Copy</span>
-            </ClipboardIndicator>
-          </ClipboardTrigger>
-        </ClipboardControl>
-      )}
+      {children
+        ? <ClipboardTrigger asChild>{children}</ClipboardTrigger>
+        : (
+          <ClipboardControl className={control}>
+            <ClipboardTrigger className={trigger}>
+              <ClipboardIndicator
+                className={indicator}
+                copied={
+                  <>
+                    <Icon name="check" size={16} />
+                    <span>Copied!</span>
+                  </>
+                }
+              >
+                <Icon name="content_copy" size={16} />
+                <span>Copy</span>
+              </ClipboardIndicator>
+            </ClipboardTrigger>
+          </ClipboardControl>
+        )}
     </ClipboardRoot>
   );
 }

@@ -1,15 +1,16 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  SwitchRoot,
   SwitchControl,
-  SwitchThumb,
-  SwitchLabel,
   SwitchHiddenInput,
+  SwitchLabel,
+  SwitchRoot,
+  SwitchThumb,
 } from "@ark-ui/react/switch";
-import { css, cx } from "styled-system/css";
 
 /** Props for {@link Switch}. */
-interface SwitchProps {
+export interface SwitchProps {
   /** Checked state. */
   checked: boolean;
   /** Fired when toggled. */

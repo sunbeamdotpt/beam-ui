@@ -1,9 +1,10 @@
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link FeatureTile}. */
-interface FeatureTileProps {
+export interface FeatureTileProps {
   /** Display name of the feature (e.g., "Analytics", "File Upload"). */
   name: string;
   /** URL endpoint or path for this feature. */

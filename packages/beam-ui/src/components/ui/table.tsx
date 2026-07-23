@@ -1,5 +1,6 @@
-import { useState, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Column configuration for {@link Table}. */
@@ -15,11 +16,11 @@ interface Column {
 }
 
 /** Props for {@link Table}. */
-interface TableProps {
+export interface TableProps {
   /** Array of column definitions with keys, labels, and optional sort/width. */
   columns: Column[];
   /** Array of row objects, matched against column keys. */
-  rows: Array<Record<string, any>>;
+  rows: Array<Record<string, ReactNode>>;
   /** Called when a sortable column header is clicked with the column key and direction. */
   onSort?: (key: string, dir: "asc" | "desc") => void;
   /** Whether checkboxes appear for row selection. Defaults to `false`. */
@@ -85,7 +86,7 @@ export function Table({
       setSelected(new Set());
       onSelect?.([]);
     } else {
-      const all = new Set(rows.map((r) => String(r[rowKey])));
+      const all = new Set(rows.map((r) => String((r[rowKey] as unknown) ?? "")));
       setSelected(all);
       onSelect?.(Array.from(all));
     }
@@ -94,13 +95,15 @@ export function Table({
   return (
     <div className={cx(wrapper, className)}>
       <table className={table}>
-        {caption && (
-          <caption className={srOnly}>{caption}</caption>
-        )}
+        {caption && <caption className={srOnly}>{caption}</caption>}
         <thead>
           <tr className={headerRow}>
             {selectable && (
-              <th scope="col" className={cx(headerCell, css({ width: "40px" }))} aria-label="Select row">
+              <th
+                scope="col"
+                className={cx(headerCell, css({ width: "10" }))}
+                aria-label="Select row"
+              >
                 <input
                   type="checkbox"
                   checked={rows.length > 0 && selected.size === rows.length}
@@ -117,21 +120,17 @@ export function Table({
                 className={headerCell}
                 style={col.width ? { width: col.width } : undefined}
                 onClick={col.sortable ? () => handleSort(col.key) : undefined}
-                aria-sort={
-                  col.sortable
-                    ? sortKey === col.key
-                      ? sortDir === "asc"
-                        ? "ascending"
-                        : "descending"
-                      : "none"
-                    : undefined
-                }
+                aria-sort={col.sortable
+                  ? sortKey === col.key ? sortDir === "asc" ? "ascending" : "descending" : "none"
+                  : undefined}
               >
                 <span className={headerLabel}>
                   {col.label}
                   {col.sortable && (
                     <Icon
-                      name={sortKey === col.key && sortDir === "desc" ? "arrow_downward" : "arrow_upward"}
+                      name={sortKey === col.key && sortDir === "desc"
+                        ? "arrow_downward"
+                        : "arrow_upward"}
                       size={14}
                       className={css({
                         opacity: sortKey === col.key ? 1 : 0.3,
@@ -146,7 +145,7 @@ export function Table({
         </thead>
         <tbody>
           {rows.map((row, i) => {
-            const key = String(row[rowKey] ?? i);
+            const key = String((row[rowKey] as unknown) ?? i);
             return (
               <tr
                 key={key}
@@ -201,7 +200,8 @@ const headerRow = css({
 });
 
 const headerCell = css({
-  padding: "10px 16px",
+  paddingBlock: "2.5",
+  paddingInline: "4",
   textAlign: "left",
   fontSize: "11px",
   fontWeight: "button",
@@ -219,7 +219,7 @@ const headerCell = css({
 const headerLabel = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
 });
 
 const dataRow = css({
@@ -231,8 +231,9 @@ const evenRow = css({ backgroundColor: "bg.page" });
 const oddRow = css({ backgroundColor: "bg.card" });
 
 const dataCell = css({
-  padding: "10px 16px",
-  fontSize: "14px",
+  paddingBlock: "2.5",
+  paddingInline: "4",
+  fontSize: "sm",
   fontFamily: "mono",
   color: "text.primary",
   borderBottom: "1px solid",

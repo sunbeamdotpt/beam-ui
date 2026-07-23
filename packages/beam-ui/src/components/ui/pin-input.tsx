@@ -1,15 +1,16 @@
+import { css } from "../../system.ts";
+
 import {
-  PinInputRoot,
   PinInputControl,
-  PinInputInput,
   PinInputHiddenInput,
+  PinInputInput,
   PinInputLabel,
+  PinInputRoot,
 } from "@ark-ui/react/pin-input";
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
+import type { ReactNode } from "react";
 
 /** Props for {@link PinInput}. */
-interface PinInputProps {
+export interface PinInputProps {
   /** Number of input slots. Defaults to `4`. */
   length?: number;
   /** Current value as a concatenated string. */
@@ -51,9 +52,7 @@ export function PinInput({
     >
       {label && <PinInputLabel className={labelStyle}>{label}</PinInputLabel>}
       <PinInputControl className={control}>
-        {Array.from({ length }, (_, i) => (
-          <PinInputInput key={i} index={i} className={input} />
-        ))}
+        {Array.from({ length }, (_, i) => <PinInputInput key={i} index={i} className={input} />)}
       </PinInputControl>
       <PinInputHiddenInput />
     </PinInputRoot>
@@ -63,11 +62,11 @@ export function PinInput({
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const labelStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.primary",
   fontFamily: "body",
@@ -75,14 +74,14 @@ const labelStyle = css({
 
 const control = css({
   display: "flex",
-  gap: "8px",
+  gap: "2",
 });
 
 const input = css({
-  width: "48px",
-  height: "48px",
+  width: "12",
+  height: "12",
   textAlign: "center",
-  fontSize: "18px",
+  fontSize: "lg",
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",

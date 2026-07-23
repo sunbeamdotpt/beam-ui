@@ -1,16 +1,17 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useMemo, useState } from "react";
 import {
-  ComboboxRoot,
+  ComboboxContent,
   ComboboxControl,
   ComboboxInput,
-  ComboboxContent,
   ComboboxItem,
   ComboboxItemText,
   ComboboxPositioner,
+  ComboboxRoot,
   ComboboxTrigger,
   createListCollection,
 } from "@ark-ui/react/combobox";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Single option in a {@link Combobox}. */
@@ -22,7 +23,7 @@ interface ComboboxOption {
 }
 
 /** Props for {@link Combobox}. */
-interface ComboboxProps {
+export interface ComboboxProps {
   /** Array of options to display in the dropdown. */
   options: ComboboxOption[];
   /** Currently selected option value. */
@@ -101,9 +102,7 @@ export function Combobox({
 
       <ComboboxPositioner>
         <ComboboxContent className={content}>
-          {filtered.length === 0 ? (
-            <div className={empty} role="status">No results found</div>
-          ) : (
+          {filtered.length === 0 ? <div className={empty} role="status">No results found</div> : (
             filtered.map((option) => (
               <ComboboxItem
                 key={option.value}

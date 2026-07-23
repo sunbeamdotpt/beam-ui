@@ -13,10 +13,20 @@ export default function EditableStory() {
 
 export function Empty() {
   const [value, setValue] = useState("");
-  return <div style={{ maxWidth: 400 }}><Editable value={value} onChange={setValue} placeholder="Type something..." /></div>;
+  return (
+    <div style={{ maxWidth: 400 }}>
+      <Editable value={value} onChange={setValue} placeholder="Type something..." />
+    </div>
+  );
 }
 
 export function WithLongText() {
-  const [value, setValue] = useState("This is a much longer editable text that demonstrates how the component handles multi-word content");
-  return <div style={{ maxWidth: 400 }}><Editable value={value} onChange={setValue} /></div>;
+  const [value, setValue] = useState(
+    "This is a much longer editable text that demonstrates how the component handles multi-word content",
+  );
+  return (
+    <div style={{ maxWidth: 400 }}>
+      <Editable value={value} onChange={setValue} />
+    </div>
+  );
 }

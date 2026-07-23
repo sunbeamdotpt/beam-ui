@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { Outlet } from "@tanstack/react-router";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Sidebar } from "../shell/sidebar.tsx";
 import { apiSidebar } from "../../data/navigation.ts";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 const srOnly = css({
   position: "absolute",
@@ -71,27 +72,39 @@ export const apiRightPanel: string = css({
   color: "white",
 });
 
+/** Props for {@link ApiLayout}. */
+export interface ApiLayoutProps {
+  /** Page content. */
+  children: ReactNode;
+  /** Current path used to compute active sidebar item. */
+  currentPath?: string;
+  /** Component used to render links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
+}
+
 /**
  * Two-column layout for API documentation. Sidebar on the left (hidden on mobile),
  * split main content area with left panel for prose and right panel for code examples.
  *
  * @example
  * ```tsx
- * <ApiLayout />
+ * <ApiLayout currentPath="/api/chat">
+ *   <MyApiPage />
+ * </ApiLayout>
  * ```
  */
-export function ApiLayout(): ReactNode {
+export function ApiLayout({ children, currentPath = "", linkAs }: ApiLayoutProps): ReactNode {
   return (
     <>
-    <a href="#main-content" className={srOnly}>Skip to main content</a>
-    <div className={body}>
-      <div className={sidebarWrapper}>
-        <Sidebar sections={apiSidebar} />
+      <a href="#main-content" className={srOnly}>Skip to main content</a>
+      <div className={body}>
+        <div className={sidebarWrapper}>
+          <Sidebar sections={apiSidebar} currentPath={currentPath} linkAs={linkAs} />
+        </div>
+        <main className={panels} id="main-content">
+          {children}
+        </main>
       </div>
-      <main className={panels} id="main-content">
-        <Outlet />
-      </main>
-    </div>
     </>
   );
 }

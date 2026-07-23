@@ -1,8 +1,9 @@
-import { type ReactNode, type CSSProperties } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { CSSProperties, ReactNode } from "react";
 
 /** Props for {@link ScrollArea}. */
-interface ScrollAreaProps {
+export interface ScrollAreaProps {
   /** Content to scroll. */
   children: ReactNode;
   /** Max height before scrolling (CSS string). */
@@ -33,34 +34,35 @@ export function ScrollArea({
   direction = "vertical",
   className,
 }: ScrollAreaProps): ReactNode {
-  const dirClass =
-    direction === "horizontal" ? dirHorizontal
-    : direction === "both" ? dirBoth
+  const dirClass = direction === "horizontal"
+    ? dirHorizontal
+    : direction === "both"
+    ? dirBoth
     : dirVertical;
 
-  const barClass =
-    scrollbar === "hover" ? barHover
-    : scrollbar === "auto" ? barAuto
-    : barVisible;
+  const barClass = scrollbar === "hover" ? barHover : scrollbar === "auto" ? barAuto : barVisible;
 
   const inlineStyle: CSSProperties = {};
   if (maxHeight) inlineStyle.maxHeight = maxHeight;
 
   // Firefox hover behavior needs JS for scrollbarColor toggle
-  const hoverProps = scrollbar === "hover" ? {
-    onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
-      (e.currentTarget.style as any).scrollbarColor = "rgba(255,161,16,0.25) transparent";
-    },
-    onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-      (e.currentTarget.style as any).scrollbarColor = "transparent transparent";
-    },
-  } : {};
+  const hoverProps = scrollbar === "hover"
+    ? {
+      onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
+        (e.currentTarget.style as unknown as Record<string, string>).scrollbarColor =
+          "rgba(255,161,16,0.25) transparent";
+      },
+      onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
+        (e.currentTarget.style as unknown as Record<string, string>).scrollbarColor =
+          "transparent transparent";
+      },
+    }
+    : {};
 
   // Firefox scrollbar inline styles (Panda can't compile these)
-  const scrollbarInline: Record<string, string> =
-    scrollbar === "hover"
-      ? { scrollbarWidth: "thin", scrollbarColor: "transparent transparent" }
-      : { scrollbarWidth: "thin", scrollbarColor: "rgba(255,161,16,0.25) transparent" };
+  const scrollbarInline: Record<string, string> = scrollbar === "hover"
+    ? { scrollbarWidth: "thin", scrollbarColor: "transparent transparent" }
+    : { scrollbarWidth: "thin", scrollbarColor: "rgba(255,161,16,0.25) transparent" };
 
   return (
     <div
@@ -97,11 +99,11 @@ const barVisible = css({
   scrollbarWidth: "thin",
   scrollbarColor: "rgba(255,161,16,0.25) transparent",
 
-  "&::-webkit-scrollbar": { width: "4px", height: "4px" },
+  "&::-webkit-scrollbar": { width: "1", height: "1" },
   "&::-webkit-scrollbar-track": { background: "transparent" },
   "&::-webkit-scrollbar-thumb": {
     background: "rgba(255,161,16,0.25)",
-    borderRadius: "9999px",
+    borderRadius: "full",
   },
   "&::-webkit-scrollbar-thumb:hover": {
     background: "rgba(255,161,16,0.5)",
@@ -113,11 +115,11 @@ const barVisible = css({
 const barHover = css({
   /* Firefox: scrollbarColor toggled via JS events above */
 
-  "&::-webkit-scrollbar": { width: "4px", height: "4px" },
+  "&::-webkit-scrollbar": { width: "1", height: "1" },
   "&::-webkit-scrollbar-track": { background: "transparent" },
   "&::-webkit-scrollbar-thumb": {
     background: "transparent",
-    borderRadius: "9999px",
+    borderRadius: "full",
   },
   "&:hover::-webkit-scrollbar-thumb": {
     background: "rgba(255,161,16,0.25)",
@@ -133,11 +135,11 @@ const barAuto = css({
   scrollbarWidth: "thin",
   scrollbarColor: "rgba(127,99,21,0.25) transparent",
 
-  "&::-webkit-scrollbar": { width: "6px", height: "6px" },
+  "&::-webkit-scrollbar": { width: "1.5", height: "1.5" },
   "&::-webkit-scrollbar-track": { background: "transparent" },
   "&::-webkit-scrollbar-thumb": {
     background: "rgba(127,99,21,0.25)",
-    borderRadius: "9999px",
+    borderRadius: "full",
   },
   "&::-webkit-scrollbar-thumb:hover": {
     background: "rgba(127,99,21,0.4)",

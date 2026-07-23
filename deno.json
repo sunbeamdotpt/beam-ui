@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "private": true,
+  "imports": {
+    "styled-system/css": "./packages/beam-ui/styled-system/css/index.mjs",
+    "styled-system/tokens": "./packages/beam-ui/styled-system/tokens/index.mjs"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "include": [
+      "packages/beam-ui/src/",
+      "packages/beam-ui/deno.json"
+    ],
+    "exclude": [
+      "packages/beam-ui/styled-system/",
+      "packages/beam-ui/dist/",
+      "packages/beam-ui-typst/"
+    ]
+  },
+  "lint": {
+    "include": [
+      "packages/beam-ui/src/"
+    ],
+    "exclude": [
+      "packages/beam-ui/styled-system/",
+      "packages/beam-ui/dist/",
+      "packages/beam-ui-typst/"
+    ]
+  },
+  "tasks": {
+    "ci": "deno fmt --check && deno lint && deno check packages/beam-ui/src/index.ts && cd packages/beam-ui && deno task test",
+    "check": "deno check packages/beam-ui/src/index.ts",
+    "test": "cd packages/beam-ui && deno task test"
+  }
+}

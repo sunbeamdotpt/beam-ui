@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/vitest";
 import { renderHook } from "@testing-library/react";
@@ -21,17 +21,17 @@ function makeItems(overrides?: Partial<CommandPaletteItem>[]): CommandPaletteIte
 }
 
 function renderPalette(
-  props: Partial<React.ComponentProps<typeof CommandPalette>> = {}
+  props: Partial<React.ComponentProps<typeof CommandPalette>> = {},
 ) {
   const onOpenChange = vi.fn();
   const items = makeItems();
   render(
     <CommandPalette
-      open={true}
+      open
       onOpenChange={onOpenChange}
       items={items}
       {...props}
-    />
+    />,
   );
   return { onOpenChange, items };
 }
@@ -107,7 +107,7 @@ describe("CommandPalette — keyboard", () => {
     ];
     const onOpenChange = vi.fn();
     render(
-      <CommandPalette open={true} onOpenChange={onOpenChange} items={items} />
+      <CommandPalette open onOpenChange={onOpenChange} items={items} />,
     );
     const user = userEvent.setup();
     const input = screen.getByRole("combobox");
@@ -120,10 +120,10 @@ describe("CommandPalette — keyboard", () => {
     const onOpenChange = vi.fn();
     render(
       <CommandPalette
-        open={true}
+        open
         onOpenChange={onOpenChange}
         items={makeItems()}
-      />
+      />,
     );
     const user = userEvent.setup();
     const input = screen.getByRole("combobox");
@@ -155,7 +155,7 @@ describe("CommandPalette — click", () => {
       { id: "y", label: "Clickable", onSelect },
     ];
     render(
-      <CommandPalette open={true} onOpenChange={onOpenChange} items={items} />
+      <CommandPalette open onOpenChange={onOpenChange} items={items} />,
     );
     const user = userEvent.setup();
     await user.click(screen.getByText("Clickable"));
@@ -172,10 +172,10 @@ describe("CommandPalette — reset semantics", () => {
   it("query_clears_when_dialog_closes", async () => {
     const { rerender } = render(
       <CommandPalette
-        open={true}
+        open
         onOpenChange={vi.fn()}
         items={makeItems()}
-      />
+      />,
     );
     const user = userEvent.setup();
     const input = screen.getByRole("combobox");
@@ -188,15 +188,15 @@ describe("CommandPalette — reset semantics", () => {
         open={false}
         onOpenChange={vi.fn()}
         items={makeItems()}
-      />
+      />,
     );
     // Reopen
     rerender(
       <CommandPalette
-        open={true}
+        open
         onOpenChange={vi.fn()}
         items={makeItems()}
-      />
+      />,
     );
     const freshInput = screen.getByRole("combobox");
     expect(freshInput).toHaveValue("");
@@ -206,10 +206,10 @@ describe("CommandPalette — reset semantics", () => {
     const initialItems = makeItems();
     const { rerender } = render(
       <CommandPalette
-        open={true}
+        open
         onOpenChange={vi.fn()}
         items={initialItems}
-      />
+      />,
     );
     const user = userEvent.setup();
     const input = screen.getByRole("combobox");
@@ -224,7 +224,7 @@ describe("CommandPalette — reset semantics", () => {
       { id: "new2", label: "New item two", onSelect: vi.fn() },
     ];
     rerender(
-      <CommandPalette open={true} onOpenChange={vi.fn()} items={newItems} />
+      <CommandPalette open onOpenChange={vi.fn()} items={newItems} />,
     );
     rows = screen.getAllByRole("option");
     expect(rows[0]).toHaveAttribute("data-active", "true");

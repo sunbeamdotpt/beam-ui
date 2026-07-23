@@ -1,11 +1,12 @@
-import { useState, useEffect, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect, useState } from "react";
 import {
-  DialogRoot,
   DialogBackdrop,
-  DialogPositioner,
-  DialogContent,
   DialogCloseTrigger,
+  DialogContent,
+  DialogPositioner,
+  DialogRoot,
   DialogTitle,
 } from "@ark-ui/react/dialog";
 import { Button } from "./button.tsx";
@@ -121,22 +122,23 @@ export function Wizard({
       <nav aria-label="Wizard progress" className={stepIndicator}>
         {steps.map((s, i) => (
           <div key={i} className={stepItem} aria-current={i === current ? "step" : undefined}>
-            <div className={cx(
-              stepCircle,
-              i < current ? stepDone :
-              i === current ? stepActive :
-              stepPending
-            )} aria-hidden="true">
-              {i < current ? (
-                <Icon name="check" size={14} />
-              ) : (
-                <span className={stepNumber}>{i + 1}</span>
+            <div
+              className={cx(
+                stepCircle,
+                i < current ? stepDone : i === current ? stepActive : stepPending,
               )}
+              aria-hidden="true"
+            >
+              {i < current
+                ? <Icon name="check" size={14} />
+                : <span className={stepNumber}>{i + 1}</span>}
             </div>
-            <span className={cx(
-              stepLabel,
-              i === current && stepLabelActive
-            )}>
+            <span
+              className={cx(
+                stepLabel,
+                i === current && stepLabelActive,
+              )}
+            >
               {s.title}
             </span>
             {i < steps.length - 1 && (
@@ -148,9 +150,7 @@ export function Wizard({
 
       {/* Content */}
       <div className={content} aria-live="polite">
-        {step.description && (
-          <p className={description}>{step.description}</p>
-        )}
+        {step.description && <p className={description}>{step.description}</p>}
         <div className={body}>
           {step.content}
         </div>
@@ -159,9 +159,7 @@ export function Wizard({
       {/* Actions */}
       <div className={actions}>
         <div className={actionsLeft}>
-          {onCancel && isFirst && (
-            <Button variant="ghost" onClick={onCancel}>{cancelLabel}</Button>
-          )}
+          {onCancel && isFirst && <Button variant="ghost" onClick={onCancel}>{cancelLabel}</Button>}
           {!isFirst && (
             <Button variant="ghost" onClick={goBack}>
               <Icon name="arrow_back" size={16} />
@@ -223,7 +221,12 @@ export function WizardModal({
   }, [open, onClose]);
 
   return (
-    <DialogRoot open={open} onOpenChange={(d) => { if (!d.open) onClose(); }}>
+    <DialogRoot
+      open={open}
+      onOpenChange={(d) => {
+        if (!d.open) onClose();
+      }}
+    >
       <DialogBackdrop className={modalBackdrop} />
       <DialogPositioner className={modalPositioner}>
         <DialogContent className={modalContent}>
@@ -250,7 +253,7 @@ export function WizardModal({
 const wrapper = css({
   display: "flex",
   flexDirection: "column",
-  gap: "24px",
+  gap: "6",
 });
 
 const stepIndicator = css({
@@ -263,12 +266,12 @@ const stepIndicator = css({
 const stepItem = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
 });
 
 const stepCircle = css({
-  width: "28px",
-  height: "28px",
+  width: "7",
+  height: "7",
   borderRadius: "full",
   display: "flex",
   alignItems: "center",
@@ -317,9 +320,9 @@ const stepLabelActive = css({
 
 const stepLine = css({
   width: { base: "16px", md: "40px" },
-  height: "2px",
+  height: "0.5",
   backgroundColor: "border.default",
-  marginInline: "8px",
+  marginInline: "2",
   flexShrink: 0,
   transition: "background-color 0.2s ease",
 });
@@ -336,7 +339,7 @@ const description = css({
   fontSize: "sm",
   color: "text.secondary",
   lineHeight: 1.6,
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const body = css({});
@@ -345,20 +348,20 @@ const actions = css({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingTop: "16px",
+  paddingTop: "4",
   borderTop: "1px solid",
   borderColor: "border.subtle",
 });
 
 const actionsLeft = css({
   display: "flex",
-  gap: "8px",
+  gap: "2",
 });
 
 const actionsRight = css({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
+  gap: "3",
 });
 
 const stepCount = css({
@@ -383,7 +386,7 @@ const modalPositioner = css({
   alignItems: "center",
   justifyContent: "center",
   zIndex: 51,
-  padding: "24px",
+  padding: "6",
 });
 
 const modalContent = css({
@@ -395,14 +398,14 @@ const modalContent = css({
   maxWidth: "600px",
   maxHeight: "85vh",
   overflowY: "auto",
-  padding: "24px",
+  padding: "6",
 });
 
 const modalHeader = css({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "24px",
+  marginBottom: "6",
 });
 
 const modalTitle = css({
@@ -421,6 +424,6 @@ const modalClose = css({
   border: "none",
   cursor: "pointer",
   color: "text.muted",
-  padding: "4px",
+  padding: "1",
   _hover: { color: "sunbeam.orange" },
 });

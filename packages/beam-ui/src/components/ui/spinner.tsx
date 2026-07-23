@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 
 /** Props for {@link Spinner}. */
-interface SpinnerProps {
+export interface SpinnerProps {
   /** Size. Defaults to `"md"`. */
   size?: "sm" | "md" | "lg";
   /** Optional label shown below spinner. */
@@ -88,7 +89,7 @@ const wrapper = css({
   display: "inline-flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "10px",
+  gap: "2.5",
 });
 
 const svgStyle = css({

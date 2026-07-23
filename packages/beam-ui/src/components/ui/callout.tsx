@@ -1,6 +1,6 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
-import { token } from "styled-system/tokens";
+import { css, cx, token } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Icon } from "./icon.tsx";
 
 /**
@@ -13,7 +13,7 @@ import { Icon } from "./icon.tsx";
 type CalloutVariant = "tip" | "warning" | "info";
 
 /** Props for {@link Callout}. */
-interface CalloutProps {
+export interface CalloutProps {
   /** Callout message content. */
   children: ReactNode;
   /** Visual style and semantics. Defaults to `"tip"`. */
@@ -76,7 +76,7 @@ export function Callout({ children, variant = "tip", className }: CalloutProps):
           borderRadius: "0",
           borderLeft: "4px solid",
         }),
-        className
+        className,
       )}
       style={{ borderLeftColor: borderColorMap[variant] }}
     >

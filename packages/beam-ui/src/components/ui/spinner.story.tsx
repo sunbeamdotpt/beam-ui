@@ -10,9 +10,21 @@ export default function SpinnerStory() {
   );
 }
 
-export function Small() { return <Spinner size="sm" />; }
-export function Medium() { return <Spinner size="md" />; }
-export function Large() { return <Spinner size="lg" />; }
-export function Accent() { return <Spinner size="md" accent />; }
-export function WithLabel() { return <Spinner size="md" label="Loading..." accent />; }
-export function CustomColor() { return <Spinner size="md" color="#6366f1" label="Custom" />; }
+export function Small() {
+  return <Spinner size="sm" />;
+}
+export function Medium() {
+  return <Spinner size="md" />;
+}
+export function Large() {
+  return <Spinner size="lg" />;
+}
+export function Accent() {
+  return <Spinner size="md" accent />;
+}
+export function WithLabel() {
+  return <Spinner size="md" label="Loading..." accent />;
+}
+export function CustomColor() {
+  return <Spinner size="md" color="#6366f1" label="Custom" />;
+}

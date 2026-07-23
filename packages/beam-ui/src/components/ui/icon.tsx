@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 
 /** Props for {@link Icon}. */
-interface IconProps {
+export interface IconProps {
   /** Material Symbol icon name (e.g., "home", "settings", "check"). */
   name: string;
   /** Icon size in pixels or CSS unit string. If numeric, converted to `px`. */
@@ -37,9 +38,7 @@ export function Icon({ name, size, filled, className, label }: IconProps): React
     <span
       className={cx("material-symbols-outlined", base, className)}
       style={style}
-      {...(label
-        ? { role: "img", "aria-label": label }
-        : { "aria-hidden": true as const })}
+      {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true as const })}
     >
       {name}
     </span>

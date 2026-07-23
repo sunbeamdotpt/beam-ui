@@ -1,21 +1,22 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  ResponsiveContainer,
-  LineChart as RLineChart,
-  Line,
-  BarChart as RBarChart,
-  Bar,
-  PieChart as RPieChart,
-  Pie,
-  Cell,
-  AreaChart as RAreaChart,
   Area,
+  AreaChart as RAreaChart,
+  Bar,
+  BarChart as RBarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Line,
+  LineChart as RLineChart,
+  Pie,
+  PieChart as RPieChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
 } from "recharts";
 
 /* ------------------------------------------------------------------ */
@@ -27,33 +28,42 @@ interface ChartDataPoint {
   [key: string]: string | number;
 }
 
+interface BeamTooltipProps {
+  active?: boolean;
+  label?: string;
+  payload?: Array<{ color?: string; name?: string; value?: number | string }>;
+}
+
 const DEFAULT_COLORS = [
-  "#fa520f",  // sunbeam orange
-  "#4a9eff",  // steel blue
-  "#5bb8a6",  // teal
-  "#a855f7",  // purple
-  "#f59e0b",  // amber
-  "#ef4444",  // red
-  "#22c55e",  // green
-  "#ec4899",  // pink
+  "#fa520f", // sunbeam orange
+  "#4a9eff", // steel blue
+  "#5bb8a6", // teal
+  "#a855f7", // purple
+  "#f59e0b", // amber
+  "#ef4444", // red
+  "#22c55e", // green
+  "#ec4899", // pink
 ];
 
 /* ------------------------------------------------------------------ */
 /* Custom tooltip                                                      */
 /* ------------------------------------------------------------------ */
-function BeamTooltip({ active, payload, label }: any) {
+function BeamTooltip({ active, payload, label }: BeamTooltipProps) {
   if (!active || !payload?.length) return null;
 
   return (
     <div className={tooltipWrapper}>
       {label && <p className={tooltipLabel}>{label}</p>}
-      {payload.map((entry: any, i: number) => (
+      {payload.map((entry, i) => (
         <p key={i} className={tooltipEntry}>
           <span
             className={tooltipDot}
             style={{ backgroundColor: entry.color }}
           />
-          {entry.name}: <strong className={tooltipValue}>{typeof entry.value === "number" ? entry.value.toLocaleString() : entry.value}</strong>
+          {entry.name}:{" "}
+          <strong className={tooltipValue}>
+            {typeof entry.value === "number" ? entry.value.toLocaleString() : entry.value}
+          </strong>
         </p>
       ))}
     </div>
@@ -65,7 +75,7 @@ function BeamTooltip({ active, payload, label }: any) {
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link LineChart}. */
-interface LineChartProps {
+export interface LineChartProps {
   /** Array of data points with a `label` key and numeric data series. */
   data: ChartDataPoint[];
   /** Array of line series; each specifies a data `key`, optional `color`, and optional `label`. */
@@ -92,7 +102,9 @@ interface LineChartProps {
  * />
  * ```
  */
-export function LineChart({ data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps): ReactNode {
+export function LineChart(
+  { data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps,
+): ReactNode {
   const defaultLabel = `Line chart with ${data.length} data points`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
@@ -137,7 +149,7 @@ export function LineChart({ data, lines, height = 300, className, "aria-label": 
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link BarChart}. */
-interface BarChartProps {
+export interface BarChartProps {
   /** Array of data points with a `label` key and numeric data series. */
   data: ChartDataPoint[];
   /** Array of bar series; each specifies a data `key`, optional `color`, and optional `label`. */
@@ -164,7 +176,9 @@ interface BarChartProps {
  * />
  * ```
  */
-export function BarChart({ data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps): ReactNode {
+export function BarChart(
+  { data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps,
+): ReactNode {
   const defaultLabel = `Bar chart with ${data.length} data points`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
@@ -206,7 +220,7 @@ export function BarChart({ data, bars, height = 300, className, "aria-label": ar
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link PieChart}. */
-interface PieChartProps {
+export interface PieChartProps {
   /** Array of segments; each with `name`, `value`, and optional `color`. */
   data: { name: string; value: number; color?: string }[];
   /** Chart height in pixels. Defaults to 300. */
@@ -237,7 +251,9 @@ interface PieChartProps {
  * />
  * ```
  */
-export function PieChart({ data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps): ReactNode {
+export function PieChart(
+  { data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps,
+): ReactNode {
   const defaultLabel = `${donut ? "Donut" : "Pie"} chart with ${data.length} segments`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
@@ -275,7 +291,7 @@ export function PieChart({ data, height = 300, donut = false, className, "aria-l
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link AreaChart}. */
-interface AreaChartProps {
+export interface AreaChartProps {
   /** Array of data points with a `label` key and numeric data series. */
   data: ChartDataPoint[];
   /** Array of area series; each specifies a data `key`, optional `color`, and optional `label`. */
@@ -302,7 +318,9 @@ interface AreaChartProps {
  * />
  * ```
  */
-export function AreaChart({ data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps): ReactNode {
+export function AreaChart(
+  { data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps,
+): ReactNode {
   const defaultLabel = `Area chart with ${data.length} data points`;
   return (
     <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>

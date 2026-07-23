@@ -1,8 +1,9 @@
-import { useId, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useId } from "react";
 
 /** Props for {@link TextInput}. */
-interface TextInputProps {
+export interface TextInputProps {
   /** Current input value. */
   value: string;
   /** Called when the input value changes. */

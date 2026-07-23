@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
 /**
  * Variant style tokens for {@link Button}.
@@ -12,25 +13,26 @@ import { css, cx } from "styled-system/css";
  */
 type Variant = "dark" | "cream" | "ghost" | "text" | "primary";
 
-/** Props for {@link Button}. */
-interface ButtonProps {
-  /** Visible label content (text, icon, or both). */
-  children: ReactNode;
+/** Own props for {@link Button}, independent of the rendered element. */
+export interface ButtonOwnProps {
   /** Visual style. Defaults to `"dark"`. */
   variant?: Variant;
-  /** If set, the button renders as a link. External (http*) opens in a new tab; otherwise React Router `<Link>`. */
+  /** When set, the component renders as a link (or as the `as` component with this href). */
   href?: string;
-  /** Additional Panda CSS classes appended after variant styles. */
-  className?: string;
-  /** Click handler (button mode only — ignored when `href` is set). */
-  onClick?: () => void;
-  /** Native button type. Defaults to `"button"`. */
-  type?: "button" | "submit" | "reset";
   /** Disables interaction and dims the visual. */
   disabled?: boolean;
   /** ARIA disabled flag (independent of `disabled` for advanced cases). */
   "aria-disabled"?: boolean;
 }
+
+/** Props for {@link Button}. */
+export type ButtonProps<T extends ElementType = ElementType> =
+  & ButtonOwnProps
+  & Omit<ComponentPropsWithoutRef<T>, keyof ButtonOwnProps | "as">
+  & {
+    /** Element or component to render. Defaults to `<button type="button">` (or `<a>` when `href` is set). */
+    as?: T;
+  };
 
 const base = css({
   display: "inline-flex",
@@ -104,48 +106,54 @@ const disabledStyle = css({
 });
 
 /**
- * Primary action button with five visual variants and link-or-button rendering.
+ * Primary action button with five visual variants and polymorphic rendering.
  *
- * Renders an `<a>` for external `href` (target `_blank`), a React Router `<Link>` for
- * internal paths, and a `<button>` otherwise.
+ * Renders a `<button type="button">` by default. Pass `href` to render a link, or pass `as`
+ * to render a custom component such as a router `Link`. External URLs
+ * (`http*`) open in a new tab when rendered as a plain link.
  *
  * @example
  * ```tsx
  * <Button variant="primary" onClick={() => save()}>Save</Button>
  * <Button href="/docs">Read the docs</Button>
+ * <Button as={Link} href="/docs">Read the docs</Button>
  * <Button variant="text" href="https://jsr.io">Learn more</Button>
  * ```
  */
-export function Button({
-  children,
-  variant = "dark",
-  href,
-  className,
-  onClick,
-  type = "button",
-  disabled,
-  "aria-disabled": ariaDisabled,
-}: ButtonProps): ReactNode {
+export function Button<T extends ElementType = "button">(
+  {
+    as,
+    children,
+    variant = "dark",
+    href,
+    className,
+    disabled,
+    "aria-disabled": ariaDisabled,
+    ...rest
+  }: ButtonProps<T>,
+): ReactNode {
   const classes = cx(base, variants[variant], disabled && disabledStyle, className);
 
-  if (href) {
-    if (href.startsWith("http")) {
-      return (
-        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
-          {children}
-        </a>
-      );
-    }
+  const resolvedAs = as ?? (href ? "a" : "button");
+
+  if (resolvedAs === "a" && href && href.startsWith("http")) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} target="_blank" rel="noopener noreferrer" {...rest}>
         {children}
       </a>
     );
   }
 
+  const Component = resolvedAs;
   return (
-    <button type={type} className={classes} onClick={onClick} disabled={disabled} aria-disabled={ariaDisabled}>
+    <Component
+      href={resolvedAs === "a" ? href : undefined}
+      className={classes}
+      disabled={resolvedAs === "button" ? disabled : undefined}
+      aria-disabled={ariaDisabled}
+      {...rest}
+    >
       {children}
-    </button>
+    </Component>
   );
 }

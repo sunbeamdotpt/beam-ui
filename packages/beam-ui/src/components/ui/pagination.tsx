@@ -1,9 +1,10 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link Pagination}. */
-interface PaginationProps {
+export interface PaginationProps {
   /** Currently active page (1-indexed). */
   currentPage: number;
   /** Total number of pages. */
@@ -66,22 +67,24 @@ export function Pagination({
         </button>
 
         {pages.map((p, i) =>
-          p === "..." ? (
-            <span key={`ellipsis-${i}`} className={ellipsis} style={cellStyle}>
-              ...
-            </span>
-          ) : (
-            <button
-              key={p}
-              type="button"
-              className={cx(pageBtn, p === currentPage && activePage)}
-              style={cellStyle}
-              onClick={() => onPageChange(p as number)}
-              {...(p === currentPage ? { "aria-current": "page" as const } : {})}
-            >
-              {p}
-            </button>
-          )
+          p === "..."
+            ? (
+              <span key={`ellipsis-${i}`} className={ellipsis} style={cellStyle}>
+                ...
+              </span>
+            )
+            : (
+              <button
+                key={p}
+                type="button"
+                className={cx(pageBtn, p === currentPage && activePage)}
+                style={cellStyle}
+                onClick={() => onPageChange(p as number)}
+                {...(p === currentPage ? { "aria-current": "page" as const } : {})}
+              >
+                {p}
+              </button>
+            )
         )}
 
         <button
@@ -148,7 +151,7 @@ const wrapper = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  gap: "16px",
+  gap: "4",
   fontFamily: "body",
   flexWrap: "wrap",
 });
@@ -156,15 +159,15 @@ const wrapper = css({
 const pageButtons = css({
   display: "flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
 });
 
 const navBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   border: "1px solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
@@ -172,15 +175,19 @@ const navBtn = css({
   cursor: "pointer",
   transition: "all 0.15s ease",
   _hover: { borderColor: "sunbeam.orange", color: "sunbeam.orange" },
-  _disabled: { opacity: 0.35, cursor: "default", _hover: { borderColor: "border.default", color: "text.primary" } },
+  _disabled: {
+    opacity: 0.35,
+    cursor: "default",
+    _hover: { borderColor: "border.default", color: "text.primary" },
+  },
 });
 
 const pageBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   padding: "0",
   fontSize: "13px",
   fontFamily: "mono",
@@ -205,10 +212,10 @@ const ellipsis = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   padding: "0",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "mono",
   color: "text.muted",
   userSelect: "none",
@@ -218,7 +225,7 @@ const ellipsis = css({
 const sizeSelector = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
 });
 
 const sizeLabel = css({
@@ -230,7 +237,8 @@ const sizeLabel = css({
 });
 
 const sizeSelect = css({
-  padding: "4px 8px",
+  paddingBlock: "1",
+  paddingInline: "2",
   fontSize: "13px",
   fontFamily: "body",
   fontWeight: "body",

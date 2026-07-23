@@ -5,7 +5,11 @@ export default function MathRendererStory() {
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       <div>
         <p style={{ marginBottom: 8, fontSize: 13, opacity: 0.6 }}>Inline</p>
-        <span>The quadratic formula is <MathRenderer math="x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}" /> for any quadratic.</span>
+        <span>
+          The quadratic formula is <MathRenderer math="x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}" />
+          {" "}
+          for any quadratic.
+        </span>
       </div>
       <div>
         <p style={{ marginBottom: 8, fontSize: 13, opacity: 0.6 }}>Display</p>
@@ -26,7 +30,11 @@ export default function MathRendererStory() {
 }
 
 export function Inline() {
-  return <span>Energy equals <MathRenderer math="E = mc^2" /> in special relativity.</span>;
+  return (
+    <span>
+      Energy equals <MathRenderer math="E = mc^2" /> in special relativity.
+    </span>
+  );
 }
 
 export function DisplayMode() {

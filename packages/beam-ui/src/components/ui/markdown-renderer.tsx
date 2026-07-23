@@ -1,5 +1,6 @@
-import { useMemo, useEffect, useState, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
@@ -25,21 +26,24 @@ const processor = unified()
   .use(rehypeSanitize)
   .use(rehypeStringify);
 
-let katexModule: any = null;
+type KatexType = typeof import("katex").default;
+
+let katexModule: KatexType | null = null;
 let katexLoading = false;
 const katexCallbacks: (() => void)[] = [];
 
-function loadKatex(): Promise<any> {
+function loadKatex(): Promise<KatexType> {
   if (katexModule) return Promise.resolve(katexModule);
   return new Promise((resolve) => {
-    katexCallbacks.push(() => resolve(katexModule));
+    katexCallbacks.push(() => resolve(katexModule as KatexType));
     if (!katexLoading) {
       katexLoading = true;
       Promise.all([
         import("katex"),
+        // deno-lint-ignore no-explicit-any
         import("katex/dist/katex.min.css" as any),
       ]).then(([mod]) => {
-        katexModule = mod.default;
+        katexModule = mod.default as KatexType;
         katexCallbacks.forEach((cb) => cb());
         katexCallbacks.length = 0;
       });
@@ -48,7 +52,9 @@ function loadKatex(): Promise<any> {
 }
 
 /** Extract math blocks, replace with text markers that survive sanitization */
-function extractMath(md: string): { processed: string; blocks: { id: string; math: string; display: boolean }[] } {
+function extractMath(
+  md: string,
+): { processed: string; blocks: { id: string; math: string; display: boolean }[] } {
   const blocks: { id: string; math: string; display: boolean }[] = [];
   let idx = 0;
 
@@ -81,7 +87,7 @@ function extractMath(md: string): { processed: string; blocks: { id: string; mat
  */
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps): ReactNode {
   const { theme } = useTheme();
-  const [katex, setKatex] = useState<any>(null);
+  const [katex, setKatex] = useState<KatexType | null>(null);
 
   useEffect(() => {
     // Check if content has math before loading KaTeX
@@ -170,7 +176,13 @@ const wrapperStyle = css({
     lineHeight: 1.3,
   },
   "& h1": { fontSize: "32px", letterSpacing: "-0.02em" },
-  "& h2": { fontSize: "24px", letterSpacing: "-0.01em", borderBottom: "1px solid", borderColor: "border.default", paddingBottom: "8px" },
+  "& h2": {
+    fontSize: "24px",
+    letterSpacing: "-0.01em",
+    borderBottom: "1px solid",
+    borderColor: "border.default",
+    paddingBottom: "8px",
+  },
   "& h3": { fontSize: "20px" },
   "& h4": { fontSize: "16px" },
 

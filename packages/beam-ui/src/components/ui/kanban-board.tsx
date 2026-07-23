@@ -1,21 +1,22 @@
-import { useState, useMemo, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useMemo, useState } from "react";
 import {
-  DndContext,
   closestCorners,
+  DndContext,
+  type DragEndEvent,
+  type DragOverEvent,
   DragOverlay,
+  type DragStartEvent,
   PointerSensor,
   useSensor,
   useSensors,
-  type DragStartEvent,
-  type DragEndEvent,
-  type DragOverEvent,
 } from "@dnd-kit/core";
 import {
-  SortableContext,
-  verticalListSortingStrategy,
-  useSortable,
   arrayMove,
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -100,7 +101,7 @@ function avatarColorFor(name: string, fallbackIdx: number): string {
 }
 
 /** Props for {@link KanbanBoard}. */
-interface KanbanBoardProps {
+export interface KanbanBoardProps {
   /** Array of columns with their cards. */
   columns: KanbanColumn[];
   /** Called whenever cards are reordered (within or between columns). Receives updated columns array. */
@@ -171,22 +172,70 @@ const PRIORITY_CONFIG: Record<
   KanbanCardPriority,
   { label: string; color: string; bg: string; border: string; icon: string }
 > = {
-  low:    { label: "Low",    color: "rgb(15, 118, 110)",  bg: "rgba(13, 148, 136, 0.1)",   border: "rgba(13, 148, 136, 0.25)",  icon: "keyboard_arrow_down" },
-  medium: { label: "Medium", color: "rgb(180, 83, 9)",    bg: "rgba(217, 119, 6, 0.12)",   border: "rgba(217, 119, 6, 0.3)",     icon: "keyboard_arrow_up" },
-  high:   { label: "High",   color: "#fa520f",            bg: "rgba(250, 82, 15, 0.12)",   border: "rgba(250, 82, 15, 0.3)",     icon: "priority_high" },
-  urgent: { label: "Urgent", color: "rgb(153, 27, 27)",   bg: "rgb(254, 226, 226)",       border: "rgb(252, 165, 165)",         icon: "priority_high" },
+  low: {
+    label: "Low",
+    color: "rgb(15, 118, 110)",
+    bg: "rgba(13, 148, 136, 0.1)",
+    border: "rgba(13, 148, 136, 0.25)",
+    icon: "keyboard_arrow_down",
+  },
+  medium: {
+    label: "Medium",
+    color: "rgb(180, 83, 9)",
+    bg: "rgba(217, 119, 6, 0.12)",
+    border: "rgba(217, 119, 6, 0.3)",
+    icon: "keyboard_arrow_up",
+  },
+  high: {
+    label: "High",
+    color: "#fa520f",
+    bg: "rgba(250, 82, 15, 0.12)",
+    border: "rgba(250, 82, 15, 0.3)",
+    icon: "priority_high",
+  },
+  urgent: {
+    label: "Urgent",
+    color: "rgb(153, 27, 27)",
+    bg: "rgb(254, 226, 226)",
+    border: "rgb(252, 165, 165)",
+    icon: "priority_high",
+  },
 };
 
 /** Map label style token → reference colours. */
 const LABEL_STYLES: Record<string, { bg: string; color: string; border: string }> = {
   orange: { bg: "rgba(250, 82, 15, 0.12)", color: "#fa520f", border: "rgba(250, 82, 15, 0.3)" },
-  gold:   { bg: "oklab(0.82 0.04 0.15 / 0.5)", color: "oklab(0.42 0.08 0.14)", border: "oklab(0.7 0.06 0.14 / 0.4)" },
-  sand:   { bg: "oklab(0.85 0.02 0.09 / 0.5)", color: "oklab(0.36 0.03 0.05)", border: "oklab(0.72 0.02 0.06 / 0.45)" },
-  rust:   { bg: "oklab(0.58 0.11 0.1 / 0.14)", color: "oklab(0.45 0.12 0.12)", border: "oklab(0.55 0.11 0.1 / 0.3)" },
-  olive:  { bg: "oklab(0.65 -0.05 0.09 / 0.18)", color: "oklab(0.4 -0.04 0.08)", border: "oklab(0.55 -0.05 0.08 / 0.3)" },
-  ink:    { bg: "rgba(31, 31, 31, 0.08)", color: "hsl(0,0%,24%)", border: "rgba(31, 31, 31, 0.15)" },
-  green:  { bg: "rgba(21, 128, 61, 0.1)", color: "rgb(21, 128, 61)", border: "rgba(21, 128, 61, 0.3)" },
-  purple: { bg: "rgba(126, 34, 206, 0.08)", color: "rgb(126, 34, 206)", border: "rgba(126, 34, 206, 0.25)" },
+  gold: {
+    bg: "oklab(0.82 0.04 0.15 / 0.5)",
+    color: "oklab(0.42 0.08 0.14)",
+    border: "oklab(0.7 0.06 0.14 / 0.4)",
+  },
+  sand: {
+    bg: "oklab(0.85 0.02 0.09 / 0.5)",
+    color: "oklab(0.36 0.03 0.05)",
+    border: "oklab(0.72 0.02 0.06 / 0.45)",
+  },
+  rust: {
+    bg: "oklab(0.58 0.11 0.1 / 0.14)",
+    color: "oklab(0.45 0.12 0.12)",
+    border: "oklab(0.55 0.11 0.1 / 0.3)",
+  },
+  olive: {
+    bg: "oklab(0.65 -0.05 0.09 / 0.18)",
+    color: "oklab(0.4 -0.04 0.08)",
+    border: "oklab(0.55 -0.05 0.08 / 0.3)",
+  },
+  ink: { bg: "rgba(31, 31, 31, 0.08)", color: "hsl(0,0%,24%)", border: "rgba(31, 31, 31, 0.15)" },
+  green: {
+    bg: "rgba(21, 128, 61, 0.1)",
+    color: "rgb(21, 128, 61)",
+    border: "rgba(21, 128, 61, 0.3)",
+  },
+  purple: {
+    bg: "rgba(126, 34, 206, 0.08)",
+    color: "rgb(126, 34, 206)",
+    border: "rgba(126, 34, 206, 0.25)",
+  },
 };
 
 export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }): ReactNode {
@@ -208,7 +257,13 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
 
       {card.blocked && (
         <span data-part="blocked-badge" className={blockedBadgeStyle}>
-          <span className="material-symbols-outlined" style={{ fontSize: "12px" }} aria-hidden="true">block</span>
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: "12px" }}
+            aria-hidden="true"
+          >
+            block
+          </span>
           BLOCKED
         </span>
       )}
@@ -268,8 +323,8 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
                 style={{ fontSize: "10px", lineHeight: 1, verticalAlign: "middle" }}
               >
                 check_box_outline_blank
-              </span>
-              {" "}{card.checklist.done}/{card.checklist.total}
+              </span>{" "}
+              {card.checklist.done}/{card.checklist.total}
             </span>
             <span className={checklistPctText}>{checklistPct}%</span>
           </div>
@@ -301,7 +356,10 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
         <div className={metaIcons}>
           {card.shortId && <span className={shortIdText}>{card.shortId}</span>}
           {card.dueDate && (
-            <span className={dueDateText} style={{ display: "inline-flex", alignItems: "center", gap: "2px" }}>
+            <span
+              className={dueDateText}
+              style={{ display: "inline-flex", alignItems: "center", gap: "2px" }}
+            >
               <span
                 className="material-symbols-outlined"
                 aria-hidden="true"
@@ -326,17 +384,17 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
           )}
           {typeof card.attachmentCount === "number" &&
             card.attachmentCount > 0 && (
-              <span className={metaIconText}>
-                <span
-                  className="material-symbols-outlined"
-                  aria-hidden="true"
-                  style={{ fontSize: "10px", lineHeight: 1 }}
-                >
-                  attach_file
-                </span>
-                {card.attachmentCount}
+            <span className={metaIconText}>
+              <span
+                className="material-symbols-outlined"
+                aria-hidden="true"
+                style={{ fontSize: "10px", lineHeight: 1 }}
+              >
+                attach_file
               </span>
-            )}
+              {card.attachmentCount}
+            </span>
+          )}
         </div>
 
         {card.assignees && card.assignees.length > 0 && (
@@ -355,13 +413,13 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
                   role="img"
                   aria-label={a.name}
                 >
-                  {a.avatarUrl ? (
-                    <img src={a.avatarUrl} alt={a.name} className={avatarImg} />
-                  ) : (
-                    <span className={avatarInitial} aria-hidden="true">
-                      {a.name.charAt(0).toUpperCase()}
-                    </span>
-                  )}
+                  {a.avatarUrl
+                    ? <img src={a.avatarUrl} alt={a.name} className={avatarImg} />
+                    : (
+                      <span className={avatarInitial} aria-hidden="true">
+                        {a.name.charAt(0).toUpperCase()}
+                      </span>
+                    )}
                 </div>
               );
             })}
@@ -388,8 +446,7 @@ function Column({
   const accent = column.accentColor ?? "var(--colors-sunbeam-orange, #fa520f)";
 
   const visibleMembers = column.members?.slice(0, 4) ?? [];
-  const overflowMembers =
-    (column.members?.length ?? 0) - visibleMembers.length;
+  const overflowMembers = (column.members?.length ?? 0) - visibleMembers.length;
 
   const hasAccent = Boolean(column.accentColor);
 
@@ -397,7 +454,9 @@ function Column({
     <div
       className={columnStyle}
       role="group"
-      aria-label={`${column.title} column, ${column.cards.length} card${column.cards.length !== 1 ? "s" : ""}`}
+      aria-label={`${column.title} column, ${column.cards.length} card${
+        column.cards.length !== 1 ? "s" : ""
+      }`}
       data-accent={hasAccent}
       style={hasAccent ? { borderTop: `3px solid ${accent}` } : undefined}
     >
@@ -425,13 +484,13 @@ function Column({
                   role="img"
                   aria-label={m.name}
                 >
-                  {m.avatarUrl ? (
-                    <img src={m.avatarUrl} alt={m.name} className={avatarImg} />
-                  ) : (
-                    <span className={memberInitial} aria-hidden="true">
-                      {m.name.charAt(0).toUpperCase()}
-                    </span>
-                  )}
+                  {m.avatarUrl
+                    ? <img src={m.avatarUrl} alt={m.name} className={avatarImg} />
+                    : (
+                      <span className={memberInitial} aria-hidden="true">
+                        {m.name.charAt(0).toUpperCase()}
+                      </span>
+                    )}
                 </div>
               );
             })}
@@ -519,7 +578,7 @@ export function KanbanBoard({
 
     const sourceCol = findColumn(activeId);
     // over might be a card or a column id
-    let destCol = findColumn(overId) ?? columns.find((c) => c.id === overId);
+    const destCol = findColumn(overId) ?? columns.find((c) => c.id === overId);
 
     if (!sourceCol || !destCol || sourceCol.id === destCol.id) return;
 

@@ -256,7 +256,11 @@ export const footerSections = [
     title: "Resources",
     links: [
       { label: "Source Control", href: "https://src.sunbeam.pt/studio/beam-ui" },
-      { label: "Contact Us", href: "mailto:hello@sunbeam.pt?subject=Beam%20Design%20Language%20Question!&body=Hi!%0A%0AI%20have%20some%20questions%20about%20the%20Beam%20Design%20Language!%0A%0AMy%20question%20is%3A%20%0A%0AI%20look%20forward%20to%20hearing%20from%20you%20%3C3%0A%0ABest%2C%0A" },
+      {
+        label: "Contact Us",
+        href:
+          "mailto:hello@sunbeam.pt?subject=Beam%20Design%20Language%20Question!&body=Hi!%0A%0AI%20have%20some%20questions%20about%20the%20Beam%20Design%20Language!%0A%0AMy%20question%20is%3A%20%0A%0AI%20look%20forward%20to%20hearing%20from%20you%20%3C3%0A%0ABest%2C%0A",
+      },
     ],
   },
 ];

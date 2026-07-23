@@ -11,10 +11,24 @@ export default function AvatarStory() {
   );
 }
 
-export function Small() { return <Avatar name="Sienna Park" size="sm" />; }
-export function Medium() { return <Avatar name="Jordan Chen" size="md" />; }
-export function Large() { return <Avatar name="Amira Kapoor" size="lg" />; }
-export function WithImage() { return <Avatar name="Luca Rossi" size="md" src="https://i.pravatar.cc/80?u=luca" />; }
-export function SmallWithImage() { return <Avatar name="Luca Rossi" size="sm" src="https://i.pravatar.cc/64?u=luca" />; }
-export function LargeWithImage() { return <Avatar name="Luca Rossi" size="lg" src="https://i.pravatar.cc/112?u=luca" />; }
-export function SingleName() { return <Avatar name="Sienna" size="md" />; }
+export function Small() {
+  return <Avatar name="Sienna Park" size="sm" />;
+}
+export function Medium() {
+  return <Avatar name="Jordan Chen" size="md" />;
+}
+export function Large() {
+  return <Avatar name="Amira Kapoor" size="lg" />;
+}
+export function WithImage() {
+  return <Avatar name="Luca Rossi" size="md" src="https://i.pravatar.cc/80?u=luca" />;
+}
+export function SmallWithImage() {
+  return <Avatar name="Luca Rossi" size="sm" src="https://i.pravatar.cc/64?u=luca" />;
+}
+export function LargeWithImage() {
+  return <Avatar name="Luca Rossi" size="lg" src="https://i.pravatar.cc/112?u=luca" />;
+}
+export function SingleName() {
+  return <Avatar name="Sienna" size="md" />;
+}

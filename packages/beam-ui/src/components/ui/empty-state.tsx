@@ -1,9 +1,10 @@
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link EmptyState}. */
-interface EmptyStateProps {
+export interface EmptyStateProps {
   /** Optional Material Design icon name (e.g., "inbox_zero", "search"). */
   icon?: string;
   /** Main heading displayed in the empty state. */

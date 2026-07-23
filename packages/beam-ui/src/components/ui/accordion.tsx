@@ -1,12 +1,13 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  AccordionRoot,
   AccordionItem,
-  AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
+  AccordionItemTrigger,
+  AccordionRoot,
 } from "@ark-ui/react/accordion";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Represents a single accordion section. */
@@ -20,7 +21,7 @@ interface AccordionEntry {
 }
 
 /** Props for {@link Accordion}. */
-interface AccordionProps {
+export interface AccordionProps {
   /** Array of accordion items to render. */
   items: AccordionEntry[];
   /** If true, multiple sections can be expanded simultaneously; otherwise only one. Defaults to false. */

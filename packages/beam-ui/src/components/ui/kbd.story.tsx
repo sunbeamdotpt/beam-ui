@@ -20,15 +20,28 @@ export default function KbdStory() {
   );
 }
 
-export function ModifierKey() { return <Kbd>⌘</Kbd>; }
-export function Shortcut() { return <Kbd>⌘K</Kbd>; }
+export function ModifierKey() {
+  return <Kbd>⌘</Kbd>;
+}
+export function Shortcut() {
+  return <Kbd>⌘K</Kbd>;
+}
 export function ArrowKeys() {
   return (
     <div style={{ display: "flex", gap: 8 }}>
-      <Kbd>↑</Kbd><Kbd>↓</Kbd><Kbd>←</Kbd><Kbd>→</Kbd>
+      <Kbd>↑</Kbd>
+      <Kbd>↓</Kbd>
+      <Kbd>←</Kbd>
+      <Kbd>→</Kbd>
     </div>
   );
 }
-export function WindowsPlatform() { return <Kbd platform="windows">⌘K</Kbd>; }
-export function LinuxPlatform() { return <Kbd platform="linux">⌘K</Kbd>; }
-export function MacPlatform() { return <Kbd platform="mac">⌘K</Kbd>; }
+export function WindowsPlatform() {
+  return <Kbd platform="windows">⌘K</Kbd>;
+}
+export function LinuxPlatform() {
+  return <Kbd platform="linux">⌘K</Kbd>;
+}
+export function MacPlatform() {
+  return <Kbd platform="mac">⌘K</Kbd>;
+}

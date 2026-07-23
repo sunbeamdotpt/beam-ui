@@ -1,14 +1,15 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
+  HoverCardContent,
+  HoverCardPositioner,
   HoverCardRoot,
   HoverCardTrigger,
-  HoverCardPositioner,
-  HoverCardContent,
 } from "@ark-ui/react/hover-card";
-import { css, cx } from "styled-system/css";
 
 /** Props for {@link HoverCard}. */
-interface HoverCardProps {
+export interface HoverCardProps {
   /** Content that triggers the hover card on mouse hover. */
   trigger: ReactNode;
   /** Content displayed in the popover when hovering. */
@@ -52,11 +53,11 @@ const content = css({
   border: "1px solid",
   borderColor: "border.default",
   shadow: "golden",
-  padding: "16px",
-  fontSize: "14px",
+  padding: "4",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   lineHeight: 1.5,
   zIndex: 50,
-  maxWidth: "320px",
+  maxWidth: "80",
 });

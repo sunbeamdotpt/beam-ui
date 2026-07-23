@@ -1,5 +1,6 @@
-import { useState, type ReactNode } from "react";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import { Icon } from "./icon.tsx";
 import { Spinner } from "./spinner.tsx";
 import { TextInput } from "./text-input.tsx";
@@ -19,7 +20,7 @@ interface OAuthProvider {
 }
 
 /** Props for {@link LoginForm}. */
-interface LoginFormProps {
+export interface LoginFormProps {
   /** Called with username, password, and remember-me flag on form submission. */
   onSubmit: (username: string, password: string, remember: boolean) => void;
   /** OAuth provider buttons to display (optional). */
@@ -130,7 +131,7 @@ export function LoginForm({
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link SignUpForm}. */
-interface SignUpFormProps {
+export interface SignUpFormProps {
   /** Called with username, email, and password on form submission. */
   onSubmit: (data: { username: string; email: string; password: string }) => void;
   /** Error message displayed in a callout (optional). */
@@ -209,7 +210,7 @@ export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link ForgotPasswordForm}. */
-interface ForgotPasswordFormProps {
+export interface ForgotPasswordFormProps {
   /** Called with email address on form submission. */
   onSubmit: (email: string) => void;
   /** Error message displayed in a callout (optional). */
@@ -250,29 +251,31 @@ export function ForgotPasswordForm({
     <div className={card}>
       <h2 className={title}>Forgot Password</h2>
       {error && <Callout variant="warning">{error}</Callout>}
-      {success ? (
-        <Callout variant="tip">
-          A password reset link has been sent to your email address.
-        </Callout>
-      ) : (
-        <form onSubmit={handleSubmit} className={form}>
-          <p className={subtitle}>
-            Enter your email address and we'll send you a link to reset your password.
-          </p>
-          <TextInput
-            label="Email"
-            type="email"
-            value={email}
-            onChange={setEmail}
-            placeholder="you@example.com"
-            disabled={loading}
-          />
-          <Button variant="primary" type="submit" className={fullWidth}>
-            {loading && <Spinner size="sm" color="#ffffff" />}
-            Send Reset Link
-          </Button>
-        </form>
-      )}
+      {success
+        ? (
+          <Callout variant="tip">
+            A password reset link has been sent to your email address.
+          </Callout>
+        )
+        : (
+          <form onSubmit={handleSubmit} className={form}>
+            <p className={subtitle}>
+              Enter your email address and we'll send you a link to reset your password.
+            </p>
+            <TextInput
+              label="Email"
+              type="email"
+              value={email}
+              onChange={setEmail}
+              placeholder="you@example.com"
+              disabled={loading}
+            />
+            <Button variant="primary" type="submit" className={fullWidth}>
+              {loading && <Spinner size="sm" color="#ffffff" />}
+              Send Reset Link
+            </Button>
+          </form>
+        )}
       <div className={links}>
         <a className={link}>Back to sign in</a>
       </div>
@@ -285,7 +288,7 @@ export function ForgotPasswordForm({
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link TwoFactorForm}. */
-interface TwoFactorFormProps {
+export interface TwoFactorFormProps {
   /** Called with the 6-digit code on form submission. */
   onSubmit: (code: string) => void;
   /** Called when user clicks "Use a scratch code instead" button. */
@@ -337,7 +340,7 @@ export function TwoFactorForm({
         </Button>
       </form>
       <div className={links}>
-        <button className={linkBtn} onClick={onScratchCode}>
+        <button className={linkBtn} onClick={onScratchCode} type="button">
           Use a scratch code instead
         </button>
       </div>

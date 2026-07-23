@@ -50,7 +50,10 @@ export function SimpleText() {
 export function CodeOnly() {
   return (
     <div style={{ maxWidth: 640 }}>
-      <MarkdownRenderer content={"```ts\nconst x = 42;\nconsole.log(x);\n```"} />
+      <MarkdownRenderer content="```ts
+const x = 42;
+console.log(x);
+```" />
     </div>
   );
 }
@@ -58,7 +61,10 @@ export function CodeOnly() {
 export function TableContent() {
   return (
     <div style={{ maxWidth: 640 }}>
-      <MarkdownRenderer content={"| Name | Role |\n|------|------|\n| Alice | Engineer |\n| Bob | Designer |"} />
+      <MarkdownRenderer content="| Name | Role |
+|------|------|
+| Alice | Engineer |
+| Bob | Designer |" />
     </div>
   );
 }

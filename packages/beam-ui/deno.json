@@ -7,13 +7,13 @@
     "./preset": "./src/preset.ts",
     "./form": "./src/form/index.tsx",
     "./i18n": "./src/i18n/index.ts",
-    "./code-editor": "./src/components/ui/code-editor.tsx",
-    "./charts": "./src/components/ui/charts.tsx",
-    "./diagram": "./src/components/ui/diagram-renderer.tsx",
-    "./math": "./src/components/ui/math-renderer.tsx",
-    "./kanban": "./src/kanban/index.ts",
-    "./markdown": "./src/markdown/index.ts",
-    "./syntax-highlighter": "./src/components/ui/syntax-highlighter.tsx"
+    "./code-editor": "./src/code-editor.ts",
+    "./charts": "./src/charts.ts",
+    "./diagram": "./src/diagram.ts",
+    "./math": "./src/math.ts",
+    "./kanban": "./src/kanban.ts",
+    "./markdown": "./src/markdown.ts",
+    "./syntax-highlighter": "./src/syntax-highlighter.ts"
   },
   "nodeModulesDir": "auto",
   "tasks": {

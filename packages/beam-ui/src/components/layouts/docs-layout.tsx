@@ -1,9 +1,10 @@
-import { Outlet, useLocation } from "@tanstack/react-router";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import { createContext, type ReactNode, useContext, useState } from "react";
 import { Sidebar } from "../shell/sidebar.tsx";
 import { RightRail } from "../shell/right-rail.tsx";
 import { docsSidebar } from "../../data/navigation.ts";
-import { useState, createContext, useContext, type ReactNode } from "react";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 const body = css({
   display: "flex",
@@ -92,44 +93,58 @@ export function useDocsContext(): DocsContextValue {
   return ctx;
 }
 
+/** Props for {@link DocsLayout}. */
+export interface DocsLayoutProps {
+  /** Page content. */
+  children: ReactNode;
+  /** Optional map of route paths to last-updated timestamps, shown in the right rail. */
+  pageDates?: Record<string, string>;
+  /** Current path used to compute active sidebar item and last-updated date. */
+  currentPath?: string;
+  /** Component used to render links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
+}
+
 /**
  * Three-column docs layout: sidebar (navigation), center (content), and right rail (TOC).
- * Sidebar and right rail hide on tablet and below. Manages table-of-contents state via outlet context.
- *
- * @param pageDates Optional map of route paths to last-updated timestamps, shown in the right rail.
+ * Sidebar and right rail hide on tablet and below. Manages table-of-contents state via context.
  *
  * @example
  * ```tsx
- * <DocsLayout pageDates={{ "/docs/intro": "2026-05-01" }}>
- *   <Outlet />
+ * <DocsLayout pageDates={{ "/docs/intro": "2026-05-01" }} currentPath="/docs/intro">
+ *   <MyDocPage />
  * </DocsLayout>
  * ```
  */
-export function DocsLayout({ pageDates }: { pageDates?: Record<string, string> } = {}): ReactNode {
+export function DocsLayout({
+  children,
+  pageDates,
+  currentPath = "",
+  linkAs,
+}: DocsLayoutProps): ReactNode {
   const [toc, setToc] = useState<DocsTocItem[]>([]);
-  const location = useLocation();
-  const lastUpdated = pageDates?.[location.pathname];
+  const lastUpdated = pageDates?.[currentPath];
 
   return (
     <>
-    <a href="#main-content" className={srOnly}>Skip to main content</a>
-    <div className={body}>
-      <div className={sidebarWrapper}>
-        <Sidebar sections={docsSidebar} />
+      <a href="#main-content" className={srOnly}>Skip to main content</a>
+      <div className={body}>
+        <div className={sidebarWrapper}>
+          <Sidebar sections={docsSidebar} currentPath={currentPath} linkAs={linkAs} />
+        </div>
+        <main className={content} id="main-content">
+          <div className={center} data-content="center">
+            <DocsContext.Provider value={{ setToc }}>
+              {children}
+            </DocsContext.Provider>
+          </div>
+        </main>
+        {toc.length > 0 && (
+          <div className={rightRailWrapper}>
+            <RightRail items={toc} lastUpdated={lastUpdated} />
+          </div>
+        )}
       </div>
-      <main className={content} id="main-content">
-        <div className={center} data-content="center">
-          <DocsContext.Provider value={{ setToc }}>
-            <Outlet />
-          </DocsContext.Provider>
-        </div>
-      </main>
-      {toc.length > 0 && (
-        <div className={rightRailWrapper}>
-          <RightRail items={toc} lastUpdated={lastUpdated} />
-        </div>
-      )}
-    </div>
     </>
   );
 }

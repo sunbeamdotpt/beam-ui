@@ -1,9 +1,17 @@
-import { useState, useRef, useCallback, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import {
+  type DragEvent,
+  type KeyboardEvent,
+  type ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link FileUpload}. */
-interface FileUploadProps {
+export interface FileUploadProps {
   /** Callback fired when the user selects or drops files; receives an array of File objects. */
   onFiles: (files: File[]) => void;
   /** MIME type or file extension filter (e.g., `"image/*"`, `".pdf,.docx"`). */
@@ -47,7 +55,7 @@ export function FileUpload({
       setFiles(next);
       onFiles(next);
     },
-    [onFiles, files, multiple]
+    [onFiles, files, multiple],
   );
 
   const removeFile = useCallback(
@@ -57,7 +65,7 @@ export function FileUpload({
       onFiles(next);
       if (inputRef.current) inputRef.current.value = "";
     },
-    [files, onFiles]
+    [files, onFiles],
   );
 
   const handleDragOver = useCallback(
@@ -65,7 +73,7 @@ export function FileUpload({
       e.preventDefault();
       if (!disabled) setDragOver(true);
     },
-    [disabled]
+    [disabled],
   );
 
   const handleDragLeave = useCallback((e: DragEvent) => {
@@ -79,64 +87,65 @@ export function FileUpload({
       setDragOver(false);
       if (!disabled) handleFiles(e.dataTransfer.files);
     },
-    [disabled, handleFiles]
+    [disabled, handleFiles],
   );
 
-  return (<>
-    <div
-      className={cx(
-        zone,
-        dragOver ? zoneActive : undefined,
-        disabled ? disabledStyle : undefined,
-        className
-      )}
-      onClick={() => !disabled && inputRef.current?.click()}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      tabIndex={0}
-      role="button"
-      aria-label="Upload files"
-      onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
-        if ((e.key === "Enter" || e.key === " ") && !disabled) {
-          e.preventDefault();
-          inputRef.current?.click();
-        }
-      }}
-    >
-      <input
-        ref={inputRef}
-        type="file"
-        accept={accept}
-        multiple={multiple}
-        disabled={disabled}
-        className={hiddenInput}
-        onChange={(e) => handleFiles(e.target.files)}
-      />
-      <Icon name="cloud_upload" size={32} className={icon} />
-      <p className={text}>
-        Drag files here or click to browse
-      </p>
-    </div>
-    {files.length > 0 && (
-      <div className={fileListStyle}>
-        {files.map((f, i) => (
-          <div key={`${f.name}-${i}`} className={fileRow}>
-            <Icon name="description" size={16} className={fileIcon} />
-            <span className={fileName}>{f.name}</span>
-            <span className={fileSize}>{formatSize(f.size)}</span>
-            <button
-              type="button"
-              className={removeBtn}
-              onClick={() => removeFile(i)}
-              aria-label={`Remove ${f.name}`}
-            >
-              <Icon name="close" size={14} />
-            </button>
-          </div>
-        ))}
+  return (
+    <>
+      <div
+        className={cx(
+          zone,
+          dragOver ? zoneActive : undefined,
+          disabled ? disabledStyle : undefined,
+          className,
+        )}
+        onClick={() => !disabled && inputRef.current?.click()}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        tabIndex={0}
+        role="button"
+        aria-label="Upload files"
+        onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
+          if ((e.key === "Enter" || e.key === " ") && !disabled) {
+            e.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
+      >
+        <input
+          ref={inputRef}
+          type="file"
+          accept={accept}
+          multiple={multiple}
+          disabled={disabled}
+          className={hiddenInput}
+          onChange={(e) => handleFiles(e.target.files)}
+        />
+        <Icon name="cloud_upload" size={32} className={icon} />
+        <p className={text}>
+          Drag files here or click to browse
+        </p>
       </div>
-    )}
+      {files.length > 0 && (
+        <div className={fileListStyle}>
+          {files.map((f, i) => (
+            <div key={`${f.name}-${i}`} className={fileRow}>
+              <Icon name="description" size={16} className={fileIcon} />
+              <span className={fileName}>{f.name}</span>
+              <span className={fileSize}>{formatSize(f.size)}</span>
+              <button
+                type="button"
+                className={removeBtn}
+                onClick={() => removeFile(i)}
+                aria-label={`Remove ${f.name}`}
+              >
+                <Icon name="close" size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
@@ -153,8 +162,8 @@ const zone = css({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: "12px",
-  padding: "32px",
+  gap: "3",
+  padding: "8",
   backgroundColor: "bg.page",
   border: "2px dashed",
   borderColor: "border.default",
@@ -166,13 +175,13 @@ const zone = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const zoneActive = css({
   borderColor: "sunbeam.orange",
-  backgroundColor: "rgba(255, 208, 106, 0.1)",
+  backgroundColor: "sunshine.300/10",
 });
 
 const disabledStyle = css({
@@ -197,7 +206,7 @@ const icon = css({
 });
 
 const text = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.secondary",
   margin: 0,
@@ -207,7 +216,7 @@ const fileListStyle = css({
   display: "flex",
   flexDirection: "column",
   gap: "0",
-  marginTop: "8px",
+  marginTop: "2",
   border: "1px solid",
   borderColor: "border.default",
 });
@@ -215,8 +224,9 @@ const fileListStyle = css({
 const fileRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "8px 12px",
+  gap: "2",
+  paddingBlock: "2",
+  paddingInline: "3",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
   "&:last-child": {
@@ -240,7 +250,7 @@ const fileName = css({
 });
 
 const fileSize = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontFamily: "mono",
   color: "text.muted",
   flexShrink: 0,
@@ -250,8 +260,8 @@ const removeBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "24px",
-  height: "24px",
+  width: "6",
+  height: "6",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -264,6 +274,6 @@ const removeBtn = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });

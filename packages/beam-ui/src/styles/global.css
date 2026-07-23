@@ -16,19 +16,37 @@
   scrollbar-color: var(--colors-sunshine-300) transparent;
 }
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--colors-sunshine-300); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--colors-sunshine-700); }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--colors-sunshine-300);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--colors-sunshine-700);
+}
 
 [data-theme="dark"] * {
   scrollbar-color: var(--colors-sunshine-700) transparent;
 }
-[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--colors-sunshine-700); }
-[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--colors-sunbeam-orange); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--colors-sunshine-700);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--colors-sunbeam-orange);
+}
 
-pre ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
-pre ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+pre ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+pre ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 
 /* Scroll anchoring */
 [id] {
@@ -52,37 +70,83 @@ html {
 
 /* Shimmer animation (Skeleton component) */
 @keyframes beam-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Worm/slug motion — generated with smooth sine-based interpolation */
 @keyframes beam-spin-dash {
-  0%   { stroke-dasharray: 1 200; stroke-dashoffset: 0; }
-  10%  { stroke-dasharray: 10 200; stroke-dashoffset: -2; }
-  20%  { stroke-dasharray: 28 200; stroke-dashoffset: -8; }
-  30%  { stroke-dasharray: 48 200; stroke-dashoffset: -16; }
-  40%  { stroke-dasharray: 60 200; stroke-dashoffset: -26; }
-  50%  { stroke-dasharray: 58 200; stroke-dashoffset: -40; }
-  60%  { stroke-dasharray: 44 200; stroke-dashoffset: -58; }
-  70%  { stroke-dasharray: 28 200; stroke-dashoffset: -78; }
-  80%  { stroke-dasharray: 14 200; stroke-dashoffset: -100; }
-  90%  { stroke-dasharray: 4 200; stroke-dashoffset: -120; }
-  100% { stroke-dasharray: 1 200; stroke-dashoffset: -126; }
+  0% {
+    stroke-dasharray: 1 200;
+    stroke-dashoffset: 0;
+  }
+  10% {
+    stroke-dasharray: 10 200;
+    stroke-dashoffset: -2;
+  }
+  20% {
+    stroke-dasharray: 28 200;
+    stroke-dashoffset: -8;
+  }
+  30% {
+    stroke-dasharray: 48 200;
+    stroke-dashoffset: -16;
+  }
+  40% {
+    stroke-dasharray: 60 200;
+    stroke-dashoffset: -26;
+  }
+  50% {
+    stroke-dasharray: 58 200;
+    stroke-dashoffset: -40;
+  }
+  60% {
+    stroke-dasharray: 44 200;
+    stroke-dashoffset: -58;
+  }
+  70% {
+    stroke-dasharray: 28 200;
+    stroke-dashoffset: -78;
+  }
+  80% {
+    stroke-dasharray: 14 200;
+    stroke-dashoffset: -100;
+  }
+  90% {
+    stroke-dasharray: 4 200;
+    stroke-dashoffset: -120;
+  }
+  100% {
+    stroke-dasharray: 1 200;
+    stroke-dashoffset: -126;
+  }
 }
 
 @keyframes beam-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* Monospace enforcement for code elements */
-pre, code, kbd, samp, .cm-editor, .cm-editor * {
-  font-family: 'Monaspace Argon', 'SF Mono', 'Fira Code', monospace !important;
+pre,
+code,
+kbd,
+samp,
+.cm-editor,
+.cm-editor * {
+  font-family: "Monaspace Argon", "SF Mono", "Fira Code", monospace !important;
 }
 
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined' !important;
+  font-family: "Material Symbols Outlined" !important;
 }
 
 /* Focus management (WCAG 2.1) */

@@ -13,7 +13,13 @@ export default function EmptyStateStory() {
 }
 
 export function WithoutAction() {
-  return <EmptyState icon="search" title="No results found" description="Try adjusting your search terms." />;
+  return (
+    <EmptyState
+      icon="search"
+      title="No results found"
+      description="Try adjusting your search terms."
+    />
+  );
 }
 
 export function WithoutDescription() {

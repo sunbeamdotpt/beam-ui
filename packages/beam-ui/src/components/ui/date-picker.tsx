@@ -1,31 +1,32 @@
-import { useId, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useId } from "react";
 import {
-  DatePickerRoot,
+  DatePickerContent,
+  DatePickerContext,
   DatePickerControl,
   DatePickerInput,
-  DatePickerTrigger,
+  DatePickerNextTrigger,
   DatePickerPositioner,
-  DatePickerContent,
+  DatePickerPrevTrigger,
+  DatePickerRoot,
   DatePickerTable,
-  DatePickerTableHead,
-  DatePickerTableHeader,
   DatePickerTableBody,
-  DatePickerTableRow,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
-  DatePickerPrevTrigger,
-  DatePickerNextTrigger,
-  DatePickerViewTrigger,
+  DatePickerTableHead,
+  DatePickerTableHeader,
+  DatePickerTableRow,
+  DatePickerTrigger,
   DatePickerView,
   DatePickerViewControl,
-  DatePickerContext,
+  DatePickerViewTrigger,
   parseDate,
 } from "@ark-ui/react/date-picker";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link DatePicker}. */
-interface DatePickerProps {
+export interface DatePickerProps {
   /** Current date value as ISO 8601 string (e.g., `"2024-12-25"`). */
   value?: string;
   /** Callback fired when the user selects a date; receives the ISO date string. */
@@ -68,7 +69,9 @@ export function DatePicker({
         onValueChange={(details) => {
           const dv = details.value[0];
           if (dv) {
-            const iso = `${dv.year}-${String(dv.month).padStart(2, "0")}-${String(dv.day).padStart(2, "0")}`;
+            const iso = `${dv.year}-${String(dv.month).padStart(2, "0")}-${
+              String(dv.day).padStart(2, "0")
+            }`;
             onChange?.(iso);
           }
         }}

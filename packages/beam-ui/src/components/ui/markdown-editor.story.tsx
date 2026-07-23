@@ -26,10 +26,18 @@ export default function MarkdownEditorStory() {
 
 export function Empty() {
   const [value, setValue] = useState("");
-  return <div style={{ maxWidth: 640 }}><MarkdownEditor value={value} onChange={setValue} placeholder="Write something..." /></div>;
+  return (
+    <div style={{ maxWidth: 640 }}>
+      <MarkdownEditor value={value} onChange={setValue} placeholder="Write something..." />
+    </div>
+  );
 }
 
 export function TallEditor() {
   const [value, setValue] = useState(initial);
-  return <div style={{ maxWidth: 640 }}><MarkdownEditor value={value} onChange={setValue} minHeight="400px" /></div>;
+  return (
+    <div style={{ maxWidth: 640 }}>
+      <MarkdownEditor value={value} onChange={setValue} minHeight="400px" />
+    </div>
+  );
 }

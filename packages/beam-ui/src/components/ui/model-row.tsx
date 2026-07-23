@@ -1,10 +1,11 @@
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
-import { Icon } from "./icon.tsx";
-import { Badge } from "./badge.tsx";
+import { css, cx } from "../../system.ts";
 
-/** Props for {@link ModelRow}. */
-interface ModelRowProps {
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import { Icon } from "./icon.tsx";
+import { Badge, type BadgeVariant } from "./badge.tsx";
+
+/** Own props for {@link ModelRow}, independent of the rendered element. */
+export interface ModelRowOwnProps {
   /** Model name / display label. */
   name: string;
   /** Material Symbol icon name for the model. */
@@ -15,16 +16,27 @@ interface ModelRowProps {
   version: string;
   /** Short description of the model. */
   description: string;
-  /** Optional link target. If provided, row becomes a link (internal route or external URL). */
+  /** Optional link target. If provided, row becomes a link. */
   href?: string;
+  /** Additional Panda CSS classes. */
+  className?: string;
 }
+
+/** Props for {@link ModelRow}. */
+export type ModelRowProps<T extends ElementType = "a"> =
+  & ModelRowOwnProps
+  & Omit<ComponentPropsWithoutRef<T>, keyof ModelRowOwnProps | "as">
+  & {
+    /** Element or component to render. Defaults to a plain link when href is set, otherwise div. */
+    as?: T;
+  };
 
 const row = css({
   display: "flex",
   alignItems: "center",
-  gap: "16px",
-  padding: "16px",
-  margin: "-16px",
+  gap: "4",
+  padding: "4",
+  margin: "-4",
   borderRadius: "0",
   border: "1px solid transparent",
   transition: "all 0.15s ease",
@@ -38,9 +50,9 @@ const row = css({
 });
 
 const iconBox = css({
-  width: "40px",
-  height: "40px",
-  minWidth: "40px",
+  width: "10",
+  height: "10",
+  minWidth: "10",
   bg: "bg.card",
   borderRadius: "md",
   display: "flex",
@@ -57,18 +69,17 @@ const info = css({
 const nameRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  marginBottom: "2px",
+  gap: "2",
+  marginBottom: "0.5",
 });
 
 const nameText = css({
   fontWeight: "button",
-  fontSize: "14px",
+  fontSize: "sm",
 });
 
-
 const desc = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.secondary",
   whiteSpace: "nowrap",
   overflow: "hidden",
@@ -77,7 +88,7 @@ const desc = css({
 });
 
 const versionText = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "text.muted",
   whiteSpace: "nowrap",
@@ -99,7 +110,19 @@ const versionText = css({
  * />
  * ```
  */
-export function ModelRow({ name, icon: iconName, tier, version, description, href }: ModelRowProps): ReactNode {
+export function ModelRow<T extends ElementType = "a">(
+  {
+    name,
+    icon: iconName,
+    tier,
+    version,
+    description,
+    href,
+    className,
+    as,
+    ...rest
+  }: ModelRowProps<T>,
+): ReactNode {
   const content = (
     <>
       <div className={iconBox}>
@@ -108,7 +131,7 @@ export function ModelRow({ name, icon: iconName, tier, version, description, hre
       <div className={info}>
         <div className={nameRow}>
           <span className={nameText}>{name}</span>
-          <Badge variant={tier as any}>{tier.toUpperCase()}</Badge>
+          <Badge variant={tier as BadgeVariant}>{tier.toUpperCase()}</Badge>
         </div>
         <p className={desc}>{description}</p>
       </div>
@@ -116,13 +139,17 @@ export function ModelRow({ name, icon: iconName, tier, version, description, hre
     </>
   );
 
-  if (href) {
-    return (
-      <a href={href} className={row} aria-label={`View ${name} model details`}>
-        {content}
-      </a>
-    );
-  }
+  const isLink = href != null && href.length > 0;
+  const Component = as ?? (isLink ? "a" : "div");
 
-  return <div className={row}>{content}</div>;
+  return (
+    <Component
+      href={isLink ? href : undefined}
+      className={cx(row, className)}
+      aria-label={isLink ? `View ${name} model details` : undefined}
+      {...rest}
+    >
+      {content}
+    </Component>
+  );
 }

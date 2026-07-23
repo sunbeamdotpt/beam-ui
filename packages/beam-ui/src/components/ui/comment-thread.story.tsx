@@ -13,7 +13,8 @@ export default function CommentThreadStory() {
           {
             id: "c1",
             author: { username: "sienna", displayName: "Sienna Park" },
-            body: "This pull request adds **branch protection rules** to the settings page. Please review the validation logic in particular.",
+            body:
+              "This pull request adds **branch protection rules** to the settings page. Please review the validation logic in particular.",
             createdAt: threeHoursAgo,
             reactions: [
               { emoji: "thumbsup", count: 2, reacted: false },
@@ -30,7 +31,8 @@ export default function CommentThreadStory() {
           {
             id: "c2",
             author: { username: "jchen", displayName: "Jordan Chen" },
-            body: "Looks great overall. One suggestion: could we add a confirmation dialog before disabling force-push protection?",
+            body:
+              "Looks great overall. One suggestion: could we add a confirmation dialog before disabling force-push protection?",
             createdAt: hourAgo,
           },
         ]}
@@ -62,8 +64,20 @@ export function TimelineOnly() {
     <div style={{ maxWidth: 700 }}>
       <CommentThread
         items={[
-          { id: "e1", type: "merge" as const, actor: "Alice", detail: "merged branch feature/auth into main", createdAt: hourAgo },
-          { id: "e2", type: "close" as const, actor: "Bob", detail: "closed this issue", createdAt: twoHoursAgo },
+          {
+            id: "e1",
+            type: "merge" as const,
+            actor: "Alice",
+            detail: "merged branch feature/auth into main",
+            createdAt: hourAgo,
+          },
+          {
+            id: "e2",
+            type: "close" as const,
+            actor: "Bob",
+            detail: "closed this issue",
+            createdAt: twoHoursAgo,
+          },
         ]}
       />
     </div>

@@ -1,19 +1,20 @@
-import { type ReactNode } from "react";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  TagsInputRoot,
   TagsInputControl,
+  TagsInputHiddenInput,
   TagsInputInput,
   TagsInputItem,
+  TagsInputItemDeleteTrigger,
   TagsInputItemPreview,
   TagsInputItemText,
-  TagsInputItemDeleteTrigger,
-  TagsInputHiddenInput,
   TagsInputLabel,
+  TagsInputRoot,
 } from "@ark-ui/react/tags-input";
-import { css } from "styled-system/css";
 
 /** Props for {@link TagsInput}. */
-interface TagsInputProps {
+export interface TagsInputProps {
   /** Array of tag strings. */
   value: string[];
   /** Called when tags are added or removed with the updated array. */
@@ -84,11 +85,11 @@ export function TagsInput({
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const labelStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.primary",
   fontFamily: "body",
@@ -98,8 +99,9 @@ const control = css({
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
-  gap: "6px",
-  padding: "6px 8px",
+  gap: "1.5",
+  paddingBlock: "1.5",
+  paddingInline: "2",
   borderRadius: "md",
   border: "1px solid",
   borderColor: "border.default",
@@ -118,8 +120,9 @@ const item = css({
 const itemPreview = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
-  padding: "2px 8px",
+  gap: "1",
+  paddingBlock: "0.5",
+  paddingInline: "2",
   borderRadius: "sm",
   backgroundColor: "sunbeam.orange/10",
   color: "sunbeam.orange",
@@ -151,9 +154,9 @@ const deleteTrigger = css({
 
 const input = css({
   flex: 1,
-  minWidth: "80px",
+  minWidth: "20",
   padding: "4px 0",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   fontWeight: "body",
   color: "text.primary",

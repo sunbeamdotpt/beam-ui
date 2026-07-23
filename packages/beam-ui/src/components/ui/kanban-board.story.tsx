@@ -50,9 +50,7 @@ const initialColumns: KanbanColumn[] = [
 export default function KanbanBoardStory() {
   const [columns, setColumns] = useState(initialColumns);
 
-  return (
-    <KanbanBoard columns={columns} onChange={setColumns} />
-  );
+  return <KanbanBoard columns={columns} onChange={setColumns} />;
 }
 
 export function EmptyBoard() {
@@ -61,7 +59,13 @@ export function EmptyBoard() {
     { id: "doing", title: "In Progress", cards: [] },
     { id: "done", title: "Done", cards: [] },
   ]);
-  return <KanbanBoard columns={columns} onChange={setColumns} onAddCard={(colId) => console.log("Add card to", colId)} />;
+  return (
+    <KanbanBoard
+      columns={columns}
+      onChange={setColumns}
+      onAddCard={(colId) => console.log("Add card to", colId)}
+    />
+  );
 }
 
 export function SingleColumn() {

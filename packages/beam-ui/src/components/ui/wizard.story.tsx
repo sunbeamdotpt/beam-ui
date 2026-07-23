@@ -46,7 +46,7 @@ export function ModalWizard() {
   return (
     <div style={{ position: "relative", minHeight: 500 }}>
       <WizardModal
-        open={true}
+        open
         onClose={() => {}}
         title="Setup Wizard"
         steps={[

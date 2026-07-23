@@ -13,17 +13,33 @@ export default function FileUploadStory() {
 }
 
 export function SingleFile() {
-  return <div style={{ maxWidth: 480 }}><FileUpload onFiles={() => {}} /></div>;
+  return (
+    <div style={{ maxWidth: 480 }}>
+      <FileUpload onFiles={() => {}} />
+    </div>
+  );
 }
 
 export function Disabled() {
-  return <div style={{ maxWidth: 480 }}><FileUpload onFiles={() => {}} disabled /></div>;
+  return (
+    <div style={{ maxWidth: 480 }}>
+      <FileUpload onFiles={() => {}} disabled />
+    </div>
+  );
 }
 
 export function ImagesOnly() {
-  return <div style={{ maxWidth: 480 }}><FileUpload onFiles={() => {}} accept="image/*" multiple /></div>;
+  return (
+    <div style={{ maxWidth: 480 }}>
+      <FileUpload onFiles={() => {}} accept="image/*" multiple />
+    </div>
+  );
 }
 
 export function Multiple() {
-  return <div style={{ maxWidth: 480 }}><FileUpload onFiles={() => {}} multiple /></div>;
+  return (
+    <div style={{ maxWidth: 480 }}>
+      <FileUpload onFiles={() => {}} multiple />
+    </div>
+  );
 }

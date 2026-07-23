@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 
 /** Props for {@link Skeleton}. */
-interface SkeletonProps {
+export interface SkeletonProps {
   /** Width (CSS string). */
   width?: string;
   /** Height (CSS string). */
@@ -34,7 +35,7 @@ const base = css({
 
 const textStyle = css({
   width: "100%",
-  height: "16px",
+  height: "4",
   borderRadius: "sm",
 });
 
@@ -49,7 +50,7 @@ const rectStyle = css({
 const stackStyle = css({
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
+  gap: "3",
 });
 
 /**
@@ -71,12 +72,11 @@ export function Skeleton({
   count = 1,
   className,
 }: SkeletonProps): ReactNode {
-  const variantStyle =
-    variant === "text"
-      ? textStyle
-      : variant === "circle"
-        ? circleStyle
-        : rectStyle;
+  const variantStyle = variant === "text"
+    ? textStyle
+    : variant === "circle"
+    ? circleStyle
+    : rectStyle;
 
   const style: React.CSSProperties = {};
   if (width) style.width = width;
@@ -96,9 +96,17 @@ export function Skeleton({
 
   return (
     <div role="status" aria-label="Loading" className={stackStyle}>
-      {Array.from({ length: count }, (_, i) => (
-        <div key={i} aria-hidden="true" className={cx(base, variantStyle, className)} style={style} />
-      ))}
+      {Array.from(
+        { length: count },
+        (_, i) => (
+          <div
+            key={i}
+            aria-hidden="true"
+            className={cx(base, variantStyle, className)}
+            style={style}
+          />
+        ),
+      )}
     </div>
   );
 }

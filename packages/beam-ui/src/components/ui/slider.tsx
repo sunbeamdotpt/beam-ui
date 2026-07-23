@@ -1,17 +1,18 @@
-import { type ReactNode } from "react";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  SliderRoot,
   SliderControl,
-  SliderTrack,
-  SliderRange,
-  SliderThumb,
-  SliderLabel,
   SliderHiddenInput,
+  SliderLabel,
+  SliderRange,
+  SliderRoot,
+  SliderThumb,
+  SliderTrack,
 } from "@ark-ui/react/slider";
-import { css } from "styled-system/css";
 
 /** Props for {@link Slider}. */
-interface SliderProps {
+export interface SliderProps {
   /** Current slider value. */
   value: number;
   /** Fired when value changes. */
@@ -68,12 +69,12 @@ export function Slider({
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
   width: "100%",
 });
 
 const labelStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.primary",
   fontFamily: "body",
@@ -83,12 +84,12 @@ const control = css({
   position: "relative",
   display: "flex",
   alignItems: "center",
-  height: "20px",
+  height: "5",
 });
 
 const track = css({
   width: "100%",
-  height: "6px",
+  height: "1.5",
   borderRadius: "full",
   backgroundColor: "bg.card",
   border: "1px solid",
@@ -103,8 +104,8 @@ const range = css({
 });
 
 const thumb = css({
-  width: "20px",
-  height: "20px",
+  width: "5",
+  height: "5",
   borderRadius: "full",
   backgroundColor: "white",
   border: "2px solid",

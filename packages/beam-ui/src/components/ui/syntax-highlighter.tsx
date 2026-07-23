@@ -1,9 +1,11 @@
-import { useEffect, useState, useRef, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useTheme } from "../../hooks/use-theme.ts";
+import type { Highlighter } from "shiki";
 
 /** Props for {@link SyntaxHighlighter}. */
-interface SyntaxHighlighterProps {
+export interface SyntaxHighlighterProps {
   /** Source code string to highlight. */
   code: string;
   /** Language identifier (e.g., "javascript", "python", "rust"). */
@@ -34,13 +36,25 @@ const BEAM_DARK = {
   },
   settings: [
     { settings: { foreground: "#d4d4d8" } }, // default text
-    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "rgba(255,255,255,0.35)", fontStyle: "italic" } },
+    {
+      scope: ["comment", "punctuation.definition.comment"],
+      settings: { foreground: "rgba(255,255,255,0.35)", fontStyle: "italic" },
+    },
     { scope: ["keyword", "storage.type", "storage.modifier"], settings: { foreground: "#c084fc" } }, // syn.keyword — purple
-    { scope: ["entity.name.function", "support.function", "meta.function-call"], settings: { foreground: "#93c5fd" } }, // syn.fn — blue
+    {
+      scope: ["entity.name.function", "support.function", "meta.function-call"],
+      settings: { foreground: "#93c5fd" },
+    }, // syn.fn — blue
     { scope: ["string", "string.quoted"], settings: { foreground: "#86efac" } }, // syn.string — green
-    { scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"], settings: { foreground: "#fdba74" } }, // syn.prop — orange
+    {
+      scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"],
+      settings: { foreground: "#fdba74" },
+    }, // syn.prop — orange
     { scope: ["constant.numeric", "constant.language"], settings: { foreground: "#fb923c" } }, // syn.number — deeper orange
-    { scope: ["support.class", "entity.name.type", "storage.type.builtin"], settings: { foreground: "#fde047" } }, // syn.builtin — yellow
+    {
+      scope: ["support.class", "entity.name.type", "storage.type.builtin"],
+      settings: { foreground: "#fde047" },
+    }, // syn.builtin — yellow
     { scope: ["variable", "variable.other"], settings: { foreground: "#e2e8f0" } },
     { scope: ["punctuation", "meta.brace"], settings: { foreground: "rgba(255,255,255,0.5)" } },
     { scope: ["entity.name.class", "entity.name.type.class"], settings: { foreground: "#fde047" } },
@@ -63,13 +77,25 @@ const BEAM_LIGHT = {
   },
   settings: [
     { settings: { foreground: "#1f1f1f" } },
-    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#7f6315", fontStyle: "italic" } },
+    {
+      scope: ["comment", "punctuation.definition.comment"],
+      settings: { foreground: "#7f6315", fontStyle: "italic" },
+    },
     { scope: ["keyword", "storage.type", "storage.modifier"], settings: { foreground: "#7c3aed" } }, // darker purple for light bg
-    { scope: ["entity.name.function", "support.function", "meta.function-call"], settings: { foreground: "#2563eb" } }, // darker blue
+    {
+      scope: ["entity.name.function", "support.function", "meta.function-call"],
+      settings: { foreground: "#2563eb" },
+    }, // darker blue
     { scope: ["string", "string.quoted"], settings: { foreground: "#16a34a" } }, // darker green
-    { scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"], settings: { foreground: "#c2410c" } }, // darker orange
+    {
+      scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"],
+      settings: { foreground: "#c2410c" },
+    }, // darker orange
     { scope: ["constant.numeric", "constant.language"], settings: { foreground: "#ea580c" } },
-    { scope: ["support.class", "entity.name.type", "storage.type.builtin"], settings: { foreground: "#a16207" } }, // darker yellow/gold
+    {
+      scope: ["support.class", "entity.name.type", "storage.type.builtin"],
+      settings: { foreground: "#a16207" },
+    }, // darker yellow/gold
     { scope: ["variable", "variable.other"], settings: { foreground: "#1f1f1f" } },
     { scope: ["punctuation", "meta.brace"], settings: { foreground: "#7f6315" } },
     { scope: ["entity.name.class", "entity.name.type.class"], settings: { foreground: "#a16207" } },
@@ -86,17 +112,34 @@ const BEAM_LIGHT = {
 /* ------------------------------------------------------------------ */
 /* Lazy singleton highlighter                                          */
 /* ------------------------------------------------------------------ */
-let highlighterPromise: Promise<any> | null = null;
+let highlighterPromise: Promise<Highlighter> | null = null;
 
-async function getOrCreateHighlighter() {
+function getOrCreateHighlighter(): Promise<Highlighter> {
   if (!highlighterPromise) {
-    highlighterPromise = import("shiki").then(async ({ createHighlighter }) => {
+    highlighterPromise = import("shiki").then(({ createHighlighter }) => {
       return createHighlighter({
         themes: [BEAM_DARK, BEAM_LIGHT],
         langs: [
-          "javascript", "typescript", "python", "rust", "go", "java",
-          "json", "html", "css", "bash", "markdown", "tsx", "jsx",
-          "sql", "yaml", "xml", "cpp", "c", "ruby", "php",
+          "javascript",
+          "typescript",
+          "python",
+          "rust",
+          "go",
+          "java",
+          "json",
+          "html",
+          "css",
+          "bash",
+          "markdown",
+          "tsx",
+          "jsx",
+          "sql",
+          "yaml",
+          "xml",
+          "cpp",
+          "c",
+          "ruby",
+          "php",
         ],
       });
     });
@@ -153,7 +196,9 @@ export function SyntaxHighlighter({
       }
     });
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [code, language, resolvedTheme]);
 
   const lines = code.split("\n");
@@ -198,7 +243,11 @@ export function SyntaxHighlighter({
   /* With line numbers or line highlighting — parse the HTML and wrap lines */
   return (
     <div className={cx(wrapper, shikiWrapper, className)}>
-      <div ref={containerRef} style={{ display: "none" }} dangerouslySetInnerHTML={{ __html: html }} />
+      <div
+        ref={containerRef}
+        style={{ display: "none" }}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
       <pre className={fallbackPre}>
         <table className={lineTable}>
           <tbody>
@@ -220,7 +269,9 @@ export function SyntaxHighlighter({
 /* ------------------------------------------------------------------ */
 /* Helper: extract a single line from Shiki HTML output                */
 /* ------------------------------------------------------------------ */
-function LineFromHtml({ html, lineIndex, fallback }: { html: string; lineIndex: number; fallback: string }) {
+function LineFromHtml(
+  { html, lineIndex, fallback }: { html: string; lineIndex: number; fallback: string },
+) {
   const [lineHtml, setLineHtml] = useState<string | null>(null);
 
   useEffect(() => {
@@ -262,7 +313,6 @@ const wrapper = css({
   fontSize: "14px",
   lineHeight: 1.7,
 });
-
 
 const shikiWrapper = css({
   "& pre": {

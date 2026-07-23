@@ -23,7 +23,7 @@ export function WithoutThemeToggle() {
 
 export function WithHeaderActions() {
   return (
-    <Shell headerActions={<button>Sign In</button>}>
+    <Shell headerActions={<button type="button">Sign In</button>}>
       <div style={{ padding: 48, textAlign: "center" }}>
         <p>Shell with custom header actions.</p>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LabelPicker, type LabelOption } from "./label-picker.tsx";
+import { type LabelOption, LabelPicker } from "./label-picker.tsx";
 
 const options: LabelOption[] = [
   { id: "bug", name: "Bug", color: "#ef4444", description: "Something isn't working" },
@@ -21,10 +21,18 @@ export default function LabelPickerStory() {
 
 export function NoSelection() {
   const [selected, setSelected] = useState<string[]>([]);
-  return <div style={{ maxWidth: 320 }}><LabelPicker options={options} selected={selected} onChange={setSelected} /></div>;
+  return (
+    <div style={{ maxWidth: 320 }}>
+      <LabelPicker options={options} selected={selected} onChange={setSelected} />
+    </div>
+  );
 }
 
 export function MultipleSelected() {
   const [selected, setSelected] = useState<string[]>(["bug", "feature", "docs"]);
-  return <div style={{ maxWidth: 320 }}><LabelPicker options={options} selected={selected} onChange={setSelected} /></div>;
+  return (
+    <div style={{ maxWidth: 320 }}>
+      <LabelPicker options={options} selected={selected} onChange={setSelected} />
+    </div>
+  );
 }

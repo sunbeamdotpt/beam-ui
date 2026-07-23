@@ -1,8 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/vitest";
-import { KanbanCardDetail, type KanbanCardData } from "./kanban-card-detail.tsx";
+import { type KanbanCardData, KanbanCardDetail } from "./kanban-card-detail.tsx";
 
 const baseCard: KanbanCardData = {
   id: "beam-204",
@@ -216,7 +216,7 @@ describe("KanbanCardDetail — onSave", () => {
   it("calls_onSave_with_updated_title_after_edit", async () => {
     const onSave = vi.fn();
     render(
-      <KanbanCardDetail card={baseCard} open onClose={() => {}} onSave={onSave} />
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} onSave={onSave} />,
     );
     // Click title to enter edit mode
     const titleEl = screen.getByText("Implement live-reload toggle for the showcase");
@@ -227,7 +227,7 @@ describe("KanbanCardDetail — onSave", () => {
     // Blur triggers save
     await userEvent.tab();
     expect(onSave).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "New title" })
+      expect.objectContaining({ title: "New title" }),
     );
   });
 });

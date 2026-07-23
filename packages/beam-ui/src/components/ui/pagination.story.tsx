@@ -32,5 +32,13 @@ export function LastPage() {
 export function WithPageSize() {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
-  return <Pagination currentPage={page} totalPages={50} onPageChange={setPage} pageSize={size} onPageSizeChange={setSize} />;
+  return (
+    <Pagination
+      currentPage={page}
+      totalPages={50}
+      onPageChange={setPage}
+      pageSize={size}
+      onPageSizeChange={setSize}
+    />
+  );
 }

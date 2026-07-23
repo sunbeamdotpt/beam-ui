@@ -15,9 +15,21 @@ export default function CheckboxStory() {
   );
 }
 
-export function Checked() { return <Checkbox checked={true} onChange={() => {}} label="Checked" />; }
-export function Unchecked() { return <Checkbox checked={false} onChange={() => {}} label="Unchecked" />; }
-export function Disabled() { return <Checkbox checked={false} onChange={() => {}} label="Disabled" disabled />; }
-export function DisabledChecked() { return <Checkbox checked={true} onChange={() => {}} label="Disabled Checked" disabled />; }
-export function Indeterminate() { return <Checkbox checked={false} onChange={() => {}} label="Indeterminate" indeterminate />; }
-export function WithoutLabel() { return <Checkbox checked={true} onChange={() => {}} />; }
+export function Checked() {
+  return <Checkbox checked onChange={() => {}} label="Checked" />;
+}
+export function Unchecked() {
+  return <Checkbox checked={false} onChange={() => {}} label="Unchecked" />;
+}
+export function Disabled() {
+  return <Checkbox checked={false} onChange={() => {}} label="Disabled" disabled />;
+}
+export function DisabledChecked() {
+  return <Checkbox checked onChange={() => {}} label="Disabled Checked" disabled />;
+}
+export function Indeterminate() {
+  return <Checkbox checked={false} onChange={() => {}} label="Indeterminate" indeterminate />;
+}
+export function WithoutLabel() {
+  return <Checkbox checked onChange={() => {}} />;
+}

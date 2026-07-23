@@ -1,6 +1,7 @@
-import { type ReactNode } from "react";
-import { TabsRoot, TabList, TabTrigger, TabIndicator, TabContent } from "@ark-ui/react/tabs";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import { TabContent, TabIndicator, TabList, TabsRoot, TabTrigger } from "@ark-ui/react/tabs";
 
 /** Tab definition for {@link Tabs}. */
 interface TabItem {
@@ -11,7 +12,7 @@ interface TabItem {
 }
 
 /** Props for {@link Tabs}. */
-interface TabsProps {
+export interface TabsProps {
   /** Array of tab items with value and label. */
   items: TabItem[];
   /** Currently active tab value. */
@@ -119,9 +120,7 @@ export function Tabs({ items, activeValue, onChange, variant = "default" }: Tabs
         <TabIndicator />
       </TabList>
 
-      {items.map((item) => (
-        <TabContent key={item.value} value={item.value} />
-      ))}
+      {items.map((item) => <TabContent key={item.value} value={item.value} />)}
     </TabsRoot>
   );
 }

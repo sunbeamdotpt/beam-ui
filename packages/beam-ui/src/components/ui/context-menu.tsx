@@ -1,13 +1,14 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  MenuRoot,
-  MenuContextTrigger,
-  MenuPositioner,
   MenuContent,
+  MenuContextTrigger,
   MenuItem,
+  MenuPositioner,
+  MenuRoot,
   MenuSeparator,
 } from "@ark-ui/react/menu";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Single menu item in a {@link ContextMenu}. */
@@ -25,7 +26,7 @@ interface ContextMenuItem {
 }
 
 /** Props for {@link ContextMenu}. */
-interface ContextMenuProps {
+export interface ContextMenuProps {
   /** Array of menu items to display. */
   items: ContextMenuItem[];
   /** Element or component that triggers the context menu on right-click. */
@@ -102,9 +103,7 @@ export function ContextMenu({ items, children }: ContextMenuProps): ReactNode {
                 className={cx(itemStyle, item.danger && itemDangerStyle)}
                 onClick={item.onClick}
               >
-                {item.icon && (
-                  <Icon name={item.icon} size={16} className={iconStyle} />
-                )}
+                {item.icon && <Icon name={item.icon} size={16} className={iconStyle} />}
                 {item.label}
               </MenuItem>
             </div>

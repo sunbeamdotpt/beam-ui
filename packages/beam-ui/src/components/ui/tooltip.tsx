@@ -1,16 +1,17 @@
-import { type ReactNode } from "react";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  TooltipRoot,
-  TooltipTrigger,
-  TooltipPositioner,
-  TooltipContent,
   TooltipArrow,
   TooltipArrowTip,
+  TooltipContent,
+  TooltipPositioner,
+  TooltipRoot,
+  TooltipTrigger,
 } from "@ark-ui/react/tooltip";
-import { css } from "styled-system/css";
 
 /** Props for {@link Tooltip}. */
-interface TooltipProps {
+export interface TooltipProps {
   /** Tooltip text displayed on hover. */
   content: string;
   /** Element that triggers the tooltip. */
@@ -42,7 +43,7 @@ const arrowStyle = css({
  * @example
  * ```tsx
  * <Tooltip content="Save changes" position="top">
- *   <button>Save</button>
+ *   <button type="button">Save</button>
  * </Tooltip>
  * ```
  */

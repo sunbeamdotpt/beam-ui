@@ -1,5 +1,6 @@
-import { useMemo, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useMemo } from "react";
 import { useTheme } from "../../hooks/use-theme.ts";
 import { ScrollArea } from "./scroll-area.tsx";
 
@@ -12,7 +13,7 @@ export interface ActivityDay {
 }
 
 /** Props for {@link ActivityHeatmap}. */
-interface ActivityHeatmapProps {
+export interface ActivityHeatmapProps {
   /** Array of daily activity data (last 365 days). */
   data: ActivityDay[];
   /** Additional Panda CSS classes. */
@@ -20,24 +21,34 @@ interface ActivityHeatmapProps {
 }
 
 const MONTH_NAMES = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 
 const LEVEL_COLORS_LIGHT = [
   "rgba(127,99,21,0.08)", // border.subtle (light)
-  "#ffe8a0",             // very light gold
-  "#ffd06a",             // sunshine.300
-  "#ffb83e",             // sunshine.500
-  "#fa520f",             // sunbeam.orange
+  "#ffe8a0", // very light gold
+  "#ffd06a", // sunshine.300
+  "#ffb83e", // sunshine.500
+  "#fa520f", // sunbeam.orange
 ];
 
 const LEVEL_COLORS_DARK = [
   "rgba(255,161,16,0.08)", // border.subtle (dark)
   "rgba(255,208,106,0.25)", // faint gold
-  "#ffd06a",               // sunshine.300
-  "#ffb83e",               // sunshine.500
-  "#fa520f",               // sunbeam.orange
+  "#ffd06a", // sunshine.300
+  "#ffb83e", // sunshine.500
+  "#fa520f", // sunbeam.orange
 ];
 
 function getLevel(count: number): number {
@@ -119,94 +130,94 @@ export function ActivityHeatmap({ data, className }: ActivityHeatmapProps): Reac
       scrollbar="hover"
       className={cx(wrapper, className)}
     >
-    <div
-      role="img"
-      aria-label={`Activity heatmap: ${total} contributions in the last year`}
-    >
-      <a href="#after-heatmap" className="sr-only">Skip activity heatmap</a>
-      <svg
-        width={svgW}
-        height={svgH}
-        viewBox={`0 0 ${svgW} ${svgH}`}
-        className={svg}
-        aria-hidden="true"
+      <div
+        role="img"
+        aria-label={`Activity heatmap: ${total} contributions in the last year`}
       >
-        {/* Month labels */}
-        {monthLabels.map((m, i) => (
-          <text
-            key={i}
-            x={LABEL_W + m.x * STEP}
-            y={12}
-            className={svgText}
-            fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
-          >
-            {m.label}
-          </text>
-        ))}
+        <a href="#after-heatmap" className="sr-only">Skip activity heatmap</a>
+        <svg
+          width={svgW}
+          height={svgH}
+          viewBox={`0 0 ${svgW} ${svgH}`}
+          className={svg}
+          aria-hidden="true"
+        >
+          {/* Month labels */}
+          {monthLabels.map((m, i) => (
+            <text
+              key={i}
+              x={LABEL_W + m.x * STEP}
+              y={12}
+              className={svgText}
+              fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+            >
+              {m.label}
+            </text>
+          ))}
 
-        {/* Day labels */}
-        {[1, 3, 5].map((dow) => (
+          {/* Day labels */}
+          {[1, 3, 5].map((dow) => (
+            <text
+              key={dow}
+              x={LABEL_W - 6}
+              y={20 + dow * STEP + CELL - 2}
+              className={svgTextEnd}
+              fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+            >
+              {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dow]}
+            </text>
+          ))}
+
+          {/* Cells */}
+          {weeks.map((week, wi) =>
+            week.map((day) => (
+              <rect
+                key={day.date}
+                x={LABEL_W + wi * STEP}
+                y={20 + day.dow * STEP}
+                width={CELL}
+                height={CELL}
+                rx={2}
+                fill={colors[getLevel(day.count)]}
+              >
+                <title>
+                  {day.count} contribution{day.count !== 1 ? "s" : ""} on {day.date}
+                </title>
+              </rect>
+            ))
+          )}
+
+          {/* Legend */}
           <text
-            key={dow}
-            x={LABEL_W - 6}
-            y={20 + dow * STEP + CELL - 2}
+            x={svgW - 5 * (CELL + 3) - 36}
+            y={svgH - 4}
             className={svgTextEnd}
             fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
           >
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dow]}
+            Less
           </text>
-        ))}
-
-        {/* Cells */}
-        {weeks.map((week, wi) =>
-          week.map((day) => (
+          {[0, 1, 2, 3, 4].map((level) => (
             <rect
-              key={day.date}
-              x={LABEL_W + wi * STEP}
-              y={20 + day.dow * STEP}
+              key={level}
+              x={svgW - (5 - level) * (CELL + 3) - 30}
+              y={svgH - CELL - 5}
               width={CELL}
               height={CELL}
               rx={2}
-              fill={colors[getLevel(day.count)]}
-            >
-              <title>
-                {day.count} contribution{day.count !== 1 ? "s" : ""} on {day.date}
-              </title>
-            </rect>
-          ))
-        )}
-
-        {/* Legend */}
-        <text
-          x={svgW - 5 * (CELL + 3) - 36}
-          y={svgH - 4}
-          className={svgTextEnd}
-          fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
-        >
-          Less
-        </text>
-        {[0, 1, 2, 3, 4].map((level) => (
-          <rect
-            key={level}
-            x={svgW - (5 - level) * (CELL + 3) - 30}
-            y={svgH - CELL - 5}
-            width={CELL}
-            height={CELL}
-            rx={2}
-            fill={colors[level]}
-          />
-        ))}
-        <text
-          x={svgW - 1}
-          y={svgH - 4}
-          className={svgTextEnd}
-          fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
-        >
-          More
-        </text>
-      </svg>
-      <span id="after-heatmap" />
-    </div>
+              fill={colors[level]}
+            />
+          ))}
+          <text
+            x={svgW - 1}
+            y={svgH - 4}
+            className={svgTextEnd}
+            fill={theme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"}
+          >
+            More
+          </text>
+        </svg>
+        <span id="after-heatmap" />
+      </div>
     </ScrollArea>
   );
 }

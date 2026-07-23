@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 
 /** Props for {@link Kbd}. */
-interface KbdProps {
+export interface KbdProps {
   /** Keyboard key name or symbol (e.g., "Ctrl", "⌘", "Enter", "⌘K"). */
   children: string;
   /** Override platform detection. Defaults to auto-detect based on user agent. */
@@ -40,7 +41,13 @@ function resolveKey(key: string, platform: Platform): ReactNode {
   // Single modifier keys
   if (key === "\u2318") {
     if (platform === "mac") return <KeyIcon name="keyboard_command_key" />;
-    if (platform === "linux") return <><KeyIcon name="keyboard_command_key" /> Super</>;
+    if (platform === "linux") {
+      return (
+        <>
+          <KeyIcon name="keyboard_command_key" /> Super
+        </>
+      );
+    }
     return "Ctrl";
   }
   if (key === "\u2325") {
@@ -48,14 +55,42 @@ function resolveKey(key: string, platform: Platform): ReactNode {
     return "Alt";
   }
   if (key === "Shift") {
-    return <><KeyIcon name="shift" /> Shift</>;
+    return (
+      <>
+        <KeyIcon name="shift" /> Shift
+      </>
+    );
   }
   if (key === "Ctrl") return "Ctrl";
   if (key === "Alt") return "Alt";
-  if (key === "Tab") return <><KeyIcon name="keyboard_tab" /> Tab</>;
-  if (key === "Enter") return <><KeyIcon name="keyboard_return" /> Enter</>;
-  if (key === "Backspace") return <><KeyIcon name="backspace" /> Backspace</>;
-  if (key === "Space") return <><KeyIcon name="space_bar" /> Space</>;
+  if (key === "Tab") {
+    return (
+      <>
+        <KeyIcon name="keyboard_tab" /> Tab
+      </>
+    );
+  }
+  if (key === "Enter") {
+    return (
+      <>
+        <KeyIcon name="keyboard_return" /> Enter
+      </>
+    );
+  }
+  if (key === "Backspace") {
+    return (
+      <>
+        <KeyIcon name="backspace" /> Backspace
+      </>
+    );
+  }
+  if (key === "Space") {
+    return (
+      <>
+        <KeyIcon name="space_bar" /> Space
+      </>
+    );
+  }
   if (key === "Esc") return "Esc";
 
   // Arrow keys
@@ -67,7 +102,14 @@ function resolveKey(key: string, platform: Platform): ReactNode {
   // Compound shortcuts like ⌘K
   if (key.startsWith("\u2318") && key.length > 1) {
     const letter = key.slice(1);
-    if (platform === "mac") return <><KeyIcon name="keyboard_command_key" />{letter}</>;
+    if (platform === "mac") {
+      return (
+        <>
+          <KeyIcon name="keyboard_command_key" />
+          {letter}
+        </>
+      );
+    }
     if (platform === "linux") return <>Ctrl+{letter}</>;
     return <>Ctrl+{letter}</>;
   }

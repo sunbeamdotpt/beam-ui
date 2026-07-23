@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ReactionPicker, type Reaction } from "./reaction-picker.tsx";
+import { type Reaction, ReactionPicker } from "./reaction-picker.tsx";
 
 export default function ReactionPickerStory() {
   const [reactions, setReactions] = useState<Reaction[]>([
@@ -21,7 +21,11 @@ export default function ReactionPickerStory() {
   const handleAdd = (emoji: string) => {
     setReactions((prev) => {
       const existing = prev.find((r) => r.emoji === emoji);
-      if (existing) return prev.map((r) => (r.emoji === emoji ? { ...r, reacted: true, count: r.count + 1 } : r));
+      if (existing) {
+        return prev.map((
+          r,
+        ) => (r.emoji === emoji ? { ...r, reacted: true, count: r.count + 1 } : r));
+      }
       return [...prev, { emoji, count: 1, reacted: true }];
     });
   };

@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 
 /**
  * Visual variant tokens for {@link Badge}.
@@ -10,7 +11,7 @@ import { css, cx } from "styled-system/css";
  * **Priority**: `critical`, `high`, `medium`, `low` — urgency-coded reds and greens.
  * **Utility**: `section` — renders as a horizontal rule with label (special layout).
  */
-type BadgeVariant =
+export type BadgeVariant =
   // Tier / Recognition
   | "featured"
   | "premier"
@@ -41,7 +42,7 @@ type BadgeVariant =
   | "section";
 
 /** Props for {@link Badge}. */
-interface BadgeProps {
+export interface BadgeProps {
   /** Badge label text. */
   children: React.ReactNode;
   /** Visual style. Defaults to `"premier"`. */
@@ -71,34 +72,111 @@ const pill = (bg: string, fg: string, border?: string) =>
 
 const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   // Tier / Recognition — warm palette
-  featured:     pill("sunbeam.orange", "white", "bright.yellow"),
-  premier:      pill("sunbeam.orange", "white"),
-  verified:     pill("sunshine.900", "white"),
-  partner:      pill("beam.orange", "white"),
-  community:    pill("beam.gold", "sunbeam.black", "sunshine.500"),
+  featured: pill("sunbeam.orange", "white", "bright.yellow"),
+  premier: pill("sunbeam.orange", "white"),
+  verified: pill("sunshine.900", "white"),
+  partner: pill("beam.orange", "white"),
+  community: pill("beam.gold", "sunbeam.black", "sunshine.500"),
 
   // Release Stage — temperature progression
-  stable:       pill("sunshine.300", "sunbeam.black"),
-  new:          pill("beam.gold", "sunbeam.black"),
-  beta:         pill("sunshine.500", "sunbeam.black"),
-  preview:      pill("sunbeam.flame", "white"),
+  stable: pill("sunshine.300", "sunbeam.black"),
+  new: pill("beam.gold", "sunbeam.black"),
+  beta: pill("sunshine.500", "sunbeam.black"),
+  preview: pill("sunbeam.flame", "white"),
   experimental: pill("bright.yellow", "sunbeam.black"),
-  deprecated:   pill("rgba(127, 99, 21, 0.15)", "text.secondary"),
+  deprecated: pill("rgba(127, 99, 21, 0.15)", "text.secondary"),
 
   // Work Status — solid, distinct, readable in both modes
-  open:         css({ backgroundColor: "#166534", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  draft:        css({ backgroundColor: "#525252", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  review:       css({ backgroundColor: "#92400e", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  approved:     css({ backgroundColor: "#15803d", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  merged:       css({ backgroundColor: "#7e22ce", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  closed:       css({ backgroundColor: "#991b1b", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  revision:     css({ backgroundColor: "#c2410c", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  open: css({
+    backgroundColor: "#166534",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  draft: css({
+    backgroundColor: "#525252",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  review: css({
+    backgroundColor: "#92400e",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  approved: css({
+    backgroundColor: "#15803d",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  merged: css({
+    backgroundColor: "#7e22ce",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  closed: css({
+    backgroundColor: "#991b1b",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  revision: css({
+    backgroundColor: "#c2410c",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
 
   // Priority — solid, urgency-coded
-  critical:     css({ backgroundColor: "#dc2626", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  high:         css({ backgroundColor: "#ea580c", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  medium:       css({ backgroundColor: "#d97706", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
-  low:          css({ backgroundColor: "#0d9488", color: "white", fontSize: "10px", padding: "4px 8px", borderRadius: "sm", display: "inline-block" }),
+  critical: css({
+    backgroundColor: "#dc2626",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  high: css({
+    backgroundColor: "#ea580c",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  medium: css({
+    backgroundColor: "#d97706",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
+  low: css({
+    backgroundColor: "#0d9488",
+    color: "white",
+    fontSize: "10px",
+    padding: "4px 8px",
+    borderRadius: "sm",
+    display: "inline-block",
+  }),
 };
 
 /**
@@ -117,7 +195,7 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
           gap: "16px",
           marginBottom: "40px",
         }),
-        className
+        className,
       )}
     >
       <span
@@ -130,7 +208,7 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
             padding: "4px 8px",
             borderRadius: "sm",
             whiteSpace: "nowrap",
-          })
+          }),
         )}
       >
         {children}
@@ -165,7 +243,5 @@ export function Badge({ children, variant = "premier", className }: BadgeProps):
     return <SectionBadge className={className}>{children}</SectionBadge>;
   }
 
-  return (
-    <span className={cx(base, variants[variant], className)}>{children}</span>
-  );
+  return <span className={cx(base, variants[variant], className)}>{children}</span>;
 }

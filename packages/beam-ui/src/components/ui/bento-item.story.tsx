@@ -29,13 +29,37 @@ export default function BentoItemStory() {
 }
 
 export function LargeVariant() {
-  return <BentoItem variant="large" title="Featured Guide" description="A large hero-style card for featured content." difficulty="Advanced" category="Featured" />;
+  return (
+    <BentoItem
+      variant="large"
+      title="Featured Guide"
+      description="A large hero-style card for featured content."
+      difficulty="Advanced"
+      category="Featured"
+    />
+  );
 }
 
 export function HorizontalVariant() {
-  return <BentoItem variant="horizontal" title="Horizontal Card" description="A side-by-side layout for medium-priority content." difficulty="Intermediate" category="Tutorial" />;
+  return (
+    <BentoItem
+      variant="horizontal"
+      title="Horizontal Card"
+      description="A side-by-side layout for medium-priority content."
+      difficulty="Intermediate"
+      category="Tutorial"
+    />
+  );
 }
 
 export function SmallVariant() {
-  return <BentoItem variant="small" title="Quick Tip" description="A compact card for smaller items." difficulty="Beginner" category="Tip" />;
+  return (
+    <BentoItem
+      variant="small"
+      title="Quick Tip"
+      description="A compact card for smaller items."
+      difficulty="Beginner"
+      category="Tip"
+    />
+  );
 }

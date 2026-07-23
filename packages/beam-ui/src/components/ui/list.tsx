@@ -1,5 +1,7 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 import { Icon } from "./icon.tsx";
 
 /** A single list item with optional icon, description, and link. */
@@ -18,7 +20,7 @@ interface ListItem {
 type Variant = "default" | "compact" | "bordered";
 
 /** Props for {@link List}. */
-interface ListProps {
+export interface ListProps {
   /** Array of items to display. */
   items: ListItem[];
   /** If true, render as `<ol>` (numbered). Defaults to `<ul>` (unordered). */
@@ -27,6 +29,8 @@ interface ListProps {
   variant?: Variant;
   /** Optional CSS class for the list container. */
   className?: string;
+  /** Component used to render item links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
 }
 
 /**
@@ -49,8 +53,10 @@ export function List({
   ordered,
   variant = "default",
   className,
+  linkAs,
 }: ListProps): ReactNode {
   const Tag = ordered ? "ol" : "ul";
+  const LinkAs = linkAs ?? DefaultLink;
 
   return (
     <Tag
@@ -62,19 +68,32 @@ export function List({
       )}
     >
       {items.map((item, i) => (
-        <li key={i} className={cx(listItem, variant === "compact" && compactItem, variant === "bordered" && borderedItem)}>
-          <ItemContent item={item} variant={variant} />
+        <li
+          key={i}
+          className={cx(
+            listItem,
+            variant === "compact" && compactItem,
+            variant === "bordered" && borderedItem,
+          )}
+        >
+          <ItemContent item={item} variant={variant} LinkAs={LinkAs} />
         </li>
       ))}
     </Tag>
   );
 }
 
-function ItemContent({ item, variant }: { item: ListItem; variant: Variant }) {
+function ItemContent(
+  { item, variant, LinkAs }: { item: ListItem; variant: Variant; LinkAs: LinkComponent },
+) {
   const inner: ReactNode = (
     <div className={itemInner}>
       {item.icon && (
-        <Icon name={item.icon} size={18} className={css({ color: "text.secondary", flexShrink: 0 })} />
+        <Icon
+          name={item.icon}
+          size={18}
+          className={css({ color: "text.secondary", flexShrink: 0 })}
+        />
       )}
       <div>
         <span className={labelStyle}>{item.label}</span>
@@ -93,10 +112,28 @@ function ItemContent({ item, variant }: { item: ListItem; variant: Variant }) {
         </a>
       );
     }
-    return <a href={item.href} className={linkStyle}>{inner}</a>;
+    return <LinkAs href={item.href} className={linkStyle}>{inner}</LinkAs>;
   }
 
   return inner;
+}
+
+function DefaultLink({
+  href,
+  children,
+  className,
+  ...rest
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}): ReactNode {
+  return (
+    <a href={href} className={className} {...rest}>
+      {children}
+    </a>
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -106,7 +143,7 @@ function ItemContent({ item, variant }: { item: ListItem; variant: Variant }) {
 const listBase = css({
   fontFamily: "body",
   margin: 0,
-  paddingLeft: "24px",
+  paddingLeft: "6",
 });
 
 const unorderedList = css({
@@ -123,8 +160,8 @@ const orderedList = css({
 });
 
 const variantStyles: Record<Variant, string> = {
-  default: css({ display: "flex", flexDirection: "column", gap: "12px" }),
-  compact: css({ display: "flex", flexDirection: "column", gap: "4px" }),
+  default: css({ display: "flex", flexDirection: "column", gap: "3" }),
+  compact: css({ display: "flex", flexDirection: "column", gap: "1" }),
   bordered: css({
     display: "flex",
     flexDirection: "column",
@@ -136,7 +173,7 @@ const variantStyles: Record<Variant, string> = {
 
 const listItem = css({
   color: "text.primary",
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: "1.5",
 });
 
@@ -154,7 +191,7 @@ const borderedItem = css({
 const itemInner = css({
   display: "flex",
   alignItems: "flex-start",
-  gap: "8px",
+  gap: "2",
 });
 
 const labelStyle = css({
@@ -164,7 +201,7 @@ const labelStyle = css({
 
 const descStyle = css({
   margin: 0,
-  marginTop: "2px",
+  marginTop: "0.5",
   fontSize: "13px",
   color: "text.secondary",
   lineHeight: "1.4",

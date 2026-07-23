@@ -6,7 +6,7 @@ export function Counter() {
   const [count, setCount] = useState(0);
 
   return (
-    <button onClick={() => setCount(c => c + 1)}>
+    <button onClick={() => setCount(c => c + 1)} type="button">
       Count: {count}
     </button>
   );
@@ -34,7 +34,8 @@ export function WithoutLineNumbers() {
 }
 
 export function PythonCode() {
-  const pyCode = `def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)`;
+  const pyCode =
+    `def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)`;
   return (
     <div style={{ maxWidth: 600 }}>
       <SyntaxHighlighter code={pyCode} language="python" showLineNumbers />
@@ -45,7 +46,12 @@ export function PythonCode() {
 export function WithHighlightedLines() {
   return (
     <div style={{ maxWidth: 600 }}>
-      <SyntaxHighlighter code={sampleCode} language="tsx" showLineNumbers highlightLines={[1, 2, 3]} />
+      <SyntaxHighlighter
+        code={sampleCode}
+        language="tsx"
+        showLineNumbers
+        highlightLines={[1, 2, 3]}
+      />
     </div>
   );
 }

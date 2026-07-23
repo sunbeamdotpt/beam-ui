@@ -1,5 +1,6 @@
-import { useState, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */
@@ -26,7 +27,7 @@ export interface DiffHunk {
 }
 
 /** Props for {@link DiffViewer}. */
-interface DiffViewerProps {
+export interface DiffViewerProps {
   /** Array of hunks to display. */
   hunks: DiffHunk[];
   /** Optional old file name (shown in unified mode or when different from newFileName). */
@@ -121,7 +122,11 @@ function segmentLines(lines: DiffLine[]): DisplaySegment[] {
       const bottom = contextRun.slice(contextRun.length - CONTEXT_VISIBLE_LINES);
       const hiddenCount = contextRun.length - CONTEXT_VISIBLE_LINES * 2;
       segments.push({ kind: "lines", lines: top });
-      segments.push({ kind: "collapsed", lines: contextRun.slice(CONTEXT_VISIBLE_LINES, contextRun.length - CONTEXT_VISIBLE_LINES), collapsedCount: hiddenCount });
+      segments.push({
+        kind: "collapsed",
+        lines: contextRun.slice(CONTEXT_VISIBLE_LINES, contextRun.length - CONTEXT_VISIBLE_LINES),
+        collapsedCount: hiddenCount,
+      });
       segments.push({ kind: "lines", lines: bottom });
     } else {
       segments.push({ kind: "lines", lines: contextRun });
@@ -194,15 +199,15 @@ export function DiffViewer({
       {/* File name header */}
       {hasFileNames && (
         <div className={fileHeader}>
-          {oldFileName && newFileName && oldFileName !== newFileName ? (
-            <span>
-              <span className={fileNameMuted}>{oldFileName}</span>
-              <span className={fileNameArrow}>{" \u2192 "}</span>
-              <span className={fileNamePrimary}>{newFileName}</span>
-            </span>
-          ) : (
-            <span className={fileNamePrimary}>{newFileName ?? oldFileName}</span>
-          )}
+          {oldFileName && newFileName && oldFileName !== newFileName
+            ? (
+              <span>
+                <span className={fileNameMuted}>{oldFileName}</span>
+                <span className={fileNameArrow}>→</span>
+                <span className={fileNamePrimary}>{newFileName}</span>
+              </span>
+            )
+            : <span className={fileNamePrimary}>{newFileName ?? oldFileName}</span>}
         </div>
       )}
 
@@ -240,7 +245,7 @@ function renderUnified(
     if (seg.kind === "collapsed" && !expanded.has(key)) {
       return (
         <div key={key} className={collapsedRow}>
-          <button className={expandBtn} onClick={() => toggleExpand(key)}>
+          <button className={expandBtn} onClick={() => toggleExpand(key)} type="button">
             {`\u2195 ${seg.collapsedCount} unchanged lines`}
           </button>
         </div>
@@ -249,15 +254,13 @@ function renderUnified(
 
     const lines = seg.kind === "collapsed" ? seg.lines : seg.lines;
     return lines.map((line, lineIdx) => {
-      const bg =
-        line.type === "add" ? addBg : line.type === "remove" ? removeBg : undefined;
+      const bg = line.type === "add" ? addBg : line.type === "remove" ? removeBg : undefined;
       const prefix = line.type === "add" ? "+" : line.type === "remove" ? "-" : " ";
-      const ariaLabel =
-        line.type === "add"
-          ? `Added: ${line.content}`
-          : line.type === "remove"
-            ? `Removed: ${line.content}`
-            : undefined;
+      const ariaLabel = line.type === "add"
+        ? `Added: ${line.content}`
+        : line.type === "remove"
+        ? `Removed: ${line.content}`
+        : undefined;
 
       return (
         <div
@@ -330,7 +333,7 @@ function renderSplit(
     if (seg.kind === "collapsed" && !expanded.has(key)) {
       return (
         <div key={key} className={collapsedRow}>
-          <button className={expandBtn} onClick={() => toggleExpand(key)}>
+          <button className={expandBtn} onClick={() => toggleExpand(key)} type="button">
             {`\u2195 ${seg.collapsedCount} unchanged lines`}
           </button>
         </div>
@@ -347,9 +350,7 @@ function renderSplit(
             splitLeftBorder,
             row.left?.type === "remove" ? removeBg : undefined,
           )}
-          aria-label={
-            row.left?.type === "remove" ? `Removed: ${row.left.content}` : undefined
-          }
+          aria-label={row.left?.type === "remove" ? `Removed: ${row.left.content}` : undefined}
         >
           <span className={lineNumCell}>{row.left?.oldLineNumber ?? ""}</span>
           <span className={cx(prefixCell, row.left?.type === "remove" ? removeBg : undefined)}>
@@ -364,9 +365,7 @@ function renderSplit(
             splitHalf,
             row.right?.type === "add" ? addBg : undefined,
           )}
-          aria-label={
-            row.right?.type === "add" ? `Added: ${row.right.content}` : undefined
-          }
+          aria-label={row.right?.type === "add" ? `Added: ${row.right.content}` : undefined}
         >
           <span className={lineNumCell}>{row.right?.newLineNumber ?? ""}</span>
           <span className={cx(prefixCell, row.right?.type === "add" ? addBg : undefined)}>

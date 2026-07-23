@@ -1,8 +1,9 @@
-import { useRef, useEffect, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect, useRef } from "react";
 
 /** Props for {@link Checkbox}. */
-interface CheckboxProps {
+export interface CheckboxProps {
   /** Whether the checkbox is checked. */
   checked: boolean;
   /** Called with the new checked state when the user toggles the checkbox. */
@@ -54,7 +55,7 @@ export function Checkbox({
       className={cx(
         wrapper,
         disabled ? disabledStyle : undefined,
-        className
+        className,
       )}
     >
       <input
@@ -68,24 +69,28 @@ export function Checkbox({
       <div
         className={cx(
           box,
-          checked || indeterminate ? boxChecked : undefined
+          checked || indeterminate ? boxChecked : undefined,
         )}
       >
-        {indeterminate ? (
-          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" aria-hidden="true">
-            <rect width="10" height="2" rx="1" fill="white" />
-          </svg>
-        ) : checked ? (
-          <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-            <path
-              d="M1 4L3.5 6.5L9 1"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        ) : null}
+        {indeterminate
+          ? (
+            <svg width="10" height="2" viewBox="0 0 10 2" fill="none" aria-hidden="true">
+              <rect width="10" height="2" rx="1" fill="white" />
+            </svg>
+          )
+          : checked
+          ? (
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+              <path
+                d="M1 4L3.5 6.5L9 1"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )
+          : null}
       </div>
       {label && <span className={labelStyle}>{label}</span>}
     </label>

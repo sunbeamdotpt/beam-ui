@@ -1,5 +1,5 @@
 // @storyName DiffViewer
-import { parseDiff, DiffViewer } from "./diff-viewer";
+import { DiffViewer, parseDiff } from "./diff-viewer.tsx";
 
 const rawDiff = `@@ -1,8 +1,10 @@
  import { useState } from "react";

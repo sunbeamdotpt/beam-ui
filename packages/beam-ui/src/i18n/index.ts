@@ -35,11 +35,11 @@
  */
 import {
   createContext,
+  createElement,
+  type ReactNode,
+  useCallback,
   useContext,
   useState,
-  useCallback,
-  type ReactNode,
-  createElement,
 } from "react";
 
 /* ------------------------------------------------------------------ */
@@ -121,7 +121,9 @@ interface I18nProviderProps {
  * </I18nProvider>
  * ```
  */
-export function I18nProvider({ config, locale: initialLocale, children }: I18nProviderProps): ReactNode {
+export function I18nProvider(
+  { config, locale: initialLocale, children }: I18nProviderProps,
+): ReactNode {
   const [locale, setLocale] = useState(initialLocale);
 
   const t = useCallback(
@@ -151,7 +153,7 @@ export function I18nProvider({ config, locale: initialLocale, children }: I18nPr
 
       return resolved;
     },
-    [locale, config]
+    [locale, config],
   );
 
   const value: I18nContextValue = { t, locale, setLocale };

@@ -1,15 +1,16 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ComponentProps, ReactNode } from "react";
 import {
-  MenuRoot,
-  MenuTrigger,
-  MenuPositioner,
   MenuContent,
   MenuItem,
-  MenuSeparator,
   MenuItemGroup,
   MenuItemGroupLabel,
+  MenuPositioner,
+  MenuRoot,
+  MenuSeparator,
+  MenuTrigger,
 } from "@ark-ui/react/menu";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Single menu item in a {@link DropdownMenu}. */
@@ -35,7 +36,7 @@ export interface DropdownMenuGroup {
 }
 
 /** Props for {@link DropdownMenu}. */
-interface DropdownMenuProps {
+export interface DropdownMenuProps {
   /** Flat list of items (mutually exclusive with `groups`). */
   items?: DropdownMenuItem[];
   /** Grouped list of items (mutually exclusive with `items`). */
@@ -43,7 +44,7 @@ interface DropdownMenuProps {
   /** Element or component that triggers the dropdown on click. */
   children: ReactNode;
   /** Positioning options for Ark UI's MenuRoot (e.g., `{ placement: "bottom-start" }`). */
-  positioning?: { placement?: string };
+  positioning?: ComponentProps<typeof MenuRoot>["positioning"];
 }
 
 /**
@@ -144,7 +145,7 @@ export function DropdownMenu({
   positioning,
 }: DropdownMenuProps): ReactNode {
   return (
-    <MenuRoot positioning={positioning as any}>
+    <MenuRoot positioning={positioning}>
       <MenuTrigger asChild>{children}</MenuTrigger>
       <MenuPositioner>
         <MenuContent className={contentStyle}>

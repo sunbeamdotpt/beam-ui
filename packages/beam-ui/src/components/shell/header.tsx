@@ -1,16 +1,18 @@
-import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
-import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  DialogRoot,
   DialogBackdrop,
-  DialogPositioner,
-  DialogContent,
   DialogCloseTrigger,
+  DialogContent,
+  DialogPositioner,
+  DialogRoot,
 } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
-import { headerLinks, docsSidebar } from "../../data/navigation.ts";
+import { docsSidebar, headerLinks } from "../../data/navigation.ts";
 import type { NavSection } from "../../data/navigation.ts";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 import { Sidebar } from "./sidebar.tsx";
 import { Breadcrumbs } from "./breadcrumbs.tsx";
 import { ThemeToggle } from "../ui/theme-toggle.tsx";
@@ -338,7 +340,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
   );
 }
 
-
+/** Default active matcher: exact for root, prefix otherwise. */
+function defaultIsActive(_label: string, href: string, currentPath: string): boolean {
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href);
+}
 
 /** Props for {@link Header}. */
 export interface HeaderProps {
@@ -362,6 +368,14 @@ export interface HeaderProps {
   showSearch?: boolean;
   /** Remove the max-width constraint so the header spans the full viewport. Defaults to false. */
   fullWidth?: boolean;
+  /** Current path used to compute active states and close the mobile drawer on navigation. */
+  currentPath?: string;
+  /** Component used to render links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
+  /** Called when the user selects a search result or a nav link should trigger client-side navigation. */
+  onNavigate?: (href: string) => void;
+  /** Override the default active-state matcher. */
+  isActive?: (label: string, href: string, currentPath: string) => boolean;
 }
 
 /**
@@ -370,12 +384,15 @@ export interface HeaderProps {
  *
  * All data sources are configurable via props. When omitted, sensible defaults
  * (beam-ui documentation navigation) are used so the component works out of the box.
+ * The component is router-agnostic: pass `linkAs` (your router's `Link`) and
+ * `currentPath`/`onNavigate` to wire it into any routing framework.
  *
  * @example
  * ```tsx
  * <Header
- *   brand={<Link to="/">My App</Link>}
+ *   brand={<Link href="/">My App</Link>}
  *   navLinks={[{ label: "Dashboard", href: "/" }, { label: "Settings", href: "/settings" }]}
+ *   currentPath="/settings"
  *   searchPlaceholder="Search..."
  * />
  * ```
@@ -383,7 +400,7 @@ export interface HeaderProps {
  * @example
  * ```tsx
  * <Header
- *   brand={<Link to="/">My App</Link>}
+ *   brand={<Link href="/">My App</Link>}
  *   breadcrumbs={[{ label: "Home", href: "/" }, { label: "Settings" }]}
  *   showSearch={false}
  * />
@@ -400,9 +417,11 @@ export function Header({
   searchPlaceholder = "Search docs...",
   showSearch = true,
   fullWidth = false,
+  currentPath = "",
+  linkAs,
+  onNavigate,
+  isActive = defaultIsActive,
 }: HeaderProps = {}): ReactNode {
-  const location = useLocation();
-  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -412,17 +431,12 @@ export function Header({
   const resolvedNavLinks = navLinksProp ?? headerLinks;
   const resolvedDrawerSections = drawerSectionsProp ?? docsSidebar;
   const allNavItems = searchItemsProp ?? buildSearchItems(resolvedDrawerSections);
+  const LinkAs = linkAs ?? DefaultLink;
 
   // Close drawer on route change
   useEffect(() => {
     setDrawerOpen(false);
-  }, [location.pathname]);
-
-  const isActive = (label: string, href: string) => {
-    if (href === "/") return location.pathname === "/";
-    if (label === "COMMUNITY") return false;
-    return location.pathname.startsWith(href);
-  };
+  }, [currentPath]);
 
   // Cmd+K / Ctrl+K to focus, Escape to blur
   useEffect(() => {
@@ -454,9 +468,7 @@ export function Header({
   }, []);
 
   const filtered = query.trim()
-    ? allNavItems.filter((item) =>
-        item.label.toLowerCase().includes(query.toLowerCase())
-      )
+    ? allNavItems.filter((item) => item.label.toLowerCase().includes(query.toLowerCase()))
     : [];
 
   const handleSelect = useCallback(
@@ -464,15 +476,15 @@ export function Header({
       setQuery("");
       setShowResults(false);
       inputRef.current?.blur();
-      navigate({ to: href });
+      onNavigate?.(href);
     },
-    [navigate]
+    [onNavigate],
   );
 
   const defaultBrand = (
-    <Link to="/" className={brandLink}>
+    <LinkAs href="/" className={brandLink}>
       Sunbeam Studios
-    </Link>
+    </LinkAs>
   );
 
   return (
@@ -481,6 +493,7 @@ export function Header({
         <div className={fullWidth ? innerFullWidth : inner}>
           <div className={leftGroup}>
             <button
+              type="button"
               className={menuBtn}
               onClick={() => setDrawerOpen(true)}
               aria-label="Open navigation"
@@ -490,27 +503,32 @@ export function Header({
               </span>
             </button>
             {brand !== undefined ? brand : defaultBrand}
-            {breadcrumbs ? (
-              <Breadcrumbs items={breadcrumbs} className={breadcrumbsNav} />
-            ) : (
-              <nav className={nav} aria-label="Main">
-                {location.pathname !== "/" && resolvedNavLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className={isActive(link.label, link.href) ? navLinkActive : navLink}
-                    {...(isActive(link.label, link.href) ? { "aria-current": "page" as const } : {})}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-            )}
+            {breadcrumbs
+              ? <Breadcrumbs items={breadcrumbs} className={breadcrumbsNav} />
+              : (
+                <nav className={nav} aria-label="Main">
+                  {currentPath !== "/" && resolvedNavLinks.map((link) => (
+                    <LinkAs
+                      key={link.label}
+                      href={link.href}
+                      className={isActive(link.label, link.href, currentPath)
+                        ? navLinkActive
+                        : navLink}
+                      {...(isActive(link.label, link.href, currentPath)
+                        ? { "aria-current": "page" as const }
+                        : {})}
+                    >
+                      {link.label}
+                    </LinkAs>
+                  ))}
+                </nav>
+              )}
           </div>
           <div className={rightGroup}>
             {showSearch && (
               <>
                 <button
+                  type="button"
                   className={searchTriggerMobile}
                   onClick={() => inputRef.current?.focus()}
                   aria-label="Search"
@@ -541,35 +559,30 @@ export function Header({
                   <kbd className={kbdStyle}>&#x2318;K</kbd>
                   {showResults && query.trim() && (
                     <div className={searchDropdown} role="listbox" id="search-listbox">
-                      {filtered.length === 0 ? (
-                        <div className={searchNoResults}>No results for "{query}"</div>
-                      ) : (
-                        (() => {
-                          let lastSection = "";
-                          return filtered.map((item) => {
-                            const showSection = item.section !== lastSection;
-                            lastSection = item.section ?? lastSection;
-                            return (
-                              <div key={item.href + item.label}>
-                                {showSection && item.section && (
-                                  <div className={searchResultSection} role="presentation">{item.section}</div>
-                                )}
-                                <a
-                                  className={searchResultItem}
-                                  role="option"
-                                  href={item.href}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleSelect(item.href);
-                                  }}
-                                >
-                                  {item.label}
-                                </a>
-                              </div>
-                            );
-                          });
-                        })()
-                      )}
+                      {filtered.length === 0
+                        ? <div className={searchNoResults}>No results for "{query}"</div>
+                        : (
+                          (() => {
+                            let lastSection = "";
+                            return filtered.map((item) => {
+                              const showSection = item.section !== lastSection;
+                              lastSection = item.section ?? lastSection;
+                              return (
+                                <div key={item.href + item.label}>
+                                  {showSection && item.section && (
+                                    <div className={searchResultSection} role="presentation">
+                                      {item.section}
+                                    </div>
+                                  )}
+                                  <SearchResult
+                                    item={item}
+                                    onSelect={onNavigate ? handleSelect : undefined}
+                                  />
+                                </div>
+                              );
+                            });
+                          })()
+                        )}
                     </div>
                   )}
                 </div>
@@ -587,14 +600,64 @@ export function Header({
           <DialogBackdrop className={drawerBackdrop} />
           <DialogPositioner className={drawerPositioner}>
             <DialogContent className={drawerContent}>
-              <DialogCloseTrigger className={drawerCloseBtn} aria-label="Close navigation">
+              <DialogCloseTrigger
+                type="button"
+                className={drawerCloseBtn}
+                aria-label="Close navigation"
+              >
                 <span className="material-symbols-outlined">close</span>
               </DialogCloseTrigger>
-              <Sidebar sections={resolvedDrawerSections} />
+              <Sidebar
+                sections={resolvedDrawerSections}
+                currentPath={currentPath}
+                linkAs={linkAs}
+              />
             </DialogContent>
           </DialogPositioner>
         </Portal>
       </DialogRoot>
     </>
+  );
+}
+
+function DefaultLink({
+  href,
+  children,
+  className,
+  ...rest
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}): ReactNode {
+  return (
+    <a href={href} className={className} {...rest}>
+      {children}
+    </a>
+  );
+}
+
+function SearchResult({
+  item,
+  onSelect,
+}: {
+  item: HeaderSearchItem;
+  onSelect?: (href: string) => void;
+}) {
+  return (
+    <a
+      className={searchResultItem}
+      role="option"
+      href={item.href}
+      onClick={onSelect
+        ? (e) => {
+          e.preventDefault();
+          onSelect(item.href);
+        }
+        : undefined}
+    >
+      {item.label}
+    </a>
   );
 }

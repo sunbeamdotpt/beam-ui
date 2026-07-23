@@ -45,5 +45,11 @@ export function LastStep() {
 
 export function TwoSteps() {
   const [current, setCurrent] = useState(0);
-  return <Steps currentStep={current} onChange={setCurrent} steps={[{ title: "Start" }, { title: "Finish" }]} />;
+  return (
+    <Steps
+      currentStep={current}
+      onChange={setCurrent}
+      steps={[{ title: "Start" }, { title: "Finish" }]}
+    />
+  );
 }

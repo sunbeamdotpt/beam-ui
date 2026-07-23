@@ -1,4 +1,4 @@
-import { TreeView, type TreeNode } from "./tree-view";
+import { type TreeNode, TreeView } from "./tree-view.tsx";
 
 const nodes: TreeNode[] = [
   {

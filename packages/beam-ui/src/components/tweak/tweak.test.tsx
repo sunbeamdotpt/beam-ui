@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/vitest";
@@ -11,7 +11,7 @@ describe("TweakSection", () => {
     render(
       <TweakSection label="Test Section">
         <div>Test content</div>
-      </TweakSection>
+      </TweakSection>,
     );
     expect(screen.getByText("Test Section")).toBeInTheDocument();
     expect(screen.getByText("Test content")).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe("TweakSection", () => {
     const { container } = render(
       <TweakSection label="Test">
         <div>Content</div>
-      </TweakSection>
+      </TweakSection>,
     );
     const section = container.querySelector('[data-part="section"]');
     expect(section).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("TweakRadio", () => {
         value="opt1"
         options={options}
         onChange={() => {}}
-      />
+      />,
     );
     expect(screen.getByText("Option 1")).toBeInTheDocument();
     expect(screen.getByText("Option 2")).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("TweakRadio", () => {
         value="opt2"
         options={options}
         onChange={() => {}}
-      />
+      />,
     );
     // When opt2 is selected, Option 2 text is rendered
     expect(screen.getByText("Option 2")).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("TweakRadio", () => {
         value="opt1"
         options={options}
         onChange={onChange}
-      />
+      />,
     );
     const user = userEvent.setup();
     const opt2Button = screen.getByText("Option 2");
@@ -90,7 +90,7 @@ describe("TweakRadio", () => {
         value="opt1"
         options={options}
         onChange={onChange}
-      />
+      />,
     );
     const user = userEvent.setup();
     const opt1Button = screen.getByText("Option 1");
@@ -106,7 +106,7 @@ describe("TweakToggle", () => {
         label="Test Toggle"
         value={false}
         onChange={() => {}}
-      />
+      />,
     );
     expect(screen.getByText("Test Toggle")).toBeInTheDocument();
   });
@@ -117,7 +117,7 @@ describe("TweakToggle", () => {
         label="Test Toggle"
         value={false}
         onChange={() => {}}
-      />
+      />,
     );
     let switchRoot = container.querySelector('[data-state="unchecked"]');
     expect(switchRoot).toBeInTheDocument();
@@ -125,9 +125,9 @@ describe("TweakToggle", () => {
     const { container: container2 } = render(
       <TweakToggle
         label="Test Toggle"
-        value={true}
+        value
         onChange={() => {}}
-      />
+      />,
     );
     switchRoot = container2.querySelector('[data-state="checked"]');
     expect(switchRoot).toBeInTheDocument();
@@ -140,7 +140,7 @@ describe("TweakToggle", () => {
         label="Test Toggle"
         value={false}
         onChange={onChange}
-      />
+      />,
     );
     const user = userEvent.setup();
     const switchLabel = container.querySelector('[data-part="root"]') as HTMLElement;
@@ -155,7 +155,7 @@ describe("TweakToggle", () => {
         label="Test Toggle"
         value={false}
         onChange={onChange}
-      />
+      />,
     );
     const switchLabel = container.querySelector('[data-part="root"]') as HTMLElement;
     const user = userEvent.setup();

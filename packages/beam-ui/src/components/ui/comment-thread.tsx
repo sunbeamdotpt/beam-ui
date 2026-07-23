@@ -1,5 +1,6 @@
-import { useState, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import { Avatar } from "./avatar.tsx";
 import { Icon } from "./icon.tsx";
 import { MarkdownRenderer } from "./markdown-renderer.tsx";
@@ -46,7 +47,7 @@ interface TimelineEvent {
 }
 
 /** Props for {@link CommentThread}. */
-interface CommentThreadProps {
+export interface CommentThreadProps {
   /** Array of comments and timeline events, rendered in chronological order. */
   items: (Comment | TimelineEvent)[];
   /** Callback fired when the user submits a reply; receives the markdown body. */
@@ -124,24 +125,32 @@ function CommentCard({
       <div className={commentHeader}>
         <span className={authorName}>{comment.author.displayName}</span>
         <span className={timestamp}>{formatRelativeTime(comment.createdAt)}</span>
-        {comment.updatedAt && (
-          <span className={editedBadge}>(edited)</span>
-        )}
+        {comment.updatedAt && <span className={editedBadge}>(edited)</span>}
       </div>
 
-      {editing ? (
-        <div className={editArea}>
-          <MarkdownEditor value={editBody} onChange={setEditBody} minHeight="100px" />
-          <div className={editActions}>
-            <Button variant="primary" onClick={handleSaveEdit}>Save</Button>
-            <Button variant="ghost" onClick={() => { setEditing(false); setEditBody(comment.body); }}>Cancel</Button>
+      {editing
+        ? (
+          <div className={editArea}>
+            <MarkdownEditor value={editBody} onChange={setEditBody} minHeight="100px" />
+            <div className={editActions}>
+              <Button variant="primary" onClick={handleSaveEdit}>Save</Button>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setEditing(false);
+                  setEditBody(comment.body);
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className={commentBody}>
-          <MarkdownRenderer content={comment.body} />
-        </div>
-      )}
+        )
+        : (
+          <div className={commentBody}>
+            <MarkdownRenderer content={comment.body} />
+          </div>
+        )}
 
       {/* Footer: reactions + edit */}
       {(!editing) && (

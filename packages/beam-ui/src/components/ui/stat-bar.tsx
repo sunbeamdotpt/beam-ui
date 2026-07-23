@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Model statistics for display in a stat bar. */
@@ -21,13 +22,13 @@ export interface ModelStats {
 const grid = css({
   display: "grid",
   gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" },
-  paddingBlock: "24px",
-  marginBottom: "48px",
+  paddingBlock: "6",
+  marginBottom: "12",
   gap: { base: "16px", lg: "0" },
 });
 
 const cell = css({
-  paddingInline: "16px",
+  paddingInline: "4",
   textAlign: "center",
   borderRight: "1px solid",
   borderColor: "border.subtle",
@@ -37,30 +38,30 @@ const cell = css({
 });
 
 const label = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "text.muted",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
-  marginBottom: "8px",
+  marginBottom: "2",
 });
 
 const bars = css({
   display: "flex",
   justifyContent: "center",
-  gap: "2px",
+  gap: "0.5",
 });
 
 const barFilled = css({
-  width: "6px",
-  height: "16px",
+  width: "1.5",
+  height: "4",
   bg: "sunbeam.orange",
   borderRadius: "sm",
 });
 
 const barEmpty = css({
-  width: "6px",
-  height: "16px",
+  width: "1.5",
+  height: "4",
   bg: "bg.card",
   borderRadius: "sm",
 });
@@ -68,12 +69,12 @@ const barEmpty = css({
 const modalityIcons = css({
   display: "flex",
   justifyContent: "center",
-  gap: "6px",
+  gap: "1.5",
   color: "text.primary",
 });
 
 const contextValue = css({
-  fontSize: "18px",
+  fontSize: "lg",
   fontWeight: "button",
   color: "sunbeam.orange",
   lineHeight: 1.2,
@@ -83,11 +84,11 @@ const priceColumn = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "2px",
+  gap: "0.5",
 });
 
 const priceLabel = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "sunbeam.orange",
 });
@@ -111,7 +112,7 @@ const modalityIconMap: Record<string, string> = {
 };
 
 /** Props for {@link StatBar}. */
-interface StatBarProps {
+export interface StatBarProps {
   /** Model statistics to display. */
   stats: ModelStats;
 }
@@ -126,7 +127,7 @@ interface StatBarProps {
  * <StatBar stats={{
  *   speed: 4,
  *   performance: 5,
- *   modalities: ["text", "image"],
+ *   modalities: "["text", "image"],
  *   context: "200K",
  *   priceIn: "$0.50",
  *   priceOut: "$1.50",
@@ -162,9 +163,7 @@ export function StatBar({ stats }: StatBarProps): ReactNode {
       <div className={cell}>
         <p className={label}>MODALITIES</p>
         <div className={modalityIcons}>
-          {stats.modalities.map((m) => (
-            <Icon key={m} name={modalityIconMap[m] ?? m} size={20} />
-          ))}
+          {stats.modalities.map((m) => <Icon key={m} name={modalityIconMap[m] ?? m} size={20} />)}
         </div>
       </div>
 

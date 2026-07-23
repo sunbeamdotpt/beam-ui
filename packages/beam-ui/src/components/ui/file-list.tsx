@@ -1,5 +1,6 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Single file or folder in a {@link FileList}. */
@@ -21,7 +22,7 @@ export interface FileItem {
 }
 
 /** Props for {@link FileList}. */
-interface FileListProps {
+export interface FileListProps {
   /** Array of files and folders to display. */
   items: FileItem[];
   /** Set of currently selected item IDs. */
@@ -61,7 +62,9 @@ const checkboxChecked = css({
   color: "white",
 });
 
-function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string }) {
+function Checkbox(
+  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+) {
   return (
     <div
       role="checkbox"
@@ -69,8 +72,17 @@ function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange
       aria-label={ariaLabel}
       tabIndex={0}
       className={cx(checkboxOuter, checked && checkboxChecked)}
-      onClick={(e) => { e.stopPropagation(); onChange(); }}
-      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onChange();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          e.stopPropagation();
+          onChange();
+        }
+      }}
     >
       {checked && <Icon name="check" size={14} />}
     </div>
@@ -189,7 +201,11 @@ function ListView({
           className={cx(listRow, selected.has(item.id) && listRowSelected)}
           onDoubleClick={() => onOpen?.(item)}
         >
-          <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+          <Checkbox
+            checked={selected.has(item.id)}
+            onChange={() => toggle(item.id)}
+            ariaLabel={`Select ${item.name}`}
+          />
           <Icon
             name={defaultIcon(item)}
             size={18}
@@ -281,10 +297,19 @@ function GridView({
           onClick={() => toggle(item.id)}
           onDoubleClick={() => onOpen?.(item)}
           tabIndex={0}
-          onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(item.id); } }}
+          onKeyDown={(e) => {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault();
+              toggle(item.id);
+            }
+          }}
         >
           <div className={gridCheckbox}>
-            <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+            <Checkbox
+              checked={selected.has(item.id)}
+              onChange={() => toggle(item.id)}
+              ariaLabel={`Select ${item.name}`}
+            />
           </div>
           <Icon
             name={defaultIcon(item)}
@@ -329,11 +354,16 @@ export function FileList({
   font = "body",
   className,
 }: FileListProps): ReactNode {
-  const inner =
-    layout === "grid" ? (
-      <GridView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} font={font} />
-    ) : (
-      <ListView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} font={font} />
+  const inner = layout === "grid"
+    ? <GridView items={items} selected={selected} onSelect={onSelect} onOpen={onOpen} font={font} />
+    : (
+      <ListView
+        items={items}
+        selected={selected}
+        onSelect={onSelect}
+        onOpen={onOpen}
+        font={font}
+      />
     );
 
   return <div className={className}>{inner}</div>;

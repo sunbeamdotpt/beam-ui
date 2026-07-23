@@ -203,21 +203,269 @@ const tokens = {
     "value": "9999px",
     "variable": "var(--radii-full)"
   },
-  "breakpoints.sm": {
-    "value": "640px",
-    "variable": "var(--breakpoints-sm)"
+  "spacing.0": {
+    "value": "0px",
+    "variable": "var(--spacing-0)"
   },
-  "breakpoints.md": {
-    "value": "768px",
-    "variable": "var(--breakpoints-md)"
+  "spacing.1": {
+    "value": "4px",
+    "variable": "var(--spacing-1)"
   },
-  "breakpoints.lg": {
-    "value": "1024px",
-    "variable": "var(--breakpoints-lg)"
+  "spacing.2": {
+    "value": "8px",
+    "variable": "var(--spacing-2)"
   },
-  "breakpoints.xl": {
-    "value": "1280px",
-    "variable": "var(--breakpoints-xl)"
+  "spacing.3": {
+    "value": "12px",
+    "variable": "var(--spacing-3)"
+  },
+  "spacing.4": {
+    "value": "16px",
+    "variable": "var(--spacing-4)"
+  },
+  "spacing.5": {
+    "value": "20px",
+    "variable": "var(--spacing-5)"
+  },
+  "spacing.6": {
+    "value": "24px",
+    "variable": "var(--spacing-6)"
+  },
+  "spacing.7": {
+    "value": "28px",
+    "variable": "var(--spacing-7)"
+  },
+  "spacing.8": {
+    "value": "32px",
+    "variable": "var(--spacing-8)"
+  },
+  "spacing.9": {
+    "value": "36px",
+    "variable": "var(--spacing-9)"
+  },
+  "spacing.10": {
+    "value": "40px",
+    "variable": "var(--spacing-10)"
+  },
+  "spacing.12": {
+    "value": "48px",
+    "variable": "var(--spacing-12)"
+  },
+  "spacing.14": {
+    "value": "56px",
+    "variable": "var(--spacing-14)"
+  },
+  "spacing.16": {
+    "value": "64px",
+    "variable": "var(--spacing-16)"
+  },
+  "spacing.20": {
+    "value": "80px",
+    "variable": "var(--spacing-20)"
+  },
+  "spacing.24": {
+    "value": "96px",
+    "variable": "var(--spacing-24)"
+  },
+  "spacing.28": {
+    "value": "112px",
+    "variable": "var(--spacing-28)"
+  },
+  "spacing.32": {
+    "value": "128px",
+    "variable": "var(--spacing-32)"
+  },
+  "spacing.36": {
+    "value": "144px",
+    "variable": "var(--spacing-36)"
+  },
+  "spacing.40": {
+    "value": "160px",
+    "variable": "var(--spacing-40)"
+  },
+  "spacing.44": {
+    "value": "176px",
+    "variable": "var(--spacing-44)"
+  },
+  "spacing.48": {
+    "value": "192px",
+    "variable": "var(--spacing-48)"
+  },
+  "spacing.52": {
+    "value": "208px",
+    "variable": "var(--spacing-52)"
+  },
+  "spacing.56": {
+    "value": "224px",
+    "variable": "var(--spacing-56)"
+  },
+  "spacing.60": {
+    "value": "240px",
+    "variable": "var(--spacing-60)"
+  },
+  "spacing.64": {
+    "value": "256px",
+    "variable": "var(--spacing-64)"
+  },
+  "spacing.72": {
+    "value": "288px",
+    "variable": "var(--spacing-72)"
+  },
+  "spacing.80": {
+    "value": "320px",
+    "variable": "var(--spacing-80)"
+  },
+  "spacing.96": {
+    "value": "384px",
+    "variable": "var(--spacing-96)"
+  },
+  "spacing.0.5": {
+    "value": "2px",
+    "variable": "var(--spacing-0\\.5)"
+  },
+  "spacing.1.5": {
+    "value": "6px",
+    "variable": "var(--spacing-1\\.5)"
+  },
+  "spacing.2.5": {
+    "value": "10px",
+    "variable": "var(--spacing-2\\.5)"
+  },
+  "spacing.3.5": {
+    "value": "14px",
+    "variable": "var(--spacing-3\\.5)"
+  },
+  "sizes.0": {
+    "value": "0px",
+    "variable": "var(--sizes-0)"
+  },
+  "sizes.1": {
+    "value": "4px",
+    "variable": "var(--sizes-1)"
+  },
+  "sizes.2": {
+    "value": "8px",
+    "variable": "var(--sizes-2)"
+  },
+  "sizes.3": {
+    "value": "12px",
+    "variable": "var(--sizes-3)"
+  },
+  "sizes.4": {
+    "value": "16px",
+    "variable": "var(--sizes-4)"
+  },
+  "sizes.5": {
+    "value": "20px",
+    "variable": "var(--sizes-5)"
+  },
+  "sizes.6": {
+    "value": "24px",
+    "variable": "var(--sizes-6)"
+  },
+  "sizes.7": {
+    "value": "28px",
+    "variable": "var(--sizes-7)"
+  },
+  "sizes.8": {
+    "value": "32px",
+    "variable": "var(--sizes-8)"
+  },
+  "sizes.9": {
+    "value": "36px",
+    "variable": "var(--sizes-9)"
+  },
+  "sizes.10": {
+    "value": "40px",
+    "variable": "var(--sizes-10)"
+  },
+  "sizes.12": {
+    "value": "48px",
+    "variable": "var(--sizes-12)"
+  },
+  "sizes.14": {
+    "value": "56px",
+    "variable": "var(--sizes-14)"
+  },
+  "sizes.16": {
+    "value": "64px",
+    "variable": "var(--sizes-16)"
+  },
+  "sizes.20": {
+    "value": "80px",
+    "variable": "var(--sizes-20)"
+  },
+  "sizes.24": {
+    "value": "96px",
+    "variable": "var(--sizes-24)"
+  },
+  "sizes.28": {
+    "value": "112px",
+    "variable": "var(--sizes-28)"
+  },
+  "sizes.32": {
+    "value": "128px",
+    "variable": "var(--sizes-32)"
+  },
+  "sizes.36": {
+    "value": "144px",
+    "variable": "var(--sizes-36)"
+  },
+  "sizes.40": {
+    "value": "160px",
+    "variable": "var(--sizes-40)"
+  },
+  "sizes.44": {
+    "value": "176px",
+    "variable": "var(--sizes-44)"
+  },
+  "sizes.48": {
+    "value": "192px",
+    "variable": "var(--sizes-48)"
+  },
+  "sizes.52": {
+    "value": "208px",
+    "variable": "var(--sizes-52)"
+  },
+  "sizes.56": {
+    "value": "224px",
+    "variable": "var(--sizes-56)"
+  },
+  "sizes.60": {
+    "value": "240px",
+    "variable": "var(--sizes-60)"
+  },
+  "sizes.64": {
+    "value": "256px",
+    "variable": "var(--sizes-64)"
+  },
+  "sizes.72": {
+    "value": "288px",
+    "variable": "var(--sizes-72)"
+  },
+  "sizes.80": {
+    "value": "320px",
+    "variable": "var(--sizes-80)"
+  },
+  "sizes.96": {
+    "value": "384px",
+    "variable": "var(--sizes-96)"
+  },
+  "sizes.0.5": {
+    "value": "2px",
+    "variable": "var(--sizes-0\\.5)"
+  },
+  "sizes.1.5": {
+    "value": "6px",
+    "variable": "var(--sizes-1\\.5)"
+  },
+  "sizes.2.5": {
+    "value": "10px",
+    "variable": "var(--sizes-2\\.5)"
+  },
+  "sizes.3.5": {
+    "value": "14px",
+    "variable": "var(--sizes-3\\.5)"
   },
   "sizes.breakpoint-sm": {
     "value": "640px",
@@ -234,6 +482,46 @@ const tokens = {
   "sizes.breakpoint-xl": {
     "value": "1280px",
     "variable": "var(--sizes-breakpoint-xl)"
+  },
+  "lineHeights.none": {
+    "value": "1",
+    "variable": "var(--line-heights-none)"
+  },
+  "lineHeights.tight": {
+    "value": "1.25",
+    "variable": "var(--line-heights-tight)"
+  },
+  "lineHeights.snug": {
+    "value": "1.375",
+    "variable": "var(--line-heights-snug)"
+  },
+  "lineHeights.normal": {
+    "value": "1.5",
+    "variable": "var(--line-heights-normal)"
+  },
+  "lineHeights.relaxed": {
+    "value": "1.625",
+    "variable": "var(--line-heights-relaxed)"
+  },
+  "lineHeights.loose": {
+    "value": "2",
+    "variable": "var(--line-heights-loose)"
+  },
+  "breakpoints.sm": {
+    "value": "640px",
+    "variable": "var(--breakpoints-sm)"
+  },
+  "breakpoints.md": {
+    "value": "768px",
+    "variable": "var(--breakpoints-md)"
+  },
+  "breakpoints.lg": {
+    "value": "1024px",
+    "variable": "var(--breakpoints-lg)"
+  },
+  "breakpoints.xl": {
+    "value": "1280px",
+    "variable": "var(--breakpoints-xl)"
   },
   "colors.bg.page": {
     "value": "var(--colors-bg\\.page)",
@@ -274,6 +562,138 @@ const tokens = {
   "colors.sectionLabel": {
     "value": "var(--colors-section-label)",
     "variable": "var(--colors-section-label)"
+  },
+  "spacing.-0": {
+    "value": "calc(var(--spacing-0) * -1)",
+    "variable": "var(--spacing-0)"
+  },
+  "spacing.-1": {
+    "value": "calc(var(--spacing-1) * -1)",
+    "variable": "var(--spacing-1)"
+  },
+  "spacing.-2": {
+    "value": "calc(var(--spacing-2) * -1)",
+    "variable": "var(--spacing-2)"
+  },
+  "spacing.-3": {
+    "value": "calc(var(--spacing-3) * -1)",
+    "variable": "var(--spacing-3)"
+  },
+  "spacing.-4": {
+    "value": "calc(var(--spacing-4) * -1)",
+    "variable": "var(--spacing-4)"
+  },
+  "spacing.-5": {
+    "value": "calc(var(--spacing-5) * -1)",
+    "variable": "var(--spacing-5)"
+  },
+  "spacing.-6": {
+    "value": "calc(var(--spacing-6) * -1)",
+    "variable": "var(--spacing-6)"
+  },
+  "spacing.-7": {
+    "value": "calc(var(--spacing-7) * -1)",
+    "variable": "var(--spacing-7)"
+  },
+  "spacing.-8": {
+    "value": "calc(var(--spacing-8) * -1)",
+    "variable": "var(--spacing-8)"
+  },
+  "spacing.-9": {
+    "value": "calc(var(--spacing-9) * -1)",
+    "variable": "var(--spacing-9)"
+  },
+  "spacing.-10": {
+    "value": "calc(var(--spacing-10) * -1)",
+    "variable": "var(--spacing-10)"
+  },
+  "spacing.-12": {
+    "value": "calc(var(--spacing-12) * -1)",
+    "variable": "var(--spacing-12)"
+  },
+  "spacing.-14": {
+    "value": "calc(var(--spacing-14) * -1)",
+    "variable": "var(--spacing-14)"
+  },
+  "spacing.-16": {
+    "value": "calc(var(--spacing-16) * -1)",
+    "variable": "var(--spacing-16)"
+  },
+  "spacing.-20": {
+    "value": "calc(var(--spacing-20) * -1)",
+    "variable": "var(--spacing-20)"
+  },
+  "spacing.-24": {
+    "value": "calc(var(--spacing-24) * -1)",
+    "variable": "var(--spacing-24)"
+  },
+  "spacing.-28": {
+    "value": "calc(var(--spacing-28) * -1)",
+    "variable": "var(--spacing-28)"
+  },
+  "spacing.-32": {
+    "value": "calc(var(--spacing-32) * -1)",
+    "variable": "var(--spacing-32)"
+  },
+  "spacing.-36": {
+    "value": "calc(var(--spacing-36) * -1)",
+    "variable": "var(--spacing-36)"
+  },
+  "spacing.-40": {
+    "value": "calc(var(--spacing-40) * -1)",
+    "variable": "var(--spacing-40)"
+  },
+  "spacing.-44": {
+    "value": "calc(var(--spacing-44) * -1)",
+    "variable": "var(--spacing-44)"
+  },
+  "spacing.-48": {
+    "value": "calc(var(--spacing-48) * -1)",
+    "variable": "var(--spacing-48)"
+  },
+  "spacing.-52": {
+    "value": "calc(var(--spacing-52) * -1)",
+    "variable": "var(--spacing-52)"
+  },
+  "spacing.-56": {
+    "value": "calc(var(--spacing-56) * -1)",
+    "variable": "var(--spacing-56)"
+  },
+  "spacing.-60": {
+    "value": "calc(var(--spacing-60) * -1)",
+    "variable": "var(--spacing-60)"
+  },
+  "spacing.-64": {
+    "value": "calc(var(--spacing-64) * -1)",
+    "variable": "var(--spacing-64)"
+  },
+  "spacing.-72": {
+    "value": "calc(var(--spacing-72) * -1)",
+    "variable": "var(--spacing-72)"
+  },
+  "spacing.-80": {
+    "value": "calc(var(--spacing-80) * -1)",
+    "variable": "var(--spacing-80)"
+  },
+  "spacing.-96": {
+    "value": "calc(var(--spacing-96) * -1)",
+    "variable": "var(--spacing-96)"
+  },
+  "spacing.-0.5": {
+    "value": "calc(var(--spacing-0\\.5) * -1)",
+    "variable": "var(--spacing-0\\.5)"
+  },
+  "spacing.-1.5": {
+    "value": "calc(var(--spacing-1\\.5) * -1)",
+    "variable": "var(--spacing-1\\.5)"
+  },
+  "spacing.-2.5": {
+    "value": "calc(var(--spacing-2\\.5) * -1)",
+    "variable": "var(--spacing-2\\.5)"
+  },
+  "spacing.-3.5": {
+    "value": "calc(var(--spacing-3\\.5) * -1)",
+    "variable": "var(--spacing-3\\.5)"
   },
   "colors.colorPalette": {
     "value": "var(--colors-color-palette)",

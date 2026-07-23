@@ -32,11 +32,18 @@
  *
  * @module
  */
-import { type ReactNode } from "react";
-import { useForm, type UseFormReturn, type FieldValues, type DefaultValues } from "react-hook-form";
+import { css } from "../system.ts";
+
+import type { ReactNode } from "react";
+import {
+  type DefaultValues,
+  type FieldValues,
+  type Path,
+  useForm,
+  type UseFormReturn,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { css } from "styled-system/css";
+import type { z } from "zod";
 
 /**
  * Form validation and submission library.
@@ -102,17 +109,17 @@ export function Form<T extends FieldValues>({
   className,
 }: FormProps<T>): ReactNode {
   const methods = useForm<T>({
-    resolver: zodResolver(schema as any) as any,
+    resolver: zodResolver(schema as never) as never,
     defaultValues,
   });
 
   return (
     <form
-      onSubmit={methods.handleSubmit(onSubmit as any)}
+      onSubmit={methods.handleSubmit(onSubmit as never)}
       className={className}
       noValidate
     >
-      {children(methods)}
+      {children(methods as never)}
     </form>
   );
 }
@@ -122,13 +129,13 @@ export function Form<T extends FieldValues>({
 /* ------------------------------------------------------------------ */
 
 /** Props for {@link FormField}. */
-interface FormFieldProps {
+interface FormFieldProps<T extends FieldValues> {
   /** Field name (must match schema and form data key). */
-  name: string;
+  name: Path<T>;
   /** Optional label text displayed above the input. */
   label?: string;
   /** react-hook-form methods from {@link Form} or `useForm()`. */
-  methods: UseFormReturn<any>;
+  methods: UseFormReturn<T>;
   /** Optional CSS class for the wrapper element. */
   className?: string;
 }
@@ -151,7 +158,9 @@ interface FormFieldProps {
  * </Form>
  * ```
  */
-export function FormField({ name, label, methods, className }: FormFieldProps): ReactNode {
+export function FormField<T extends FieldValues>(
+  { name, label, methods, className }: FormFieldProps<T>,
+): ReactNode {
   const { register, formState: { errors } } = methods;
   const error = errors[name];
 

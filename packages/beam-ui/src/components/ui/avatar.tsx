@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { CSSProperties, ReactNode } from "react";
 
 /** Props for {@link Avatar}. */
-interface AvatarProps {
+export interface AvatarProps {
   /** Person's name (used for initials fallback and accessibility). */
   name: string;
   /** Image URL; if omitted, renders initials on a colored background. */
@@ -11,6 +12,8 @@ interface AvatarProps {
   size?: "sm" | "md" | "lg";
   /** Additional Panda CSS classes. */
   className?: string;
+  /** Inline styles applied to the root element. */
+  style?: CSSProperties;
 }
 
 const sizes = {
@@ -71,7 +74,7 @@ const base = css({
   flexShrink: 0,
 });
 
-export function Avatar({ name, src, size = "md", className }: AvatarProps): ReactNode {
+export function Avatar({ name, src, size = "md", className, style }: AvatarProps): ReactNode {
   const dim = sizes[size];
   const fontSize = Math.round(dim * 0.38);
 
@@ -81,7 +84,7 @@ export function Avatar({ name, src, size = "md", className }: AvatarProps): Reac
         src={src}
         alt={name}
         className={cx(base, className)}
-        style={{ width: dim, height: dim }}
+        style={{ width: dim, height: dim, ...style }}
       />
     );
   }
@@ -98,6 +101,7 @@ export function Avatar({ name, src, size = "md", className }: AvatarProps): Reac
         color: "white",
         fontSize,
         fontWeight: 600,
+        ...style,
       }}
     >
       {getInitials(name)}

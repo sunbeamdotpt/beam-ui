@@ -1,5 +1,6 @@
-import { useState, useCallback, useId, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useCallback, useId, useState } from "react";
 import { Icon } from "./icon.tsx";
 
 /** Item in a transfer list. */
@@ -13,7 +14,7 @@ export interface TransferItem {
 }
 
 /** Props for {@link TransferList}. */
-interface TransferListProps {
+export interface TransferListProps {
   /** Array of available items (left panel). */
   available: TransferItem[];
   /** Array of selected items (right panel). */
@@ -71,7 +72,7 @@ export function TransferList({
   );
 
   const handleItemClick = useCallback(
-    (id: string, side: "available" | "selected", event: React.MouseEvent) => {
+    (id: string, side: "available" | "selected", event: React.MouseEvent | React.KeyboardEvent) => {
       const setter = side === "available" ? setCheckedAvailable : setCheckedSelected;
       setter((prev) => {
         const next = new Set(prev);
@@ -89,7 +90,7 @@ export function TransferList({
         return next;
       });
     },
-    []
+    [],
   );
 
   const moveRight = () => {
@@ -97,7 +98,7 @@ export function TransferList({
     if (toMove.length === 0) return;
     onChange(
       available.filter((item) => !checkedAvailable.has(item.id)),
-      [...selected, ...toMove]
+      [...selected, ...toMove],
     );
     setCheckedAvailable(new Set());
   };
@@ -112,7 +113,7 @@ export function TransferList({
     if (toMove.length === 0) return;
     onChange(
       [...available, ...toMove],
-      selected.filter((item) => !checkedSelected.has(item.id))
+      selected.filter((item) => !checkedSelected.has(item.id)),
     );
     setCheckedSelected(new Set());
   };
@@ -141,7 +142,13 @@ export function TransferList({
             aria-label={`Filter ${availableTitle}`}
           />
         </div>
-        <div className={itemList} role="listbox" aria-labelledby={availableLabelId} aria-multiselectable="true" tabIndex={0}>
+        <div
+          className={itemList}
+          role="listbox"
+          aria-labelledby={availableLabelId}
+          aria-multiselectable="true"
+          tabIndex={0}
+        >
           {filteredAvailable.map((item) => (
             <div
               key={item.id}
@@ -150,33 +157,56 @@ export function TransferList({
               tabIndex={0}
               className={cx(
                 listItem,
-                checkedAvailable.has(item.id) ? listItemSelected : undefined
+                checkedAvailable.has(item.id) ? listItemSelected : undefined,
               )}
               onClick={(e) => handleItemClick(item.id, "available", e)}
-              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleItemClick(item.id, "available", e as any); } }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleItemClick(item.id, "available", e);
+                }
+              }}
             >
               {item.icon && <Icon name={item.icon} size={16} />}
               <span>{item.label}</span>
             </div>
           ))}
-          {filteredAvailable.length === 0 && (
-            <div className={emptyPanel}>No items</div>
-          )}
+          {filteredAvailable.length === 0 && <div className={emptyPanel}>No items</div>}
         </div>
       </div>
 
       {/* Action buttons */}
       <div className={actions}>
-        <button className={actionBtn} onClick={moveAllRight} type="button" aria-label={`Move all to ${selectedTitle}`}>
+        <button
+          className={actionBtn}
+          onClick={moveAllRight}
+          type="button"
+          aria-label={`Move all to ${selectedTitle}`}
+        >
           <Icon name="keyboard_double_arrow_right" size={18} />
         </button>
-        <button className={actionBtn} onClick={moveRight} type="button" aria-label={`Move selected to ${selectedTitle}`}>
+        <button
+          className={actionBtn}
+          onClick={moveRight}
+          type="button"
+          aria-label={`Move selected to ${selectedTitle}`}
+        >
           <Icon name="chevron_right" size={18} />
         </button>
-        <button className={actionBtn} onClick={moveLeft} type="button" aria-label={`Move selected to ${availableTitle}`}>
+        <button
+          className={actionBtn}
+          onClick={moveLeft}
+          type="button"
+          aria-label={`Move selected to ${availableTitle}`}
+        >
           <Icon name="chevron_left" size={18} />
         </button>
-        <button className={actionBtn} onClick={moveAllLeft} type="button" aria-label={`Move all to ${availableTitle}`}>
+        <button
+          className={actionBtn}
+          onClick={moveAllLeft}
+          type="button"
+          aria-label={`Move all to ${availableTitle}`}
+        >
           <Icon name="keyboard_double_arrow_left" size={18} />
         </button>
       </div>
@@ -198,7 +228,13 @@ export function TransferList({
             aria-label={`Filter ${selectedTitle}`}
           />
         </div>
-        <div className={itemList} role="listbox" aria-labelledby={selectedLabelId} aria-multiselectable="true" tabIndex={0}>
+        <div
+          className={itemList}
+          role="listbox"
+          aria-labelledby={selectedLabelId}
+          aria-multiselectable="true"
+          tabIndex={0}
+        >
           {filteredSelected.map((item) => (
             <div
               key={item.id}
@@ -207,18 +243,21 @@ export function TransferList({
               tabIndex={0}
               className={cx(
                 listItem,
-                checkedSelected.has(item.id) ? listItemSelected : undefined
+                checkedSelected.has(item.id) ? listItemSelected : undefined,
               )}
               onClick={(e) => handleItemClick(item.id, "selected", e)}
-              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleItemClick(item.id, "selected", e as any); } }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleItemClick(item.id, "selected", e);
+                }
+              }}
             >
               {item.icon && <Icon name={item.icon} size={16} />}
               <span>{item.label}</span>
             </div>
           ))}
-          {filteredSelected.length === 0 && (
-            <div className={emptyPanel}>No items</div>
-          )}
+          {filteredSelected.length === 0 && <div className={emptyPanel}>No items</div>}
         </div>
       </div>
     </div>
@@ -228,7 +267,7 @@ export function TransferList({
 const container = css({
   display: "flex",
   alignItems: "stretch",
-  gap: "12px",
+  gap: "3",
 });
 
 const panel = css({
@@ -245,13 +284,14 @@ const panelHeader = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "12px 16px",
+  paddingBlock: "3",
+  paddingInline: "4",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const panelTitle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -268,14 +308,14 @@ const panelCount = css({
 
 const searchWrapper = css({
   position: "relative",
-  padding: "8px",
+  padding: "2",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const searchIcon = css({
   position: "absolute",
-  left: "16px",
+  left: "4",
   top: "50%",
   transform: "translateY(-50%)",
   color: "text.muted",
@@ -284,7 +324,9 @@ const searchIcon = css({
 
 const searchInput = css({
   width: "100%",
-  padding: "6px 8px 6px 28px",
+  paddingBlock: "1.5",
+  paddingRight: "2",
+  paddingLeft: "7",
   backgroundColor: "bg.page",
   border: "1px solid",
   borderColor: "border.default",
@@ -310,9 +352,10 @@ const itemList = css({
 const listItem = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "8px 16px",
-  fontSize: "14px",
+  gap: "2",
+  paddingBlock: "2",
+  paddingInline: "4",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   cursor: "pointer",
@@ -325,7 +368,7 @@ const listItem = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "-2px",
+    outlineOffset: "-0.5",
   },
 });
 
@@ -338,15 +381,15 @@ const actions = css({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  gap: "4px",
+  gap: "1",
 });
 
 const actionBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
@@ -360,12 +403,13 @@ const actionBtn = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const emptyPanel = css({
-  padding: "24px 16px",
+  paddingBlock: "6",
+  paddingInline: "4",
   textAlign: "center",
   fontSize: "13px",
   color: "text.muted",

@@ -1,45 +1,42 @@
-import { useRef, useEffect, useCallback, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
-import { EditorState } from "@codemirror/state";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useCallback, useEffect, useRef } from "react";
+import { EditorState, type Extension } from "@codemirror/state";
 import {
   EditorView,
+  highlightActiveLine,
   keymap,
   lineNumbers,
-  highlightActiveLine,
   placeholder as cmPlaceholder,
 } from "@codemirror/view";
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
-import {
-  syntaxHighlighting,
-  HighlightStyle,
-  indentOnInput,
-} from "@codemirror/language";
+import { HighlightStyle, indentOnInput, syntaxHighlighting } from "@codemirror/language";
 import { tags } from "@lezer/highlight";
 import { searchKeymap } from "@codemirror/search";
 import { useTheme } from "../../hooks/use-theme.ts";
 
 /* Beam syntax highlighting — matches syn.* tokens */
 const beamHighlightDark = HighlightStyle.define([
-  { tag: tags.keyword, color: "#c084fc" },           // syn.keyword — purple
+  { tag: tags.keyword, color: "#c084fc" }, // syn.keyword — purple
   { tag: tags.controlKeyword, color: "#c084fc" },
   { tag: tags.operatorKeyword, color: "#c084fc" },
   { tag: tags.definitionKeyword, color: "#c084fc" },
   { tag: tags.moduleKeyword, color: "#c084fc" },
   { tag: tags.function(tags.variableName), color: "#93c5fd" }, // syn.fn — blue
   { tag: tags.function(tags.definition(tags.variableName)), color: "#93c5fd" },
-  { tag: tags.string, color: "#86efac" },             // syn.string — green
+  { tag: tags.string, color: "#86efac" }, // syn.string — green
   { tag: tags.special(tags.string), color: "#86efac" },
-  { tag: tags.propertyName, color: "#fdba74" },       // syn.prop — orange
-  { tag: tags.number, color: "#fb923c" },             // syn.number — deeper orange
+  { tag: tags.propertyName, color: "#fdba74" }, // syn.prop — orange
+  { tag: tags.number, color: "#fb923c" }, // syn.number — deeper orange
   { tag: tags.bool, color: "#fb923c" },
   { tag: tags.null, color: "#fb923c" },
-  { tag: tags.typeName, color: "#fde047" },           // syn.builtin — yellow
+  { tag: tags.typeName, color: "#fde047" }, // syn.builtin — yellow
   { tag: tags.className, color: "#fde047" },
   { tag: tags.standard(tags.typeName), color: "#fde047" },
   { tag: tags.comment, color: "rgba(255,255,255,0.35)", fontStyle: "italic" },
   { tag: tags.lineComment, color: "rgba(255,255,255,0.35)", fontStyle: "italic" },
   { tag: tags.blockComment, color: "rgba(255,255,255,0.35)", fontStyle: "italic" },
-  { tag: tags.operator, color: "#ffa110" },           // sunshine.700
+  { tag: tags.operator, color: "#ffa110" }, // sunshine.700
   { tag: tags.punctuation, color: "rgba(255,255,255,0.5)" },
   { tag: tags.variableName, color: "#e2e8f0" },
   { tag: tags.regexp, color: "#fb923c" },
@@ -222,29 +219,20 @@ function createBeamTheme(isDark: boolean) {
         borderLeftColor: "#fa520f",
         borderLeftWidth: "2px",
       },
-      "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-        {
-          backgroundColor: isDark
-            ? "rgba(250, 82, 15, 0.20)"
-            : "rgba(250, 82, 15, 0.15)",
-        },
+      "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
+        backgroundColor: isDark ? "rgba(250, 82, 15, 0.20)" : "rgba(250, 82, 15, 0.15)",
+      },
       ".cm-activeLine": {
-        backgroundColor: isDark
-          ? "rgba(255, 255, 255, 0.03)"
-          : "rgba(0, 0, 0, 0.02)",
+        backgroundColor: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
       },
       ".cm-gutters": {
-        backgroundColor: isDark
-          ? "rgba(255, 255, 255, 0.02)"
-          : "rgba(0, 0, 0, 0.02)",
+        backgroundColor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
         color: muted,
         border: "none",
         paddingRight: "8px",
       },
       ".cm-activeLineGutter": {
-        backgroundColor: isDark
-          ? "rgba(255, 255, 255, 0.05)"
-          : "rgba(0, 0, 0, 0.04)",
+        backgroundColor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
       },
       ".cm-lineNumbers .cm-gutterElement": {
         fontSize: "12px",
@@ -347,8 +335,7 @@ export function CodeEditor({
         exts.push(langExtension);
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (extensions?.length) exts.push(...(extensions as any[]));
+      if (extensions?.length) exts.push(...(extensions as Extension[]));
 
       return exts;
     },

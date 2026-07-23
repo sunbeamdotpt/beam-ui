@@ -1,16 +1,17 @@
-import { useState, type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import {
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
 } from "@ark-ui/react/popover";
-import { TabsRoot, TabList, TabTrigger, TabContent } from "@ark-ui/react/tabs";
-import { css, cx } from "styled-system/css";
+import { TabContent, TabList, TabsRoot, TabTrigger } from "@ark-ui/react/tabs";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link BranchSelector}. */
-interface BranchSelectorProps {
+export interface BranchSelectorProps {
   /** Array of branch names to choose from. */
   branches: string[];
   /** Array of tag names to choose from. */
@@ -58,16 +59,11 @@ export function BranchSelector({
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState("branches");
 
-  const filteredBranches = branches.filter((b) =>
-    b.toLowerCase().includes(query.toLowerCase()),
-  );
+  const filteredBranches = branches.filter((b) => b.toLowerCase().includes(query.toLowerCase()));
 
-  const filteredTags = tags.filter((t) =>
-    t.toLowerCase().includes(query.toLowerCase()),
-  );
+  const filteredTags = tags.filter((t) => t.toLowerCase().includes(query.toLowerCase()));
 
-  const showCreateBranch =
-    onCreateBranch &&
+  const showCreateBranch = onCreateBranch &&
     query.length > 0 &&
     tab === "branches" &&
     !branches.some((b) => b.toLowerCase() === query.toLowerCase());
@@ -83,7 +79,7 @@ export function BranchSelector({
       }}
     >
       <PopoverTrigger asChild>
-        <button className={cx(triggerStyle, className)}>
+        <button className={cx(triggerStyle, className)} type="button">
           <Icon
             name={isBranch ? "fork_right" : "sell"}
             size={16}
@@ -129,6 +125,7 @@ export function BranchSelector({
                     key={branch}
                     className={optionRow}
                     onClick={() => onChange(branch)}
+                    type="button"
                   >
                     <Icon name="fork_right" size={16} className={refIcon} />
                     <span
@@ -139,18 +136,15 @@ export function BranchSelector({
                     >
                       {branch}
                     </span>
-                    {branch === defaultBranch && (
-                      <span className={defaultBadge}>default</span>
-                    )}
-                    {current === branch && (
-                      <Icon name="check" size={16} className={checkIcon} />
-                    )}
+                    {branch === defaultBranch && <span className={defaultBadge}>default</span>}
+                    {current === branch && <Icon name="check" size={16} className={checkIcon} />}
                   </button>
                 ))}
                 {showCreateBranch && (
                   <button
                     className={createRow}
                     onClick={() => onCreateBranch(query)}
+                    type="button"
                   >
                     <Icon name="add" size={16} className={refIcon} />
                     <span className={createText}>
@@ -171,6 +165,7 @@ export function BranchSelector({
                     key={tag}
                     className={optionRow}
                     onClick={() => onChange(tag)}
+                    type="button"
                   >
                     <Icon name="sell" size={16} className={refIcon} />
                     <span
@@ -181,14 +176,10 @@ export function BranchSelector({
                     >
                       {tag}
                     </span>
-                    {current === tag && (
-                      <Icon name="check" size={16} className={checkIcon} />
-                    )}
+                    {current === tag && <Icon name="check" size={16} className={checkIcon} />}
                   </button>
                 ))}
-                {filteredTags.length === 0 && (
-                  <span className={emptyText}>No tags found</span>
-                )}
+                {filteredTags.length === 0 && <span className={emptyText}>No tags found</span>}
               </div>
             </TabContent>
           </TabsRoot>

@@ -28,7 +28,13 @@ export default function CodeEditorStory() {
 export function ReadOnly() {
   return (
     <div style={{ maxWidth: 700 }}>
-      <CodeEditor value={initialCode} onChange={() => {}} language="typescript" readOnly height="200px" />
+      <CodeEditor
+        value={initialCode}
+        onChange={() => {}}
+        language="typescript"
+        readOnly
+        height="200px"
+      />
     </div>
   );
 }
@@ -36,7 +42,13 @@ export function ReadOnly() {
 export function NoLineNumbers() {
   return (
     <div style={{ maxWidth: 700 }}>
-      <CodeEditor value={initialCode} onChange={() => {}} language="typescript" showLineNumbers={false} height="200px" />
+      <CodeEditor
+        value={initialCode}
+        onChange={() => {}}
+        language="typescript"
+        showLineNumbers={false}
+        height="200px"
+      />
     </div>
   );
 }
@@ -54,7 +66,12 @@ export function WithPlaceholder() {
   const [value, setValue] = useState("");
   return (
     <div style={{ maxWidth: 700 }}>
-      <CodeEditor value={value} onChange={setValue} placeholder="Start typing your code..." height="160px" />
+      <CodeEditor
+        value={value}
+        onChange={setValue}
+        placeholder="Start typing your code..."
+        height="160px"
+      />
     </div>
   );
 }

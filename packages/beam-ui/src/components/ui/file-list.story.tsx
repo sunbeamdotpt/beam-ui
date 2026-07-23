@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileList, type FileItem } from "./file-list.tsx";
+import { type FileItem, FileList } from "./file-list.tsx";
 
 const items: FileItem[] = [
   { id: "1", name: "src", type: "folder", modified: "Apr 1, 2026" },
@@ -65,7 +65,13 @@ export function GridMonoFont() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   return (
     <div style={{ maxWidth: 700 }}>
-      <FileList items={items} selected={selected} onSelect={setSelected} layout="grid" font="mono" />
+      <FileList
+        items={items}
+        selected={selected}
+        onSelect={setSelected}
+        layout="grid"
+        font="mono"
+      />
     </div>
   );
 }

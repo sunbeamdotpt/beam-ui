@@ -1,16 +1,17 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  SelectRoot,
-  SelectTrigger,
+  createListCollection,
   SelectContent,
+  SelectControl,
   SelectItem,
   SelectItemText,
   SelectPositioner,
-  SelectControl,
+  SelectRoot,
+  SelectTrigger,
   SelectValueText,
-  createListCollection,
 } from "@ark-ui/react/select";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Single select option. */
@@ -22,7 +23,7 @@ interface SelectOption {
 }
 
 /** Props for {@link Select}. */
-interface SelectProps {
+export interface SelectProps {
   /** Array of available options. */
   options: SelectOption[];
   /** Currently selected value. */

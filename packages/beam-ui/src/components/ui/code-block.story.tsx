@@ -6,11 +6,11 @@ const pythonCode = (
     {"\n"}
     client = anthropic.<span className={syn.fn}>Anthropic</span>(){"\n"}
     message = client.messages.<span className={syn.fn}>create</span>({"\n"}
-    {"    "}model=<span className={syn.string}>"claude-sonnet-4-20250514"</span>,{"\n"}
-    {"    "}max_tokens=<span className={syn.number}>1024</span>,{"\n"}
-    {"    "}messages=[{"\n"}
-    {"        "}{"{"}<span className={syn.string}>"role"</span>: <span className={syn.string}>"user"</span>, <span className={syn.string}>"content"</span>: <span className={syn.string}>"Hello!"</span>{"}"}{"\n"}
-    {"    "}],{"\n"}
+        model=<span className={syn.string}>"claude-sonnet-4-20250514"</span>,{"\n"}
+        max_tokens=<span className={syn.number}>1024</span>,{"\n"}
+        messages=[{"\n"}
+            {"{"}<span className={syn.string}>"role"</span>: <span className={syn.string}>"user"</span>, <span className={syn.string}>"content"</span>: <span className={syn.string}>"Hello!"</span>{"}"}{"\n"}
+        ],{"\n"}
     ){"\n"}
     <span className={syn.fn}>print</span>(message.content)
   </pre>
@@ -38,7 +38,9 @@ export function MultipleTabs() {
   );
   return (
     <div style={{ maxWidth: 700 }}>
-      <CodeBlock tabs={[{ label: "Python", content: pythonCode }, { label: "TypeScript", content: tsCode }]} />
+      <CodeBlock
+        tabs={[{ label: "Python", content: pythonCode }, { label: "TypeScript", content: tsCode }]}
+      />
     </div>
   );
 }

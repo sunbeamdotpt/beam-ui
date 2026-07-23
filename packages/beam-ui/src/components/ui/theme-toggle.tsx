@@ -1,10 +1,11 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { useTheme } from "../../hooks/use-theme.ts";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link ThemeToggle}. */
-interface ThemeToggleProps {
+export interface ThemeToggleProps {
   /** Visual variant. Defaults to `"icon"`. */
   variant?: "icon" | "switch" | "pill";
   /** Optional CSS class applied to the button or container. */
@@ -41,6 +42,7 @@ export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): 
           role="radio"
           aria-checked={!isDark}
           aria-label="Light mode"
+          type="button"
         >
           <Icon name="light_mode" size={16} />
           <span>Light</span>
@@ -51,6 +53,7 @@ export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): 
           role="radio"
           aria-checked={isDark}
           aria-label="Dark mode"
+          type="button"
         >
           <Icon name="dark_mode" size={16} />
           <span>Dark</span>
@@ -67,6 +70,7 @@ export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): 
         role="switch"
         aria-checked={isDark}
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        type="button"
       >
         <span className={switchTrack}>
           <span className={cx(switchThumb, isDark && switchThumbDark)} />
@@ -85,6 +89,7 @@ export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): 
       className={cx(iconBtn, className)}
       onClick={toggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      type="button"
     >
       <span
         className="material-symbols-outlined"

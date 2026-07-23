@@ -1,5 +1,6 @@
-import { useMemo, useState, useEffect, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 
 /** Props for {@link MathRenderer}. */
 export interface MathRendererProps {
@@ -31,7 +32,10 @@ export function MathRenderer({ math, display = false, className }: MathRendererP
     if (katexModule) return;
     Promise.all([
       import("katex"),
-      katexCssLoaded ? Promise.resolve() : import("katex/dist/katex.min.css" as any).then(() => { katexCssLoaded = true; }),
+      // deno-lint-ignore no-explicit-any
+      katexCssLoaded ? Promise.resolve() : import("katex/dist/katex.min.css" as any).then(() => {
+        katexCssLoaded = true;
+      }),
     ]).then(([mod]) => {
       katexModule = mod;
       setReady(true);

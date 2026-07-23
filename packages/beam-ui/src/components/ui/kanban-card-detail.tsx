@@ -1,11 +1,12 @@
-import { useState, useEffect, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useEffect, useState } from "react";
 import {
-  DialogRoot,
   DialogBackdrop,
-  DialogPositioner,
-  DialogContent,
   DialogCloseTrigger,
+  DialogContent,
+  DialogPositioner,
+  DialogRoot,
 } from "@ark-ui/react/dialog";
 import { Icon } from "./icon.tsx";
 import { Button } from "./button.tsx";
@@ -62,7 +63,7 @@ export interface KanbanCardData {
 }
 
 /** Props for {@link KanbanCardDetail}. */
-interface KanbanCardDetailProps {
+export interface KanbanCardDetailProps {
   card: KanbanCardData;
   open: boolean;
   onClose: () => void;
@@ -189,11 +190,15 @@ export function KanbanCardDetail({
   const checklistDone = totalCount > 0 && doneCount === totalCount;
 
   return (
-    <DialogRoot open={open} onOpenChange={(d) => { if (!d.open) onClose(); }}>
+    <DialogRoot
+      open={open}
+      onOpenChange={(d) => {
+        if (!d.open) onClose();
+      }}
+    >
       <DialogBackdrop className={backdrop} />
       <DialogPositioner className={positioner}>
         <DialogContent className={cx(drawerPanel, className)} data-testid="card-detail-modal">
-
           {/* ── Head ── */}
           <div className={drawerHead}>
             <div className={drawerHeadTop}>
@@ -220,66 +225,72 @@ export function KanbanCardDetail({
             </div>
 
             {/* Editable title */}
-            {editingTitle && !readOnly ? (
-              <textarea
-                className={titleInput}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                onBlur={handleSave}
-                autoFocus
-                rows={2}
-              />
-            ) : (
-              <h2
-                className={titleDisplay}
-                onClick={() => { if (!readOnly) setEditingTitle(true); }}
-                style={{ cursor: readOnly ? "default" : "text" }}
-              >
-                {title}
-              </h2>
-            )}
+            {editingTitle && !readOnly
+              ? (
+                <textarea
+                  className={titleInput}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  onBlur={handleSave}
+                  autoFocus
+                  rows={2}
+                />
+              )
+              : (
+                <h2
+                  className={titleDisplay}
+                  onClick={() => {
+                    if (!readOnly) setEditingTitle(true);
+                  }}
+                  style={{ cursor: readOnly ? "default" : "text" }}
+                >
+                  {title}
+                </h2>
+              )}
           </div>
 
           {/* ── Body ── */}
           <div className={drawerBody}>
-
             {/* ── Main column ── */}
             <div className={drawerMain}>
-
               {/* Description */}
               <div className={drawerSection}>
                 <h4 className={sectionH4}>
                   <Icon name="notes" size={14} />
                   Description
                 </h4>
-                {editingDesc && !readOnly ? (
-                  <>
-                    <MarkdownEditor
-                      value={description}
-                      onChange={setDescription}
-                      placeholder="Add a more detailed description…"
-                      minHeight="100px"
-                    />
-                    <div className={descEditActions}>
-                      <Button variant="primary" onClick={handleSave}>Save</Button>
-                      <Button variant="ghost" onClick={handleCancelDesc}>Cancel</Button>
+                {editingDesc && !readOnly
+                  ? (
+                    <>
+                      <MarkdownEditor
+                        value={description}
+                        onChange={setDescription}
+                        placeholder="Add a more detailed description…"
+                        minHeight="100px"
+                      />
+                      <div className={descEditActions}>
+                        <Button variant="primary" onClick={handleSave}>Save</Button>
+                        <Button variant="ghost" onClick={handleCancelDesc}>Cancel</Button>
+                      </div>
+                    </>
+                  )
+                  : (
+                    <div
+                      className={descView}
+                      onClick={() => {
+                        if (!readOnly) setEditingDesc(true);
+                      }}
+                      role={readOnly ? undefined : "button"}
+                      tabIndex={readOnly ? undefined : 0}
+                      onKeyDown={(e) => {
+                        if (!readOnly && (e.key === "Enter" || e.key === " ")) setEditingDesc(true);
+                      }}
+                    >
+                      {description
+                        ? <MarkdownRenderer content={description} />
+                        : <span className={descPlaceholder}>Add a more detailed description…</span>}
                     </div>
-                  </>
-                ) : (
-                  <div
-                    className={descView}
-                    onClick={() => { if (!readOnly) setEditingDesc(true); }}
-                    role={readOnly ? undefined : "button"}
-                    tabIndex={readOnly ? undefined : 0}
-                    onKeyDown={(e) => { if (!readOnly && (e.key === "Enter" || e.key === " ")) setEditingDesc(true); }}
-                  >
-                    {description ? (
-                      <MarkdownRenderer content={description} />
-                    ) : (
-                      <span className={descPlaceholder}>Add a more detailed description…</span>
-                    )}
-                  </div>
-                )}
+                  )}
               </div>
 
               {/* Checklist */}
@@ -296,11 +307,20 @@ export function KanbanCardDetail({
                     />
                   </div>
                   {card.checklist.map((item) => (
-                    <label key={item.id} className={cx(checklistItem, item.done ? checklistItemDone : "")}>
+                    <label
+                      key={item.id}
+                      className={cx(checklistItem, item.done ? checklistItemDone : "")}
+                    >
                       <input
                         type="checkbox"
                         defaultChecked={item.done}
-                        style={{ accentColor: "#fa520f", width: 14, height: 14, marginTop: 3, flexShrink: 0 }}
+                        style={{
+                          accentColor: "#fa520f",
+                          width: 14,
+                          height: 14,
+                          marginTop: 3,
+                          flexShrink: 0,
+                        }}
                         readOnly={readOnly}
                       />
                       <span className={checklistLabel}>{item.title}</span>
@@ -319,14 +339,16 @@ export function KanbanCardDetail({
               <div className={drawerSection}>
                 <h4 className={sectionH4}>
                   <Icon name="forum" size={14} />
-                  Activity{card.comments && card.comments.length > 0 ? ` · ${card.comments.length}` : ""}
+                  Activity{card.comments && card.comments.length > 0
+                    ? ` · ${card.comments.length}`
+                    : ""}
                 </h4>
                 {(card.comments ?? []).map((c) => (
                   <div key={c.id} className={comment}>
                     <Avatar
                       name={c.author}
                       size="sm"
-                      {...(c.avatarColor ? { style: { backgroundColor: c.avatarColor } } as any : {})}
+                      {...(c.avatarColor ? { style: { backgroundColor: c.avatarColor } } : {})}
                     />
                     <div>
                       <div className={commentHead}>
@@ -365,20 +387,19 @@ export function KanbanCardDetail({
 
             {/* ── Side column ── */}
             <div className={drawerSide}>
-
               {/* Assignees */}
               <div className={field}>
                 <span className={fieldLabel}>Assignees</span>
                 <button className={fieldValue} type="button">
-                  {card.assignees && card.assignees.length > 0 ? (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                      {card.assignees.map((a) => (
-                        <Avatar key={a.name} name={a.name} src={a.avatarUrl} size="sm" />
-                      ))}
-                    </div>
-                  ) : (
-                    <span className={fieldEmpty}>None</span>
-                  )}
+                  {card.assignees && card.assignees.length > 0
+                    ? (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                        {card.assignees.map((a) => (
+                          <Avatar key={a.name} name={a.name} src={a.avatarUrl} size="sm" />
+                        ))}
+                      </div>
+                    )
+                    : <span className={fieldEmpty}>None</span>}
                 </button>
               </div>
 
@@ -386,24 +407,24 @@ export function KanbanCardDetail({
               <div className={field}>
                 <span className={fieldLabel}>Labels</span>
                 <button className={fieldValue} type="button">
-                  {card.labels && card.labels.length > 0 ? (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                      {card.labels.map((l) => {
-                        const s = getLabelStyle(l.color);
-                        return (
-                          <span
-                            key={l.name}
-                            className={labelChip}
-                            style={{ background: s.background, color: s.color, border: s.border }}
-                          >
-                            {l.name}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <span className={fieldEmpty}>None</span>
-                  )}
+                  {card.labels && card.labels.length > 0
+                    ? (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                        {card.labels.map((l) => {
+                          const s = getLabelStyle(l.color);
+                          return (
+                            <span
+                              key={l.name}
+                              className={labelChip}
+                              style={{ background: s.background, color: s.color, border: s.border }}
+                            >
+                              {l.name}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )
+                    : <span className={fieldEmpty}>None</span>}
                 </button>
               </div>
 
@@ -411,16 +432,16 @@ export function KanbanCardDetail({
               <div className={field}>
                 <span className={fieldLabel}>Priority</span>
                 <button className={fieldValue} type="button">
-                  {card.priority ? (
-                    <span
-                      className={priorityChip}
-                      style={PRIORITY_STYLE[card.priority]}
-                    >
-                      {card.priority}
-                    </span>
-                  ) : (
-                    <span className={fieldEmpty}>None</span>
-                  )}
+                  {card.priority
+                    ? (
+                      <span
+                        className={priorityChip}
+                        style={PRIORITY_STYLE[card.priority]}
+                      >
+                        {card.priority}
+                      </span>
+                    )
+                    : <span className={fieldEmpty}>None</span>}
                 </button>
               </div>
 
@@ -428,11 +449,9 @@ export function KanbanCardDetail({
               <div className={field}>
                 <span className={fieldLabel}>Due date</span>
                 <button className={fieldValue} type="button">
-                  {card.dueDate ? (
-                    <span>{card.dueDate}</span>
-                  ) : (
-                    <span className={fieldEmpty}>No date</span>
-                  )}
+                  {card.dueDate
+                    ? <span>{card.dueDate}</span>
+                    : <span className={fieldEmpty}>No date</span>}
                 </button>
               </div>
 
@@ -440,14 +459,14 @@ export function KanbanCardDetail({
               <div className={field}>
                 <span className={fieldLabel}>Milestone</span>
                 <button className={fieldValue} type="button">
-                  {card.milestone ? (
-                    <>
-                      <Icon name="flag" size={14} />
-                      {card.milestone}
-                    </>
-                  ) : (
-                    <span className={fieldEmpty}>None</span>
-                  )}
+                  {card.milestone
+                    ? (
+                      <>
+                        <Icon name="flag" size={14} />
+                        {card.milestone}
+                      </>
+                    )
+                    : <span className={fieldEmpty}>None</span>}
                 </button>
               </div>
 
@@ -455,16 +474,17 @@ export function KanbanCardDetail({
               <div className={field}>
                 <span className={fieldLabel}>Attachments</span>
                 <button className={fieldValue} type="button">
-                  {card.attachments && card.attachments.length > 0 ? (
-                    <span>{card.attachments.length} file{card.attachments.length !== 1 ? "s" : ""}</span>
-                  ) : (
-                    <span className={fieldEmpty}>None</span>
-                  )}
+                  {card.attachments && card.attachments.length > 0
+                    ? (
+                      <span>
+                        {card.attachments.length} file{card.attachments.length !== 1 ? "s" : ""}
+                      </span>
+                    )
+                    : <span className={fieldEmpty}>None</span>}
                 </button>
               </div>
             </div>
           </div>
-
         </DialogContent>
       </DialogPositioner>
     </DialogRoot>

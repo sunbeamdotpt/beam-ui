@@ -22,14 +22,13 @@ export interface CommandPaletteAccelerator {
  */
 export function useCommandPaletteShortcut(
   setOpen: (open: boolean) => void,
-  accelerator: CommandPaletteAccelerator = { key: "k", meta: true }
+  accelerator: CommandPaletteAccelerator = { key: "k", meta: true },
 ): void {
   useEffect(() => {
     function handler(e: KeyboardEvent): void {
       const isMac = navigator.platform.startsWith("Mac");
       const modifierHeld = isMac ? e.metaKey : e.ctrlKey;
-      const keyMatches =
-        e.key.toLowerCase() === accelerator.key.toLowerCase();
+      const keyMatches = e.key.toLowerCase() === accelerator.key.toLowerCase();
       const modifierRequired = accelerator.meta !== false;
 
       if (keyMatches && (!modifierRequired || modifierHeld)) {
@@ -38,7 +37,7 @@ export function useCommandPaletteShortcut(
       }
     }
 
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    globalThis.addEventListener("keydown", handler);
+    return () => globalThis.removeEventListener("keydown", handler);
   }, [setOpen, accelerator.key, accelerator.meta]);
 }

@@ -1,13 +1,14 @@
-import { type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  StepsRoot,
-  StepsList,
-  StepsItem,
-  StepsTrigger,
   StepsIndicator,
+  StepsItem,
+  StepsList,
+  StepsRoot,
   StepsSeparator,
+  StepsTrigger,
 } from "@ark-ui/react/steps";
-import { css, cx } from "styled-system/css";
 
 /** Single step in a steps component. */
 interface StepItem {
@@ -18,7 +19,7 @@ interface StepItem {
 }
 
 /** Props for {@link Steps}. */
-interface StepsProps {
+export interface StepsProps {
   /** Array of steps. */
   steps: StepItem[];
   /** Currently active step index (0-based). */
@@ -63,43 +64,42 @@ export function Steps({ steps, currentStep, onChange }: StepsProps): ReactNode {
                   index < currentStep
                     ? completedIndicator
                     : index === currentStep
-                      ? currentIndicator
-                      : upcomingIndicator
+                    ? currentIndicator
+                    : upcomingIndicator,
                 )}
               >
-                {index < currentStep ? (
-                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
-                    <path
-                      d="M1 5L4.5 8.5L11 1"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : (
-                  <span className={stepNumber}>{index + 1}</span>
-                )}
+                {index < currentStep
+                  ? (
+                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+                      <path
+                        d="M1 5L4.5 8.5L11 1"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )
+                  : <span className={stepNumber}>{index + 1}</span>}
               </StepsIndicator>
               <div className={labelWrap}>
                 <span
                   className={cx(
                     label,
-                    index === currentStep ? currentLabel : undefined
+                    index === currentStep ? currentLabel : undefined,
                   )}
                 >
                   {stepItem.title}
                 </span>
-                {stepItem.description && (
-                  <span className={description}>{stepItem.description}</span>
-                )}
+                {stepItem.description && <span className={description}>{stepItem.description}
+                </span>}
               </div>
             </StepsTrigger>
             {index < steps.length - 1 && (
               <StepsSeparator
                 className={cx(
                   separator,
-                  index < currentStep ? completedSeparator : undefined
+                  index < currentStep ? completedSeparator : undefined,
                 )}
               />
             )}
@@ -128,7 +128,7 @@ const item = css({
 const trigger = css({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
+  gap: "2.5",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -137,8 +137,8 @@ const trigger = css({
 });
 
 const indicator = css({
-  width: "32px",
-  height: "32px",
+  width: "8",
+  height: "8",
   borderRadius: "full",
   display: "flex",
   alignItems: "center",
@@ -177,7 +177,7 @@ const labelWrap = css({
 });
 
 const label = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "body",
   fontFamily: "body",
   color: "text.secondary",
@@ -190,7 +190,7 @@ const currentLabel = css({
 });
 
 const description = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
   fontFamily: "body",
   lineHeight: 1.3,
@@ -198,7 +198,7 @@ const description = css({
 
 const separator = css({
   flex: 1,
-  height: "2px",
+  height: "0.5",
   backgroundColor: "border.default",
   margin: "0 12px",
   borderRadius: "full",

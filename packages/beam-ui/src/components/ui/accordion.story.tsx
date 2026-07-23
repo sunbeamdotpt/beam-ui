@@ -7,17 +7,20 @@ export default function AccordionStory() {
         {
           value: "getting-started",
           title: "Getting Started",
-          content: "Install the package and import the components you need. Beam UI provides a full set of accessible, styled primitives.",
+          content:
+            "Install the package and import the components you need. Beam UI provides a full set of accessible, styled primitives.",
         },
         {
           value: "theming",
           title: "Theming",
-          content: "Beam UI uses Panda CSS tokens for theming. Override tokens in your panda.config to customize colors, fonts, and spacing.",
+          content:
+            "Beam UI uses Panda CSS tokens for theming. Override tokens in your panda.config to customize colors, fonts, and spacing.",
         },
         {
           value: "accessibility",
           title: "Accessibility",
-          content: "All components follow WAI-ARIA patterns. Keyboard navigation, focus management, and screen reader support are built in.",
+          content:
+            "All components follow WAI-ARIA patterns. Keyboard navigation, focus management, and screen reader support are built in.",
         },
       ]}
       multiple

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MilestonePicker, type MilestoneOption } from "./milestone-picker.tsx";
+import { type MilestoneOption, MilestonePicker } from "./milestone-picker.tsx";
 
 const options: MilestoneOption[] = [
   { id: "m1", title: "v1.0 Launch", dueDate: "May 1, 2026", progress: 85, open: 3, closed: 17 },
@@ -19,11 +19,25 @@ export default function MilestonePickerStory() {
 
 export function NoSelection() {
   const [selected, setSelected] = useState<string | null>(null);
-  return <div style={{ maxWidth: 320 }}><MilestonePicker options={options} selected={selected} onChange={setSelected} /></div>;
+  return (
+    <div style={{ maxWidth: 320 }}>
+      <MilestonePicker options={options} selected={selected} onChange={setSelected} />
+    </div>
+  );
 }
 
 export function SingleOption() {
-  const single: MilestoneOption[] = [{ id: "m1", title: "v1.0", progress: 100, open: 0, closed: 20 }];
+  const single: MilestoneOption[] = [{
+    id: "m1",
+    title: "v1.0",
+    progress: 100,
+    open: 0,
+    closed: 20,
+  }];
   const [selected, setSelected] = useState<string | null>("m1");
-  return <div style={{ maxWidth: 320 }}><MilestonePicker options={single} selected={selected} onChange={setSelected} /></div>;
+  return (
+    <div style={{ maxWidth: 320 }}>
+      <MilestonePicker options={single} selected={selected} onChange={setSelected} />
+    </div>
+  );
 }

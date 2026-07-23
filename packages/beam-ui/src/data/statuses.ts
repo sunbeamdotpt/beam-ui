@@ -30,9 +30,27 @@ export interface StatusDef {
  * Consumers filter and display these statuses to show issue workflow state.
  */
 export const issueStatuses: StatusDef[] = [
-  { label: "Open", variant: "open", icon: "circle", color: "#22c55e", description: "Issue is active and accepting contributions" },
-  { label: "Closed", variant: "closed", icon: "cancel", color: "#991b1b", description: "Issue has been resolved or won't be fixed" },
-  { label: "Duplicate", variant: "closed", icon: "content_copy", color: "#991b1b", description: "Issue duplicates an existing one" },
+  {
+    label: "Open",
+    variant: "open",
+    icon: "circle",
+    color: "#22c55e",
+    description: "Issue is active and accepting contributions",
+  },
+  {
+    label: "Closed",
+    variant: "closed",
+    icon: "cancel",
+    color: "#991b1b",
+    description: "Issue has been resolved or won't be fixed",
+  },
+  {
+    label: "Duplicate",
+    variant: "closed",
+    icon: "content_copy",
+    color: "#991b1b",
+    description: "Issue duplicates an existing one",
+  },
 ];
 
 /**
@@ -42,12 +60,48 @@ export const issueStatuses: StatusDef[] = [
  * Consumers track PR workflow through Draft → Review → Approved/Revision → Merged/Declined states.
  */
 export const prStatuses: StatusDef[] = [
-  { label: "Draft", variant: "draft", icon: "edit_note", color: "#525252", description: "PR is a work in progress, not ready for review" },
-  { label: "Review", variant: "review", icon: "rate_review", color: "#92400e", description: "PR is awaiting code review" },
-  { label: "Approved", variant: "approved", icon: "check_circle", color: "#15803d", description: "PR has been approved and is ready to merge" },
-  { label: "Revision", variant: "revision", icon: "edit", color: "#c2410c", description: "Reviewer has requested changes" },
-  { label: "Merged", variant: "merged", icon: "merge", color: "#7e22ce", description: "PR has been merged into the target branch" },
-  { label: "Declined", variant: "closed", icon: "close", color: "#991b1b", description: "PR has been closed without merging" },
+  {
+    label: "Draft",
+    variant: "draft",
+    icon: "edit_note",
+    color: "#525252",
+    description: "PR is a work in progress, not ready for review",
+  },
+  {
+    label: "Review",
+    variant: "review",
+    icon: "rate_review",
+    color: "#92400e",
+    description: "PR is awaiting code review",
+  },
+  {
+    label: "Approved",
+    variant: "approved",
+    icon: "check_circle",
+    color: "#15803d",
+    description: "PR has been approved and is ready to merge",
+  },
+  {
+    label: "Revision",
+    variant: "revision",
+    icon: "edit",
+    color: "#c2410c",
+    description: "Reviewer has requested changes",
+  },
+  {
+    label: "Merged",
+    variant: "merged",
+    icon: "merge",
+    color: "#7e22ce",
+    description: "PR has been merged into the target branch",
+  },
+  {
+    label: "Declined",
+    variant: "closed",
+    icon: "close",
+    color: "#991b1b",
+    description: "PR has been closed without merging",
+  },
 ];
 
 /**
@@ -57,10 +111,34 @@ export const prStatuses: StatusDef[] = [
  * Consumers assign priorities to track and communicate work importance.
  */
 export const priorities: StatusDef[] = [
-  { label: "Critical", variant: "critical", icon: "priority_high", color: "#dc2626", description: "Requires immediate attention" },
-  { label: "High", variant: "high", icon: "arrow_upward", color: "#ea580c", description: "Should be addressed soon" },
-  { label: "Medium", variant: "medium", icon: "remove", color: "#d97706", description: "Normal priority" },
-  { label: "Low", variant: "low", icon: "arrow_downward", color: "#0d9488", description: "Can be addressed when convenient" },
+  {
+    label: "Critical",
+    variant: "critical",
+    icon: "priority_high",
+    color: "#dc2626",
+    description: "Requires immediate attention",
+  },
+  {
+    label: "High",
+    variant: "high",
+    icon: "arrow_upward",
+    color: "#ea580c",
+    description: "Should be addressed soon",
+  },
+  {
+    label: "Medium",
+    variant: "medium",
+    icon: "remove",
+    color: "#d97706",
+    description: "Normal priority",
+  },
+  {
+    label: "Low",
+    variant: "low",
+    icon: "arrow_downward",
+    color: "#0d9488",
+    description: "Can be addressed when convenient",
+  },
 ];
 
 /**
@@ -73,8 +151,16 @@ export const releaseStages: StatusDef[] = [
   { label: "Stable", variant: "stable", description: "Production-ready, fully supported" },
   { label: "Beta", variant: "beta", description: "Feature-complete but may have bugs" },
   { label: "Preview", variant: "preview", description: "Early access, API may change" },
-  { label: "Experimental", variant: "experimental", description: "Proof of concept, not for production" },
-  { label: "Deprecated", variant: "deprecated", description: "Scheduled for removal, migrate away" },
+  {
+    label: "Experimental",
+    variant: "experimental",
+    description: "Proof of concept, not for production",
+  },
+  {
+    label: "Deprecated",
+    variant: "deprecated",
+    description: "Scheduled for removal, migrate away",
+  },
 ];
 
 /**

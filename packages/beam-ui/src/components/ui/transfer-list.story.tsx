@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TransferList, type TransferItem } from "./transfer-list.tsx";
+import { type TransferItem, TransferList } from "./transfer-list.tsx";
 
 const initialAvailable: TransferItem[] = [
   { id: "1", label: "TypeScript", icon: "code" },
@@ -20,7 +20,10 @@ export default function TransferListStory() {
     <TransferList
       available={available}
       selected={selected}
-      onChange={(a, s) => { setAvailable(a); setSelected(s); }}
+      onChange={(a, s) => {
+        setAvailable(a);
+        setSelected(s);
+      }}
       availableTitle="Languages"
       selectedTitle="Selected"
     />
@@ -34,7 +37,10 @@ export function EmptySelected() {
     <TransferList
       available={available}
       selected={selected}
-      onChange={(a, s) => { setAvailable(a); setSelected(s); }}
+      onChange={(a, s) => {
+        setAvailable(a);
+        setSelected(s);
+      }}
     />
   );
 }
@@ -46,7 +52,10 @@ export function AllSelected() {
     <TransferList
       available={available}
       selected={selected}
-      onChange={(a, s) => { setAvailable(a); setSelected(s); }}
+      onChange={(a, s) => {
+        setAvailable(a);
+        setSelected(s);
+      }}
     />
   );
 }

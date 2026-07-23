@@ -1,17 +1,14 @@
+import { css, cx } from "../../system.ts";
+
 import {
+  PopoverCloseTrigger,
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
-  PopoverCloseTrigger,
 } from "@ark-ui/react/popover";
-import { useState, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
-import {
-  CollapsibleRoot,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "@ark-ui/react/collapsible";
+import { type ReactNode, useState } from "react";
+import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "@ark-ui/react/collapsible";
 import { Icon } from "./icon.tsx";
 import { ScrollArea } from "./scroll-area.tsx";
 
@@ -38,7 +35,7 @@ export interface Notification {
 }
 
 /** Props for {@link NotificationCenter}. */
-interface NotificationCenterProps {
+export interface NotificationCenterProps {
   /** Array of notifications to display. */
   notifications: Notification[];
   /** Called when user marks a single notification as read. */
@@ -107,15 +104,22 @@ export function NotificationItem({
 }): ReactNode {
   return (
     <div
-      className={cx(notifRow, !notification.read ? notifUnread : undefined, onClick && clickableRow)}
+      className={cx(
+        notifRow,
+        !notification.read ? notifUnread : undefined,
+        onClick && clickableRow,
+      )}
       onClick={() => onClick?.(notification)}
-      onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && onClick) { e.preventDefault(); onClick(notification); } }}
+      onKeyDown={(e) => {
+        if ((e.key === "Enter" || e.key === " ") && onClick) {
+          e.preventDefault();
+          onClick(notification);
+        }
+      }}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
-      {notification.icon && (
-        <Icon name={notification.icon} size={18} className={typeIcon} />
-      )}
+      {notification.icon && <Icon name={notification.icon} size={18} className={typeIcon} />}
       <div className={notifContent}>
         <span className={notifTitle}>{notification.title}</span>
         {(notification.subtitle || notification.timestamp) && (
@@ -129,7 +133,10 @@ export function NotificationItem({
       {!notification.read && onMarkRead && (
         <button
           className={markReadBtn}
-          onClick={(e) => { e.stopPropagation(); onMarkRead(notification.id); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onMarkRead(notification.id);
+          }}
           aria-label={`Mark "${notification.title}" as read`}
           type="button"
         >
@@ -159,9 +166,7 @@ function CollapsibleGroup({
       <CollapsibleTrigger className={groupTrigger}>
         <span>{group}</span>
         <span className={groupRight}>
-          {!open && groupUnread > 0 && (
-            <span className={groupUnreadBadge}>{groupUnread}</span>
-          )}
+          {!open && groupUnread > 0 && <span className={groupUnreadBadge}>{groupUnread}</span>}
           <Icon name={open ? "expand_less" : "expand_more"} size={16} />
         </span>
       </CollapsibleTrigger>
@@ -215,13 +220,17 @@ export function NotificationCenter({
       acc[key].push(notif);
       return acc;
     },
-    {}
+    {},
   );
 
   return (
     <PopoverRoot positioning={{ placement: "bottom-end" }}>
       <PopoverTrigger asChild>
-        <button className={cx(triggerBtn, className)} aria-label={`${headerText}, ${unreadCount} unread`}>
+        <button
+          className={cx(triggerBtn, className)}
+          aria-label={`${headerText}, ${unreadCount} unread`}
+          type="button"
+        >
           <Icon name={triggerIcon} size={20} />
           {unreadCount > 0 && <span className={badge} aria-hidden="true">{unreadCount}</span>}
         </button>
@@ -243,40 +252,42 @@ export function NotificationCenter({
           </div>
 
           <ScrollArea maxHeight="400px" scrollbar="visible">
-            {notifications.length === 0 ? (
-              <div className={emptyState}>
-                <Icon name="notifications_none" size={32} className={emptyIcon} />
-                <p>No notifications</p>
-              </div>
-            ) : (
-              Object.entries(grouped).map(([group, items]) => {
-                if (collapsibleGroups && group) {
-                  return (
-                    <CollapsibleGroup
-                      key={group}
-                      group={group}
-                      items={items}
-                      onMarkRead={onMarkRead}
-                      onClick={onClickNotification}
-                    />
-                  );
-                }
-
-                return (
-                  <div key={group}>
-                    {group && <div className={groupHeader}>{group}</div>}
-                    {items.map((notif) => (
-                      <NotificationItem
-                        key={notif.id}
-                        notification={notif}
+            {notifications.length === 0
+              ? (
+                <div className={emptyState}>
+                  <Icon name="notifications_none" size={32} className={emptyIcon} />
+                  <p>No notifications</p>
+                </div>
+              )
+              : (
+                Object.entries(grouped).map(([group, items]) => {
+                  if (collapsibleGroups && group) {
+                    return (
+                      <CollapsibleGroup
+                        key={group}
+                        group={group}
+                        items={items}
                         onMarkRead={onMarkRead}
                         onClick={onClickNotification}
                       />
-                    ))}
-                  </div>
-                );
-              })
-            )}
+                    );
+                  }
+
+                  return (
+                    <div key={group}>
+                      {group && <div className={groupHeader}>{group}</div>}
+                      {items.map((notif) => (
+                        <NotificationItem
+                          key={notif.id}
+                          notification={notif}
+                          onMarkRead={onMarkRead}
+                          onClick={onClickNotification}
+                        />
+                      ))}
+                    </div>
+                  );
+                })
+              )}
           </ScrollArea>
         </PopoverContent>
       </PopoverPositioner>
@@ -289,8 +300,8 @@ const triggerBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "40px",
-  height: "40px",
+  width: "10",
+  height: "10",
   backgroundColor: "transparent",
   border: "1px solid",
   borderColor: "border.default",
@@ -305,8 +316,8 @@ const triggerBtn = css({
 
 const badge = css({
   position: "absolute",
-  top: "-4px",
-  right: "-4px",
+  top: "-1",
+  right: "-1",
   minWidth: "18px",
   height: "18px",
   display: "flex",
@@ -314,7 +325,7 @@ const badge = css({
   justifyContent: "center",
   backgroundColor: "sunbeam.orange",
   color: "white",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   fontFamily: "body",
   borderRadius: "full",
@@ -336,13 +347,13 @@ const header = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "16px",
+  padding: "4",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const headerTitle = css({
-  fontSize: "16px",
+  fontSize: "md",
   fontWeight: "heading",
   fontFamily: "heading",
   color: "text.primary",
@@ -351,7 +362,7 @@ const headerTitle = css({
 const headerActions = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
 });
 
 const markAllBtn = css({
@@ -377,7 +388,7 @@ const closeBtn = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  padding: "4px",
+  padding: "1",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
@@ -389,8 +400,9 @@ const groupTrigger = css({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  padding: "8px 16px",
-  fontSize: "10px",
+  paddingBlock: "2",
+  paddingInline: "4",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
@@ -407,11 +419,11 @@ const groupTrigger = css({
 const groupRight = css({
   display: "flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const groupUnreadBadge = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontFamily: "mono",
   fontWeight: "button",
   color: "white",
@@ -431,10 +443,11 @@ const emptyState = css({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: "8px",
-  padding: "48px 16px",
+  gap: "2",
+  paddingBlock: "12",
+  paddingInline: "4",
   color: "text.muted",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
 });
 
@@ -443,8 +456,9 @@ const emptyIcon = css({
 });
 
 const groupHeader = css({
-  padding: "8px 16px",
-  fontSize: "10px",
+  paddingBlock: "2",
+  paddingInline: "4",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
@@ -458,8 +472,9 @@ const groupHeader = css({
 const notifRow = css({
   display: "flex",
   alignItems: "flex-start",
-  gap: "10px",
-  padding: "12px 16px",
+  gap: "2.5",
+  paddingBlock: "3",
+  paddingInline: "4",
   paddingLeft: "19px",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
@@ -473,7 +488,7 @@ const clickableRow = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "-2px",
+    outlineOffset: "-0.5",
   },
 });
 
@@ -493,14 +508,14 @@ const notifUnread = css({
 const typeIcon = css({
   color: "text.muted",
   flexShrink: 0,
-  marginTop: "2px",
+  marginTop: "0.5",
 });
 
 const notifContent = css({
   flex: 1,
   display: "flex",
   flexDirection: "column",
-  gap: "2px",
+  gap: "0.5",
   minWidth: 0,
 });
 
@@ -524,8 +539,8 @@ const markReadBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "24px",
-  height: "24px",
+  width: "6",
+  height: "6",
   backgroundColor: "transparent",
   border: "none",
   color: "text.muted",

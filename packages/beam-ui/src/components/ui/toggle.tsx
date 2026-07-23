@@ -1,11 +1,10 @@
-import { type ReactNode } from "react";
-import {
-  ToggleRoot,
-} from "@ark-ui/react/toggle";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import { ToggleRoot } from "@ark-ui/react/toggle";
 
 /** Props for {@link Toggle}. */
-interface ToggleProps {
+export interface ToggleProps {
   /** Whether the toggle is currently pressed (active). */
   pressed: boolean;
   /** Called when the toggle is clicked with the new pressed state. */

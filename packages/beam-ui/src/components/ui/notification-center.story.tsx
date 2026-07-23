@@ -1,6 +1,10 @@
 // @storyName NotificationCenter
 import { useState } from "react";
-import { NotificationCenter, type Notification, notificationIcons } from "./notification-center.tsx";
+import {
+  type Notification,
+  NotificationCenter,
+  notificationIcons,
+} from "./notification-center.tsx";
 
 const initial: Notification[] = [
   {
@@ -43,12 +47,9 @@ export default function NotificationCenterStory() {
   const [notifications, setNotifications] = useState(initial);
 
   const markRead = (id: string) =>
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    );
+    setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
 
-  const markAllRead = () =>
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  const markAllRead = () => setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
 
   return (
     <div style={{ display: "flex", justifyContent: "flex-end", padding: 16 }}>

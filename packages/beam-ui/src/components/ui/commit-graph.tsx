@@ -1,5 +1,6 @@
-import { useMemo, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useMemo } from "react";
 
 /** Single commit in a {@link CommitGraph}. */
 export interface CommitNode {
@@ -22,7 +23,7 @@ export interface CommitNode {
 }
 
 /** Props for {@link CommitGraph}. */
-interface CommitGraphProps {
+export interface CommitGraphProps {
   /** Array of commits to display, in chronological order. */
   commits: CommitNode[];
   /** Extra CSS class names to apply to the root container. */
@@ -81,9 +82,7 @@ function layoutCommits(commits: CommitNode[]) {
       branchLanes.set(commit.branch, lane);
     } else {
       // No branch name - try to inherit from parent
-      const parentNode = commit.parents.length > 0
-        ? hashToNode.get(commit.parents[0])
-        : undefined;
+      const parentNode = commit.parents.length > 0 ? hashToNode.get(commit.parents[0]) : undefined;
       lane = parentNode ? parentNode.lane : 0;
     }
 

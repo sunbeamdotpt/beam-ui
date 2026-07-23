@@ -1,5 +1,5 @@
 // @storyName AuthForms
-import { LoginForm, SignUpForm, ForgotPasswordForm, TwoFactorForm } from "./auth-form.tsx";
+import { ForgotPasswordForm, LoginForm, SignUpForm, TwoFactorForm } from "./auth-form.tsx";
 
 export default function AuthFormsStory() {
   return (
@@ -15,10 +15,18 @@ export default function AuthFormsStory() {
   );
 }
 
-export function SignUp() { return <SignUpForm onSubmit={() => {}} />; }
-export function ForgotPassword() { return <ForgotPasswordForm onSubmit={() => {}} />; }
-export function ForgotPasswordSuccess() { return <ForgotPasswordForm onSubmit={() => {}} success />; }
-export function TwoFactor() { return <TwoFactorForm onSubmit={() => {}} onScratchCode={() => {}} />; }
+export function SignUp() {
+  return <SignUpForm onSubmit={() => {}} />;
+}
+export function ForgotPassword() {
+  return <ForgotPasswordForm onSubmit={() => {}} />;
+}
+export function ForgotPasswordSuccess() {
+  return <ForgotPasswordForm onSubmit={() => {}} success />;
+}
+export function TwoFactor() {
+  return <TwoFactorForm onSubmit={() => {}} onScratchCode={() => {}} />;
+}
 export function LoginWithError() {
   return (
     <LoginForm
@@ -43,7 +51,13 @@ export function ForgotPasswordLoading() {
   return <ForgotPasswordForm onSubmit={() => {}} loading />;
 }
 export function TwoFactorWithError() {
-  return <TwoFactorForm onSubmit={() => {}} onScratchCode={() => {}} error="Invalid code. Please try again." />;
+  return (
+    <TwoFactorForm
+      onSubmit={() => {}}
+      onScratchCode={() => {}}
+      error="Invalid code. Please try again."
+    />
+  );
 }
 export function TwoFactorLoading() {
   return <TwoFactorForm onSubmit={() => {}} onScratchCode={() => {}} loading />;

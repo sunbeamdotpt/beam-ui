@@ -1,6 +1,7 @@
-import { useState, type ReactNode } from "react";
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "@ark-ui/react/collapsible";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
+import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "@ark-ui/react/collapsible";
 import { Icon } from "./icon.tsx";
 
 /** Node in a tree hierarchy. */
@@ -18,7 +19,7 @@ export interface TreeNode {
 }
 
 /** Props for {@link TreeView}. */
-interface TreeViewProps {
+export interface TreeViewProps {
   /** Array of root tree nodes. */
   nodes: TreeNode[];
   /** ID of the currently active/selected node. */
@@ -38,7 +39,7 @@ interface TreeViewProps {
  *     id: "src",
  *     label: "src",
  *     children: [
- *       { id: "index.ts", label: "index.ts", onClick: () => console.log("clicked") },
+ *       { id: "index.ts", label: "index.ts", onClick: "() => console.log("clicked") },
  *     ],
  *   },
  * ];
@@ -48,9 +49,7 @@ interface TreeViewProps {
 export function TreeView({ nodes, activeId, className }: TreeViewProps): ReactNode {
   return (
     <div className={cx(root, className)} role="tree">
-      {nodes.map((node) => (
-        <TreeItem key={node.id} node={node} activeId={activeId} level={0} />
-      ))}
+      {nodes.map((node) => <TreeItem key={node.id} node={node} activeId={activeId} level={0} />)}
     </div>
   );
 }
@@ -99,7 +98,7 @@ function TreeItem({
       role="treeitem"
     >
       <span style={{ paddingLeft: `${level * 16}px` }} className={itemInner}>
-        <span className={css({ width: "16px", flexShrink: 0 })} />
+        <span className={css({ width: "4", flexShrink: 0 })} />
         <Icon name={node.icon ?? "description"} size={18} className={fileIcon} />
         <span className={labelStyle}>{node.label}</span>
       </span>
@@ -113,7 +112,7 @@ function TreeItem({
 
 const root = css({
   fontFamily: "body",
-  fontSize: "14px",
+  fontSize: "sm",
 });
 
 const itemRow = css({
@@ -123,7 +122,8 @@ const itemRow = css({
   background: "none",
   border: "none",
   cursor: "pointer",
-  padding: "4px 8px",
+  paddingBlock: "1",
+  paddingInline: "2",
   borderRadius: "md",
   transition: "background-color 0.15s ease",
   textAlign: "left",
@@ -139,7 +139,7 @@ const activeRow = css({
 const itemInner = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const chevron = css({

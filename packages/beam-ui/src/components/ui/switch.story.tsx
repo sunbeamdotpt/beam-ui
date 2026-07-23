@@ -12,8 +12,18 @@ export default function SwitchStory() {
   );
 }
 
-export function On() { return <Switch checked={true} onChange={() => {}} label="Enabled" />; }
-export function Off() { return <Switch checked={false} onChange={() => {}} label="Disabled toggle" />; }
-export function Disabled() { return <Switch checked={false} onChange={() => {}} label="Cannot change" disabled />; }
-export function DisabledChecked() { return <Switch checked={true} onChange={() => {}} label="Locked on" disabled />; }
-export function WithoutLabel() { return <Switch checked={true} onChange={() => {}} />; }
+export function On() {
+  return <Switch checked onChange={() => {}} label="Enabled" />;
+}
+export function Off() {
+  return <Switch checked={false} onChange={() => {}} label="Disabled toggle" />;
+}
+export function Disabled() {
+  return <Switch checked={false} onChange={() => {}} label="Cannot change" disabled />;
+}
+export function DisabledChecked() {
+  return <Switch checked onChange={() => {}} label="Locked on" disabled />;
+}
+export function WithoutLabel() {
+  return <Switch checked onChange={() => {}} />;
+}

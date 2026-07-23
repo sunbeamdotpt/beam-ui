@@ -1,11 +1,12 @@
-import { useState, type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import {
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
 } from "@ark-ui/react/popover";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** A single label option with name, color, and optional description. */
@@ -21,7 +22,7 @@ export interface LabelOption {
 }
 
 /** Props for {@link LabelPicker}. */
-interface LabelPickerProps {
+export interface LabelPickerProps {
   /** Array of available labels to choose from. */
   options: LabelOption[];
   /** Array of selected label IDs. */
@@ -75,22 +76,22 @@ export function LabelPicker({
   return (
     <PopoverRoot positioning={{ placement: "bottom-start" }} onOpenChange={() => setQuery("")}>
       <PopoverTrigger asChild>
-        <button className={cx(triggerStyle, className)}>
-          {selectedOptions.length === 0 ? (
-            <span className={placeholderStyle}>{placeholder}</span>
-          ) : (
-            <span className={pillRow}>
-              {selectedOptions.map((opt) => (
-                <span
-                  key={opt.id}
-                  className={pill}
-                  style={{ backgroundColor: opt.color, color: getContrastColor(opt.color) }}
-                >
-                  {opt.name}
-                </span>
-              ))}
-            </span>
-          )}
+        <button className={cx(triggerStyle, className)} type="button">
+          {selectedOptions.length === 0
+            ? <span className={placeholderStyle}>{placeholder}</span>
+            : (
+              <span className={pillRow}>
+                {selectedOptions.map((opt) => (
+                  <span
+                    key={opt.id}
+                    className={pill}
+                    style={{ backgroundColor: opt.color, color: getContrastColor(opt.color) }}
+                  >
+                    {opt.name}
+                  </span>
+                ))}
+              </span>
+            )}
           <Icon name="expand_more" size={18} className={chevron} />
         </button>
       </PopoverTrigger>
@@ -114,6 +115,7 @@ export function LabelPicker({
                   key={opt.id}
                   className={optionRow}
                   onClick={() => toggle(opt.id)}
+                  type="button"
                 >
                   <span
                     className={colorSwatch}
@@ -121,19 +123,13 @@ export function LabelPicker({
                   />
                   <span className={optionText}>
                     <span className={optionName}>{opt.name}</span>
-                    {opt.description && (
-                      <span className={optionDesc}>{opt.description}</span>
-                    )}
+                    {opt.description && <span className={optionDesc}>{opt.description}</span>}
                   </span>
-                  {isSelected && (
-                    <Icon name="check" size={16} className={checkIcon} />
-                  )}
+                  {isSelected && <Icon name="check" size={16} className={checkIcon} />}
                 </button>
               );
             })}
-            {filtered.length === 0 && (
-              <span className={emptyText}>No labels found</span>
-            )}
+            {filtered.length === 0 && <span className={emptyText}>No labels found</span>}
           </div>
         </PopoverContent>
       </PopoverPositioner>

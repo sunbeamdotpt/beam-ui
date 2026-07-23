@@ -1,5 +1,5 @@
 // @storyName Charts
-import { LineChart, BarChart, PieChart, AreaChart } from "./charts.tsx";
+import { AreaChart, BarChart, LineChart, PieChart } from "./charts.tsx";
 
 const lineData = [
   { label: "Jan", commits: 120, issues: 45 },
@@ -44,7 +44,11 @@ export default function ChartsStory() {
 export function LineChartOnly() {
   return (
     <div style={{ maxWidth: 700 }}>
-      <LineChart data={lineData} lines={[{ key: "commits", label: "Commits" }]} aria-label="Monthly commits" />
+      <LineChart
+        data={lineData}
+        lines={[{ key: "commits", label: "Commits" }]}
+        aria-label="Monthly commits"
+      />
     </div>
   );
 }
@@ -52,7 +56,11 @@ export function LineChartOnly() {
 export function BarChartOnly() {
   return (
     <div style={{ maxWidth: 700 }}>
-      <BarChart data={barData} bars={[{ key: "prs", label: "Pull Requests" }]} aria-label="PRs by team" />
+      <BarChart
+        data={barData}
+        bars={[{ key: "prs", label: "Pull Requests" }]}
+        aria-label="PRs by team"
+      />
     </div>
   );
 }
@@ -92,7 +100,11 @@ export function DonutChart() {
 export function AreaChartExample() {
   return (
     <div style={{ maxWidth: 700 }}>
-      <AreaChart data={lineData} areas={[{ key: "commits", label: "Commits" }]} aria-label="Monthly commits area" />
+      <AreaChart
+        data={lineData}
+        areas={[{ key: "commits", label: "Commits" }]}
+        aria-label="Monthly commits area"
+      />
     </div>
   );
 }

@@ -1,9 +1,7 @@
-import { type ReactNode } from "react";
-import {
-  ToggleGroupRoot,
-  ToggleGroupItem,
-} from "@ark-ui/react/toggle-group";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import { ToggleGroupItem, ToggleGroupRoot } from "@ark-ui/react/toggle-group";
 
 /** Option for {@link ToggleGroup}. */
 interface ToggleGroupOption {
@@ -14,7 +12,7 @@ interface ToggleGroupOption {
 }
 
 /** Props for {@link ToggleGroup}. */
-interface ToggleGroupProps {
+export interface ToggleGroupProps {
   /** Array of toggle options with value and label. */
   items: ToggleGroupOption[];
   /** Currently selected option value. */

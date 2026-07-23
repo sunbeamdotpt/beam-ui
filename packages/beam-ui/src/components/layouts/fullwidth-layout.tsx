@@ -1,8 +1,9 @@
-import { type ReactNode } from "react";
-import { Outlet } from "@tanstack/react-router";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import { Sidebar } from "../shell/sidebar.tsx";
 import { docsSidebar } from "../../data/navigation.ts";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 const srOnly = css({
   position: "absolute",
@@ -55,27 +56,43 @@ const content = css({
   overflow: "visible",
 });
 
+/** Props for {@link FullwidthLayout}. */
+export interface FullwidthLayoutProps {
+  /** Page content. */
+  children: ReactNode;
+  /** Current path used to compute active sidebar item. */
+  currentPath?: string;
+  /** Component used to render links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
+}
+
 /**
  * Two-column layout with sidebar and full-width centered content.
  * Sidebar hides on tablet and below. No right rail or additional columns.
  *
  * @example
  * ```tsx
- * <FullwidthLayout />
+ * <FullwidthLayout currentPath="/models">
+ *   <MyPage />
+ * </FullwidthLayout>
  * ```
  */
-export function FullwidthLayout(): ReactNode {
+export function FullwidthLayout({
+  children,
+  currentPath = "",
+  linkAs,
+}: FullwidthLayoutProps): ReactNode {
   return (
     <>
-    <a href="#main-content" className={srOnly}>Skip to main content</a>
-    <div className={body}>
-      <div className={sidebarWrapper}>
-        <Sidebar sections={docsSidebar} />
+      <a href="#main-content" className={srOnly}>Skip to main content</a>
+      <div className={body}>
+        <div className={sidebarWrapper}>
+          <Sidebar sections={docsSidebar} currentPath={currentPath} linkAs={linkAs} />
+        </div>
+        <main className={content} id="main-content">
+          {children}
+        </main>
       </div>
-      <main className={content} id="main-content">
-        <Outlet />
-      </main>
-    </div>
     </>
   );
 }

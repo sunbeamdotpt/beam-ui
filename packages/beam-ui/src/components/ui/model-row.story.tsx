@@ -29,5 +29,13 @@ export default function ModelRowStory() {
 }
 
 export function SingleRow() {
-  return <ModelRow name="Sunbeam Pro" icon="auto_awesome" tier="pro" version="v4.2.0" description="High-performance model for complex reasoning tasks" />;
+  return (
+    <ModelRow
+      name="Sunbeam Pro"
+      icon="auto_awesome"
+      tier="pro"
+      version="v4.2.0"
+      description="High-performance model for complex reasoning tasks"
+    />
+  );
 }

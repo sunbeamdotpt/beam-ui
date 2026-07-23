@@ -1,17 +1,18 @@
-import { type ReactNode } from "react";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
 import {
-  DialogRoot,
   DialogBackdrop,
-  DialogPositioner,
-  DialogContent,
-  DialogTitle,
   DialogCloseTrigger,
+  DialogContent,
+  DialogPositioner,
+  DialogRoot,
+  DialogTitle,
 } from "@ark-ui/react/dialog";
-import { css } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** Props for {@link Dialog}. */
-interface DialogProps {
+export interface DialogProps {
   /** If true, the dialog is visible; if false, it is hidden. */
   open: boolean;
   /** Callback fired when the user closes the dialog (via close button or backdrop click). */
@@ -49,9 +50,12 @@ export function Dialog({
   actions,
 }: DialogProps): ReactNode {
   return (
-    <DialogRoot open={open} onOpenChange={(details) => {
-      if (!details.open) onClose();
-    }}>
+    <DialogRoot
+      open={open}
+      onOpenChange={(details) => {
+        if (!details.open) onClose();
+      }}
+    >
       <DialogBackdrop className={backdrop} />
       <DialogPositioner className={positioner}>
         <DialogContent className={content}>

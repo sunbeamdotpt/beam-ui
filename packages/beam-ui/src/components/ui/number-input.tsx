@@ -1,16 +1,17 @@
+import { css } from "../../system.ts";
+
 import {
-  NumberInputRoot,
-  NumberInputLabel,
   NumberInputControl,
-  NumberInputInput,
-  NumberInputIncrementTrigger,
   NumberInputDecrementTrigger,
+  NumberInputIncrementTrigger,
+  NumberInputInput,
+  NumberInputLabel,
+  NumberInputRoot,
 } from "@ark-ui/react/number-input";
-import { type ReactNode } from "react";
-import { css } from "styled-system/css";
+import type { ReactNode } from "react";
 
 /** Props for {@link NumberInput}. */
-interface NumberInputProps {
+export interface NumberInputProps {
   /** Current numeric value. */
   value: number;
   /** Called when user types or clicks increment/decrement buttons. Receives new number. */
@@ -83,11 +84,11 @@ export function NumberInput({
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const labelStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.primary",
   fontFamily: "body",
@@ -104,8 +105,9 @@ const control = css({
 
 const input = css({
   width: "100%",
-  padding: "8px 12px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "sm",
   fontFamily: "body",
   fontWeight: "body",
   color: "text.primary",
@@ -122,8 +124,8 @@ const trigger = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   flexShrink: 0,
   backgroundColor: "sunbeam.orange",
   color: "white",
@@ -136,7 +138,7 @@ const trigger = css({
   _focus: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
   _disabled: {
     opacity: 0.5,

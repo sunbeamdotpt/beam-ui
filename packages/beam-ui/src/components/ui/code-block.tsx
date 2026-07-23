@@ -1,6 +1,7 @@
-import { useState, type ReactNode } from "react";
-import { TabsRoot, TabList, TabTrigger, TabContent } from "@ark-ui/react/tabs";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
+import { TabContent, TabList, TabsRoot, TabTrigger } from "@ark-ui/react/tabs";
 import { Icon } from "./icon.tsx";
 
 /** Represents a single code tab. */
@@ -22,7 +23,7 @@ interface ToggleGroup {
 }
 
 /** Props for {@link CodeBlock}. */
-interface CodeBlockProps {
+export interface CodeBlockProps {
   /** Array of code tabs to display. */
   tabs: CodeTab[];
   /** Optional streaming mode toggle (appears in top bar). */
@@ -48,7 +49,15 @@ function PillToggle({
   onChange: (v: string) => void;
 }) {
   return (
-    <div role="group" className={css({ display: "flex", backgroundColor: "sunbeam.black", borderRadius: "md", padding: "2px" })}>
+    <div
+      role="group"
+      className={css({
+        display: "flex",
+        backgroundColor: "sunbeam.black",
+        borderRadius: "md",
+        padding: "2px",
+      })}
+    >
       {options.map((opt) => (
         <button
           key={opt}
@@ -66,10 +75,13 @@ function PillToggle({
               transition: "all 0.15s ease",
               fontFamily: "body",
             }),
-            value === opt
-              ? css({ backgroundColor: "code.activePill", color: "white" })
-              : css({ backgroundColor: "transparent", color: "rgba(255,255,255,0.35)", _hover: { color: "rgba(255,255,255,0.7)" } })
+            value === opt ? css({ backgroundColor: "code.activePill", color: "white" }) : css({
+              backgroundColor: "transparent",
+              color: "rgba(255,255,255,0.35)",
+              _hover: { color: "rgba(255,255,255,0.7)" },
+            }),
           )}
+          type="button"
         >
           {opt}
         </button>
@@ -115,8 +127,12 @@ export function CodeBlock({
   modeToggle,
   className,
 }: CodeBlockProps): ReactNode {
-  const [stream, setStream] = useState(streamToggle?.defaultValue ?? streamToggle?.options[0] ?? "");
-  const [version, setVersion] = useState(versionToggle?.defaultValue ?? versionToggle?.options[0] ?? "");
+  const [stream, setStream] = useState(
+    streamToggle?.defaultValue ?? streamToggle?.options[0] ?? "",
+  );
+  const [version, setVersion] = useState(
+    versionToggle?.defaultValue ?? versionToggle?.options[0] ?? "",
+  );
   const [mode, setMode] = useState(modeToggle?.defaultValue ?? modeToggle?.options[0] ?? "");
   const [copied, setCopied] = useState(false);
 
@@ -137,7 +153,8 @@ export function CodeBlock({
     if (tab.content) return tab.content;
     if (!tab.variants) return null;
     // Try exact match, then partial matches, then "default"
-    return tab.variants[variantKey] ?? tab.variants["default"] ?? Object.values(tab.variants)[0] ?? null;
+    return tab.variants[variantKey] ?? tab.variants["default"] ?? Object.values(tab.variants)[0] ??
+      null;
   };
 
   return (
@@ -165,21 +182,44 @@ export function CodeBlock({
                     fontFamily: "body",
                   }),
                   stream === opt
-                    ? css({ color: "white", borderBottom: "2px solid", borderBottomColor: "sunbeam.orange" })
-                    : css({ color: "rgba(255,255,255,0.35)", _hover: { color: "rgba(255,255,255,0.6)" } })
+                    ? css({
+                      color: "white",
+                      borderBottom: "2px solid",
+                      borderBottomColor: "sunbeam.orange",
+                    })
+                    : css({
+                      color: "rgba(255,255,255,0.35)",
+                      _hover: { color: "rgba(255,255,255,0.6)" },
+                    }),
                 )}
+                type="button"
               >
                 {opt}
               </button>
             ))}
           </div>
-          <button onClick={handleCopy} className={copyBtn} title="Copy code" aria-label="Copy code">
+          <button
+            onClick={handleCopy}
+            className={copyBtn}
+            title="Copy code"
+            aria-label="Copy code"
+            type="button"
+          >
             <Icon
               name={copied ? "check" : "content_copy"}
               size={16}
               className={css({ color: copied ? "code.success" : "rgba(255,255,255,0.35)" })}
             />
-            <span aria-live="polite" className={css({ fontSize: "10px", color: "code.success", fontFamily: "body", fontWeight: "button", textTransform: "uppercase" })}>
+            <span
+              aria-live="polite"
+              className={css({
+                fontSize: "10px",
+                color: "code.success",
+                fontFamily: "body",
+                fontWeight: "button",
+                textTransform: "uppercase",
+              })}
+            >
               {copied ? "Copied!" : ""}
             </span>
           </button>
@@ -200,17 +240,30 @@ export function CodeBlock({
             <PillToggle options={versionToggle.options} value={version} onChange={setVersion} />
           )}
         </div>
-        {modeToggle && (
-          <PillToggle options={modeToggle.options} value={mode} onChange={setMode} />
-        )}
+        {modeToggle && <PillToggle options={modeToggle.options} value={mode} onChange={setMode} />}
         {!streamToggle && (
-          <button onClick={handleCopy} className={copyBtn} title="Copy code" aria-label="Copy code">
+          <button
+            onClick={handleCopy}
+            className={copyBtn}
+            title="Copy code"
+            aria-label="Copy code"
+            type="button"
+          >
             <Icon
               name={copied ? "check" : "content_copy"}
               size={16}
               className={css({ color: copied ? "code.success" : "rgba(255,255,255,0.35)" })}
             />
-            <span aria-live="polite" className={css({ fontSize: "10px", color: "code.success", fontFamily: "body", fontWeight: "button", textTransform: "uppercase" })}>
+            <span
+              aria-live="polite"
+              className={css({
+                fontSize: "10px",
+                color: "code.success",
+                fontFamily: "body",
+                fontWeight: "button",
+                textTransform: "uppercase",
+              })}
+            >
               {copied ? "Copied!" : ""}
             </span>
           </button>
@@ -312,7 +365,10 @@ const codeBody = css({
 /* ------------------------------------------------------------------ */
 /* Syntax span helpers (use as className on <span>)                    */
 /* ------------------------------------------------------------------ */
-export const syn: Record<"keyword" | "fn" | "string" | "prop" | "number" | "builtin" | "comment", string> = {
+export const syn: Record<
+  "keyword" | "fn" | "string" | "prop" | "number" | "builtin" | "comment",
+  string
+> = {
   keyword: css({ color: "syn.keyword" }),
   fn: css({ color: "syn.fn" }),
   string: css({ color: "syn.string" }),

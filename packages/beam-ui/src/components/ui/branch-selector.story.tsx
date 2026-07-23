@@ -21,10 +21,26 @@ export default function BranchSelectorStory() {
 
 export function OnTag() {
   const [current, setCurrent] = useState("v2.0.0");
-  return <BranchSelector branches={branches} tags={tags} current={current} defaultBranch="main" onChange={setCurrent} />;
+  return (
+    <BranchSelector
+      branches={branches}
+      tags={tags}
+      current={current}
+      defaultBranch="main"
+      onChange={setCurrent}
+    />
+  );
 }
 
 export function WithoutCreateBranch() {
   const [current, setCurrent] = useState("main");
-  return <BranchSelector branches={branches} tags={tags} current={current} defaultBranch="main" onChange={setCurrent} />;
+  return (
+    <BranchSelector
+      branches={branches}
+      tags={tags}
+      current={current}
+      defaultBranch="main"
+      onChange={setCurrent}
+    />
+  );
 }

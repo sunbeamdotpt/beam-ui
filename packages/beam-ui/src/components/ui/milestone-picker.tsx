@@ -1,11 +1,12 @@
-import { useState, type ReactNode } from "react";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useState } from "react";
 import {
+  PopoverContent,
+  PopoverPositioner,
   PopoverRoot,
   PopoverTrigger,
-  PopoverPositioner,
-  PopoverContent,
 } from "@ark-ui/react/popover";
-import { css, cx } from "styled-system/css";
 import { Icon } from "./icon.tsx";
 
 /** A milestone option with progress tracking and completion counts. */
@@ -25,7 +26,7 @@ export interface MilestoneOption {
 }
 
 /** Props for {@link MilestonePicker}. */
-interface MilestonePickerProps {
+export interface MilestonePickerProps {
   /** Array of available milestones to choose from. */
   options: MilestoneOption[];
   /** ID of the currently selected milestone, or null if none selected. */
@@ -62,9 +63,7 @@ export function MilestonePicker({
 }: MilestonePickerProps): ReactNode {
   const [query, setQuery] = useState("");
 
-  const filtered = options.filter((opt) =>
-    opt.title.toLowerCase().includes(query.toLowerCase()),
-  );
+  const filtered = options.filter((opt) => opt.title.toLowerCase().includes(query.toLowerCase()));
 
   const selectedOption = options.find((o) => o.id === selected);
 
@@ -79,7 +78,7 @@ export function MilestonePicker({
   return (
     <PopoverRoot positioning={{ placement: "bottom-start" }} onOpenChange={() => setQuery("")}>
       <PopoverTrigger asChild>
-        <button className={cx(triggerStyle, className)}>
+        <button className={cx(triggerStyle, className)} type="button">
           <Icon name="flag" size={16} className={triggerIcon} />
           <span className={selectedOption ? triggerText : placeholderStyle}>
             {selectedOption ? selectedOption.title : placeholder}
@@ -107,6 +106,7 @@ export function MilestonePicker({
                   key={opt.id}
                   className={optionRow}
                   onClick={() => handleSelect(opt.id)}
+                  type="button"
                 >
                   <span className={optionMain}>
                     <span className={optionTitle}>
@@ -114,9 +114,7 @@ export function MilestonePicker({
                       {opt.title}
                     </span>
                     <span className={optionMeta}>
-                      {opt.dueDate && (
-                        <span className={dueDate}>Due {opt.dueDate}</span>
-                      )}
+                      {opt.dueDate && <span className={dueDate}>Due {opt.dueDate}</span>}
                       <span className={counts}>
                         {opt.closed} closed / {opt.open} open
                       </span>
@@ -128,15 +126,11 @@ export function MilestonePicker({
                       />
                     </span>
                   </span>
-                  {isSelected && (
-                    <Icon name="check" size={16} className={checkIcon} />
-                  )}
+                  {isSelected && <Icon name="check" size={16} className={checkIcon} />}
                 </button>
               );
             })}
-            {filtered.length === 0 && (
-              <span className={emptyText}>No milestones found</span>
-            )}
+            {filtered.length === 0 && <span className={emptyText}>No milestones found</span>}
           </div>
         </PopoverContent>
       </PopoverPositioner>

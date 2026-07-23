@@ -12,11 +12,11 @@ function getCookie(name: string): string | null {
 }
 
 function setCookie(name: string, value: string) {
-  const parts = window.location.hostname.split(".");
-  const domain = parts.length >= 2
-    ? "." + parts.slice(-2).join(".")
-    : window.location.hostname;
-  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; domain=${domain}; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
+  const parts = globalThis.location.hostname.split(".");
+  const domain = parts.length >= 2 ? "." + parts.slice(-2).join(".") : globalThis.location.hostname;
+  document.cookie = `${name}=${
+    encodeURIComponent(value)
+  }; path=/; domain=${domain}; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
   localStorage.setItem(name, value);
 }
 
@@ -26,7 +26,7 @@ function getInitial(): Theme {
   if (fromCookie === "light" || fromCookie === "dark") return fromCookie;
   const fromStorage = localStorage.getItem(COOKIE_NAME) as Theme | null;
   if (fromStorage === "light" || fromStorage === "dark") return fromStorage;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return globalThis.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function readTheme(): Theme {
@@ -54,7 +54,7 @@ export function useTheme(): { theme: Theme; toggle: () => void } {
       attributeFilter: ["data-theme"],
     });
 
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const mq = globalThis.matchMedia("(prefers-color-scheme: dark)");
     const onChange = () => {
       if (!document.documentElement.hasAttribute("data-theme")) {
         setTheme(mq.matches ? "dark" : "light");

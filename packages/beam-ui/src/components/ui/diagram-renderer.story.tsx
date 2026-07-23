@@ -22,7 +22,11 @@ export function SequenceDiagram() {
     Server->>DB: Validate credentials
     DB-->>Server: User record
     Server-->>Client: JWT token`;
-  return <div style={{ maxWidth: 700 }}><DiagramRenderer code={code} /></div>;
+  return (
+    <div style={{ maxWidth: 700 }}>
+      <DiagramRenderer code={code} />
+    </div>
+  );
 }
 
 export function PieChart() {
@@ -31,5 +35,9 @@ export function PieChart() {
     "Rust" : 25
     "Go" : 20
     "Python" : 10`;
-  return <div style={{ maxWidth: 500 }}><DiagramRenderer code={code} /></div>;
+  return (
+    <div style={{ maxWidth: 500 }}>
+      <DiagramRenderer code={code} />
+    </div>
+  );
 }

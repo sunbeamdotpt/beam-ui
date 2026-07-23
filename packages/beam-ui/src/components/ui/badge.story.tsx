@@ -28,37 +28,83 @@ export default function BadgeStory() {
 }
 
 // Tier / Recognition
-export function Featured() { return <Badge variant="featured">Featured</Badge>; }
-export function Premier() { return <Badge variant="premier">Premier</Badge>; }
-export function Verified() { return <Badge variant="verified">Verified</Badge>; }
-export function Partner() { return <Badge variant="partner">Partner</Badge>; }
-export function Community() { return <Badge variant="community">Community</Badge>; }
+export function Featured() {
+  return <Badge variant="featured">Featured</Badge>;
+}
+export function Premier() {
+  return <Badge variant="premier">Premier</Badge>;
+}
+export function Verified() {
+  return <Badge variant="verified">Verified</Badge>;
+}
+export function Partner() {
+  return <Badge variant="partner">Partner</Badge>;
+}
+export function Community() {
+  return <Badge variant="community">Community</Badge>;
+}
 
 // Release Stage
-export function Stable() { return <Badge variant="stable">Stable</Badge>; }
-export function New() { return <Badge variant="new">New</Badge>; }
-export function Beta() { return <Badge variant="beta">Beta</Badge>; }
-export function Preview() { return <Badge variant="preview">Preview</Badge>; }
-export function Experimental() { return <Badge variant="experimental">Experimental</Badge>; }
-export function Deprecated() { return <Badge variant="deprecated">Deprecated</Badge>; }
+export function Stable() {
+  return <Badge variant="stable">Stable</Badge>;
+}
+export function New() {
+  return <Badge variant="new">New</Badge>;
+}
+export function Beta() {
+  return <Badge variant="beta">Beta</Badge>;
+}
+export function Preview() {
+  return <Badge variant="preview">Preview</Badge>;
+}
+export function Experimental() {
+  return <Badge variant="experimental">Experimental</Badge>;
+}
+export function Deprecated() {
+  return <Badge variant="deprecated">Deprecated</Badge>;
+}
 
 // Work Status
-export function Open() { return <Badge variant="open">Open</Badge>; }
-export function Draft() { return <Badge variant="draft">Draft</Badge>; }
-export function Review() { return <Badge variant="review">Review</Badge>; }
-export function Approved() { return <Badge variant="approved">Approved</Badge>; }
-export function Merged() { return <Badge variant="merged">Merged</Badge>; }
-export function Closed() { return <Badge variant="closed">Closed</Badge>; }
-export function Revision() { return <Badge variant="revision">Revision</Badge>; }
+export function Open() {
+  return <Badge variant="open">Open</Badge>;
+}
+export function Draft() {
+  return <Badge variant="draft">Draft</Badge>;
+}
+export function Review() {
+  return <Badge variant="review">Review</Badge>;
+}
+export function Approved() {
+  return <Badge variant="approved">Approved</Badge>;
+}
+export function Merged() {
+  return <Badge variant="merged">Merged</Badge>;
+}
+export function Closed() {
+  return <Badge variant="closed">Closed</Badge>;
+}
+export function Revision() {
+  return <Badge variant="revision">Revision</Badge>;
+}
 
 // Priority
-export function Critical() { return <Badge variant="critical">Critical</Badge>; }
-export function High() { return <Badge variant="high">High</Badge>; }
-export function Medium() { return <Badge variant="medium">Medium</Badge>; }
-export function Low() { return <Badge variant="low">Low</Badge>; }
+export function Critical() {
+  return <Badge variant="critical">Critical</Badge>;
+}
+export function High() {
+  return <Badge variant="high">High</Badge>;
+}
+export function Medium() {
+  return <Badge variant="medium">Medium</Badge>;
+}
+export function Low() {
+  return <Badge variant="low">Low</Badge>;
+}
 
 // Utility
-export function Section() { return <Badge variant="section">Section Label</Badge>; }
+export function Section() {
+  return <Badge variant="section">Section Label</Badge>;
+}
 
 // Group exports
 export function AllTier() {

@@ -8,7 +8,15 @@ export default function ToastStory() {
   );
 }
 
-export function SuccessToast() { return <Toast message="Changes saved." variant="success" visible />; }
-export function ErrorToast() { return <Toast message="Failed to save changes." variant="error" visible />; }
-export function InfoToast() { return <Toast message="A new version is available." variant="info" visible />; }
-export function Dismissible() { return <Toast message="Click X to dismiss." variant="info" visible onDismiss={() => {}} />; }
+export function SuccessToast() {
+  return <Toast message="Changes saved." variant="success" visible />;
+}
+export function ErrorToast() {
+  return <Toast message="Failed to save changes." variant="error" visible />;
+}
+export function InfoToast() {
+  return <Toast message="A new version is available." variant="info" visible />;
+}
+export function Dismissible() {
+  return <Toast message="Click X to dismiss." variant="info" visible onDismiss={() => {}} />;
+}

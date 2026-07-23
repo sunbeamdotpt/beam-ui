@@ -1,8 +1,10 @@
-import { useState, type ReactNode } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "@ark-ui/react/collapsible";
-import { css } from "styled-system/css";
+import { css } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import { useState } from "react";
+import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "@ark-ui/react/collapsible";
 import type { NavSection } from "../../data/navigation.ts";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 const aside = css({
   width: "240px",
@@ -202,29 +204,36 @@ const childLinkActive = css({
 });
 
 /** Props for {@link Sidebar}. */
-interface SidebarProps {
+export interface SidebarProps {
   /** Navigation sections to render. Each section has a title and list of items. */
   sections: NavSection[];
+  /** Current path used to compute active items. */
+  currentPath?: string;
+  /** Component used to render links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
 }
 
-function SidebarItem({ item }: { item: NavSection["items"][number] }) {
-  const location = useLocation();
-  const isActive = location.pathname === item.href;
+export interface SidebarItemProps {
+  item: NavSection["items"][number];
+  currentPath: string;
+  LinkAs: LinkComponent;
+}
+
+function SidebarItem({ item, currentPath, LinkAs }: SidebarItemProps) {
+  const isActive = currentPath === item.href;
   const hasChildren = item.children && item.children.length > 0;
-  const childActive = hasChildren
-    ? item.children!.some((c) => location.pathname === c.href)
-    : false;
+  const childActive = hasChildren ? item.children!.some((c) => currentPath === c.href) : false;
   const [open, setOpen] = useState(isActive || childActive);
 
   if (!hasChildren) {
     return (
-      <Link
-        to={item.href}
+      <LinkAs
+        href={item.href}
         className={isActive ? itemLinkActive : itemLink}
         {...(isActive ? { "aria-current": "page" as const } : {})}
       >
         <span>{item.label}</span>
-      </Link>
+      </LinkAs>
     );
   }
 
@@ -240,22 +249,23 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
         <ul className={childList} role="list">
           {item.children!.map((child) => {
             const sameAsParent = child.href === item.href;
-            const onParentPage = sameAsParent && location.pathname === item.href;
-            const cActive = !sameAsParent && location.pathname === child.href;
+            const onParentPage = sameAsParent && currentPath === item.href;
+            const cActive = !sameAsParent && currentPath === child.href;
             return (
               <li key={child.label}>
-                <Link
-                  to={child.href}
-                  className={
-                    cActive ? childLinkActive
-                      : onParentPage ? childLabelOnPage
-                      : sameAsParent ? childLabel
-                      : childLink
-                  }
+                <LinkAs
+                  href={child.href}
+                  className={cActive
+                    ? childLinkActive
+                    : onParentPage
+                    ? childLabelOnPage
+                    : sameAsParent
+                    ? childLabel
+                    : childLink}
                   {...(cActive ? { "aria-current": "page" as const } : {})}
                 >
                   {child.label}
-                </Link>
+                </LinkAs>
               </li>
             );
           })}
@@ -269,22 +279,34 @@ function SidebarItem({ item }: { item: NavSection["items"][number] }) {
  * Left-side navigation rail for documentation and API reference sites.
  *
  * Renders a sticky sidebar with collapsible sections and nested links.
- * Handles active state based on current URL pathname.
- * Cross-references {@link docsSidebar} and {@link apiSidebar} from data/navigation.
+ * Handles active state based on the `currentPath` prop. The consumer supplies
+ * the link component (React Router, TanStack Router, Fresh, etc.) via `linkAs`;
+ * otherwise plain `<a>` tags are used.
  *
  * @example
  * ```tsx
- * <Sidebar sections={docsSidebar} />
+ * <Sidebar sections={docsSidebar} currentPath="/components/button" />
  * ```
  */
-export function Sidebar({ sections }: SidebarProps): ReactNode {
+export function Sidebar({ sections, currentPath = "", linkAs }: SidebarProps): ReactNode {
+  const LinkAs = linkAs ?? DefaultLink;
   return (
     <aside
       className={aside}
       aria-label="Documentation navigation"
-      style={{ scrollbarWidth: "thin", scrollbarColor: "transparent transparent" } as React.CSSProperties}
-      onMouseEnter={(e) => { (e.currentTarget.style as any).scrollbarColor = "rgba(255,161,16,0.25) transparent"; }}
-      onMouseLeave={(e) => { (e.currentTarget.style as any).scrollbarColor = "transparent transparent"; }}
+      style={{
+        scrollbarWidth: "thin",
+        scrollbarColor: "transparent transparent",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.setProperty(
+          "scrollbar-color",
+          "rgba(255,161,16,0.25) transparent",
+        );
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.setProperty("scrollbar-color", "transparent transparent");
+      }}
     >
       {sections.map((section) => (
         <div key={section.title} className={sectionGroup}>
@@ -292,12 +314,30 @@ export function Sidebar({ sections }: SidebarProps): ReactNode {
           <ul className={itemList} role="list">
             {section.items.map((item) => (
               <li key={item.label}>
-                <SidebarItem item={item} />
+                <SidebarItem item={item} currentPath={currentPath} LinkAs={LinkAs} />
               </li>
             ))}
           </ul>
         </div>
       ))}
     </aside>
+  );
+}
+
+function DefaultLink({
+  href,
+  children,
+  className,
+  ...rest
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}): ReactNode {
+  return (
+    <a href={href} className={className} {...rest}>
+      {children}
+    </a>
   );
 }

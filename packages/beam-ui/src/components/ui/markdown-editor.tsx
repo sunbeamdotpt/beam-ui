@@ -1,10 +1,11 @@
-import { useState, useRef, useCallback, type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { type ReactNode, useCallback, useRef, useState } from "react";
 import { Icon } from "./icon.tsx";
 import { MarkdownRenderer } from "./markdown-renderer.tsx";
 
 /** Props for {@link MarkdownEditor}. */
-interface MarkdownEditorProps {
+export interface MarkdownEditorProps {
   /** Current markdown content. */
   value: string;
   /** Called when user edits the markdown text. Receives new content string. */
@@ -137,7 +138,8 @@ const TOOLBAR_ACTIONS: ToolbarAction[] = [
     label: "Table",
     action: (ta, v) => {
       const start = ta.selectionStart;
-      const table = "| Header | Header |\n| ------ | ------ |\n| Cell   | Cell   |\n| Cell   | Cell   |";
+      const table =
+        "| Header | Header |\n| ------ | ------ |\n| Cell   | Cell   |\n| Cell   | Cell   |";
       return {
         newValue: v.slice(0, start) + table + v.slice(ta.selectionEnd),
         cursorPos: start + table.length,
@@ -222,25 +224,25 @@ export function MarkdownEditor({
       )}
 
       {/* Content */}
-      {activeTab === "write" ? (
-        <textarea
-          ref={textareaRef}
-          className={textarea}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          style={{ minHeight }}
-          aria-label="Markdown editor"
-        />
-      ) : (
-        <div className={previewPane} style={{ minHeight }}>
-          {value ? (
-            <MarkdownRenderer content={value} />
-          ) : (
-            <p className={emptyPreview}>Nothing to preview</p>
-          )}
-        </div>
-      )}
+      {activeTab === "write"
+        ? (
+          <textarea
+            ref={textareaRef}
+            className={textarea}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            style={{ minHeight }}
+            aria-label="Markdown editor"
+          />
+        )
+        : (
+          <div className={previewPane} style={{ minHeight }}>
+            {value
+              ? <MarkdownRenderer content={value} />
+              : <p className={emptyPreview}>Nothing to preview</p>}
+          </div>
+        )}
     </div>
   );
 }

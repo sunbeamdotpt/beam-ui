@@ -10,8 +10,18 @@ export default function SkeletonStory() {
   );
 }
 
-export function TextVariant() { return <Skeleton variant="text" count={3} />; }
-export function CircleVariant() { return <Skeleton variant="circle" width="48px" />; }
-export function RectVariant() { return <Skeleton variant="rect" width="200px" height="120px" />; }
-export function SingleLine() { return <Skeleton variant="text" />; }
-export function LargeCircle() { return <Skeleton variant="circle" width="96px" />; }
+export function TextVariant() {
+  return <Skeleton variant="text" count={3} />;
+}
+export function CircleVariant() {
+  return <Skeleton variant="circle" width="48px" />;
+}
+export function RectVariant() {
+  return <Skeleton variant="rect" width="200px" height="120px" />;
+}
+export function SingleLine() {
+  return <Skeleton variant="text" />;
+}
+export function LargeCircle() {
+  return <Skeleton variant="circle" width="96px" />;
+}

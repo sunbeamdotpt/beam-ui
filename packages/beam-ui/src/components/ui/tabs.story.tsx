@@ -19,14 +19,26 @@ export default function TabsStory() {
 
 export function DefaultVariant() {
   const [active, setActive] = useState("a");
-  return <Tabs activeValue={active} onChange={setActive} variant="default" items={[{ value: "a", label: "Tab A" }, { value: "b", label: "Tab B" }]} />;
+  return (
+    <Tabs
+      activeValue={active}
+      onChange={setActive}
+      variant="default"
+      items={[{ value: "a", label: "Tab A" }, { value: "b", label: "Tab B" }]}
+    />
+  );
 }
 
 export function DarkVariant() {
   const [active, setActive] = useState("a");
   return (
     <div style={{ background: "#1f1f1f", padding: 24 }}>
-      <Tabs activeValue={active} onChange={setActive} variant="dark" items={[{ value: "a", label: "Tab A" }, { value: "b", label: "Tab B" }]} />
+      <Tabs
+        activeValue={active}
+        onChange={setActive}
+        variant="dark"
+        items={[{ value: "a", label: "Tab A" }, { value: "b", label: "Tab B" }]}
+      />
     </div>
   );
 }

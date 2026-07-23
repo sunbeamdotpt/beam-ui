@@ -30,17 +30,18 @@
 /* ------------------------------------------------------------------ */
 
 /* Ysabeau Infant — Variable weight (body + heading) */
-@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap");
 
 /* Material Symbols Outlined — Icons */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
 
 /* ------------------------------------------------------------------ */
 /* Monaspace Argon — Monospace (GitHub CDN, no Google Fonts equivalent)*/
 /* ------------------------------------------------------------------ */
 @font-face {
-  font-family: 'Monaspace Argon';
-  src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceArgonVarVF%5Bwght%5D.woff2') format('woff2');
+  font-family: "Monaspace Argon";
+  src: url("https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceArgonVarVF%5Bwght%5D.woff2")
+    format("woff2");
   font-weight: 300 800;
   font-style: normal;
   font-display: swap;
@@ -50,7 +51,7 @@
 /* Material Symbols icon class                                         */
 /* ------------------------------------------------------------------ */
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
+  font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -61,6 +62,6 @@
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   -webkit-font-smoothing: antialiased;
 }

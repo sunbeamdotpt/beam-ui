@@ -19,7 +19,13 @@ export default function ToggleGroupStory() {
 
 export function TwoItems() {
   const [value, setValue] = useState("on");
-  return <ToggleGroup value={value} onChange={setValue} items={[{ value: "on", label: "On" }, { value: "off", label: "Off" }]} />;
+  return (
+    <ToggleGroup
+      value={value}
+      onChange={setValue}
+      items={[{ value: "on", label: "On" }, { value: "off", label: "Off" }]}
+    />
+  );
 }
 
 export function ManyItems() {

@@ -1,14 +1,10 @@
-import {
-  EditableRoot,
-  EditableArea,
-  EditableInput,
-  EditablePreview,
-} from "@ark-ui/react/editable";
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import { EditableArea, EditableInput, EditablePreview, EditableRoot } from "@ark-ui/react/editable";
+import type { ReactNode } from "react";
 
 /** Props for {@link Editable}. */
-interface EditableProps {
+export interface EditableProps {
   /** Current text value (shown in preview mode). */
   value: string;
   /** Callback fired when the user submits an edit; receives the new text. */

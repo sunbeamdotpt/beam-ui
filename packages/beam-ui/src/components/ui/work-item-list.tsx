@@ -1,5 +1,7 @@
-import { type ReactNode } from "react";
-import { css, cx } from "styled-system/css";
+import { css, cx } from "../../system.ts";
+
+import type { ReactNode } from "react";
+import type { LinkComponent } from "../../utils/polymorphic.ts";
 import { Icon } from "./icon.tsx";
 
 /* ------------------------------------------------------------------ */
@@ -58,13 +60,17 @@ export interface WorkItemListProps {
   onLoadMore?: () => void;
   /** Optional CSS class applied to the root container. */
   className?: string;
+  /** Component used to render item links. Defaults to a plain `<a>`. */
+  linkAs?: LinkComponent;
 }
 
 /* ------------------------------------------------------------------ */
 /* Checkbox                                                            */
 /* ------------------------------------------------------------------ */
 
-function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string }) {
+function Checkbox(
+  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+) {
   return (
     <div
       role="checkbox"
@@ -72,8 +78,17 @@ function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange
       aria-label={ariaLabel}
       tabIndex={0}
       className={cx(checkboxOuter, checked && checkboxChecked)}
-      onClick={(e) => { e.stopPropagation(); onChange(); }}
-      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onChange();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          e.stopPropagation();
+          onChange();
+        }
+      }}
     >
       {checked && <Icon name="check" size={14} />}
     </div>
@@ -97,8 +112,8 @@ function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange
  *     title: "Add feature X",
  *     href: "/pr/1",
  *     meta: "opened by alice",
- *     labels: [{ name: "feature", color: "#0066cc" }],
- *     branches: { base: "main", head: "feat/x" },
+ *     labels: "[{ name: "feature", color: "#0066cc" }],
+ *     branches: "{ base: "main", head: "feat/x" },
  *     status: <Badge>Draft</Badge>,
  *     commentCount: 3,
  *   },
@@ -113,7 +128,9 @@ export function WorkItemList({
   selectable = false,
   onLoadMore,
   className,
+  linkAs,
 }: WorkItemListProps): ReactNode {
+  const LinkAs = linkAs ?? DefaultLink;
   const sel = selected ?? new Set<string>();
 
   const toggle = (id: string) => {
@@ -149,11 +166,9 @@ export function WorkItemList({
             {/* Center: title, labels, meta+branches */}
             <div className={centerCol}>
               {/* Line 1: Title */}
-              {item.href ? (
-                <a href={item.href} className={titleLink}>{item.title}</a>
-              ) : (
-                <span className={titleText}>{item.title}</span>
-              )}
+              {item.href
+                ? <LinkAs href={item.href} className={titleLink}>{item.title}</LinkAs>
+                : <span className={titleText}>{item.title}</span>}
 
               {/* Line 2: Labels */}
               {item.labels && item.labels.length > 0 && (
@@ -192,7 +207,10 @@ export function WorkItemList({
             <div className={rightCol}>
               {item.status}
               {item.commentCount != null && item.commentCount > 0 && (
-                <span className={commentBadge} aria-label={`${item.commentCount} comment${item.commentCount !== 1 ? "s" : ""}`}>
+                <span
+                  className={commentBadge}
+                  aria-label={`${item.commentCount} comment${item.commentCount !== 1 ? "s" : ""}`}
+                >
                   <Icon name="chat_bubble_outline" size={14} />
                   {item.commentCount}
                 </span>
@@ -203,7 +221,18 @@ export function WorkItemList({
       })}
 
       {onLoadMore && (
-        <div className={loadMoreBtn} role="button" tabIndex={0} onClick={onLoadMore} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onLoadMore!(); } }}>
+        <div
+          className={loadMoreBtn}
+          role="button"
+          tabIndex={0}
+          onClick={onLoadMore}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onLoadMore!();
+            }
+          }}
+        >
           Load more
         </div>
       )}
@@ -223,8 +252,9 @@ const container = css({
 const row = css({
   display: "grid",
   gridTemplateColumns: "auto 1fr auto",
-  gap: "12px",
-  padding: "12px 16px",
+  gap: "3",
+  paddingBlock: "3",
+  paddingInline: "4",
   cursor: "default",
   transition: "background 0.1s ease",
   _hover: { backgroundColor: "bg.card" },
@@ -234,14 +264,14 @@ const row = css({
 });
 
 const rowSelected = css({
-  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  backgroundColor: "sunbeam.orange/6",
 });
 
 const leftCol = css({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
-  paddingTop: "2px",
+  gap: "2.5",
+  paddingTop: "0.5",
 });
 
 const iconCell = css({
@@ -254,7 +284,7 @@ const centerCol = css({
   minWidth: 0,
   display: "flex",
   flexDirection: "column",
-  gap: "4px",
+  gap: "1",
 });
 
 const titleLink = css({
@@ -276,7 +306,7 @@ const titleText = css({
 const labelRow = css({
   display: "flex",
   flexWrap: "wrap",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const labelBadge = css({
@@ -321,7 +351,7 @@ const branchPill = css({
   borderColor: "border.default",
   color: "text.primary",
   whiteSpace: "nowrap",
-  marginInline: "4px",
+  marginInline: "1",
   lineHeight: 1.5,
 });
 
@@ -336,7 +366,7 @@ const rightCol = css({
 const commentBadge = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
   fontSize: "xs",
   marginTop: "auto",
   color: "text.muted",
@@ -365,7 +395,8 @@ const checkboxChecked = css({
 const loadMoreBtn = css({
   display: "flex",
   justifyContent: "center",
-  padding: "12px 16px",
+  paddingBlock: "3",
+  paddingInline: "4",
   cursor: "pointer",
   fontSize: "sm",
   fontWeight: "button",
@@ -373,3 +404,21 @@ const loadMoreBtn = css({
   transition: "color 0.15s ease",
   _hover: { color: "text.primary" },
 });
+
+function DefaultLink({
+  href,
+  children,
+  className,
+  ...rest
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}): ReactNode {
+  return (
+    <a href={href} className={className} {...rest}>
+      {children}
+    </a>
+  );
+}
