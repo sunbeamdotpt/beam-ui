@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { LineChart, BarChart, PieChart, AreaChart } from "@sunbeam/beam-ui/components/ui/charts";
+import { LineChart, BarChart, PieChart, AreaChart } from "@sunbeam/beam-ui/charts";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -93,7 +93,7 @@ export function ChartsPage() {
     <ComponentPage
       name="Charts"
       description="Styled chart components wrapping Recharts. Includes LineChart, BarChart, PieChart, and AreaChart with Beam design system theming."
-      importPath='import { LineChart, BarChart, PieChart, AreaChart } from "@sunbeam/beam-ui"'
+      importPath='import { LineChart, BarChart, PieChart, AreaChart } from "@sunbeam/beam-ui/charts"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -129,7 +129,7 @@ export function ChartsPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}LineChart, BarChart, PieChart, AreaChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}LineChart, BarChart, PieChart, AreaChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/charts"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> data = [{"\n"}
               {"  "}{"{ "}label: <span className={syn.string}>"Jan"</span>, value: <span className={syn.number}>42</span>{" },"}{"\n"}

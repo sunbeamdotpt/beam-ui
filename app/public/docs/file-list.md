@@ -1,7 +1,38 @@
 # FileList
 
-> Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) */
+> Single file or folder in a {@link FileList}. */
+export interface FileItem {
+  /** Unique identifier for this item. */
+  id: string;
+  /** Display name of the file or folder. */
+  name: string;
+  /** Optional Material Design icon name (overrides default folder/file icons). */
+  icon?: string;
+  /** Type of item: "file" or "folder". Defaults to "file". */
+  type?: "file" | "folder";
+  /** Human-readable file size (e.g., "1.2 MB"). */
+  size?: string;
+  /** Human-readable modification time (e.g., "2 days ago"). */
+  modified?: string;
+  /** Optional extra metadata content. */
+  meta?: ReactNode;
+}
+
+/** Props for {@link FileList}. */
+export interface FileListProps {
+  /** Array of files and folders to display. */
+  items: FileItem[];
+  /** Set of currently selected item IDs. */
+  selected: Set<string>;
+  /** Callback fired when the selection changes; receives the new Set of selected IDs. */
+  onSelect: (selected: Set<string>) => void;
+  /** Callback fired when the user double-clicks an item; receives the FileItem. */
+  onOpen?: (item: FileItem) => void;
+  /** Render layout: "list" (detailed table) or "grid" (icon grid). Defaults to `"list"`. */
+  layout?: "list" | "grid";
+  /** Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon). Defaults to `"body"`. */
   font?: "body" | "mono";
+  /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
 
@@ -28,7 +59,9 @@ const checkboxChecked = css({
   color: "white",
 });
 
-function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string }) {
+function Checkbox(
+  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+) {
   return (
     <div
       role="checkbox"
@@ -36,8 +69,17 @@ function Checkbox({ checked, onChange, ariaLabel }: { checked: boolean; onChange
       aria-label={ariaLabel}
       tabIndex={0}
       className={cx(checkboxOuter, checked && checkboxChecked)}
-      onClick={(e) => { e.stopPropagation(); onChange(); }}
-      onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); onChange(); } }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onChange();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          e.stopPropagation();
+          onChange();
+        }
+      }}
     >
       {checked && <Icon name="check" size={14} />}
     </div>
@@ -156,7 +198,11 @@ function ListView({
           className={cx(listRow, selected.has(item.id) && listRowSelected)}
           onDoubleClick={() => onOpen?.(item)}
         >
-          <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+          <Checkbox
+            checked={selected.has(item.id)}
+            onChange={() => toggle(item.id)}
+            ariaLabel={`Select ${item.name}`}
+          />
           <Icon
             name={defaultIcon(item)}
             size={18}
@@ -248,10 +294,19 @@ function GridView({
           onClick={() => toggle(item.id)}
           onDoubleClick={() => onOpen?.(item)}
           tabIndex={0}
-          onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(item.id); } }}
+          onKeyDown={(e) => {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault();
+              toggle(item.id);
+            }
+          }}
         >
           <div className={gridCheckbox}>
-            <Checkbox checked={selected.has(item.id)} onChange={() => toggle(item.id)} ariaLabel={`Select ${item.name}`} />
+            <Checkbox
+              checked={selected.has(item.id)}
+              onChange={() => toggle(item.id)}
+              ariaLabel={`Select ${item.name}`}
+            />
           </div>
           <Icon
             name={defaultIcon(item)}
@@ -267,7 +322,9 @@ function GridView({
 
 /* ------------------------------------------------------------------ */
 /* FileList                                                            */
-/* ------------------------------------------------------------------
+/* ------------------------------------------------------------------ */
+
+/** Multi-select file browser with list and grid layout options. * Displays files and folders with icons, sizes, and modification times. Supports checkbox multi-select, double-click to open, and layout toggle. List mode shows detailed metadata; grid mode is compact and icon-focused. * @example ```tsx <FileList items={files} selected={selected} onSelect={setSelected} onOpen={(item) => openFile(item.id)} layout="list" /> ```
 
 > **[View rendered page](https://design.sunbeam.pt/components/file-list?render=html)** — see the live component with full DOM structure and styling.
 
@@ -279,13 +336,13 @@ import { FileList } from "@sunbeam/beam-ui/components/ui/file-list"
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| items | `FileItem[]` | Yes |  |
-| selected | `Set<string>` | Yes |  |
-| onSelect | `(selected: Set<string>) => void` | Yes |  |
-| onOpen | `(item: FileItem) => void` | No |  |
-| layout | `"list" | "grid"` | No |  |
-| font | `"body" | "mono"` | No | Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon) |
-| className | `string` | No |  |
+| items | `FileItem[]` | Yes | Array of files and folders to display. |
+| selected | `Set<string>` | Yes | Set of currently selected item IDs. |
+| onSelect | `(selected: Set<string>) => void` | Yes | Callback fired when the selection changes; receives the new Set of selected IDs. |
+| onOpen | `(item: FileItem) => void` | No | Callback fired when the user double-clicks an item; receives the FileItem. |
+| layout | `"list" | "grid"` | No | Render layout: "list" (detailed table) or "grid" (icon grid). Defaults to `"list"`. |
+| font | `"body" | "mono"` | No | Font family for file names: "body" (Ysabeau Infant) or "mono" (Monaspace Argon). Defaults to `"body"`. |
+| className | `string` | No | Extra CSS class names to apply to the root container. |
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

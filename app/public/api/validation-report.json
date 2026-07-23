@@ -1,6 +1,6 @@
 {
-  "total": 758,
-  "passed": 756,
+  "total": 748,
+  "passed": 746,
   "failed": 2,
   "failures": [
     {
@@ -671,54 +671,6 @@
       "theme": "light",
       "warnings": [
         "has-gradients"
-      ]
-    },
-    {
-      "component": "TopicCard",
-      "variant": "Default",
-      "theme": "dark",
-      "warnings": [
-        "external-image"
-      ]
-    },
-    {
-      "component": "TopicCard",
-      "variant": "Default",
-      "theme": "light",
-      "warnings": [
-        "external-image"
-      ]
-    },
-    {
-      "component": "TopicCard",
-      "variant": "Single Card",
-      "theme": "dark",
-      "warnings": [
-        "external-image"
-      ]
-    },
-    {
-      "component": "TopicCard",
-      "variant": "Single Card",
-      "theme": "light",
-      "warnings": [
-        "external-image"
-      ]
-    },
-    {
-      "component": "TopicCard",
-      "variant": "Without Href",
-      "theme": "dark",
-      "warnings": [
-        "external-image"
-      ]
-    },
-    {
-      "component": "TopicCard",
-      "variant": "Without Href",
-      "theme": "light",
-      "warnings": [
-        "external-image"
       ]
     },
     {

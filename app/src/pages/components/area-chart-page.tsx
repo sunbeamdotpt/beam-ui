@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { AreaChart } from "@sunbeam/beam-ui/components/ui/charts";
+import { AreaChart } from "@sunbeam/beam-ui/charts";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -39,7 +39,7 @@ export function AreaChartPage() {
     <ComponentPage
       name="AreaChart"
       description="An area chart component for visualizing trends with filled regions. Supports multiple stacked areas with Beam theming."
-      importPath='import { AreaChart } from "@sunbeam/beam-ui"'
+      importPath='import { AreaChart } from "@sunbeam/beam-ui/charts"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -66,7 +66,7 @@ export function AreaChartPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}AreaChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}AreaChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/charts"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> data = [{"\n"}
               {"  "}{"{ "}label: <span className={syn.string}>"Jan"</span>, issues: <span className={syn.number}>45</span>, prs: <span className={syn.number}>32</span>{" },"}{"\n"}

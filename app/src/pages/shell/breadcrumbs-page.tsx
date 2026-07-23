@@ -17,6 +17,7 @@ const TOC_ITEMS = [
 const PROPS = [
   { name: "items", type: "Array<BreadcrumbItem>", required: true, description: "Array of breadcrumb items defining the trail. Items with href render as links; the last item renders as plain text." },
   { name: "className", type: "string", required: false, description: "Optional CSS class name applied to the root nav element." },
+  { name: "linkAs", type: "LinkComponent", required: false, description: "Component used to render links (e.g. your router's Link). Defaults to a plain <a>." },
 ];
 
 const ITEM_FIELDS = [

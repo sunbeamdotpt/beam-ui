@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { BarChart } from "@sunbeam/beam-ui/components/ui/charts";
+import { BarChart } from "@sunbeam/beam-ui/charts";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -44,7 +44,7 @@ export function BarChartPage() {
     <ComponentPage
       name="BarChart"
       description="A bar chart component for visualizing categorical data. Supports single and multi-bar configurations with Beam theming."
-      importPath='import { BarChart } from "@sunbeam/beam-ui"'
+      importPath='import { BarChart } from "@sunbeam/beam-ui/charts"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -67,7 +67,7 @@ export function BarChartPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}BarChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}BarChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/charts"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> data = [{"\n"}
               {"  "}{"{ "}label: <span className={syn.string}>"Mon"</span>, commits: <span className={syn.number}>12</span>{" },"}{"\n"}

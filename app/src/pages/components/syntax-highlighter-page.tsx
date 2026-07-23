@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { SyntaxHighlighter } from "@sunbeam/beam-ui/components/ui/syntax-highlighter";
+import { SyntaxHighlighter } from "@sunbeam/beam-ui/syntax-highlighter";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -53,7 +53,7 @@ export function SyntaxHighlighterPage() {
     <ComponentPage
       name="SyntaxHighlighter"
       description="Client-side syntax highlighting powered by Shiki. Supports multiple languages, line numbers, and line highlighting with automatic theme detection."
-      importPath='import { SyntaxHighlighter } from "@sunbeam/beam-ui"'
+      importPath='import { SyntaxHighlighter } from "@sunbeam/beam-ui/syntax-highlighter"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -72,7 +72,7 @@ export function SyntaxHighlighterPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}SyntaxHighlighter{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}SyntaxHighlighter{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/syntax-highlighter"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> code = <span className={syn.string}>`const x = 42;`</span>{"\n"}
               {"\n"}

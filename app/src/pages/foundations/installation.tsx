@@ -6,7 +6,6 @@ import { Callout } from "@sunbeam/beam-ui/components/ui/callout";
 import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";
 
 const TOC_ITEMS = [
-  { label: "Registry", id: "registry" },
   { label: "Install", id: "install" },
   { label: "Panda CSS Setup", id: "panda" },
   { label: "Usage", id: "usage" },
@@ -72,42 +71,22 @@ export function InstallationPage() {
         Get the Beam Design Language into your project in a few steps.
       </p>
 
-      {/* ===== Registry ===== */}
-      <h2 id="registry" className={sectionTitle}>Registry</h2>
-      <p className={paragraph}>
-        Beam UI is published to the Sunbeam Studios Gitea package registry. Add the
-        scoped registry to your project's <code className={inlineCode}>.npmrc</code>:
-      </p>
-      <CodeBlock
-        tabs={[{
-          label: ".npmrc",
-          content: (
-            <pre><code>
-              <span className={syn.comment}># Point @sunbeam scope to the Gitea npm registry</span>{"\n"}
-              {"@sunbeam:registry=https://src.sunbeam.pt/api/packages/studio/npm/"}
-            </code></pre>
-          ),
-        }]}
-      />
-
       {/* ===== Install ===== */}
       <h2 id="install" className={sectionTitle}>Install</h2>
       <p className={paragraph}>
-        Install the package with your preferred package manager:
+        Beam UI is published to JSR (the JavaScript Registry). No scoped
+        registry configuration is needed. Add it with Deno, or with the JSR
+        CLI in npm-based projects:
       </p>
       <CodeBlock
         tabs={[
           {
-            label: "npm",
-            content: <pre><code>npm install @sunbeam/beam-ui</code></pre>,
+            label: "Deno",
+            content: <pre><code>deno add jsr:@sunbeam/beam-ui</code></pre>,
           },
           {
-            label: "pnpm",
-            content: <pre><code>pnpm add @sunbeam/beam-ui</code></pre>,
-          },
-          {
-            label: "yarn",
-            content: <pre><code>yarn add @sunbeam/beam-ui</code></pre>,
+            label: "npm / pnpm / yarn",
+            content: <pre><code>npx jsr add @sunbeam/beam-ui</code></pre>,
           },
         ]}
       />
@@ -151,9 +130,7 @@ export function InstallationPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Shell</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/components/shell/shell"</span>{"\n"}
-              <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Button</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/components/ui/button"</span>{"\n"}
-              <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Badge</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/components/ui/badge"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Shell</span>{", "}<span className={syn.fn}>Button</span>{", "}<span className={syn.fn}>Badge</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
               {"\n"}
               <span className={syn.comment}>{"// Shell includes Header + Footer out of the box"}</span>{"\n"}
               <span className={syn.keyword}>function</span> <span className={syn.fn}>App</span>() {"{"}{"\n"}

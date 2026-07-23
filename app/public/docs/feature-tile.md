@@ -12,9 +12,9 @@ import { FeatureTile } from "@sunbeam/beam-ui/components/ui/feature-tile"
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| name | `string` | Yes |  |
-| endpoint | `string` | Yes |  |
-| icon | `string` | Yes |  |
+| name | `string` | Yes | Display name of the feature (e.g., "Analytics", "File Upload"). |
+| endpoint | `string` | Yes | URL endpoint or path for this feature. |
+| icon | `string` | Yes | Material Design icon name to display above the name. |
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

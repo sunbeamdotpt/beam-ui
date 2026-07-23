@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { css } from "styled-system/css";
-import { MarkdownEditor } from "@sunbeam/beam-ui/components/ui/markdown-editor";
+import { MarkdownEditor } from "@sunbeam/beam-ui/markdown";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -43,7 +43,7 @@ export function MarkdownEditorPage() {
     <ComponentPage
       name="MarkdownEditor"
       description="A rich text editor for composing Markdown content with a formatting toolbar and live preview tab."
-      importPath='import { MarkdownEditor } from "@sunbeam/beam-ui"'
+      importPath='import { MarkdownEditor } from "@sunbeam/beam-ui/markdown"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
       <div className={previewBox}>
@@ -68,7 +68,7 @@ export function MarkdownEditorPage() {
           content: (
             <pre><code>
               <span className={syn.keyword}>import</span> {"{ "}useState{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"react"</span>{"\n"}
-              <span className={syn.keyword}>import</span> {"{ "}MarkdownEditor{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}MarkdownEditor{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/markdown"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> [value, setValue] = <span className={syn.fn}>useState</span>(<span className={syn.string}>""</span>){"\n"}
               {"\n"}

@@ -1,6 +1,101 @@
 # Button
 
-> Button component.
+> * Variant style tokens for {@link Button}. * - `primary` — solid sunbeam orange (default CTA). - `dark` — sunbeam black bg, white text (high contrast actions). - `cream` — beam gold bg, black text (warm secondary CTA). - `ghost` — transparent with bordered outline (subtle actions). - `text` — link-style underline-only (inline tertiary actions). /
+type Variant = "dark" | "cream" | "ghost" | "text" | "primary";
+
+/** Own props for {@link Button}, independent of the rendered element. */
+export interface ButtonOwnProps {
+  /** Visual style. Defaults to `"dark"`. */
+  variant?: Variant;
+  /** When set, the component renders as a link (or as the `as` component with this href). */
+  href?: string;
+  /** Disables interaction and dims the visual. */
+  disabled?: boolean;
+  /** ARIA disabled flag (independent of `disabled` for advanced cases). */
+  "aria-disabled"?: boolean;
+}
+
+/** Props for {@link Button}. */
+export type ButtonProps<T extends ElementType = ElementType> =
+  & ButtonOwnProps
+  & Omit<ComponentPropsWithoutRef<T>, keyof ButtonOwnProps | "as">
+  & {
+    /** Element or component to render. Defaults to `<button type="button">` (or `<a>` when `href` is set). */
+    as?: T;
+  };
+
+const base = css({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "8px",
+  fontWeight: "button",
+  textTransform: "uppercase",
+  letterSpacing: "0.05em",
+  fontSize: "14px",
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+  textDecoration: "none",
+  border: "none",
+  lineHeight: 1,
+  _focusVisible: {
+    outline: "2px solid",
+    outlineColor: "sunbeam.orange",
+    outlineOffset: "2px",
+  },
+});
+
+const variants: Record<Variant, string> = {
+  dark: css({
+    backgroundColor: "sunbeam.black",
+    color: "white",
+    padding: "10px 20px",
+    borderRadius: "0",
+    _hover: { backgroundColor: "sunbeam.flame" },
+    _active: { transform: "scale(0.95)" },
+  }),
+  cream: css({
+    backgroundColor: { base: "beam.gold", _dark: "beam.gold" },
+    color: "sunbeam.black",
+    padding: "10px 20px",
+    borderRadius: "0",
+    border: "1px solid",
+    borderColor: { base: "sunshine.500", _dark: "sunshine.300" },
+    _hover: { backgroundColor: { base: "sunshine.300", _dark: "sunshine.300" } },
+  }),
+  ghost: css({
+    backgroundColor: "transparent",
+    color: "text.primary",
+    border: "1px solid",
+    borderColor: "border.default",
+    padding: "10px 20px",
+    borderRadius: "0",
+    _hover: { borderColor: "sunbeam.orange", color: "sunbeam.orange" },
+  }),
+  text: css({
+    backgroundColor: "transparent",
+    color: "sunbeam.orange",
+    padding: 0,
+    textDecoration: "underline",
+    textUnderlineOffset: "4px",
+    _hover: { textDecorationColor: "sunbeam.orange" },
+  }),
+  primary: css({
+    backgroundColor: "sunbeam.orange",
+    color: "white",
+    padding: "10px 20px",
+    borderRadius: "0",
+    _hover: { backgroundColor: "sunbeam.flame" },
+    _active: { transform: "scale(0.95)" },
+  }),
+};
+
+const disabledStyle = css({
+  opacity: 0.5,
+  cursor: "not-allowed",
+  pointerEvents: "none",
+});
+
+/** Primary action button with five visual variants and polymorphic rendering. * Renders a `<button type="button">` by default. Pass `href` to render a link, or pass `as` to render a custom component such as a router `Link`. External URLs (`http*`) open in a new tab when rendered as a plain link. * @example ```tsx <Button variant="primary" onClick={() => save()}>Save</Button> <Button href="/docs">Read the docs</Button> <Button as={Link} href="/docs">Read the docs</Button> <Button variant="text" href="https://jsr.io">Learn more</Button> ```
 
 > **[View rendered page](https://design.sunbeam.pt/components/button?render=html)** — see the live component with full DOM structure and styling.
 
@@ -12,13 +107,9 @@ import { Button } from "@sunbeam/beam-ui/components/ui/button"
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| children | `ReactNode` | Yes |  |
-| variant | `Variant` | No |  |
-| href | `string` | No |  |
-| className | `string` | No |  |
-| onClick | `() => void` | No |  |
-| type | `"button" | "submit" | "reset"` | No |  |
-| disabled | `boolean` | No |  |
+| variant | `Variant` | No | Visual style. Defaults to `"dark"`. |
+| href | `string` | No | When set, the component renders as a link (or as the `as` component with this href). |
+| disabled | `boolean` | No | Disables interaction and dims the visual. |
 
 ---
 *Part of the [Beam Design Language](https://design.sunbeam.pt) by Sunbeam Studios.*

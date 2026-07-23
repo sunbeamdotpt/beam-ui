@@ -174,7 +174,7 @@ export function FooterPage() {
               {"      "}{"<"}<span className={syn.fn}>Header</span> {"/>"}{"\n"}
               {"      "}{"<"}<span className={syn.fn}>main</span>{">"}{"\n"}
               {"        "}{"<"}<span className={syn.fn}>Sidebar</span> <span className={syn.prop}>sections</span>={"{sections}"} {"/>"}{"\n"}
-              {"        "}{"<"}<span className={syn.fn}>Outlet</span> {"/>"}{"\n"}
+              {"        "}{"{children}"} <span className={syn.comment}>{"  {/* page content; e.g. <Outlet /> from your router */}"}</span>{"\n"}
               {"        "}{"<"}<span className={syn.fn}>RightRail</span> <span className={syn.prop}>items</span>={"{toc}"} {"/>"}{"\n"}
               {"      "}{"</"}<span className={syn.fn}>main</span>{">"}{"\n"}
               {"      "}{"<"}<span className={syn.fn}>Footer</span> {"/>"} <span className={syn.comment}>{"  {/* rendered automatically */}"}</span>{"\n"}

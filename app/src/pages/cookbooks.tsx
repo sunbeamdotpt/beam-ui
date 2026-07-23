@@ -2,7 +2,7 @@ import { css } from "styled-system/css";
 import { Icon } from "@sunbeam/beam-ui/components/ui/icon";
 import { Button } from "@sunbeam/beam-ui/components/ui/button";
 import { Badge } from "@sunbeam/beam-ui/components/ui/badge";
-import { TopicCard } from "@sunbeam/beam-ui/components/ui/topic-card";
+import { Card } from "@sunbeam/beam-ui/components/ui/card";
 import { BentoItem } from "@sunbeam/beam-ui/components/ui/bento-item";
 import { topics, featuredCookbooks } from "../data/cookbooks";
 
@@ -240,11 +240,13 @@ export function CookbooksPage() {
         </div>
         <div className={topicGrid}>
           {topics.map((topic) => (
-            <TopicCard
+            <Card
               key={topic.title}
               title={topic.title}
               icon={topic.icon}
               description={topic.description}
+              href="/guides"
+              variant="outlined"
             />
           ))}
         </div>

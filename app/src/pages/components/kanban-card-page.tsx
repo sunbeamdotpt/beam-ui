@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { css } from "styled-system/css";
-import { KanbanCardView } from "@sunbeam/beam-ui/components/ui/kanban-board";
-import { KanbanCardDetail } from "@sunbeam/beam-ui/components/ui/kanban-card-detail";
+import { KanbanCardView, KanbanCardDetail } from "@sunbeam/beam-ui/kanban";
 import { Button } from "@sunbeam/beam-ui/components/ui/button";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
@@ -104,7 +103,7 @@ export function KanbanCardPage() {
     <ComponentPage
       name="KanbanCard"
       description="A standalone card component for displaying task information with labels, assignees, and milestones. Used within KanbanBoard but also usable independently in lists or detail panels."
-      importPath='import { KanbanCardView } from "@sunbeam/beam-ui"'
+      importPath='import { KanbanCardView } from "@sunbeam/beam-ui/kanban"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
       <div className={previewGrid}>
@@ -134,7 +133,7 @@ export function KanbanCardPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}KanbanCardView{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}KanbanCardView{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/kanban"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> card = {"{"}{"\n"}
               {"  "}id: <span className={syn.string}>"1"</span>,{"\n"}

@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { PieChart } from "@sunbeam/beam-ui/components/ui/charts";
+import { PieChart } from "@sunbeam/beam-ui/charts";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -32,7 +32,7 @@ export function PieChartPage() {
     <ComponentPage
       name="PieChart"
       description="A pie chart component for visualizing proportional data. Supports both standard pie and donut variants with Beam theming."
-      importPath='import { PieChart } from "@sunbeam/beam-ui"'
+      importPath='import { PieChart } from "@sunbeam/beam-ui/charts"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -51,7 +51,7 @@ export function PieChartPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}PieChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}PieChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/charts"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> data = [{"\n"}
               {"  "}{"{ "}name: <span className={syn.string}>"TypeScript"</span>, value: <span className={syn.number}>42</span>{" },"}{"\n"}

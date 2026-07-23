@@ -1,32 +1,44 @@
 # NotificationItem
 
-> Material Symbol icon name, or a ReactNode for custom icons */
+> A single notification in the notification center. */
+export interface Notification {
+  /** Unique notification identifier. */
+  id: string;
+  /** Material Symbol icon name (e.g., from {@link notificationIcons}). */
   icon?: string;
+  /** Primary notification text. */
   title: string;
-  /** Grouping key — notifications are grouped by this value (e.g., repo name, app name, channel) */
+  /** Grouping key — notifications are grouped by this value (e.g., repo name, app name, channel). */
   group?: string;
-  /** Secondary text — timestamp, sender, channel, etc. */
+  /** Secondary text — sender, channel, etc. */
   subtitle?: string;
-  /** Human-readable timestamp */
+  /** Human-readable timestamp. */
   timestamp?: string;
+  /** Whether the notification has been marked as read. */
   read: boolean;
-  /** Optional action URL */
+  /** Optional action URL. */
   href?: string;
-  /** Any additional metadata the consumer wants to attach */
+  /** Any additional metadata the consumer wants to attach. */
   meta?: Record<string, unknown>;
 }
 
-interface NotificationCenterProps {
+/** Props for {@link NotificationCenter}. */
+export interface NotificationCenterProps {
+  /** Array of notifications to display. */
   notifications: Notification[];
+  /** Called when user marks a single notification as read. */
   onMarkRead: (id: string) => void;
+  /** Called when user clicks "Mark all as read" button. */
   onMarkAllRead: () => void;
+  /** Optional callback when user clicks a notification. */
   onClickNotification?: (notification: Notification) => void;
-  /** Header title. Defaults to "Notifications" */
+  /** Header title. Defaults to `"Notifications"`. */
   title?: string;
-  /** Trigger icon. Defaults to "notifications" */
+  /** Trigger icon name. Defaults to `"notifications"`. */
   triggerIcon?: string;
-  /** Make groups collapsible with unread count badges. Defaults to false. */
+  /** If true, groups are collapsible with unread count badges. Defaults to `false`. */
   collapsibleGroups?: boolean;
+  /** Optional CSS class for the trigger button. */
   className?: string;
 }
 
@@ -56,7 +68,7 @@ export const notificationIcons = {
   info: "info",
 } as const;
 
-/** Standalone notification row — usable outside the NotificationCenter dropdown.
+/** Standalone notification row — usable outside the {@link NotificationCenter} dropdown. Displays icon, title, subtitle, timestamp, and optional read-mark button. * @example ```tsx <NotificationItem notification={notif} onMarkRead={(id) => markAsRead(id)} onClick={(notif) => openNotification(notif)} /> ```
 
 > **[View rendered page](https://design.sunbeam.pt/components/notification-center?render=html)** — see the live component with full DOM structure and styling.
 
@@ -68,14 +80,14 @@ import { NotificationItem } from "@sunbeam/beam-ui/components/ui/notification-ce
 ## Props
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| notifications | `Notification[]` | Yes |  |
-| onMarkRead | `(id: string) => void` | Yes |  |
-| onMarkAllRead | `() => void` | Yes |  |
-| onClickNotification | `(notification: Notification) => void` | No |  |
-| title | `string` | No | Header title. Defaults to "Notifications" |
-| triggerIcon | `string` | No | Trigger icon. Defaults to "notifications" |
-| collapsibleGroups | `boolean` | No | Make groups collapsible with unread count badges. Defaults to false. |
-| className | `string` | No |  |
+| notifications | `Notification[]` | Yes | Array of notifications to display. |
+| onMarkRead | `(id: string) => void` | Yes | Called when user marks a single notification as read. |
+| onMarkAllRead | `() => void` | Yes | Called when user clicks "Mark all as read" button. |
+| onClickNotification | `(notification: Notification) => void` | No | Optional callback when user clicks a notification. |
+| title | `string` | No | Header title. Defaults to `"Notifications"`. |
+| triggerIcon | `string` | No | Trigger icon name. Defaults to `"notifications"`. |
+| collapsibleGroups | `boolean` | No | If true, groups are collapsible with unread count badges. Defaults to `false`. |
+| className | `string` | No | Optional CSS class for the trigger button. |
 
 ## Also Exports
 - `NotificationCenter`

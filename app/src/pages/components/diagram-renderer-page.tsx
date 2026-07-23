@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { DiagramRenderer } from "@sunbeam/beam-ui/components/ui/diagram-renderer";
+import { DiagramRenderer } from "@sunbeam/beam-ui/diagram";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
 const PROPS = [
@@ -48,7 +48,7 @@ export function DiagramRendererPage() {
     <ComponentPage
       name="DiagramRenderer"
       description="Client-side Mermaid diagram renderer with dark/light theme support. Renders flowcharts, sequence diagrams, class diagrams, and more."
-      importPath='import { DiagramRenderer } from "@sunbeam/beam-ui"'
+      importPath='import { DiagramRenderer } from "@sunbeam/beam-ui/diagram"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>

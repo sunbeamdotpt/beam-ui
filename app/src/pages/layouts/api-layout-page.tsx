@@ -287,7 +287,9 @@ export function ApiLayoutPage() {
       {/* ---- Props & Exports ---- */}
       <h2 id="props" className={sectionTitle}>Props & Exports</h2>
       <p className={bodyText}>
-        ApiLayout is a zero-prop component. It exports two CSS classes that
+        ApiLayout takes <code>children</code> (required), plus optional{" "}
+        <code>currentPath</code> and <code>linkAs</code> props for router
+        integration. It also exports two CSS classes that
         pages use to structure their left/right panel content.
       </p>
 
@@ -300,7 +302,7 @@ export function ApiLayoutPage() {
         <div className={tableRow}>
           <span className={cellName} style={{ flex: 1 }}>ApiLayout</span>
           <span className={cellDesc} style={{ flex: 1 }}>Component</span>
-          <span className={cellDesc} style={{ flex: 2 }}>Layout wrapper. No props. Renders Sidebar and split-panel Outlet.</span>
+          <span className={cellDesc} style={{ flex: 2 }}>Layout wrapper. Renders Sidebar and children in a split-panel container. Props: children (required), currentPath?, linkAs?.</span>
         </div>
         <div className={tableRow}>
           <span className={cellName} style={{ flex: 1 }}>apiLeftPanel</span>
@@ -323,7 +325,7 @@ export function ApiLayoutPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>apiLeftPanel</span>{", "}<span className={syn.fn}>apiRightPanel</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui/components/layouts/api-layout"</span>{";"}{"\n"}
+              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>apiLeftPanel</span>{", "}<span className={syn.fn}>apiRightPanel</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui"</span>{";"}{"\n"}
               {"\n"}
               <span className={syn.keyword}>export function</span>{" "}<span className={syn.fn}>ApiReferencePage</span>{"() {"}{"\n"}
               {"  "}<span className={syn.keyword}>return</span>{" ("}{"\n"}
@@ -345,7 +347,7 @@ export function ApiLayoutPage() {
       <p className={bodyText}>
         Nest API routes inside an <code>&lt;ApiLayout&gt;</code> route
         element, which itself is a child of <code>&lt;Shell&gt;</code>.
-        The Outlet renders directly into the split-panel container, so
+        Children render directly into the split-panel container, so
         page components must return the two panel divs as siblings.
       </p>
 
@@ -354,11 +356,21 @@ export function ApiLayoutPage() {
           label: "app.tsx",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>ApiLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui/components/layouts/api-layout"</span>{";"}{"\n"}
+              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>ApiLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui"</span>{";"}{"\n"}
               {"\n"}
-              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<Shell />"}</span>{"}>"}{"\n"}
+              <span className={syn.comment}>{"// Layouts render children, so pass <Outlet /> to nest routes:"}</span>{"\n"}
+              <span className={syn.keyword}>function</span>{" "}<span className={syn.fn}>ApiLayoutWrapper</span>{"() {"}{"\n"}
+              {"  "}<span className={syn.keyword}>const</span>{" { pathname } = "}<span className={syn.fn}>useLocation</span>{"();"}{"\n"}
+              {"  "}<span className={syn.keyword}>return</span>{" ("}{"\n"}
+              {"    <"}<span className={syn.fn}>ApiLayout</span>{" "}<span className={syn.prop}>currentPath</span>{"={pathname} "}<span className={syn.prop}>linkAs</span>{"={Link}>"}{"\n"}
+              {"      <"}<span className={syn.fn}>Outlet</span>{" />"}{"\n"}
+              {"    </"}<span className={syn.fn}>ApiLayout</span>{">"}{"\n"}
+              {"  );"}{"\n"}
+              {"}"}{"\n"}
+              {"\n"}
+              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<RouterShell />"}</span>{"}>"}{"\n"}
               {"  "}<span className={syn.comment}>{"// API pages (sidebar + split panels)"}</span>{"\n"}
-              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ApiLayout />"}</span>{"}>"}{"\n"}
+              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ApiLayoutWrapper />"}</span>{"}>"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"api"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ApiReferencePage />"}</span>{"} />"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"api/*"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ApiReferencePage />"}</span>{"} />"}{"\n"}
               {"  </"}<span className={syn.fn}>Route</span>{">"}{"\n"}

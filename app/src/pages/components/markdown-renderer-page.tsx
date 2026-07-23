@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { MarkdownRenderer } from "@sunbeam/beam-ui/components/ui/markdown-renderer";
+import { MarkdownRenderer } from "@sunbeam/beam-ui/markdown";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -79,7 +79,7 @@ export function MarkdownRendererPage() {
     <ComponentPage
       name="MarkdownRenderer"
       description="Client-side GFM Markdown renderer using unified/remark/rehype. Produces semantically correct, sanitized HTML with scoped styling. Supports LaTeX math via KaTeX ($...$ inline, $$...$$ block)."
-      importPath='import { MarkdownRenderer } from "@sunbeam/beam-ui"'
+      importPath='import { MarkdownRenderer } from "@sunbeam/beam-ui/markdown"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
 
@@ -97,7 +97,7 @@ export function MarkdownRendererPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}MarkdownRenderer{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}MarkdownRenderer{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/markdown"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> markdown = <span className={syn.string}>`# Hello World\n\nSome **bold** text.`</span>{"\n"}
               {"\n"}

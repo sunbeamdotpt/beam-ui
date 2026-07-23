@@ -1,6 +1,5 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
-import { MemoryRouter } from "react-router-dom";
 
 import "./panda.css";
 import "@sunbeam/beam-ui/styles/fonts.css";
@@ -11,13 +10,9 @@ const preview: Preview = {
   decorators: [
     (Story) =>
       React.createElement(
-        MemoryRouter,
-        null,
-        React.createElement(
-          "div",
-          { "data-theme": "light", style: { padding: 16 } },
-          React.createElement(Story),
-        ),
+        "div",
+        { "data-theme": "light", style: { padding: 16 } },
+        React.createElement(Story),
       ),
   ],
   parameters: {

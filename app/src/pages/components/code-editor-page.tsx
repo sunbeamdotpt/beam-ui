@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { css } from "styled-system/css";
-import { CodeEditor } from "@sunbeam/beam-ui/components/ui/code-editor";
+import { CodeEditor } from "@sunbeam/beam-ui/code-editor";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -57,7 +57,7 @@ This is a long line of markdown text that should wrap when soft-wrap is enabled,
 ## Installation
 
 \`\`\`bash
-npm install @sunbeam/beam-ui
+deno add jsr:@sunbeam/beam-ui
 \`\`\`
 
 > Note: CodeMirror language packages are loaded dynamically to keep the initial bundle small.`;
@@ -71,7 +71,7 @@ export function CodeEditorPage() {
     <ComponentPage
       name="CodeEditor"
       description="In-browser code editor powered by CodeMirror 6 with syntax highlighting, line numbers, and Beam-themed styling. Supports 15+ languages."
-      importPath='import { CodeEditor } from "@sunbeam/beam-ui"'
+      importPath='import { CodeEditor } from "@sunbeam/beam-ui/code-editor"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
 
@@ -120,7 +120,7 @@ export function CodeEditorPage() {
           content: (
             <pre><code>
               <span className={syn.keyword}>import</span> {"{ "}useState{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"react"</span>{"\n"}
-              <span className={syn.keyword}>import</span> {"{ "}CodeEditor{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}CodeEditor{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/code-editor"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>function</span> <span className={syn.fn}>Editor</span>() {"{"}
               {"\n"}{"  "}<span className={syn.keyword}>const</span> [code, setCode] = <span className={syn.fn}>useState</span>(<span className={syn.string}>""</span>){"\n"}

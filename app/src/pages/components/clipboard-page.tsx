@@ -20,7 +20,7 @@ export function ClipboardPage() {
       <SectionHeading id="preview">Preview</SectionHeading>
       <div className={previewBox}>
         <div className={css({ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" })}>
-          <Clipboard value="npm install @sunbeam/beam-ui" />
+          <Clipboard value="deno add jsr:@sunbeam/beam-ui" />
           <Clipboard value="https://sunbeam.dev/components">
             <Button variant="ghost">Copy link</Button>
           </Clipboard>
@@ -39,7 +39,7 @@ export function ClipboardPage() {
               <span className={syn.keyword}>import</span> {"{ "}Clipboard{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
               {"\n"}
               <span className={syn.comment}>{"// Default button"}</span>{"\n"}
-              {"<"}<span className={syn.fn}>Clipboard</span> <span className={syn.prop}>value</span>=<span className={syn.string}>"npm install @sunbeam/beam-ui"</span> {"/>"}{"\n"}
+              {"<"}<span className={syn.fn}>Clipboard</span> <span className={syn.prop}>value</span>=<span className={syn.string}>"deno add jsr:@sunbeam/beam-ui"</span> {"/>"}{"\n"}
               {"\n"}
               <span className={syn.comment}>{"// Custom trigger"}</span>{"\n"}
               {"<"}<span className={syn.fn}>Clipboard</span> <span className={syn.prop}>value</span>=<span className={syn.string}>"hello"</span>{">"}{"\n"}

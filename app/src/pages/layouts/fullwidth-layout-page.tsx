@@ -254,7 +254,8 @@ export function FullwidthLayoutPage() {
         responsive: 24px base, 48px medium, 120px large.
       </p>
       <p className={bodyText}>
-        Pages render via <code>&lt;Outlet&gt;</code>. There is no right-rail
+        Pages render as children (with React Router, the app passes{" "}
+        <code>&lt;Outlet&gt;</code> as a child). There is no right-rail
         TOC context -- pages rendered in this layout do not have access to{" "}
         <code>useDocsContext()</code>. If a page needs a TOC, use DocsLayout
         instead.
@@ -265,7 +266,9 @@ export function FullwidthLayoutPage() {
       {/* ---- Props & Slots ---- */}
       <h2 id="props" className={sectionTitle}>Props & Slots</h2>
       <p className={bodyText}>
-        FullwidthLayout is a zero-prop component with no exported hooks or
+        FullwidthLayout takes <code>children</code> (required), plus optional{" "}
+        <code>currentPath</code> and <code>linkAs</code> props for router
+        integration. It has no exported hooks or
         CSS classes. It is simpler than DocsLayout because it has no right
         rail or context management.
       </p>
@@ -279,7 +282,7 @@ export function FullwidthLayoutPage() {
         <div className={tableRow}>
           <span className={cellName} style={{ flex: 1 }}>FullwidthLayout</span>
           <span className={cellDesc} style={{ flex: 1 }}>Component</span>
-          <span className={cellDesc} style={{ flex: 2 }}>Layout wrapper. No props. Renders Sidebar (docsSidebar) and a wider Outlet container (max 900px).</span>
+          <span className={cellDesc} style={{ flex: 2 }}>Layout wrapper. Renders Sidebar (docsSidebar) and children in a wider container (max 900px). Props: children (required), currentPath?, linkAs?.</span>
         </div>
       </div>
 
@@ -322,11 +325,21 @@ export function FullwidthLayoutPage() {
           label: "app.tsx",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>FullwidthLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui/components/layouts/fullwidth-layout"</span>{";"}{"\n"}
+              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>FullwidthLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui"</span>{";"}{"\n"}
               {"\n"}
-              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<Shell />"}</span>{"}>"}{"\n"}
+              <span className={syn.comment}>{"// Layouts render children, so pass <Outlet /> to nest routes:"}</span>{"\n"}
+              <span className={syn.keyword}>function</span>{" "}<span className={syn.fn}>FullwidthLayoutWrapper</span>{"() {"}{"\n"}
+              {"  "}<span className={syn.keyword}>const</span>{" { pathname } = "}<span className={syn.fn}>useLocation</span>{"();"}{"\n"}
+              {"  "}<span className={syn.keyword}>return</span>{" ("}{"\n"}
+              {"    <"}<span className={syn.fn}>FullwidthLayout</span>{" "}<span className={syn.prop}>currentPath</span>{"={pathname} "}<span className={syn.prop}>linkAs</span>{"={Link}>"}{"\n"}
+              {"      <"}<span className={syn.fn}>Outlet</span>{" />"}{"\n"}
+              {"    </"}<span className={syn.fn}>FullwidthLayout</span>{">"}{"\n"}
+              {"  );"}{"\n"}
+              {"}"}{"\n"}
+              {"\n"}
+              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<RouterShell />"}</span>{"}>"}{"\n"}
               {"  "}<span className={syn.comment}>{"// Fullwidth pages (sidebar + wider content)"}</span>{"\n"}
-              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<FullwidthLayout />"}</span>{"}>"}{"\n"}
+              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<FullwidthLayoutWrapper />"}</span>{"}>"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"models"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ModelsIndexPage />"}</span>{"} />"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"models/solstice-4-vision"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ModelDetailPage />"}</span>{"} />"}{"\n"}
               {"  </"}<span className={syn.fn}>Route</span>{">"}{"\n"}

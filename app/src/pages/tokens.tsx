@@ -261,12 +261,8 @@ export function TokensPage() {
         </p>
 
         <div className={installBlock}>
-          <span className={installPrompt}>#</span>
-          <span style={{ opacity: 0.5 }}>{" .npmrc: @sunbeam:registry=https://src.sunbeam.pt/api/packages/studio/npm/"}</span>
-        </div>
-        <div className={installBlock} style={{ marginTop: "8px" }}>
           <span className={installPrompt}>$</span>
-          <span>npm install @sunbeam/beam-ui</span>
+          <span>deno add jsr:@sunbeam/beam-ui</span>
         </div>
 
         <CodeBlock
@@ -275,7 +271,7 @@ export function TokensPage() {
               label: "App.tsx",
               content: (
                 <pre>
-                  <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Shell</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/components/shell/shell"</span>{"\n"}
+                  <span className={syn.keyword}>import</span> {"{ "}<span className={syn.fn}>Shell</span>{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
                   {"\n"}
                   <span className={syn.comment}>{"// Shell renders Header + Footer by default"}</span>{"\n"}
                   <span className={syn.keyword}>export default function</span> <span className={syn.fn}>App</span>() {"{"}{"\n"}

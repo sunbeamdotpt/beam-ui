@@ -260,7 +260,8 @@ export function DocsLayoutPage() {
         The primary reading area. Fills the remaining width between sidebar
         and right rail, with an inner container capped at 720px for an
         optimal reading measure of 65-75 characters per line. Pages render
-        here via React Router's <code>&lt;Outlet&gt;</code>. Padding is
+        here as children (with React Router, the app passes{" "}
+        <code>&lt;Outlet&gt;</code> as a child). Padding is
         responsive: 24px on mobile, 48px on medium, 120px on large.
       </p>
 
@@ -278,8 +279,10 @@ export function DocsLayoutPage() {
       {/* ---- Props & Slots ---- */}
       <h2 id="props" className={sectionTitle}>Props & Slots</h2>
       <p className={bodyText}>
-        DocsLayout is a zero-prop component. It manages internal state and
-        exposes context to child pages via <code>useDocsContext()</code>.
+        DocsLayout takes <code>children</code> (required), plus optional{" "}
+        <code>pageDates</code>, <code>currentPath</code>, and{" "}
+        <code>linkAs</code> props for router integration. It manages internal
+        state and exposes context to child pages via <code>useDocsContext()</code>.
       </p>
 
       <div className={tableWrapper}>
@@ -291,7 +294,13 @@ export function DocsLayoutPage() {
         <div className={tableRow}>
           <span className={cellName} style={{ flex: 1 }}>DocsLayout</span>
           <span className={cellDesc} style={{ flex: 1 }}>Component</span>
-          <span className={cellDesc} style={{ flex: 2 }}>Layout wrapper. No props. Renders Sidebar, Outlet, and RightRail.</span>
+          <span className={cellDesc} style={{ flex: 2 }}>
+            Layout wrapper. Renders Sidebar, children, and RightRail. Props:{" "}
+            <code>children</code> (required), <code>pageDates?</code>{" "}
+            (<code>Record&lt;string, string&gt;</code>), <code>currentPath?</code>{" "}
+            (<code>string</code>), <code>linkAs?</code> (link component,
+            defaults to a plain <code>&lt;a&gt;</code>).
+          </span>
         </div>
         <div className={tableRow}>
           <span className={cellName} style={{ flex: 1 }}>useDocsContext()</span>
@@ -348,10 +357,20 @@ export function DocsLayoutPage() {
           label: "app.tsx",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>DocsLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui/components/layouts/docs-layout"</span>{";"}{"\n"}
+              <span className={syn.keyword}>import</span>{" { "}<span className={syn.fn}>DocsLayout</span>{" } "}<span className={syn.keyword}>from</span>{" "}<span className={syn.string}>"@sunbeam/beam-ui"</span>{";"}{"\n"}
               {"\n"}
-              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<Shell />"}</span>{"}>"}{"\n"}
-              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<DocsLayout />"}</span>{"}>"}{"\n"}
+              <span className={syn.comment}>{"// Layouts render children, so pass <Outlet /> to nest routes:"}</span>{"\n"}
+              <span className={syn.keyword}>function</span>{" "}<span className={syn.fn}>DocsLayoutWrapper</span>{"() {"}{"\n"}
+              {"  "}<span className={syn.keyword}>const</span>{" { pathname } = "}<span className={syn.fn}>useLocation</span>{"();"}{"\n"}
+              {"  "}<span className={syn.keyword}>return</span>{" ("}{"\n"}
+              {"    <"}<span className={syn.fn}>DocsLayout</span>{" "}<span className={syn.prop}>currentPath</span>{"={pathname} "}<span className={syn.prop}>linkAs</span>{"={Link}>"}{"\n"}
+              {"      <"}<span className={syn.fn}>Outlet</span>{" />"}{"\n"}
+              {"    </"}<span className={syn.fn}>DocsLayout</span>{">"}{"\n"}
+              {"  );"}{"\n"}
+              {"}"}{"\n"}
+              {"\n"}
+              {"<"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<RouterShell />"}</span>{"}>"}{"\n"}
+              {"  <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<DocsLayoutWrapper />"}</span>{"}>"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"foundations/colors"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ColorsPage />"}</span>{"} />"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"components/button"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<ButtonPage />"}</span>{"} />"}{"\n"}
               {"    <"}<span className={syn.fn}>Route</span>{" "}<span className={syn.prop}>path</span>{"="}<span className={syn.string}>"layouts/docs"</span>{" "}<span className={syn.prop}>element</span>{"={"}<span className={syn.string}>{"<DocsLayoutPage />"}</span>{"} />"}{"\n"}

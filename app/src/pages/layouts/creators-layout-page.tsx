@@ -345,8 +345,8 @@ export function CreatorsLayoutPage() {
       <h2 id="shell-integration" className={sectionTitle}>Shell Integration</h2>
       <p className={bodyText}>
         The <code>Shell</code> component provides the fixed <strong>Header</strong>{" "}
-        (64px) and <strong>Footer</strong>. The Shell renders an{" "}
-        <code>&lt;Outlet&gt;</code> in a flex container with{" "}
+        (64px) and <strong>Footer</strong>. The Shell renders its{" "}
+        <code>children</code> in a flex container with{" "}
         <code>paddingTop: 64px</code> and <code>flex: 1</code>, which is
         where the page content appears.
       </p>

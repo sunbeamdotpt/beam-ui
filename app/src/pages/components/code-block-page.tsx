@@ -115,7 +115,7 @@ export function CodeBlockPage() {
           label: "Shell",
           content: (
             <pre><code>
-              $ npm install @sunbeam/beam-ui
+              $ deno add jsr:@sunbeam/beam-ui
             </code></pre>
           ),
         }]}

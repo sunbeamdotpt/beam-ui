@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { MathRenderer } from "@sunbeam/beam-ui/components/ui/math-renderer";
+import { MathRenderer } from "@sunbeam/beam-ui/math";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -14,7 +14,7 @@ export function MathRendererPage() {
     <ComponentPage
       name="MathRenderer"
       description="Client-side KaTeX renderer for LaTeX math expressions. Supports both inline and display (block) modes with graceful error handling."
-      importPath='import { MathRenderer } from "@sunbeam/beam-ui"'
+      importPath='import { MathRenderer } from "@sunbeam/beam-ui/math"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
 
@@ -69,7 +69,7 @@ export function MathRendererPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}MathRenderer{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}MathRenderer{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/math"</span>{"\n"}
               {"\n"}
               <span className={syn.comment}>{"// Inline math"}</span>{"\n"}
               {"<p>The equation <"}<span className={syn.fn}>MathRenderer</span> <span className={syn.prop}>math</span>=<span className={syn.string}>"E = mc^2"</span> {"/> is famous.</p>"}{"\n"}

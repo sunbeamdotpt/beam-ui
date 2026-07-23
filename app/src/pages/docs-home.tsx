@@ -8,14 +8,15 @@ import { useEffect } from "react";
 import { css } from "styled-system/css";
 import { Icon } from "@sunbeam/beam-ui/components/ui/icon";
 import { Card } from "@sunbeam/beam-ui/components/ui/card";
-import { CapabilityCard } from "@sunbeam/beam-ui/components/ui/capability-card";
 import { Badge } from "@sunbeam/beam-ui/components/ui/badge";
 import { Breadcrumbs } from "@sunbeam/beam-ui/components/shell/breadcrumbs";
 import { useDocsContext } from "@sunbeam/beam-ui/components/layouts/docs-layout";
 
 export function DocsHomePage() {
   const { setToc } = useDocsContext();
-  useEffect(() => { setToc([]); }, [setToc]);
+  useEffect(() => {
+    setToc([]);
+  }, [setToc]);
   return (
     <div>
       {/* Breadcrumbs */}
@@ -33,34 +34,37 @@ export function DocsHomePage() {
           Welcome to Sunbeam Studios
         </h1>
         <p className={heroSubtitle}>
-          The warm heart of modern engineering. Build faster with our sun-drenched
-          tools and intuitive documentation.
+          The warm heart of modern engineering. Build faster with our
+          sun-drenched tools and intuitive documentation.
         </p>
       </section>
 
       {/* Product Cards */}
       <section className={css({ marginBottom: "64px" })}>
-        <div className={css({ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" })}>
+        <div
+          className={css({
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "24px",
+          })}
+        >
           <Card
             icon="dataset"
             title="Core Engine"
             description="The architectural backbone for your Portuguese-inspired digital experiences. Scalable, warm, and blazing fast."
-            ctaLabel="Explore Engine"
-            ctaHref="/docs/chat-completions/usage"
+            action={{ label: "Explore Engine", href: "/docs/chat-completions/usage" }}
           />
           <Card
             icon="auto_awesome"
             title="Lumina SDK"
             description="A developer experience that feels like late-afternoon light. Minimalist structure, maximalist warmth in code."
-            ctaLabel="Read Docs"
-            ctaHref="/docs/chat-completions/usage"
+            action={{ label: "Read Docs", href: "/docs/chat-completions/usage" }}
           />
           <Card
             icon="terminal"
             title="Sol CLI"
             description="Manage your entire studio workflow from the command line with expressive, declarative commands."
-            ctaLabel="View Reference"
-            ctaHref="/docs/chat-completions/usage"
+            action={{ label: "View Reference", href: "/docs/chat-completions/usage" }}
           />
         </div>
       </section>
@@ -87,35 +91,41 @@ export function DocsHomePage() {
             lg: { gridTemplateColumns: "repeat(3, 1fr)" },
           })}
         >
-          <CapabilityCard
+          <Card
             icon="chat_bubble"
             title="Text Generation"
             description="Produce high-quality Portuguese and international text with contextual warmth."
+            variant="outlined"
           />
-          <CapabilityCard
+          <Card
             icon="visibility"
             title="Vision"
             description="Image understanding calibrated for vibrant, high-contrast environments."
+            variant="outlined"
           />
-          <CapabilityCard
+          <Card
             icon="audio_file"
             title="Audio"
             description="Crystal clear speech synthesis with natural, warm vocal characteristics."
+            variant="outlined"
           />
-          <CapabilityCard
+          <Card
             icon="hub"
             title="Embeddings"
             description="Vector representations that capture the nuance of your data ecosystem."
+            variant="outlined"
           />
-          <CapabilityCard
+          <Card
             icon="integration_instructions"
             title="Function Calling"
             description="Seamlessly bridge the gap between models and your proprietary APIs."
+            variant="outlined"
           />
-          <CapabilityCard
+          <Card
             icon="groups"
             title="Agents"
             description="Autonomous entities that collaborate across your studio workspace."
+            variant="outlined"
           />
         </div>
       </section>
@@ -143,7 +153,9 @@ export function DocsHomePage() {
 /* ------------------------------------------------------------------ */
 /* Link tile sub-component                                             */
 /* ------------------------------------------------------------------ */
-function LinkTile({ icon, label, href }: { icon: string; label: string; href: string }) {
+function LinkTile(
+  { icon, label, href }: { icon: string; label: string; href: string },
+) {
   return (
     <Link
       to={href}

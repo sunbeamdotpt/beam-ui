@@ -22,7 +22,10 @@ const PROPS = [
   { name: "showThemeToggle", type: "boolean", required: false, description: "Show the theme toggle button in the header. Defaults to true." },
   { name: "header", type: "ReactNode", required: false, description: "Replace the default Header with a custom element. Pass null to remove." },
   { name: "footer", type: "ReactNode", required: false, description: "Replace the default Footer with a custom element. Pass null to remove." },
-  { name: "children", type: "ReactNode", required: false, description: "Content to render. If omitted, renders <Outlet /> for React Router nested routes." },
+  { name: "children", type: "ReactNode", required: false, description: "Content to render between the header and footer. With React Router, pass <Outlet /> as a child." },
+  { name: "currentPath", type: "string", required: false, description: "Current path, used by the header to compute active nav states." },
+  { name: "linkAs", type: "LinkComponent", required: false, description: "Component used to render links (e.g. your router's Link). Defaults to a plain <a>." },
+  { name: "onNavigate", type: "(href: string) => void", required: false, description: "Called when a nav link or search result should trigger client-side navigation." },
   { name: "className", type: "string", required: false, description: "Override the default shell container class." },
 ];
 
@@ -43,8 +46,8 @@ export function ShellPage() {
       <h1 className={pageTitle}>Shell</h1>
       <p className={descText}>
         The root application wrapper that provides a consistent Header + content + Footer
-        structure across all pages. Handles the fixed header offset, min-height viewport
-        fill, and React Router outlet rendering.
+        structure across all pages. Handles the fixed header offset and min-height viewport
+        fill, and renders whatever you pass as children in between.
       </p>
       <div className={importBlock}>
         <code className={importCode}>import {"{ Shell }"} from "@sunbeam/beam-ui"</code>
@@ -54,8 +57,10 @@ export function ShellPage() {
       <h2 id="overview" className={sectionTitle}>Overview</h2>
       <p className={bodyText}>
         Shell is the outermost structural component. It renders the Header at the top,
-        Footer at the bottom, and your page content in between. When used with React Router,
-        it renders an <code className={mono}>&lt;Outlet /&gt;</code> for nested routes.
+        Footer at the bottom, and your page content in between. It knows nothing about
+        routers: when used with React Router, pass <code className={mono}>&lt;Outlet /&gt;</code> as
+        a child for nested routes, and wire navigation via <code className={mono}>linkAs</code>,{" "}
+        <code className={mono}>currentPath</code>, and <code className={mono}>onNavigate</code>.
         Layout components (DocsLayout, ApiLayout, FullwidthLayout) are rendered inside the Shell.
       </p>
 
@@ -63,7 +68,7 @@ export function ShellPage() {
       <div className={wireframe}>
         <div className={wireZoneHeader}>HEADER (fixed, 64px)</div>
         <div className={wireZoneContent}>
-          <span className={wireZoneLabel}>CONTENT / OUTLET</span>
+          <span className={wireZoneLabel}>CONTENT (children)</span>
           <span className={wireZoneDim}>flex: 1, paddingTop: 64px</span>
         </div>
         <div className={wireZoneFooter}>FOOTER</div>
@@ -86,7 +91,7 @@ export function ShellPage() {
               {"<div class=\"shell\">\n"}
               {"  <Header />\n"}
               {"  <div class=\"main\" style=\"padding-top: 64px\">\n"}
-              {"    <Outlet />  <!-- or children -->\n"}
+              {"    {children}  <!-- e.g. <Outlet /> -->\n"}
               {"  </div>\n"}
               {"  <Footer />\n"}
               {"</div>"}
@@ -107,19 +112,27 @@ export function ShellPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}Shell{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
-              <span className={syn.keyword}>import</span> {"{ "}DocsLayout{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}Shell{", "}DocsLayout{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}Outlet{", "}Route{", "}Routes{", "}useLocation{", "}useNavigate{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"react-router-dom"</span>{"\n"}
               {"\n"}
-              <span className={syn.comment}>{"// With React Router"}</span>{"\n"}
+              <span className={syn.comment}>{"// Shell renders children; with React Router, pass <Outlet /> as a child"}</span>{"\n"}
+              <span className={syn.comment}>{"// and wire navigation via linkAs / currentPath / onNavigate"}</span>{"\n"}
+              <span className={syn.keyword}>function</span> <span className={syn.fn}>RouterShell</span>() {"{"}{"\n"}
+              {"  "}<span className={syn.keyword}>const</span> {"{ "}pathname{" } = "}<span className={syn.fn}>useLocation</span>{"();"}{"\n"}
+              {"  "}<span className={syn.keyword}>const</span> navigate{" = "}<span className={syn.fn}>useNavigate</span>{"();"}{"\n"}
+              {"  "}<span className={syn.keyword}>return</span> ({"\n"}
+              {"    <"}<span className={syn.fn}>Shell</span> <span className={syn.prop}>currentPath</span>={"{pathname}"} <span className={syn.prop}>linkAs</span>={"{Link}"} <span className={syn.prop}>onNavigate</span>={"{navigate}"}{">"}{"\n"}
+              {"      <"}<span className={syn.fn}>Outlet</span> {" />"}{"\n"}
+              {"    </"}<span className={syn.fn}>Shell</span>{">"}{"\n"}
+              {"  );"}{"\n"}
+              {"}"}{"\n"}
+              {"\n"}
               {"<"}<span className={syn.fn}>Routes</span>{">"}{"\n"}
-              {"  <"}<span className={syn.fn}>Route</span> <span className={syn.prop}>element</span>={"{<"}<span className={syn.fn}>Shell</span> {"/>}"}{">"}{"\n"}
+              {"  <"}<span className={syn.fn}>Route</span> <span className={syn.prop}>element</span>={"{<"}<span className={syn.fn}>RouterShell</span> {"/>}"}{">"}{"\n"}
               {"    "}<span className={syn.comment}>{"// Full-width pages"}</span>{"\n"}
               {"    <"}<span className={syn.fn}>Route</span> <span className={syn.prop}>index</span> <span className={syn.prop}>element</span>={"{<"}<span className={syn.fn}>HomePage</span> {"/>}"} {"/>"}{"\n"}
-              {"\n"}
               {"    "}<span className={syn.comment}>{"// Docs pages (with sidebar)"}</span>{"\n"}
-              {"    <"}<span className={syn.fn}>Route</span> <span className={syn.prop}>element</span>={"{<"}<span className={syn.fn}>DocsLayout</span> {"/>}"}{">"}{"\n"}
-              {"      <"}<span className={syn.fn}>Route</span> <span className={syn.prop}>path</span>=<span className={syn.string}>"docs/*"</span> <span className={syn.prop}>element</span>={"{<"}<span className={syn.fn}>DocsPage</span> {"/>}"} {"/>"}{"\n"}
-              {"    </"}<span className={syn.fn}>Route</span>{">"}{"\n"}
+              {"    <"}<span className={syn.fn}>Route</span> <span className={syn.prop}>path</span>=<span className={syn.string}>"docs/*"</span> <span className={syn.prop}>element</span>={"{<"}<span className={syn.fn}>DocsPage</span> {"/>}"} {"/>"}{"\n"}
               {"  </"}<span className={syn.fn}>Route</span>{">"}{"\n"}
               {"</"}<span className={syn.fn}>Routes</span>{">"}
             </code></pre>

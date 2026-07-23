@@ -1,6 +1,7 @@
 node_modules/
 dist/
 app/styled-system/
+app/storybook-static/
 app/node_modules/
 *.local
 .DS_Store

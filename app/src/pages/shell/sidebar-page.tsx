@@ -18,6 +18,8 @@ const TOC_ITEMS = [
 
 const PROPS = [
   { name: "sections", type: "NavSection[]", required: true, description: "Array of navigation sections to render. Each section has a title and an array of NavItems." },
+  { name: "currentPath", type: "string", required: false, description: "Current path used to compute active items. Pass your router's location pathname." },
+  { name: "linkAs", type: "LinkComponent", required: false, description: "Component used to render links (e.g. your router's Link). Defaults to a plain <a>." },
 ];
 
 const NAV_SECTION_FIELDS = [

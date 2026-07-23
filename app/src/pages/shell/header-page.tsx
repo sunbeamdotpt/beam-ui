@@ -17,6 +17,18 @@ const TOC_ITEMS = [
 
 const PROPS = [
   { name: "showThemeToggle", type: "boolean", required: false, description: "Show the theme toggle button in the right group. Defaults to true." },
+  { name: "actions", type: "ReactNode", required: false, description: "Extra elements rendered in the right group before the theme toggle." },
+  { name: "brand", type: "ReactNode", required: false, description: "Replace the default brand link with a custom element." },
+  { name: "navLinks", type: "HeaderNavLink[]", required: false, description: "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when breadcrumbs is set." },
+  { name: "breadcrumbs", type: "HeaderBreadcrumbItem[]", required: false, description: "Breadcrumb items shown in place of nav links. When set, nav links are hidden." },
+  { name: "drawerSections", type: "NavSection[]", required: false, description: "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar." },
+  { name: "searchItems", type: "HeaderSearchItem[]", required: false, description: "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections." },
+  { name: "showSearch", type: "boolean", required: false, description: "Show the search input and Cmd+K shortcut. Defaults to true." },
+  { name: "fullWidth", type: "boolean", required: false, description: "Remove the max-width constraint so the header spans the full viewport. Defaults to false." },
+  { name: "currentPath", type: "string", required: false, description: "Current path used to compute active states and close the mobile drawer on navigation." },
+  { name: "linkAs", type: "LinkComponent", required: false, description: "Component used to render links (e.g. your router's Link). Defaults to a plain <a>." },
+  { name: "onNavigate", type: "(href: string) => void", required: false, description: "Called when the user selects a search result or a nav link should trigger client-side navigation." },
+  { name: "isActive", type: "(label, href, currentPath) => boolean", required: false, description: "Override the default active-state matcher." },
 ];
 
 export function HeaderPage() {

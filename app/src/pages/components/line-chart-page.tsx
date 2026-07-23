@@ -1,5 +1,5 @@
 import { css } from "styled-system/css";
-import { LineChart } from "@sunbeam/beam-ui/components/ui/charts";
+import { LineChart } from "@sunbeam/beam-ui/charts";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -39,7 +39,7 @@ export function LineChartPage() {
     <ComponentPage
       name="LineChart"
       description="A line chart component for visualizing trends over time. Wraps Recharts with Beam design system theming."
-      importPath='import { LineChart } from "@sunbeam/beam-ui"'
+      importPath='import { LineChart } from "@sunbeam/beam-ui/charts"'
     >
       {/* Preview */}
       <SectionHeading id="preview">Preview</SectionHeading>
@@ -64,7 +64,7 @@ export function LineChartPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}LineChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}LineChart{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/charts"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> data = [{"\n"}
               {"  "}{"{ "}label: <span className={syn.string}>"W1"</span>, additions: <span className={syn.number}>320</span>, deletions: <span className={syn.number}>120</span>{" },"}{"\n"}

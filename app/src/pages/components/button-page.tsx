@@ -10,6 +10,7 @@ import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
 const PROPS = [
   { name: "variant", type: '"dark" | "cream" | "ghost" | "text" | "primary"', required: false, description: "Visual style of the button. Defaults to \"dark\"." },
+  { name: "as", type: "ElementType", required: false, description: "Element or component to render (polymorphic). Defaults to <button type=\"button\"> (or <a> when href is set)." },
   { name: "href", type: "string", required: false, description: "If provided, renders as a link (internal or external)." },
   { name: "children", type: "ReactNode", required: true, description: "Button label content." },
   { name: "onClick", type: "() => void", required: false, description: "Click handler for button mode." },

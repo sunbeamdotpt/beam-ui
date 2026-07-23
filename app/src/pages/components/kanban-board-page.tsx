@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { css } from "styled-system/css";
-import { KanbanBoard, KanbanCardView, type KanbanColumn, type KanbanCard } from "@sunbeam/beam-ui/components/ui/kanban-board";
+import { KanbanBoard, KanbanCardView, type KanbanColumn, type KanbanCard } from "@sunbeam/beam-ui/kanban";
 import { CodeBlock, syn } from "@sunbeam/beam-ui/components/ui/code-block";
 import { ComponentPage, PropsTable, SectionHeading } from "./_template";
 
@@ -98,7 +98,7 @@ export function KanbanBoardPage() {
     <ComponentPage
       name="KanbanBoard"
       description="A drag-and-drop project board with columns and cards. Cards can be reordered within a column and moved between columns using @dnd-kit."
-      importPath='import { KanbanBoard } from "@sunbeam/beam-ui"'
+      importPath='import { KanbanBoard } from "@sunbeam/beam-ui/kanban"'
     >
       <SectionHeading id="preview">Preview</SectionHeading>
       <div className={previewBox}>
@@ -135,7 +135,7 @@ export function KanbanBoardPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}KanbanBoard{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}KanbanBoard{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/kanban"</span>{"\n"}
               {"\n"}
               <span className={syn.keyword}>const</span> [columns, setColumns] = useState(initialColumns){"\n"}
               {"\n"}
@@ -194,7 +194,7 @@ export function KanbanBoardPage() {
           label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.keyword}>import</span> {"{ "}KanbanCardView{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui"</span>{"\n"}
+              <span className={syn.keyword}>import</span> {"{ "}KanbanCardView{" }"} <span className={syn.keyword}>from</span> <span className={syn.string}>"@sunbeam/beam-ui/kanban"</span>{"\n"}
               {"\n"}
               {"<"}<span className={syn.fn}>KanbanCardView</span>{"\n"}
               {"  "}<span className={syn.prop}>card</span>={"{"}{"{ "}id: <span className={syn.string}>"1"</span>, title: <span className={syn.string}>"My card"</span>, labels: [...]{" }"}{"}"}{"\n"}
