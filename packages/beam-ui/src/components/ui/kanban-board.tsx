@@ -657,7 +657,7 @@ const boardStyle = css({
 const columnStyle = css({
   width: "296px",
   minWidth: "296px",
-  backgroundColor: "cream",
+  backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.warm",
   borderRadius: "sm",
