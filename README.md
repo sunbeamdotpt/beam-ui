@@ -1,5 +1,8 @@
 # Beam Design Language
 
+[![Matrix](https://img.shields.io/badge/chat-%23hello%3Asunbeam.pt-0dbd8b?logo=matrix)](https://matrix.to/#/#hello:sunbeam.pt)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](packages/beam-ui-typst/LICENSE)
+
 A design language by humans, for humans.
 
 ## Install
