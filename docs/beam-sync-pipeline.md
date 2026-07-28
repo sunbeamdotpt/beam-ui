@@ -1,3 +1,9 @@
+---
+title: "Beam Sync Pipeline — Complete Technical Reference"
+description: "From React components to pixel-perfect Penpot design assets with editable text"
+updated_at: "2026-07-28"
+---
+
 # Beam Sync Pipeline — Complete Technical Reference
 
 > From React components to pixel-perfect Penpot design assets with editable text
