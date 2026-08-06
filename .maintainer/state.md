@@ -6,19 +6,25 @@ tags: [state]
 timestamp: 2026-08-06T21:00:00Z
 ---
 
-# State — 2026-08-06 (v0.14.0 released; image building)
+# State — 2026-08-06 (v0.14.0 shipped; Plasmic scoped)
 
 All July loose ends resolved, pushed (`f3713ec`..`7bad499`), and released
-as **v0.14.0** (tag pushed; CHANGELOG.md created). Gates: tests green,
-`deno publish --dry-run` passes; **coverage gate waived by the human**
-(no tooling; harness is BEAM-001 work). `deno publish` to JSR is the
-human's action per charter — dry-run is green, ready when they are.
+as **v0.14.0** (tag pushed; CHANGELOG.md created). Image built via run
+31128925488 (workflow_dispatch — push triggers were swallowed by the
+2026-08-06 GitHub Actions incident): `v0.14.0`/`v0.14`/`v0`/`latest` at
+index sha256:f7116363…. Deploy card **SBBB-082** filed. Gates: tests
+green, `deno publish --dry-run` passes; **coverage gate waived by the
+human** (no tooling; harness is BEAM-001 work). `deno publish` to JSR is
+the human's action per charter — needs `--token` or interactive login.
 
-Note: the push/tag triggers did NOT queue a Release Container run
-(transient GitHub issue); the image was kicked off via
-`workflow_dispatch` on tag v0.14.0 (run 31128925488) — builds
-v0.14.0/v0.14/v0/latest. If future pushes don't trigger Actions, check
-for swallowed webhook deliveries before assuming config drift.
+## Plasmic (BEAM-002)
+
+Scoped 2026-08-06, doc at `docs/plasmic-app-host-scope.md`. Decided:
+full codegen, no loader (Plasmic for UI design/wiring; we own the
+pipeline). Cards: BEAM-003 plumbing, BEAM-004 token generator, BEAM-005
+component registry, BEAM-006 Studio cutover, BEAM-007 codegen pipeline.
+W1 (create Plasmic project, pick plan, get ID + public API token) is the
+human's.
 
 All July loose ends resolved — 11 commits on mainline (rebased onto the
 f3713ec docs PR; pre-rebase hashes in log.md entries are stale).
