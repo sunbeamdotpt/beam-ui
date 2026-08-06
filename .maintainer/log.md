@@ -246,3 +246,18 @@ subpath exports); generated files are Plasmic-owned (never hand-edit —
 wiring lives in wrapper/route components); no runtime env needed in the
 image (public API token lives in plasmic.json, safe to commit). Scope
 doc updated; carded as BEAM-007.
+
+## 2026-08-06 — BEAM-003 Plasmic plumbing landed (in review)
+
+W2 done without needing the Plasmic project: @plasmicapp/react-web@1.0.30
+(pinned), /plasmic-host route outside the app Shell rendering only
+PlasmicCanvasHost, plasmic/registry.ts side-effect module as the W3/W4
+registration home (codegen pattern: registrations live on the host page;
+generated code will import components via their importPath). Verified
+against Plasmic's documented success criterion — the "Your app is ready
+to host Plasmic Studio!" confirmation renders at /plasmic-host. Real
+Studio handshake deferred to BEAM-006 (needs the human's project, W1).
+Also: mermaid bumped to 11.16.1 (five new moderate advisories), npm audit
+back to the single known react-router high. Deno-symlink repair after npm
+install needed twice more — consider codifying the rm+deno install step
+in a root task.
