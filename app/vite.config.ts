@@ -22,6 +22,11 @@ function generateBuildAssets() {
       } catch (e) {
         console.warn("Warning: failed to generate component API", e);
       }
+      try {
+        execFileSync("npx", ["tsx", "scripts/generate-plasmic-tokens.ts"], { cwd: __dirname, stdio: "inherit" });
+      } catch (e) {
+        console.warn("Warning: failed to generate Plasmic tokens", e);
+      }
     },
   };
 }
