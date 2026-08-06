@@ -59,6 +59,10 @@ const tokens = {
     "value": "#1f1f1f",
     "variable": "var(--colors-sunbeam\\.black)"
   },
+  "colors.white": {
+    "value": "#ffffff",
+    "variable": "var(--colors-white)"
+  },
   "colors.card.dark": {
     "value": "#2a2a2a",
     "variable": "var(--colors-card\\.dark)"
@@ -235,6 +239,10 @@ const tokens = {
     "value": "rgba(31,31,31,0.60)",
     "variable": "var(--colors-scrim\\.60)"
   },
+  "colors.scrim.85": {
+    "value": "rgba(31,31,31,0.85)",
+    "variable": "var(--colors-scrim\\.85)"
+  },
   "colors.grid.06": {
     "value": "rgba(128,128,128,0.06)",
     "variable": "var(--colors-grid\\.06)"
@@ -358,6 +366,10 @@ const tokens = {
   "shadows.pop": {
     "value": "0 8px 24px rgba(0,0,0,0.12)",
     "variable": "var(--shadows-pop)"
+  },
+  "fontSizes.8": {
+    "value": "8px",
+    "variable": "var(--font-sizes-8)"
   },
   "fontSizes.9": {
     "value": "9px",
@@ -615,9 +627,17 @@ const tokens = {
     "value": "3px",
     "variable": "var(--spacing-0\\.75)"
   },
+  "spacing.1.25": {
+    "value": "5px",
+    "variable": "var(--spacing-1\\.25)"
+  },
   "spacing.1.5": {
     "value": "6px",
     "variable": "var(--spacing-1\\.5)"
+  },
+  "spacing.1.75": {
+    "value": "7px",
+    "variable": "var(--spacing-1\\.75)"
   },
   "spacing.2.25": {
     "value": "9px",
@@ -855,9 +875,17 @@ const tokens = {
     "value": "3px",
     "variable": "var(--sizes-0\\.75)"
   },
+  "sizes.1.25": {
+    "value": "5px",
+    "variable": "var(--sizes-1\\.25)"
+  },
   "sizes.1.5": {
     "value": "6px",
     "variable": "var(--sizes-1\\.5)"
+  },
+  "sizes.1.75": {
+    "value": "7px",
+    "variable": "var(--sizes-1\\.75)"
   },
   "sizes.2.25": {
     "value": "9px",
@@ -1139,9 +1167,17 @@ const tokens = {
     "value": "calc(var(--spacing-0\\.75) * -1)",
     "variable": "var(--spacing-0\\.75)"
   },
+  "spacing.-1.25": {
+    "value": "calc(var(--spacing-1\\.25) * -1)",
+    "variable": "var(--spacing-1\\.25)"
+  },
   "spacing.-1.5": {
     "value": "calc(var(--spacing-1\\.5) * -1)",
     "variable": "var(--spacing-1\\.5)"
+  },
+  "spacing.-1.75": {
+    "value": "calc(var(--spacing-1\\.75) * -1)",
+    "variable": "var(--spacing-1\\.75)"
   },
   "spacing.-2.25": {
     "value": "calc(var(--spacing-2\\.25) * -1)",

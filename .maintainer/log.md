@@ -189,3 +189,21 @@ strings (need focusRing shadow tokens in the preset), ~10 odd one-off values
 values (gradients, calc(), grid track lists, palette data files, inline
 style props, SVG attrs, third-party widget configs) that stay by design.
 `deno task ci` + app build green.
+
+## 2026-08-06 — token migration complete (phases 2-3 + long tail)
+
+Phase 2 (4-agent cleanup swarm): ~140 border/outline shorthand splits to
+longhand token props, focus-ring/shadow strings → new focusRing.*/thumb/
+drawer/pop tokens, one-off leftovers (sizes 90/95, spacing 2.25, chrome.06/
+30/90, slate.*) converted. Phase 3 (4 judgment agents): kanban css() +
+inline icon styles, badge/statuses dedup, charts, editor palettes.
+**Key discovery (J2): Panda cannot statically evaluate imported constants
+inside css() — they silently produce no CSS.** Pattern established: status
+colors live in data/statuses.ts (`statusColors`) and are applied via inline
+style; css() holds only static token strings. Long tail: theme-toggle +
+file-upload converted, kanban leftovers via new micro tokens (spacing
+1.25/1.75, fontSize "8", colors.white, scrim.85), blockedBadge/progressDone
+routed through statusColors inline. Remaining raw values are all documented
+exceptions: Mermaid/light-syntax palettes, categorical data maps
+(AVATAR/BRANCH/LEVEL/PRIORITY/LABEL/EVENT_COLORS), gradients/calc/grid
+tracks, SVG attrs, JSDoc, inline runtime values.

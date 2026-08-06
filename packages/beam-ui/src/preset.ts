@@ -48,7 +48,9 @@ const spacingScale = {
   0.5: { value: "2px" },
   0.75: { value: "3px" },
   1: { value: "4px" },
+  1.25: { value: "5px" },
   1.5: { value: "6px" },
+  1.75: { value: "7px" },
   2: { value: "8px" },
   2.25: { value: "9px" },
   2.5: { value: "10px" },
@@ -131,6 +133,7 @@ export const beamPreset: Preset = definePreset({
           "warm.ivory": { value: "#fffaeb" },
           cream: { value: "#fff0c2" },
           "sunbeam.black": { value: "#1f1f1f" },
+          white: { value: "#ffffff" },
           "card.dark": { value: "#2a2a2a" },
           "code.activePill": { value: "#404040" },
           "code.text": { value: "#d4d4d8" },
@@ -182,6 +185,7 @@ export const beamPreset: Preset = definePreset({
           "scrim.50": { value: "rgba(31,31,31,0.50)" },
           "scrim.55": { value: "rgba(31,31,31,0.55)" },
           "scrim.60": { value: "rgba(31,31,31,0.60)" },
+          "scrim.85": { value: "rgba(31,31,31,0.85)" },
           "grid.06": { value: "rgba(128,128,128,0.06)" },
           "grid.15": { value: "rgba(128,128,128,0.15)" },
           "grid.20": { value: "rgba(128,128,128,0.20)" },
@@ -251,6 +255,7 @@ export const beamPreset: Preset = definePreset({
           "6xl": { value: "5.125rem" }, // 82px — Display (weight 431 / line 1.0 / ls -2.05px)
           // Numeric pixel sizes (same numeric convention as the spacing scale)
           "9": { value: "9px" },
+          "8": { value: "8px" },
           "9.5": { value: "9.5px" },
           "10.5": { value: "10.5px" },
           "11": { value: "11px" },

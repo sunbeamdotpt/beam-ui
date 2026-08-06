@@ -191,8 +191,8 @@ const disabledStyle = css({
 
 const hiddenInput = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
   margin: "-1px",
   overflow: "hidden",
@@ -241,7 +241,7 @@ const fileIcon = css({
 
 const fileName = css({
   flex: 1,
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "mono",
   color: "text.primary",
   overflow: "hidden",

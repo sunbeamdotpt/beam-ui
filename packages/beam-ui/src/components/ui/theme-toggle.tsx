@@ -1,4 +1,4 @@
-import { css, cx } from "../../system.ts";
+import { css, cx, token } from "../../system.ts";
 
 import type { ReactNode } from "react";
 import { useTheme } from "../../hooks/use-theme.ts";
@@ -29,13 +29,19 @@ export interface ThemeToggleProps {
  * <ThemeToggle variant="pill" />
  * ```
  */
-export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): ReactNode {
+export function ThemeToggle(
+  { variant = "icon", className }: ThemeToggleProps,
+): ReactNode {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
 
   if (variant === "pill") {
     return (
-      <div className={cx(pillContainer, className)} role="radiogroup" aria-label="Color theme">
+      <div
+        className={cx(pillContainer, className)}
+        role="radiogroup"
+        aria-label="Color theme"
+      >
         <button
           className={cx(pillOption, !isDark && pillActive)}
           onClick={() => isDark && toggle()}
@@ -93,7 +99,10 @@ export function ThemeToggle({ variant = "icon", className }: ThemeToggleProps): 
     >
       <span
         className="material-symbols-outlined"
-        style={{ fontSize: "20px", color: isDark ? "#ffd06a" : undefined }}
+        style={{
+          fontSize: token.var("fontSizes.xl"),
+          color: isDark ? token.var("colors.sunshine.300") : undefined,
+        }}
       >
         {isDark ? "dark_mode" : "light_mode"}
       </span>
@@ -109,13 +118,13 @@ const iconBtn = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   backgroundColor: "transparent",
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  fontSize: "20px",
+  fontSize: "xl",
   transition: "color 0.2s",
   _hover: {
     color: "accent",
@@ -125,7 +134,7 @@ const iconBtn = css({
 const switchBtn = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "10px",
+  gap: "2.5",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -134,8 +143,8 @@ const switchBtn = css({
 
 const switchTrack = css({
   position: "relative",
-  width: "40px",
-  height: "22px",
+  width: "10",
+  height: "5.5",
   borderRadius: "full",
   backgroundColor: "border.default",
   transition: "background-color 0.2s ease",
@@ -143,10 +152,10 @@ const switchTrack = css({
 
 const switchThumb = css({
   position: "absolute",
-  top: "2px",
-  left: "2px",
-  width: "18px",
-  height: "18px",
+  top: "0.5",
+  left: "0.5",
+  width: "4.5",
+  height: "4.5",
   borderRadius: "full",
   backgroundColor: "white",
   transition: "transform 0.2s ease",
@@ -161,8 +170,8 @@ const switchThumbDark = css({
 const switchLabel = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
-  fontSize: "13px",
+  gap: "1",
+  fontSize: "13",
   fontWeight: "button",
   color: "text.secondary",
   fontFamily: "body",
@@ -173,16 +182,16 @@ const pillContainer = css({
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
-  padding: "2px",
-  gap: "2px",
+  padding: "0.5",
+  gap: "0.5",
 });
 
 const pillOption = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
   padding: "6px 14px",
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   fontFamily: "body",
   color: "text.muted",

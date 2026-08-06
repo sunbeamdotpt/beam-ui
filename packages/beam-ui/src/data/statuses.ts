@@ -37,6 +37,12 @@ export const statusColors = {
   medium: "#d97706",
   /** Badge background for "low" priority. */
   low: "#0d9488",
+  /** Surface for the blocked indicator (kanban cards). */
+  blockedBg: "#fef2f2",
+  /** Border for the blocked indicator (kanban cards). */
+  blockedBorder: "#fca5a5",
+  /** Fill for completed progress bars (kanban checklists). Same as approved. */
+  progressDone: "#15803d",
 } as const;
 
 /**

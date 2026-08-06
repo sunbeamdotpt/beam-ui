@@ -1,4 +1,5 @@
 import { css, cx, token } from "../../system.ts";
+import { statusColors } from "../../data/statuses.ts";
 
 import { type ReactNode, useMemo, useState } from "react";
 import {
@@ -271,7 +272,15 @@ export function KanbanCardView(
       )}
 
       {card.blocked && (
-        <span data-part="blocked-badge" className={blockedBadgeStyle}>
+        <span
+          data-part="blocked-badge"
+          className={blockedBadgeStyle}
+          style={{
+            backgroundColor: statusColors.blockedBg,
+            color: statusColors.closed,
+            borderColor: statusColors.blockedBorder,
+          }}
+        >
           <span
             className="material-symbols-outlined"
             style={{ fontSize: token.var("fontSizes.xs") }}
@@ -288,7 +297,7 @@ export function KanbanCardView(
           {card.labels.map((l) => {
             const s = LABEL_STYLES[l.color] ?? {
               bg: l.color,
-              color: "rgba(31,31,31,0.85)",
+              color: token.var("colors.scrim.85"),
               border: l.color,
             };
             return (
@@ -476,7 +485,7 @@ function Column({
   onCardClick?: (cardId: string) => void;
 }) {
   const cardIds = useMemo(() => column.cards.map((c) => c.id), [column.cards]);
-  const accent = column.accentColor ?? "var(--colors-sunbeam-orange, #fa520f)";
+  const accent = column.accentColor ?? token.var("colors.sunbeam.orange");
 
   const visibleMembers = column.members?.slice(0, 4) ?? [];
   const overflowMembers = (column.members?.length ?? 0) - visibleMembers.length;
@@ -754,7 +763,7 @@ const columnCount = css({
   backgroundColor: "bg.page",
   border: "1px solid",
   borderColor: "border.subtle",
-  padding: "1px 7px",
+  padding: "0.25 1.75",
   borderRadius: "full",
 });
 
@@ -765,7 +774,7 @@ const wipPill = css({
   backgroundColor: "accent.08",
   border: "1px solid",
   borderColor: "accent.20",
-  padding: "1px 7px",
+  padding: "0.25 1.75",
   borderRadius: "full",
   whiteSpace: "nowrap",
 });
@@ -786,7 +795,7 @@ const memberCircle = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginRight: "-5px",
+  marginRight: "-1.25",
   overflow: "hidden",
   flexShrink: 0,
 });
@@ -794,7 +803,7 @@ const memberCircle = css({
 const memberInitial = css({
   fontSize: "9",
   fontWeight: "button",
-  color: "#fff",
+  color: "white",
   textTransform: "uppercase",
   lineHeight: 1,
 });
@@ -809,7 +818,7 @@ const memberOverflow = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "8px",
+  fontSize: "8",
   fontWeight: "button",
   color: "text.muted",
   fontFamily: "mono",
@@ -848,10 +857,7 @@ const blockedBadgeStyle = css({
   letterSpacing: "0.05em",
   textTransform: "uppercase",
   padding: "0.5 1.5",
-  backgroundColor: "rgb(254, 242, 242)",
-  color: "rgb(153, 27, 27)",
   border: "1px solid",
-  borderColor: "rgb(252, 165, 165)",
   borderRadius: "sm",
   fontFamily: "mono",
 });
@@ -960,7 +966,7 @@ const priorityChip = css({
   fontFamily: "mono",
   fontWeight: 600,
   letterSpacing: "0.04em",
-  padding: "1px 5px",
+  padding: "0.25 1.25",
   borderRadius: "sm",
   textTransform: "uppercase",
 });
@@ -1048,7 +1054,7 @@ const avatarImg = css({
 const avatarInitial = css({
   fontSize: "9",
   fontWeight: "button",
-  color: "#fff",
+  color: "white",
   textTransform: "uppercase",
   lineHeight: 1,
 });

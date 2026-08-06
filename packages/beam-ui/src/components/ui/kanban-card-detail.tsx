@@ -1,4 +1,5 @@
 import { css, cx, token } from "../../system.ts";
+import { statusColors } from "../../data/statuses.ts";
 
 import { type ReactNode, useEffect, useState } from "react";
 import {
@@ -326,11 +327,11 @@ export function KanbanCardDetail({
                   </h4>
                   <div className={progressBar}>
                     <div
-                      className={cx(
-                        progressFill,
-                        checklistDone ? progressFillDone : "",
-                      )}
-                      style={{ width: `${checklistPct}%` }}
+                      className={progressFill}
+                      style={{
+                        width: `${checklistPct}%`,
+                        backgroundColor: checklistDone ? statusColors.progressDone : undefined,
+                      }}
                     />
                   </div>
                   {card.checklist.map((item) => (
@@ -741,7 +742,7 @@ const descEditActions = css({
 /* ── Checklist ── */
 
 const progressBar = css({
-  height: "5px",
+  height: "1.25",
   borderRadius: "sm",
   background: "warm.10",
   marginBottom: "2.5",
@@ -752,10 +753,6 @@ const progressFill = css({
   height: "100%",
   background: "sunshine.700",
   transition: "width 0.3s",
-});
-
-const progressFillDone = css({
-  background: "rgb(21,128,61)",
 });
 
 const checklistItem = css({
@@ -917,7 +914,7 @@ const priorityChip = css({
   display: "inline-flex",
   alignItems: "center",
   gap: "0.75",
-  padding: "1px 5px",
+  padding: "0.25 1.25",
   borderRadius: "sm",
   fontFamily: "mono",
   fontSize: "9.5",
