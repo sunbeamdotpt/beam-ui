@@ -1,4 +1,4 @@
-import { css, cx } from "../../system.ts";
+import { css, cx, token } from "../../system.ts";
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useTheme } from "../../hooks/use-theme.ts";
@@ -31,40 +31,83 @@ const BEAM_DARK = {
   name: "beam-dark",
   type: "dark" as const,
   colors: {
-    "editor.background": "#2a2a2a",
-    "editor.foreground": "#d4d4d8",
+    "editor.background": token.var("colors.card.dark"),
+    "editor.foreground": token.var("colors.code.text"),
   },
   settings: [
-    { settings: { foreground: "#d4d4d8" } }, // default text
+    { settings: { foreground: token.var("colors.code.text") } }, // default text
     {
       scope: ["comment", "punctuation.definition.comment"],
-      settings: { foreground: "rgba(255,255,255,0.35)", fontStyle: "italic" },
+      settings: {
+        foreground: token.var("colors.chrome.35"),
+        fontStyle: "italic",
+      },
     },
-    { scope: ["keyword", "storage.type", "storage.modifier"], settings: { foreground: "#c084fc" } }, // syn.keyword — purple
+    {
+      scope: ["keyword", "storage.type", "storage.modifier"],
+      settings: { foreground: token.var("colors.syn.keyword") },
+    }, // syn.keyword — purple
     {
       scope: ["entity.name.function", "support.function", "meta.function-call"],
-      settings: { foreground: "#93c5fd" },
+      settings: { foreground: token.var("colors.syn.fn") },
     }, // syn.fn — blue
-    { scope: ["string", "string.quoted"], settings: { foreground: "#86efac" } }, // syn.string — green
     {
-      scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"],
-      settings: { foreground: "#fdba74" },
+      scope: ["string", "string.quoted"],
+      settings: { foreground: token.var("colors.syn.string") },
+    }, // syn.string — green
+    {
+      scope: [
+        "variable.other.property",
+        "entity.name.tag",
+        "support.type.property-name",
+      ],
+      settings: { foreground: token.var("colors.syn.prop") },
     }, // syn.prop — orange
-    { scope: ["constant.numeric", "constant.language"], settings: { foreground: "#fb923c" } }, // syn.number — deeper orange
+    {
+      scope: ["constant.numeric", "constant.language"],
+      settings: { foreground: token.var("colors.syn.number") },
+    }, // syn.number — deeper orange
     {
       scope: ["support.class", "entity.name.type", "storage.type.builtin"],
-      settings: { foreground: "#fde047" },
+      settings: { foreground: token.var("colors.syn.builtin") },
     }, // syn.builtin — yellow
-    { scope: ["variable", "variable.other"], settings: { foreground: "#e2e8f0" } },
-    { scope: ["punctuation", "meta.brace"], settings: { foreground: "rgba(255,255,255,0.5)" } },
-    { scope: ["entity.name.class", "entity.name.type.class"], settings: { foreground: "#fde047" } },
-    { scope: ["constant.other", "variable.other.constant"], settings: { foreground: "#fb923c" } },
-    { scope: ["keyword.operator"], settings: { foreground: "#ffa110" } }, // sunshine.700
-    { scope: ["meta.decorator", "punctuation.decorator"], settings: { foreground: "#ffd06a" } }, // sunshine.300
-    { scope: ["markup.heading"], settings: { foreground: "#fa520f", fontStyle: "bold" } }, // sunbeam.orange
+    {
+      scope: ["variable", "variable.other"],
+      settings: { foreground: "#e2e8f0" },
+    }, // no token counterpart — dark-variable slate
+    {
+      scope: ["punctuation", "meta.brace"],
+      settings: { foreground: token.var("colors.chrome.50") },
+    },
+    {
+      scope: ["entity.name.class", "entity.name.type.class"],
+      settings: { foreground: token.var("colors.syn.builtin") },
+    },
+    {
+      scope: ["constant.other", "variable.other.constant"],
+      settings: { foreground: token.var("colors.syn.number") },
+    },
+    {
+      scope: ["keyword.operator"],
+      settings: { foreground: token.var("colors.sunshine.700") },
+    }, // sunshine.700
+    {
+      scope: ["meta.decorator", "punctuation.decorator"],
+      settings: { foreground: token.var("colors.sunshine.300") },
+    }, // sunshine.300
+    {
+      scope: ["markup.heading"],
+      settings: {
+        foreground: token.var("colors.sunbeam.orange"),
+        fontStyle: "bold",
+      },
+    }, // sunbeam.orange
     { scope: ["markup.bold"], settings: { fontStyle: "bold" } },
     { scope: ["markup.italic"], settings: { fontStyle: "italic" } },
-    { scope: ["markup.inline.raw", "markup.fenced_code"], settings: { foreground: "#86efac" } },
+    {
+      scope: ["markup.inline.raw", "markup.fenced_code"],
+      settings: { foreground: token.var("colors.syn.string") },
+    },
   ],
 };
 
@@ -81,31 +124,62 @@ const BEAM_LIGHT = {
       scope: ["comment", "punctuation.definition.comment"],
       settings: { foreground: "#7f6315", fontStyle: "italic" },
     },
-    { scope: ["keyword", "storage.type", "storage.modifier"], settings: { foreground: "#7c3aed" } }, // darker purple for light bg
+    {
+      scope: ["keyword", "storage.type", "storage.modifier"],
+      settings: { foreground: "#7c3aed" },
+    }, // darker purple for light bg
     {
       scope: ["entity.name.function", "support.function", "meta.function-call"],
       settings: { foreground: "#2563eb" },
     }, // darker blue
     { scope: ["string", "string.quoted"], settings: { foreground: "#16a34a" } }, // darker green
     {
-      scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"],
+      scope: [
+        "variable.other.property",
+        "entity.name.tag",
+        "support.type.property-name",
+      ],
       settings: { foreground: "#c2410c" },
     }, // darker orange
-    { scope: ["constant.numeric", "constant.language"], settings: { foreground: "#ea580c" } },
+    {
+      scope: ["constant.numeric", "constant.language"],
+      settings: { foreground: "#ea580c" },
+    },
     {
       scope: ["support.class", "entity.name.type", "storage.type.builtin"],
       settings: { foreground: "#a16207" },
     }, // darker yellow/gold
-    { scope: ["variable", "variable.other"], settings: { foreground: "#1f1f1f" } },
-    { scope: ["punctuation", "meta.brace"], settings: { foreground: "#7f6315" } },
-    { scope: ["entity.name.class", "entity.name.type.class"], settings: { foreground: "#a16207" } },
-    { scope: ["constant.other", "variable.other.constant"], settings: { foreground: "#ea580c" } },
+    {
+      scope: ["variable", "variable.other"],
+      settings: { foreground: "#1f1f1f" },
+    },
+    {
+      scope: ["punctuation", "meta.brace"],
+      settings: { foreground: "#7f6315" },
+    },
+    {
+      scope: ["entity.name.class", "entity.name.type.class"],
+      settings: { foreground: "#a16207" },
+    },
+    {
+      scope: ["constant.other", "variable.other.constant"],
+      settings: { foreground: "#ea580c" },
+    },
     { scope: ["keyword.operator"], settings: { foreground: "#b45309" } },
-    { scope: ["meta.decorator", "punctuation.decorator"], settings: { foreground: "#a16207" } },
-    { scope: ["markup.heading"], settings: { foreground: "#fa520f", fontStyle: "bold" } },
+    {
+      scope: ["meta.decorator", "punctuation.decorator"],
+      settings: { foreground: "#a16207" },
+    },
+    {
+      scope: ["markup.heading"],
+      settings: { foreground: "#fa520f", fontStyle: "bold" },
+    },
     { scope: ["markup.bold"], settings: { fontStyle: "bold" } },
     { scope: ["markup.italic"], settings: { fontStyle: "italic" } },
-    { scope: ["markup.inline.raw", "markup.fenced_code"], settings: { foreground: "#16a34a" } },
+    {
+      scope: ["markup.inline.raw", "markup.fenced_code"],
+      settings: { foreground: "#16a34a" },
+    },
   ],
 };
 
@@ -270,7 +344,11 @@ export function SyntaxHighlighter({
 /* Helper: extract a single line from Shiki HTML output                */
 /* ------------------------------------------------------------------ */
 function LineFromHtml(
-  { html, lineIndex, fallback }: { html: string; lineIndex: number; fallback: string },
+  { html, lineIndex, fallback }: {
+    html: string;
+    lineIndex: number;
+    fallback: string;
+  },
 ) {
   const [lineHtml, setLineHtml] = useState<string | null>(null);
 
@@ -310,14 +388,14 @@ const wrapper = css({
   borderRadius: "0",
   overflowX: "auto",
   fontFamily: "mono",
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: 1.7,
 });
 
 const shikiWrapper = css({
   "& pre": {
     margin: 0,
-    padding: "20px",
+    padding: "5",
     backgroundColor: "transparent !important",
     fontFamily: "mono",
   },
@@ -328,9 +406,9 @@ const shikiWrapper = css({
 
 const fallbackPre = css({
   margin: 0,
-  padding: "20px",
+  padding: "5",
   fontFamily: "mono",
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: 1.7,
   color: "text.primary",
   whiteSpace: "pre",
@@ -343,22 +421,22 @@ const lineTable = css({
 });
 
 const gutterCell = css({
-  width: "1px",
+  width: "0.25",
   whiteSpace: "nowrap",
-  paddingRight: "16px",
+  paddingRight: "4",
   textAlign: "right",
   userSelect: "none",
   color: "text.muted",
-  fontSize: "12px",
+  fontSize: "xs",
   verticalAlign: "top",
   opacity: 0.5,
 });
 
 const codeCell = css({
   whiteSpace: "pre",
-  paddingLeft: "8px",
+  paddingLeft: "2",
 });
 
 const highlightRow = css({
-  backgroundColor: "rgba(250, 82, 15, 0.08)",
+  backgroundColor: "accent.08",
 });

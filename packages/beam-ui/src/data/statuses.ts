@@ -6,6 +6,40 @@
  */
 
 /**
+ * Status color palette.
+ *
+ * Hex literals are intentional: this data file is the single source of truth
+ * for status colors. Components (e.g. `Badge`) import these constants instead
+ * of hardcoding their own values.
+ */
+export const statusColors = {
+  /** Badge background for the "open" work status (dark enough for white text). */
+  open: "#166534",
+  /** Accent color for the open issue indicator (brighter than the badge background). */
+  issueOpen: "#22c55e",
+  /** Badge background for the "draft" work status. */
+  draft: "#525252",
+  /** Badge background for the "review" work status. */
+  review: "#92400e",
+  /** Badge background for the "approved" work status. */
+  approved: "#15803d",
+  /** Badge background for the "revision" work status. */
+  revision: "#c2410c",
+  /** Badge background for the "merged" work status. */
+  merged: "#7e22ce",
+  /** Badge background for the "closed" work status. */
+  closed: "#991b1b",
+  /** Badge background for "critical" priority. */
+  critical: "#dc2626",
+  /** Badge background for "high" priority. */
+  high: "#ea580c",
+  /** Badge background for "medium" priority. */
+  medium: "#d97706",
+  /** Badge background for "low" priority. */
+  low: "#0d9488",
+} as const;
+
+/**
  * Definition of a status with visual styling and metadata.
  *
  * Used to render consistent status badges across issues, PRs, and work items.
@@ -34,21 +68,21 @@ export const issueStatuses: StatusDef[] = [
     label: "Open",
     variant: "open",
     icon: "circle",
-    color: "#22c55e",
+    color: statusColors.issueOpen,
     description: "Issue is active and accepting contributions",
   },
   {
     label: "Closed",
     variant: "closed",
     icon: "cancel",
-    color: "#991b1b",
+    color: statusColors.closed,
     description: "Issue has been resolved or won't be fixed",
   },
   {
     label: "Duplicate",
     variant: "closed",
     icon: "content_copy",
-    color: "#991b1b",
+    color: statusColors.closed,
     description: "Issue duplicates an existing one",
   },
 ];
@@ -64,42 +98,42 @@ export const prStatuses: StatusDef[] = [
     label: "Draft",
     variant: "draft",
     icon: "edit_note",
-    color: "#525252",
+    color: statusColors.draft,
     description: "PR is a work in progress, not ready for review",
   },
   {
     label: "Review",
     variant: "review",
     icon: "rate_review",
-    color: "#92400e",
+    color: statusColors.review,
     description: "PR is awaiting code review",
   },
   {
     label: "Approved",
     variant: "approved",
     icon: "check_circle",
-    color: "#15803d",
+    color: statusColors.approved,
     description: "PR has been approved and is ready to merge",
   },
   {
     label: "Revision",
     variant: "revision",
     icon: "edit",
-    color: "#c2410c",
+    color: statusColors.revision,
     description: "Reviewer has requested changes",
   },
   {
     label: "Merged",
     variant: "merged",
     icon: "merge",
-    color: "#7e22ce",
+    color: statusColors.merged,
     description: "PR has been merged into the target branch",
   },
   {
     label: "Declined",
     variant: "closed",
     icon: "close",
-    color: "#991b1b",
+    color: statusColors.closed,
     description: "PR has been closed without merging",
   },
 ];
@@ -115,28 +149,28 @@ export const priorities: StatusDef[] = [
     label: "Critical",
     variant: "critical",
     icon: "priority_high",
-    color: "#dc2626",
+    color: statusColors.critical,
     description: "Requires immediate attention",
   },
   {
     label: "High",
     variant: "high",
     icon: "arrow_upward",
-    color: "#ea580c",
+    color: statusColors.high,
     description: "Should be addressed soon",
   },
   {
     label: "Medium",
     variant: "medium",
     icon: "remove",
-    color: "#d97706",
+    color: statusColors.medium,
     description: "Normal priority",
   },
   {
     label: "Low",
     variant: "low",
     icon: "arrow_downward",
-    color: "#0d9488",
+    color: statusColors.low,
     description: "Can be addressed when convenient",
   },
 ];
@@ -148,9 +182,21 @@ export const priorities: StatusDef[] = [
  * Consumers show these in documentation to set user expectations about stability and support.
  */
 export const releaseStages: StatusDef[] = [
-  { label: "Stable", variant: "stable", description: "Production-ready, fully supported" },
-  { label: "Beta", variant: "beta", description: "Feature-complete but may have bugs" },
-  { label: "Preview", variant: "preview", description: "Early access, API may change" },
+  {
+    label: "Stable",
+    variant: "stable",
+    description: "Production-ready, fully supported",
+  },
+  {
+    label: "Beta",
+    variant: "beta",
+    description: "Feature-complete but may have bugs",
+  },
+  {
+    label: "Preview",
+    variant: "preview",
+    description: "Early access, API may change",
+  },
   {
     label: "Experimental",
     variant: "experimental",

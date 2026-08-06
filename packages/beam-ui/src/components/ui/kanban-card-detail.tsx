@@ -1,4 +1,4 @@
-import { css, cx } from "../../system.ts";
+import { css, cx, token } from "../../system.ts";
 
 import { type ReactNode, useEffect, useState } from "react";
 import {
@@ -53,7 +53,12 @@ export interface KanbanCardData {
     createdAt: string;
   }[];
   /** File attachments. */
-  attachments?: { id: string; name: string; sizeBytes?: number; url?: string }[];
+  attachments?: {
+    id: string;
+    name: string;
+    sizeBytes?: number;
+    url?: string;
+  }[];
   /** Breadcrumb path, e.g. "Beam UI / Components". */
   breadcrumb?: string;
   /** Column/status title, e.g. "Backlog". */
@@ -77,7 +82,10 @@ export interface KanbanCardDetailProps {
 /* Label color mapping (matches ref .lb--* classes)                   */
 /* ------------------------------------------------------------------ */
 
-const LABEL_STYLE: Record<string, { background: string; color: string; border: string }> = {
+const LABEL_STYLE: Record<
+  string,
+  { background: string; color: string; border: string }
+> = {
   orange: {
     background: "rgba(250,82,15,0.12)",
     color: "#fa520f",
@@ -110,7 +118,10 @@ function getLabelStyle(color: string) {
 /* Priority badge                                                      */
 /* ------------------------------------------------------------------ */
 
-const PRIORITY_STYLE: Record<string, { background: string; color: string; border: string }> = {
+const PRIORITY_STYLE: Record<
+  string,
+  { background: string; color: string; border: string }
+> = {
   low: {
     background: "rgba(13,148,136,0.1)",
     color: "rgb(15,118,110)",
@@ -198,7 +209,10 @@ export function KanbanCardDetail({
     >
       <DialogBackdrop className={backdrop} />
       <DialogPositioner className={positioner}>
-        <DialogContent className={cx(drawerPanel, className)} data-testid="card-detail-modal">
+        <DialogContent
+          className={cx(drawerPanel, className)}
+          data-testid="card-detail-modal"
+        >
           {/* ── Head ── */}
           <div className={drawerHead}>
             <div className={drawerHeadTop}>
@@ -269,8 +283,12 @@ export function KanbanCardDetail({
                         minHeight="100px"
                       />
                       <div className={descEditActions}>
-                        <Button variant="primary" onClick={handleSave}>Save</Button>
-                        <Button variant="ghost" onClick={handleCancelDesc}>Cancel</Button>
+                        <Button variant="primary" onClick={handleSave}>
+                          Save
+                        </Button>
+                        <Button variant="ghost" onClick={handleCancelDesc}>
+                          Cancel
+                        </Button>
                       </div>
                     </>
                   )
@@ -283,12 +301,18 @@ export function KanbanCardDetail({
                       role={readOnly ? undefined : "button"}
                       tabIndex={readOnly ? undefined : 0}
                       onKeyDown={(e) => {
-                        if (!readOnly && (e.key === "Enter" || e.key === " ")) setEditingDesc(true);
+                        if (!readOnly && (e.key === "Enter" || e.key === " ")) {
+                          setEditingDesc(true);
+                        }
                       }}
                     >
                       {description
                         ? <MarkdownRenderer content={description} />
-                        : <span className={descPlaceholder}>Add a more detailed description…</span>}
+                        : (
+                          <span className={descPlaceholder}>
+                            Add a more detailed description…
+                          </span>
+                        )}
                     </div>
                   )}
               </div>
@@ -302,23 +326,29 @@ export function KanbanCardDetail({
                   </h4>
                   <div className={progressBar}>
                     <div
-                      className={cx(progressFill, checklistDone ? progressFillDone : "")}
+                      className={cx(
+                        progressFill,
+                        checklistDone ? progressFillDone : "",
+                      )}
                       style={{ width: `${checklistPct}%` }}
                     />
                   </div>
                   {card.checklist.map((item) => (
                     <label
                       key={item.id}
-                      className={cx(checklistItem, item.done ? checklistItemDone : "")}
+                      className={cx(
+                        checklistItem,
+                        item.done ? checklistItemDone : "",
+                      )}
                     >
                       <input
                         type="checkbox"
                         defaultChecked={item.done}
                         style={{
-                          accentColor: "#fa520f",
-                          width: 14,
-                          height: 14,
-                          marginTop: 3,
+                          accentColor: token.var("colors.sunbeam.orange"),
+                          width: token.var("sizes.3.5"),
+                          height: token.var("sizes.3.5"),
+                          marginTop: token.var("spacing.0.75"),
                           flexShrink: 0,
                         }}
                         readOnly={readOnly}
@@ -368,7 +398,12 @@ export function KanbanCardDetail({
                       onChange={(e) => setCommentText(e.target.value)}
                     />
                     <div className={commentFormActions}>
-                      <Button variant="ghost" onClick={() => setCommentText("")}>Cancel</Button>
+                      <Button
+                        variant="ghost"
+                        onClick={() => setCommentText("")}
+                      >
+                        Cancel
+                      </Button>
                       <Button variant="primary">Comment</Button>
                     </div>
                   </div>
@@ -393,9 +428,20 @@ export function KanbanCardDetail({
                 <button className={fieldValue} type="button">
                   {card.assignees && card.assignees.length > 0
                     ? (
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          gap: token.var("spacing.1"),
+                        }}
+                      >
                         {card.assignees.map((a) => (
-                          <Avatar key={a.name} name={a.name} src={a.avatarUrl} size="sm" />
+                          <Avatar
+                            key={a.name}
+                            name={a.name}
+                            src={a.avatarUrl}
+                            size="sm"
+                          />
                         ))}
                       </div>
                     )
@@ -409,14 +455,24 @@ export function KanbanCardDetail({
                 <button className={fieldValue} type="button">
                   {card.labels && card.labels.length > 0
                     ? (
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          gap: token.var("spacing.1"),
+                        }}
+                      >
                         {card.labels.map((l) => {
                           const s = getLabelStyle(l.color);
                           return (
                             <span
                               key={l.name}
                               className={labelChip}
-                              style={{ background: s.background, color: s.color, border: s.border }}
+                              style={{
+                                background: s.background,
+                                color: s.color,
+                                border: s.border,
+                              }}
                             >
                               {l.name}
                             </span>
@@ -498,7 +554,7 @@ export function KanbanCardDetail({
 const backdrop = css({
   position: "fixed",
   inset: 0,
-  background: "rgba(31,31,31,0.45)",
+  background: "scrim.45",
   backdropFilter: "blur(3px)",
   zIndex: 50,
   animationName: "beam-fadeIn",
@@ -512,14 +568,14 @@ const positioner = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "40px 20px",
+  padding: "10 5",
   zIndex: 51,
   overflowY: "auto",
 });
 
 const drawerPanel = css({
   position: "relative",
-  width: "880px",
+  width: "220",
   maxWidth: "100%",
   maxHeight: "calc(100vh - 80px)",
   background: "bg.page",
@@ -537,7 +593,7 @@ const drawerPanel = css({
 });
 
 const drawerHead = css({
-  padding: "18px 24px 14px",
+  padding: "4.5 6 3.5",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
   background: "bg.card",
@@ -548,15 +604,15 @@ const drawerHeadTop = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  marginBottom: "8px",
+  marginBottom: "2",
 });
 
 const headMeta = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   fontFamily: "mono",
-  fontSize: "11px",
+  fontSize: "11",
   color: "text.muted",
 });
 
@@ -571,12 +627,12 @@ const headSep = css({
 
 const headActions = css({
   display: "flex",
-  gap: "4px",
+  gap: "1",
 });
 
 const iconBtn = css({
-  width: "32px",
-  height: "32px",
+  width: "8",
+  height: "8",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
@@ -595,7 +651,7 @@ const iconBtn = css({
 
 const titleDisplay = css({
   fontFamily: "heading",
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   lineHeight: "1.2",
   margin: 0,
@@ -609,12 +665,12 @@ const titleInput = css({
   borderColor: "sunbeam.orange",
   borderRadius: "sm",
   fontFamily: "heading",
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   lineHeight: "1.2",
   color: "text.primary",
-  padding: "4px 6px",
-  margin: "-4px -6px",
+  padding: "1 1.5",
+  margin: "-1 -1.5",
   resize: "none",
   outline: "none",
 });
@@ -628,47 +684,47 @@ const drawerBody = css({
 });
 
 const drawerMain = css({
-  padding: "22px 28px",
+  padding: "5.5 7",
   borderRight: "1px solid",
   borderColor: "border.subtle",
   minWidth: 0,
 });
 
 const drawerSide = css({
-  padding: "22px",
+  padding: "5.5",
   background: "bg.card",
 });
 
 const drawerSection = css({
-  marginBottom: "22px",
+  marginBottom: "5.5",
 });
 
 const sectionH4 = css({
   fontFamily: "body",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
   color: "sunbeam.orange",
-  margin: "0 0 8px",
+  margin: "0 0 2",
   display: "flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const descView = css({
   fontFamily: "body",
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: "1.5",
   color: "text.secondary",
   background: "bg.card",
   border: "1px solid",
   borderColor: "border.subtle",
   borderRadius: "sm",
-  padding: "12px 14px",
+  padding: "3 3.5",
   whiteSpace: "pre-wrap",
   cursor: "text",
-  minHeight: "60px",
+  minHeight: "15",
 });
 
 const descPlaceholder = css({
@@ -678,8 +734,8 @@ const descPlaceholder = css({
 
 const descEditActions = css({
   display: "flex",
-  gap: "8px",
-  marginTop: "8px",
+  gap: "2",
+  marginTop: "2",
 });
 
 /* ── Checklist ── */
@@ -687,8 +743,8 @@ const descEditActions = css({
 const progressBar = css({
   height: "5px",
   borderRadius: "sm",
-  background: "rgba(127,99,21,0.1)",
-  marginBottom: "10px",
+  background: "warm.10",
+  marginBottom: "2.5",
   overflow: "hidden",
 });
 
@@ -705,8 +761,8 @@ const progressFillDone = css({
 const checklistItem = css({
   display: "flex",
   alignItems: "flex-start",
-  gap: "8px",
-  padding: "6px 4px",
+  gap: "2",
+  padding: "1.5 1",
   borderRadius: "sm",
   cursor: "pointer",
   _hover: { background: "bg.card" },
@@ -718,7 +774,7 @@ const checklistItemDone = css({
 
 const checklistLabel = css({
   fontFamily: "body",
-  fontSize: "13.5px",
+  fontSize: "13.5",
   color: "text.primary",
   lineHeight: "1.4",
   flex: "1 1 0%",
@@ -727,12 +783,12 @@ const checklistLabel = css({
 const checklistAdd = css({
   display: "flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
   background: "transparent",
   border: "none",
-  padding: "6px 4px",
+  padding: "1.5 1",
   fontFamily: "body",
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
   cursor: "pointer",
   _hover: { color: "sunbeam.orange" },
@@ -743,8 +799,8 @@ const checklistAdd = css({
 const comment = css({
   display: "grid",
   gridTemplateColumns: "32px 1fr",
-  gap: "10px",
-  padding: "10px 0",
+  gap: "2.5",
+  padding: "2.5 0",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
   "&:last-of-type": { borderBottom: "none" },
@@ -753,26 +809,26 @@ const comment = css({
 const commentHead = css({
   display: "flex",
   alignItems: "baseline",
-  gap: "8px",
-  marginBottom: "4px",
+  gap: "2",
+  marginBottom: "1",
 });
 
 const commentAuthor = css({
   fontFamily: "body",
   fontWeight: "button",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.primary",
 });
 
 const commentTime = css({
   fontFamily: "mono",
-  fontSize: "11px",
+  fontSize: "11",
   color: "text.muted",
 });
 
 const commentBody = css({
   fontFamily: "body",
-  fontSize: "13.5px",
+  fontSize: "13.5",
   color: "text.secondary",
   lineHeight: "1.5",
 });
@@ -780,20 +836,20 @@ const commentBody = css({
 const commentForm = css({
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
-  marginTop: "12px",
+  gap: "2",
+  marginTop: "3",
 });
 
 const commentTextarea = css({
   fontFamily: "body",
-  fontSize: "13.5px",
+  fontSize: "13.5",
   border: "1px solid",
   borderColor: "border.default",
   background: "bg.page",
   borderRadius: "sm",
-  padding: "10px 12px",
+  padding: "2.5 3",
   resize: "vertical",
-  minHeight: "64px",
+  minHeight: "16",
   outline: "none",
   color: "text.primary",
   _focus: { borderColor: "sunbeam.orange" },
@@ -802,7 +858,7 @@ const commentTextarea = css({
 const commentFormActions = css({
   display: "flex",
   justifyContent: "flex-end",
-  gap: "6px",
+  gap: "1.5",
 });
 
 /* ── Side fields ── */
@@ -810,13 +866,13 @@ const commentFormActions = css({
 const field = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
-  marginBottom: "16px",
+  gap: "1.5",
+  marginBottom: "4",
 });
 
 const fieldLabel = css({
   fontFamily: "body",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
@@ -826,14 +882,14 @@ const fieldLabel = css({
 const fieldValue = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "6px 8px",
+  gap: "2",
+  padding: "1.5 2",
   background: "transparent",
   border: "1px solid transparent",
   borderRadius: "sm",
   cursor: "pointer",
   fontFamily: "body",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.primary",
   textAlign: "left",
   width: "100%",
@@ -848,9 +904,9 @@ const fieldEmpty = css({
 const labelChip = css({
   display: "inline-block",
   fontFamily: "mono",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "600",
-  padding: "1px 6px",
+  padding: "0.25 1.5",
   borderRadius: "sm",
   lineHeight: "1.5",
   letterSpacing: "0.01em",
@@ -860,11 +916,11 @@ const labelChip = css({
 const priorityChip = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "3px",
+  gap: "0.75",
   padding: "1px 5px",
   borderRadius: "sm",
   fontFamily: "mono",
-  fontSize: "9.5px",
+  fontSize: "9.5",
   fontWeight: "600",
   letterSpacing: "0.04em",
 });

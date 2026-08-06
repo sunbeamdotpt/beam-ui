@@ -1,4 +1,4 @@
-import { css, cx } from "../../system.ts";
+import { css, cx, token } from "../../system.ts";
 
 import { type ReactNode, useMemo, useState } from "react";
 import {
@@ -203,8 +203,15 @@ const PRIORITY_CONFIG: Record<
 };
 
 /** Map label style token → reference colours. */
-const LABEL_STYLES: Record<string, { bg: string; color: string; border: string }> = {
-  orange: { bg: "rgba(250, 82, 15, 0.12)", color: "#fa520f", border: "rgba(250, 82, 15, 0.3)" },
+const LABEL_STYLES: Record<
+  string,
+  { bg: string; color: string; border: string }
+> = {
+  orange: {
+    bg: "rgba(250, 82, 15, 0.12)",
+    color: "#fa520f",
+    border: "rgba(250, 82, 15, 0.3)",
+  },
   gold: {
     bg: "oklab(0.82 0.04 0.15 / 0.5)",
     color: "oklab(0.42 0.08 0.14)",
@@ -225,7 +232,11 @@ const LABEL_STYLES: Record<string, { bg: string; color: string; border: string }
     color: "oklab(0.4 -0.04 0.08)",
     border: "oklab(0.55 -0.05 0.08 / 0.3)",
   },
-  ink: { bg: "rgba(31, 31, 31, 0.08)", color: "hsl(0,0%,24%)", border: "rgba(31, 31, 31, 0.15)" },
+  ink: {
+    bg: "rgba(31, 31, 31, 0.08)",
+    color: "hsl(0,0%,24%)",
+    border: "rgba(31, 31, 31, 0.15)",
+  },
   green: {
     bg: "rgba(21, 128, 61, 0.1)",
     color: "rgb(21, 128, 61)",
@@ -238,9 +249,13 @@ const LABEL_STYLES: Record<string, { bg: string; color: string; border: string }
   },
 };
 
-export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: boolean }): ReactNode {
+export function KanbanCardView(
+  { card, ghost }: { card: KanbanCard; ghost?: boolean },
+): ReactNode {
   const checklistPct = card.checklist
-    ? Math.round((card.checklist.done / Math.max(card.checklist.total, 1)) * 100)
+    ? Math.round(
+      (card.checklist.done / Math.max(card.checklist.total, 1)) * 100,
+    )
     : null;
 
   const priorityCfg = card.priority ? PRIORITY_CONFIG[card.priority] : null;
@@ -259,7 +274,7 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
         <span data-part="blocked-badge" className={blockedBadgeStyle}>
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "12px" }}
+            style={{ fontSize: token.var("fontSizes.xs") }}
             aria-hidden="true"
           >
             block
@@ -280,7 +295,11 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
               <span
                 key={l.name}
                 className={labelPill}
-                style={{ backgroundColor: s.bg, color: s.color, borderColor: s.border }}
+                style={{
+                  backgroundColor: s.bg,
+                  color: s.color,
+                  borderColor: s.border,
+                }}
               >
                 {l.name}
               </span>
@@ -304,7 +323,7 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
             <span
               className="material-symbols-outlined"
               aria-hidden="true"
-              style={{ fontSize: "11px", lineHeight: 1 }}
+              style={{ fontSize: token.var("fontSizes.11"), lineHeight: 1 }}
             >
               {priorityCfg.icon}
             </span>
@@ -320,7 +339,11 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
               <span
                 className="material-symbols-outlined"
                 aria-hidden="true"
-                style={{ fontSize: "10px", lineHeight: 1, verticalAlign: "middle" }}
+                style={{
+                  fontSize: token.var("fontSizes.2xs"),
+                  lineHeight: 1,
+                  verticalAlign: "middle",
+                }}
               >
                 check_box_outline_blank
               </span>{" "}
@@ -343,7 +366,7 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
             <span
               className="material-symbols-outlined"
               aria-hidden="true"
-              style={{ fontSize: "11px", lineHeight: 1 }}
+              style={{ fontSize: token.var("fontSizes.11"), lineHeight: 1 }}
             >
               flag
             </span>
@@ -358,12 +381,16 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
           {card.dueDate && (
             <span
               className={dueDateText}
-              style={{ display: "inline-flex", alignItems: "center", gap: "2px" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: token.var("spacing.0.5"),
+              }}
             >
               <span
                 className="material-symbols-outlined"
                 aria-hidden="true"
-                style={{ fontSize: "10px", lineHeight: 1 }}
+                style={{ fontSize: token.var("fontSizes.2xs"), lineHeight: 1 }}
               >
                 event
               </span>
@@ -375,7 +402,7 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
               <span
                 className="material-symbols-outlined"
                 aria-hidden="true"
-                style={{ fontSize: "10px", lineHeight: 1 }}
+                style={{ fontSize: token.var("fontSizes.2xs"), lineHeight: 1 }}
               >
                 chat_bubble_outline
               </span>
@@ -388,7 +415,7 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
               <span
                 className="material-symbols-outlined"
                 aria-hidden="true"
-                style={{ fontSize: "10px", lineHeight: 1 }}
+                style={{ fontSize: token.var("fontSizes.2xs"), lineHeight: 1 }}
               >
                 attach_file
               </span>
@@ -414,7 +441,13 @@ export function KanbanCardView({ card, ghost }: { card: KanbanCard; ghost?: bool
                   aria-label={a.name}
                 >
                   {a.avatarUrl
-                    ? <img src={a.avatarUrl} alt={a.name} className={avatarImg} />
+                    ? (
+                      <img
+                        src={a.avatarUrl}
+                        alt={a.name}
+                        className={avatarImg}
+                      />
+                    )
                     : (
                       <span className={avatarInitial} aria-hidden="true">
                         {a.name.charAt(0).toUpperCase()}
@@ -485,7 +518,13 @@ function Column({
                   aria-label={m.name}
                 >
                   {m.avatarUrl
-                    ? <img src={m.avatarUrl} alt={m.name} className={avatarImg} />
+                    ? (
+                      <img
+                        src={m.avatarUrl}
+                        alt={m.name}
+                        className={avatarImg}
+                      />
+                    )
                     : (
                       <span className={memberInitial} aria-hidden="true">
                         {m.name.charAt(0).toUpperCase()}
@@ -582,7 +621,10 @@ export function KanbanBoard({
 
     if (!sourceCol || !destCol || sourceCol.id === destCol.id) return;
 
-    const newColumns = columns.map((col) => ({ ...col, cards: [...col.cards] }));
+    const newColumns = columns.map((col) => ({
+      ...col,
+      cards: [...col.cards],
+    }));
     const src = newColumns.find((c) => c.id === sourceCol.id)!;
     const dst = newColumns.find((c) => c.id === destCol!.id)!;
     const cardIndex = src.cards.findIndex((c) => c.id === activeId);
@@ -630,9 +672,18 @@ export function KanbanBoard({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className={cx(boardStyle, className)} role="region" aria-label="Kanban board">
+      <div
+        className={cx(boardStyle, className)}
+        role="region"
+        aria-label="Kanban board"
+      >
         {columns.map((col) => (
-          <Column key={col.id} column={col} onAddCard={onAddCard} onCardClick={onCardClick} />
+          <Column
+            key={col.id}
+            column={col}
+            onAddCard={onAddCard}
+            onCardClick={onCardClick}
+          />
         ))}
       </div>
 
@@ -648,15 +699,15 @@ export function KanbanBoard({
 /* ------------------------------------------------------------------ */
 const boardStyle = css({
   display: "flex",
-  gap: "14px",
+  gap: "3.5",
   overflowX: "auto",
   minHeight: "100%",
   alignItems: "flex-start",
 });
 
 const columnStyle = css({
-  width: "296px",
-  minWidth: "296px",
+  width: "74",
+  minWidth: "74",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.warm",
@@ -664,8 +715,8 @@ const columnStyle = css({
   display: "flex",
   flexDirection: "column",
   position: "relative",
-  gap: "8px",
-  padding: "10px 10px 8px",
+  gap: "2",
+  padding: "2.5 2.5 2",
   maxHeight: "calc(100vh - 220px)",
 });
 
@@ -673,21 +724,21 @@ const columnHeader = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "4px 4px 8px",
+  padding: "1 1 2",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
-  gap: "8px",
+  gap: "2",
 });
 
 const columnHeaderLeft = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   minWidth: 0,
 });
 
 const columnTitle = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
@@ -697,7 +748,7 @@ const columnTitle = css({
 });
 
 const columnCount = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   fontFamily: "mono",
   color: "text.muted",
   backgroundColor: "bg.page",
@@ -708,12 +759,12 @@ const columnCount = css({
 });
 
 const wipPill = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   fontFamily: "mono",
   color: "text.muted",
-  backgroundColor: "rgba(250, 82, 15, 0.08)",
+  backgroundColor: "accent.08",
   border: "1px solid",
-  borderColor: "rgba(250, 82, 15, 0.2)",
+  borderColor: "accent.20",
   padding: "1px 7px",
   borderRadius: "full",
   whiteSpace: "nowrap",
@@ -726,8 +777,8 @@ const memberStack = css({
 });
 
 const memberCircle = css({
-  width: "22px",
-  height: "22px",
+  width: "5.5",
+  height: "5.5",
   borderRadius: "50%",
   border: "2px solid",
   borderColor: "cream",
@@ -741,7 +792,7 @@ const memberCircle = css({
 });
 
 const memberInitial = css({
-  fontSize: "9px",
+  fontSize: "9",
   fontWeight: "button",
   color: "#fff",
   textTransform: "uppercase",
@@ -749,8 +800,8 @@ const memberInitial = css({
 });
 
 const memberOverflow = css({
-  width: "22px",
-  height: "22px",
+  width: "5.5",
+  height: "5.5",
   borderRadius: "50%",
   border: "2px solid",
   borderColor: "cream",
@@ -768,18 +819,18 @@ const memberOverflow = css({
 
 const columnBody = css({
   flex: 1,
-  padding: "2px",
-  margin: "-2px",
+  padding: "0.5",
+  margin: "-0.5",
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
-  minHeight: "60px",
+  gap: "2",
+  minHeight: "15",
   overflowY: "auto",
 });
 
 const cardCoverStyle = css({
-  height: "64px",
-  margin: "-10px -12px 0px",
+  height: "16",
+  margin: "-2.5 -3 0",
   backgroundSize: "cover",
   backgroundPosition: "center",
   borderBottom: "1px solid",
@@ -791,12 +842,12 @@ const cardCoverStyle = css({
 const blockedBadgeStyle = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
-  fontSize: "10px",
+  gap: "1",
+  fontSize: "2xs",
   fontWeight: 600,
   letterSpacing: "0.05em",
   textTransform: "uppercase",
-  padding: "2px 6px",
+  padding: "0.5 1.5",
   backgroundColor: "rgb(254, 242, 242)",
   color: "rgb(153, 27, 27)",
   border: "1px solid",
@@ -810,12 +861,12 @@ const cardStyle = css({
   border: "1px solid",
   borderColor: "border.warm",
   borderRadius: "sm",
-  padding: "10px 12px",
+  padding: "2.5 3",
   cursor: "grab",
   transition: "border-color 0.12s, box-shadow 0.12s, transform 0.12s",
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
+  gap: "2",
   position: "relative",
   _hover: {
     borderColor: "sunbeam.orange",
@@ -831,7 +882,7 @@ const cardGhostStyle = css({
 });
 
 const cardTitleStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "button",
   color: "text.primary",
   lineHeight: "1.32",
@@ -841,15 +892,15 @@ const cardTitleStyle = css({
 const labelsRow = css({
   display: "flex",
   flexWrap: "wrap",
-  gap: "4px",
+  gap: "1",
 });
 
 const labelPill = css({
   display: "inline-block",
   fontFamily: "mono",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: 600,
-  padding: "1px 6px",
+  padding: "0.25 1.5",
   borderRadius: "sm",
   lineHeight: "1.5",
   letterSpacing: "0.01em",
@@ -860,32 +911,32 @@ const labelPill = css({
 const checklistRow = css({
   display: "flex",
   flexDirection: "column",
-  gap: "4px",
+  gap: "1",
 });
 
 const checklistMetaRow = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  gap: "8px",
+  gap: "2",
 });
 
 const checklistCount = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   fontFamily: "mono",
 });
 
 const checklistPctText = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   fontFamily: "mono",
 });
 
 const checklistTrack = css({
-  height: "4px",
+  height: "1",
   borderRadius: "sm",
-  background: "rgba(127,99,21,0.1)",
+  background: "warm.10",
   width: "100%",
   overflow: "hidden",
 });
@@ -904,8 +955,8 @@ const priorityRow = css({
 const priorityChip = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "3px",
-  fontSize: "9.5px",
+  gap: "0.75",
+  fontSize: "9.5",
   fontFamily: "mono",
   fontWeight: 600,
   letterSpacing: "0.04em",
@@ -917,55 +968,55 @@ const priorityChip = css({
 const cardMetaRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const milestonePill = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   fontFamily: "mono",
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
 });
 
 const metaIcons = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   flexWrap: "wrap",
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   fontFamily: "mono",
 });
 
 const shortIdText = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   fontFamily: "mono",
   fontWeight: 500,
 });
 
 const dueDateText = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   fontFamily: "mono",
 });
 
 const metaIconText = css({
-  fontSize: "10.5px",
+  fontSize: "10.5",
   color: "text.muted",
   display: "inline-flex",
   alignItems: "center",
-  gap: "3px",
+  gap: "0.75",
 });
 
 const cardFooter = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  gap: "8px",
-  paddingTop: "4px",
+  gap: "2",
+  paddingTop: "1",
   borderTop: "1px dashed",
   borderColor: "border.subtle",
 });
@@ -975,8 +1026,8 @@ const avatarStack = css({
 });
 
 const avatarCircle = css({
-  width: "22px",
-  height: "22px",
+  width: "5.5",
+  height: "5.5",
   borderRadius: "50%",
   border: "1.5px solid",
   borderColor: "bg.page",
@@ -984,7 +1035,7 @@ const avatarCircle = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginLeft: "-6px",
+  marginLeft: "-1.5",
   overflow: "hidden",
 });
 
@@ -995,7 +1046,7 @@ const avatarImg = css({
 });
 
 const avatarInitial = css({
-  fontSize: "9px",
+  fontSize: "9",
   fontWeight: "button",
   color: "#fff",
   textTransform: "uppercase",
@@ -1005,9 +1056,9 @@ const avatarInitial = css({
 const addCardBtn = css({
   display: "flex",
   alignItems: "center",
-  gap: "6px",
-  padding: "6px 8px",
-  fontSize: "12px",
+  gap: "1.5",
+  padding: "1.5 2",
+  fontSize: "xs",
   color: "text.muted",
   background: "transparent",
   border: "none",

@@ -1,4 +1,5 @@
 import { css, cx } from "../../system.ts";
+import { statusColors } from "../../data/statuses.ts";
 
 import type { ReactNode } from "react";
 
@@ -63,12 +64,50 @@ const pill = (bg: string, fg: string, border?: string) =>
   css({
     backgroundColor: bg,
     color: fg,
-    fontSize: "10px",
-    padding: "4px 8px",
+    fontSize: "2xs",
+    padding: "1 2",
     borderRadius: "sm",
     display: "inline-block",
     ...(border ? { border: "1px solid", borderColor: border } : {}),
   });
+
+/**
+ * Shared layout for solid work-status / priority pills.
+ *
+ * The background color is applied via inline style from {@link statusColors}:
+ * `statuses.ts` is the single source of truth for those colors, and Panda can
+ * only statically extract local values, so imported colors cannot go through
+ * `css()`.
+ */
+const solidPill = css({
+  color: "white",
+  fontSize: "2xs",
+  padding: "1 2",
+  borderRadius: "sm",
+  display: "inline-block",
+});
+
+/** Solid pill background colors, keyed by badge variant (runtime-consumed). */
+const solidBackgrounds = {
+  // Work Status — solid, distinct, readable in both modes
+  open: statusColors.open,
+  draft: statusColors.draft,
+  review: statusColors.review,
+  approved: statusColors.approved,
+  merged: statusColors.merged,
+  closed: statusColors.closed,
+  revision: statusColors.revision,
+  // Priority — solid, urgency-coded
+  critical: statusColors.critical,
+  high: statusColors.high,
+  medium: statusColors.medium,
+  low: statusColors.low,
+} as const;
+
+type SolidVariant = keyof typeof solidBackgrounds;
+
+const isSolidVariant = (variant: BadgeVariant): variant is SolidVariant =>
+  variant in solidBackgrounds;
 
 const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   // Tier / Recognition — warm palette
@@ -84,99 +123,22 @@ const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   beta: pill("sunshine.500", "sunbeam.black"),
   preview: pill("sunbeam.flame", "white"),
   experimental: pill("bright.yellow", "sunbeam.black"),
-  deprecated: pill("rgba(127, 99, 21, 0.15)", "text.secondary"),
+  deprecated: pill("border.warm", "text.secondary"),
 
   // Work Status — solid, distinct, readable in both modes
-  open: css({
-    backgroundColor: "#166534",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  draft: css({
-    backgroundColor: "#525252",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  review: css({
-    backgroundColor: "#92400e",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  approved: css({
-    backgroundColor: "#15803d",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  merged: css({
-    backgroundColor: "#7e22ce",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  closed: css({
-    backgroundColor: "#991b1b",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  revision: css({
-    backgroundColor: "#c2410c",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
+  open: solidPill,
+  draft: solidPill,
+  review: solidPill,
+  approved: solidPill,
+  merged: solidPill,
+  closed: solidPill,
+  revision: solidPill,
 
   // Priority — solid, urgency-coded
-  critical: css({
-    backgroundColor: "#dc2626",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  high: css({
-    backgroundColor: "#ea580c",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  medium: css({
-    backgroundColor: "#d97706",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  low: css({
-    backgroundColor: "#0d9488",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
+  critical: solidPill,
+  high: solidPill,
+  medium: solidPill,
+  low: solidPill,
 };
 
 /**
@@ -185,15 +147,17 @@ const variants: Record<Exclude<BadgeVariant, "section">, string> = {
  * Used to visually separate sections in long-form content. The label is left-aligned
  * with an orange background, and a decorative line extends to the right.
  */
-function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): ReactNode {
+function SectionBadge(
+  { children, className }: Omit<BadgeProps, "variant">,
+): ReactNode {
   return (
     <div
       className={cx(
         css({
           display: "flex",
           alignItems: "center",
-          gap: "16px",
-          marginBottom: "40px",
+          gap: "4",
+          marginBottom: "10",
         }),
         className,
       )}
@@ -202,10 +166,10 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
         className={cx(
           base,
           css({
-            fontSize: "10px",
+            fontSize: "2xs",
             color: "sunbeam.orange",
-            backgroundColor: "rgba(250, 82, 15, 0.1)",
-            padding: "4px 8px",
+            backgroundColor: "accent.10",
+            padding: "1 2",
             borderRadius: "sm",
             whiteSpace: "nowrap",
           }),
@@ -216,7 +180,7 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
       <div
         aria-hidden="true"
         className={css({
-          height: "1px",
+          height: "0.25",
           flex: 1,
           backgroundColor: "border.warm",
         })}
@@ -238,10 +202,19 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
  * <Badge variant="section">Documentation</Badge>
  * ```
  */
-export function Badge({ children, variant = "premier", className }: BadgeProps): ReactNode {
+export function Badge(
+  { children, variant = "premier", className }: BadgeProps,
+): ReactNode {
   if (variant === "section") {
     return <SectionBadge className={className}>{children}</SectionBadge>;
   }
 
-  return <span className={cx(base, variants[variant], className)}>{children}</span>;
+  return (
+    <span
+      className={cx(base, variants[variant], className)}
+      style={isSolidVariant(variant) ? { backgroundColor: solidBackgrounds[variant] } : undefined}
+    >
+      {children}
+    </span>
+  );
 }

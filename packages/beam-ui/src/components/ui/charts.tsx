@@ -1,4 +1,4 @@
-import { css, cx } from "../../system.ts";
+import { css, cx, token } from "../../system.ts";
 
 import type { ReactNode } from "react";
 import {
@@ -107,24 +107,35 @@ export function LineChart(
 ): ReactNode {
   const defaultLabel = `Line chart with ${data.length} data points`;
   return (
-    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
+    <div
+      className={cx(chartWrapper, className)}
+      role="img"
+      aria-label={ariaLabel ?? defaultLabel}
+    >
       <ResponsiveContainer width="100%" height={height}>
         <RLineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.15)" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={token.var("colors.grid.15")}
+          />
           <XAxis
             dataKey="label"
             tick={axisTick}
-            axisLine={{ stroke: "rgba(128,128,128,0.2)" }}
+            axisLine={{ stroke: token.var("colors.grid.20") }}
             tickLine={false}
           />
           <YAxis
             tick={axisTick}
-            axisLine={{ stroke: "rgba(128,128,128,0.2)" }}
+            axisLine={{ stroke: token.var("colors.grid.20") }}
             tickLine={false}
           />
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
+            wrapperStyle={{
+              fontSize: token.var("fontSizes.xs"),
+              fontFamily: "var(--fonts-body)",
+              color: token.var("colors.text.primary"),
+            }}
           />
           {lines.map((line, i) => (
             <Line
@@ -181,24 +192,35 @@ export function BarChart(
 ): ReactNode {
   const defaultLabel = `Bar chart with ${data.length} data points`;
   return (
-    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
+    <div
+      className={cx(chartWrapper, className)}
+      role="img"
+      aria-label={ariaLabel ?? defaultLabel}
+    >
       <ResponsiveContainer width="100%" height={height}>
         <RBarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.15)" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={token.var("colors.grid.15")}
+          />
           <XAxis
             dataKey="label"
             tick={axisTick}
-            axisLine={{ stroke: "rgba(128,128,128,0.2)" }}
+            axisLine={{ stroke: token.var("colors.grid.20") }}
             tickLine={false}
           />
           <YAxis
             tick={axisTick}
-            axisLine={{ stroke: "rgba(128,128,128,0.2)" }}
+            axisLine={{ stroke: token.var("colors.grid.20") }}
             tickLine={false}
           />
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
+            wrapperStyle={{
+              fontSize: token.var("fontSizes.xs"),
+              fontFamily: "var(--fonts-body)",
+              color: token.var("colors.text.primary"),
+            }}
           />
           {bars.map((bar, i) => (
             <Bar
@@ -256,7 +278,11 @@ export function PieChart(
 ): ReactNode {
   const defaultLabel = `${donut ? "Donut" : "Pie"} chart with ${data.length} segments`;
   return (
-    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
+    <div
+      className={cx(chartWrapper, className)}
+      role="img"
+      aria-label={ariaLabel ?? defaultLabel}
+    >
       <ResponsiveContainer width="100%" height={height}>
         <RPieChart>
           <Pie
@@ -278,7 +304,11 @@ export function PieChart(
           </Pie>
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
+            wrapperStyle={{
+              fontSize: token.var("fontSizes.xs"),
+              fontFamily: "var(--fonts-body)",
+              color: token.var("colors.text.primary"),
+            }}
           />
         </RPieChart>
       </ResponsiveContainer>
@@ -323,27 +353,39 @@ export function AreaChart(
 ): ReactNode {
   const defaultLabel = `Area chart with ${data.length} data points`;
   return (
-    <div className={cx(chartWrapper, className)} role="img" aria-label={ariaLabel ?? defaultLabel}>
+    <div
+      className={cx(chartWrapper, className)}
+      role="img"
+      aria-label={ariaLabel ?? defaultLabel}
+    >
       <ResponsiveContainer width="100%" height={height}>
         <RAreaChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,128,128,0.15)" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={token.var("colors.grid.15")}
+          />
           <XAxis
             dataKey="label"
             tick={axisTick}
-            axisLine={{ stroke: "rgba(128,128,128,0.2)" }}
+            axisLine={{ stroke: token.var("colors.grid.20") }}
             tickLine={false}
           />
           <YAxis
             tick={axisTick}
-            axisLine={{ stroke: "rgba(128,128,128,0.2)" }}
+            axisLine={{ stroke: token.var("colors.grid.20") }}
             tickLine={false}
           />
           <Tooltip content={<BeamTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: "12px", fontFamily: "var(--fonts-body)", color: "#1f1f1f" }}
+            wrapperStyle={{
+              fontSize: token.var("fontSizes.xs"),
+              fontFamily: "var(--fonts-body)",
+              color: token.var("colors.text.primary"),
+            }}
           />
           {areas.map((area, i) => {
-            const color = area.color ?? DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+            const color = area.color ??
+              DEFAULT_COLORS[i % DEFAULT_COLORS.length];
             return (
               <Area
                 key={area.key}
@@ -372,12 +414,12 @@ const chartWrapper = css({
   border: "1px solid",
   borderColor: "border.default",
   borderRadius: "0",
-  padding: "24px",
+  padding: "6",
 });
 
 const axisTick = {
-  fontSize: 11,
-  fill: "rgba(128,128,128,0.7)",
+  fontSize: token.var("fontSizes.11"),
+  fill: token.var("colors.text.secondary"),
   fontFamily: "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace",
 };
 
@@ -385,8 +427,8 @@ const tooltipWrapper = css({
   backgroundColor: "bg.page",
   border: "1px solid",
   borderColor: "border.default",
-  padding: "12px 16px",
-  fontSize: "13px",
+  padding: "3 4",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   shadow: "sm",
@@ -394,16 +436,16 @@ const tooltipWrapper = css({
 
 const tooltipLabel = css({
   fontWeight: "heading",
-  marginBottom: "4px",
-  fontSize: "12px",
+  marginBottom: "1",
+  fontSize: "xs",
   color: "text.secondary",
 });
 
 const tooltipEntry = css({
   display: "flex",
   alignItems: "center",
-  gap: "6px",
-  fontSize: "13px",
+  gap: "1.5",
+  fontSize: "13",
   margin: 0,
   lineHeight: 1.6,
 });
@@ -413,8 +455,8 @@ const tooltipValue = css({
 });
 
 const tooltipDot = css({
-  width: "8px",
-  height: "8px",
+  width: "2",
+  height: "2",
   borderRadius: "50%",
   flexShrink: 0,
 });

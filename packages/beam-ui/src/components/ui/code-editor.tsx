@@ -1,4 +1,4 @@
-import { css, cx } from "../../system.ts";
+import { css, cx, token } from "../../system.ts";
 
 import { type ReactNode, useCallback, useEffect, useRef } from "react";
 import { EditorState, type Extension } from "@codemirror/state";
@@ -17,33 +17,52 @@ import { useTheme } from "../../hooks/use-theme.ts";
 
 /* Beam syntax highlighting — matches syn.* tokens */
 const beamHighlightDark = HighlightStyle.define([
-  { tag: tags.keyword, color: "#c084fc" }, // syn.keyword — purple
-  { tag: tags.controlKeyword, color: "#c084fc" },
-  { tag: tags.operatorKeyword, color: "#c084fc" },
-  { tag: tags.definitionKeyword, color: "#c084fc" },
-  { tag: tags.moduleKeyword, color: "#c084fc" },
-  { tag: tags.function(tags.variableName), color: "#93c5fd" }, // syn.fn — blue
-  { tag: tags.function(tags.definition(tags.variableName)), color: "#93c5fd" },
-  { tag: tags.string, color: "#86efac" }, // syn.string — green
-  { tag: tags.special(tags.string), color: "#86efac" },
-  { tag: tags.propertyName, color: "#fdba74" }, // syn.prop — orange
-  { tag: tags.number, color: "#fb923c" }, // syn.number — deeper orange
-  { tag: tags.bool, color: "#fb923c" },
-  { tag: tags.null, color: "#fb923c" },
-  { tag: tags.typeName, color: "#fde047" }, // syn.builtin — yellow
-  { tag: tags.className, color: "#fde047" },
-  { tag: tags.standard(tags.typeName), color: "#fde047" },
-  { tag: tags.comment, color: "rgba(255,255,255,0.35)", fontStyle: "italic" },
-  { tag: tags.lineComment, color: "rgba(255,255,255,0.35)", fontStyle: "italic" },
-  { tag: tags.blockComment, color: "rgba(255,255,255,0.35)", fontStyle: "italic" },
-  { tag: tags.operator, color: "#ffa110" }, // sunshine.700
-  { tag: tags.punctuation, color: "rgba(255,255,255,0.5)" },
-  { tag: tags.variableName, color: "#e2e8f0" },
-  { tag: tags.regexp, color: "#fb923c" },
-  { tag: tags.tagName, color: "#fdba74" },
-  { tag: tags.attributeName, color: "#93c5fd" },
-  { tag: tags.attributeValue, color: "#86efac" },
-  { tag: tags.heading, color: "#fa520f", fontWeight: "bold" },
+  { tag: tags.keyword, color: token.var("colors.syn.keyword") }, // syn.keyword — purple
+  { tag: tags.controlKeyword, color: token.var("colors.syn.keyword") },
+  { tag: tags.operatorKeyword, color: token.var("colors.syn.keyword") },
+  { tag: tags.definitionKeyword, color: token.var("colors.syn.keyword") },
+  { tag: tags.moduleKeyword, color: token.var("colors.syn.keyword") },
+  { tag: tags.function(tags.variableName), color: token.var("colors.syn.fn") }, // syn.fn — blue
+  {
+    tag: tags.function(tags.definition(tags.variableName)),
+    color: token.var("colors.syn.fn"),
+  },
+  { tag: tags.string, color: token.var("colors.syn.string") }, // syn.string — green
+  { tag: tags.special(tags.string), color: token.var("colors.syn.string") },
+  { tag: tags.propertyName, color: token.var("colors.syn.prop") }, // syn.prop — orange
+  { tag: tags.number, color: token.var("colors.syn.number") }, // syn.number — deeper orange
+  { tag: tags.bool, color: token.var("colors.syn.number") },
+  { tag: tags.null, color: token.var("colors.syn.number") },
+  { tag: tags.typeName, color: token.var("colors.syn.builtin") }, // syn.builtin — yellow
+  { tag: tags.className, color: token.var("colors.syn.builtin") },
+  { tag: tags.standard(tags.typeName), color: token.var("colors.syn.builtin") },
+  {
+    tag: tags.comment,
+    color: token.var("colors.chrome.35"),
+    fontStyle: "italic",
+  },
+  {
+    tag: tags.lineComment,
+    color: token.var("colors.chrome.35"),
+    fontStyle: "italic",
+  },
+  {
+    tag: tags.blockComment,
+    color: token.var("colors.chrome.35"),
+    fontStyle: "italic",
+  },
+  { tag: tags.operator, color: token.var("colors.sunshine.700") },
+  { tag: tags.punctuation, color: token.var("colors.chrome.50") },
+  { tag: tags.variableName, color: "#e2e8f0" }, // no token counterpart — dark-variable slate
+  { tag: tags.regexp, color: token.var("colors.syn.number") },
+  { tag: tags.tagName, color: token.var("colors.syn.prop") },
+  { tag: tags.attributeName, color: token.var("colors.syn.fn") },
+  { tag: tags.attributeValue, color: token.var("colors.syn.string") },
+  {
+    tag: tags.heading,
+    color: token.var("colors.sunbeam.orange"),
+    fontWeight: "bold",
+  },
   { tag: tags.strong, fontWeight: "bold" },
   { tag: tags.emphasis, fontStyle: "italic" },
 ]);
@@ -198,9 +217,11 @@ async function loadLanguage(lang: string | undefined) {
 /* Custom CodeMirror theme using Beam tokens                           */
 /* ------------------------------------------------------------------ */
 function createBeamTheme(isDark: boolean) {
-  const bg = isDark ? "#2a2a2a" : "#fff0c2";
-  const fg = isDark ? "#ffffff" : "#1f1f1f";
-  const muted = isDark ? "rgba(255,255,255,0.4)" : "#7f6315";
+  const bg = isDark ? token.var("colors.card.dark") : token.var("colors.cream");
+  // "#ffffff" has no token counterpart — pure white editor foreground
+  const fg = isDark ? "#ffffff" : token.var("colors.sunbeam.black");
+  // "#7f6315" has no token counterpart — intentional light-mode muted warm
+  const muted = isDark ? token.var("colors.chrome.40") : "#7f6315";
   const mono = "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace";
 
   return EditorView.theme(
@@ -208,36 +229,39 @@ function createBeamTheme(isDark: boolean) {
       "&": {
         backgroundColor: bg,
         color: fg,
-        fontSize: "13px",
+        fontSize: token.var("fontSizes.13"),
         fontFamily: mono,
       },
       ".cm-content": {
-        caretColor: "#fa520f",
-        padding: "12px 0",
+        caretColor: token.var("colors.sunbeam.orange"),
+        padding: `${token.var("spacing.3")} 0`,
       },
       ".cm-cursor, .cm-dropCursor": {
-        borderLeftColor: "#fa520f",
+        borderLeftColor: token.var("colors.sunbeam.orange"),
         borderLeftWidth: "2px",
       },
       "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
-        backgroundColor: isDark ? "rgba(250, 82, 15, 0.20)" : "rgba(250, 82, 15, 0.15)",
+        backgroundColor: isDark ? token.var("colors.accent.20") : token.var("colors.accent.15"),
       },
       ".cm-activeLine": {
-        backgroundColor: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
+        // rgba(0,0,0,0.02) has no token counterpart — light-mode active-line wash
+        backgroundColor: isDark ? token.var("colors.chrome.03") : "rgba(0, 0, 0, 0.02)",
       },
       ".cm-gutters": {
+        // rgba(255,255,255,0.02) and rgba(0,0,0,0.02) have no token counterparts
         backgroundColor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
         color: muted,
         border: "none",
-        paddingRight: "8px",
+        paddingRight: token.var("spacing.2"),
       },
       ".cm-activeLineGutter": {
-        backgroundColor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
+        // rgba(0,0,0,0.04) has no token counterpart — light-mode active-gutter wash
+        backgroundColor: isDark ? token.var("colors.chrome.05") : "rgba(0, 0, 0, 0.04)",
       },
       ".cm-lineNumbers .cm-gutterElement": {
-        fontSize: "12px",
-        minWidth: "32px",
-        padding: "0 4px 0 8px",
+        fontSize: token.var("fontSizes.xs"),
+        minWidth: token.var("sizes.8"),
+        padding: `0 ${token.var("spacing.1")} 0 ${token.var("spacing.2")}`,
       },
       ".cm-placeholder": {
         color: muted,
@@ -339,7 +363,15 @@ export function CodeEditor({
 
       return exts;
     },
-    [theme, showLineNumbers, softWrap, placeholder, readOnly, language, extensions],
+    [
+      theme,
+      showLineNumbers,
+      softWrap,
+      placeholder,
+      readOnly,
+      language,
+      extensions,
+    ],
   );
 
   // Create / recreate the editor when config changes
