@@ -160,3 +160,17 @@ builds emit the woff2s, Playwright `document.fonts.check` true for all
 three families, zero CDN requests. Known gap: JSR `exports` in deno.json
 has no `./styles/*` subpath — app/storybook resolve it via the Vite
 alias, external JSR consumers can't (pre-existing).
+
+## 2026-08-06 — preset token scales extended for migration
+
+Added to `beamPreset`: numeric fontSizes (9/9.5/10.5/11/13/13.5/15/36/40px),
+spacing steps 0.25–75 (1px hairlines, 18/22px, 60–300px), sizes-only layout
+max-widths (100–360 = 400–1440px), and exact-alpha color groups: accent.06–40,
+chrome.03–70, warm.04–40, sunshine.25/35/50, creamA.30, ivory.30/50,
+scrim.45–60, grid.06–20, diff.add/del.bg/emphasis. Numeric keys follow the
+preset's own spacingScale convention. Static `accent.*` coexists with the
+semantic `accent` token (verified in generated types); `cream.30` would
+collide with flat `cream`, hence `creamA.30`. styled-system regenerated via
+`deno run -A npm:@pandacss/dev@1.12.0 codegen`. *Why exact-alpha tokens
+instead of semantic unification: zero visual drift during migration; alpha
+scales are a legitimate token layer (Radix-style).*
