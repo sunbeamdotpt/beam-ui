@@ -9,7 +9,7 @@ import type { LinkComponent } from "../../utils/polymorphic.ts";
 const body = css({
   display: "flex",
   alignItems: "stretch",
-  maxWidth: "1440px",
+  maxWidth: "360",
   marginInline: "auto",
   width: "100%",
 });
@@ -25,28 +25,28 @@ const rightRailWrapper = css({
 const content = css({
   flex: 1,
   minWidth: 0,
-  paddingInline: { base: "24px", md: "48px", lg: "120px" },
-  paddingBlock: "32px",
+  paddingInline: { base: "6", md: "12", lg: "30" },
+  paddingBlock: "8",
   overflow: "visible",
 });
 
 const srOnly = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",
   borderWidth: 0,
   _focus: {
     position: "fixed",
-    top: "4px",
-    left: "4px",
+    top: "1",
+    left: "1",
     width: "auto",
     height: "auto",
-    padding: "8px 16px",
+    padding: "2 4",
     margin: 0,
     overflow: "visible",
     clip: "auto",
@@ -55,14 +55,14 @@ const srOnly = css({
     bg: "bg.card",
     color: "accent",
     fontWeight: "button",
-    fontSize: "14px",
+    fontSize: "sm",
     border: "2px solid",
     borderColor: "accent",
   },
 });
 
 const center = css({
-  maxWidth: "720px",
+  maxWidth: "180",
 });
 
 /** Single item in the table of contents shown in {@link RightRail}. */
@@ -130,7 +130,11 @@ export function DocsLayout({
       <a href="#main-content" className={srOnly}>Skip to main content</a>
       <div className={body}>
         <div className={sidebarWrapper}>
-          <Sidebar sections={docsSidebar} currentPath={currentPath} linkAs={linkAs} />
+          <Sidebar
+            sections={docsSidebar}
+            currentPath={currentPath}
+            linkAs={linkAs}
+          />
         </div>
         <main className={content} id="main-content">
           <div className={center} data-content="center">

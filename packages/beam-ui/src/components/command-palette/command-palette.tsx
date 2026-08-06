@@ -270,7 +270,7 @@ export function CommandPalette({
 const backdrop = css({
   position: "fixed",
   inset: 0,
-  backgroundColor: "rgba(31, 31, 31, 0.55)",
+  backgroundColor: "scrim.55",
   zIndex: 200,
 });
 
@@ -288,7 +288,7 @@ const positioner = css({
 const content = css({
   backgroundColor: "bg.page",
   width: "100%",
-  maxWidth: "560px",
+  maxWidth: "140",
   shadow: "golden",
   outline: "none",
   overflow: "hidden",
@@ -297,14 +297,14 @@ const content = css({
 const searchRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "12px 16px",
+  gap: "2",
+  padding: "3 4",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const searchIcon = css({
-  fontSize: "20px",
+  fontSize: "xl",
   color: "text.secondary",
   flexShrink: 0,
 });
@@ -314,7 +314,7 @@ const searchInput = css({
   border: "none",
   outline: "none",
   background: "transparent",
-  fontSize: "15px",
+  fontSize: "15",
   fontFamily: "body",
   color: "text.primary",
   _placeholder: { color: "text.secondary" },
@@ -323,7 +323,7 @@ const searchInput = css({
 const list = css({
   listStyle: "none",
   margin: 0,
-  padding: "4px 0",
+  padding: "1 0",
   maxHeight: "380px",
   overflowY: "auto",
 });
@@ -331,10 +331,10 @@ const list = css({
 const rowBase = css({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
+  gap: "2.5",
   padding: "9px 16px",
   cursor: "pointer",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   userSelect: "none",
@@ -349,7 +349,7 @@ const rowActive = css({
 });
 
 const rowIcon = css({
-  fontSize: "18px",
+  fontSize: "lg",
   color: "text.secondary",
   flexShrink: 0,
 });
@@ -362,21 +362,21 @@ const rowLabel = css({
 });
 
 const rowHint = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.secondary",
   flexShrink: 0,
   marginLeft: "auto",
-  paddingLeft: "12px",
+  paddingLeft: "3",
 });
 
 const groupLabel = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: 600,
   fontFamily: "body",
   color: "text.secondary",
   textTransform: "uppercase",
   letterSpacing: "0.06em",
-  padding: "8px 16px 4px",
+  padding: "2 4 1",
 });
 
 const groupList = css({
@@ -386,8 +386,8 @@ const groupList = css({
 });
 
 const emptyState = css({
-  padding: "20px 16px",
-  fontSize: "14px",
+  padding: "5 4",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.secondary",
   textAlign: "center",

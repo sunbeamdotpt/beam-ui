@@ -241,11 +241,18 @@ export function NotificationCenter({
             <span className={headerTitle}>{headerText}</span>
             <div className={headerActions}>
               {unreadCount > 0 && (
-                <button className={markAllBtn} onClick={onMarkAllRead} type="button">
+                <button
+                  className={markAllBtn}
+                  onClick={onMarkAllRead}
+                  type="button"
+                >
                   Mark all as read
                 </button>
               )}
-              <PopoverCloseTrigger className={closeBtn} aria-label="Close notifications">
+              <PopoverCloseTrigger
+                className={closeBtn}
+                aria-label="Close notifications"
+              >
                 <Icon name="close" size={16} />
               </PopoverCloseTrigger>
             </div>
@@ -255,7 +262,11 @@ export function NotificationCenter({
             {notifications.length === 0
               ? (
                 <div className={emptyState}>
-                  <Icon name="notifications_none" size={32} className={emptyIcon} />
+                  <Icon
+                    name="notifications_none"
+                    size={32}
+                    className={emptyIcon}
+                  />
                   <p>No notifications</p>
                 </div>
               )
@@ -318,8 +329,8 @@ const badge = css({
   position: "absolute",
   top: "-1",
   right: "-1",
-  minWidth: "18px",
-  height: "18px",
+  minWidth: "4.5",
+  height: "4.5",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -329,7 +340,7 @@ const badge = css({
   fontWeight: "button",
   fontFamily: "body",
   borderRadius: "full",
-  padding: "0 4px",
+  padding: "0 1",
   lineHeight: 1,
 });
 
@@ -366,7 +377,7 @@ const headerActions = css({
 });
 
 const markAllBtn = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -429,12 +440,12 @@ const groupUnreadBadge = css({
   color: "white",
   backgroundColor: "sunbeam.orange",
   borderRadius: "full",
-  minWidth: "18px",
-  height: "18px",
+  minWidth: "4.5",
+  height: "4.5",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 4px",
+  padding: "0 1",
   lineHeight: 1,
 });
 
@@ -500,7 +511,7 @@ const notifUnread = css({
     left: 0,
     top: 0,
     bottom: 0,
-    width: "3px",
+    width: "0.75",
     backgroundColor: "sunbeam.orange",
   },
 });
@@ -520,7 +531,7 @@ const notifContent = css({
 });
 
 const notifTitle = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   lineHeight: 1.4,
@@ -530,7 +541,7 @@ const notifTitle = css({
 });
 
 const notifTime = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontFamily: "body",
   color: "text.muted",
 });

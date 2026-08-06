@@ -49,12 +49,12 @@ export function ScrollArea({
   const hoverProps = scrollbar === "hover"
     ? {
       onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
-        (e.currentTarget.style as unknown as Record<string, string>).scrollbarColor =
-          "rgba(255,161,16,0.25) transparent";
+        (e.currentTarget.style as unknown as Record<string, string>)
+          .scrollbarColor = "rgba(255,161,16,0.25) transparent";
       },
       onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-        (e.currentTarget.style as unknown as Record<string, string>).scrollbarColor =
-          "transparent transparent";
+        (e.currentTarget.style as unknown as Record<string, string>)
+          .scrollbarColor = "transparent transparent";
       },
     }
     : {};
@@ -62,7 +62,10 @@ export function ScrollArea({
   // Firefox scrollbar inline styles (Panda can't compile these)
   const scrollbarInline: Record<string, string> = scrollbar === "hover"
     ? { scrollbarWidth: "thin", scrollbarColor: "transparent transparent" }
-    : { scrollbarWidth: "thin", scrollbarColor: "rgba(255,161,16,0.25) transparent" };
+    : {
+      scrollbarWidth: "thin",
+      scrollbarColor: "rgba(255,161,16,0.25) transparent",
+    };
 
   return (
     <div
@@ -102,11 +105,11 @@ const barVisible = css({
   "&::-webkit-scrollbar": { width: "1", height: "1" },
   "&::-webkit-scrollbar-track": { background: "transparent" },
   "&::-webkit-scrollbar-thumb": {
-    background: "rgba(255,161,16,0.25)",
+    background: "sunshine.25",
     borderRadius: "full",
   },
   "&::-webkit-scrollbar-thumb:hover": {
-    background: "rgba(255,161,16,0.5)",
+    background: "sunshine.50",
   },
   "&::-webkit-scrollbar-corner": { background: "transparent" },
 });
@@ -122,10 +125,10 @@ const barHover = css({
     borderRadius: "full",
   },
   "&:hover::-webkit-scrollbar-thumb": {
-    background: "rgba(255,161,16,0.25)",
+    background: "sunshine.25",
   },
   "&:hover::-webkit-scrollbar-thumb:hover": {
-    background: "rgba(255,161,16,0.5)",
+    background: "sunshine.50",
   },
   "&::-webkit-scrollbar-corner": { background: "transparent" },
 });
@@ -138,11 +141,11 @@ const barAuto = css({
   "&::-webkit-scrollbar": { width: "1.5", height: "1.5" },
   "&::-webkit-scrollbar-track": { background: "transparent" },
   "&::-webkit-scrollbar-thumb": {
-    background: "rgba(127,99,21,0.25)",
+    background: "warm.25",
     borderRadius: "full",
   },
   "&::-webkit-scrollbar-thumb:hover": {
-    background: "rgba(127,99,21,0.4)",
+    background: "warm.40",
   },
   "&::-webkit-scrollbar-corner": { background: "transparent" },
 });

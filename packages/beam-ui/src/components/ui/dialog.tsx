@@ -61,7 +61,10 @@ export function Dialog({
         <DialogContent className={content}>
           <div className={header}>
             <DialogTitle className={titleStyle}>{title}</DialogTitle>
-            <DialogCloseTrigger className={closeButton} aria-label="Close dialog">
+            <DialogCloseTrigger
+              className={closeButton}
+              aria-label="Close dialog"
+            >
               <Icon name="close" size={20} />
             </DialogCloseTrigger>
           </div>
@@ -76,7 +79,7 @@ export function Dialog({
 const backdrop = css({
   position: "fixed",
   inset: 0,
-  backgroundColor: "rgba(31, 31, 31, 0.6)",
+  backgroundColor: "scrim.60",
   zIndex: 100,
 });
 
@@ -87,12 +90,12 @@ const positioner = css({
   alignItems: "center",
   justifyContent: "center",
   zIndex: 101,
-  padding: "16px",
+  padding: "4",
 });
 
 const content = css({
   backgroundColor: "bg.page",
-  maxWidth: "480px",
+  maxWidth: "120",
   width: "100%",
   shadow: "golden",
   position: "relative",
@@ -103,11 +106,11 @@ const header = css({
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "space-between",
-  padding: "24px 24px 0",
+  padding: "6 6 0",
 });
 
 const titleStyle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   fontFamily: "heading",
   color: "text.primary",
@@ -123,7 +126,7 @@ const closeButton = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  padding: "4px",
+  padding: "1",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
@@ -131,8 +134,8 @@ const closeButton = css({
 });
 
 const body = css({
-  padding: "16px 24px 24px",
-  fontSize: "14px",
+  padding: "4 6 6",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   lineHeight: 1.5,
@@ -141,6 +144,6 @@ const body = css({
 const actionsBar = css({
   display: "flex",
   justifyContent: "flex-end",
-  gap: "8px",
-  padding: "0 24px 24px",
+  gap: "2",
+  padding: "0 6 6",
 });

@@ -63,7 +63,9 @@ export function parseDiff(diffText: string): DiffHunk[] {
   let newLine = 0;
 
   for (const line of lines) {
-    const hunkMatch = line.match(/^@@\s+-(\d+)(?:,\d+)?\s+\+(\d+)(?:,\d+)?\s+@@(.*)$/);
+    const hunkMatch = line.match(
+      /^@@\s+-(\d+)(?:,\d+)?\s+\+(\d+)(?:,\d+)?\s+@@(.*)$/,
+    );
     if (hunkMatch) {
       currentHunk = { header: line, lines: [] };
       hunks.push(currentHunk);
@@ -119,12 +121,17 @@ function segmentLines(lines: DiffLine[]): DisplaySegment[] {
     if (contextRun.length === 0) return;
     if (contextRun.length > CONTEXT_COLLAPSE_THRESHOLD) {
       const top = contextRun.slice(0, CONTEXT_VISIBLE_LINES);
-      const bottom = contextRun.slice(contextRun.length - CONTEXT_VISIBLE_LINES);
+      const bottom = contextRun.slice(
+        contextRun.length - CONTEXT_VISIBLE_LINES,
+      );
       const hiddenCount = contextRun.length - CONTEXT_VISIBLE_LINES * 2;
       segments.push({ kind: "lines", lines: top });
       segments.push({
         kind: "collapsed",
-        lines: contextRun.slice(CONTEXT_VISIBLE_LINES, contextRun.length - CONTEXT_VISIBLE_LINES),
+        lines: contextRun.slice(
+          CONTEXT_VISIBLE_LINES,
+          contextRun.length - CONTEXT_VISIBLE_LINES,
+        ),
         collapsedCount: hiddenCount,
       });
       segments.push({ kind: "lines", lines: bottom });
@@ -139,7 +146,9 @@ function segmentLines(lines: DiffLine[]): DisplaySegment[] {
       contextRun.push(line);
     } else {
       flushContext();
-      if (segments.length > 0 && segments[segments.length - 1].kind === "lines") {
+      if (
+        segments.length > 0 && segments[segments.length - 1].kind === "lines"
+      ) {
         segments[segments.length - 1].lines.push(line);
       } else {
         segments.push({ kind: "lines", lines: [line] });
@@ -178,7 +187,9 @@ export function DiffViewer({
   mode = "unified",
   className,
 }: DiffViewerProps): ReactNode {
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(
+    new Set(),
+  );
 
   const toggleExpand = (key: string) => {
     setExpandedSections((prev) => {
@@ -207,7 +218,11 @@ export function DiffViewer({
                 <span className={fileNamePrimary}>{newFileName}</span>
               </span>
             )
-            : <span className={fileNamePrimary}>{newFileName ?? oldFileName}</span>}
+            : (
+              <span className={fileNamePrimary}>
+                {newFileName ?? oldFileName}
+              </span>
+            )}
         </div>
       )}
 
@@ -245,7 +260,11 @@ function renderUnified(
     if (seg.kind === "collapsed" && !expanded.has(key)) {
       return (
         <div key={key} className={collapsedRow}>
-          <button className={expandBtn} onClick={() => toggleExpand(key)} type="button">
+          <button
+            className={expandBtn}
+            onClick={() => toggleExpand(key)}
+            type="button"
+          >
             {`\u2195 ${seg.collapsedCount} unchanged lines`}
           </button>
         </div>
@@ -333,7 +352,11 @@ function renderSplit(
     if (seg.kind === "collapsed" && !expanded.has(key)) {
       return (
         <div key={key} className={collapsedRow}>
-          <button className={expandBtn} onClick={() => toggleExpand(key)} type="button">
+          <button
+            className={expandBtn}
+            onClick={() => toggleExpand(key)}
+            type="button"
+          >
             {`\u2195 ${seg.collapsedCount} unchanged lines`}
           </button>
         </div>
@@ -353,7 +376,12 @@ function renderSplit(
           aria-label={row.left?.type === "remove" ? `Removed: ${row.left.content}` : undefined}
         >
           <span className={lineNumCell}>{row.left?.oldLineNumber ?? ""}</span>
-          <span className={cx(prefixCell, row.left?.type === "remove" ? removeBg : undefined)}>
+          <span
+            className={cx(
+              prefixCell,
+              row.left?.type === "remove" ? removeBg : undefined,
+            )}
+          >
             {row.left?.type === "remove" ? "-" : row.left ? " " : ""}
           </span>
           <span className={contentCell}>{row.left?.content ?? ""}</span>
@@ -368,7 +396,12 @@ function renderSplit(
           aria-label={row.right?.type === "add" ? `Added: ${row.right.content}` : undefined}
         >
           <span className={lineNumCell}>{row.right?.newLineNumber ?? ""}</span>
-          <span className={cx(prefixCell, row.right?.type === "add" ? addBg : undefined)}>
+          <span
+            className={cx(
+              prefixCell,
+              row.right?.type === "add" ? addBg : undefined,
+            )}
+          >
             {row.right?.type === "add" ? "+" : row.right ? " " : ""}
           </span>
           <span className={contentCell}>{row.right?.content ?? ""}</span>
@@ -388,7 +421,7 @@ const rootStyle = css({
   border: "1px solid",
   borderColor: "border.default",
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
   lineHeight: 1.6,
   color: "text.primary",
 });
@@ -396,11 +429,11 @@ const rootStyle = css({
 const fileHeader = css({
   display: "flex",
   alignItems: "center",
-  padding: "10px 16px",
+  padding: "2.5 4",
   backgroundColor: "bg.card",
   borderBottom: "1px solid",
   borderBottomColor: "border.default",
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "button",
 });
 
@@ -414,14 +447,17 @@ const fileNameMuted = css({
 
 const fileNameArrow = css({
   color: "text.muted",
-  padding: "0 4px",
+  padding: "0 1",
 });
 
 const hunkHeaderStyle = css({
-  padding: "6px 16px",
-  backgroundColor: { base: "rgba(130, 130, 160, 0.08)", _dark: "rgba(130, 130, 160, 0.15)" },
+  padding: "1.5 4",
+  backgroundColor: {
+    base: "rgba(130, 130, 160, 0.08)",
+    _dark: "rgba(130, 130, 160, 0.15)",
+  },
   color: "text.secondary",
-  fontSize: "12px",
+  fontSize: "xs",
   fontFamily: "mono",
   borderBottom: "1px solid",
   borderBottomColor: "border.default",
@@ -429,7 +465,7 @@ const hunkHeaderStyle = css({
 
 const unifiedRow = css({
   display: "flex",
-  minHeight: "22px",
+  minHeight: "5.5",
   alignItems: "stretch",
   borderBottom: "1px solid rgba(128, 128, 128, 0.06)",
 });
@@ -438,11 +474,11 @@ const lineNumCell = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "flex-end",
-  width: "48px",
-  minWidth: "48px",
-  padding: "0 8px",
+  width: "12",
+  minWidth: "12",
+  padding: "0 2",
   color: "text.secondary",
-  fontSize: "11px",
+  fontSize: "11",
   userSelect: "none",
   borderRight: "1px solid",
   borderRightColor: "border.default",
@@ -452,8 +488,8 @@ const prefixCell = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "24px",
-  minWidth: "24px",
+  width: "6",
+  minWidth: "6",
   fontWeight: "button",
   userSelect: "none",
 });
@@ -462,18 +498,18 @@ const contentCell = css({
   display: "inline-flex",
   alignItems: "center",
   flex: 1,
-  padding: "0 12px",
+  padding: "0 3",
   whiteSpace: "pre",
   overflowX: "auto",
 });
 
 const addBg = css({
-  backgroundColor: { base: "rgba(46, 160, 67, 0.15)", _dark: "rgba(46, 160, 67, 0.2)" },
+  backgroundColor: { base: "diff.add.bg", _dark: "diff.add.emphasis" },
   color: { _dark: "rgba(255, 255, 255, 0.9)" },
 });
 
 const removeBg = css({
-  backgroundColor: { base: "rgba(248, 81, 73, 0.15)", _dark: "rgba(248, 81, 73, 0.2)" },
+  backgroundColor: { base: "diff.del.bg", _dark: "diff.del.emphasis" },
   color: { _dark: "rgba(255, 255, 255, 0.9)" },
 });
 
@@ -485,7 +521,7 @@ const splitRowStyle = css({
 const splitHalf = css({
   display: "flex",
   flex: 1,
-  minHeight: "22px",
+  minHeight: "5.5",
   alignItems: "stretch",
   overflow: "hidden",
 });
@@ -498,7 +534,7 @@ const splitLeftBorder = css({
 const collapsedRow = css({
   display: "flex",
   justifyContent: "center",
-  padding: "4px 0",
+  padding: "1 0",
   backgroundColor: "rgba(130, 130, 160, 0.05)",
   borderBottom: "1px solid rgba(128, 128, 128, 0.06)",
 });
@@ -508,9 +544,9 @@ const expandBtn = css({
   border: "none",
   cursor: "pointer",
   fontFamily: "mono",
-  fontSize: "11px",
+  fontSize: "11",
   color: "text.muted",
-  padding: "2px 12px",
+  padding: "0.5 3",
   borderRadius: "md",
   transition: "all 0.15s ease",
   _hover: {

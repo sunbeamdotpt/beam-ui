@@ -98,7 +98,10 @@ export function ColorPicker({
           <PopoverContent className={contentStyle}>
             <div className={popoverHeader}>
               <span className={popoverTitle}>Choose color</span>
-              <PopoverCloseTrigger className={closeBtn} aria-label="Close color picker">
+              <PopoverCloseTrigger
+                className={closeBtn}
+                aria-label="Close color picker"
+              >
                 <Icon name="close" size={16} />
               </PopoverCloseTrigger>
             </div>
@@ -149,11 +152,11 @@ export function ColorPicker({
 const wrapper = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const labelStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -164,14 +167,14 @@ const labelStyle = css({
 const triggerStyle = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "8px 12px",
+  gap: "2",
+  padding: "2 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   borderRadius: "0",
   cursor: "pointer",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "mono",
   color: "text.primary",
   transition: "all 0.15s ease",
@@ -181,13 +184,13 @@ const triggerStyle = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const triggerSwatch = css({
-  width: "18px",
-  height: "18px",
+  width: "4.5",
+  height: "4.5",
   borderRadius: "50%",
   border: "1px solid",
   borderColor: "border.default",
@@ -195,7 +198,7 @@ const triggerSwatch = css({
 });
 
 const triggerHex = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "mono",
   color: "text.primary",
 });
@@ -205,21 +208,21 @@ const contentStyle = css({
   border: "1px solid",
   borderColor: "border.default",
   shadow: "golden",
-  padding: "16px",
+  padding: "4",
   zIndex: 50,
   outline: "none",
-  width: "260px",
+  width: "65",
 });
 
 const popoverHeader = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  marginBottom: "12px",
+  marginBottom: "3",
 });
 
 const popoverTitle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
@@ -233,7 +236,7 @@ const closeBtn = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  padding: "4px",
+  padding: "1",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
@@ -241,28 +244,28 @@ const closeBtn = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const previewRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
-  marginBottom: "14px",
+  gap: "2.5",
+  marginBottom: "3.5",
 });
 
 const previewSwatch = css({
-  width: "36px",
-  height: "36px",
-  borderRadius: "4px",
+  width: "9",
+  height: "9",
+  borderRadius: "md",
   border: "1px solid",
   borderColor: "border.default",
   flexShrink: 0,
 });
 
 const previewHex = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "mono",
   fontWeight: "heading",
   color: "text.primary",
@@ -271,14 +274,14 @@ const previewHex = css({
 const swatchGrid = css({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fill, 24px)",
-  gap: "8px",
-  marginBottom: "14px",
+  gap: "2",
+  marginBottom: "3.5",
   justifyContent: "start",
 });
 
 const swatchButton = css({
-  width: "24px",
-  height: "24px",
+  width: "6",
+  height: "6",
   borderRadius: "50%",
   border: "2px solid transparent",
   cursor: "pointer",
@@ -291,28 +294,28 @@ const swatchButton = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const swatchSelected = css({
   borderColor: "sunbeam.orange",
-  ringWidth: "2px",
+  ringWidth: "0.5",
   ringColor: "sunbeam.orange",
-  ringOffset: "1px",
+  ringOffset: "0.25",
 });
 
 const hexInputRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   borderTop: "1px solid",
   borderColor: "border.default",
-  paddingTop: "12px",
+  paddingTop: "3",
 });
 
 const hexLabel = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -322,17 +325,17 @@ const hexLabel = css({
 
 const hexInputStyle = css({
   flex: 1,
-  padding: "6px 8px",
+  padding: "1.5 2",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   borderRadius: "0",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "mono",
   color: "text.primary",
   outline: "none",
   _focus: {
-    ringWidth: "2px",
+    ringWidth: "0.5",
     ringColor: "sunbeam.orange",
     borderColor: "transparent",
   },

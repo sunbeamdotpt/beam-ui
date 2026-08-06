@@ -25,23 +25,23 @@ export interface TabsProps {
 
 const tabList = css({
   display: "flex",
-  gap: "32px",
+  gap: "8",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
-  marginBottom: "32px",
+  marginBottom: "8",
 });
 
 const tabListDark = css({
   display: "flex",
-  gap: "24px",
+  gap: "6",
   borderBottom: "1px solid",
-  borderColor: "rgba(255,255,255,0.1)",
-  marginBottom: "24px",
+  borderColor: "chrome.10",
+  marginBottom: "6",
 });
 
 const tabTrigger = css({
-  paddingBottom: "16px",
-  fontSize: "12px",
+  paddingBottom: "4",
+  fontSize: "xs",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
@@ -61,19 +61,19 @@ const tabTrigger = css({
 });
 
 const tabTriggerDark = css({
-  paddingBottom: "12px",
-  fontSize: "11px",
+  paddingBottom: "3",
+  fontSize: "11",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
   bg: "transparent",
   border: "none",
   cursor: "pointer",
-  color: "rgba(255,255,255,0.4)",
+  color: "chrome.40",
   borderBottom: "2px solid transparent",
   transition: "all 0.15s ease",
   _hover: {
-    color: "rgba(255,255,255,0.6)",
+    color: "chrome.60",
   },
   _selected: {
     color: "sunbeam.orange",
@@ -99,7 +99,9 @@ const tabTriggerDark = css({
  * />
  * ```
  */
-export function Tabs({ items, activeValue, onChange, variant = "default" }: TabsProps): ReactNode {
+export function Tabs(
+  { items, activeValue, onChange, variant = "default" }: TabsProps,
+): ReactNode {
   const isDark = variant === "dark";
 
   return (

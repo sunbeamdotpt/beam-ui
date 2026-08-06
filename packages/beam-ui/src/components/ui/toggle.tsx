@@ -27,12 +27,18 @@ export interface ToggleProps {
  * </Toggle>
  * ```
  */
-export function Toggle({ pressed, onChange, children, className }: ToggleProps): ReactNode {
+export function Toggle(
+  { pressed, onChange, children, className }: ToggleProps,
+): ReactNode {
   return (
     <ToggleRoot
       pressed={pressed}
       onPressedChange={(pressed) => onChange(pressed)}
-      className={cx(toggle, pressed ? togglePressed : toggleUnpressed, className)}
+      className={cx(
+        toggle,
+        pressed ? togglePressed : toggleUnpressed,
+        className,
+      )}
     >
       {children}
     </ToggleRoot>
@@ -43,9 +49,9 @@ const toggle = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "6px",
-  padding: "8px 16px",
-  fontSize: "14px",
+  gap: "1.5",
+  padding: "2 4",
+  fontSize: "sm",
   fontFamily: "body",
   fontWeight: "button",
   border: "1px solid",
@@ -54,7 +60,7 @@ const toggle = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 

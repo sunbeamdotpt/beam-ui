@@ -25,17 +25,21 @@ let katexCssLoaded = false;
  * <MathRenderer math="\\int_0^\\infty e^{-x^2} dx" display />
  * ```
  */
-export function MathRenderer({ math, display = false, className }: MathRendererProps): ReactNode {
+export function MathRenderer(
+  { math, display = false, className }: MathRendererProps,
+): ReactNode {
   const [ready, setReady] = useState(!!katexModule);
 
   useEffect(() => {
     if (katexModule) return;
     Promise.all([
       import("katex"),
-      // deno-lint-ignore no-explicit-any
-      katexCssLoaded ? Promise.resolve() : import("katex/dist/katex.min.css" as any).then(() => {
-        katexCssLoaded = true;
-      }),
+      katexCssLoaded
+        ? Promise.resolve()
+        // deno-lint-ignore no-explicit-any
+        : import("katex/dist/katex.min.css" as any).then(() => {
+          katexCssLoaded = true;
+        }),
     ]).then(([mod]) => {
       katexModule = mod;
       setReady(true);
@@ -90,7 +94,7 @@ export function MathRenderer({ math, display = false, className }: MathRendererP
 const displayStyle = css({
   display: "block",
   textAlign: "center",
-  padding: "24px 16px",
+  padding: "6 4",
   overflowX: "auto",
 });
 
@@ -100,10 +104,10 @@ const inlineStyle = css({
 
 const errorStyle = css({
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
   color: "sunbeam.orange",
-  padding: "4px 8px",
+  padding: "1 2",
   border: "1px solid",
   borderColor: "sunbeam.orange",
-  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  backgroundColor: "accent.06",
 });

@@ -69,7 +69,11 @@ export interface WorkItemListProps {
 /* ------------------------------------------------------------------ */
 
 function Checkbox(
-  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+  { checked, onChange, ariaLabel }: {
+    checked: boolean;
+    onChange: () => void;
+    ariaLabel?: string;
+  },
 ) {
   return (
     <div
@@ -167,7 +171,11 @@ export function WorkItemList({
             <div className={centerCol}>
               {/* Line 1: Title */}
               {item.href
-                ? <LinkAs href={item.href} className={titleLink}>{item.title}</LinkAs>
+                ? (
+                  <LinkAs href={item.href} className={titleLink}>
+                    {item.title}
+                  </LinkAs>
+                )
                 : <span className={titleText}>{item.title}</span>}
 
               {/* Line 2: Labels */}
@@ -316,7 +324,7 @@ const labelBadge = css({
   textTransform: "uppercase",
   letterSpacing: "0.08em",
   lineHeight: 1,
-  padding: "3px 8px",
+  padding: "0.75 2",
   borderRadius: "sm",
   border: "1px solid",
   whiteSpace: "nowrap",
@@ -345,7 +353,7 @@ const branchPill = css({
   fontSize: "xs",
   fontFamily: "mono",
   fontWeight: "body",
-  padding: "0px 6px",
+  padding: "0 1.5",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
@@ -374,11 +382,11 @@ const commentBadge = css({
 });
 
 const checkboxOuter = css({
-  width: "18px",
-  height: "18px",
-  minWidth: "18px",
+  width: "4.5",
+  height: "4.5",
+  minWidth: "4.5",
   border: "1px solid",
-  borderColor: { base: "rgba(127,99,21,0.3)", _dark: "rgba(255,161,16,0.35)" },
+  borderColor: { base: "warm.30", _dark: "sunshine.35" },
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

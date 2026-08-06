@@ -174,3 +174,18 @@ collide with flat `cream`, hence `creamA.30`. styled-system regenerated via
 `deno run -A npm:@pandacss/dev@1.12.0 codegen`. *Why exact-alpha tokens
 instead of semantic unification: zero visual drift during migration; alpha
 scales are a legitimate token layer (Radix-style).*
+
+## 2026-08-06 — token migration phase 1: mechanical batches (11-agent swarm)
+
+~460 raw px/hex/rgba values converted across 60 component files via an
+11-agent swarm, hand edits only (charter rule 4), each agent re-running
+`deno check` until its own files were clean. Method that worked: exact-match
+mapping table (fontSize scale incl. new numeric tokens, px÷4 spacing/sizes,
+exact-alpha color groups), semantic tokens preferred where the value already
+played that role. Leftovers are three fixable patterns — border/outline
+shorthand strings (need borderWidth/borderStyle split), focus-ring boxShadow
+strings (need focusRing shadow tokens in the preset), ~10 odd one-off values
+(360/380px, 9px, chrome.06/30/90, rgba(130,130,160,*)) — plus legitimate raw
+values (gradients, calc(), grid track lists, palette data files, inline
+style props, SVG attrs, third-party widget configs) that stay by design.
+`deno task ci` + app build green.

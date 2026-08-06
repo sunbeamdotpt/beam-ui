@@ -25,7 +25,9 @@ export interface DiagramRendererProps {
  * <DiagramRenderer code="flowchart LR\n  A[Start] --> B[End]" />
  * ```
  */
-export function DiagramRenderer({ code, className }: DiagramRendererProps): ReactNode {
+export function DiagramRenderer(
+  { code, className }: DiagramRendererProps,
+): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [svg, setSvg] = useState<string>("");
@@ -161,7 +163,9 @@ export function DiagramRenderer({ code, className }: DiagramRendererProps): Reac
         }
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to render diagram");
+          setError(
+            err instanceof Error ? err.message : "Failed to render diagram",
+          );
           setSvg("");
         }
         // Clean up any orphaned render element mermaid may have left
@@ -199,7 +203,7 @@ export function DiagramRenderer({ code, className }: DiagramRendererProps): Reac
 /* ------------------------------------------------------------------ */
 
 const containerStyle = css({
-  padding: "24px",
+  padding: "6",
   backgroundColor: "bg.card",
   borderRadius: "0",
   "& svg": {
@@ -215,7 +219,7 @@ const errorContainer = css({
 
 const errorPre = css({
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.secondary",
   margin: 0,
   whiteSpace: "pre-wrap",

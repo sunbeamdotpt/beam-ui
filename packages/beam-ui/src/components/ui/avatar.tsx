@@ -74,7 +74,9 @@ const base = css({
   flexShrink: 0,
 });
 
-export function Avatar({ name, src, size = "md", className, style }: AvatarProps): ReactNode {
+export function Avatar(
+  { name, src, size = "md", className, style }: AvatarProps,
+): ReactNode {
   const dim = sizes[size];
   const fontSize = Math.round(dim * 0.38);
 

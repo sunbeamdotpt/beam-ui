@@ -113,20 +113,20 @@ const wrapper = css({
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const reactionButton = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
-  padding: "4px 10px",
+  gap: "1",
+  padding: "1 2.5",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
-  borderRadius: "999px",
+  borderRadius: "full",
   cursor: "pointer",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   transition: "all 0.15s ease",
@@ -141,12 +141,12 @@ const reactionActive = css({
 });
 
 const emojiSpan = css({
-  fontSize: "15px",
+  fontSize: "15",
   lineHeight: 1,
 });
 
 const countSpan = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   color: "text.secondary",
   fontFamily: "mono",
@@ -156,14 +156,14 @@ const addButton = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "30px",
-  height: "30px",
+  width: "7.5",
+  height: "7.5",
   backgroundColor: "bg.card",
   border: "1px dashed",
   borderColor: "border.default",
-  borderRadius: "999px",
+  borderRadius: "full",
   cursor: "pointer",
-  fontSize: "16px",
+  fontSize: "md",
   color: "text.muted",
   transition: "all 0.15s ease",
   _hover: {
@@ -177,21 +177,21 @@ const pickerContent = css({
   border: "1px solid",
   borderColor: "border.default",
   shadow: "golden",
-  padding: "12px",
+  padding: "3",
   zIndex: 50,
   outline: "none",
-  minWidth: "200px",
+  minWidth: "50",
 });
 
 const pickerHeader = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  marginBottom: "10px",
+  marginBottom: "2.5",
 });
 
 const pickerTitle = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
@@ -205,9 +205,9 @@ const closeBtn = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  fontSize: "18px",
+  fontSize: "lg",
   lineHeight: 1,
-  padding: "2px",
+  padding: "0.5",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
@@ -217,19 +217,19 @@ const closeBtn = css({
 const emojiGrid = css({
   display: "grid",
   gridTemplateColumns: "repeat(4, 1fr)",
-  gap: "4px",
+  gap: "1",
 });
 
 const emojiButton = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
-  fontSize: "20px",
+  width: "9",
+  height: "9",
+  fontSize: "xl",
   background: "none",
   border: "1px solid transparent",
-  borderRadius: "4px",
+  borderRadius: "md",
   cursor: "pointer",
   transition: "all 0.15s ease",
   _hover: {

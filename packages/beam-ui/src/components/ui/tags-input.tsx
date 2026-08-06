@@ -62,8 +62,17 @@ export function TagsInput({
           <TagsInputItem key={index} index={index} value={tag} className={item}>
             <TagsInputItemPreview className={itemPreview}>
               <TagsInputItemText>{tag}</TagsInputItemText>
-              <TagsInputItemDeleteTrigger className={deleteTrigger} aria-label={`Remove ${tag}`}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <TagsInputItemDeleteTrigger
+                className={deleteTrigger}
+                aria-label={`Remove ${tag}`}
+              >
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  aria-hidden="true"
+                >
                   <path
                     d="M1 1l8 8M9 1l-8 8"
                     stroke="currentColor"
@@ -126,7 +135,7 @@ const itemPreview = css({
   borderRadius: "sm",
   backgroundColor: "sunbeam.orange/10",
   color: "sunbeam.orange",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   fontWeight: "body",
   lineHeight: 1.4,
@@ -141,21 +150,21 @@ const deleteTrigger = css({
   opacity: 0.7,
   background: "none",
   border: "none",
-  padding: "0 0 0 2px",
+  padding: "0 0 0 0.5",
   _hover: {
     opacity: 1,
   },
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "1px",
+    outlineOffset: "0.25",
   },
 });
 
 const input = css({
   flex: 1,
   minWidth: "20",
-  padding: "4px 0",
+  padding: "1 0",
   fontSize: "sm",
   fontFamily: "body",
   fontWeight: "body",

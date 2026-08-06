@@ -14,12 +14,16 @@ const footer = css({
 
 const grid = css({
   display: "grid",
-  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(6, 1fr)" },
-  gap: "32px",
-  maxWidth: "1440px",
+  gridTemplateColumns: {
+    base: "repeat(2, 1fr)",
+    md: "repeat(3, 1fr)",
+    lg: "repeat(6, 1fr)",
+  },
+  gap: "8",
+  maxWidth: "360",
   marginInline: "auto",
-  paddingInline: { base: "24px", md: "48px", lg: "48px" },
-  paddingBlock: "64px",
+  paddingInline: { base: "6", md: "12", lg: "12" },
+  paddingBlock: "16",
 });
 
 const brandCol = css({
@@ -28,50 +32,50 @@ const brandCol = css({
 
 const brandName = css({
   display: "block",
-  fontSize: "20px",
+  fontSize: "xl",
   fontFamily: "heading",
   fontWeight: "heading",
   color: "warm.ivory",
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const brandDesc = css({
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: "1.6",
-  color: "rgba(255, 250, 235, 0.5)",
-  maxWidth: "320px",
+  color: "ivory.50",
+  maxWidth: "80",
 });
 
 const copyright = css({
-  fontSize: "12px",
-  color: "rgba(255, 250, 235, 0.3)",
-  marginTop: "16px",
+  fontSize: "xs",
+  color: "ivory.30",
+  marginTop: "4",
 });
 
 const buildLabel = css({
   fontFamily: "mono",
-  fontSize: "10px",
+  fontSize: "2xs",
   opacity: 0.6,
 });
 
 const sectionCol = css({
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
+  gap: "3",
 });
 
 const sectionTitle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
   color: "sunbeam.orange",
-  marginBottom: "4px",
+  marginBottom: "1",
 });
 
 const sectionLink = css({
-  fontSize: "14px",
-  color: "rgba(255, 250, 235, 0.5)",
+  fontSize: "sm",
+  color: "ivory.50",
   textDecoration: "none",
   transition: "color 0.2s",
   _hover: {
@@ -113,16 +117,24 @@ export function Footer({ linkAs }: FooterProps = {}): ReactNode {
           </p>
         </div>
         {footerSections.map((section) => (
-          <nav key={section.title} className={sectionCol} aria-label={section.title}>
+          <nav
+            key={section.title}
+            className={sectionCol}
+            aria-label={section.title}
+          >
             <span className={sectionTitle}>{section.title}</span>
             {section.links.map((link) => {
-              const isExternal = link.href.startsWith("http") || link.href.startsWith("mailto:");
+              const isExternal = link.href.startsWith("http") ||
+                link.href.startsWith("mailto:");
               if (isExternal) {
                 // Inject build version into mailto subject if present
-                const href =
-                  link.href.startsWith("mailto:") && typeof __BUILD_LABEL__ !== "undefined"
-                    ? link.href.replace("Question!", `${__BUILD_LABEL__} Question!`)
-                    : link.href;
+                const href = link.href.startsWith("mailto:") &&
+                    typeof __BUILD_LABEL__ !== "undefined"
+                  ? link.href.replace(
+                    "Question!",
+                    `${__BUILD_LABEL__} Question!`,
+                  )
+                  : link.href;
                 return (
                   <a
                     key={link.label}
@@ -136,7 +148,11 @@ export function Footer({ linkAs }: FooterProps = {}): ReactNode {
                 );
               }
               return (
-                <LinkAs key={link.label} href={link.href} className={sectionLink}>
+                <LinkAs
+                  key={link.label}
+                  href={link.href}
+                  className={sectionLink}
+                >
                   {link.label}
                 </LinkAs>
               );

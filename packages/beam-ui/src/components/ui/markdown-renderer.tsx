@@ -54,7 +54,10 @@ function loadKatex(): Promise<KatexType> {
 /** Extract math blocks, replace with text markers that survive sanitization */
 function extractMath(
   md: string,
-): { processed: string; blocks: { id: string; math: string; display: boolean }[] } {
+): {
+  processed: string;
+  blocks: { id: string; math: string; display: boolean }[];
+} {
   const blocks: { id: string; math: string; display: boolean }[] = [];
   let idx = 0;
 
@@ -66,11 +69,14 @@ function extractMath(
   });
 
   // Inline math: $...$  (not preceded/followed by $)
-  processed = processed.replace(/(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g, (_, math) => {
-    const id = `BEAMMATH${idx++}BEAMMATH`;
-    blocks.push({ id, math: math.trim(), display: false });
-    return id;
-  });
+  processed = processed.replace(
+    /(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g,
+    (_, math) => {
+      const id = `BEAMMATH${idx++}BEAMMATH`;
+      blocks.push({ id, math: math.trim(), display: false });
+      return id;
+    },
+  );
 
   return { processed, blocks };
 }
@@ -85,7 +91,9 @@ function extractMath(
  * <MarkdownRenderer content="# Hello\n\n$E = mc^2$" />
  * ```
  */
-export function MarkdownRenderer({ content, className }: MarkdownRendererProps): ReactNode {
+export function MarkdownRenderer(
+  { content, className }: MarkdownRendererProps,
+): ReactNode {
   const { theme } = useTheme();
   const [katex, setKatex] = useState<KatexType | null>(null);
 
@@ -161,7 +169,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps):
 /* ------------------------------------------------------------------ */
 
 const wrapperStyle = css({
-  fontSize: "15px",
+  fontSize: "15",
   lineHeight: 1.7,
   color: "text.primary",
   wordBreak: "break-word",
@@ -170,30 +178,30 @@ const wrapperStyle = css({
   "& h1, & h2, & h3, & h4, & h5, & h6": {
     fontWeight: "heading",
     color: "text.primary",
-    scrollMarginTop: "80px",
-    marginTop: "32px",
-    marginBottom: "16px",
+    scrollMarginTop: "20",
+    marginTop: "8",
+    marginBottom: "4",
     lineHeight: 1.3,
   },
-  "& h1": { fontSize: "32px", letterSpacing: "-0.02em" },
+  "& h1": { fontSize: "3xl", letterSpacing: "-0.02em" },
   "& h2": {
-    fontSize: "24px",
+    fontSize: "2xl",
     letterSpacing: "-0.01em",
     borderBottom: "1px solid",
     borderColor: "border.default",
-    paddingBottom: "8px",
+    paddingBottom: "2",
   },
-  "& h3": { fontSize: "20px" },
-  "& h4": { fontSize: "16px" },
+  "& h3": { fontSize: "xl" },
+  "& h4": { fontSize: "md" },
 
   /* Paragraphs */
-  "& p": { marginBottom: "16px" },
+  "& p": { marginBottom: "4" },
 
   /* Links — distinguishable by color AND underline for 508 */
   "& a": {
     color: "sunbeam.orange",
     textDecoration: "underline",
-    textUnderlineOffset: "2px",
+    textUnderlineOffset: "0.5",
     _hover: { opacity: 0.8 },
   },
 
@@ -206,14 +214,14 @@ const wrapperStyle = css({
     backgroundColor: "bg.card",
     border: "1px solid",
     borderColor: "border.default",
-    padding: "16px",
+    padding: "4",
     overflowX: "auto",
-    marginBottom: "16px",
+    marginBottom: "4",
     borderRadius: "0",
   },
   "& pre code": {
     fontFamily: "mono",
-    fontSize: "13px",
+    fontSize: "13",
     lineHeight: 1.6,
     background: "none",
     padding: "0",
@@ -223,9 +231,9 @@ const wrapperStyle = css({
   /* Inline code */
   "& :not(pre) > code": {
     fontFamily: "mono",
-    fontSize: "13px",
+    fontSize: "13",
     backgroundColor: "bg.card",
-    padding: "2px 6px",
+    padding: "0.5 1.5",
     border: "1px solid",
     borderColor: "border.default",
   },
@@ -234,19 +242,19 @@ const wrapperStyle = css({
   "& blockquote": {
     borderLeft: "3px solid",
     borderColor: "sunbeam.orange",
-    paddingLeft: "16px",
+    paddingLeft: "4",
     marginLeft: "0",
-    marginBottom: "16px",
+    marginBottom: "4",
     color: "text.secondary",
     fontStyle: "italic",
   },
 
   /* Lists */
   "& ul, & ol": {
-    paddingLeft: "24px",
-    marginBottom: "16px",
+    paddingLeft: "6",
+    marginBottom: "4",
   },
-  "& li": { marginBottom: "4px" },
+  "& li": { marginBottom: "1" },
 
   /* Task lists (GFM checkboxes) */
   "& ul.contains-task-list": {
@@ -256,12 +264,12 @@ const wrapperStyle = css({
   "& li.task-list-item": {
     display: "flex",
     alignItems: "baseline",
-    gap: "8px",
+    gap: "2",
   },
   '& input[type="checkbox"]': {
     accentColor: "var(--colors-sunbeam-orange)",
-    width: "14px",
-    height: "14px",
+    width: "3.5",
+    height: "3.5",
     flexShrink: 0,
   },
 
@@ -269,23 +277,23 @@ const wrapperStyle = css({
   "& table": {
     width: "100%",
     borderCollapse: "collapse",
-    marginBottom: "16px",
-    fontSize: "14px",
+    marginBottom: "4",
+    fontSize: "sm",
   },
   "& th": {
     textAlign: "left",
     fontWeight: "button",
-    fontSize: "10px",
+    fontSize: "2xs",
     textTransform: "uppercase",
     letterSpacing: "0.15em",
     color: "text.muted",
     backgroundColor: "bg.card",
-    padding: "10px 12px",
+    padding: "2.5 3",
     borderBottom: "1px solid",
     borderColor: "border.default",
   },
   "& td": {
-    padding: "10px 12px",
+    padding: "2.5 3",
     borderBottom: "1px solid",
     borderColor: "border.default",
     color: "text.primary",
@@ -298,7 +306,7 @@ const wrapperStyle = css({
   "& img": {
     maxWidth: "100%",
     height: "auto",
-    marginBottom: "16px",
+    marginBottom: "4",
   },
 
   /* Horizontal rule */
@@ -306,7 +314,7 @@ const wrapperStyle = css({
     border: "none",
     borderTop: "1px solid",
     borderColor: "border.default",
-    margin: "32px 0",
+    margin: "8 0",
   },
 
   /* Delete / strikethrough */
@@ -318,7 +326,7 @@ const wrapperStyle = css({
   /* KaTeX display math */
   "& .beam-math-display": {
     textAlign: "center",
-    marginBottom: "16px",
+    marginBottom: "4",
     overflowX: "auto",
   },
 

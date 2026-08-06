@@ -73,7 +73,9 @@ export function TweakRadio({
             data-state={value === option.value ? "checked" : "unchecked"}
           >
             <RadioGroupItemControl className={control} />
-            <RadioGroupItemText className={text}>{option.label}</RadioGroupItemText>
+            <RadioGroupItemText className={text}>
+              {option.label}
+            </RadioGroupItemText>
             <RadioGroupItemHiddenInput />
           </RadioGroupItem>
         ))}
@@ -85,11 +87,11 @@ export function TweakRadio({
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const labelStyle = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: 500,
   color: "text.primary",
   fontFamily: "body",
@@ -98,21 +100,21 @@ const labelStyle = css({
 
 const group = css({
   display: "flex",
-  gap: "6px",
+  gap: "1.5",
   flexWrap: "wrap",
 });
 
 const item = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "0px",
+  gap: "0",
   cursor: "pointer",
   flexShrink: 0,
 });
 
 const control = css({
-  width: "18px",
-  height: "18px",
+  width: "4.5",
+  height: "4.5",
   borderRadius: "full",
   border: "1.5px solid",
   borderColor: "border.default",
@@ -127,13 +129,13 @@ const control = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
   _before: {
     content: '""',
     display: "block",
-    width: "6px",
-    height: "6px",
+    width: "1.5",
+    height: "1.5",
     borderRadius: "full",
     backgroundColor: "transparent",
     transition: "all 0.15s ease",
@@ -144,9 +146,9 @@ const control = css({
 });
 
 const text = css({
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.primary",
   fontFamily: "body",
   lineHeight: 1.4,
-  paddingX: "6px",
+  paddingX: "1.5",
 });

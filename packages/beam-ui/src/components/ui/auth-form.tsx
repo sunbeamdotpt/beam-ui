@@ -88,7 +88,7 @@ export function LoginForm({
           />
         </div>
         <Button variant="primary" type="submit" className={fullWidth}>
-          {loading && <Spinner size="sm" color="#ffffff" />}
+          {loading && <Spinner size="sm" color="white" />}
           Sign In
         </Button>
       </form>
@@ -133,7 +133,9 @@ export function LoginForm({
 /** Props for {@link SignUpForm}. */
 export interface SignUpFormProps {
   /** Called with username, email, and password on form submission. */
-  onSubmit: (data: { username: string; email: string; password: string }) => void;
+  onSubmit: (
+    data: { username: string; email: string; password: string },
+  ) => void;
   /** Error message displayed in a callout (optional). */
   error?: string;
   /** If true, inputs are disabled and submit button shows spinner. Defaults to false. */
@@ -153,7 +155,9 @@ export interface SignUpFormProps {
  * />
  * ```
  */
-export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps): ReactNode {
+export function SignUpForm(
+  { onSubmit, error, loading = false }: SignUpFormProps,
+): ReactNode {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -192,7 +196,7 @@ export function SignUpForm({ onSubmit, error, loading = false }: SignUpFormProps
           disabled={loading}
         />
         <Button variant="primary" type="submit" className={fullWidth}>
-          {loading && <Spinner size="sm" color="#ffffff" />}
+          {loading && <Spinner size="sm" color="white" />}
           Create Account
         </Button>
       </form>
@@ -271,7 +275,7 @@ export function ForgotPasswordForm({
               disabled={loading}
             />
             <Button variant="primary" type="submit" className={fullWidth}>
-              {loading && <Spinner size="sm" color="#ffffff" />}
+              {loading && <Spinner size="sm" color="white" />}
               Send Reset Link
             </Button>
           </form>
@@ -328,14 +332,16 @@ export function TwoFactorForm({
   return (
     <div className={card}>
       <h2 className={title}>Two-Factor Authentication</h2>
-      <p className={subtitle}>Enter the 6-digit code from your authenticator app.</p>
+      <p className={subtitle}>
+        Enter the 6-digit code from your authenticator app.
+      </p>
       {error && <Callout variant="warning">{error}</Callout>}
       <form onSubmit={handleSubmit} className={form}>
         <div className={centered}>
           <PinInput length={6} value={code} onChange={setCode} />
         </div>
         <Button variant="primary" type="submit" className={fullWidth}>
-          {loading && <Spinner size="sm" color="#ffffff" />}
+          {loading && <Spinner size="sm" color="white" />}
           Verify
         </Button>
       </form>
@@ -353,21 +359,21 @@ export function TwoFactorForm({
 /* ------------------------------------------------------------------ */
 
 const card = css({
-  maxWidth: "400px",
+  maxWidth: "100",
   width: "100%",
   margin: "0 auto",
   backgroundColor: "bg.page",
   border: "2px solid",
   borderColor: "border.default",
-  padding: "32px",
+  padding: "8",
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: "4",
   shadow: "golden",
 });
 
 const title = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   fontFamily: "heading",
   color: "text.primary",
@@ -376,7 +382,7 @@ const title = css({
 });
 
 const subtitle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.secondary",
   lineHeight: 1.5,
@@ -387,7 +393,7 @@ const subtitle = css({
 const form = css({
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: "4",
 });
 
 const row = css({
@@ -404,17 +410,17 @@ const fullWidth = css({
 const divider = css({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
+  gap: "3",
 });
 
 const dividerLine = css({
   flex: 1,
-  height: "1px",
+  height: "0.25",
   backgroundColor: "border.default",
 });
 
 const dividerText = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -425,25 +431,25 @@ const dividerText = css({
 const oauthList = css({
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
+  gap: "2",
 });
 
 const links = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "8px",
-  marginTop: "8px",
+  gap: "2",
+  marginTop: "2",
 });
 
 const linkText = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.secondary",
 });
 
 const link = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "sunbeam.orange",
   cursor: "pointer",
@@ -455,7 +461,7 @@ const link = css({
 });
 
 const linkBtn = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "sunbeam.orange",
   cursor: "pointer",

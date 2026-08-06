@@ -12,10 +12,18 @@ export interface SearchInputProps {
 // Build a flat list of all nav items for search
 const allNavItems = docsSidebar.flatMap((section) =>
   section.items.flatMap((item) => {
-    const results = [{ label: item.label, href: item.href, section: section.title }];
+    const results = [{
+      label: item.label,
+      href: item.href,
+      section: section.title,
+    }];
     if (item.children) {
       item.children.forEach((child) =>
-        results.push({ label: child.label, href: child.href, section: section.title })
+        results.push({
+          label: child.label,
+          href: child.href,
+          section: section.title,
+        })
       );
     }
     return results;
@@ -58,7 +66,9 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
   // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current && !wrapperRef.current.contains(e.target as Node)
+      ) {
         setShowResults(false);
       }
     };
@@ -100,7 +110,11 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
       {showResults && query.trim() && (
         <div className={dropdown} role="listbox">
           {filtered.length === 0
-            ? <div className={noResults}>No results for &ldquo;{query}&rdquo;</div>
+            ? (
+              <div className={noResults}>
+                No results for &ldquo;{query}&rdquo;
+              </div>
+            )
             : (
               (() => {
                 let lastSection = "";
@@ -110,7 +124,9 @@ export function SearchInput({ className }: SearchInputProps): ReactNode {
                   return (
                     <div key={item.href + item.label}>
                       {showSection && (
-                        <div className={sectionHeader} role="presentation">{item.section}</div>
+                        <div className={sectionHeader} role="presentation">
+                          {item.section}
+                        </div>
                       )}
                       <a
                         className={resultItem}
@@ -238,7 +254,7 @@ const resultItem = css({
 
 const noResults = css({
   padding: "4",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.muted",
   textAlign: "center",
 });

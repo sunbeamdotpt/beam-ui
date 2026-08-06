@@ -30,7 +30,8 @@ turndown.addRule("badges", {
     const fontSize = node.style?.fontSize || "";
     const isSmallCaps = node.textContent?.trim() === node.textContent?.trim().toUpperCase() &&
       (node.textContent?.trim().length ?? 0) < 20;
-    const isBadge = fontSize === "10px" || fontSize === "11px" || fontSize === "12px";
+    const isBadge = fontSize === "10px" || fontSize === "11px" ||
+      fontSize === "12px";
     return (isBadge && isSmallCaps) || false;
   },
   replacement: () => "",
@@ -44,44 +45,47 @@ turndown.addRule("callouts", {
   replacement: (_content: string, node: HTMLElement) => {
     const text = (node as HTMLElement).textContent?.trim() ?? "";
     // Remove the label (PRO TIP, OPTIMIZATION TIP, etc.)
-    const cleaned = text.replace(/^(PRO TIP|OPTIMIZATION TIP|WARNING|INFO|TIP)\s*/i, "");
+    const cleaned = text.replace(
+      /^(PRO TIP|OPTIMIZATION TIP|WARNING|INFO|TIP)\s*/i,
+      "",
+    );
     return `\n> **Tip:** ${cleaned}\n\n`;
   },
 });
 
 const aside = css({
-  width: "200px",
-  minWidth: "200px",
+  width: "50",
+  minWidth: "50",
   position: "sticky",
-  top: "64px",
+  top: "16",
   height: "calc(100vh - 64px)",
   overflowY: "auto",
-  paddingInline: "24px",
-  paddingBlock: "40px",
+  paddingInline: "6",
+  paddingBlock: "10",
   borderLeft: "1px solid",
   borderLeftColor: "border.subtle",
 });
 
 const heading = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.2em",
   color: "text.muted",
-  marginBottom: "20px",
+  marginBottom: "5",
 });
 
 const navList = css({
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
-  paddingLeft: "12px",
+  gap: "3",
+  paddingLeft: "3",
   borderLeft: "2px solid",
   borderLeftColor: "border.subtle",
 });
 
 const navItem = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "body",
   color: "text.muted",
   textDecoration: "none",
@@ -91,19 +95,19 @@ const navItem = css({
 });
 
 const navItemActive = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "button",
   color: "accent",
   textDecoration: "none",
   cursor: "pointer",
-  marginLeft: "-14px",
-  paddingLeft: "12px",
+  marginLeft: "-3.5",
+  paddingLeft: "3",
   borderLeft: "2px solid",
   borderLeftColor: "accent",
 });
 
 const divider = css({
-  marginBlock: "24px",
+  marginBlock: "6",
   border: "none",
   borderTop: "1px solid",
   borderTopColor: "border.subtle",
@@ -112,14 +116,14 @@ const divider = css({
 const actionList = css({
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
+  gap: "3",
 });
 
 const actionBtn = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  fontSize: "12px",
+  gap: "2",
+  fontSize: "xs",
   fontWeight: "body",
   color: "text.muted",
   textDecoration: "none",
@@ -133,11 +137,11 @@ const actionBtn = css({
 });
 
 const metaText = css({
-  fontSize: "11px",
+  fontSize: "11",
   color: "text.muted",
   display: "flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 /** Props for {@link RightRail}. */
@@ -213,7 +217,10 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
     if (hash) {
       const el = document.getElementById(hash);
       if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+        setTimeout(
+          () => el.scrollIntoView({ behavior: "smooth", block: "start" }),
+          100,
+        );
         setActiveId(hash);
       }
     }
@@ -276,12 +283,12 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
           className={actionBtn}
           aria-label="Copy as markdown"
           onClick={() => {
-            const el = document.querySelector('[data-content="center"]') ?? document.body;
+            const el = document.querySelector('[data-content="center"]') ??
+              document.body;
             const clone = el.cloneNode(true) as HTMLElement;
             // Remove elements that shouldn't be in the markdown
-            clone.querySelectorAll("[data-breadcrumbs], [data-meta-bar]").forEach((n) =>
-              n.remove()
-            );
+            clone.querySelectorAll("[data-breadcrumbs], [data-meta-bar]")
+              .forEach((n) => n.remove());
             let md = turndown.turndown(clone.innerHTML);
             // Clean up badge text that leaked (ALL CAPS short strings on their own line)
             md = md.replace(/^[A-Z][A-Z\s]{1,25}$/gm, "");
@@ -305,7 +312,12 @@ export function RightRail({ items, lastUpdated }: RightRailProps): ReactNode {
           <Icon name="edit_note" size={14} />
           <span>Edit in source control</span>
         </a>
-        <button type="button" className={actionBtn} aria-label="Report an issue" onClick={() => {}}>
+        <button
+          type="button"
+          className={actionBtn}
+          aria-label="Report an issue"
+          onClick={() => {}}
+        >
           <Icon name="bug_report" size={14} />
           <span>Report an issue</span>
         </button>

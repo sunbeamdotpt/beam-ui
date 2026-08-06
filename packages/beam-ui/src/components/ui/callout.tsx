@@ -65,13 +65,15 @@ const roleMap: Record<CalloutVariant, string> = {
  * <Callout variant="info">New feature available in v2.0.</Callout>
  * ```
  */
-export function Callout({ children, variant = "tip", className }: CalloutProps): ReactNode {
+export function Callout(
+  { children, variant = "tip", className }: CalloutProps,
+): ReactNode {
   return (
     <div
       role={roleMap[variant]}
       className={cx(
         css({
-          padding: "24px",
+          padding: "6",
           backgroundColor: "bg.card",
           borderRadius: "0",
           borderLeft: "4px solid",
@@ -84,10 +86,10 @@ export function Callout({ children, variant = "tip", className }: CalloutProps):
         className={css({
           display: "flex",
           alignItems: "center",
-          gap: "8px",
+          gap: "2",
           fontWeight: "button",
-          marginBottom: "8px",
-          fontSize: "12px",
+          marginBottom: "2",
+          fontSize: "xs",
           textTransform: "uppercase",
           letterSpacing: "0.05em",
         })}
@@ -98,7 +100,7 @@ export function Callout({ children, variant = "tip", className }: CalloutProps):
       </div>
       <div
         className={css({
-          fontSize: "14px",
+          fontSize: "sm",
           color: "text.secondary",
           lineHeight: 1.7,
           fontStyle: "italic",

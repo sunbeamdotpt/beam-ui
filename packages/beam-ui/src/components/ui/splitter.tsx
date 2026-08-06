@@ -108,7 +108,7 @@ const handleH = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "8px",
+  width: "2",
   cursor: "col-resize",
   backgroundColor: "transparent",
   border: "none",
@@ -130,7 +130,7 @@ const handleV = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "8px",
+  height: "2",
   cursor: "row-resize",
   backgroundColor: "transparent",
   border: "none",
@@ -149,16 +149,16 @@ const handleV = css({
 });
 
 const handleBarH = css({
-  width: "2px",
-  height: "32px",
+  width: "0.5",
+  height: "8",
   backgroundColor: "border.default",
   borderRadius: "full",
   transition: "background-color 0.15s ease",
 });
 
 const handleBarV = css({
-  height: "2px",
-  width: "32px",
+  height: "0.5",
+  width: "8",
   backgroundColor: "border.default",
   borderRadius: "full",
   transition: "background-color 0.15s ease",

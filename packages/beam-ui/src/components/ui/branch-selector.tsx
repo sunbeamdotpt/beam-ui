@@ -192,16 +192,16 @@ export function BranchSelector({
 const triggerStyle = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "6px 12px",
+  gap: "2",
+  padding: "1.5 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   cursor: "pointer",
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.primary",
-  minHeight: "36px",
+  minHeight: "9",
   transition: "border-color 0.15s ease",
   _hover: {
     borderColor: "sunbeam.orange",
@@ -229,7 +229,7 @@ const dropdown = css({
   shadow: "golden",
   zIndex: 50,
   outline: "none",
-  width: "320px",
+  width: "80",
   overflow: "hidden",
 });
 
@@ -242,8 +242,8 @@ const tabList = css({
 
 const tabTriggerStyle = css({
   flex: 1,
-  padding: "10px 16px",
-  fontSize: "12px",
+  padding: "2.5 4",
+  fontSize: "xs",
   fontWeight: "button",
   letterSpacing: "0.1em",
   textTransform: "uppercase",
@@ -264,14 +264,14 @@ const tabTriggerStyle = css({
 
 const searchWrapper = css({
   position: "relative",
-  padding: "8px",
+  padding: "2",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const searchIcon = css({
   position: "absolute",
-  left: "16px",
+  left: "4",
   top: "50%",
   transform: "translateY(-50%)",
   color: "text.muted",
@@ -279,11 +279,11 @@ const searchIcon = css({
 
 const searchInput = css({
   width: "100%",
-  padding: "6px 8px 6px 32px",
+  padding: "1.5 2 1.5 8",
   border: "1px solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   outline: "none",
@@ -293,16 +293,16 @@ const searchInput = css({
 });
 
 const listWrapper = css({
-  maxHeight: "260px",
+  maxHeight: "65",
   overflowY: "auto",
 });
 
 const optionRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   width: "100%",
-  padding: "8px 12px",
+  padding: "2 3",
   border: "none",
   background: "none",
   cursor: "pointer",
@@ -320,7 +320,7 @@ const refIcon = css({
 });
 
 const refName = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "mono",
   color: "text.primary",
   flex: 1,
@@ -335,13 +335,13 @@ const currentRef = css({
 });
 
 const defaultBadge = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.1em",
   color: "text.muted",
   backgroundColor: "bg.card",
-  padding: "2px 6px",
+  padding: "0.5 1.5",
   border: "1px solid",
   borderColor: "border.default",
   flexShrink: 0,
@@ -355,9 +355,9 @@ const checkIcon = css({
 const createRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   width: "100%",
-  padding: "8px 12px",
+  padding: "2 3",
   border: "none",
   background: "none",
   cursor: "pointer",
@@ -372,14 +372,14 @@ const createRow = css({
 });
 
 const createText = css({
-  fontSize: "13px",
+  fontSize: "13",
   color: "sunbeam.orange",
 });
 
 const emptyText = css({
   display: "block",
-  padding: "16px",
-  fontSize: "13px",
+  padding: "4",
+  fontSize: "13",
   color: "text.muted",
   textAlign: "center",
 });

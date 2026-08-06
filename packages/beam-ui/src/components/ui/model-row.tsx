@@ -84,7 +84,7 @@ const desc = css({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  maxWidth: "200px",
+  maxWidth: "50",
 });
 
 const versionText = css({

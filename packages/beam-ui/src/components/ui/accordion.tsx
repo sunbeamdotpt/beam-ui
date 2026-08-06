@@ -93,11 +93,11 @@ const trigger = css({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  padding: "12px 0",
+  padding: "3 0",
   background: "none",
   border: "none",
   cursor: "pointer",
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
@@ -105,7 +105,7 @@ const trigger = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
   _hover: {
     color: "sunbeam.orange",
@@ -129,8 +129,8 @@ const content = css({
 });
 
 const panel = css({
-  padding: "12px",
-  fontSize: "14px",
+  padding: "3",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   lineHeight: 1.5,

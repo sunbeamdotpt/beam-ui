@@ -52,7 +52,10 @@ export function PinInput({
     >
       {label && <PinInputLabel className={labelStyle}>{label}</PinInputLabel>}
       <PinInputControl className={control}>
-        {Array.from({ length }, (_, i) => <PinInputInput key={i} index={i} className={input} />)}
+        {Array.from(
+          { length },
+          (_, i) => <PinInputInput key={i} index={i} className={input} />,
+        )}
       </PinInputControl>
       <PinInputHiddenInput />
     </PinInputRoot>

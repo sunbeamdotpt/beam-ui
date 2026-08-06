@@ -49,7 +49,10 @@ export function Popover({
         <PopoverContent className={cx(content, className)}>
           <div className={header}>
             {title && <PopoverTitle className={titleStyle}>{title}</PopoverTitle>}
-            <PopoverCloseTrigger className={closeButton} aria-label="Close popover">
+            <PopoverCloseTrigger
+              className={closeButton}
+              aria-label="Close popover"
+            >
               <Icon name="close" size={16} />
             </PopoverCloseTrigger>
           </div>
@@ -72,18 +75,18 @@ const content = css({
   shadow: "golden",
   zIndex: 50,
   outline: "none",
-  maxWidth: "360px",
+  maxWidth: "90",
 });
 
 const header = css({
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "space-between",
-  padding: "16px 16px 0",
+  padding: "4 4 0",
 });
 
 const titleStyle = css({
-  fontSize: "16px",
+  fontSize: "md",
   fontWeight: "heading",
   fontFamily: "heading",
   color: "text.primary",
@@ -99,7 +102,7 @@ const closeButton = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  padding: "4px",
+  padding: "1",
   marginLeft: "auto",
   transition: "color 0.15s ease",
   _hover: {
@@ -108,8 +111,8 @@ const closeButton = css({
 });
 
 const body = css({
-  padding: "12px 16px 16px",
-  fontSize: "14px",
+  padding: "3 4 4",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   lineHeight: 1.5,

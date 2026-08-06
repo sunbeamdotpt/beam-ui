@@ -33,7 +33,9 @@ export interface ClipboardProps {
  * </Clipboard>
  * ```
  */
-export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps): ReactNode {
+export function Clipboard(
+  { value, children, timeout = 2000 }: ClipboardProps,
+): ReactNode {
   return (
     <ClipboardRoot value={value} timeout={timeout}>
       {children
@@ -63,7 +65,7 @@ export function Clipboard({ value, children, timeout = 2000 }: ClipboardProps): 
 const indicator = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "6px",
+  gap: "1.5",
 });
 
 const control = css({
@@ -73,9 +75,9 @@ const control = css({
 const trigger = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "6px",
-  padding: "8px 14px",
-  fontSize: "13px",
+  gap: "1.5",
+  padding: "2 3.5",
+  fontSize: "13",
   fontFamily: "body",
   fontWeight: "button",
   color: "text.primary",

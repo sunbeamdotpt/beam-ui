@@ -21,10 +21,14 @@ export interface ModelStats {
 
 const grid = css({
   display: "grid",
-  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" },
+  gridTemplateColumns: {
+    base: "repeat(2, 1fr)",
+    md: "repeat(3, 1fr)",
+    lg: "repeat(5, 1fr)",
+  },
   paddingBlock: "6",
   marginBottom: "12",
-  gap: { base: "16px", lg: "0" },
+  gap: { base: "4", lg: "0" },
 });
 
 const cell = css({
@@ -95,10 +99,10 @@ const priceLabel = css({
 
 const srOnly = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",
@@ -149,11 +153,17 @@ export function StatBar({ stats }: StatBarProps): ReactNode {
       </div>
 
       {/* Performance */}
-      <div className={cell} aria-label={`Performance: ${stats.performance} out of 5`}>
+      <div
+        className={cell}
+        aria-label={`Performance: ${stats.performance} out of 5`}
+      >
         <p className={label}>PERFORMANCE</p>
         <div className={bars} aria-hidden="true">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className={i < stats.performance ? barFilled : barEmpty} />
+            <div
+              key={i}
+              className={i < stats.performance ? barFilled : barEmpty}
+            />
           ))}
         </div>
         <span className={srOnly}>{stats.performance} out of 5</span>

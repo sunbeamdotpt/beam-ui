@@ -74,13 +74,25 @@ export function Checkbox({
       >
         {indeterminate
           ? (
-            <svg width="10" height="2" viewBox="0 0 10 2" fill="none" aria-hidden="true">
+            <svg
+              width="10"
+              height="2"
+              viewBox="0 0 10 2"
+              fill="none"
+              aria-hidden="true"
+            >
               <rect width="10" height="2" rx="1" fill="white" />
             </svg>
           )
           : checked
           ? (
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+            <svg
+              width="10"
+              height="8"
+              viewBox="0 0 10 8"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M1 4L3.5 6.5L9 1"
                 stroke="white"
@@ -100,7 +112,7 @@ export function Checkbox({
 const wrapper = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   cursor: "pointer",
   userSelect: "none",
 });
@@ -112,10 +124,10 @@ const disabledStyle = css({
 
 const hiddenInput = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",
@@ -123,8 +135,8 @@ const hiddenInput = css({
 });
 
 const box = css({
-  width: "18px",
-  height: "18px",
+  width: "4.5",
+  height: "4.5",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -137,17 +149,17 @@ const box = css({
   "input:focus-visible + &": {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const boxChecked = css({
-  backgroundColor: "#fa520f",
-  borderColor: "#fa520f",
+  backgroundColor: "accent",
+  borderColor: "accent",
 });
 
 const labelStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   fontFamily: "body",
   lineHeight: 1.4,

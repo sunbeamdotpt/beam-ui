@@ -26,7 +26,7 @@ const header = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "64px",
+  height: "16",
   backdropFilter: "blur(12px)",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
@@ -39,8 +39,8 @@ const inner = css({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  maxWidth: "1440px",
-  paddingInline: { base: "16px", md: "24px", lg: "32px" },
+  maxWidth: "360",
+  paddingInline: { base: "4", md: "6", lg: "8" },
 });
 
 const innerFullWidth = css({
@@ -48,18 +48,18 @@ const innerFullWidth = css({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  paddingInline: { base: "16px", md: "24px", lg: "32px" },
+  paddingInline: { base: "4", md: "6", lg: "8" },
 });
 
 const leftGroup = css({
   display: "flex",
   alignItems: "center",
-  gap: { base: "12px", lg: "40px" },
+  gap: { base: "3", lg: "10" },
 });
 
 const brandLink = css({
   textDecoration: "none",
-  fontSize: "20px",
+  fontSize: "xl",
   fontFamily: "heading",
   fontWeight: "heading",
   letterSpacing: "-0.3px",
@@ -69,14 +69,14 @@ const brandLink = css({
 const nav = css({
   display: { base: "none", lg: "flex" },
   alignItems: "center",
-  gap: "24px",
+  gap: "6",
 });
 
 const breadcrumbsNav = css({
   display: { base: "none", md: "flex" },
   alignItems: "center",
-  gap: "8px",
-  fontSize: "13px",
+  gap: "2",
+  fontSize: "13",
   fontWeight: "body",
   marginBottom: "0",
 });
@@ -85,8 +85,8 @@ const menuBtn = css({
   display: { base: "flex", lg: "none" },
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   bg: "transparent",
   border: "none",
   cursor: "pointer",
@@ -100,7 +100,7 @@ const menuBtn = css({
 const drawerBackdrop = css({
   position: "fixed",
   inset: 0,
-  bg: "rgba(31, 31, 31, 0.5)",
+  bg: "scrim.50",
   zIndex: 99,
 });
 
@@ -113,7 +113,7 @@ const drawerPositioner = css({
 });
 
 const drawerContent = css({
-  width: "300px",
+  width: "75",
   height: "100%",
   bg: "bg.page",
   overflowY: "auto",
@@ -124,16 +124,16 @@ const drawerCloseBtn = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   bg: "transparent",
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  fontSize: "20px",
+  fontSize: "xl",
   position: "absolute",
-  top: "14px",
-  right: "8px",
+  top: "3.5",
+  right: "2",
   _hover: {
     color: "accent",
   },
@@ -141,7 +141,7 @@ const drawerCloseBtn = css({
 
 const navLink = css({
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.5px",
@@ -155,7 +155,7 @@ const navLink = css({
 
 const navLinkActive = css({
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.5px",
@@ -166,8 +166,8 @@ const navLinkActive = css({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: "-2px",
-    height: "2px",
+    bottom: "-0.5",
+    height: "0.5",
     bg: "accent",
   },
 });
@@ -175,7 +175,7 @@ const navLinkActive = css({
 const rightGroup = css({
   display: "flex",
   alignItems: "center",
-  gap: "16px",
+  gap: "4",
 });
 
 const searchWrapper = css({
@@ -187,15 +187,15 @@ const searchTriggerMobile = css({
   display: { base: "flex", md: "none" },
   alignItems: "center",
   justifyContent: "center",
-  width: "36px",
-  height: "36px",
+  width: "9",
+  height: "9",
   bg: "transparent",
   border: "1px solid",
   borderColor: "border.subtle",
   borderRadius: "sm",
   cursor: "pointer",
   color: "text.muted",
-  fontSize: "16px",
+  fontSize: "md",
   _hover: {
     borderColor: "accent",
     color: "accent",
@@ -205,19 +205,19 @@ const searchTriggerMobile = css({
 const searchIcon = css({
   position: "absolute",
   top: "50%",
-  left: "12px",
+  left: "3",
   transform: "translateY(-50%)",
-  fontSize: "16px",
+  fontSize: "md",
   color: "text.muted",
   pointerEvents: "none",
 });
 
 const searchInput = css({
-  width: "240px",
-  paddingLeft: "36px",
-  paddingRight: "48px",
-  paddingBlock: "8px",
-  fontSize: "14px",
+  width: "60",
+  paddingLeft: "9",
+  paddingRight: "12",
+  paddingBlock: "2",
+  fontSize: "sm",
   fontFamily: "body",
   fontWeight: "body",
   bg: "bg.card",
@@ -238,15 +238,15 @@ const searchInput = css({
 const kbdStyle = css({
   position: "absolute",
   top: "50%",
-  right: "12px",
+  right: "3",
   transform: "translateY(-50%)",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "text.muted",
   border: "1px solid",
   borderColor: "border.default",
-  paddingInline: "6px",
-  paddingBlock: "2px",
+  paddingInline: "1.5",
+  paddingBlock: "0.5",
   borderRadius: "sm",
   pointerEvents: "none",
 });
@@ -256,43 +256,43 @@ const searchDropdown = css({
   top: "100%",
   left: 0,
   right: 0,
-  marginTop: "4px",
+  marginTop: "1",
   bg: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   borderRadius: "sm",
   boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-  maxHeight: "320px",
+  maxHeight: "80",
   overflowY: "auto",
   zIndex: 100,
 });
 
 const searchResultItem = css({
   display: "block",
-  padding: "10px 16px",
-  fontSize: "14px",
+  padding: "2.5 4",
+  fontSize: "sm",
   color: "text.secondary",
   textDecoration: "none",
   cursor: "pointer",
   transition: "all 0.1s",
   _hover: {
-    bg: "rgba(250, 82, 15, 0.08)",
+    bg: "accent.08",
     color: "accent",
   },
 });
 
 const searchResultSection = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.15em",
   color: "text.muted",
-  padding: "8px 16px 4px",
+  padding: "2 4 1",
 });
 
 const searchNoResults = css({
-  padding: "16px",
-  fontSize: "13px",
+  padding: "4",
+  fontSize: "13",
   color: "text.muted",
   textAlign: "center",
 });
@@ -332,7 +332,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
       ];
       if (item.children) {
         item.children.forEach((child) =>
-          results.push({ label: child.label, href: child.href, section: section.title })
+          results.push({
+            label: child.label,
+            href: child.href,
+            section: section.title,
+          })
         );
       }
       return results;
@@ -341,7 +345,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
 }
 
 /** Default active matcher: exact for root, prefix otherwise. */
-function defaultIsActive(_label: string, href: string, currentPath: string): boolean {
+function defaultIsActive(
+  _label: string,
+  href: string,
+  currentPath: string,
+): boolean {
   if (href === "/") return currentPath === "/";
   return currentPath.startsWith(href);
 }
@@ -430,7 +438,8 @@ export function Header({
 
   const resolvedNavLinks = navLinksProp ?? headerLinks;
   const resolvedDrawerSections = drawerSectionsProp ?? docsSidebar;
-  const allNavItems = searchItemsProp ?? buildSearchItems(resolvedDrawerSections);
+  const allNavItems = searchItemsProp ??
+    buildSearchItems(resolvedDrawerSections);
   const LinkAs = linkAs ?? DefaultLink;
 
   // Close drawer on route change
@@ -459,7 +468,9 @@ export function Header({
   // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current && !wrapperRef.current.contains(e.target as Node)
+      ) {
         setShowResults(false);
       }
     };
@@ -498,7 +509,10 @@ export function Header({
               onClick={() => setDrawerOpen(true)}
               aria-label="Open navigation"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "24px" }}
+              >
                 menu
               </span>
             </button>
@@ -533,12 +547,17 @@ export function Header({
                   onClick={() => inputRef.current?.focus()}
                   aria-label="Search"
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: "16px" }}
+                  >
                     search
                   </span>
                 </button>
                 <div className={searchWrapper} ref={wrapperRef}>
-                  <span className={`material-symbols-outlined ${searchIcon}`}>search</span>
+                  <span className={`material-symbols-outlined ${searchIcon}`}>
+                    search
+                  </span>
                   <input
                     ref={inputRef}
                     className={searchInput}
@@ -558,9 +577,17 @@ export function Header({
                   />
                   <kbd className={kbdStyle}>&#x2318;K</kbd>
                   {showResults && query.trim() && (
-                    <div className={searchDropdown} role="listbox" id="search-listbox">
+                    <div
+                      className={searchDropdown}
+                      role="listbox"
+                      id="search-listbox"
+                    >
                       {filtered.length === 0
-                        ? <div className={searchNoResults}>No results for "{query}"</div>
+                        ? (
+                          <div className={searchNoResults}>
+                            No results for "{query}"
+                          </div>
+                        )
                         : (
                           (() => {
                             let lastSection = "";
@@ -570,7 +597,10 @@ export function Header({
                               return (
                                 <div key={item.href + item.label}>
                                   {showSection && item.section && (
-                                    <div className={searchResultSection} role="presentation">
+                                    <div
+                                      className={searchResultSection}
+                                      role="presentation"
+                                    >
                                       {item.section}
                                     </div>
                                   )}

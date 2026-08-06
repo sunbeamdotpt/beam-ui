@@ -40,7 +40,9 @@ export interface ToggleGroupProps {
  * />
  * ```
  */
-export function ToggleGroup({ items, value, onChange, className }: ToggleGroupProps): ReactNode {
+export function ToggleGroup(
+  { items, value, onChange, className }: ToggleGroupProps,
+): ReactNode {
   return (
     <ToggleGroupRoot
       value={[value]}
@@ -75,18 +77,18 @@ const itemBase = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "8px 16px",
-  fontSize: "14px",
+  padding: "2 4",
+  fontSize: "sm",
   fontFamily: "body",
   fontWeight: "button",
   border: "1px solid",
   cursor: "pointer",
   transition: "all 0.15s ease",
-  marginLeft: "-1px",
+  marginLeft: "-0.25",
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
     zIndex: 2,
   },
   _first: { marginLeft: "0" },

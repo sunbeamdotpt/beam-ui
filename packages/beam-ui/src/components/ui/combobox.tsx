@@ -129,7 +129,7 @@ const control = css({
   borderRadius: "0",
   transition: "all 0.15s ease",
   _focusWithin: {
-    ringWidth: "2px",
+    ringWidth: "0.5",
     ringColor: "sunbeam.orange",
     borderColor: "transparent",
   },
@@ -137,11 +137,11 @@ const control = css({
 
 const input = css({
   flex: 1,
-  padding: "10px 12px",
+  padding: "2.5 3",
   background: "none",
   border: "none",
   outline: "none",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   _placeholder: {
@@ -157,7 +157,7 @@ const triggerBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 8px",
+  padding: "0 2",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -168,7 +168,7 @@ const triggerBtn = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "-2px",
+    outlineOffset: "-0.5",
   },
 });
 
@@ -178,15 +178,15 @@ const content = css({
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,
-  maxHeight: "240px",
+  maxHeight: "60",
   overflowY: "auto",
 });
 
 const item = css({
   display: "flex",
   alignItems: "center",
-  padding: "8px 12px",
-  fontSize: "14px",
+  padding: "2 3",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   cursor: "pointer",
@@ -204,8 +204,8 @@ const item = css({
 });
 
 const empty = css({
-  padding: "8px 12px",
-  fontSize: "14px",
+  padding: "2 3",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.muted",
 });

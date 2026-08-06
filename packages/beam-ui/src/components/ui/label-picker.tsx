@@ -74,7 +74,10 @@ export function LabelPicker({
   }
 
   return (
-    <PopoverRoot positioning={{ placement: "bottom-start" }} onOpenChange={() => setQuery("")}>
+    <PopoverRoot
+      positioning={{ placement: "bottom-start" }}
+      onOpenChange={() => setQuery("")}
+    >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">
           {selectedOptions.length === 0
@@ -85,7 +88,10 @@ export function LabelPicker({
                   <span
                     key={opt.id}
                     className={pill}
-                    style={{ backgroundColor: opt.color, color: getContrastColor(opt.color) }}
+                    style={{
+                      backgroundColor: opt.color,
+                      color: getContrastColor(opt.color),
+                    }}
                   >
                     {opt.name}
                   </span>
@@ -149,17 +155,17 @@ function getContrastColor(hex: string): string {
 const triggerStyle = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "6px 12px",
+  gap: "2",
+  padding: "1.5 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   cursor: "pointer",
   fontFamily: "body",
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
-  minHeight: "36px",
-  minWidth: "180px",
+  minHeight: "9",
+  minWidth: "45",
   transition: "border-color 0.15s ease",
   _hover: {
     borderColor: "sunbeam.orange",
@@ -173,14 +179,14 @@ const placeholderStyle = css({
 const pillRow = css({
   display: "flex",
   flexWrap: "wrap",
-  gap: "4px",
+  gap: "1",
   flex: 1,
 });
 
 const pill = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
-  padding: "2px 8px",
+  padding: "0.5 2",
   borderRadius: "full",
   lineHeight: 1.4,
   whiteSpace: "nowrap",
@@ -199,20 +205,20 @@ const dropdown = css({
   shadow: "golden",
   zIndex: 50,
   outline: "none",
-  width: "300px",
+  width: "75",
   overflow: "hidden",
 });
 
 const searchWrapper = css({
   position: "relative",
-  padding: "8px",
+  padding: "2",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const searchIcon = css({
   position: "absolute",
-  left: "16px",
+  left: "4",
   top: "50%",
   transform: "translateY(-50%)",
   color: "text.muted",
@@ -220,11 +226,11 @@ const searchIcon = css({
 
 const searchInput = css({
   width: "100%",
-  padding: "6px 8px 6px 32px",
+  padding: "1.5 2 1.5 8",
   border: "1px solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   outline: "none",
@@ -234,16 +240,16 @@ const searchInput = css({
 });
 
 const listWrapper = css({
-  maxHeight: "260px",
+  maxHeight: "65",
   overflowY: "auto",
 });
 
 const optionRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
+  gap: "2.5",
   width: "100%",
-  padding: "8px 12px",
+  padding: "2 3",
   border: "none",
   background: "none",
   cursor: "pointer",
@@ -256,8 +262,8 @@ const optionRow = css({
 });
 
 const colorSwatch = css({
-  width: "16px",
-  height: "16px",
+  width: "4",
+  height: "4",
   borderRadius: "full",
   flexShrink: 0,
 });
@@ -265,19 +271,19 @@ const colorSwatch = css({
 const optionText = css({
   display: "flex",
   flexDirection: "column",
-  gap: "2px",
+  gap: "0.5",
   flex: 1,
   minWidth: 0,
 });
 
 const optionName = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   fontWeight: "button",
 });
 
 const optionDesc = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
   lineHeight: 1.3,
 });
@@ -289,8 +295,8 @@ const checkIcon = css({
 
 const emptyText = css({
   display: "block",
-  padding: "16px",
-  fontSize: "13px",
+  padding: "4",
+  fontSize: "13",
   color: "text.muted",
   textAlign: "center",
 });

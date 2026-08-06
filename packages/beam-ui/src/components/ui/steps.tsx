@@ -164,7 +164,7 @@ const upcomingIndicator = css({
 });
 
 const stepNumber = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
@@ -173,7 +173,7 @@ const stepNumber = css({
 const labelWrap = css({
   display: "flex",
   flexDirection: "column",
-  gap: "1px",
+  gap: "0.25",
 });
 
 const label = css({
@@ -200,7 +200,7 @@ const separator = css({
   flex: 1,
   height: "0.5",
   backgroundColor: "border.default",
-  margin: "0 12px",
+  margin: "0 3",
   borderRadius: "full",
   transition: "background-color 0.2s ease",
   alignSelf: "center",

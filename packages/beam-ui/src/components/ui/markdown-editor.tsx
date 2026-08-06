@@ -23,7 +23,10 @@ type ActiveTab = "write" | "preview";
 interface ToolbarAction {
   icon: string;
   label: string;
-  action: (textarea: HTMLTextAreaElement, value: string) => { newValue: string; cursorPos: number };
+  action: (
+    textarea: HTMLTextAreaElement,
+    value: string,
+  ) => { newValue: string; cursorPos: number };
 }
 
 function wrapSelection(
@@ -192,14 +195,20 @@ export function MarkdownEditor({
       <div className={tabBar}>
         <button
           type="button"
-          className={cx(tabButton, activeTab === "write" ? tabActive : undefined)}
+          className={cx(
+            tabButton,
+            activeTab === "write" ? tabActive : undefined,
+          )}
           onClick={() => setActiveTab("write")}
         >
           Write
         </button>
         <button
           type="button"
-          className={cx(tabButton, activeTab === "preview" ? tabActive : undefined)}
+          className={cx(
+            tabButton,
+            activeTab === "preview" ? tabActive : undefined,
+          )}
           onClick={() => setActiveTab("preview")}
         >
           Preview
@@ -266,8 +275,8 @@ const tabBar = css({
 });
 
 const tabButton = css({
-  padding: "8px 16px",
-  fontSize: "13px",
+  padding: "2 4",
+  fontSize: "13",
   fontWeight: "button",
   fontFamily: "body",
   color: "text.secondary",
@@ -294,8 +303,8 @@ const tabActive = css({
 const toolbar = css({
   display: "flex",
   flexWrap: "wrap",
-  gap: "2px",
-  padding: "6px 8px",
+  gap: "0.5",
+  padding: "1.5 2",
   backgroundColor: "bg.card",
   borderBottom: "1px solid",
   borderColor: "border.default",
@@ -305,8 +314,8 @@ const toolbarButton = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "28px",
-  height: "28px",
+  width: "7",
+  height: "7",
   background: "none",
   border: "1px solid transparent",
   cursor: "pointer",
@@ -321,9 +330,9 @@ const toolbarButton = css({
 const textarea = css({
   display: "block",
   width: "100%",
-  padding: "16px",
+  padding: "4",
   fontFamily: "mono",
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: 1.6,
   color: "text.primary",
   backgroundColor: "bg.page",
@@ -336,7 +345,7 @@ const textarea = css({
 });
 
 const previewPane = css({
-  padding: "16px",
+  padding: "4",
   backgroundColor: "bg.page",
   overflowY: "auto",
 });
@@ -344,5 +353,5 @@ const previewPane = css({
 const emptyPreview = css({
   color: "text.muted",
   fontStyle: "italic",
-  fontSize: "14px",
+  fontSize: "sm",
 });

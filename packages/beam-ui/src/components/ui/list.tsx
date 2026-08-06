@@ -84,7 +84,11 @@ export function List({
 }
 
 function ItemContent(
-  { item, variant, LinkAs }: { item: ListItem; variant: Variant; LinkAs: LinkComponent },
+  { item, variant, LinkAs }: {
+    item: ListItem;
+    variant: Variant;
+    LinkAs: LinkComponent;
+  },
 ) {
   const inner: ReactNode = (
     <div className={itemInner}>
@@ -107,7 +111,12 @@ function ItemContent(
   if (item.href) {
     if (item.href.startsWith("http")) {
       return (
-        <a href={item.href} className={linkStyle} target="_blank" rel="noopener noreferrer">
+        <a
+          href={item.href}
+          className={linkStyle}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {inner}
         </a>
       );
@@ -178,13 +187,13 @@ const listItem = css({
 });
 
 const compactItem = css({
-  fontSize: "13px",
+  fontSize: "13",
 });
 
 const borderedItem = css({
   borderBottom: "1px solid",
   borderColor: "border.default",
-  padding: "12px 0",
+  padding: "3 0",
   _first: { paddingTop: 0 },
 });
 
@@ -202,7 +211,7 @@ const labelStyle = css({
 const descStyle = css({
   margin: 0,
   marginTop: "0.5",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.secondary",
   lineHeight: "1.4",
 });

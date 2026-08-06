@@ -69,7 +69,11 @@ export function Pagination({
         {pages.map((p, i) =>
           p === "..."
             ? (
-              <span key={`ellipsis-${i}`} className={ellipsis} style={cellStyle}>
+              <span
+                key={`ellipsis-${i}`}
+                className={ellipsis}
+                style={cellStyle}
+              >
                 ...
               </span>
             )
@@ -189,7 +193,7 @@ const pageBtn = css({
   width: "9",
   height: "9",
   padding: "0",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "mono",
   fontWeight: "button",
   border: "1px solid",
@@ -205,7 +209,11 @@ const activePage = css({
   backgroundColor: "sunbeam.orange",
   color: "white",
   borderColor: "sunbeam.orange",
-  _hover: { backgroundColor: "sunbeam.flame", borderColor: "sunbeam.flame", color: "white" },
+  _hover: {
+    backgroundColor: "sunbeam.flame",
+    borderColor: "sunbeam.flame",
+    color: "white",
+  },
 });
 
 const ellipsis = css({
@@ -229,7 +237,7 @@ const sizeSelector = css({
 });
 
 const sizeLabel = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.06em",
@@ -239,7 +247,7 @@ const sizeLabel = css({
 const sizeSelect = css({
   paddingBlock: "1",
   paddingInline: "2",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   fontWeight: "body",
   border: "1px solid",

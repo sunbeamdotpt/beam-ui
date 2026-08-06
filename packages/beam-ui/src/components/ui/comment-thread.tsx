@@ -37,7 +37,14 @@ interface TimelineEvent {
   /** Unique identifier for this event. */
   id: string;
   /** Event type (e.g., "merge", "close", "label"). */
-  type: "label" | "assignee" | "milestone" | "merge" | "close" | "reopen" | "reference";
+  type:
+    | "label"
+    | "assignee"
+    | "milestone"
+    | "merge"
+    | "close"
+    | "reopen"
+    | "reference";
   /** Username of the actor who triggered the event. */
   actor: string;
   /** Human-readable detail of the event (e.g., "closed this" or "added label bug"). */
@@ -124,14 +131,20 @@ function CommentCard({
     >
       <div className={commentHeader}>
         <span className={authorName}>{comment.author.displayName}</span>
-        <span className={timestamp}>{formatRelativeTime(comment.createdAt)}</span>
+        <span className={timestamp}>
+          {formatRelativeTime(comment.createdAt)}
+        </span>
         {comment.updatedAt && <span className={editedBadge}>(edited)</span>}
       </div>
 
       {editing
         ? (
           <div className={editArea}>
-            <MarkdownEditor value={editBody} onChange={setEditBody} minHeight="100px" />
+            <MarkdownEditor
+              value={editBody}
+              onChange={setEditBody}
+              minHeight="100px"
+            />
             <div className={editActions}>
               <Button variant="primary" onClick={handleSaveEdit}>Save</Button>
               <Button
@@ -191,13 +204,18 @@ const EVENT_COLORS: Record<TimelineEvent["type"], string> = {
 function TimelineEventItem({ event }: { event: TimelineEvent }) {
   return (
     <div className={eventRow} role="listitem">
-      <div className={eventIconWrapper} style={{ color: EVENT_COLORS[event.type] }}>
+      <div
+        className={eventIconWrapper}
+        style={{ color: EVENT_COLORS[event.type] }}
+      >
         <Icon name={EVENT_ICONS[event.type]} size={16} />
       </div>
       <div className={eventContent}>
         <span className={eventActorText}>{event.actor}</span>{" "}
         <span className={eventDetailText}>{event.detail}</span>
-        <span className={eventTimestamp}>{formatRelativeTime(event.createdAt)}</span>
+        <span className={eventTimestamp}>
+          {formatRelativeTime(event.createdAt)}
+        </span>
       </div>
     </div>
   );
@@ -317,33 +335,33 @@ const threadWrapper = css({
 
 const commentRow = css({
   display: "flex",
-  gap: "12px",
+  gap: "3",
 });
 
 const eventItemRow = css({
   display: "flex",
-  gap: "12px",
+  gap: "3",
 });
 
 const avatarCol = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "48px",
+  width: "12",
   flexShrink: 0,
 });
 
 const timelineLine = css({
-  width: "2px",
+  width: "0.5",
   flex: 1,
-  backgroundColor: { base: "rgba(250, 82, 15, 0.15)", _dark: "rgba(250, 82, 15, 0.2)" },
-  minHeight: "16px",
+  backgroundColor: { base: "accent.15", _dark: "accent.20" },
+  minHeight: "4",
 });
 
 const contentCol = css({
   flex: 1,
   minWidth: 0,
-  paddingBottom: "16px",
+  paddingBottom: "4",
 });
 
 const commentCard = css({
@@ -359,53 +377,53 @@ const commentCard = css({
 const commentHeader = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "12px 16px",
+  gap: "2",
+  padding: "3 4",
   borderBottom: "2px solid",
   borderColor: "sunbeam.orange",
-  backgroundColor: { base: "rgba(250, 82, 15, 0.06)", _dark: "rgba(250, 82, 15, 0.1)" },
+  backgroundColor: { base: "accent.06", _dark: "accent.10" },
 });
 
 const authorName = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "heading",
   color: "sunbeam.orange",
 });
 
 const timestamp = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
 });
 
 const editedBadge = css({
-  fontSize: "11px",
+  fontSize: "11",
   color: "text.muted",
   fontStyle: "italic",
 });
 
 const commentBody = css({
-  padding: "16px 20px",
+  padding: "4 5",
   backgroundColor: "bg.page",
 });
 
 const commentFooter = css({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  padding: "10px 16px",
+  gap: "3",
+  padding: "2.5 4",
   borderTop: "1px solid",
   borderColor: "border.default",
-  backgroundColor: { base: "rgba(127, 99, 21, 0.04)", _dark: "rgba(255, 255, 255, 0.03)" },
+  backgroundColor: { base: "warm.04", _dark: "chrome.03" },
 });
 
 const editButton = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
   background: "none",
   border: "none",
   cursor: "pointer",
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
   fontFamily: "body",
   transition: "color 0.15s ease",
@@ -415,20 +433,20 @@ const editButton = css({
 });
 
 const editArea = css({
-  padding: "12px 16px",
+  padding: "3 4",
 });
 
 const editActions = css({
   display: "flex",
-  gap: "8px",
-  marginTop: "8px",
+  gap: "2",
+  marginTop: "2",
 });
 
 /* Timeline events */
 
 const eventDot = css({
-  width: "24px",
-  height: "24px",
+  width: "6",
+  height: "6",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -442,8 +460,8 @@ const eventDot = css({
 const eventRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "4px 0",
+  gap: "2",
+  padding: "1 0",
 });
 
 const eventIconWrapper = css({
@@ -453,7 +471,7 @@ const eventIconWrapper = css({
 });
 
 const eventContent = css({
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.secondary",
   lineHeight: 1.4,
 });
@@ -468,36 +486,36 @@ const eventDetailText = css({
 });
 
 const eventTimestamp = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
-  marginLeft: "8px",
+  marginLeft: "2",
 });
 
 /* Reply section */
 
 const replySection = css({
   display: "flex",
-  gap: "12px",
-  marginTop: "8px",
+  gap: "3",
+  marginTop: "2",
 });
 
 const replyDot = css({
-  width: "8px",
-  height: "8px",
+  width: "2",
+  height: "2",
   borderRadius: "full",
   backgroundColor: "sunbeam.orange",
-  marginTop: "8px",
+  marginTop: "2",
 });
 
 const replyHeading = css({
-  fontSize: "16px",
+  fontSize: "md",
   fontWeight: "heading",
   color: "text.primary",
-  marginBottom: "12px",
+  marginBottom: "3",
 });
 
 const replyActions = css({
   display: "flex",
   justifyContent: "flex-end",
-  marginTop: "12px",
+  marginTop: "3",
 });

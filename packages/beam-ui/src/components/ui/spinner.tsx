@@ -49,7 +49,11 @@ export function Spinner({
   const r = (dim - stroke) / 2;
 
   return (
-    <div className={cx(wrapper, className)} role="status" aria-label={label ?? "Loading"}>
+    <div
+      className={cx(wrapper, className)}
+      role="status"
+      aria-label={label ?? "Loading"}
+    >
       <svg
         width={dim}
         height={dim}

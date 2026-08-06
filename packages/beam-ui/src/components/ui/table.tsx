@@ -86,7 +86,9 @@ export function Table({
       setSelected(new Set());
       onSelect?.([]);
     } else {
-      const all = new Set(rows.map((r) => String((r[rowKey] as unknown) ?? "")));
+      const all = new Set(
+        rows.map((r) => String((r[rowKey] as unknown) ?? "")),
+      );
       setSelected(all);
       onSelect?.(Array.from(all));
     }
@@ -203,7 +205,7 @@ const headerCell = css({
   paddingBlock: "2.5",
   paddingInline: "4",
   textAlign: "left",
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.06em",
@@ -247,10 +249,10 @@ const checkbox = css({
 
 const srOnly = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",

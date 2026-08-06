@@ -80,7 +80,10 @@ export function AssigneePicker({
   }
 
   return (
-    <PopoverRoot positioning={{ placement: "bottom-start" }} onOpenChange={() => setQuery("")}>
+    <PopoverRoot
+      positioning={{ placement: "bottom-start" }}
+      onOpenChange={() => setQuery("")}
+    >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">
           {selectedOptions.length === 0
@@ -148,17 +151,17 @@ export function AssigneePicker({
 const triggerStyle = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "6px 12px",
+  gap: "2",
+  padding: "1.5 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   cursor: "pointer",
   fontFamily: "body",
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
-  minHeight: "36px",
-  minWidth: "180px",
+  minHeight: "9",
+  minWidth: "45",
   transition: "border-color 0.15s ease",
   _hover: {
     borderColor: "sunbeam.orange",
@@ -176,10 +179,10 @@ const avatarRow = css({
 });
 
 const avatarSmall = css({
-  width: "24px!",
-  height: "24px!",
-  fontSize: "10px!",
-  marginRight: "-4px",
+  width: "6!",
+  height: "6!",
+  fontSize: "2xs!",
+  marginRight: "-1",
 });
 
 const chevron = css({
@@ -195,20 +198,20 @@ const dropdown = css({
   shadow: "golden",
   zIndex: 50,
   outline: "none",
-  width: "300px",
+  width: "75",
   overflow: "hidden",
 });
 
 const searchWrapper = css({
   position: "relative",
-  padding: "8px",
+  padding: "2",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const searchIcon = css({
   position: "absolute",
-  left: "16px",
+  left: "4",
   top: "50%",
   transform: "translateY(-50%)",
   color: "text.muted",
@@ -216,11 +219,11 @@ const searchIcon = css({
 
 const searchInput = css({
   width: "100%",
-  padding: "6px 8px 6px 32px",
+  padding: "1.5 2 1.5 8",
   border: "1px solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   outline: "none",
@@ -230,16 +233,16 @@ const searchInput = css({
 });
 
 const listWrapper = css({
-  maxHeight: "260px",
+  maxHeight: "65",
   overflowY: "auto",
 });
 
 const optionRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
+  gap: "2.5",
   width: "100%",
-  padding: "8px 12px",
+  padding: "2 3",
   border: "none",
   background: "none",
   cursor: "pointer",
@@ -254,19 +257,19 @@ const optionRow = css({
 const optionText = css({
   display: "flex",
   flexDirection: "column",
-  gap: "1px",
+  gap: "0.25",
   flex: 1,
   minWidth: 0,
 });
 
 const displayName = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   fontWeight: "button",
 });
 
 const username = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
   fontFamily: "mono",
 });
@@ -278,8 +281,8 @@ const checkIcon = css({
 
 const emptyText = css({
   display: "block",
-  padding: "16px",
-  fontSize: "13px",
+  padding: "4",
+  fontSize: "13",
   color: "text.muted",
   textAlign: "center",
 });

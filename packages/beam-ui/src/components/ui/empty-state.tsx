@@ -37,9 +37,9 @@ const containerStyle = css({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: "64px",
+  padding: "16",
   textAlign: "center",
-  gap: "16px",
+  gap: "4",
 });
 
 const iconStyle = css({
@@ -47,25 +47,27 @@ const iconStyle = css({
 });
 
 const titleStyle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   color: "text.primary",
   lineHeight: 1.3,
 });
 
 const descriptionStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
   lineHeight: 1.6,
-  maxWidth: "400px",
+  maxWidth: "100",
 });
 
 const actionStyle = css({
-  marginTop: "8px",
+  marginTop: "2",
 });
 
 // EmptyState is documented above, before const containerStyle
-export function EmptyState({ icon, title, description, action }: EmptyStateProps): ReactNode {
+export function EmptyState(
+  { icon, title, description, action }: EmptyStateProps,
+): ReactNode {
   return (
     <div className={containerStyle}>
       {icon && <Icon name={icon} size={48} className={iconStyle} />}

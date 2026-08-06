@@ -75,12 +75,12 @@ export function TextInput({
 const wrapper = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
   width: "100%",
 });
 
 const labelStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -90,18 +90,18 @@ const labelStyle = css({
 
 const input = css({
   width: "100%",
-  padding: "10px 12px",
+  padding: "2.5 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   borderRadius: "0",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   outline: "none",
   transition: "all 0.15s ease",
   _focus: {
-    ringWidth: "2px",
+    ringWidth: "0.5",
     ringColor: "sunbeam.orange",
     borderColor: "transparent",
   },
@@ -119,7 +119,7 @@ const inputError = css({
 });
 
 const errorText = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "sunbeam.orange",
   fontFamily: "body",
   margin: 0,

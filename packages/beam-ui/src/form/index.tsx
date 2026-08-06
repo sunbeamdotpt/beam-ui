@@ -190,12 +190,12 @@ export function FormField<T extends FieldValues>(
 const fieldWrapper = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
-  marginBottom: "16px",
+  gap: "1.5",
+  marginBottom: "4",
 });
 
 const labelStyle = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "button",
   color: "text.primary",
   textTransform: "uppercase",
@@ -203,8 +203,8 @@ const labelStyle = css({
 });
 
 const inputStyle = css({
-  padding: "10px 12px",
-  fontSize: "14px",
+  padding: "2.5 3",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   backgroundColor: "bg.card",
@@ -219,7 +219,7 @@ const inputStyle = css({
 });
 
 const errorStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "sunbeam.orange",
   margin: 0,
 });

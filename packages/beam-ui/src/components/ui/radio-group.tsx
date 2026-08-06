@@ -45,7 +45,9 @@ export interface RadioGroupProps {
  * />
  * ```
  */
-export function RadioGroup({ options, value, onChange, label }: RadioGroupProps): ReactNode {
+export function RadioGroup(
+  { options, value, onChange, label }: RadioGroupProps,
+): ReactNode {
   const labelId = useId();
   return (
     <RadioGroupRoot
@@ -56,9 +58,15 @@ export function RadioGroup({ options, value, onChange, label }: RadioGroupProps)
     >
       {label && <span className={groupLabel} id={labelId}>{label}</span>}
       {options.map((option) => (
-        <RadioGroupItem key={option.value} value={option.value} className={item}>
+        <RadioGroupItem
+          key={option.value}
+          value={option.value}
+          className={item}
+        >
           <RadioGroupItemControl className={control} />
-          <RadioGroupItemText className={text}>{option.label}</RadioGroupItemText>
+          <RadioGroupItemText className={text}>
+            {option.label}
+          </RadioGroupItemText>
           <RadioGroupItemHiddenInput />
         </RadioGroupItem>
       ))}
@@ -69,27 +77,27 @@ export function RadioGroup({ options, value, onChange, label }: RadioGroupProps)
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "10px",
+  gap: "2.5",
 });
 
 const groupLabel = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.primary",
   fontFamily: "body",
-  marginBottom: "2px",
+  marginBottom: "0.5",
 });
 
 const item = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   cursor: "pointer",
 });
 
 const control = css({
-  width: "18px",
-  height: "18px",
+  width: "4.5",
+  height: "4.5",
   borderRadius: "full",
   border: "2px solid",
   borderColor: "border.default",
@@ -104,13 +112,13 @@ const control = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
   _before: {
     content: '""',
     display: "block",
-    width: "8px",
-    height: "8px",
+    width: "2",
+    height: "2",
     borderRadius: "full",
     backgroundColor: "transparent",
     transition: "all 0.15s ease",
@@ -121,7 +129,7 @@ const control = css({
 });
 
 const text = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   fontFamily: "body",
   lineHeight: 1.4,

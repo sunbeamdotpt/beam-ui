@@ -55,7 +55,7 @@ function PillToggle({
         display: "flex",
         backgroundColor: "sunbeam.black",
         borderRadius: "md",
-        padding: "2px",
+        padding: "0.5",
       })}
     >
       {options.map((opt) => (
@@ -65,8 +65,8 @@ function PillToggle({
           aria-pressed={value === opt}
           className={cx(
             css({
-              padding: "4px 12px",
-              fontSize: "10px",
+              padding: "1 3",
+              fontSize: "2xs",
               fontWeight: "button",
               borderRadius: "md",
               textTransform: "uppercase",
@@ -77,8 +77,8 @@ function PillToggle({
             }),
             value === opt ? css({ backgroundColor: "code.activePill", color: "white" }) : css({
               backgroundColor: "transparent",
-              color: "rgba(255,255,255,0.35)",
-              _hover: { color: "rgba(255,255,255,0.7)" },
+              color: "chrome.35",
+              _hover: { color: "chrome.70" },
             }),
           )}
           type="button"
@@ -133,7 +133,9 @@ export function CodeBlock({
   const [version, setVersion] = useState(
     versionToggle?.defaultValue ?? versionToggle?.options[0] ?? "",
   );
-  const [mode, setMode] = useState(modeToggle?.defaultValue ?? modeToggle?.options[0] ?? "");
+  const [mode, setMode] = useState(
+    modeToggle?.defaultValue ?? modeToggle?.options[0] ?? "",
+  );
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -153,16 +155,20 @@ export function CodeBlock({
     if (tab.content) return tab.content;
     if (!tab.variants) return null;
     // Try exact match, then partial matches, then "default"
-    return tab.variants[variantKey] ?? tab.variants["default"] ?? Object.values(tab.variants)[0] ??
+    return tab.variants[variantKey] ?? tab.variants["default"] ??
+      Object.values(tab.variants)[0] ??
       null;
   };
 
   return (
-    <TabsRoot defaultValue={tabs[0]?.label} className={cx(codeBlockRoot, className)}>
+    <TabsRoot
+      defaultValue={tabs[0]?.label}
+      className={cx(codeBlockRoot, className)}
+    >
       {/* Stream / copy bar */}
       {streamToggle && (
         <div className={topBar}>
-          <div className={css({ display: "flex", gap: "16px" })}>
+          <div className={css({ display: "flex", gap: "4" })}>
             {streamToggle.options.map((opt) => (
               <button
                 key={opt}
@@ -170,14 +176,14 @@ export function CodeBlock({
                 aria-pressed={stream === opt}
                 className={cx(
                   css({
-                    fontSize: "12px",
+                    fontSize: "xs",
                     fontWeight: "button",
                     letterSpacing: "-0.01em",
                     textTransform: "uppercase",
                     border: "none",
                     background: "none",
                     cursor: "pointer",
-                    paddingBottom: "4px",
+                    paddingBottom: "1",
                     transition: "all 0.15s ease",
                     fontFamily: "body",
                   }),
@@ -188,8 +194,8 @@ export function CodeBlock({
                       borderBottomColor: "sunbeam.orange",
                     })
                     : css({
-                      color: "rgba(255,255,255,0.35)",
-                      _hover: { color: "rgba(255,255,255,0.6)" },
+                      color: "chrome.35",
+                      _hover: { color: "chrome.60" },
                     }),
                 )}
                 type="button"
@@ -208,12 +214,12 @@ export function CodeBlock({
             <Icon
               name={copied ? "check" : "content_copy"}
               size={16}
-              className={css({ color: copied ? "code.success" : "rgba(255,255,255,0.35)" })}
+              className={css({ color: copied ? "code.success" : "chrome.35" })}
             />
             <span
               aria-live="polite"
               className={css({
-                fontSize: "10px",
+                fontSize: "2xs",
                 color: "code.success",
                 fontFamily: "body",
                 fontWeight: "button",
@@ -228,19 +234,35 @@ export function CodeBlock({
 
       {/* Language + version + mode bar */}
       <div className={controlsBar}>
-        <div className={css({ display: "flex", gap: "12px", alignItems: "center" })}>
+        <div
+          className={css({ display: "flex", gap: "3", alignItems: "center" })}
+        >
           <TabList className={tabList}>
             {tabs.map((tab) => (
-              <TabTrigger key={tab.label} value={tab.label} className={tabTrigger}>
+              <TabTrigger
+                key={tab.label}
+                value={tab.label}
+                className={tabTrigger}
+              >
                 {tab.label}
               </TabTrigger>
             ))}
           </TabList>
           {versionToggle && (
-            <PillToggle options={versionToggle.options} value={version} onChange={setVersion} />
+            <PillToggle
+              options={versionToggle.options}
+              value={version}
+              onChange={setVersion}
+            />
           )}
         </div>
-        {modeToggle && <PillToggle options={modeToggle.options} value={mode} onChange={setMode} />}
+        {modeToggle && (
+          <PillToggle
+            options={modeToggle.options}
+            value={mode}
+            onChange={setMode}
+          />
+        )}
         {!streamToggle && (
           <button
             onClick={handleCopy}
@@ -252,12 +274,12 @@ export function CodeBlock({
             <Icon
               name={copied ? "check" : "content_copy"}
               size={16}
-              className={css({ color: copied ? "code.success" : "rgba(255,255,255,0.35)" })}
+              className={css({ color: copied ? "code.success" : "chrome.35" })}
             />
             <span
               aria-live="polite"
               className={css({
-                fontSize: "10px",
+                fontSize: "2xs",
                 color: "code.success",
                 fontFamily: "body",
                 fontWeight: "button",
@@ -292,7 +314,7 @@ const codeBlockRoot = css({
   backgroundColor: "sunbeam.black",
   color: "code.text",
   fontFamily: "mono",
-  fontSize: "14px",
+  fontSize: "sm",
   shadow: "code",
   border: "1px solid rgba(255,255,255,0.05)",
 });
@@ -301,8 +323,8 @@ const topBar = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "8px 16px",
-  backgroundColor: "rgba(31,31,31,0.5)",
+  padding: "2 4",
+  backgroundColor: "scrim.50",
   borderBottom: "1px solid rgba(255,255,255,0.05)",
 });
 
@@ -310,34 +332,34 @@ const controlsBar = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "12px 16px",
+  padding: "3 4",
   backgroundColor: "sunbeam.black",
   borderBottom: "1px solid rgba(255,255,255,0.05)",
   flexWrap: "wrap",
-  gap: "8px",
+  gap: "2",
 });
 
 const tabList = css({
   display: "flex",
   backgroundColor: "sunbeam.black",
   borderRadius: "md",
-  padding: "2px",
+  padding: "0.5",
   gap: 0,
 });
 
 const tabTrigger = css({
-  padding: "4px 12px",
-  fontSize: "10px",
+  padding: "1 3",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   borderRadius: "md",
   border: "none",
   cursor: "pointer",
   transition: "all 0.15s ease",
-  color: "rgba(255,255,255,0.35)",
+  color: "chrome.35",
   backgroundColor: "transparent",
   fontFamily: "body",
-  _hover: { color: "rgba(255,255,255,0.7)" },
+  _hover: { color: "chrome.70" },
   _selected: { backgroundColor: "code.activePill", color: "white" },
 });
 
@@ -345,18 +367,18 @@ const copyBtn = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "6px",
+  gap: "1.5",
   background: "none",
   border: "none",
   cursor: "pointer",
-  padding: "4px",
+  padding: "1",
   borderRadius: "md",
   transition: "all 0.15s ease",
-  _hover: { backgroundColor: "rgba(255,255,255,0.1)" },
+  _hover: { backgroundColor: "chrome.10" },
 });
 
 const codeBody = css({
-  padding: "24px",
+  padding: "6",
   overflowX: "auto",
   lineHeight: 1.7,
   "& pre": { margin: 0, fontFamily: "mono" },

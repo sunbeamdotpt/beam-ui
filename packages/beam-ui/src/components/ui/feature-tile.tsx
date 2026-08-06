@@ -26,7 +26,7 @@ export interface FeatureTileProps {
  */
 
 const tile = css({
-  padding: "20px",
+  padding: "5",
   bg: "bg.page",
   borderRadius: "0",
   transition: "background 0.15s ease",
@@ -38,24 +38,26 @@ const tile = css({
 const tileIcon = css({
   color: "sunbeam.orange",
   display: "block",
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const tileName = css({
   fontWeight: "button",
-  fontSize: "14px",
-  marginBottom: "4px",
+  fontSize: "sm",
+  marginBottom: "1",
   color: "text.primary",
 });
 
 const tileEndpoint = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontFamily: "mono",
   color: "text.muted",
 });
 
 // FeatureTile function is documented above, before const tile
-export function FeatureTile({ name, endpoint, icon: iconName }: FeatureTileProps): ReactNode {
+export function FeatureTile(
+  { name, endpoint, icon: iconName }: FeatureTileProps,
+): ReactNode {
   return (
     <div className={tile}>
       <Icon name={iconName} size={24} className={tileIcon} aria-hidden="true" />

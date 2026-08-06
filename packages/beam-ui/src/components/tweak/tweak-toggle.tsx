@@ -43,11 +43,11 @@ const root = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  gap: "12px",
+  gap: "3",
 });
 
 const labelStyle = css({
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: 500,
   color: "text.primary",
   fontFamily: "body",

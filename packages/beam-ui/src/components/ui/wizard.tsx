@@ -121,7 +121,11 @@ export function Wizard({
       {/* Step indicator */}
       <nav aria-label="Wizard progress" className={stepIndicator}>
         {steps.map((s, i) => (
-          <div key={i} className={stepItem} aria-current={i === current ? "step" : undefined}>
+          <div
+            key={i}
+            className={stepItem}
+            aria-current={i === current ? "step" : undefined}
+          >
             <div
               className={cx(
                 stepCircle,
@@ -142,7 +146,10 @@ export function Wizard({
               {s.title}
             </span>
             {i < steps.length - 1 && (
-              <div className={cx(stepLine, i < current && stepLineDone)} aria-hidden="true" />
+              <div
+                className={cx(stepLine, i < current && stepLineDone)}
+                aria-hidden="true"
+              />
             )}
           </div>
         ))}
@@ -232,7 +239,10 @@ export function WizardModal({
         <DialogContent className={modalContent}>
           <div className={modalHeader}>
             {title && <DialogTitle className={modalTitle}>{title}</DialogTitle>}
-            <DialogCloseTrigger className={modalClose} aria-label="Close wizard">
+            <DialogCloseTrigger
+              className={modalClose}
+              aria-label="Close wizard"
+            >
               <Icon name="close" size={20} />
             </DialogCloseTrigger>
           </div>
@@ -319,7 +329,7 @@ const stepLabelActive = css({
 });
 
 const stepLine = css({
-  width: { base: "16px", md: "40px" },
+  width: { base: "4", md: "10" },
   height: "0.5",
   backgroundColor: "border.default",
   marginInline: "2",
@@ -332,7 +342,7 @@ const stepLineDone = css({
 });
 
 const content = css({
-  minHeight: "120px",
+  minHeight: "30",
 });
 
 const description = css({
@@ -375,7 +385,7 @@ const stepCount = css({
 const modalBackdrop = css({
   position: "fixed",
   inset: 0,
-  backgroundColor: "rgba(0,0,0,0.5)",
+  backgroundColor: "scrim.50",
   zIndex: 50,
 });
 
@@ -395,7 +405,7 @@ const modalContent = css({
   borderColor: "border.default",
   shadow: "golden",
   width: "100%",
-  maxWidth: "600px",
+  maxWidth: "150",
   maxHeight: "85vh",
   overflowY: "auto",
   padding: "6",

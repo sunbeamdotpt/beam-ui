@@ -75,7 +75,8 @@ function layoutCommits(commits: CommitNode[]) {
     } else if (commit.branch) {
       // Check if this is the main branch (lane 0 candidate)
       if (i === 0 || commit.branch === "main" || commit.branch === "master") {
-        lane = branchLanes.get("main") ?? branchLanes.get("master") ?? nextLane++;
+        lane = branchLanes.get("main") ?? branchLanes.get("master") ??
+          nextLane++;
       } else {
         lane = nextLane++;
       }
@@ -117,7 +118,9 @@ function layoutCommits(commits: CommitNode[]) {
  * />
  * ```
  */
-export function CommitGraph({ commits, className }: CommitGraphProps): ReactNode {
+export function CommitGraph(
+  { commits, className }: CommitGraphProps,
+): ReactNode {
   const { nodes, hashToNode, maxLane } = useMemo(
     () => layoutCommits(commits),
     [commits],
@@ -127,7 +130,13 @@ export function CommitGraph({ commits, className }: CommitGraphProps): ReactNode
   const totalHeight = ROW_HEIGHT * commits.length + GRAPH_PADDING_TOP;
 
   // Build edges
-  const edges: { x1: number; y1: number; x2: number; y2: number; color: string }[] = [];
+  const edges: {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    color: string;
+  }[] = [];
   for (const node of nodes) {
     for (const parentHash of node.commit.parents) {
       const parent = hashToNode.get(parentHash);
@@ -206,7 +215,10 @@ export function CommitGraph({ commits, className }: CommitGraphProps): ReactNode
           >
             <div className={commitMeta}>
               {node.commit.branch && (
-                <span className={branchBadge} style={{ borderColor: node.color }}>
+                <span
+                  className={branchBadge}
+                  style={{ borderColor: node.color }}
+                >
                   {node.commit.branch}
                 </span>
               )}
@@ -251,22 +263,22 @@ const detailsColumn = css({
 const commitRow = css({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  paddingRight: "16px",
+  gap: "3",
+  paddingRight: "4",
   borderBottom: "1px solid",
   borderColor: "border.subtle",
 });
 
 const commitMeta = css({
   display: "flex",
-  gap: "4px",
+  gap: "1",
   flexShrink: 0,
 });
 
 const branchBadge = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontFamily: "mono",
-  padding: "1px 6px",
+  padding: "0.25 1.5",
   border: "1px solid",
   color: "text.primary",
   backgroundColor: "bg.page",
@@ -274,24 +286,24 @@ const branchBadge = css({
 });
 
 const tagBadge = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontFamily: "mono",
-  padding: "1px 6px",
-  backgroundColor: "rgba(250, 82, 15, 0.1)",
+  padding: "0.25 1.5",
+  backgroundColor: "accent.10",
   color: "sunbeam.orange",
   whiteSpace: "nowrap",
 });
 
 const hashStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontFamily: "mono",
   color: "sunbeam.orange",
   flexShrink: 0,
-  width: "64px",
+  width: "16",
 });
 
 const messageStyle = css({
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.primary",
   flex: 1,
   overflow: "hidden",
@@ -300,10 +312,10 @@ const messageStyle = css({
 });
 
 const authorStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
   flexShrink: 0,
-  width: "80px",
+  width: "20",
   textAlign: "right",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -311,10 +323,10 @@ const authorStyle = css({
 });
 
 const dateStyle = css({
-  fontSize: "11px",
+  fontSize: "11",
   color: "text.muted",
   flexShrink: 0,
-  minWidth: "100px",
+  minWidth: "25",
   textAlign: "right",
   fontFamily: "mono",
   whiteSpace: "nowrap",

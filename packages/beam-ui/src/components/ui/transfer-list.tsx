@@ -60,8 +60,12 @@ export function TransferList({
   const selectedLabelId = `${instanceId}-selected`;
   const [availableSearch, setAvailableSearch] = useState("");
   const [selectedSearch, setSelectedSearch] = useState("");
-  const [checkedAvailable, setCheckedAvailable] = useState<Set<string>>(new Set());
-  const [checkedSelected, setCheckedSelected] = useState<Set<string>>(new Set());
+  const [checkedAvailable, setCheckedAvailable] = useState<Set<string>>(
+    new Set(),
+  );
+  const [checkedSelected, setCheckedSelected] = useState<Set<string>>(
+    new Set(),
+  );
 
   const filteredAvailable = available.filter((item) =>
     item.label.toLowerCase().includes(availableSearch.toLowerCase())
@@ -72,7 +76,11 @@ export function TransferList({
   );
 
   const handleItemClick = useCallback(
-    (id: string, side: "available" | "selected", event: React.MouseEvent | React.KeyboardEvent) => {
+    (
+      id: string,
+      side: "available" | "selected",
+      event: React.MouseEvent | React.KeyboardEvent,
+    ) => {
       const setter = side === "available" ? setCheckedAvailable : setCheckedSelected;
       setter((prev) => {
         const next = new Set(prev);
@@ -124,11 +132,17 @@ export function TransferList({
   };
 
   return (
-    <div className={cx(container, className)} role="group" aria-label="Transfer list">
+    <div
+      className={cx(container, className)}
+      role="group"
+      aria-label="Transfer list"
+    >
       {/* Available panel */}
       <div className={panel}>
         <div className={panelHeader}>
-          <span id={availableLabelId} className={panelTitle}>{availableTitle}</span>
+          <span id={availableLabelId} className={panelTitle}>
+            {availableTitle}
+          </span>
           <span className={panelCount}>{available.length}</span>
         </div>
         <div className={searchWrapper}>
@@ -214,7 +228,9 @@ export function TransferList({
       {/* Selected panel */}
       <div className={panel}>
         <div className={panelHeader}>
-          <span id={selectedLabelId} className={panelTitle}>{selectedTitle}</span>
+          <span id={selectedLabelId} className={panelTitle}>
+            {selectedTitle}
+          </span>
           <span className={panelCount}>{selected.length}</span>
         </div>
         <div className={searchWrapper}>
@@ -277,7 +293,7 @@ const panel = css({
   borderColor: "border.default",
   display: "flex",
   flexDirection: "column",
-  minWidth: "200px",
+  minWidth: "50",
 });
 
 const panelHeader = css({
@@ -300,7 +316,7 @@ const panelTitle = css({
 });
 
 const panelCount = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   color: "text.muted",
   fontFamily: "mono",
@@ -330,7 +346,7 @@ const searchInput = css({
   backgroundColor: "bg.page",
   border: "1px solid",
   borderColor: "border.default",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   outline: "none",
@@ -345,8 +361,8 @@ const searchInput = css({
 const itemList = css({
   flex: 1,
   overflowY: "auto",
-  maxHeight: "260px",
-  minHeight: "120px",
+  maxHeight: "65",
+  minHeight: "30",
 });
 
 const listItem = css({
@@ -411,7 +427,7 @@ const emptyPanel = css({
   paddingBlock: "6",
   paddingInline: "4",
   textAlign: "center",
-  fontSize: "13px",
+  fontSize: "13",
   color: "text.muted",
   fontFamily: "body",
 });

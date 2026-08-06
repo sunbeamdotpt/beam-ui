@@ -7,21 +7,21 @@ import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 const srOnly = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",
   borderWidth: 0,
   _focus: {
     position: "fixed",
-    top: "4px",
-    left: "4px",
+    top: "1",
+    left: "1",
     width: "auto",
     height: "auto",
-    padding: "8px 16px",
+    padding: "2 4",
     margin: 0,
     overflow: "visible",
     clip: "auto",
@@ -30,7 +30,7 @@ const srOnly = css({
     bg: "bg.card",
     color: "accent",
     fontWeight: "button",
-    fontSize: "14px",
+    fontSize: "sm",
     border: "2px solid",
     borderColor: "accent",
   },
@@ -61,7 +61,7 @@ export const apiLeftPanel: string = css({
   width: { base: "100%", lg: "55%" },
   overflowY: "auto",
   bg: "bg.page",
-  paddingInline: "24px",
+  paddingInline: "6",
 });
 
 /** CSS class for API layout's right panel (45% width on desktop, dark background). */
@@ -93,13 +93,19 @@ export interface ApiLayoutProps {
  * </ApiLayout>
  * ```
  */
-export function ApiLayout({ children, currentPath = "", linkAs }: ApiLayoutProps): ReactNode {
+export function ApiLayout(
+  { children, currentPath = "", linkAs }: ApiLayoutProps,
+): ReactNode {
   return (
     <>
       <a href="#main-content" className={srOnly}>Skip to main content</a>
       <div className={body}>
         <div className={sidebarWrapper}>
-          <Sidebar sections={apiSidebar} currentPath={currentPath} linkAs={linkAs} />
+          <Sidebar
+            sections={apiSidebar}
+            currentPath={currentPath}
+            linkAs={linkAs}
+          />
         </div>
         <main className={panels} id="main-content">
           {children}

@@ -59,8 +59,8 @@ const area = css({
 
 const preview = css({
   width: "100%",
-  padding: "8px 0",
-  fontSize: "14px",
+  padding: "2 0",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   cursor: "pointer",
@@ -71,14 +71,14 @@ const preview = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const input = css({
   width: "100%",
-  padding: "8px 12px",
-  fontSize: "14px",
+  padding: "2 3",
+  fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
   backgroundColor: "bg.card",
@@ -90,7 +90,7 @@ const input = css({
   transition: "all 0.15s ease",
   caretColor: "text.primary",
   _focus: {
-    ringWidth: "2px",
+    ringWidth: "0.5",
     ringColor: "sunbeam.orange",
     borderColor: "transparent",
     color: "text.primary",

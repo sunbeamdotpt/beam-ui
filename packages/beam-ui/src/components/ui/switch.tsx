@@ -58,7 +58,7 @@ export function Switch({
 const root = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   cursor: "pointer",
   _disabled: {
     opacity: 0.5,
@@ -69,9 +69,9 @@ const root = css({
 const control = css({
   display: "inline-flex",
   alignItems: "center",
-  width: "40px",
-  height: "24px",
-  padding: "2px",
+  width: "10",
+  height: "6",
+  padding: "0.5",
   borderRadius: "full",
   backgroundColor: "bg.card",
   border: "1px solid",
@@ -85,13 +85,13 @@ const control = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
 const thumb = css({
-  width: "18px",
-  height: "18px",
+  width: "4.5",
+  height: "4.5",
   borderRadius: "full",
   backgroundColor: "white",
   transition: "transform 0.2s ease",
@@ -102,7 +102,7 @@ const thumb = css({
 });
 
 const labelStyle = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   fontFamily: "body",
   lineHeight: 1.4,

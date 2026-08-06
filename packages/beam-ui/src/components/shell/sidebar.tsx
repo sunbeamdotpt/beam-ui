@@ -7,35 +7,35 @@ import type { NavSection } from "../../data/navigation.ts";
 import type { LinkComponent } from "../../utils/polymorphic.ts";
 
 const aside = css({
-  width: "240px",
-  minWidth: "240px",
+  width: "60",
+  minWidth: "60",
   position: "sticky",
-  top: "64px",
+  top: "16",
   height: "calc(100vh - 64px)",
   overflowY: "auto",
   alignSelf: "flex-start",
   bg: "bg.page",
-  paddingInline: "24px",
-  paddingBlock: "32px",
+  paddingInline: "6",
+  paddingBlock: "8",
 });
 
 const sectionGroup = css({
-  marginBottom: "32px",
+  marginBottom: "8",
 });
 
 const sectionHeader = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   color: "sectionLabel",
   textTransform: "uppercase",
   letterSpacing: "0.2em",
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const itemList = css({
   display: "flex",
   flexDirection: "column",
-  gap: "2px",
+  gap: "0.5",
   listStyle: "none",
   padding: 0,
   margin: 0,
@@ -45,9 +45,9 @@ const itemLink = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingBlock: "8px",
-  paddingInline: "12px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.secondary",
   textDecoration: "none",
@@ -62,15 +62,15 @@ const itemLinkActive = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingBlock: "8px",
-  paddingInline: "12px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "sm",
   fontWeight: "button",
   color: "accent",
   textDecoration: "none",
   borderLeft: "3px solid",
   borderLeftColor: "sunbeam.orange",
-  bg: "rgba(255, 240, 194, 0.3)",
+  bg: "creamA.30",
 });
 
 const collapsibleTrigger = css({
@@ -78,9 +78,9 @@ const collapsibleTrigger = css({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  paddingBlock: "8px",
-  paddingInline: "12px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.primary",
   textDecoration: "none",
@@ -99,9 +99,9 @@ const collapsibleTriggerActive = css({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  paddingBlock: "8px",
-  paddingInline: "12px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingInline: "3",
+  fontSize: "sm",
   fontWeight: "button",
   color: "text.primary",
   bg: "transparent",
@@ -111,14 +111,14 @@ const collapsibleTriggerActive = css({
 });
 
 const chevron = css({
-  fontSize: "18px",
+  fontSize: "lg",
   transition: "transform 0.2s",
   color: "text.muted",
   lineHeight: 1,
 });
 
 const chevronOpen = css({
-  fontSize: "18px",
+  fontSize: "lg",
   transition: "transform 0.2s",
   transform: "rotate(90deg)",
   color: "text.muted",
@@ -126,28 +126,28 @@ const chevronOpen = css({
 });
 
 const childList = css({
-  marginLeft: "16px",
+  marginLeft: "4",
   borderLeft: "1px solid",
   borderLeftColor: "border.default",
   display: "flex",
   flexDirection: "column",
-  gap: "2px",
-  paddingBlock: "2px",
+  gap: "0.5",
+  paddingBlock: "0.5",
   listStyle: "none",
   paddingInlineStart: 0,
 });
 
 const childLabel = css({
   display: "block",
-  paddingBlock: "6px",
-  paddingLeft: "16px",
-  fontSize: "13px",
+  paddingBlock: "1.5",
+  paddingLeft: "4",
+  fontSize: "13",
   fontWeight: "body",
   color: "text.secondary",
   textDecoration: "none",
   borderLeft: "1px solid",
   borderLeftColor: "border.subtle",
-  marginLeft: "-1px",
+  marginLeft: "-0.25",
   cursor: "pointer",
   transition: "color 0.15s",
   _hover: {
@@ -157,15 +157,15 @@ const childLabel = css({
 
 const childLabelOnPage = css({
   display: "block",
-  paddingBlock: "6px",
-  paddingLeft: "16px",
-  fontSize: "13px",
+  paddingBlock: "1.5",
+  paddingLeft: "4",
+  fontSize: "13",
   fontWeight: "body",
   color: "text.primary",
   textDecoration: "none",
   borderLeft: "2px solid",
   borderLeftColor: "sunbeam.orange",
-  marginLeft: "-1px",
+  marginLeft: "-0.25",
   cursor: "pointer",
   transition: "color 0.15s",
   _hover: {
@@ -175,14 +175,14 @@ const childLabelOnPage = css({
 
 const childLink = css({
   display: "block",
-  paddingBlock: "8px",
-  paddingLeft: "16px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingLeft: "4",
+  fontSize: "sm",
   fontWeight: "body",
   color: "text.secondary",
   textDecoration: "none",
   borderLeft: "3px solid transparent",
-  marginLeft: "-1px",
+  marginLeft: "-0.25",
   transition: "all 0.15s",
   _hover: {
     color: "accent",
@@ -191,16 +191,16 @@ const childLink = css({
 
 const childLinkActive = css({
   display: "block",
-  paddingBlock: "8px",
-  paddingLeft: "16px",
-  fontSize: "14px",
+  paddingBlock: "2",
+  paddingLeft: "4",
+  fontSize: "sm",
   fontWeight: "button",
   color: "accent",
   textDecoration: "none",
   borderLeft: "3px solid",
   borderLeftColor: "sunbeam.orange",
-  marginLeft: "-1px",
-  bg: "rgba(255, 240, 194, 0.3)",
+  marginLeft: "-0.25",
+  bg: "creamA.30",
 });
 
 /** Props for {@link Sidebar}. */
@@ -288,7 +288,9 @@ function SidebarItem({ item, currentPath, LinkAs }: SidebarItemProps) {
  * <Sidebar sections={docsSidebar} currentPath="/components/button" />
  * ```
  */
-export function Sidebar({ sections, currentPath = "", linkAs }: SidebarProps): ReactNode {
+export function Sidebar(
+  { sections, currentPath = "", linkAs }: SidebarProps,
+): ReactNode {
   const LinkAs = linkAs ?? DefaultLink;
   return (
     <aside
@@ -305,7 +307,10 @@ export function Sidebar({ sections, currentPath = "", linkAs }: SidebarProps): R
         );
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.setProperty("scrollbar-color", "transparent transparent");
+        e.currentTarget.style.setProperty(
+          "scrollbar-color",
+          "transparent transparent",
+        );
       }}
     >
       {sections.map((section) => (
@@ -314,7 +319,11 @@ export function Sidebar({ sections, currentPath = "", linkAs }: SidebarProps): R
           <ul className={itemList} role="list">
             {section.items.map((item) => (
               <li key={item.label}>
-                <SidebarItem item={item} currentPath={currentPath} LinkAs={LinkAs} />
+                <SidebarItem
+                  item={item}
+                  currentPath={currentPath}
+                  LinkAs={LinkAs}
+                />
               </li>
             ))}
           </ul>

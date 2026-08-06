@@ -21,7 +21,9 @@ interface TweakSectionProps {
  * </TweakSection>
  * ```
  */
-export function TweakSection({ label, children }: TweakSectionProps): ReactNode {
+export function TweakSection(
+  { label, children }: TweakSectionProps,
+): ReactNode {
   return (
     <section className={root} data-part="section">
       <h3 className={header}>{label}</h3>
@@ -33,9 +35,9 @@ export function TweakSection({ label, children }: TweakSectionProps): ReactNode 
 const root = css({
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
-  paddingTop: "12px",
-  borderTopWidth: "1px",
+  gap: "3",
+  paddingTop: "3",
+  borderTopWidth: "0.25",
   borderTopStyle: "solid",
   borderTopColor: "border.default",
   _first: {
@@ -45,17 +47,17 @@ const root = css({
 });
 
 const header = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: 600,
   letterSpacing: "0.06em",
   textTransform: "uppercase",
   color: "text.secondary",
   margin: 0,
-  marginBottom: "4px",
+  marginBottom: "1",
 });
 
 const content = css({
   display: "flex",
   flexDirection: "column",
-  gap: "10px",
+  gap: "2.5",
 });

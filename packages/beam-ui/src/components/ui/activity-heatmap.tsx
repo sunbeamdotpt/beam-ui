@@ -79,7 +79,9 @@ const LABEL_W = 32;
  * <ActivityHeatmap data={data} />
  * ```
  */
-export function ActivityHeatmap({ data, className }: ActivityHeatmapProps): ReactNode {
+export function ActivityHeatmap(
+  { data, className }: ActivityHeatmapProps,
+): ReactNode {
   const { theme } = useTheme();
   const colors = theme === "dark" ? LEVEL_COLORS_DARK : LEVEL_COLORS_LIGHT;
 
@@ -110,13 +112,21 @@ export function ActivityHeatmap({ data, className }: ActivityHeatmapProps): Reac
           months.push({ label: MONTH_NAMES[m], x: weeksArr.length });
           lastMonth = m;
         }
-        week.push({ date: ds, count: lookup.get(ds) ?? 0, dow: cursor.getDay() });
+        week.push({
+          date: ds,
+          count: lookup.get(ds) ?? 0,
+          dow: cursor.getDay(),
+        });
         cursor.setDate(cursor.getDate() + 1);
       }
       weeksArr.push(week);
     }
 
-    return { weeks: weeksArr, monthLabels: months, totalWeeks: weeksArr.length };
+    return {
+      weeks: weeksArr,
+      monthLabels: months,
+      totalWeeks: weeksArr.length,
+    };
   }, [data]);
 
   const svgW = LABEL_W + totalWeeks * STEP;
@@ -229,12 +239,12 @@ const svg = css({
 });
 
 const svgText = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontFamily: "body",
 });
 
 const svgTextEnd = css({
-  fontSize: "9px",
+  fontSize: "9",
   fontFamily: "body",
   textAnchor: "end",
 });

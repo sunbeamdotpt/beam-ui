@@ -76,7 +76,10 @@ export function MilestonePicker({
   }
 
   return (
-    <PopoverRoot positioning={{ placement: "bottom-start" }} onOpenChange={() => setQuery("")}>
+    <PopoverRoot
+      positioning={{ placement: "bottom-start" }}
+      onOpenChange={() => setQuery("")}
+    >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">
           <Icon name="flag" size={16} className={triggerIcon} />
@@ -122,7 +125,9 @@ export function MilestonePicker({
                     <span className={progressTrack}>
                       <span
                         className={progressFill}
-                        style={{ width: `${Math.max(0, Math.min(100, opt.progress))}%` }}
+                        style={{
+                          width: `${Math.max(0, Math.min(100, opt.progress))}%`,
+                        }}
                       />
                     </span>
                   </span>
@@ -141,17 +146,17 @@ export function MilestonePicker({
 const triggerStyle = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "6px 12px",
+  gap: "2",
+  padding: "1.5 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   cursor: "pointer",
   fontFamily: "body",
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
-  minHeight: "36px",
-  minWidth: "180px",
+  minHeight: "9",
+  minWidth: "45",
   transition: "border-color 0.15s ease",
   _hover: {
     borderColor: "sunbeam.orange",
@@ -187,20 +192,20 @@ const dropdown = css({
   shadow: "golden",
   zIndex: 50,
   outline: "none",
-  width: "320px",
+  width: "80",
   overflow: "hidden",
 });
 
 const searchWrapper = css({
   position: "relative",
-  padding: "8px",
+  padding: "2",
   borderBottom: "1px solid",
   borderColor: "border.default",
 });
 
 const searchIcon = css({
   position: "absolute",
-  left: "16px",
+  left: "4",
   top: "50%",
   transform: "translateY(-50%)",
   color: "text.muted",
@@ -208,11 +213,11 @@ const searchIcon = css({
 
 const searchInput = css({
   width: "100%",
-  padding: "6px 8px 6px 32px",
+  padding: "1.5 2 1.5 8",
   border: "1px solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
-  fontSize: "13px",
+  fontSize: "13",
   fontFamily: "body",
   color: "text.primary",
   outline: "none",
@@ -222,16 +227,16 @@ const searchInput = css({
 });
 
 const listWrapper = css({
-  maxHeight: "300px",
+  maxHeight: "75",
   overflowY: "auto",
 });
 
 const optionRow = css({
   display: "flex",
   alignItems: "flex-start",
-  gap: "10px",
+  gap: "2.5",
   width: "100%",
-  padding: "10px 12px",
+  padding: "2.5 3",
   border: "none",
   background: "none",
   cursor: "pointer",
@@ -246,7 +251,7 @@ const optionRow = css({
 const optionMain = css({
   display: "flex",
   flexDirection: "column",
-  gap: "4px",
+  gap: "1",
   flex: 1,
   minWidth: 0,
 });
@@ -254,8 +259,8 @@ const optionMain = css({
 const optionTitle = css({
   display: "flex",
   alignItems: "center",
-  gap: "6px",
-  fontSize: "14px",
+  gap: "1.5",
+  fontSize: "sm",
   color: "text.primary",
   fontWeight: "button",
 });
@@ -268,8 +273,8 @@ const milestoneIcon = css({
 const optionMeta = css({
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  fontSize: "12px",
+  gap: "3",
+  fontSize: "xs",
   color: "text.muted",
 });
 
@@ -279,11 +284,11 @@ const counts = css({});
 
 const progressTrack = css({
   width: "100%",
-  height: "4px",
+  height: "1",
   backgroundColor: "bg.card",
   borderRadius: "full",
   overflow: "hidden",
-  marginTop: "2px",
+  marginTop: "0.5",
 });
 
 const progressFill = css({
@@ -296,13 +301,13 @@ const progressFill = css({
 const checkIcon = css({
   color: "sunbeam.orange",
   flexShrink: 0,
-  marginTop: "2px",
+  marginTop: "0.5",
 });
 
 const emptyText = css({
   display: "block",
-  padding: "16px",
-  fontSize: "13px",
+  padding: "4",
+  fontSize: "13",
   color: "text.muted",
   textAlign: "center",
 });

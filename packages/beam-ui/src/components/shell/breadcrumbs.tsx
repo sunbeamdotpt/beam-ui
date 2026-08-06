@@ -6,10 +6,10 @@ import type { LinkComponent } from "../../utils/polymorphic.ts";
 const nav = css({
   display: "flex",
   alignItems: "center",
-  gap: "8px",
-  fontSize: "12px",
+  gap: "2",
+  fontSize: "xs",
   fontWeight: "body",
-  marginBottom: "32px",
+  marginBottom: "8",
 });
 
 const crumbLink = css({
@@ -27,7 +27,7 @@ const crumbCurrent = css({
 
 const separator = css({
   color: "text.muted",
-  fontSize: "14px",
+  fontSize: "sm",
   lineHeight: 1,
   userSelect: "none",
 });
@@ -64,7 +64,9 @@ export interface BreadcrumbsProps {
  * ]} />
  * ```
  */
-export function Breadcrumbs({ items, className, linkAs }: BreadcrumbsProps): ReactNode {
+export function Breadcrumbs(
+  { items, className, linkAs }: BreadcrumbsProps,
+): ReactNode {
   const LinkAs = linkAs ?? DefaultLink;
   return (
     <nav className={className ?? nav} aria-label="Breadcrumb">
@@ -81,7 +83,10 @@ export function Breadcrumbs({ items, className, linkAs }: BreadcrumbsProps): Rea
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
           return (
-            <li key={item.label} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <li
+              key={item.label}
+              style={{ display: "flex", alignItems: "center", gap: "8px" }}
+            >
               {idx > 0 && <span className={separator} aria-hidden="true">&#x203A;</span>}
               {item.href && !isLast
                 ? (

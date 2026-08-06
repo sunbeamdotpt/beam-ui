@@ -37,16 +37,16 @@ export type CardProps<T extends ElementType = "article"> =
 
 const elevatedSurface = css({
   backgroundColor: "bg.card",
-  padding: { base: "24px", lg: "40px" },
+  padding: { base: "6", lg: "10" },
   borderRadius: "0",
   shadow: "golden",
   transition: "all 0.3s ease",
-  _hover: { translateY: "-1px" },
+  _hover: { translateY: "-0.25" },
 });
 
 const outlinedSurface = css({
   backgroundColor: "bg.card",
-  padding: "32px",
+  padding: "8",
   border: "1px solid",
   borderColor: "border.warm",
   borderRadius: "0",
@@ -55,45 +55,45 @@ const outlinedSurface = css({
 });
 
 const iconBox = css({
-  width: "48px",
-  height: "48px",
+  width: "12",
+  height: "12",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: "24px",
+  marginBottom: "6",
   color: "sunbeam.orange",
 });
 
 const iconBoxCompact = css({
   color: "sunbeam.orange",
-  fontSize: "36px",
-  marginBottom: "16px",
+  fontSize: "36",
+  marginBottom: "4",
 });
 
 const titleStyle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   color: "text.primary",
   textTransform: "uppercase",
   letterSpacing: "-0.025em",
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const titleStyleCompact = css({
-  fontSize: "20px",
+  fontSize: "xl",
   fontWeight: "heading",
   color: "text.primary",
-  marginBottom: "8px",
+  marginBottom: "2",
 });
 
 const descriptionStyle = css({
   color: "text.secondary",
   lineHeight: 1.7,
-  marginBottom: "24px",
+  marginBottom: "6",
 });
 
 const descriptionStyleCompact = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
   lineHeight: 1.6,
   marginBottom: "0",
@@ -104,13 +104,13 @@ const ctaLink = css({
   fontWeight: "button",
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   textTransform: "uppercase",
-  fontSize: "14px",
+  fontSize: "sm",
   letterSpacing: "0.1em",
   textDecoration: "none",
   transition: "gap 0.2s ease",
-  _hover: { gap: "12px" },
+  _hover: { gap: "3" },
 });
 
 /**
@@ -157,7 +157,8 @@ export function Card<T extends ElementType = "article">(
   const isLink = href != null && href.length > 0;
   const isInteractive = isLink || action != null;
 
-  const resolvedVariant = variant ?? (isContent && !isInteractive ? "outlined" : "elevated");
+  const resolvedVariant = variant ??
+    (isContent && !isInteractive ? "outlined" : "elevated");
   const surfaceClass = resolvedVariant === "outlined" ? outlinedSurface : elevatedSurface;
 
   const Component = as ?? (isLink ? "a" : "article");
@@ -180,7 +181,12 @@ export function Card<T extends ElementType = "article">(
     <>
       {icon && (
         <div className={compact ? iconBoxCompact : iconBox}>
-          <Icon name={icon} size={compact ? 36 : 30} filled aria-hidden="true" />
+          <Icon
+            name={icon}
+            size={compact ? 36 : 30}
+            filled
+            aria-hidden="true"
+          />
         </div>
       )}
       <h3 className={compact ? titleStyleCompact : titleStyle}>{title}</h3>

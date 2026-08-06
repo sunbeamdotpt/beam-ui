@@ -79,8 +79,15 @@ export function DatePicker({
         closeOnSelect
       >
         <DatePickerControl className={controlStyle}>
-          <DatePickerInput id={inputId} className={inputStyle} placeholder={placeholder} />
-          <DatePickerTrigger className={triggerButton} aria-label="Open calendar">
+          <DatePickerInput
+            id={inputId}
+            className={inputStyle}
+            placeholder={placeholder}
+          />
+          <DatePickerTrigger
+            className={triggerButton}
+            aria-label="Open calendar"
+          >
             <Icon name="calendar_today" size={18} />
           </DatePickerTrigger>
         </DatePickerControl>
@@ -92,13 +99,19 @@ export function DatePicker({
                 {(context) => (
                   <>
                     <DatePickerViewControl className={navRow}>
-                      <DatePickerPrevTrigger className={navButton} aria-label="Previous">
+                      <DatePickerPrevTrigger
+                        className={navButton}
+                        aria-label="Previous"
+                      >
                         <Icon name="chevron_left" size={18} />
                       </DatePickerPrevTrigger>
                       <DatePickerViewTrigger className={viewTrigger}>
                         {context.visibleRangeText.start}
                       </DatePickerViewTrigger>
-                      <DatePickerNextTrigger className={navButton} aria-label="Next">
+                      <DatePickerNextTrigger
+                        className={navButton}
+                        aria-label="Next"
+                      >
                         <Icon name="chevron_right" size={18} />
                       </DatePickerNextTrigger>
                     </DatePickerViewControl>
@@ -107,7 +120,10 @@ export function DatePicker({
                       <DatePickerTableHead>
                         <DatePickerTableRow>
                           {context.weekDays.map((weekDay, i) => (
-                            <DatePickerTableHeader key={i} className={headerCell}>
+                            <DatePickerTableHeader
+                              key={i}
+                              className={headerCell}
+                            >
                               {weekDay.narrow}
                             </DatePickerTableHeader>
                           ))}
@@ -117,8 +133,14 @@ export function DatePicker({
                         {context.weeks.map((week, i) => (
                           <DatePickerTableRow key={i}>
                             {week.map((day, j) => (
-                              <DatePickerTableCell key={j} value={day} className={dayCell}>
-                                <DatePickerTableCellTrigger className={dayCellTrigger}>
+                              <DatePickerTableCell
+                                key={j}
+                                value={day}
+                                className={dayCell}
+                              >
+                                <DatePickerTableCellTrigger
+                                  className={dayCellTrigger}
+                                >
                                   {day.day}
                                 </DatePickerTableCellTrigger>
                               </DatePickerTableCell>
@@ -137,30 +159,43 @@ export function DatePicker({
                 {(context) => (
                   <>
                     <DatePickerViewControl className={navRow}>
-                      <DatePickerPrevTrigger className={navButton} aria-label="Previous">
+                      <DatePickerPrevTrigger
+                        className={navButton}
+                        aria-label="Previous"
+                      >
                         <Icon name="chevron_left" size={18} />
                       </DatePickerPrevTrigger>
                       <DatePickerViewTrigger className={viewTrigger}>
                         {context.visibleRange.start.year}
                       </DatePickerViewTrigger>
-                      <DatePickerNextTrigger className={navButton} aria-label="Next">
+                      <DatePickerNextTrigger
+                        className={navButton}
+                        aria-label="Next"
+                      >
                         <Icon name="chevron_right" size={18} />
                       </DatePickerNextTrigger>
                     </DatePickerViewControl>
 
                     <DatePickerTable className={tableStyle}>
                       <DatePickerTableBody>
-                        {context.getMonthsGrid({ columns: 4, format: "short" }).map((months, i) => (
-                          <DatePickerTableRow key={i}>
-                            {months.map((month, j) => (
-                              <DatePickerTableCell key={j} value={month.value} className={dayCell}>
-                                <DatePickerTableCellTrigger className={dayCellTrigger}>
-                                  {month.label}
-                                </DatePickerTableCellTrigger>
-                              </DatePickerTableCell>
-                            ))}
-                          </DatePickerTableRow>
-                        ))}
+                        {context.getMonthsGrid({ columns: 4, format: "short" })
+                          .map((months, i) => (
+                            <DatePickerTableRow key={i}>
+                              {months.map((month, j) => (
+                                <DatePickerTableCell
+                                  key={j}
+                                  value={month.value}
+                                  className={dayCell}
+                                >
+                                  <DatePickerTableCellTrigger
+                                    className={dayCellTrigger}
+                                  >
+                                    {month.label}
+                                  </DatePickerTableCellTrigger>
+                                </DatePickerTableCell>
+                              ))}
+                            </DatePickerTableRow>
+                          ))}
                       </DatePickerTableBody>
                     </DatePickerTable>
                   </>
@@ -173,25 +208,40 @@ export function DatePicker({
                 {(context) => (
                   <>
                     <DatePickerViewControl className={navRow}>
-                      <DatePickerPrevTrigger className={navButton} aria-label="Previous">
+                      <DatePickerPrevTrigger
+                        className={navButton}
+                        aria-label="Previous"
+                      >
                         <Icon name="chevron_left" size={18} />
                       </DatePickerPrevTrigger>
                       <DatePickerViewTrigger className={viewTrigger}>
                         {context.getYearsGrid().at(0)?.at(0)?.label} &ndash;{" "}
                         {context.getYearsGrid().at(-1)?.at(-1)?.label}
                       </DatePickerViewTrigger>
-                      <DatePickerNextTrigger className={navButton} aria-label="Next">
+                      <DatePickerNextTrigger
+                        className={navButton}
+                        aria-label="Next"
+                      >
                         <Icon name="chevron_right" size={18} />
                       </DatePickerNextTrigger>
                     </DatePickerViewControl>
 
                     <DatePickerTable className={tableStyle}>
                       <DatePickerTableBody>
-                        {context.getYearsGrid({ columns: 4 }).map((years, i) => (
+                        {context.getYearsGrid({ columns: 4 }).map((
+                          years,
+                          i,
+                        ) => (
                           <DatePickerTableRow key={i}>
                             {years.map((year, j) => (
-                              <DatePickerTableCell key={j} value={year.value} className={dayCell}>
-                                <DatePickerTableCellTrigger className={dayCellTrigger}>
+                              <DatePickerTableCell
+                                key={j}
+                                value={year.value}
+                                className={dayCell}
+                              >
+                                <DatePickerTableCellTrigger
+                                  className={dayCellTrigger}
+                                >
                                   {year.label}
                                 </DatePickerTableCellTrigger>
                               </DatePickerTableCell>
@@ -214,12 +264,12 @@ export function DatePicker({
 const wrapper = css({
   display: "flex",
   flexDirection: "column",
-  gap: "6px",
+  gap: "1.5",
   width: "100%",
 });
 
 const labelStyle = css({
-  fontSize: "12px",
+  fontSize: "xs",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -235,18 +285,18 @@ const controlStyle = css({
 
 const inputStyle = css({
   width: "100%",
-  padding: "10px 12px",
+  padding: "2.5 3",
   backgroundColor: "bg.card",
   border: "1px solid",
   borderColor: "border.default",
   borderRadius: "0",
-  fontSize: "14px",
+  fontSize: "sm",
   fontFamily: "mono",
   color: "text.primary",
   outline: "none",
   transition: "all 0.15s ease",
   _focus: {
-    ringWidth: "2px",
+    ringWidth: "0.5",
     ringColor: "sunbeam.orange",
     borderColor: "transparent",
   },
@@ -263,7 +313,7 @@ const triggerButton = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 12px",
+  padding: "0 3",
   height: "auto",
   alignSelf: "stretch",
   backgroundColor: "bg.card",
@@ -280,7 +330,7 @@ const triggerButton = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "-2px",
+    outlineOffset: "-0.5",
   },
   _disabled: {
     opacity: 0.5,
@@ -297,10 +347,10 @@ const contentStyle = css({
   border: "1px solid",
   borderColor: "border.default",
   shadow: "golden",
-  padding: "16px",
+  padding: "4",
   zIndex: 50,
   outline: "none",
-  minWidth: "280px",
+  minWidth: "70",
   "&[data-state=closed]": {
     display: "none",
   },
@@ -310,7 +360,7 @@ const navRow = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  marginBottom: "12px",
+  marginBottom: "3",
 });
 
 const navButton = css({
@@ -321,7 +371,7 @@ const navButton = css({
   border: "none",
   cursor: "pointer",
   color: "text.secondary",
-  padding: "4px",
+  padding: "1",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
@@ -329,7 +379,7 @@ const navButton = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
@@ -337,11 +387,11 @@ const viewTrigger = css({
   background: "none",
   border: "none",
   cursor: "pointer",
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
-  padding: "4px 8px",
+  padding: "1 2",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",
@@ -349,7 +399,7 @@ const viewTrigger = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
@@ -359,27 +409,27 @@ const tableStyle = css({
 });
 
 const headerCell = css({
-  fontSize: "11px",
+  fontSize: "11",
   fontWeight: "button",
   textTransform: "uppercase",
   color: "text.muted",
   textAlign: "center",
-  padding: "4px",
+  padding: "1",
   fontFamily: "mono",
 });
 
 const dayCell = css({
   textAlign: "center",
-  padding: "1px",
+  padding: "0.25",
 });
 
 const dayCellTrigger = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "32px",
-  height: "32px",
-  fontSize: "13px",
+  width: "8",
+  height: "8",
+  fontSize: "13",
   fontFamily: "mono",
   color: "text.primary",
   background: "none",
@@ -408,7 +458,7 @@ const dayCellTrigger = css({
   _focusVisible: {
     outline: "2px solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "1px",
+    outlineOffset: "0.25",
   },
   _disabled: {
     opacity: 0.3,
