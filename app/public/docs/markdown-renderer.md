@@ -44,7 +44,10 @@ function loadKatex(): Promise<KatexType> {
 /** Extract math blocks, replace with text markers that survive sanitization */
 function extractMath(
   md: string,
-): { processed: string; blocks: { id: string; math: string; display: boolean }[] } {
+): {
+  processed: string;
+  blocks: { id: string; math: string; display: boolean }[];
+} {
   const blocks: { id: string; math: string; display: boolean }[] = [];
   let idx = 0;
 
@@ -56,11 +59,14 @@ function extractMath(
   });
 
   // Inline math: $...$  (not preceded/followed by $)
-  processed = processed.replace(/(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g, (_, math) => {
-    const id = `BEAMMATH${idx++}BEAMMATH`;
-    blocks.push({ id, math: math.trim(), display: false });
-    return id;
-  });
+  processed = processed.replace(
+    /(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g,
+    (_, math) => {
+      const id = `BEAMMATH${idx++}BEAMMATH`;
+      blocks.push({ id, math: math.trim(), display: false });
+      return id;
+    },
+  );
 
   return { processed, blocks };
 }

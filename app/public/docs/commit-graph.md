@@ -69,7 +69,8 @@ function layoutCommits(commits: CommitNode[]) {
     } else if (commit.branch) {
       // Check if this is the main branch (lane 0 candidate)
       if (i === 0 || commit.branch === "main" || commit.branch === "master") {
-        lane = branchLanes.get("main") ?? branchLanes.get("master") ?? nextLane++;
+        lane = branchLanes.get("main") ?? branchLanes.get("master") ??
+          nextLane++;
       } else {
         lane = nextLane++;
       }

@@ -35,7 +35,12 @@ export interface KanbanCardData {
     createdAt: string;
   }[];
   /** File attachments. */
-  attachments?: { id: string; name: string; sizeBytes?: number; url?: string }[];
+  attachments?: {
+    id: string;
+    name: string;
+    sizeBytes?: number;
+    url?: string;
+  }[];
   /** Breadcrumb path, e.g. "Beam UI / Components". */
   breadcrumb?: string;
   /** Column/status title, e.g. "Backlog". */
@@ -59,7 +64,10 @@ export interface KanbanCardDetailProps {
 /* Label color mapping (matches ref .lb--* classes)                   */
 /* ------------------------------------------------------------------ */
 
-const LABEL_STYLE: Record<string, { background: string; color: string; border: string }> = {
+const LABEL_STYLE: Record<
+  string,
+  { background: string; color: string; border: string }
+> = {
   orange: {
     background: "rgba(250,82,15,0.12)",
     color: "#fa520f",
@@ -92,7 +100,10 @@ function getLabelStyle(color: string) {
 /* Priority badge                                                      */
 /* ------------------------------------------------------------------ */
 
-const PRIORITY_STYLE: Record<string, { background: string; color: string; border: string }> = {
+const PRIORITY_STYLE: Record<
+  string,
+  { background: string; color: string; border: string }
+> = {
   low: {
     background: "rgba(13,148,136,0.1)",
     color: "rgb(15,118,110)",

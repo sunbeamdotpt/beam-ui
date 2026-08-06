@@ -34,7 +34,9 @@ const row = css({
   padding: "4",
   margin: "-4",
   borderRadius: "0",
-  border: "1px solid transparent",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "transparent",
   transition: "all 0.15s ease",
   textDecoration: "none",
   color: "text.primary",
@@ -80,7 +82,7 @@ const desc = css({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  maxWidth: "200px",
+  maxWidth: "50",
 });
 
 const versionText = css({

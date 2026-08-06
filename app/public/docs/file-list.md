@@ -41,11 +41,12 @@ export interface FileListProps {
 /* ------------------------------------------------------------------ */
 
 const checkboxOuter = css({
-  width: "18px",
-  height: "18px",
-  minWidth: "18px",
-  border: "1px solid",
-  borderColor: { base: "rgba(127,99,21,0.3)", _dark: "rgba(255,161,16,0.35)" },
+  width: "4.5",
+  height: "4.5",
+  minWidth: "4.5",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: { base: "warm.30", _dark: "sunshine.35" },
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -60,7 +61,11 @@ const checkboxChecked = css({
 });
 
 function Checkbox(
-  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+  { checked, onChange, ariaLabel }: {
+    checked: boolean;
+    onChange: () => void;
+    ariaLabel?: string;
+  },
 ) {
   return (
     <div
@@ -103,37 +108,39 @@ const listContainer = css({
 const listHeader = css({
   display: "grid",
   gridTemplateColumns: "32px 24px 1fr 100px 140px",
-  gap: "8px",
+  gap: "2",
   alignItems: "center",
-  padding: "8px 12px",
-  fontSize: "11px",
+  padding: "2 3",
+  fontSize: "11",
   fontWeight: "button",
   color: "text.muted",
   textTransform: "uppercase",
   letterSpacing: "0.1em",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
 const listRow = css({
   display: "grid",
   gridTemplateColumns: "32px 24px 1fr 100px 140px",
-  gap: "8px",
+  gap: "2",
   alignItems: "center",
-  padding: "8px 12px",
+  padding: "2 3",
   cursor: "pointer",
   transition: "background 0.1s ease",
   _hover: { backgroundColor: "bg.card" },
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
 });
 
 const listRowSelected = css({
-  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  backgroundColor: "accent.06",
 });
 
 const fileName = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -142,11 +149,11 @@ const fileName = css({
 
 const fileNameMono = css({
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
 });
 
 const fileMeta = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
 });
 
@@ -165,7 +172,8 @@ function ListView({
   onOpen,
   font = "body",
 }: Omit<FileListProps, "layout" | "className">) {
-  const allSelected = items.length > 0 && items.every((i) => selected.has(i.id));
+  const allSelected = items.length > 0 &&
+    items.every((i) => selected.has(i.id));
 
   const toggleAll = () => {
     if (allSelected) {
@@ -185,7 +193,11 @@ function ListView({
   return (
     <div className={listContainer} role="grid">
       <div className={listHeader} role="row">
-        <Checkbox checked={allSelected} onChange={toggleAll} ariaLabel="Select all files" />
+        <Checkbox
+          checked={allSelected}
+          onChange={toggleAll}
+          ariaLabel="Select all files"
+        />
         <span />
         <span>Name</span>
         <span>Size</span>
@@ -208,7 +220,9 @@ function ListView({
             size={18}
             className={item.type === "folder" ? folderIcon : fileIcon}
           />
-          <span className={cx(fileName, font === "mono" && fileNameMono)}>{item.name}</span>
+          <span className={cx(fileName, font === "mono" && fileNameMono)}>
+            {item.name}
+          </span>
           <span className={fileMeta}>{item.size ?? "—"}</span>
           <span className={fileMeta}>{item.modified ?? "—"}</span>
         </div>
@@ -227,35 +241,37 @@ const gridContainer = css({
     base: "repeat(auto-fill, minmax(120px, 1fr))",
     md: "repeat(auto-fill, minmax(140px, 1fr))",
   },
-  gap: "12px",
+  gap: "3",
 });
 
 const gridCell = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "8px",
-  padding: "16px 8px",
+  gap: "2",
+  padding: "4 2",
   cursor: "pointer",
   position: "relative",
   transition: "background 0.1s ease",
-  border: "1px solid transparent",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "transparent",
   _hover: { backgroundColor: "bg.card" },
 });
 
 const gridCellSelected = css({
-  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  backgroundColor: "accent.06",
   borderColor: "sunbeam.orange",
 });
 
 const gridCheckbox = css({
   position: "absolute",
-  top: "8px",
-  left: "8px",
+  top: "2",
+  left: "2",
 });
 
 const gridName = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.primary",
   textAlign: "center",
   overflow: "hidden",
@@ -266,7 +282,7 @@ const gridName = css({
 
 const gridNameMono = css({
   fontFamily: "mono",
-  fontSize: "11px",
+  fontSize: "11",
 });
 
 function GridView({
@@ -313,7 +329,9 @@ function GridView({
             size={40}
             className={item.type === "folder" ? folderIcon : fileIcon}
           />
-          <span className={cx(gridName, font === "mono" && gridNameMono)}>{item.name}</span>
+          <span className={cx(gridName, font === "mono" && gridNameMono)}>
+            {item.name}
+          </span>
         </div>
       ))}
     </div>

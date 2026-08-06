@@ -18,16 +18,21 @@ export interface ModelStats {
 
 const grid = css({
   display: "grid",
-  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" },
+  gridTemplateColumns: {
+    base: "repeat(2, 1fr)",
+    md: "repeat(3, 1fr)",
+    lg: "repeat(5, 1fr)",
+  },
   paddingBlock: "6",
   marginBottom: "12",
-  gap: { base: "16px", lg: "0" },
+  gap: { base: "4", lg: "0" },
 });
 
 const cell = css({
   paddingInline: "4",
   textAlign: "center",
-  borderRight: "1px solid",
+  borderRightWidth: "0.25",
+  borderRightStyle: "solid",
   borderColor: "border.subtle",
   _last: {
     borderRight: "none",
@@ -92,10 +97,10 @@ const priceLabel = css({
 
 const srOnly = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",

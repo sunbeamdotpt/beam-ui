@@ -25,7 +25,14 @@ interface TimelineEvent {
   /** Unique identifier for this event. */
   id: string;
   /** Event type (e.g., "merge", "close", "label"). */
-  type: "label" | "assignee" | "milestone" | "merge" | "close" | "reopen" | "reference";
+  type:
+    | "label"
+    | "assignee"
+    | "milestone"
+    | "merge"
+    | "close"
+    | "reopen"
+    | "reference";
   /** Username of the actor who triggered the event. */
   actor: string;
   /** Human-readable detail of the event (e.g., "closed this" or "added label bug"). */
@@ -112,14 +119,20 @@ function CommentCard({
     >
       <div className={commentHeader}>
         <span className={authorName}>{comment.author.displayName}</span>
-        <span className={timestamp}>{formatRelativeTime(comment.createdAt)}</span>
+        <span className={timestamp}>
+          {formatRelativeTime(comment.createdAt)}
+        </span>
         {comment.updatedAt && <span className={editedBadge}>(edited)</span>}
       </div>
 
       {editing
         ? (
           <div className={editArea}>
-            <MarkdownEditor value={editBody} onChange={setEditBody} minHeight="100px" />
+            <MarkdownEditor
+              value={editBody}
+              onChange={setEditBody}
+              minHeight="100px"
+            />
             <div className={editActions}>
               <Button variant="primary" onClick={handleSaveEdit}>Save</Button>
               <Button
@@ -179,13 +192,18 @@ const EVENT_COLORS: Record<TimelineEvent["type"], string> = {
 function TimelineEventItem({ event }: { event: TimelineEvent }) {
   return (
     <div className={eventRow} role="listitem">
-      <div className={eventIconWrapper} style={{ color: EVENT_COLORS[event.type] }}>
+      <div
+        className={eventIconWrapper}
+        style={{ color: EVENT_COLORS[event.type] }}
+      >
         <Icon name={EVENT_ICONS[event.type]} size={16} />
       </div>
       <div className={eventContent}>
         <span className={eventActorText}>{event.actor}</span>{" "}
         <span className={eventDetailText}>{event.detail}</span>
-        <span className={eventTimestamp}>{formatRelativeTime(event.createdAt)}</span>
+        <span className={eventTimestamp}>
+          {formatRelativeTime(event.createdAt)}
+        </span>
       </div>
     </div>
   );

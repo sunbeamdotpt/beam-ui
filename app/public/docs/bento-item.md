@@ -35,20 +35,20 @@ const categoryBadge = css({
   display: "inline-block",
   bg: "sunbeam.orange",
   color: "white",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
-  paddingInline: "8px",
-  paddingBlock: "4px",
+  paddingInline: "2",
+  paddingBlock: "1",
   letterSpacing: "0.05em",
 });
 
 const difficultyLabel = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   color: "sunbeam.orange",
   bg: "bg.page",
-  padding: "4px",
+  padding: "1",
 });
 
 const arrowIcon = css({
@@ -66,7 +66,8 @@ const largeCard = css({
   display: "flex",
   flexDirection: "column",
   bg: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   textDecoration: "none",
   color: "text.primary",
@@ -74,7 +75,7 @@ const largeCard = css({
 });
 
 const largeImage = css({
-  height: "288px",
+  height: "72",
   bg: "linear-gradient(135deg, token(colors.sunbeam.orange), token(colors.sunbeam.flame))",
   position: "relative",
   overflow: "hidden",
@@ -87,28 +88,28 @@ const largeImagePlaceholder = css({
   alignItems: "center",
   justifyContent: "center",
   color: "white",
-  fontSize: "48px",
+  fontSize: "4xl",
   opacity: 0.3,
 });
 
 const largeBody = css({
-  padding: "32px",
+  padding: "8",
   flex: 1,
   display: "flex",
   flexDirection: "column",
 });
 
 const largeTitle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "button",
-  marginBottom: "16px",
+  marginBottom: "4",
   color: "text.primary",
 });
 
 const largeDesc = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
-  marginBottom: "24px",
+  marginBottom: "6",
   flex: 1,
   lineHeight: 1.6,
 });
@@ -121,10 +122,10 @@ const largeFooter = css({
 
 const ctaLink = css({
   fontWeight: "button",
-  fontSize: "14px",
+  fontSize: "sm",
   display: "flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
   transition: "transform 0.2s ease",
   _groupHover: {
     transform: "translateX(8px)",
@@ -140,7 +141,8 @@ const horizontalCard = css({
   display: "flex",
   flexDirection: { base: "column", md: "row" },
   bg: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   textDecoration: "none",
   color: "text.primary",
@@ -149,49 +151,50 @@ const horizontalCard = css({
 
 const horizontalImage = css({
   width: { base: "100%", md: "33.333%" },
-  minHeight: { base: "160px", md: "100%" },
+  minHeight: { base: "40", md: "100%" },
   bg: "linear-gradient(135deg, token(colors.sunbeam.black), token(colors.card.dark))",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   color: "sunbeam.orange",
-  fontSize: "40px",
+  fontSize: "40",
   opacity: 0.5,
   overflow: "hidden",
 });
 
 const horizontalBody = css({
   flex: 1,
-  padding: "24px",
+  padding: "6",
 });
 
 const horizontalCategory = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "sunbeam.orange",
   letterSpacing: "-0.02em",
-  marginBottom: "8px",
+  marginBottom: "2",
   display: "block",
 });
 
 const horizontalTitle = css({
-  fontSize: "20px",
+  fontSize: "xl",
   fontWeight: "heading",
-  marginBottom: "8px",
+  marginBottom: "2",
   color: "text.primary",
 });
 
 const horizontalDesc = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
-  marginBottom: "16px",
+  marginBottom: "4",
   lineHeight: 1.6,
 });
 
 const horizontalCta = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "button",
-  borderBottom: "2px solid",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
   borderColor: "sunbeam.orange",
   display: "inline",
 });
@@ -202,8 +205,9 @@ const horizontalCta = css({
 
 const smallCard = css({
   bg: "bg.card",
-  padding: "24px",
-  border: "1px solid",
+  padding: "6",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   textDecoration: "none",
   color: "text.primary",
@@ -212,16 +216,16 @@ const smallCard = css({
 });
 
 const smallTitle = css({
-  fontSize: "18px",
+  fontSize: "lg",
   fontWeight: "heading",
-  marginBottom: "12px",
+  marginBottom: "3",
   color: "text.primary",
 });
 
 const smallDesc = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.secondary",
-  marginBottom: "16px",
+  marginBottom: "4",
   flex: 1,
   lineHeight: 1.6,
 });

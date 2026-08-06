@@ -13,11 +13,11 @@ export interface TooltipProps {
 const contentStyle = css({
   backgroundColor: "sunbeam.black",
   color: "white",
-  fontSize: "12px",
-  padding: "6px 12px",
+  fontSize: "xs",
+  padding: "1.5 3",
   borderRadius: "sm",
   lineHeight: 1.4,
-  maxWidth: "240px",
+  maxWidth: "60",
   zIndex: 1000,
 });
 

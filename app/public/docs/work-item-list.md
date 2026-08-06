@@ -61,7 +61,11 @@ export interface WorkItemListProps {
 /* ------------------------------------------------------------------ */
 
 function Checkbox(
-  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+  { checked, onChange, ariaLabel }: {
+    checked: boolean;
+    onChange: () => void;
+    ariaLabel?: string;
+  },
 ) {
   return (
     <div

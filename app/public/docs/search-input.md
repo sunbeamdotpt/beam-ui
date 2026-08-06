@@ -9,10 +9,18 @@ export interface SearchInputProps {
 // Build a flat list of all nav items for search
 const allNavItems = docsSidebar.flatMap((section) =>
   section.items.flatMap((item) => {
-    const results = [{ label: item.label, href: item.href, section: section.title }];
+    const results = [{
+      label: item.label,
+      href: item.href,
+      section: section.title,
+    }];
     if (item.children) {
       item.children.forEach((child) =>
-        results.push({ label: child.label, href: child.href, section: section.title })
+        results.push({
+          label: child.label,
+          href: child.href,
+          section: section.title,
+        })
       );
     }
     return results;

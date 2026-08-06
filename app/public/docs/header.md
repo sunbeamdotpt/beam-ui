@@ -35,7 +35,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
       ];
       if (item.children) {
         item.children.forEach((child) =>
-          results.push({ label: child.label, href: child.href, section: section.title })
+          results.push({
+            label: child.label,
+            href: child.href,
+            section: section.title,
+          })
         );
       }
       return results;
@@ -44,7 +48,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
 }
 
 /** Default active matcher: exact for root, prefix otherwise. */
-function defaultIsActive(_label: string, href: string, currentPath: string): boolean {
+function defaultIsActive(
+  _label: string,
+  href: string,
+  currentPath: string,
+): boolean {
   if (href === "/") return currentPath === "/";
   return currentPath.startsWith(href);
 }

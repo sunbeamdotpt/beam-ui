@@ -34,17 +34,18 @@ export type CardProps<T extends ElementType = "article"> =
 
 const elevatedSurface = css({
   backgroundColor: "bg.card",
-  padding: { base: "24px", lg: "40px" },
+  padding: { base: "6", lg: "10" },
   borderRadius: "0",
   shadow: "golden",
   transition: "all 0.3s ease",
-  _hover: { translateY: "-1px" },
+  _hover: { translateY: "-0.25" },
 });
 
 const outlinedSurface = css({
   backgroundColor: "bg.card",
-  padding: "32px",
-  border: "1px solid",
+  padding: "8",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   borderRadius: "0",
   transition: "border-color 0.2s ease",
@@ -52,45 +53,45 @@ const outlinedSurface = css({
 });
 
 const iconBox = css({
-  width: "48px",
-  height: "48px",
+  width: "12",
+  height: "12",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: "24px",
+  marginBottom: "6",
   color: "sunbeam.orange",
 });
 
 const iconBoxCompact = css({
   color: "sunbeam.orange",
-  fontSize: "36px",
-  marginBottom: "16px",
+  fontSize: "36",
+  marginBottom: "4",
 });
 
 const titleStyle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   color: "text.primary",
   textTransform: "uppercase",
   letterSpacing: "-0.025em",
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const titleStyleCompact = css({
-  fontSize: "20px",
+  fontSize: "xl",
   fontWeight: "heading",
   color: "text.primary",
-  marginBottom: "8px",
+  marginBottom: "2",
 });
 
 const descriptionStyle = css({
   color: "text.secondary",
   lineHeight: 1.7,
-  marginBottom: "24px",
+  marginBottom: "6",
 });
 
 const descriptionStyleCompact = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
   lineHeight: 1.6,
   marginBottom: "0",
@@ -101,13 +102,13 @@ const ctaLink = css({
   fontWeight: "button",
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   textTransform: "uppercase",
-  fontSize: "14px",
+  fontSize: "sm",
   letterSpacing: "0.1em",
   textDecoration: "none",
   transition: "gap 0.2s ease",
-  _hover: { gap: "12px" },
+  _hover: { gap: "3" },
 });
 
 /** Single card implementation that serves as both a generic surface and a structured content card. * **Container mode** — pass `children` and no `title`: ```tsx <Card> <h3>Anything goes here</h3> </Card> ``` * **Content mode** — pass `title` (and usually `icon` + `description`): - `href` makes the whole card a link. - `action` renders a separate CTA inside the card. - neither produces a static content card. * Use `variant="outlined"` for the bordered CapabilityCard/TopicCard look, or `variant="elevated"` (default) for the shadow-lift FeatureCard look. * @example ```tsx <Card icon="code" title="API" description="..." action={{ label: "Explore", href: "/api" }} /> <Card icon="guide" title="Guide" description="..." href="/guide" variant="outlined" /> <Card icon="shield" title="Security" description="..." variant="outlined" /> ```

@@ -19,7 +19,10 @@ type ActiveTab = "write" | "preview";
 interface ToolbarAction {
   icon: string;
   label: string;
-  action: (textarea: HTMLTextAreaElement, value: string) => { newValue: string; cursorPos: number };
+  action: (
+    textarea: HTMLTextAreaElement,
+    value: string,
+  ) => { newValue: string; cursorPos: number };
 }
 
 function wrapSelection(

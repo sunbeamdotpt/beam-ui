@@ -22,23 +22,25 @@ export interface TabsProps {
 
 const tabList = css({
   display: "flex",
-  gap: "32px",
-  borderBottom: "1px solid",
+  gap: "8",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
-  marginBottom: "32px",
+  marginBottom: "8",
 });
 
 const tabListDark = css({
   display: "flex",
-  gap: "24px",
-  borderBottom: "1px solid",
-  borderColor: "rgba(255,255,255,0.1)",
-  marginBottom: "24px",
+  gap: "6",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderColor: "chrome.10",
+  marginBottom: "6",
 });
 
 const tabTrigger = css({
-  paddingBottom: "16px",
-  fontSize: "12px",
+  paddingBottom: "4",
+  fontSize: "xs",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
@@ -46,7 +48,9 @@ const tabTrigger = css({
   border: "none",
   cursor: "pointer",
   color: "text.muted",
-  borderBottom: "2px solid transparent",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
     color: "text.primary",
@@ -58,19 +62,21 @@ const tabTrigger = css({
 });
 
 const tabTriggerDark = css({
-  paddingBottom: "12px",
-  fontSize: "11px",
+  paddingBottom: "3",
+  fontSize: "11",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
   bg: "transparent",
   border: "none",
   cursor: "pointer",
-  color: "rgba(255,255,255,0.4)",
-  borderBottom: "2px solid transparent",
+  color: "chrome.40",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
-    color: "rgba(255,255,255,0.6)",
+    color: "chrome.60",
   },
   _selected: {
     color: "sunbeam.orange",

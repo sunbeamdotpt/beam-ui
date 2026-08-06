@@ -268,12 +268,43 @@ const pill = (bg: string, fg: string, border?: string) =>
   css({
     backgroundColor: bg,
     color: fg,
-    fontSize: "10px",
-    padding: "4px 8px",
+    fontSize: "2xs",
+    padding: "1 2",
     borderRadius: "sm",
     display: "inline-block",
     ...(border ? { border: "1px solid", borderColor: border } : {}),
   });
+
+/** Shared layout for solid work-status / priority pills. * The background color is applied via inline style from {@link statusColors}: `statuses.ts` is the single source of truth for those colors, and Panda can only statically extract local values, so imported colors cannot go through `css()`. /
+const solidPill = css({
+  color: "white",
+  fontSize: "2xs",
+  padding: "1 2",
+  borderRadius: "sm",
+  display: "inline-block",
+});
+
+/** Solid pill background colors, keyed by badge variant (runtime-consumed). */
+const solidBackgrounds = {
+  // Work Status — solid, distinct, readable in both modes
+  open: statusColors.open,
+  draft: statusColors.draft,
+  review: statusColors.review,
+  approved: statusColors.approved,
+  merged: statusColors.merged,
+  closed: statusColors.closed,
+  revision: statusColors.revision,
+  // Priority — solid, urgency-coded
+  critical: statusColors.critical,
+  high: statusColors.high,
+  medium: statusColors.medium,
+  low: statusColors.low,
+} as const;
+
+type SolidVariant = keyof typeof solidBackgrounds;
+
+const isSolidVariant = (variant: BadgeVariant): variant is SolidVariant =>
+  variant in solidBackgrounds;
 
 const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   // Tier / Recognition — warm palette
@@ -289,111 +320,36 @@ const variants: Record<Exclude<BadgeVariant, "section">, string> = {
   beta: pill("sunshine.500", "sunbeam.black"),
   preview: pill("sunbeam.flame", "white"),
   experimental: pill("bright.yellow", "sunbeam.black"),
-  deprecated: pill("rgba(127, 99, 21, 0.15)", "text.secondary"),
+  deprecated: pill("border.warm", "text.secondary"),
 
   // Work Status — solid, distinct, readable in both modes
-  open: css({
-    backgroundColor: "#166534",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  draft: css({
-    backgroundColor: "#525252",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  review: css({
-    backgroundColor: "#92400e",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  approved: css({
-    backgroundColor: "#15803d",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  merged: css({
-    backgroundColor: "#7e22ce",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  closed: css({
-    backgroundColor: "#991b1b",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  revision: css({
-    backgroundColor: "#c2410c",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
+  open: solidPill,
+  draft: solidPill,
+  review: solidPill,
+  approved: solidPill,
+  merged: solidPill,
+  closed: solidPill,
+  revision: solidPill,
 
   // Priority — solid, urgency-coded
-  critical: css({
-    backgroundColor: "#dc2626",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  high: css({
-    backgroundColor: "#ea580c",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  medium: css({
-    backgroundColor: "#d97706",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
-  low: css({
-    backgroundColor: "#0d9488",
-    color: "white",
-    fontSize: "10px",
-    padding: "4px 8px",
-    borderRadius: "sm",
-    display: "inline-block",
-  }),
+  critical: solidPill,
+  high: solidPill,
+  medium: solidPill,
+  low: solidPill,
 };
 
 /** Section badge renders as a label on a horizontal rule. * Used to visually separate sections in long-form content. The label is left-aligned with an orange background, and a decorative line extends to the right. /
-function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): ReactNode {
+function SectionBadge(
+  { children, className }: Omit<BadgeProps, "variant">,
+): ReactNode {
   return (
     <div
       className={cx(
         css({
           display: "flex",
           alignItems: "center",
-          gap: "16px",
-          marginBottom: "40px",
+          gap: "4",
+          marginBottom: "10",
         }),
         className,
       )}
@@ -402,10 +358,10 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
         className={cx(
           base,
           css({
-            fontSize: "10px",
+            fontSize: "2xs",
             color: "sunbeam.orange",
-            backgroundColor: "rgba(250, 82, 15, 0.1)",
-            padding: "4px 8px",
+            backgroundColor: "accent.10",
+            padding: "1 2",
             borderRadius: "sm",
             whiteSpace: "nowrap",
           }),
@@ -416,7 +372,7 @@ function SectionBadge({ children, className }: Omit<BadgeProps, "variant">): Rea
       <div
         aria-hidden="true"
         className={css({
-          height: "1px",
+          height: "0.25",
           flex: 1,
           backgroundColor: "border.warm",
         })}
@@ -476,20 +432,20 @@ const categoryBadge = css({
   display: "inline-block",
   bg: "sunbeam.orange",
   color: "white",
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
-  paddingInline: "8px",
-  paddingBlock: "4px",
+  paddingInline: "2",
+  paddingBlock: "1",
   letterSpacing: "0.05em",
 });
 
 const difficultyLabel = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",
   color: "sunbeam.orange",
   bg: "bg.page",
-  padding: "4px",
+  padding: "1",
 });
 
 const arrowIcon = css({
@@ -507,7 +463,8 @@ const largeCard = css({
   display: "flex",
   flexDirection: "column",
   bg: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   textDecoration: "none",
   color: "text.primary",
@@ -515,7 +472,7 @@ const largeCard = css({
 });
 
 const largeImage = css({
-  height: "288px",
+  height: "72",
   bg: "linear-gradient(135deg, token(colors.sunbeam.orange), token(colors.sunbeam.flame))",
   position: "relative",
   overflow: "hidden",
@@ -528,28 +485,28 @@ const largeImagePlaceholder = css({
   alignItems: "center",
   justifyContent: "center",
   color: "white",
-  fontSize: "48px",
+  fontSize: "4xl",
   opacity: 0.3,
 });
 
 const largeBody = css({
-  padding: "32px",
+  padding: "8",
   flex: 1,
   display: "flex",
   flexDirection: "column",
 });
 
 const largeTitle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "button",
-  marginBottom: "16px",
+  marginBottom: "4",
   color: "text.primary",
 });
 
 const largeDesc = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
-  marginBottom: "24px",
+  marginBottom: "6",
   flex: 1,
   lineHeight: 1.6,
 });
@@ -562,10 +519,10 @@ const largeFooter = css({
 
 const ctaLink = css({
   fontWeight: "button",
-  fontSize: "14px",
+  fontSize: "sm",
   display: "flex",
   alignItems: "center",
-  gap: "4px",
+  gap: "1",
   transition: "transform 0.2s ease",
   _groupHover: {
     transform: "translateX(8px)",
@@ -581,7 +538,8 @@ const horizontalCard = css({
   display: "flex",
   flexDirection: { base: "column", md: "row" },
   bg: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   textDecoration: "none",
   color: "text.primary",
@@ -590,49 +548,50 @@ const horizontalCard = css({
 
 const horizontalImage = css({
   width: { base: "100%", md: "33.333%" },
-  minHeight: { base: "160px", md: "100%" },
+  minHeight: { base: "40", md: "100%" },
   bg: "linear-gradient(135deg, token(colors.sunbeam.black), token(colors.card.dark))",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   color: "sunbeam.orange",
-  fontSize: "40px",
+  fontSize: "40",
   opacity: 0.5,
   overflow: "hidden",
 });
 
 const horizontalBody = css({
   flex: 1,
-  padding: "24px",
+  padding: "6",
 });
 
 const horizontalCategory = css({
-  fontSize: "10px",
+  fontSize: "2xs",
   fontWeight: "button",
   color: "sunbeam.orange",
   letterSpacing: "-0.02em",
-  marginBottom: "8px",
+  marginBottom: "2",
   display: "block",
 });
 
 const horizontalTitle = css({
-  fontSize: "20px",
+  fontSize: "xl",
   fontWeight: "heading",
-  marginBottom: "8px",
+  marginBottom: "2",
   color: "text.primary",
 });
 
 const horizontalDesc = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
-  marginBottom: "16px",
+  marginBottom: "4",
   lineHeight: 1.6,
 });
 
 const horizontalCta = css({
-  fontSize: "14px",
+  fontSize: "sm",
   fontWeight: "button",
-  borderBottom: "2px solid",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
   borderColor: "sunbeam.orange",
   display: "inline",
 });
@@ -643,8 +602,9 @@ const horizontalCta = css({
 
 const smallCard = css({
   bg: "bg.card",
-  padding: "24px",
-  border: "1px solid",
+  padding: "6",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   textDecoration: "none",
   color: "text.primary",
@@ -653,16 +613,16 @@ const smallCard = css({
 });
 
 const smallTitle = css({
-  fontSize: "18px",
+  fontSize: "lg",
   fontWeight: "heading",
-  marginBottom: "12px",
+  marginBottom: "3",
   color: "text.primary",
 });
 
 const smallDesc = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.secondary",
-  marginBottom: "16px",
+  marginBottom: "4",
   flex: 1,
   lineHeight: 1.6,
 });
@@ -763,20 +723,21 @@ export type ButtonProps<T extends ElementType = ElementType> =
 const base = css({
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   fontWeight: "button",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
-  fontSize: "14px",
+  fontSize: "sm",
   cursor: "pointer",
   transition: "all 0.2s ease",
   textDecoration: "none",
   border: "none",
   lineHeight: 1,
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
-    outlineOffset: "2px",
+    outlineOffset: "0.5",
   },
 });
 
@@ -784,7 +745,7 @@ const variants: Record<Variant, string> = {
   dark: css({
     backgroundColor: "sunbeam.black",
     color: "white",
-    padding: "10px 20px",
+    padding: "2.5 5",
     borderRadius: "0",
     _hover: { backgroundColor: "sunbeam.flame" },
     _active: { transform: "scale(0.95)" },
@@ -792,18 +753,22 @@ const variants: Record<Variant, string> = {
   cream: css({
     backgroundColor: { base: "beam.gold", _dark: "beam.gold" },
     color: "sunbeam.black",
-    padding: "10px 20px",
+    padding: "2.5 5",
     borderRadius: "0",
-    border: "1px solid",
+    borderWidth: "0.25",
+    borderStyle: "solid",
     borderColor: { base: "sunshine.500", _dark: "sunshine.300" },
-    _hover: { backgroundColor: { base: "sunshine.300", _dark: "sunshine.300" } },
+    _hover: {
+      backgroundColor: { base: "sunshine.300", _dark: "sunshine.300" },
+    },
   }),
   ghost: css({
     backgroundColor: "transparent",
     color: "text.primary",
-    border: "1px solid",
+    borderWidth: "0.25",
+    borderStyle: "solid",
     borderColor: "border.default",
-    padding: "10px 20px",
+    padding: "2.5 5",
     borderRadius: "0",
     _hover: { borderColor: "sunbeam.orange", color: "sunbeam.orange" },
   }),
@@ -812,13 +777,13 @@ const variants: Record<Variant, string> = {
     color: "sunbeam.orange",
     padding: 0,
     textDecoration: "underline",
-    textUnderlineOffset: "4px",
+    textUnderlineOffset: "1",
     _hover: { textDecorationColor: "sunbeam.orange" },
   }),
   primary: css({
     backgroundColor: "sunbeam.orange",
     color: "white",
-    padding: "10px 20px",
+    padding: "2.5 5",
     borderRadius: "0",
     _hover: { backgroundColor: "sunbeam.flame" },
     _active: { transform: "scale(0.95)" },
@@ -940,17 +905,18 @@ export type CardProps<T extends ElementType = "article"> =
 
 const elevatedSurface = css({
   backgroundColor: "bg.card",
-  padding: { base: "24px", lg: "40px" },
+  padding: { base: "6", lg: "10" },
   borderRadius: "0",
   shadow: "golden",
   transition: "all 0.3s ease",
-  _hover: { translateY: "-1px" },
+  _hover: { translateY: "-0.25" },
 });
 
 const outlinedSurface = css({
   backgroundColor: "bg.card",
-  padding: "32px",
-  border: "1px solid",
+  padding: "8",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   borderRadius: "0",
   transition: "border-color 0.2s ease",
@@ -958,45 +924,45 @@ const outlinedSurface = css({
 });
 
 const iconBox = css({
-  width: "48px",
-  height: "48px",
+  width: "12",
+  height: "12",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: "24px",
+  marginBottom: "6",
   color: "sunbeam.orange",
 });
 
 const iconBoxCompact = css({
   color: "sunbeam.orange",
-  fontSize: "36px",
-  marginBottom: "16px",
+  fontSize: "36",
+  marginBottom: "4",
 });
 
 const titleStyle = css({
-  fontSize: "24px",
+  fontSize: "2xl",
   fontWeight: "heading",
   color: "text.primary",
   textTransform: "uppercase",
   letterSpacing: "-0.025em",
-  marginBottom: "16px",
+  marginBottom: "4",
 });
 
 const titleStyleCompact = css({
-  fontSize: "20px",
+  fontSize: "xl",
   fontWeight: "heading",
   color: "text.primary",
-  marginBottom: "8px",
+  marginBottom: "2",
 });
 
 const descriptionStyle = css({
   color: "text.secondary",
   lineHeight: 1.7,
-  marginBottom: "24px",
+  marginBottom: "6",
 });
 
 const descriptionStyleCompact = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.secondary",
   lineHeight: 1.6,
   marginBottom: "0",
@@ -1007,13 +973,13 @@ const ctaLink = css({
   fontWeight: "button",
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
+  gap: "2",
   textTransform: "uppercase",
-  fontSize: "14px",
+  fontSize: "sm",
   letterSpacing: "0.1em",
   textDecoration: "none",
   transition: "gap 0.2s ease",
-  _hover: { gap: "12px" },
+  _hover: { gap: "3" },
 });
 
 /** Single card implementation that serves as both a generic surface and a structured content card. * **Container mode** — pass `children` and no `title`: ```tsx <Card> <h3>Anything goes here</h3> </Card> ``` * **Content mode** — pass `title` (and usually `icon` + `description`): - `href` makes the whole card a link. - `action` renders a separate CTA inside the card. - neither produces a static content card. * Use `variant="outlined"` for the bordered CapabilityCard/TopicCard look, or `variant="elevated"` (default) for the shadow-lift FeatureCard look. * @example ```tsx <Card icon="code" title="API" description="..." action={{ label: "Explore", href: "/api" }} /> <Card icon="guide" title="Guide" description="..." href="/guide" variant="outlined" /> <Card icon="shield" title="Security" description="..." variant="outlined" /> ```
@@ -1161,7 +1127,7 @@ function PillToggle({
         display: "flex",
         backgroundColor: "sunbeam.black",
         borderRadius: "md",
-        padding: "2px",
+        padding: "0.5",
       })}
     >
       {options.map((opt) => (
@@ -1171,8 +1137,8 @@ function PillToggle({
           aria-pressed={value === opt}
           className={cx(
             css({
-              padding: "4px 12px",
-              fontSize: "10px",
+              padding: "1 3",
+              fontSize: "2xs",
               fontWeight: "button",
               borderRadius: "md",
               textTransform: "uppercase",
@@ -1183,8 +1149,8 @@ function PillToggle({
             }),
             value === opt ? css({ backgroundColor: "code.activePill", color: "white" }) : css({
               backgroundColor: "transparent",
-              color: "rgba(255,255,255,0.35)",
-              _hover: { color: "rgba(255,255,255,0.7)" },
+              color: "chrome.35",
+              _hover: { color: "chrome.70" },
             }),
           )}
           type="button"
@@ -1338,9 +1304,11 @@ async function loadLanguage(lang: string | undefined) {
 /* Custom CodeMirror theme using Beam tokens                           */
 /* ------------------------------------------------------------------ */
 function createBeamTheme(isDark: boolean) {
-  const bg = isDark ? "#2a2a2a" : "#fff0c2";
-  const fg = isDark ? "#ffffff" : "#1f1f1f";
-  const muted = isDark ? "rgba(255,255,255,0.4)" : "#7f6315";
+  const bg = isDark ? token.var("colors.card.dark") : token.var("colors.cream");
+  // "#ffffff" has no token counterpart — pure white editor foreground
+  const fg = isDark ? "#ffffff" : token.var("colors.sunbeam.black");
+  // "#7f6315" has no token counterpart — intentional light-mode muted warm
+  const muted = isDark ? token.var("colors.chrome.40") : "#7f6315";
   const mono = "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace";
 
   return EditorView.theme(
@@ -1348,36 +1316,39 @@ function createBeamTheme(isDark: boolean) {
       "&": {
         backgroundColor: bg,
         color: fg,
-        fontSize: "13px",
+        fontSize: token.var("fontSizes.13"),
         fontFamily: mono,
       },
       ".cm-content": {
-        caretColor: "#fa520f",
-        padding: "12px 0",
+        caretColor: token.var("colors.sunbeam.orange"),
+        padding: `${token.var("spacing.3")} 0`,
       },
       ".cm-cursor, .cm-dropCursor": {
-        borderLeftColor: "#fa520f",
+        borderLeftColor: token.var("colors.sunbeam.orange"),
         borderLeftWidth: "2px",
       },
       "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
-        backgroundColor: isDark ? "rgba(250, 82, 15, 0.20)" : "rgba(250, 82, 15, 0.15)",
+        backgroundColor: isDark ? token.var("colors.accent.20") : token.var("colors.accent.15"),
       },
       ".cm-activeLine": {
-        backgroundColor: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
+        // rgba(0,0,0,0.02) has no token counterpart — light-mode active-line wash
+        backgroundColor: isDark ? token.var("colors.chrome.03") : "rgba(0, 0, 0, 0.02)",
       },
       ".cm-gutters": {
+        // rgba(255,255,255,0.02) and rgba(0,0,0,0.02) have no token counterparts
         backgroundColor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
         color: muted,
         border: "none",
-        paddingRight: "8px",
+        paddingRight: token.var("spacing.2"),
       },
       ".cm-activeLineGutter": {
-        backgroundColor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
+        // rgba(0,0,0,0.04) has no token counterpart — light-mode active-gutter wash
+        backgroundColor: isDark ? token.var("colors.chrome.05") : "rgba(0, 0, 0, 0.04)",
       },
       ".cm-lineNumbers .cm-gutterElement": {
-        fontSize: "12px",
-        minWidth: "32px",
-        padding: "0 4px 0 8px",
+        fontSize: token.var("fontSizes.xs"),
+        minWidth: token.var("sizes.8"),
+        padding: `0 ${token.var("spacing.1")} 0 ${token.var("spacing.2")}`,
       },
       ".cm-placeholder": {
         color: muted,
@@ -1545,7 +1516,14 @@ interface TimelineEvent {
   /** Unique identifier for this event. */
   id: string;
   /** Event type (e.g., "merge", "close", "label"). */
-  type: "label" | "assignee" | "milestone" | "merge" | "close" | "reopen" | "reference";
+  type:
+    | "label"
+    | "assignee"
+    | "milestone"
+    | "merge"
+    | "close"
+    | "reopen"
+    | "reference";
   /** Username of the actor who triggered the event. */
   actor: string;
   /** Human-readable detail of the event (e.g., "closed this" or "added label bug"). */
@@ -1632,14 +1610,20 @@ function CommentCard({
     >
       <div className={commentHeader}>
         <span className={authorName}>{comment.author.displayName}</span>
-        <span className={timestamp}>{formatRelativeTime(comment.createdAt)}</span>
+        <span className={timestamp}>
+          {formatRelativeTime(comment.createdAt)}
+        </span>
         {comment.updatedAt && <span className={editedBadge}>(edited)</span>}
       </div>
 
       {editing
         ? (
           <div className={editArea}>
-            <MarkdownEditor value={editBody} onChange={setEditBody} minHeight="100px" />
+            <MarkdownEditor
+              value={editBody}
+              onChange={setEditBody}
+              minHeight="100px"
+            />
             <div className={editActions}>
               <Button variant="primary" onClick={handleSaveEdit}>Save</Button>
               <Button
@@ -1699,13 +1683,18 @@ const EVENT_COLORS: Record<TimelineEvent["type"], string> = {
 function TimelineEventItem({ event }: { event: TimelineEvent }) {
   return (
     <div className={eventRow} role="listitem">
-      <div className={eventIconWrapper} style={{ color: EVENT_COLORS[event.type] }}>
+      <div
+        className={eventIconWrapper}
+        style={{ color: EVENT_COLORS[event.type] }}
+      >
         <Icon name={EVENT_ICONS[event.type]} size={16} />
       </div>
       <div className={eventContent}>
         <span className={eventActorText}>{event.actor}</span>{" "}
         <span className={eventDetailText}>{event.detail}</span>
-        <span className={eventTimestamp}>{formatRelativeTime(event.createdAt)}</span>
+        <span className={eventTimestamp}>
+          {formatRelativeTime(event.createdAt)}
+        </span>
       </div>
     </div>
   );
@@ -1802,7 +1791,8 @@ function layoutCommits(commits: CommitNode[]) {
     } else if (commit.branch) {
       // Check if this is the main branch (lane 0 candidate)
       if (i === 0 || commit.branch === "main" || commit.branch === "master") {
-        lane = branchLanes.get("main") ?? branchLanes.get("master") ?? nextLane++;
+        lane = branchLanes.get("main") ?? branchLanes.get("master") ??
+          nextLane++;
       } else {
         lane = nextLane++;
       }
@@ -2291,11 +2281,12 @@ export interface FileListProps {
 /* ------------------------------------------------------------------ */
 
 const checkboxOuter = css({
-  width: "18px",
-  height: "18px",
-  minWidth: "18px",
-  border: "1px solid",
-  borderColor: { base: "rgba(127,99,21,0.3)", _dark: "rgba(255,161,16,0.35)" },
+  width: "4.5",
+  height: "4.5",
+  minWidth: "4.5",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: { base: "warm.30", _dark: "sunshine.35" },
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -2310,7 +2301,11 @@ const checkboxChecked = css({
 });
 
 function Checkbox(
-  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+  { checked, onChange, ariaLabel }: {
+    checked: boolean;
+    onChange: () => void;
+    ariaLabel?: string;
+  },
 ) {
   return (
     <div
@@ -2353,37 +2348,39 @@ const listContainer = css({
 const listHeader = css({
   display: "grid",
   gridTemplateColumns: "32px 24px 1fr 100px 140px",
-  gap: "8px",
+  gap: "2",
   alignItems: "center",
-  padding: "8px 12px",
-  fontSize: "11px",
+  padding: "2 3",
+  fontSize: "11",
   fontWeight: "button",
   color: "text.muted",
   textTransform: "uppercase",
   letterSpacing: "0.1em",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
 const listRow = css({
   display: "grid",
   gridTemplateColumns: "32px 24px 1fr 100px 140px",
-  gap: "8px",
+  gap: "2",
   alignItems: "center",
-  padding: "8px 12px",
+  padding: "2 3",
   cursor: "pointer",
   transition: "background 0.1s ease",
   _hover: { backgroundColor: "bg.card" },
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
 });
 
 const listRowSelected = css({
-  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  backgroundColor: "accent.06",
 });
 
 const fileName = css({
-  fontSize: "14px",
+  fontSize: "sm",
   color: "text.primary",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -2392,11 +2389,11 @@ const fileName = css({
 
 const fileNameMono = css({
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
 });
 
 const fileMeta = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.muted",
 });
 
@@ -2415,7 +2412,8 @@ function ListView({
   onOpen,
   font = "body",
 }: Omit<FileListProps, "layout" | "className">) {
-  const allSelected = items.length > 0 && items.every((i) => selected.has(i.id));
+  const allSelected = items.length > 0 &&
+    items.every((i) => selected.has(i.id));
 
   const toggleAll = () => {
     if (allSelected) {
@@ -2435,7 +2433,11 @@ function ListView({
   return (
     <div className={listContainer} role="grid">
       <div className={listHeader} role="row">
-        <Checkbox checked={allSelected} onChange={toggleAll} ariaLabel="Select all files" />
+        <Checkbox
+          checked={allSelected}
+          onChange={toggleAll}
+          ariaLabel="Select all files"
+        />
         <span />
         <span>Name</span>
         <span>Size</span>
@@ -2458,7 +2460,9 @@ function ListView({
             size={18}
             className={item.type === "folder" ? folderIcon : fileIcon}
           />
-          <span className={cx(fileName, font === "mono" && fileNameMono)}>{item.name}</span>
+          <span className={cx(fileName, font === "mono" && fileNameMono)}>
+            {item.name}
+          </span>
           <span className={fileMeta}>{item.size ?? "—"}</span>
           <span className={fileMeta}>{item.modified ?? "—"}</span>
         </div>
@@ -2477,35 +2481,37 @@ const gridContainer = css({
     base: "repeat(auto-fill, minmax(120px, 1fr))",
     md: "repeat(auto-fill, minmax(140px, 1fr))",
   },
-  gap: "12px",
+  gap: "3",
 });
 
 const gridCell = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "8px",
-  padding: "16px 8px",
+  gap: "2",
+  padding: "4 2",
   cursor: "pointer",
   position: "relative",
   transition: "background 0.1s ease",
-  border: "1px solid transparent",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "transparent",
   _hover: { backgroundColor: "bg.card" },
 });
 
 const gridCellSelected = css({
-  backgroundColor: "rgba(250, 82, 15, 0.06)",
+  backgroundColor: "accent.06",
   borderColor: "sunbeam.orange",
 });
 
 const gridCheckbox = css({
   position: "absolute",
-  top: "8px",
-  left: "8px",
+  top: "2",
+  left: "2",
 });
 
 const gridName = css({
-  fontSize: "12px",
+  fontSize: "xs",
   color: "text.primary",
   textAlign: "center",
   overflow: "hidden",
@@ -2516,7 +2522,7 @@ const gridName = css({
 
 const gridNameMono = css({
   fontFamily: "mono",
-  fontSize: "11px",
+  fontSize: "11",
 });
 
 function GridView({
@@ -2563,7 +2569,9 @@ function GridView({
             size={40}
             className={item.type === "folder" ? folderIcon : fileIcon}
           />
-          <span className={cx(gridName, font === "mono" && gridNameMono)}>{item.name}</span>
+          <span className={cx(gridName, font === "mono" && gridNameMono)}>
+            {item.name}
+          </span>
         </div>
       ))}
     </div>
@@ -2901,7 +2909,12 @@ export interface KanbanCardData {
     createdAt: string;
   }[];
   /** File attachments. */
-  attachments?: { id: string; name: string; sizeBytes?: number; url?: string }[];
+  attachments?: {
+    id: string;
+    name: string;
+    sizeBytes?: number;
+    url?: string;
+  }[];
   /** Breadcrumb path, e.g. "Beam UI / Components". */
   breadcrumb?: string;
   /** Column/status title, e.g. "Backlog". */
@@ -2925,7 +2938,10 @@ export interface KanbanCardDetailProps {
 /* Label color mapping (matches ref .lb--* classes)                   */
 /* ------------------------------------------------------------------ */
 
-const LABEL_STYLE: Record<string, { background: string; color: string; border: string }> = {
+const LABEL_STYLE: Record<
+  string,
+  { background: string; color: string; border: string }
+> = {
   orange: {
     background: "rgba(250,82,15,0.12)",
     color: "#fa520f",
@@ -2958,7 +2974,10 @@ function getLabelStyle(color: string) {
 /* Priority badge                                                      */
 /* ------------------------------------------------------------------ */
 
-const PRIORITY_STYLE: Record<string, { background: string; color: string; border: string }> = {
+const PRIORITY_STYLE: Record<
+  string,
+  { background: string; color: string; border: string }
+> = {
   low: {
     background: "rgba(13,148,136,0.1)",
     color: "rgb(15,118,110)",
@@ -3146,16 +3165,17 @@ const kbdStyle = css({
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
-  borderBottomWidth: "2px",
+  borderBottomWidth: "0.5",
   borderRadius: "sm",
   fontFamily: "mono",
-  fontSize: "13px",
+  fontSize: "13",
   fontWeight: "body",
   lineHeight: 1,
-  padding: "4px 8px",
-  minWidth: "24px",
+  padding: "1 2",
+  minWidth: "6",
   color: "text.secondary",
   whiteSpace: "nowrap",
   verticalAlign: "middle",
@@ -3406,7 +3426,10 @@ type ActiveTab = "write" | "preview";
 interface ToolbarAction {
   icon: string;
   label: string;
-  action: (textarea: HTMLTextAreaElement, value: string) => { newValue: string; cursorPos: number };
+  action: (
+    textarea: HTMLTextAreaElement,
+    value: string,
+  ) => { newValue: string; cursorPos: number };
 }
 
 function wrapSelection(
@@ -3593,7 +3616,10 @@ function loadKatex(): Promise<KatexType> {
 /** Extract math blocks, replace with text markers that survive sanitization */
 function extractMath(
   md: string,
-): { processed: string; blocks: { id: string; math: string; display: boolean }[] } {
+): {
+  processed: string;
+  blocks: { id: string; math: string; display: boolean }[];
+} {
   const blocks: { id: string; math: string; display: boolean }[] = [];
   let idx = 0;
 
@@ -3605,11 +3631,14 @@ function extractMath(
   });
 
   // Inline math: $...$  (not preceded/followed by $)
-  processed = processed.replace(/(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g, (_, math) => {
-    const id = `BEAMMATH${idx++}BEAMMATH`;
-    blocks.push({ id, math: math.trim(), display: false });
-    return id;
-  });
+  processed = processed.replace(
+    /(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)/g,
+    (_, math) => {
+      const id = `BEAMMATH${idx++}BEAMMATH`;
+      blocks.push({ id, math: math.trim(), display: false });
+      return id;
+    },
+  );
 
   return { processed, blocks };
 }
@@ -3736,7 +3765,9 @@ const row = css({
   padding: "4",
   margin: "-4",
   borderRadius: "0",
-  border: "1px solid transparent",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "transparent",
   transition: "all 0.15s ease",
   textDecoration: "none",
   color: "text.primary",
@@ -3782,7 +3813,7 @@ const desc = css({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  maxWidth: "200px",
+  maxWidth: "50",
 });
 
 const versionText = css({
@@ -4417,10 +4448,18 @@ export interface SearchInputProps {
 // Build a flat list of all nav items for search
 const allNavItems = docsSidebar.flatMap((section) =>
   section.items.flatMap((item) => {
-    const results = [{ label: item.label, href: item.href, section: section.title }];
+    const results = [{
+      label: item.label,
+      href: item.href,
+      section: section.title,
+    }];
     if (item.children) {
       item.children.forEach((child) =>
-        results.push({ label: child.label, href: child.href, section: section.title })
+        results.push({
+          label: child.label,
+          href: child.href,
+          section: section.title,
+        })
       );
     }
     return results;
@@ -4609,8 +4648,9 @@ export interface SkeletonProps {
 const shimmerName = "beam-shimmer";
 
 const base = css({
-  backgroundColor: { base: "rgba(127,99,21,0.10)", _dark: "rgba(255,255,255,0.06)" },
-  border: "1px solid",
+  backgroundColor: { base: "warm.10", _dark: "chrome.06" },
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   backgroundImage: {
     base: "linear-gradient(90deg, transparent 0%, rgba(127,99,21,0.15) 50%, transparent 100%)",
@@ -4841,16 +4881,21 @@ export interface ModelStats {
 
 const grid = css({
   display: "grid",
-  gridTemplateColumns: { base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" },
+  gridTemplateColumns: {
+    base: "repeat(2, 1fr)",
+    md: "repeat(3, 1fr)",
+    lg: "repeat(5, 1fr)",
+  },
   paddingBlock: "6",
   marginBottom: "12",
-  gap: { base: "16px", lg: "0" },
+  gap: { base: "4", lg: "0" },
 });
 
 const cell = css({
   paddingInline: "4",
   textAlign: "center",
-  borderRight: "1px solid",
+  borderRightWidth: "0.25",
+  borderRightStyle: "solid",
   borderColor: "border.subtle",
   _last: {
     borderRight: "none",
@@ -4915,10 +4960,10 @@ const priceLabel = css({
 
 const srOnly = css({
   position: "absolute",
-  width: "1px",
-  height: "1px",
+  width: "0.25",
+  height: "0.25",
   padding: 0,
-  margin: "-1px",
+  margin: "-0.25",
   overflow: "hidden",
   clip: "rect(0,0,0,0)",
   whiteSpace: "nowrap",
@@ -5058,40 +5103,83 @@ const BEAM_DARK = {
   name: "beam-dark",
   type: "dark" as const,
   colors: {
-    "editor.background": "#2a2a2a",
-    "editor.foreground": "#d4d4d8",
+    "editor.background": token.var("colors.card.dark"),
+    "editor.foreground": token.var("colors.code.text"),
   },
   settings: [
-    { settings: { foreground: "#d4d4d8" } }, // default text
+    { settings: { foreground: token.var("colors.code.text") } }, // default text
     {
       scope: ["comment", "punctuation.definition.comment"],
-      settings: { foreground: "rgba(255,255,255,0.35)", fontStyle: "italic" },
+      settings: {
+        foreground: token.var("colors.chrome.35"),
+        fontStyle: "italic",
+      },
     },
-    { scope: ["keyword", "storage.type", "storage.modifier"], settings: { foreground: "#c084fc" } }, // syn.keyword — purple
+    {
+      scope: ["keyword", "storage.type", "storage.modifier"],
+      settings: { foreground: token.var("colors.syn.keyword") },
+    }, // syn.keyword — purple
     {
       scope: ["entity.name.function", "support.function", "meta.function-call"],
-      settings: { foreground: "#93c5fd" },
+      settings: { foreground: token.var("colors.syn.fn") },
     }, // syn.fn — blue
-    { scope: ["string", "string.quoted"], settings: { foreground: "#86efac" } }, // syn.string — green
     {
-      scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"],
-      settings: { foreground: "#fdba74" },
+      scope: ["string", "string.quoted"],
+      settings: { foreground: token.var("colors.syn.string") },
+    }, // syn.string — green
+    {
+      scope: [
+        "variable.other.property",
+        "entity.name.tag",
+        "support.type.property-name",
+      ],
+      settings: { foreground: token.var("colors.syn.prop") },
     }, // syn.prop — orange
-    { scope: ["constant.numeric", "constant.language"], settings: { foreground: "#fb923c" } }, // syn.number — deeper orange
+    {
+      scope: ["constant.numeric", "constant.language"],
+      settings: { foreground: token.var("colors.syn.number") },
+    }, // syn.number — deeper orange
     {
       scope: ["support.class", "entity.name.type", "storage.type.builtin"],
-      settings: { foreground: "#fde047" },
+      settings: { foreground: token.var("colors.syn.builtin") },
     }, // syn.builtin — yellow
-    { scope: ["variable", "variable.other"], settings: { foreground: "#e2e8f0" } },
-    { scope: ["punctuation", "meta.brace"], settings: { foreground: "rgba(255,255,255,0.5)" } },
-    { scope: ["entity.name.class", "entity.name.type.class"], settings: { foreground: "#fde047" } },
-    { scope: ["constant.other", "variable.other.constant"], settings: { foreground: "#fb923c" } },
-    { scope: ["keyword.operator"], settings: { foreground: "#ffa110" } }, // sunshine.700
-    { scope: ["meta.decorator", "punctuation.decorator"], settings: { foreground: "#ffd06a" } }, // sunshine.300
-    { scope: ["markup.heading"], settings: { foreground: "#fa520f", fontStyle: "bold" } }, // sunbeam.orange
+    {
+      scope: ["variable", "variable.other"],
+      settings: { foreground: "#e2e8f0" },
+    }, // no token counterpart — dark-variable slate
+    {
+      scope: ["punctuation", "meta.brace"],
+      settings: { foreground: token.var("colors.chrome.50") },
+    },
+    {
+      scope: ["entity.name.class", "entity.name.type.class"],
+      settings: { foreground: token.var("colors.syn.builtin") },
+    },
+    {
+      scope: ["constant.other", "variable.other.constant"],
+      settings: { foreground: token.var("colors.syn.number") },
+    },
+    {
+      scope: ["keyword.operator"],
+      settings: { foreground: token.var("colors.sunshine.700") },
+    }, // sunshine.700
+    {
+      scope: ["meta.decorator", "punctuation.decorator"],
+      settings: { foreground: token.var("colors.sunshine.300") },
+    }, // sunshine.300
+    {
+      scope: ["markup.heading"],
+      settings: {
+        foreground: token.var("colors.sunbeam.orange"),
+        fontStyle: "bold",
+      },
+    }, // sunbeam.orange
     { scope: ["markup.bold"], settings: { fontStyle: "bold" } },
     { scope: ["markup.italic"], settings: { fontStyle: "italic" } },
-    { scope: ["markup.inline.raw", "markup.fenced_code"], settings: { foreground: "#86efac" } },
+    {
+      scope: ["markup.inline.raw", "markup.fenced_code"],
+      settings: { foreground: token.var("colors.syn.string") },
+    },
   ],
 };
 
@@ -5108,31 +5196,62 @@ const BEAM_LIGHT = {
       scope: ["comment", "punctuation.definition.comment"],
       settings: { foreground: "#7f6315", fontStyle: "italic" },
     },
-    { scope: ["keyword", "storage.type", "storage.modifier"], settings: { foreground: "#7c3aed" } }, // darker purple for light bg
+    {
+      scope: ["keyword", "storage.type", "storage.modifier"],
+      settings: { foreground: "#7c3aed" },
+    }, // darker purple for light bg
     {
       scope: ["entity.name.function", "support.function", "meta.function-call"],
       settings: { foreground: "#2563eb" },
     }, // darker blue
     { scope: ["string", "string.quoted"], settings: { foreground: "#16a34a" } }, // darker green
     {
-      scope: ["variable.other.property", "entity.name.tag", "support.type.property-name"],
+      scope: [
+        "variable.other.property",
+        "entity.name.tag",
+        "support.type.property-name",
+      ],
       settings: { foreground: "#c2410c" },
     }, // darker orange
-    { scope: ["constant.numeric", "constant.language"], settings: { foreground: "#ea580c" } },
+    {
+      scope: ["constant.numeric", "constant.language"],
+      settings: { foreground: "#ea580c" },
+    },
     {
       scope: ["support.class", "entity.name.type", "storage.type.builtin"],
       settings: { foreground: "#a16207" },
     }, // darker yellow/gold
-    { scope: ["variable", "variable.other"], settings: { foreground: "#1f1f1f" } },
-    { scope: ["punctuation", "meta.brace"], settings: { foreground: "#7f6315" } },
-    { scope: ["entity.name.class", "entity.name.type.class"], settings: { foreground: "#a16207" } },
-    { scope: ["constant.other", "variable.other.constant"], settings: { foreground: "#ea580c" } },
+    {
+      scope: ["variable", "variable.other"],
+      settings: { foreground: "#1f1f1f" },
+    },
+    {
+      scope: ["punctuation", "meta.brace"],
+      settings: { foreground: "#7f6315" },
+    },
+    {
+      scope: ["entity.name.class", "entity.name.type.class"],
+      settings: { foreground: "#a16207" },
+    },
+    {
+      scope: ["constant.other", "variable.other.constant"],
+      settings: { foreground: "#ea580c" },
+    },
     { scope: ["keyword.operator"], settings: { foreground: "#b45309" } },
-    { scope: ["meta.decorator", "punctuation.decorator"], settings: { foreground: "#a16207" } },
-    { scope: ["markup.heading"], settings: { foreground: "#fa520f", fontStyle: "bold" } },
+    {
+      scope: ["meta.decorator", "punctuation.decorator"],
+      settings: { foreground: "#a16207" },
+    },
+    {
+      scope: ["markup.heading"],
+      settings: { foreground: "#fa520f", fontStyle: "bold" },
+    },
     { scope: ["markup.bold"], settings: { fontStyle: "bold" } },
     { scope: ["markup.italic"], settings: { fontStyle: "italic" } },
-    { scope: ["markup.inline.raw", "markup.fenced_code"], settings: { foreground: "#16a34a" } },
+    {
+      scope: ["markup.inline.raw", "markup.fenced_code"],
+      settings: { foreground: "#16a34a" },
+    },
   ],
 };
 
@@ -5268,23 +5387,25 @@ export interface TabsProps {
 
 const tabList = css({
   display: "flex",
-  gap: "32px",
-  borderBottom: "1px solid",
+  gap: "8",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
-  marginBottom: "32px",
+  marginBottom: "8",
 });
 
 const tabListDark = css({
   display: "flex",
-  gap: "24px",
-  borderBottom: "1px solid",
-  borderColor: "rgba(255,255,255,0.1)",
-  marginBottom: "24px",
+  gap: "6",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderColor: "chrome.10",
+  marginBottom: "6",
 });
 
 const tabTrigger = css({
-  paddingBottom: "16px",
-  fontSize: "12px",
+  paddingBottom: "4",
+  fontSize: "xs",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
@@ -5292,7 +5413,9 @@ const tabTrigger = css({
   border: "none",
   cursor: "pointer",
   color: "text.muted",
-  borderBottom: "2px solid transparent",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
     color: "text.primary",
@@ -5304,19 +5427,21 @@ const tabTrigger = css({
 });
 
 const tabTriggerDark = css({
-  paddingBottom: "12px",
-  fontSize: "11px",
+  paddingBottom: "3",
+  fontSize: "11",
   fontWeight: "button",
   letterSpacing: "0.15em",
   textTransform: "uppercase",
   bg: "transparent",
   border: "none",
   cursor: "pointer",
-  color: "rgba(255,255,255,0.4)",
-  borderBottom: "2px solid transparent",
+  color: "chrome.40",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
-    color: "rgba(255,255,255,0.6)",
+    color: "chrome.60",
   },
   _selected: {
     color: "sunbeam.orange",
@@ -5579,11 +5704,11 @@ export interface TooltipProps {
 const contentStyle = css({
   backgroundColor: "sunbeam.black",
   color: "white",
-  fontSize: "12px",
-  padding: "6px 12px",
+  fontSize: "xs",
+  padding: "1.5 3",
   borderRadius: "sm",
   lineHeight: 1.4,
-  maxWidth: "240px",
+  maxWidth: "60",
   zIndex: 1000,
 });
 
@@ -6032,7 +6157,11 @@ export interface WorkItemListProps {
 /* ------------------------------------------------------------------ */
 
 function Checkbox(
-  { checked, onChange, ariaLabel }: { checked: boolean; onChange: () => void; ariaLabel?: string },
+  { checked, onChange, ariaLabel }: {
+    checked: boolean;
+    onChange: () => void;
+    ariaLabel?: string;
+  },
 ) {
   return (
     <div
@@ -6185,7 +6314,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
       ];
       if (item.children) {
         item.children.forEach((child) =>
-          results.push({ label: child.label, href: child.href, section: section.title })
+          results.push({
+            label: child.label,
+            href: child.href,
+            section: section.title,
+          })
         );
       }
       return results;
@@ -6194,7 +6327,11 @@ function buildSearchItems(sections?: NavSection[]): HeaderSearchItem[] {
 }
 
 /** Default active matcher: exact for root, prefix otherwise. */
-function defaultIsActive(_label: string, href: string, currentPath: string): boolean {
+function defaultIsActive(
+  _label: string,
+  href: string,
+  currentPath: string,
+): boolean {
   if (href === "/") return currentPath === "/";
   return currentPath.startsWith(href);
 }
@@ -6499,7 +6636,7 @@ export const apiLeftPanel: string = css({
   width: { base: "100%", lg: "55%" },
   overflowY: "auto",
   bg: "bg.page",
-  paddingInline: "24px",
+  paddingInline: "6",
 });
 
 /** CSS class for API layout's right panel (45% width on desktop, dark background). */

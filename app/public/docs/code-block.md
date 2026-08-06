@@ -51,7 +51,7 @@ function PillToggle({
         display: "flex",
         backgroundColor: "sunbeam.black",
         borderRadius: "md",
-        padding: "2px",
+        padding: "0.5",
       })}
     >
       {options.map((opt) => (
@@ -61,8 +61,8 @@ function PillToggle({
           aria-pressed={value === opt}
           className={cx(
             css({
-              padding: "4px 12px",
-              fontSize: "10px",
+              padding: "1 3",
+              fontSize: "2xs",
               fontWeight: "button",
               borderRadius: "md",
               textTransform: "uppercase",
@@ -73,8 +73,8 @@ function PillToggle({
             }),
             value === opt ? css({ backgroundColor: "code.activePill", color: "white" }) : css({
               backgroundColor: "transparent",
-              color: "rgba(255,255,255,0.35)",
-              _hover: { color: "rgba(255,255,255,0.7)" },
+              color: "chrome.35",
+              _hover: { color: "chrome.70" },
             }),
           )}
           type="button"

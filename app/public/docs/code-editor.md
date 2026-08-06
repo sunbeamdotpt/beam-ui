@@ -118,9 +118,11 @@ async function loadLanguage(lang: string | undefined) {
 /* Custom CodeMirror theme using Beam tokens                           */
 /* ------------------------------------------------------------------ */
 function createBeamTheme(isDark: boolean) {
-  const bg = isDark ? "#2a2a2a" : "#fff0c2";
-  const fg = isDark ? "#ffffff" : "#1f1f1f";
-  const muted = isDark ? "rgba(255,255,255,0.4)" : "#7f6315";
+  const bg = isDark ? token.var("colors.card.dark") : token.var("colors.cream");
+  // "#ffffff" has no token counterpart — pure white editor foreground
+  const fg = isDark ? "#ffffff" : token.var("colors.sunbeam.black");
+  // "#7f6315" has no token counterpart — intentional light-mode muted warm
+  const muted = isDark ? token.var("colors.chrome.40") : "#7f6315";
   const mono = "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace";
 
   return EditorView.theme(
@@ -128,36 +130,39 @@ function createBeamTheme(isDark: boolean) {
       "&": {
         backgroundColor: bg,
         color: fg,
-        fontSize: "13px",
+        fontSize: token.var("fontSizes.13"),
         fontFamily: mono,
       },
       ".cm-content": {
-        caretColor: "#fa520f",
-        padding: "12px 0",
+        caretColor: token.var("colors.sunbeam.orange"),
+        padding: `${token.var("spacing.3")} 0`,
       },
       ".cm-cursor, .cm-dropCursor": {
-        borderLeftColor: "#fa520f",
+        borderLeftColor: token.var("colors.sunbeam.orange"),
         borderLeftWidth: "2px",
       },
       "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
-        backgroundColor: isDark ? "rgba(250, 82, 15, 0.20)" : "rgba(250, 82, 15, 0.15)",
+        backgroundColor: isDark ? token.var("colors.accent.20") : token.var("colors.accent.15"),
       },
       ".cm-activeLine": {
-        backgroundColor: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
+        // rgba(0,0,0,0.02) has no token counterpart — light-mode active-line wash
+        backgroundColor: isDark ? token.var("colors.chrome.03") : "rgba(0, 0, 0, 0.02)",
       },
       ".cm-gutters": {
+        // rgba(255,255,255,0.02) and rgba(0,0,0,0.02) have no token counterparts
         backgroundColor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
         color: muted,
         border: "none",
-        paddingRight: "8px",
+        paddingRight: token.var("spacing.2"),
       },
       ".cm-activeLineGutter": {
-        backgroundColor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
+        // rgba(0,0,0,0.04) has no token counterpart — light-mode active-gutter wash
+        backgroundColor: isDark ? token.var("colors.chrome.05") : "rgba(0, 0, 0, 0.04)",
       },
       ".cm-lineNumbers .cm-gutterElement": {
-        fontSize: "12px",
-        minWidth: "32px",
-        padding: "0 4px 0 8px",
+        fontSize: token.var("fontSizes.xs"),
+        minWidth: token.var("sizes.8"),
+        padding: `0 ${token.var("spacing.1")} 0 ${token.var("spacing.2")}`,
       },
       ".cm-placeholder": {
         color: muted,

@@ -5,7 +5,7 @@ export const apiLeftPanel: string = css({
   width: { base: "100%", lg: "55%" },
   overflowY: "auto",
   bg: "bg.page",
-  paddingInline: "24px",
+  paddingInline: "6",
 });
 
 /** CSS class for API layout's right panel (45% width on desktop, dark background). */
