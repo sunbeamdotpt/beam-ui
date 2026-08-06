@@ -50,6 +50,7 @@ and fixed three systemic Panda bugs (see log.md 2026-07-23 entry).
 
 ## Pick up first
 
-- Check for open mail: `agent-mail inbox`.
+- Check for open cards on the `beam-ui` boards (`sunbeam kanban board list
+  beam-ui`, then `sunbeam kanban card list <board-id>`).
 - Triaged dependabot alerts and the font/typography question are the most
   valuable next items.

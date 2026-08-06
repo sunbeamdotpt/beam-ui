@@ -92,3 +92,22 @@ trees (kill port 4173 between runs), diff with pixelmatch+pngjs.
 
 GitHub flags 46 dependabot vulnerabilities on the default branch (8 high) —
 recorded in state.md as untriaged.
+
+## 2026-07-23 — image verified; deploy tasked to sbbb
+
+CI run 30014354620 refreshed `ghcr.io/sunbeamdotpt/beam-ui:latest`
+(index `sha256:669393d1…`, linux/amd64+arm64) with the kanban dark-mode
+fix, dependency sweep, and 0.13.0 bump. Sent agent-mail task #52 to sbbb
+to update the design.sunbeam.pt deployment, including the registry move
+(Gitea → ghcr.io). Kanban fix used the `bg.card` semantic token so light
+mode is pixel-identical — the right pattern for surface fixes (static
+palette colors never flip).
+
+## 2026-07-24 — agent-mail → kanban ticketing migration
+
+Cross-repo coordination moved off agent-mail (deprecated) onto kanban cards
+via `sunbeam kanban` — the same migration sbbb did earlier. The AGENTS.md
+ritual, charter, and state.md now describe the kanban flow; mail-thread
+references in older entries (e.g. task #52 to sbbb) are historical. *Why:*
+the human standardized cross-repo tracking on kanban so tickets are visible
+to everyone, not just the two mail endpoints.
