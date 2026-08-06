@@ -3,8 +3,55 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-07-22T00:00:00Z
+timestamp: 2026-08-06T21:00:00Z
 ---
+
+# State — 2026-08-06 (loose ends closed; ready for new work)
+
+All July loose ends resolved and committed on mainline
+(`41138e5`..`1ca1c07`, 8 commits). `deno task ci` + app build green;
+5-page Playwright visual spot-check clean (kanban, badge, code-block,
+diff-viewer, charts).
+
+## Resolved this session
+
+- **Kanban ticketing migration** edits committed (`41138e5`).
+- **Stale Gitea pipeline** — `workflows.yaml` deleted, `sunbeam.yaml`
+  rewritten for the Deno/ghcr.io stack (`7e54f11`).
+- **Dependabot** — 66 open alerts → 2 (`eb410ed`). Remaining:
+  react-router GHSA-qwww-vcr4-c8h2 (patched only in 8.3.0 — major bump,
+  needs the human's call) and one dompurify low with no published patch.
+- **Fonts self-hosted** (`e25954c`) — root cause was both Monaspace CDN
+  URLs 404ing. Ysabeau Infant + Monaspace Argon v1.400 + Material Symbols
+  now ship as woff2 in the package. Known gap: JSR `exports` has no
+  `./styles/*` subpath (app resolves via Vite alias; external JSR
+  consumers can't import fonts.css — pre-existing, unaddressed).
+- **Token migration complete** (phases 1–3 + long tail, `44b8a30`,
+  `93faca7`, `c6bf97e`, `c6f6593`, `0468c16`, `1ca1c07`). Component
+  source is token-only except documented exceptions (palette data files,
+  Mermaid/light-syntax themes, gradients/calc/grid tracks, SVG attrs).
+  Key gotcha learned: **Panda silently drops imported constants inside
+  css()** — status colors live in `data/statuses.ts` (`statusColors`)
+  and are applied via inline style.
+
+## Deferred
+
+- Plan phases 5–7 (Fresh 2.x showcase, release prep) → card **BEAM-001**
+  on the ideas board.
+- react-router 8.x major bump (see above) — awaiting human decision.
+
+## Housekeeping
+
+- Working tree has build-output churn in `app/` (build-info, page-dates,
+  components.json, panda.css) — regenerated every build, intentionally
+  uncommitted. `packages/beam-ui-typst/` WIP is the human's — untouched.
+- If npm install breaks Deno symlinks: `rm -rf
+  packages/beam-ui/node_modules/.deno .bin && deno install`.
+
+## Pick up first
+
+- The new work the human mentioned (was blocked on this cleanup).
+- Check boards: `sunbeam kanban card list` on dev/support/ideas.
 
 # State — 2026-07-23 (after push)
 
@@ -27,30 +74,3 @@ timestamp: 2026-07-22T00:00:00Z
 Verification behind them: `deno task ci` green, app + storybook builds
 green, and a 208-screen visual regression vs the old baseline that caught
 and fixed three systemic Panda bugs (see log.md 2026-07-23 entry).
-
-## Known loose ends
-
-- The user's unanswered 2026-07-02 message: *"huge issues with bundling our
-  font and getting the typography right"* — font/typography bundling is an
-  open problem, not addressed.
-- Token migration (px → `beamPreset` spacing) is only half-applied across
-  component source (valid but inconsistent). Charter rule 4 applies when
-  resuming it.
-- `workflows.yaml` / `sunbeam.yaml` (Gitea pipeline) are stale.
-- Plan items #4–#8 and phases 5–7 (Preact/Fresh migration, release prep)
-  never started.
-- GitHub reports 46 dependabot vulnerabilities on the default branch
-  (8 high) — not yet triaged.
-- Untracked/modified files under `packages/beam-ui-typst/` are the human's
-  own WIP — do not commit or revert them.
-
-## Blocked / waiting
-
-- Nothing, once the image is verified on ghcr.io.
-
-## Pick up first
-
-- Check for open cards on the `beam-ui` boards (`sunbeam kanban board list
-  beam-ui`, then `sunbeam kanban card list <board-id>`).
-- Triaged dependabot alerts and the font/typography question are the most
-  valuable next items.
