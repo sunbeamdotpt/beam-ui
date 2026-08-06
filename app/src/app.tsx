@@ -14,6 +14,7 @@ import {
   type LinkComponent,
 } from "@sunbeam/beam-ui";
 import { pageDates } from "./generated/page-dates";
+import { PlasmicHostPage } from "./pages/plasmic-host";
 import { TokensPage } from "./pages/tokens";
 import { DocsHomePage } from "./pages/docs-home";
 import { DocsInteriorPage } from "./pages/docs-interior";
@@ -213,6 +214,8 @@ export function App() {
     <>
       <ScrollToTop />
       <Routes>
+        {/* Plasmic app host — bare page, no Shell chrome (BEAM-003) */}
+        <Route path="plasmic-host" element={<PlasmicHostPage />} />
         <Route element={<RouterShell />}>
           {/* Full-width pages (no sidebar) */}
           <Route index element={<TokensPage />} />

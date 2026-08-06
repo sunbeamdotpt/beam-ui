@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@ark-ui/react": "^4.0.0",
+    "@plasmicapp/react-web": "1.0.30",
     "@sunbeam/beam-ui": "file:../packages/beam-ui",
     "@types/turndown": "^5.0.6",
     "react": "^19.0.0",
