@@ -111,3 +111,14 @@ ritual, charter, and state.md now describe the kanban flow; mail-thread
 references in older entries (e.g. task #52 to sbbb) are historical. *Why:*
 the human standardized cross-repo tracking on kanban so tickets are visible
 to everyone, not just the two mail endpoints.
+
+## 2026-08-06 — stale Gitea pipeline files resolved
+
+Removed `workflows.yaml` (wfe-server/Gitea-registry CI, superseded by
+`.github/workflows/release.yml` since 2026-07-23) and rewrote
+`sunbeam.yaml` for the current stack: kind `deno-app`, Deno tasks for
+test/lint/fmt, app npm scripts for build/dev, `package` targeting
+`ghcr.io/sunbeamdotpt/beam-ui:latest` for local verification only
+(release images come from GitHub Actions). *Why:* state.md had flagged
+both files as stale since July; keeping two contradictory pipeline
+descriptions invites someone to revive the wrong one.

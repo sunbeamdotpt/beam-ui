@@ -1,18 +1,28 @@
 schema: 1
 project:
   name: beam-ui
-  kind: node-ui
-  description: "Beam Design Language — React component library and Storybook monorepo."
+  kind: deno-app
+  description: "Beam Design Language — Preact/React component library (JSR @sunbeam/beam-ui), showcase site, and Storybook."
 targets:
   build:
     exec: "npm run build"
-    cwd: packages/beam-ui
+    cwd: app
+  test:
+    exec: "deno task test"
+  lint:
+    exec: "deno lint"
+  fmt:
+    exec: "deno fmt"
   dev:
-    exec: "npm run storybook"
+    exec: "npm run dev"
     cwd: app
   clean:
-    exec: "rm -rf packages/beam-ui/dist app/dist"
+    exec: "rm -rf app/dist app/storybook-static"
   package:
-    exec: "docker buildx build --push -t src.${SUNBEAM_REGISTRY}/studio/beam-ui:latest ."
+    # Local verification only; the release image is built multi-arch by
+    # .github/workflows/release.yml and pushed to ghcr.io.
+    exec: "docker buildx build -t ghcr.io/sunbeamdotpt/beam-ui:latest ."
+  deploy: skip
 outputs:
-  - packages/beam-ui/dist
+  - app/dist
+  - ghcr.io/sunbeamdotpt/beam-ui:latest
