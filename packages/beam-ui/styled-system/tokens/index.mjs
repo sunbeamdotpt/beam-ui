@@ -151,9 +151,17 @@ const tokens = {
     "value": "rgba(255,255,255,0.05)",
     "variable": "var(--colors-chrome\\.05)"
   },
+  "colors.chrome.06": {
+    "value": "rgba(255,255,255,0.06)",
+    "variable": "var(--colors-chrome\\.06)"
+  },
   "colors.chrome.10": {
     "value": "rgba(255,255,255,0.10)",
     "variable": "var(--colors-chrome\\.10)"
+  },
+  "colors.chrome.30": {
+    "value": "rgba(255,255,255,0.30)",
+    "variable": "var(--colors-chrome\\.30)"
   },
   "colors.chrome.35": {
     "value": "rgba(255,255,255,0.35)",
@@ -174,6 +182,10 @@ const tokens = {
   "colors.chrome.70": {
     "value": "rgba(255,255,255,0.70)",
     "variable": "var(--colors-chrome\\.70)"
+  },
+  "colors.chrome.90": {
+    "value": "rgba(255,255,255,0.90)",
+    "variable": "var(--colors-chrome\\.90)"
   },
   "colors.warm.04": {
     "value": "rgba(127,99,21,0.04)",
@@ -251,6 +263,22 @@ const tokens = {
     "value": "rgba(248,81,73,0.2)",
     "variable": "var(--colors-diff\\.del\\.emphasis)"
   },
+  "colors.slate.05": {
+    "value": "rgba(130,130,160,0.05)",
+    "variable": "var(--colors-slate\\.05)"
+  },
+  "colors.slate.08": {
+    "value": "rgba(130,130,160,0.08)",
+    "variable": "var(--colors-slate\\.08)"
+  },
+  "colors.slate.10": {
+    "value": "rgba(130,130,160,0.10)",
+    "variable": "var(--colors-slate\\.10)"
+  },
+  "colors.slate.15": {
+    "value": "rgba(130,130,160,0.15)",
+    "variable": "var(--colors-slate\\.15)"
+  },
   "fonts.heading": {
     "value": "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
     "variable": "var(--fonts-heading)"
@@ -294,6 +322,42 @@ const tokens = {
   "shadows.code": {
     "value": "var(--shadows-code)",
     "variable": "var(--shadows-code)"
+  },
+  "shadows.focusRing.sm": {
+    "value": "0 0 0 2px var(--colors-accent\\.15)",
+    "variable": "var(--shadows-focus-ring\\.sm)"
+  },
+  "shadows.focusRing.md": {
+    "value": "0 0 0 3px var(--colors-accent\\.20)",
+    "variable": "var(--shadows-focus-ring\\.md)"
+  },
+  "shadows.focusRing.lg": {
+    "value": "0 0 0 2px var(--colors-accent\\.30)",
+    "variable": "var(--shadows-focus-ring\\.lg)"
+  },
+  "shadows.focusRing.xl": {
+    "value": "0 0 0 3px var(--colors-accent\\.30)",
+    "variable": "var(--shadows-focus-ring\\.xl)"
+  },
+  "shadows.focusRing.2xl": {
+    "value": "0 0 0 2px var(--colors-accent\\.40)",
+    "variable": "var(--shadows-focus-ring\\.2xl)"
+  },
+  "shadows.thumb": {
+    "value": "0 1px 3px rgba(0,0,0,0.15)",
+    "variable": "var(--shadows-thumb)"
+  },
+  "shadows.thumbSoft": {
+    "value": "0 1px 3px rgba(0,0,0,0.12)",
+    "variable": "var(--shadows-thumb-soft)"
+  },
+  "shadows.drawer": {
+    "value": "4px 0 20px rgba(0,0,0,0.15)",
+    "variable": "var(--shadows-drawer)"
+  },
+  "shadows.pop": {
+    "value": "0 8px 24px rgba(0,0,0,0.12)",
+    "variable": "var(--shadows-pop)"
   },
   "fontSizes.9": {
     "value": "9px",
@@ -555,6 +619,10 @@ const tokens = {
     "value": "6px",
     "variable": "var(--spacing-1\\.5)"
   },
+  "spacing.2.25": {
+    "value": "9px",
+    "variable": "var(--spacing-2\\.25)"
+  },
   "spacing.2.5": {
     "value": "10px",
     "variable": "var(--spacing-2\\.5)"
@@ -719,6 +787,14 @@ const tokens = {
     "value": "320px",
     "variable": "var(--sizes-80)"
   },
+  "sizes.90": {
+    "value": "360px",
+    "variable": "var(--sizes-90)"
+  },
+  "sizes.95": {
+    "value": "380px",
+    "variable": "var(--sizes-95)"
+  },
   "sizes.96": {
     "value": "384px",
     "variable": "var(--sizes-96)"
@@ -782,6 +858,10 @@ const tokens = {
   "sizes.1.5": {
     "value": "6px",
     "variable": "var(--sizes-1\\.5)"
+  },
+  "sizes.2.25": {
+    "value": "9px",
+    "variable": "var(--sizes-2\\.25)"
   },
   "sizes.2.5": {
     "value": "10px",
@@ -1062,6 +1142,10 @@ const tokens = {
   "spacing.-1.5": {
     "value": "calc(var(--spacing-1\\.5) * -1)",
     "variable": "var(--spacing-1\\.5)"
+  },
+  "spacing.-2.25": {
+    "value": "calc(var(--spacing-2\\.25) * -1)",
+    "variable": "var(--spacing-2\\.25)"
   },
   "spacing.-2.5": {
     "value": "calc(var(--spacing-2\\.5) * -1)",

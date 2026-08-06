@@ -50,6 +50,7 @@ const spacingScale = {
   1: { value: "4px" },
   1.5: { value: "6px" },
   2: { value: "8px" },
+  2.25: { value: "9px" },
   2.5: { value: "10px" },
   3: { value: "12px" },
   3.5: { value: "14px" },
@@ -160,12 +161,15 @@ export const beamPreset: Preset = definePreset({
           "accent.40": { value: "rgba(250,82,15,0.40)" },
           "chrome.03": { value: "rgba(255,255,255,0.03)" },
           "chrome.05": { value: "rgba(255,255,255,0.05)" },
+          "chrome.06": { value: "rgba(255,255,255,0.06)" },
           "chrome.10": { value: "rgba(255,255,255,0.10)" },
+          "chrome.30": { value: "rgba(255,255,255,0.30)" },
           "chrome.35": { value: "rgba(255,255,255,0.35)" },
           "chrome.40": { value: "rgba(255,255,255,0.40)" },
           "chrome.50": { value: "rgba(255,255,255,0.50)" },
           "chrome.60": { value: "rgba(255,255,255,0.60)" },
           "chrome.70": { value: "rgba(255,255,255,0.70)" },
+          "chrome.90": { value: "rgba(255,255,255,0.90)" },
           "warm.04": { value: "rgba(127,99,21,0.04)" },
           "warm.10": { value: "rgba(127,99,21,0.10)" },
           "warm.25": { value: "rgba(127,99,21,0.25)" },
@@ -185,11 +189,24 @@ export const beamPreset: Preset = definePreset({
           "diff.add.emphasis": { value: "rgba(46,160,67,0.2)" },
           "diff.del.bg": { value: "rgba(248,81,73,0.15)" },
           "diff.del.emphasis": { value: "rgba(248,81,73,0.2)" },
+          // Diff-gutter neutral slate (line-number backgrounds/borders)
+          "slate.05": { value: "rgba(130,130,160,0.05)" },
+          "slate.08": { value: "rgba(130,130,160,0.08)" },
+          "slate.10": { value: "rgba(130,130,160,0.10)" },
+          "slate.15": { value: "rgba(130,130,160,0.15)" },
         },
         fonts: {
-          heading: { value: "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif" },
-          body: { value: "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif" },
-          mono: { value: "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace" },
+          heading: {
+            value:
+              "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
+          },
+          body: {
+            value:
+              "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
+          },
+          mono: {
+            value: "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace",
+          },
         },
         fontWeights: {
           display: { value: "431" },
@@ -208,6 +225,17 @@ export const beamPreset: Preset = definePreset({
           },
           nav: { value: "0 3px 13px rgba(127,99,21,0.08)" },
           code: { value: "0 7px 20px -7px rgba(0,0,0,0.5)" },
+          // Focus rings — ordered by prominence; colors reference the accent alpha scale
+          "focusRing.sm": { value: "0 0 0 2px {colors.accent.15}" },
+          "focusRing.md": { value: "0 0 0 3px {colors.accent.20}" },
+          "focusRing.lg": { value: "0 0 0 2px {colors.accent.30}" },
+          "focusRing.xl": { value: "0 0 0 3px {colors.accent.30}" },
+          "focusRing.2xl": { value: "0 0 0 2px {colors.accent.40}" },
+          // Control thumbs / flyout surfaces
+          thumb: { value: "0 1px 3px rgba(0,0,0,0.15)" },
+          thumbSoft: { value: "0 1px 3px rgba(0,0,0,0.12)" },
+          drawer: { value: "4px 0 20px rgba(0,0,0,0.15)" },
+          pop: { value: "0 8px 24px rgba(0,0,0,0.12)" },
         },
         fontSizes: {
           // UI utility sizes
@@ -246,6 +274,8 @@ export const beamPreset: Preset = definePreset({
         // The extra entries are layout max-widths (sizes-only, not spacing).
         sizes: {
           ...spacingScale,
+          "90": { value: "360px" },
+          "95": { value: "380px" },
           "100": { value: "400px" },
           "120": { value: "480px" },
           "125": { value: "500px" },
@@ -357,26 +387,59 @@ export const beamPreset: Preset = definePreset({
           code: {
             value: {
               base: "0 10px 30px -10px rgba(0,0,0,0.5)",
-              _dark: "0 14px 40px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,161,16,0.08)",
+              _dark:
+                "0 14px 40px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,161,16,0.08)",
             },
           },
         },
         colors: {
-          "bg.page": { value: { base: "{colors.warm.ivory}", _dark: "{colors.sunbeam.black}" } },
-          "bg.card": { value: { base: "{colors.cream}", _dark: "{colors.card.dark}" } },
-          "bg.nav": { value: { base: "rgba(255,250,235,0.92)", _dark: "rgba(31,31,31,0.92)" } },
-          "text.primary": { value: { base: "{colors.sunbeam.black}", _dark: "#ffffff" } },
-          "text.secondary": { value: { base: "hsl(0,0%,24%)", _dark: "rgba(255,255,255,0.7)" } },
-          "text.muted": { value: { base: "#7f6315", _dark: "rgba(255,255,255,0.4)" } },
+          "bg.page": {
+            value: {
+              base: "{colors.warm.ivory}",
+              _dark: "{colors.sunbeam.black}",
+            },
+          },
+          "bg.card": {
+            value: { base: "{colors.cream}", _dark: "{colors.card.dark}" },
+          },
+          "bg.nav": {
+            value: {
+              base: "rgba(255,250,235,0.92)",
+              _dark: "rgba(31,31,31,0.92)",
+            },
+          },
+          "text.primary": {
+            value: { base: "{colors.sunbeam.black}", _dark: "#ffffff" },
+          },
+          "text.secondary": {
+            value: { base: "hsl(0,0%,24%)", _dark: "rgba(255,255,255,0.7)" },
+          },
+          "text.muted": {
+            value: { base: "#7f6315", _dark: "rgba(255,255,255,0.4)" },
+          },
           "border.default": {
-            value: { base: "{colors.border.warm}", _dark: "{colors.border.warmDark}" },
+            value: {
+              base: "{colors.border.warm}",
+              _dark: "{colors.border.warmDark}",
+            },
           },
           "border.subtle": {
-            value: { base: "{colors.border.warmSubtle}", _dark: "rgba(255,161,16,0.08)" },
+            value: {
+              base: "{colors.border.warmSubtle}",
+              _dark: "rgba(255,161,16,0.08)",
+            },
           },
-          accent: { value: { base: "{colors.sunbeam.orange}", _dark: "{colors.sunbeam.orange}" } },
+          accent: {
+            value: {
+              base: "{colors.sunbeam.orange}",
+              _dark: "{colors.sunbeam.orange}",
+            },
+          },
           sectionLabel: {
-            value: { base: "{colors.sunbeam.orange}", _dark: "{colors.sunshine.700}" },
+            value: {
+              base: "{colors.sunbeam.orange}",
+              _dark: "{colors.sunshine.700}",
+            },
           },
         },
       },
