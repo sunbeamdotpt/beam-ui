@@ -207,3 +207,14 @@ routed through statusColors inline. Remaining raw values are all documented
 exceptions: Mermaid/light-syntax palettes, categorical data maps
 (AVATAR/BRANCH/LEVEL/PRIORITY/LABEL/EVENT_COLORS), gradients/calc/grid
 tracks, SVG attrs, JSDoc, inline runtime values.
+
+## 2026-08-06 — release v0.14.0 (coverage gate waived by human)
+
+Pushed the 11-commit loose-ends series (rebased onto f3713ec docs PR),
+created CHANGELOG.md, bumped to 0.14.0. Gates: tests green,
+`deno publish --dry-run --allow-dirty` passes. **Coverage gate (>90%)
+waived by the human in-session** — the repo has no coverage tooling and
+the suite (65 tests/4 files over ~85 components) is far below the bar;
+building the harness is part of BEAM-001. Recorded per sunbeam-release
+§2 ("say so, don't wave through" — surfaced and decided by the human).
+`deno publish` itself remains the human's action (charter).
