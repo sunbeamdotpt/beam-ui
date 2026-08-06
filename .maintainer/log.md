@@ -261,3 +261,21 @@ Also: mermaid bumped to 11.16.1 (five new moderate advisories), npm audit
 back to the single known react-router high. Deno-symlink repair after npm
 install needed twice more — consider codifying the rm+deno install step
 in a root task.
+
+## 2026-08-06 — BEAM-004 Plasmic token registration landed (in review)
+
+W3: app/scripts/generate-plasmic-tokens.ts walks beamPreset tokens +
+semanticTokens and emits app/src/plasmic/tokens.generated.ts — 223
+registerToken() calls wired into generateBuildAssets(). Key decision:
+registered values are CSS variable references (var(--colors-sunshine.700)
+etc.) read from Panda's styled-system/tokens artifacts rather than raw
+hex/px. registerToken has no variant/dark-target support, but because
+Panda redefines the vars under [data-theme=dark], var references give us
+dark-mode-correct tokens in Studio for free — designs stay theme-aware
+instead of freezing light-mode values into generated code. Plasmic token
+types are limited (color, spacing, font-size, line-height, opacity,
+font-family); radii/shadows/fontWeights/breakpoints skipped as scoped.
+sizes.* registered as spacing (Plasmic uses spacing tokens for sizing).
+Verified: app build green, /plasmic-host still renders the Plasmic
+confirmation. Actual token pickers only inspectable inside Studio after
+W1/BEAM-006.
