@@ -54,9 +54,11 @@ clean (kanban, badge, code-block, diff-viewer, charts).
 
 ## Housekeeping
 
-- Working tree has build-output churn in `app/` (build-info, page-dates,
-  components.json, panda.css) — regenerated every build, intentionally
-  uncommitted. `packages/beam-ui-typst/` WIP is the human's — untouched.
+- Generated app artifacts (public/docs/*.md, llms.txt, components.json,
+  build-info, page-dates, storybook panda.css) ARE committed
+  (`88783a9`) — the human wants them current in git for the container.
+  Keep committing them with app-affecting changes from now on.
+- `packages/beam-ui-typst/` WIP is the human's — untouched.
 - If npm install breaks Deno symlinks: `rm -rf
   packages/beam-ui/node_modules/.deno .bin && deno install`.
 
