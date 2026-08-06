@@ -48,7 +48,8 @@ const base = css({
   border: "none",
   lineHeight: 1,
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "0.5",
   },
@@ -68,7 +69,8 @@ const variants: Record<Variant, string> = {
     color: "sunbeam.black",
     padding: "2.5 5",
     borderRadius: "0",
-    border: "1px solid",
+    borderWidth: "0.25",
+    borderStyle: "solid",
     borderColor: { base: "sunshine.500", _dark: "sunshine.300" },
     _hover: {
       backgroundColor: { base: "sunshine.300", _dark: "sunshine.300" },
@@ -77,7 +79,8 @@ const variants: Record<Variant, string> = {
   ghost: css({
     backgroundColor: "transparent",
     color: "text.primary",
-    border: "1px solid",
+    borderWidth: "0.25",
+    borderStyle: "solid",
     borderColor: "border.default",
     padding: "2.5 5",
     borderRadius: "0",

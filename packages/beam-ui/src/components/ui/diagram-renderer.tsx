@@ -213,7 +213,8 @@ const containerStyle = css({
 });
 
 const errorContainer = css({
-  borderLeft: "4px solid",
+  borderLeftWidth: "1",
+  borderLeftStyle: "solid",
   borderLeftColor: "sunbeam.orange",
 });
 

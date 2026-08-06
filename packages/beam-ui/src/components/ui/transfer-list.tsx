@@ -289,7 +289,8 @@ const container = css({
 const panel = css({
   flex: 1,
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   display: "flex",
   flexDirection: "column",
@@ -302,7 +303,8 @@ const panelHeader = css({
   justifyContent: "space-between",
   paddingBlock: "3",
   paddingInline: "4",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -325,7 +327,8 @@ const panelCount = css({
 const searchWrapper = css({
   position: "relative",
   padding: "2",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -344,7 +347,8 @@ const searchInput = css({
   paddingRight: "2",
   paddingLeft: "7",
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   fontSize: "13",
   fontFamily: "body",
@@ -375,14 +379,17 @@ const listItem = css({
   fontFamily: "body",
   color: "text.primary",
   cursor: "pointer",
-  borderLeft: "3px solid transparent",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
+  borderLeftColor: "transparent",
   transition: "all 0.1s ease",
   userSelect: "none",
   _hover: {
     backgroundColor: "bg.page",
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "-0.5",
   },
@@ -407,7 +414,8 @@ const actionBtn = css({
   width: "9",
   height: "9",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   color: { base: "text.secondary", _dark: "warm.ivory" },
   cursor: "pointer",
@@ -417,7 +425,8 @@ const actionBtn = css({
     color: "sunbeam.orange",
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "0.5",
   },

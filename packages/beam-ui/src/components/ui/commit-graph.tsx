@@ -246,7 +246,8 @@ export function CommitGraph(
 const wrapperStyle = css({
   display: "flex",
   overflow: "auto",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
 });
@@ -265,7 +266,8 @@ const commitRow = css({
   alignItems: "center",
   gap: "3",
   paddingRight: "4",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
 });
 
@@ -279,7 +281,8 @@ const branchBadge = css({
   fontSize: "2xs",
   fontFamily: "mono",
   padding: "0.25 1.5",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   color: "text.primary",
   backgroundColor: "bg.page",
   whiteSpace: "nowrap",

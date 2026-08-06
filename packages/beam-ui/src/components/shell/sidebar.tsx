@@ -51,7 +51,9 @@ const itemLink = css({
   fontWeight: "body",
   color: "text.secondary",
   textDecoration: "none",
-  borderLeft: "3px solid transparent",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
+  borderLeftColor: "transparent",
   transition: "all 0.15s",
   _hover: {
     color: "accent",
@@ -68,7 +70,8 @@ const itemLinkActive = css({
   fontWeight: "button",
   color: "accent",
   textDecoration: "none",
-  borderLeft: "3px solid",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
   borderLeftColor: "sunbeam.orange",
   bg: "creamA.30",
 });
@@ -87,7 +90,9 @@ const collapsibleTrigger = css({
   bg: "transparent",
   border: "none",
   cursor: "pointer",
-  borderLeft: "3px solid transparent",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
+  borderLeftColor: "transparent",
   transition: "all 0.15s",
   _hover: {
     color: "accent",
@@ -107,7 +112,9 @@ const collapsibleTriggerActive = css({
   bg: "transparent",
   border: "none",
   cursor: "pointer",
-  borderLeft: "3px solid transparent",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
+  borderLeftColor: "transparent",
 });
 
 const chevron = css({
@@ -127,7 +134,8 @@ const chevronOpen = css({
 
 const childList = css({
   marginLeft: "4",
-  borderLeft: "1px solid",
+  borderLeftWidth: "0.25",
+  borderLeftStyle: "solid",
   borderLeftColor: "border.default",
   display: "flex",
   flexDirection: "column",
@@ -145,7 +153,8 @@ const childLabel = css({
   fontWeight: "body",
   color: "text.secondary",
   textDecoration: "none",
-  borderLeft: "1px solid",
+  borderLeftWidth: "0.25",
+  borderLeftStyle: "solid",
   borderLeftColor: "border.subtle",
   marginLeft: "-0.25",
   cursor: "pointer",
@@ -163,7 +172,8 @@ const childLabelOnPage = css({
   fontWeight: "body",
   color: "text.primary",
   textDecoration: "none",
-  borderLeft: "2px solid",
+  borderLeftWidth: "0.5",
+  borderLeftStyle: "solid",
   borderLeftColor: "sunbeam.orange",
   marginLeft: "-0.25",
   cursor: "pointer",
@@ -181,7 +191,9 @@ const childLink = css({
   fontWeight: "body",
   color: "text.secondary",
   textDecoration: "none",
-  borderLeft: "3px solid transparent",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
+  borderLeftColor: "transparent",
   marginLeft: "-0.25",
   transition: "all 0.15s",
   _hover: {
@@ -197,7 +209,8 @@ const childLinkActive = css({
   fontWeight: "button",
   color: "accent",
   textDecoration: "none",
-  borderLeft: "3px solid",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
   borderLeftColor: "sunbeam.orange",
   marginLeft: "-0.25",
   bg: "creamA.30",

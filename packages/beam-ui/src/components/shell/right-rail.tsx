@@ -62,7 +62,8 @@ const aside = css({
   overflowY: "auto",
   paddingInline: "6",
   paddingBlock: "10",
-  borderLeft: "1px solid",
+  borderLeftWidth: "0.25",
+  borderLeftStyle: "solid",
   borderLeftColor: "border.subtle",
 });
 
@@ -80,7 +81,8 @@ const navList = css({
   flexDirection: "column",
   gap: "3",
   paddingLeft: "3",
-  borderLeft: "2px solid",
+  borderLeftWidth: "0.5",
+  borderLeftStyle: "solid",
   borderLeftColor: "border.subtle",
 });
 
@@ -102,14 +104,16 @@ const navItemActive = css({
   cursor: "pointer",
   marginLeft: "-3.5",
   paddingLeft: "3",
-  borderLeft: "2px solid",
+  borderLeftWidth: "0.5",
+  borderLeftStyle: "solid",
   borderLeftColor: "accent",
 });
 
 const divider = css({
   marginBlock: "6",
   border: "none",
-  borderTop: "1px solid",
+  borderTopWidth: "0.25",
+  borderTopStyle: "solid",
   borderTopColor: "border.subtle",
 });
 

@@ -190,7 +190,8 @@ export function CodeBlock({
                   stream === opt
                     ? css({
                       color: "white",
-                      borderBottom: "2px solid",
+                      borderBottomWidth: "0.5",
+                      borderBottomStyle: "solid",
                       borderBottomColor: "sunbeam.orange",
                     })
                     : css({
@@ -316,7 +317,9 @@ const codeBlockRoot = css({
   fontFamily: "mono",
   fontSize: "sm",
   shadow: "code",
-  border: "1px solid rgba(255,255,255,0.05)",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "chrome.05",
 });
 
 const topBar = css({
@@ -325,7 +328,9 @@ const topBar = css({
   justifyContent: "space-between",
   padding: "2 4",
   backgroundColor: "scrim.50",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderBottomColor: "chrome.05",
 });
 
 const controlsBar = css({
@@ -334,7 +339,9 @@ const controlsBar = css({
   justifyContent: "space-between",
   padding: "3 4",
   backgroundColor: "sunbeam.black",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderBottomColor: "chrome.05",
   flexWrap: "wrap",
   gap: "2",
 });
@@ -397,5 +404,5 @@ export const syn: Record<
   prop: css({ color: "syn.prop" }),
   number: css({ color: "syn.number" }),
   builtin: css({ color: "syn.builtin" }),
-  comment: css({ color: "rgba(255,255,255,0.3)", fontStyle: "italic" }),
+  comment: css({ color: "chrome.30", fontStyle: "italic" }),
 };

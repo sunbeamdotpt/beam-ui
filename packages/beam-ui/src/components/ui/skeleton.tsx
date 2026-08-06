@@ -19,8 +19,9 @@ export interface SkeletonProps {
 const shimmerName = "beam-shimmer";
 
 const base = css({
-  backgroundColor: { base: "warm.10", _dark: "rgba(255,255,255,0.06)" },
-  border: "1px solid",
+  backgroundColor: { base: "warm.10", _dark: "chrome.06" },
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   backgroundImage: {
     base: "linear-gradient(90deg, transparent 0%, rgba(127,99,21,0.15) 50%, transparent 100%)",

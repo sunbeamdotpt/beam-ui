@@ -418,7 +418,8 @@ function renderSplit(
 const rootStyle = css({
   borderRadius: "0",
   overflow: "hidden",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   fontFamily: "mono",
   fontSize: "13",
@@ -431,7 +432,8 @@ const fileHeader = css({
   alignItems: "center",
   padding: "2.5 4",
   backgroundColor: "bg.card",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderBottomColor: "border.default",
   fontSize: "13",
   fontWeight: "button",
@@ -453,13 +455,14 @@ const fileNameArrow = css({
 const hunkHeaderStyle = css({
   padding: "1.5 4",
   backgroundColor: {
-    base: "rgba(130, 130, 160, 0.08)",
-    _dark: "rgba(130, 130, 160, 0.15)",
+    base: "slate.08",
+    _dark: "slate.15",
   },
   color: "text.secondary",
   fontSize: "xs",
   fontFamily: "mono",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderBottomColor: "border.default",
 });
 
@@ -467,7 +470,9 @@ const unifiedRow = css({
   display: "flex",
   minHeight: "5.5",
   alignItems: "stretch",
-  borderBottom: "1px solid rgba(128, 128, 128, 0.06)",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderBottomColor: "grid.06",
 });
 
 const lineNumCell = css({
@@ -480,7 +485,8 @@ const lineNumCell = css({
   color: "text.secondary",
   fontSize: "11",
   userSelect: "none",
-  borderRight: "1px solid",
+  borderRightWidth: "0.25",
+  borderRightStyle: "solid",
   borderRightColor: "border.default",
 });
 
@@ -505,17 +511,19 @@ const contentCell = css({
 
 const addBg = css({
   backgroundColor: { base: "diff.add.bg", _dark: "diff.add.emphasis" },
-  color: { _dark: "rgba(255, 255, 255, 0.9)" },
+  color: { _dark: "chrome.90" },
 });
 
 const removeBg = css({
   backgroundColor: { base: "diff.del.bg", _dark: "diff.del.emphasis" },
-  color: { _dark: "rgba(255, 255, 255, 0.9)" },
+  color: { _dark: "chrome.90" },
 });
 
 const splitRowStyle = css({
   display: "flex",
-  borderBottom: "1px solid rgba(128, 128, 128, 0.06)",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderBottomColor: "grid.06",
 });
 
 const splitHalf = css({
@@ -527,7 +535,8 @@ const splitHalf = css({
 });
 
 const splitLeftBorder = css({
-  borderRight: "1px solid",
+  borderRightWidth: "0.25",
+  borderRightStyle: "solid",
   borderRightColor: "border.default",
 });
 
@@ -535,8 +544,10 @@ const collapsedRow = css({
   display: "flex",
   justifyContent: "center",
   padding: "1 0",
-  backgroundColor: "rgba(130, 130, 160, 0.05)",
-  borderBottom: "1px solid rgba(128, 128, 128, 0.06)",
+  backgroundColor: "slate.05",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
+  borderBottomColor: "grid.06",
 });
 
 const expandBtn = css({
@@ -551,6 +562,6 @@ const expandBtn = css({
   transition: "all 0.15s ease",
   _hover: {
     color: "text.primary",
-    backgroundColor: "rgba(130, 130, 160, 0.1)",
+    backgroundColor: "slate.10",
   },
 });

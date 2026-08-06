@@ -26,7 +26,8 @@ export interface TabsProps {
 const tabList = css({
   display: "flex",
   gap: "8",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
   marginBottom: "8",
 });
@@ -34,7 +35,8 @@ const tabList = css({
 const tabListDark = css({
   display: "flex",
   gap: "6",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "chrome.10",
   marginBottom: "6",
 });
@@ -49,7 +51,9 @@ const tabTrigger = css({
   border: "none",
   cursor: "pointer",
   color: "text.muted",
-  borderBottom: "2px solid transparent",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
     color: "text.primary",
@@ -70,7 +74,9 @@ const tabTriggerDark = css({
   border: "none",
   cursor: "pointer",
   color: "chrome.40",
-  borderBottom: "2px solid transparent",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
     color: "chrome.60",

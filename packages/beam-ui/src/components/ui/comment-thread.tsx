@@ -366,9 +366,11 @@ const contentCol = css({
 
 const commentCard = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
-  borderTop: "3px solid",
+  borderTopWidth: "0.75",
+  borderTopStyle: "solid",
   borderTopColor: "sunbeam.orange",
   overflow: "hidden",
   shadow: "golden",
@@ -379,7 +381,8 @@ const commentHeader = css({
   alignItems: "center",
   gap: "2",
   padding: "3 4",
-  borderBottom: "2px solid",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
   borderColor: "sunbeam.orange",
   backgroundColor: { base: "accent.06", _dark: "accent.10" },
 });
@@ -411,7 +414,8 @@ const commentFooter = css({
   alignItems: "center",
   gap: "3",
   padding: "2.5 4",
-  borderTop: "1px solid",
+  borderTopWidth: "0.25",
+  borderTopStyle: "solid",
   borderColor: "border.default",
   backgroundColor: { base: "warm.04", _dark: "chrome.03" },
 });
@@ -452,7 +456,8 @@ const eventDot = css({
   justifyContent: "center",
   borderRadius: "full",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   flexShrink: 0,
 });

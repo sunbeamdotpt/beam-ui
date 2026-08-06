@@ -299,7 +299,8 @@ const searchRow = css({
   alignItems: "center",
   gap: "2",
   padding: "3 4",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -324,7 +325,7 @@ const list = css({
   listStyle: "none",
   margin: 0,
   padding: "1 0",
-  maxHeight: "380px",
+  maxHeight: "95",
   overflowY: "auto",
 });
 
@@ -332,7 +333,7 @@ const rowBase = css({
   display: "flex",
   alignItems: "center",
   gap: "2.5",
-  padding: "9px 16px",
+  padding: "2.25 4",
   cursor: "pointer",
   fontSize: "sm",
   fontFamily: "body",

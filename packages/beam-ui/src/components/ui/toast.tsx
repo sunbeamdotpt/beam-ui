@@ -90,9 +90,10 @@ const wrapper = css({
   paddingInline: "4",
   backgroundColor: "bg.card",
   shadow: "golden",
-  borderLeft: "3px solid",
+  borderLeftWidth: "0.75",
+  borderLeftStyle: "solid",
   zIndex: 200,
-  maxWidth: "360px",
+  maxWidth: "90",
   transition: "all 0.3s ease",
 });
 

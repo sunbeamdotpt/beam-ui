@@ -187,7 +187,8 @@ export function Table({
 
 const wrapper = css({
   overflowX: "auto",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -210,7 +211,8 @@ const headerCell = css({
   textTransform: "uppercase",
   letterSpacing: "0.06em",
   color: "text.muted",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
   cursor: "default",
   whiteSpace: "nowrap",
@@ -238,7 +240,8 @@ const dataCell = css({
   fontSize: "sm",
   fontFamily: "mono",
   color: "text.primary",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
 });
 

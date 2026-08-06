@@ -197,12 +197,10 @@ export const beamPreset: Preset = definePreset({
         },
         fonts: {
           heading: {
-            value:
-              "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
+            value: "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
           },
           body: {
-            value:
-              "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
+            value: "'Ysabeau Infant', Arial, ui-sans-serif, system-ui, sans-serif",
           },
           mono: {
             value: "'Monaspace Argon', 'SF Mono', 'Fira Code', monospace",
@@ -387,8 +385,7 @@ export const beamPreset: Preset = definePreset({
           code: {
             value: {
               base: "0 10px 30px -10px rgba(0,0,0,0.5)",
-              _dark:
-                "0 14px 40px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,161,16,0.08)",
+              _dark: "0 14px 40px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,161,16,0.08)",
             },
           },
         },

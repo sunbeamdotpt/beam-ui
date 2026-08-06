@@ -191,7 +191,8 @@ const compactItem = css({
 });
 
 const borderedItem = css({
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
   padding: "3 0",
   _first: { paddingTop: 0 },

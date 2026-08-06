@@ -127,7 +127,8 @@ const control = css({
     borderColor: "sunbeam.orange",
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "0.5",
   },

@@ -92,7 +92,8 @@ const track = css({
   height: "1.5",
   borderRadius: "full",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   overflow: "hidden",
 });
@@ -108,9 +109,10 @@ const thumb = css({
   height: "5",
   borderRadius: "full",
   backgroundColor: "white",
-  border: "2px solid",
+  borderWidth: "0.5",
+  borderStyle: "solid",
   borderColor: "border.default",
-  boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
+  boxShadow: "thumbSoft",
   cursor: "grab",
   transition: "border-color 0.15s ease",
   _hover: {
@@ -122,6 +124,6 @@ const thumb = css({
   _focus: {
     outline: "none",
     borderColor: "sunbeam.orange",
-    boxShadow: "0 0 0 3px rgba(250, 82, 15, 0.3)",
+    boxShadow: "focusRing.xl",
   },
 });

@@ -301,13 +301,14 @@ const stepDone = css({
 const stepActive = css({
   backgroundColor: "sunbeam.orange",
   color: "white",
-  boxShadow: "0 0 0 3px rgba(250, 82, 15, 0.2)",
+  boxShadow: "focusRing.md",
 });
 
 const stepPending = css({
   backgroundColor: "bg.card",
   color: "text.muted",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -359,7 +360,8 @@ const actions = css({
   justifyContent: "space-between",
   alignItems: "center",
   paddingTop: "4",
-  borderTop: "1px solid",
+  borderTopWidth: "0.25",
+  borderTopStyle: "solid",
   borderColor: "border.subtle",
 });
 
@@ -401,7 +403,8 @@ const modalPositioner = css({
 
 const modalContent = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   width: "100%",

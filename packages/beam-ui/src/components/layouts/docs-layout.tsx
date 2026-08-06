@@ -56,7 +56,8 @@ const srOnly = css({
     color: "accent",
     fontWeight: "button",
     fontSize: "sm",
-    border: "2px solid",
+    borderWidth: "0.5",
+    borderStyle: "solid",
     borderColor: "accent",
   },
 });

@@ -261,7 +261,8 @@ export function MarkdownEditor({
 /* ------------------------------------------------------------------ */
 
 const container = css({
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   overflow: "hidden",
 });
@@ -269,7 +270,8 @@ const container = css({
 const tabBar = css({
   display: "flex",
   gap: "0",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
 });
@@ -282,7 +284,9 @@ const tabButton = css({
   color: "text.secondary",
   background: "none",
   border: "none",
-  borderBottom: "2px solid transparent",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   cursor: "pointer",
   textTransform: "uppercase",
   letterSpacing: "0.05em",
@@ -306,7 +310,8 @@ const toolbar = css({
   gap: "0.5",
   padding: "1.5 2",
   backgroundColor: "bg.card",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -317,7 +322,9 @@ const toolbarButton = css({
   width: "7",
   height: "7",
   background: "none",
-  border: "1px solid transparent",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "transparent",
   cursor: "pointer",
   color: "text.primary",
   transition: "all 0.15s ease",

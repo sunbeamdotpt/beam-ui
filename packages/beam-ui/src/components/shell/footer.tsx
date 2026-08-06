@@ -8,7 +8,8 @@ declare const __BUILD_LABEL__: string | undefined;
 
 const footer = css({
   bg: "sunbeam.black",
-  borderTop: "4px solid",
+  borderTopWidth: "1",
+  borderTopStyle: "solid",
   borderColor: "sunbeam.orange",
 });
 

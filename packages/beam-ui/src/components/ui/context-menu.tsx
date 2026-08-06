@@ -54,7 +54,8 @@ export interface ContextMenuProps {
 
 const contentStyle = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   padding: "1",

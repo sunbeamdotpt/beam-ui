@@ -178,7 +178,8 @@ const input = css({
   fontFamily: "body",
   fontWeight: "body",
   bg: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.subtle",
   borderRadius: "sm",
   outline: "none",
@@ -188,7 +189,7 @@ const input = css({
   },
   _focus: {
     borderColor: "accent",
-    boxShadow: "0 0 0 2px rgba(250, 82, 15, 0.15)",
+    boxShadow: "focusRing.sm",
   },
 });
 
@@ -200,7 +201,8 @@ const kbd = css({
   fontSize: "2xs",
   fontWeight: "button",
   color: "text.muted",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   paddingInline: "1.5",
   paddingBlock: "0.5",
@@ -217,7 +219,8 @@ const dropdown = css({
   right: 0,
   marginTop: "1",
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   maxHeight: "80",
@@ -234,7 +237,8 @@ const sectionHeader = css({
   letterSpacing: "0.15em",
   color: "text.muted",
   backgroundColor: "bg.card",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
 });
 

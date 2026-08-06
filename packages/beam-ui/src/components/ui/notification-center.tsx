@@ -314,7 +314,8 @@ const triggerBtn = css({
   width: "10",
   height: "10",
   backgroundColor: "transparent",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   color: "text.primary",
   cursor: "pointer",
@@ -345,9 +346,10 @@ const badge = css({
 });
 
 const popoverContent = css({
-  width: "360px",
+  width: "90",
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,
@@ -359,7 +361,8 @@ const header = css({
   alignItems: "center",
   justifyContent: "space-between",
   padding: "4",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -420,7 +423,8 @@ const groupTrigger = css({
   color: "text.muted",
   fontFamily: "body",
   backgroundColor: "bg.card",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
   border: "none",
   cursor: "pointer",
@@ -476,7 +480,8 @@ const groupHeader = css({
   color: "text.muted",
   fontFamily: "body",
   backgroundColor: "bg.card",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -487,7 +492,8 @@ const notifRow = css({
   paddingBlock: "3",
   paddingInline: "4",
   paddingLeft: "19px",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
   position: "relative",
   transition: "background 0.1s ease",
@@ -497,7 +503,8 @@ const clickableRow = css({
   cursor: "pointer",
   _hover: { backgroundColor: "bg.card" },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "-0.5",
   },

@@ -195,7 +195,8 @@ const triggerStyle = css({
   gap: "2",
   padding: "1.5 3",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   cursor: "pointer",
   fontFamily: "mono",
@@ -224,7 +225,8 @@ const chevron = css({
 
 const dropdown = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,
@@ -236,7 +238,8 @@ const dropdown = css({
 const tabList = css({
   display: "flex",
   gap: "0",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -251,7 +254,9 @@ const tabTriggerStyle = css({
   border: "none",
   cursor: "pointer",
   color: "text.muted",
-  borderBottom: "2px solid transparent",
+  borderBottomWidth: "0.5",
+  borderBottomStyle: "solid",
+  borderBottomColor: "transparent",
   transition: "all 0.15s ease",
   _hover: {
     color: "text.primary",
@@ -265,7 +270,8 @@ const tabTriggerStyle = css({
 const searchWrapper = css({
   position: "relative",
   padding: "2",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -280,7 +286,8 @@ const searchIcon = css({
 const searchInput = css({
   width: "100%",
   padding: "1.5 2 1.5 8",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
   fontSize: "13",
@@ -342,7 +349,8 @@ const defaultBadge = css({
   color: "text.muted",
   backgroundColor: "bg.card",
   padding: "0.5 1.5",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   flexShrink: 0,
 });
@@ -363,7 +371,8 @@ const createRow = css({
   cursor: "pointer",
   textAlign: "left",
   fontFamily: "body",
-  borderTop: "1px solid",
+  borderTopWidth: "0.25",
+  borderTopStyle: "solid",
   borderColor: "border.default",
   transition: "background-color 0.1s ease",
   _hover: {

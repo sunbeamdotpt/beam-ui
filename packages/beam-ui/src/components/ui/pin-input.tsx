@@ -89,13 +89,14 @@ const input = css({
   fontFamily: "body",
   color: "text.primary",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   borderRadius: "md",
   outline: "none",
   transition: "all 0.15s ease",
   _focus: {
     borderColor: "sunbeam.orange",
-    boxShadow: "0 0 0 2px rgba(250, 82, 15, 0.4)",
+    boxShadow: "focusRing.2xl",
   },
 });

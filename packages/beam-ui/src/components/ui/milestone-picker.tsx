@@ -149,7 +149,8 @@ const triggerStyle = css({
   gap: "2",
   padding: "1.5 3",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   cursor: "pointer",
   fontFamily: "body",
@@ -187,7 +188,8 @@ const chevron = css({
 
 const dropdown = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,
@@ -199,7 +201,8 @@ const dropdown = css({
 const searchWrapper = css({
   position: "relative",
   padding: "2",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -214,7 +217,8 @@ const searchIcon = css({
 const searchInput = css({
   width: "100%",
   padding: "1.5 2 1.5 8",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   backgroundColor: "bg.card",
   fontSize: "13",

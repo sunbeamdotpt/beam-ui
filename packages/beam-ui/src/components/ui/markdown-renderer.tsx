@@ -187,7 +187,8 @@ const wrapperStyle = css({
   "& h2": {
     fontSize: "2xl",
     letterSpacing: "-0.01em",
-    borderBottom: "1px solid",
+    borderBottomWidth: "0.25",
+    borderBottomStyle: "solid",
     borderColor: "border.default",
     paddingBottom: "2",
   },
@@ -212,7 +213,8 @@ const wrapperStyle = css({
   /* Code blocks (pre > code) */
   "& pre": {
     backgroundColor: "bg.card",
-    border: "1px solid",
+    borderWidth: "0.25",
+    borderStyle: "solid",
     borderColor: "border.default",
     padding: "4",
     overflowX: "auto",
@@ -234,13 +236,15 @@ const wrapperStyle = css({
     fontSize: "13",
     backgroundColor: "bg.card",
     padding: "0.5 1.5",
-    border: "1px solid",
+    borderWidth: "0.25",
+    borderStyle: "solid",
     borderColor: "border.default",
   },
 
   /* Blockquotes */
   "& blockquote": {
-    borderLeft: "3px solid",
+    borderLeftWidth: "0.75",
+    borderLeftStyle: "solid",
     borderColor: "sunbeam.orange",
     paddingLeft: "4",
     marginLeft: "0",
@@ -289,12 +293,14 @@ const wrapperStyle = css({
     color: "text.muted",
     backgroundColor: "bg.card",
     padding: "2.5 3",
-    borderBottom: "1px solid",
+    borderBottomWidth: "0.25",
+    borderBottomStyle: "solid",
     borderColor: "border.default",
   },
   "& td": {
     padding: "2.5 3",
-    borderBottom: "1px solid",
+    borderBottomWidth: "0.25",
+    borderBottomStyle: "solid",
     borderColor: "border.default",
     color: "text.primary",
   },
@@ -312,7 +318,8 @@ const wrapperStyle = css({
   /* Horizontal rule */
   "& hr": {
     border: "none",
-    borderTop: "1px solid",
+    borderTopWidth: "0.25",
+    borderTopStyle: "solid",
     borderColor: "border.default",
     margin: "8 0",
   },

@@ -84,7 +84,8 @@ const root = css({
 });
 
 const item = css({
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -103,7 +104,8 @@ const trigger = css({
   color: "text.primary",
   transition: "color 0.15s ease",
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "0.5",
   },

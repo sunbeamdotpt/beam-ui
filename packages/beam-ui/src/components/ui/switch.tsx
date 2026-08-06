@@ -74,7 +74,8 @@ const control = css({
   padding: "0.5",
   borderRadius: "full",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   transition: "all 0.2s ease",
   flexShrink: 0,
@@ -83,7 +84,8 @@ const control = css({
     borderColor: "sunbeam.orange",
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "0.5",
   },
@@ -95,7 +97,7 @@ const thumb = css({
   borderRadius: "full",
   backgroundColor: "white",
   transition: "transform 0.2s ease",
-  boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+  boxShadow: "thumb",
   "&[data-state=checked]": {
     transform: "translateX(16px)",
   },

@@ -47,7 +47,8 @@ const elevatedSurface = css({
 const outlinedSurface = css({
   backgroundColor: "bg.card",
   padding: "8",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.warm",
   borderRadius: "0",
   transition: "border-color 0.2s ease",

@@ -115,7 +115,8 @@ const trigger = css({
   width: "100%",
   padding: "2.5 3",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   borderRadius: "0",
   fontSize: "sm",
@@ -137,7 +138,8 @@ const trigger = css({
 
 const content = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,
@@ -162,7 +164,8 @@ const item = css({
     backgroundColor: "bg.card",
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "-0.5",
   },

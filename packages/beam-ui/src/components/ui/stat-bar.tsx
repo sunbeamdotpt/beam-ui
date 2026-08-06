@@ -34,7 +34,8 @@ const grid = css({
 const cell = css({
   paddingInline: "4",
   textAlign: "center",
-  borderRight: "1px solid",
+  borderRightWidth: "0.25",
+  borderRightStyle: "solid",
   borderColor: "border.subtle",
   _last: {
     borderRight: "none",

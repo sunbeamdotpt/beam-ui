@@ -70,7 +70,8 @@ const triggerStyle = css({
 
 const content = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,

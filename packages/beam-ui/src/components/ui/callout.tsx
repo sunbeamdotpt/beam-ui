@@ -76,7 +76,8 @@ export function Callout(
           padding: "6",
           backgroundColor: "bg.card",
           borderRadius: "0",
-          borderLeft: "4px solid",
+          borderLeftWidth: "1",
+          borderLeftStyle: "solid",
         }),
         className,
       )}

@@ -124,7 +124,8 @@ const control = css({
   alignItems: "center",
   width: "100%",
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   borderRadius: "0",
   transition: "all 0.15s ease",
@@ -166,7 +167,8 @@ const triggerBtn = css({
     color: "text.primary",
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "-0.5",
   },
@@ -174,7 +176,8 @@ const triggerBtn = css({
 
 const content = css({
   backgroundColor: "bg.page",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   shadow: "golden",
   zIndex: 50,

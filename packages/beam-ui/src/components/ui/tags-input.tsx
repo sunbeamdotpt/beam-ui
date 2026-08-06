@@ -112,13 +112,14 @@ const control = css({
   paddingBlock: "1.5",
   paddingInline: "2",
   borderRadius: "md",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
   backgroundColor: "transparent",
   transition: "all 0.15s ease",
   _focusWithin: {
     borderColor: "sunbeam.orange",
-    boxShadow: "0 0 0 2px rgba(250, 82, 15, 0.3)",
+    boxShadow: "focusRing.lg",
   },
 });
 
@@ -155,7 +156,8 @@ const deleteTrigger = css({
     opacity: 1,
   },
   _focusVisible: {
-    outline: "2px solid",
+    outlineWidth: "0.5",
+    outlineStyle: "solid",
     outlineColor: "sunbeam.orange",
     outlineOffset: "0.25",
   },

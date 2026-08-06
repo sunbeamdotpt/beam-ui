@@ -153,13 +153,15 @@ const completedIndicator = css({
 
 const currentIndicator = css({
   backgroundColor: "transparent",
-  border: "2px solid",
+  borderWidth: "0.5",
+  borderStyle: "solid",
   borderColor: "sunbeam.orange",
 });
 
 const upcomingIndicator = css({
   backgroundColor: "bg.card",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: "border.default",
 });
 

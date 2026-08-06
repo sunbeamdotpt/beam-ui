@@ -47,7 +47,8 @@ const checkboxOuter = css({
   width: "4.5",
   height: "4.5",
   minWidth: "4.5",
-  border: "1px solid",
+  borderWidth: "0.25",
+  borderStyle: "solid",
   borderColor: { base: "warm.30", _dark: "sunshine.35" },
   display: "flex",
   alignItems: "center",
@@ -118,7 +119,8 @@ const listHeader = css({
   color: "text.muted",
   textTransform: "uppercase",
   letterSpacing: "0.1em",
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.default",
 });
 
@@ -131,7 +133,8 @@ const listRow = css({
   cursor: "pointer",
   transition: "background 0.1s ease",
   _hover: { backgroundColor: "bg.card" },
-  borderBottom: "1px solid",
+  borderBottomWidth: "0.25",
+  borderBottomStyle: "solid",
   borderColor: "border.subtle",
 });
 
@@ -253,7 +256,9 @@ const gridCell = css({
   cursor: "pointer",
   position: "relative",
   transition: "background 0.1s ease",
-  border: "1px solid transparent",
+  borderWidth: "0.25",
+  borderStyle: "solid",
+  borderColor: "transparent",
   _hover: { backgroundColor: "bg.card" },
 });
 
