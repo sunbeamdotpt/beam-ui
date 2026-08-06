@@ -11,9 +11,11 @@
     },
     "@modelcontextprotocol/sdk": {
       "@hono/node-server": "^2.0.5"
-    }
+    },
+    "postcss": "^8.5.26"
   },
   "devDependencies": {
+    "@pandacss/dev": "^1.12.0",
     "@storybook/addon-essentials": "^8.6.18",
     "@storybook/builder-vite": "^8.6.18",
     "@storybook/react": "^8.6.18",

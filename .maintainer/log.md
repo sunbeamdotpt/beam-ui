@@ -122,3 +122,21 @@ test/lint/fmt, app npm scripts for build/dev, `package` targeting
 (release images come from GitHub Actions). *Why:* state.md had flagged
 both files as stale since July; keeping two contradictory pipeline
 descriptions invites someone to revive the wrong one.
+
+## 2026-08-06 — dependabot sweep: 66 open alerts → 2
+
+Bumped `react-router-dom` ^7.15.1→^7.18.0 and postcss ^8.5.0→^8.5.18
+(app), hoisted `@pandacss/dev` ^1.12.0 to root devDeps + unscoped postcss
+override ^8.5.26, regenerated `package-lock.json` via `npm audit fix`.
+fast-uri, brace-expansion, ip-address patched; the hono / @hono/node-server
+/ express / qs / body-parser alerts vanished because @pandacss/dev 1.12.0
+dropped @pandacss/mcp (and with it the whole @modelcontextprotocol/sdk
+subtree). Remaining: react-router GHSA-qwww-vcr4-c8h2 (patched only in
+8.3.0 — major bump, needs the human's call) and one dompurify low with no
+patch published. *Why:* state.md had 46 untriaged alerts since July; the
+July sweep (5e4e356) only covered part of the tree.
+Gotcha reconfirmed: npm install prunes Deno's node_modules symlinks;
+repair is `rm -rf packages/beam-ui/node_modules/.deno .bin && deno install`
+(fragile-areas.md). Also learned: npm *scoped* overrides are silently
+ignored for dependency chains rooted in a workspace package (npm 11.x) —
+use unscoped overrides + root-hoisted devDeps instead.
