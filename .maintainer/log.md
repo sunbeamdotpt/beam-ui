@@ -234,3 +234,15 @@ Plasmic-authored content, deferred as phase-2 decision). Scope doc at
 docs/plasmic-app-host-scope.md; sub-cards W2-W5 filed, W1 (Plasmic
 project/plan) is the human's. Registration code will live in app/, never
 in the JSR package (design-language rules).
+
+## 2026-08-06 — Plasmic: full codegen decided (W6 = BEAM-007)
+
+Human decided the integration mode: **full codegen, no loader** — Plasmic
+is for UI design and wiring; generated React/TSX is synced (`plasmic
+sync`), committed, and built into the container by the normal release
+pipeline. Consequences: registerComponent importPaths must be the
+package subpaths (generated code tree-shakes, heavy deps stay behind
+subpath exports); generated files are Plasmic-owned (never hand-edit —
+wiring lives in wrapper/route components); no runtime env needed in the
+image (public API token lives in plasmic.json, safe to commit). Scope
+doc updated; carded as BEAM-007.

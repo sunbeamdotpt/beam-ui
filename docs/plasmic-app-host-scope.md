@@ -128,15 +128,31 @@ templates), expect a **generated skeleton + hand-curated overrides** file.
   URL to `https://design.sunbeam.pt/plasmic-host`, verify team editing.
   Server change needed: none (SPA fallback + no XFO) — add a regression note
   to `.maintainer/fragile-areas.md`.
-- **W6 — (Phase 2, separate decision) render Plasmic-authored pages in the
-  app**: loader vs codegen choice, env wiring for project ID/token in the
-  Docker build, routing for Plasmic pages.
+- **W6 — Codegen pipeline** (decided 2026-08-06: **full codegen**, not
+  loader — Plasmic is for UI design/wiring; generated code is ours to
+  build and deploy):
+  - `@plasmicapp/cli` + `plasmic init` in `app/` → `plasmic.json`
+    (projectId + **public** API token — safe to commit; srcDir e.g.
+    `src/plasmic`, TS scheme). Human supplies the project (W1).
+  - `plasmic sync` emits plain React/TSX page + component code that
+    imports our code components via each registration's `importPath` —
+    set these to the **package subpaths** (`@sunbeam/beam-ui`,
+    `@sunbeam/beam-ui/kanban`, `/charts`, …) so generated code tree-shakes
+    and heavy deps stay behind subpath exports. Per Plasmic guidance,
+    `registerComponent` calls live on the host page for codegen.
+  - Generated files are owned by Plasmic (overwritten on sync) — never
+    hand-edit; wiring/logic goes in wrapper components or route files
+    that import the generated pages. react-router routes point at the
+    generated page components.
+  - Pipeline: `plasmic sync` runs locally or in CI (watch mode exists for
+    dev); synced code is committed and built into the container by the
+    normal release flow — no runtime loader, no extra env in the image.
 
 ## 6. Open questions for the human
 
 1. Plasmic plan/seats — is the free Starter tier enough, or paid?
 2. Which components matter first for the pages you want to build visually?
    (Lets W4 land in two increments instead of all 83 at once.)
-3. Is the end goal only "design pages in Studio" (app-host only) or also
-   "serve Plasmic-authored pages from this container" (phase 2, W6)?
+3. ~~App-host only vs. serving Plasmic content~~ — **decided**: full
+   codegen (W6); Plasmic is for UI design/wiring, we own the pipeline.
 4. Self-hosted Plasmic Studio, or studio.plasmic.app cloud? (Assumed cloud.)
