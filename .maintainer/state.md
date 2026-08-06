@@ -6,12 +6,24 @@ tags: [state]
 timestamp: 2026-08-06T21:00:00Z
 ---
 
-# State — 2026-08-06 (loose ends closed; ready for new work)
+# State — 2026-08-06 (v0.14.0 released; image building)
 
-All July loose ends resolved and committed on mainline
-(`41138e5`..`1ca1c07`, 8 commits). `deno task ci` + app build green;
-5-page Playwright visual spot-check clean (kanban, badge, code-block,
-diff-viewer, charts).
+All July loose ends resolved, pushed (`f3713ec`..`7bad499`), and released
+as **v0.14.0** (tag pushed; CHANGELOG.md created). Gates: tests green,
+`deno publish --dry-run` passes; **coverage gate waived by the human**
+(no tooling; harness is BEAM-001 work). `deno publish` to JSR is the
+human's action per charter — dry-run is green, ready when they are.
+
+Note: the push/tag triggers did NOT queue a Release Container run
+(transient GitHub issue); the image was kicked off via
+`workflow_dispatch` on tag v0.14.0 (run 31128925488) — builds
+v0.14.0/v0.14/v0/latest. If future pushes don't trigger Actions, check
+for swallowed webhook deliveries before assuming config drift.
+
+All July loose ends resolved — 11 commits on mainline (rebased onto the
+f3713ec docs PR; pre-rebase hashes in log.md entries are stale).
+`deno task ci` + app build green; 5-page Playwright visual spot-check
+clean (kanban, badge, code-block, diff-viewer, charts).
 
 ## Resolved this session
 
