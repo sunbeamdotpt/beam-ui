@@ -218,3 +218,19 @@ the suite (65 tests/4 files over ~85 components) is far below the bar;
 building the harness is part of BEAM-001. Recorded per sunbeam-release
 §2 ("say so, don't wave through" — surfaced and decided by the human).
 `deno publish` itself remains the human's action (charter).
+
+## 2026-08-06 — Plasmic app-host scoped (BEAM-002 → BEAM-003..006)
+
+Human asked for a Plasmic app-host in the container with full
+component/token scoping. Research (Plasmic docs, no swarm per human)
+found: app-host = public /plasmic-host route rendering PlasmicCanvasHost
+(@plasmicapp/react-web, React 19 supported since Loader V2); server.ts
+needs zero changes (SPA fallback, no X-Frame-Options — added to
+watch-list); registerToken covers colors/spacing/fontSizes/fonts/
+lineHeights but NOT radii/shadows/fontWeights; 83 components triaged into
+bulk/slot-composition/wrapper/heavy-dynamic-import/skip buckets; host
+page needs no credentials (project ID+token only for rendering
+Plasmic-authored content, deferred as phase-2 decision). Scope doc at
+docs/plasmic-app-host-scope.md; sub-cards W2-W5 filed, W1 (Plasmic
+project/plan) is the human's. Registration code will live in app/, never
+in the JSR package (design-language rules).
