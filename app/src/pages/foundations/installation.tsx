@@ -149,22 +149,22 @@ export function InstallationPage() {
       {/* ===== Fonts ===== */}
       <h2 id="fonts" className={sectionTitle}>Fonts</h2>
       <p className={paragraph}>
-        Beam uses two typefaces. Include them in your HTML or load them via your bundler:
+        Beam ships its typefaces self-hosted inside the package -- no CDN needed.
+        Import the stylesheet once at application startup and your bundler
+        (Vite, Rollup, webpack) emits the woff2 files automatically:
       </p>
       <ul className={css({ color: "text.secondary", fontSize: "15px", lineHeight: 1.7, paddingLeft: "24px", marginBottom: "16px", maxWidth: "640px" })}>
         <li><strong className={css({ color: "text.primary" })}>Ysabeau Infant</strong> (variable, weights 431/575/647/791) -- headings and body</li>
         <li><strong className={css({ color: "text.primary" })}>Monaspace Argon</strong> -- monospace, code blocks, and UI labels</li>
+        <li><strong className={css({ color: "text.primary" })}>Material Symbols Outlined</strong> -- icon font</li>
       </ul>
       <CodeBlock
         tabs={[{
-          label: "HTML",
+          label: "TSX",
           content: (
             <pre><code>
-              <span className={syn.comment}>{"<!-- Google Fonts -->"}</span>{"\n"}
-              {'<link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:wght@1..1000&display=swap" rel="stylesheet">'}{"\n"}
-              {"\n"}
-              <span className={syn.comment}>{"<!-- Monaspace Argon (self-hosted or via CDN) -->"}</span>{"\n"}
-              {'<link href="/fonts/monaspace-argon.css" rel="stylesheet">'}
+              <span className={syn.comment}>{"// In your app entry (e.g. main.tsx), before other styles"}</span>{"\n"}
+              <span className={syn.keyword}>import</span> <span className={syn.string}>"@sunbeam/beam-ui/styles/fonts.css"</span>{";"}
             </code></pre>
           ),
         }]}

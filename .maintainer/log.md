@@ -140,3 +140,23 @@ repair is `rm -rf packages/beam-ui/node_modules/.deno .bin && deno install`
 (fragile-areas.md). Also learned: npm *scoped* overrides are silently
 ignored for dependency chains rooted in a workspace package (npm 11.x) —
 use unscoped overrides + root-hoisted devDeps instead.
+
+## 2026-08-06 — fonts self-hosted (Monaspace was 404 everywhere)
+
+Root cause of the long-standing "huge issues with bundling our font":
+both Monaspace CDN URLs were dead — the v1.101 jsdelivr path AND the
+v1.400 `fonts/webfonts/` path (v1.400 restructured to
+`fonts/Web Fonts/...`), so the monospace font never loaded and fell back
+silently; Ysabeau Infant + Material Symbols depended on Google Fonts at
+runtime. Now all three fonts ship as woff2 inside the package
+(`packages/beam-ui/src/styles/fonts/`): Ysabeau Infant var (wght 1–1000,
+normal+italic, latin subset), **Monaspace Argon Var from monaspace
+v1.400** (wght 200–800, per the human's request for latest), Material
+Symbols Outlined var. `fonts.css` rewritten with local @font-face +
+OFL/Apache license files; `app/index.html` CDN links and dead inline
+@font-face block removed; app imports the stylesheet in `main.tsx`;
+installation docs updated. Verified: `deno task ci`, app + storybook
+builds emit the woff2s, Playwright `document.fonts.check` true for all
+three families, zero CDN requests. Known gap: JSR `exports` in deno.json
+has no `./styles/*` subpath — app/storybook resolve it via the Vite
+alias, external JSR consumers can't (pre-existing).
