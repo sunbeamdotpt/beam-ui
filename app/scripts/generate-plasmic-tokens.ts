@@ -36,8 +36,25 @@ interface Registration {
   displayName: string;
 }
 
+const CATEGORY_GROUPS: Record<string, string> = {
+  spacing: "Spacing",
+  sizes: "Sizes",
+  fontSizes: "Font size",
+  lineHeights: "Line height",
+  fonts: "Font family",
+};
+
 function humanize(path: string, semantic: boolean): string {
-  const parts = path.split(".").slice(1).map((p) => p.charAt(0).toUpperCase() + p.slice(1));
+  const [category, ...rest] = path.split(".");
+  // Studio's token tree splits display names on "/" AND on "." — so leaf
+  // names must not contain dots ("Beam / 0.5" renders as a bogus "0 → 5"
+  // nesting), and numeric-leaf categories need an explicit group, or
+  // spacing.0.5 and sizes.0.5 collide into one indistinguishable "0.5".
+  if (category !== "colors") {
+    const leaf = rest.join("-").replaceAll(".", "-");
+    return ["Beam", CATEGORY_GROUPS[category] ?? category, leaf].join(" / ");
+  }
+  const parts = rest.map((p) => p.charAt(0).toUpperCase() + p.slice(1));
   return ["Beam", ...(semantic ? ["Semantic"] : []), ...parts].join(" / ");
 }
 
@@ -56,7 +73,16 @@ function collect(
       console.warn(`  ⚠ no CSS variable for token ${path}, skipping`);
       continue;
     }
-    out.push({ name: path, value: variable, type, displayName: humanize(path, semantic) });
+    // Panda escapes dots in CSS identifiers (--spacing-0\.5); the escape is
+    // required in stylesheets but breaks Studio's token-value evaluator,
+    // which then shows the raw var() text instead of the resolved value.
+    // Browsers resolve the unescaped dotted name fine, so strip it here.
+    out.push({
+      name: path,
+      value: variable.replaceAll("\\.", "."),
+      type,
+      displayName: humanize(path, semantic),
+    });
   }
 }
 

@@ -182,7 +182,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Page content.",
-      "defaultValue": "ApiLayout"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "ApiLayout",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -326,7 +340,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Badge label text.",
-      "defaultValue": "Badge"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Badge",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "variant": {
       "type": "choice",
@@ -407,7 +435,21 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "defaultValue": "BentoItem"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "BentoItem",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -482,7 +524,21 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "defaultValue": "Button"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Button",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -496,7 +552,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Callout message content.",
-      "defaultValue": "Callout"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Callout",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "variant": {
       "type": "choice",
@@ -548,7 +618,21 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "description": "Generic card content. Ignored when `title` is provided.",
-      "defaultValue": "Card"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Card",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -692,7 +776,21 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "description": "Custom trigger element (e.g., button or icon). If omitted, renders a default \"Copy\" button.",
-      "defaultValue": "Clipboard"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Clipboard",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "timeout": {
       "type": "number",
@@ -871,7 +969,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Element or component that triggers the context menu on right-click.",
-      "defaultValue": "ContextMenu"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "ContextMenu",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -934,7 +1046,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Main content of the dialog (typically text, form fields, or other components).",
-      "defaultValue": "Dialog"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Dialog",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "actions": {
       "type": "slot",
@@ -983,7 +1109,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Page content.",
-      "defaultValue": "DocsLayout"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "DocsLayout",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "pageDates": {
       "type": "object",
@@ -1012,7 +1152,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Element or component that triggers the dropdown on click.",
-      "defaultValue": "DropdownMenu"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "DropdownMenu",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "positioning": {
       "type": "object",
@@ -1164,7 +1318,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Page content.",
-      "defaultValue": "FullwidthLayout"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "FullwidthLayout",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -1239,7 +1407,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Content displayed in the popover when hovering.",
-      "defaultValue": "HoverCard"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "HoverCard",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -1311,7 +1493,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Keyboard key name or symbol (e.g., \"Ctrl\", \"⌘\", \"Enter\", \"⌘K\").",
-      "defaultValue": "Kbd"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Kbd",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "platform": {
       "type": "choice",
@@ -1492,7 +1688,21 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "defaultValue": "ModelRow"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "ModelRow",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -1632,7 +1842,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Content displayed inside the popover body.",
-      "defaultValue": "Popover"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Popover",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "title": {
       "type": "string",
@@ -1789,7 +2013,21 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "description": "Content to render.",
-      "defaultValue": "Shell"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Shell",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "showThemeToggle": {
       "type": "boolean",
@@ -1952,7 +2190,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Exactly two child elements to split.",
-      "defaultValue": "Splitter"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Splitter",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "direction": {
       "type": "choice",
@@ -2279,7 +2531,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Content displayed inside the button (text, icon, or both).",
-      "defaultValue": "Toggle"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Toggle",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     }
   }
 }));
@@ -2298,7 +2564,21 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Element that triggers the tooltip.",
-      "defaultValue": "Tooltip"
+      "defaultValue": {
+        "type": "text",
+        "tag": "span",
+        "value": "Tooltip",
+        "styles": {
+          "fontFamily": "inherit",
+          "fontSize": "inherit",
+          "fontWeight": "inherit",
+          "fontStyle": "inherit",
+          "lineHeight": "inherit",
+          "letterSpacing": "inherit",
+          "textTransform": "inherit",
+          "color": "inherit"
+        }
+      }
     },
     "position": {
       "type": "choice",

@@ -178,11 +178,28 @@ for (const { file, path } of discover()) {
     // canvas — give the children slot a text placeholder so instances are
     // visible and hug-sized out of the gate (curate richer defaults per
     // component in registry.overrides.tsx).
-    // NOTE: do NOT emit JSX defaults here — Studio converts registered
-    // slot defaultValue JSX into its tpl model at registry-ingest time,
-    // and unsupported content hard-errors the frame ("Unexpected error").
+    //
+    // defaultValue must be a PlasmicElement SCHEMA (JSON), not JSX — JSX
+    // hard-errors Studio's registry ingest. A bare string becomes a text
+    // node styled with the PROJECT's default typography (Inter 16px from
+    // starter templates); a GenericTextElement with explicit `inherit`
+    // styles keeps the component's own typography.
     if (props.children?.type === "slot" && props.children.defaultValue === undefined) {
-      props.children.defaultValue = name;
+      props.children.defaultValue = {
+        type: "text",
+        tag: "span",
+        value: name,
+        styles: {
+          fontFamily: "inherit",
+          fontSize: "inherit",
+          fontWeight: "inherit",
+          fontStyle: "inherit",
+          lineHeight: "inherit",
+          letterSpacing: "inherit",
+          textTransform: "inherit",
+          color: "inherit",
+        },
+      };
     }
     components.push({ name, file, importPath: HEAVY_SUBPATHS[file] ?? ROOT_IMPORT, props, unmapped });
   }
