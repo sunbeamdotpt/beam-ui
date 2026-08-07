@@ -133,6 +133,18 @@ const MarkdownRendererHost = withSuspense(MarkdownRendererLazy);
 const MathRendererHost = withSuspense(MathRendererLazy);
 const SyntaxHighlighterHost = withSuspense(SyntaxHighlighterLazy);
 
+// Slot placeholder text must explicitly inherit the component's
+// typography: bare strings become Plasmic text nodes styled with the
+// PROJECT's default typography (e.g. Inter 16px from starter
+// templates), not ours. Inline styles beat Plasmic's unlayered rules.
+function slotText(text: string): ReactNode {
+  return (
+    <span style={{ font: "inherit", color: "inherit", letterSpacing: "inherit", textTransform: "inherit" }}>
+      {text}
+    </span>
+  );
+}
+
 export function registerBeamComponents(): void {
   registerComponent(withSanitizedProps(Accordion), withOverride("Accordion", {
   "name": "BeamAccordion",
@@ -182,7 +194,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Page content.",
-      "defaultValue": "ApiLayout"
+      "defaultValue": slotText("ApiLayout")
     }
   }
 }));
@@ -326,7 +338,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Badge label text.",
-      "defaultValue": "Badge"
+      "defaultValue": slotText("Badge")
     },
     "variant": {
       "type": "choice",
@@ -407,7 +419,7 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "defaultValue": "BentoItem"
+      "defaultValue": slotText("BentoItem")
     }
   }
 }));
@@ -482,7 +494,7 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "defaultValue": "Button"
+      "defaultValue": slotText("Button")
     }
   }
 }));
@@ -496,7 +508,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Callout message content.",
-      "defaultValue": "Callout"
+      "defaultValue": slotText("Callout")
     },
     "variant": {
       "type": "choice",
@@ -548,7 +560,7 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "description": "Generic card content. Ignored when `title` is provided.",
-      "defaultValue": "Card"
+      "defaultValue": slotText("Card")
     }
   }
 }));
@@ -692,7 +704,7 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "description": "Custom trigger element (e.g., button or icon). If omitted, renders a default \"Copy\" button.",
-      "defaultValue": "Clipboard"
+      "defaultValue": slotText("Clipboard")
     },
     "timeout": {
       "type": "number",
@@ -871,7 +883,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Element or component that triggers the context menu on right-click.",
-      "defaultValue": "ContextMenu"
+      "defaultValue": slotText("ContextMenu")
     }
   }
 }));
@@ -934,7 +946,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Main content of the dialog (typically text, form fields, or other components).",
-      "defaultValue": "Dialog"
+      "defaultValue": slotText("Dialog")
     },
     "actions": {
       "type": "slot",
@@ -983,7 +995,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Page content.",
-      "defaultValue": "DocsLayout"
+      "defaultValue": slotText("DocsLayout")
     },
     "pageDates": {
       "type": "object",
@@ -1012,7 +1024,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Element or component that triggers the dropdown on click.",
-      "defaultValue": "DropdownMenu"
+      "defaultValue": slotText("DropdownMenu")
     },
     "positioning": {
       "type": "object",
@@ -1164,7 +1176,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Page content.",
-      "defaultValue": "FullwidthLayout"
+      "defaultValue": slotText("FullwidthLayout")
     }
   }
 }));
@@ -1239,7 +1251,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Content displayed in the popover when hovering.",
-      "defaultValue": "HoverCard"
+      "defaultValue": slotText("HoverCard")
     }
   }
 }));
@@ -1311,7 +1323,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Keyboard key name or symbol (e.g., \"Ctrl\", \"⌘\", \"Enter\", \"⌘K\").",
-      "defaultValue": "Kbd"
+      "defaultValue": slotText("Kbd")
     },
     "platform": {
       "type": "choice",
@@ -1492,7 +1504,7 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "defaultValue": "ModelRow"
+      "defaultValue": slotText("ModelRow")
     }
   }
 }));
@@ -1632,7 +1644,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Content displayed inside the popover body.",
-      "defaultValue": "Popover"
+      "defaultValue": slotText("Popover")
     },
     "title": {
       "type": "string",
@@ -1789,7 +1801,7 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "description": "Content to render.",
-      "defaultValue": "Shell"
+      "defaultValue": slotText("Shell")
     },
     "showThemeToggle": {
       "type": "boolean",
@@ -1952,7 +1964,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Exactly two child elements to split.",
-      "defaultValue": "Splitter"
+      "defaultValue": slotText("Splitter")
     },
     "direction": {
       "type": "choice",
@@ -2279,7 +2291,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Content displayed inside the button (text, icon, or both).",
-      "defaultValue": "Toggle"
+      "defaultValue": slotText("Toggle")
     }
   }
 }));
@@ -2298,7 +2310,7 @@ export function registerBeamComponents(): void {
       "type": "slot",
       "required": true,
       "description": "Element that triggers the tooltip.",
-      "defaultValue": "Tooltip"
+      "defaultValue": slotText("Tooltip")
     },
     "position": {
       "type": "choice",
