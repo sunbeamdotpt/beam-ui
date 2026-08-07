@@ -343,3 +343,18 @@ plasmic monorepo (cloned to ~/Development/plasmic, sparse checkout).
 FOLLOW-UP: docs app visuals changed everywhere padding was broken —
 Playwright baselines need regeneration (test:visual -u) before the next
 release; visual diff is "roomier, as designed", not a regression.
+
+## 2026-08-07 — Slot text typography fix
+
+User report: text inside dragged components renders Inter, not Beam
+fonts. Root cause: Plasmic gives every canvas text node the PROJECT's
+default typography (starter template: Inter 16px #000); our bare-string
+slot defaultValues became such text nodes. First verification pass
+missed this because I compared the button chrome (bg/padding), not the
+slot text node — lesson: verify the thing the user pointed at, not the
+adjacent thing. Fix: slotText() wrapper with inline inherit styles.
+NOTE for Studio users: text they type themselves still gets project
+default typography — the durable fix is setting the Plasmic project's
+default typography to the registered Beam / Body token (project
+settings, one-time). Existing instances keep their stored text-node
+styles; delete + re-drag to pick up slotText defaults.
