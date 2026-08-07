@@ -27,6 +27,11 @@ function generateBuildAssets() {
       } catch (e) {
         console.warn("Warning: failed to generate Plasmic tokens", e);
       }
+      try {
+        execFileSync("npx", ["tsx", "scripts/generate-plasmic-registry.ts"], { cwd: __dirname, stdio: "inherit" });
+      } catch (e) {
+        console.warn("Warning: failed to generate Plasmic registry", e);
+      }
     },
   };
 }
