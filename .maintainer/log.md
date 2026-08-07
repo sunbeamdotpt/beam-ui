@@ -302,3 +302,21 @@ headless browser against the dev server: __PlasmicComponentRegistry = 91,
 __PlasmicTokenRegistry = 223, zero console errors. Build cost: docgen
 adds ~30s to vite buildStart. Deno symlink repair needed again after
 npm install of react-docgen-typescript.
+
+## 2026-08-07 — Plasmic canvas sizing fix (0×0 instances)
+
+First real Studio session (user's BDL Test project): every dragged
+component rendered as an empty 0×0 box. Two root causes, both in the W4
+skeleton: (1) slots registered without defaultValue collapse to nothing,
+so every content-driven component was invisible; (2) polymorphic
+components (Button, Card, BentoItem, ModelRow) lost their children slot
+entirely — docgen cannot resolve generic ComponentPropsWithoutRef<T>
+spreads. Fixes: generator injects a children slot when the source uses
+the polymorphic spread, gives every children slot the component name as
+placeholder text, and Dialog/WizardModal get open:true defaults via
+overrides. Lesson for future registry work: "renders in the docs app" ≠
+"renders on the Studio canvas" — canvas instances start from defaults
+only. Verified in-browser: BeamButton children slot default "Button",
+BeamDialog open default true, 91 components, no console errors. Sample
+data for data-driven components (Accordion items, StatBar stats…) still
+uncurated — add to overrides as real usage demands.
