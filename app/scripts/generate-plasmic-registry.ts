@@ -181,24 +181,16 @@ for (const { file, path } of discover()) {
     //
     // defaultValue must be a PlasmicElement SCHEMA (JSON), not JSX — JSX
     // hard-errors Studio's registry ingest. A bare string becomes a text
-    // node styled with the PROJECT's default typography (Inter 16px from
-    // starter templates); a GenericTextElement with explicit `inherit`
-    // styles keeps the component's own typography.
+    // node with NO typography of its own, which inherits from the artboard
+    // root; canvas-overrides.css asserts Beam body typography there, so
+    // slot text comes out in Beam fonts. (Do NOT set styles like
+    // fontFamily: "inherit" on the schema — Studio's font checker treats
+    // "inherit" as a literal font name and warns it "is not available".)
     if (props.children?.type === "slot" && props.children.defaultValue === undefined) {
       props.children.defaultValue = {
         type: "text",
         tag: "span",
         value: name,
-        styles: {
-          fontFamily: "inherit",
-          fontSize: "inherit",
-          fontWeight: "inherit",
-          fontStyle: "inherit",
-          lineHeight: "inherit",
-          letterSpacing: "inherit",
-          textTransform: "inherit",
-          color: "inherit",
-        },
       };
     }
     components.push({ name, file, importPath: HEAVY_SUBPATHS[file] ?? ROOT_IMPORT, props, unmapped });

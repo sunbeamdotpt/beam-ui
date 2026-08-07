@@ -185,17 +185,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "ApiLayout",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "ApiLayout"
       }
     }
   }
@@ -343,17 +333,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Badge",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Badge"
       }
     },
     "variant": {
@@ -438,17 +418,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "BentoItem",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "BentoItem"
       }
     }
   }
@@ -527,17 +497,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Button",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Button"
       }
     }
   }
@@ -555,17 +515,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Callout",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Callout"
       }
     },
     "variant": {
@@ -621,17 +571,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Card",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Card"
       }
     }
   }
@@ -779,17 +719,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Clipboard",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Clipboard"
       }
     },
     "timeout": {
@@ -972,17 +902,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "ContextMenu",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "ContextMenu"
       }
     }
   }
@@ -1049,17 +969,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Dialog",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Dialog"
       }
     },
     "actions": {
@@ -1112,17 +1022,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "DocsLayout",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "DocsLayout"
       }
     },
     "pageDates": {
@@ -1155,17 +1055,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "DropdownMenu",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "DropdownMenu"
       }
     },
     "positioning": {
@@ -1321,17 +1211,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "FullwidthLayout",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "FullwidthLayout"
       }
     }
   }
@@ -1410,17 +1290,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "HoverCard",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "HoverCard"
       }
     }
   }
@@ -1496,17 +1366,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Kbd",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Kbd"
       }
     },
     "platform": {
@@ -1691,17 +1551,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "ModelRow",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "ModelRow"
       }
     }
   }
@@ -1845,17 +1695,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Popover",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Popover"
       }
     },
     "title": {
@@ -2016,17 +1856,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Shell",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Shell"
       }
     },
     "showThemeToggle": {
@@ -2193,17 +2023,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Splitter",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Splitter"
       }
     },
     "direction": {
@@ -2534,17 +2354,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Toggle",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Toggle"
       }
     }
   }
@@ -2567,17 +2377,7 @@ export function registerBeamComponents(): void {
       "defaultValue": {
         "type": "text",
         "tag": "span",
-        "value": "Tooltip",
-        "styles": {
-          "fontFamily": "inherit",
-          "fontSize": "inherit",
-          "fontWeight": "inherit",
-          "fontStyle": "inherit",
-          "lineHeight": "inherit",
-          "letterSpacing": "inherit",
-          "textTransform": "inherit",
-          "color": "inherit"
-        }
+        "value": "Tooltip"
       }
     },
     "position": {
