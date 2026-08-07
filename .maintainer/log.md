@@ -279,3 +279,26 @@ sizes.* registered as spacing (Plasmic uses spacing tokens for sizing).
 Verified: app build green, /plasmic-host still renders the Plasmic
 confirmation. Actual token pickers only inspectable inside Studio after
 W1/BEAM-006.
+
+## 2026-08-06 — BEAM-005 component registry landed (in review)
+
+W4: app/scripts/generate-plasmic-registry.ts (react-docgen-typescript)
+walks components/{ui,shell,layouts} and emits components.generated.tsx —
+91 registerComponent() calls (79 root entry, 12 lazy through React.lazy +
+Suspense with importPath on the heavy subpaths). Decisions: (1) generated
+skeleton + runtime-merged registry.overrides.tsx, because prop-control
+nuance (slot templates, hidden rules) can't be fully derived — overrides
+is a runtime module so it can carry JSX default slot content. (2) Data
+props (items/data/options/commits…) map to advanced JSON controls rather
+than being dropped — keeps data-driven components usable in Studio
+without hand-writing 133 entries. (3) Event handlers (func types + onX
+convention), polymorphic `as`, and the design-language nav props
+(linkAs/currentPath/onNavigate/isActive) are hidden globally — Studio
+interaction wiring and href-string wrappers are later curation, not
+skeleton. (4) KanbanBoard skipped: DnD kit fights the Studio canvas and
+the library has no staticMode prop yet — needs a small library change +
+usePlasmicCanvasContext wrapper, flagged on the card. Verified via
+headless browser against the dev server: __PlasmicComponentRegistry = 91,
+__PlasmicTokenRegistry = 223, zero console errors. Build cost: docgen
+adds ~30s to vite buildStart. Deno symlink repair needed again after
+npm install of react-docgen-typescript.
