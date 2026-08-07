@@ -1,0 +1,22 @@
+/**
+ * Plasmic canvas typography override.
+ *
+ * Studio stamps the PROJECT's default typography (starter template:
+ * Inter 16px) onto the artboard root element (.__wab_defaults__all) via
+ * a zero-specificity :where() rule. Descendants inherit that instead of
+ * our body font, because any direct declaration — even a zero-specificity
+ * one — beats inheritance from `body`. Beam components largely inherit
+ * font-family rather than setting it, so canvas instances rendered in
+ * Inter instead of Ysabeau Infant.
+ *
+ * This rule re-asserts the Beam body typography on the artboard root,
+ * mirroring beamPreset's globalCss body block. Ordinary specificity
+ * (0,1,0 / 0,1,1) beats Plasmic's :where() (0,0,0). Imported ONLY by the
+ * /plasmic-host page — never loaded by the docs app routes.
+ */
+body .__wab_defaults__all,
+body div[class*="__wab_defaults"] {
+  font-family: var(--fonts-body);
+  font-weight: var(--font-weights-body);
+  line-height: 1.5;
+}

@@ -10,6 +10,7 @@
  * import below; keep that import first.
  */
 import "../plasmic/registry";
+import "../plasmic/canvas-overrides.css";
 import { PlasmicCanvasHost } from "@plasmicapp/react-web/lib/host";
 
 export function PlasmicHostPage() {
