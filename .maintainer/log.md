@@ -320,3 +320,26 @@ only. Verified in-browser: BeamButton children slot default "Button",
 BeamDialog open default true, 91 components, no console errors. Sample
 data for data-driven components (Accordion items, StatBar stats…) still
 uncurated — add to overrides as real usage demands.
+
+## 2026-08-07 — Canvas styling root cause: invalid Panda shorthand CSS
+
+"Everything sized incorrectly" in Studio turned out to be mostly NOT a
+Plasmic problem. Systematic probing (temporary on-page debug probe inside
+the canvas iframe) proved: token vars resolve, utility rules present,
+dragged instances get full Panda classes + Studio's __wab_instance class.
+The actual bug: Panda emits multi-part shorthand values verbatim —
+padding: "2.5 5" → `.p_2\.5_5 { padding: 2.5 5 }` — invalid CSS, silently
+dropped, so 127 component sites rendered with zero padding/margin
+EVERYWHERE (docs app too; buttons were tight 64×14 labels). No Panda
+upgrade path (1.12.0 is latest); px/py/pt/... utilities resolve tokens
+correctly, so a codemod converted all 127 sites across 45 library files.
+Also fixed: registry now strips Plasmic-internal proxy props
+(setControlContextData et al.) that leaked through our ...rest spreads
+onto DOM nodes (React dev warnings in the canvas). Diagnostics method
+worth reusing: a temporary probe component rendered by the host page
+itself gives ground truth from inside Studio's canvas iframe — Studio's
+own createPlasmicElementProxy/canvas-rendering.ts is in the open-source
+plasmic monorepo (cloned to ~/Development/plasmic, sparse checkout).
+FOLLOW-UP: docs app visuals changed everywhere padding was broken —
+Playwright baselines need regeneration (test:visual -u) before the next
+release; visual diff is "roomier, as designed", not a regression.
