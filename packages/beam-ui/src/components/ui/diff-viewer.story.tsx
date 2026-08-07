@@ -32,7 +32,12 @@ export default function DiffViewerStory() {
 export function SplitMode() {
   return (
     <div style={{ maxWidth: 800 }}>
-      <DiffViewer hunks={hunks} oldFileName="button.tsx" newFileName="button.tsx" mode="split" />
+      <DiffViewer
+        hunks={hunks}
+        oldFileName="button.tsx"
+        newFileName="button.tsx"
+        mode="split"
+      />
     </div>
   );
 }
@@ -40,7 +45,12 @@ export function SplitMode() {
 export function UnifiedMode() {
   return (
     <div style={{ maxWidth: 800 }}>
-      <DiffViewer hunks={hunks} oldFileName="button.tsx" newFileName="button.tsx" mode="unified" />
+      <DiffViewer
+        hunks={hunks}
+        oldFileName="button.tsx"
+        newFileName="button.tsx"
+        mode="unified"
+      />
     </div>
   );
 }

@@ -277,7 +277,8 @@ const tabBar = css({
 });
 
 const tabButton = css({
-  padding: "2 4",
+  py: "2",
+  px: "4",
   fontSize: "13",
   fontWeight: "button",
   fontFamily: "body",
@@ -308,7 +309,8 @@ const toolbar = css({
   display: "flex",
   flexWrap: "wrap",
   gap: "0.5",
-  padding: "1.5 2",
+  py: "1.5",
+  px: "2",
   backgroundColor: "bg.card",
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",

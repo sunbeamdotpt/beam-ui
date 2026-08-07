@@ -18,5 +18,12 @@ export function InfoToast() {
   return <Toast message="A new version is available." variant="info" visible />;
 }
 export function Dismissible() {
-  return <Toast message="Click X to dismiss." variant="info" visible onDismiss={() => {}} />;
+  return (
+    <Toast
+      message="Click X to dismiss."
+      variant="info"
+      visible
+      onDismiss={() => {}}
+    />
+  );
 }

@@ -43,8 +43,10 @@ describe("KanbanCardView — regression", () => {
 
   it("renders_without_cover_or_blocked_by_default", () => {
     const { container } = render(<KanbanCardView card={baseCard} />);
-    expect(container.querySelector('[data-part="cover"]')).not.toBeInTheDocument();
-    expect(container.querySelector('[data-part="blocked-badge"]')).not.toBeInTheDocument();
+    expect(container.querySelector('[data-part="cover"]')).not
+      .toBeInTheDocument();
+    expect(container.querySelector('[data-part="blocked-badge"]')).not
+      .toBeInTheDocument();
   });
 });
 
@@ -61,7 +63,8 @@ describe("KanbanCardView — cover prop", () => {
 
   it("does_not_render_cover_strip_when_cover_prop_is_undefined", () => {
     const { container } = render(<KanbanCardView card={baseCard} />);
-    expect(container.querySelector('[data-part="cover"]')).not.toBeInTheDocument();
+    expect(container.querySelector('[data-part="cover"]')).not
+      .toBeInTheDocument();
   });
 
   it("cover_supports_linear_gradient_string", () => {
@@ -69,7 +72,9 @@ describe("KanbanCardView — cover prop", () => {
     const { container } = render(
       <KanbanCardView card={{ ...baseCard, cover: gradient }} />,
     );
-    const coverEl = container.querySelector('[data-part="cover"]') as HTMLElement;
+    const coverEl = container.querySelector(
+      '[data-part="cover"]',
+    ) as HTMLElement;
     expect(coverEl).toBeInTheDocument();
     expect(coverEl.style.background).toBe(gradient);
   });
@@ -78,7 +83,9 @@ describe("KanbanCardView — cover prop", () => {
     const { container } = render(
       <KanbanCardView card={{ ...baseCard, cover: "#fffaeb" }} />,
     );
-    const coverEl = container.querySelector('[data-part="cover"]') as HTMLElement;
+    const coverEl = container.querySelector(
+      '[data-part="cover"]',
+    ) as HTMLElement;
     expect(coverEl).toBeInTheDocument();
     expect(coverEl.style.background).toBe("rgb(255, 250, 235)");
   });
@@ -101,12 +108,14 @@ describe("KanbanCardView — blocked prop", () => {
     const { container } = render(
       <KanbanCardView card={{ ...baseCard, blocked: false }} />,
     );
-    expect(container.querySelector('[data-part="blocked-badge"]')).not.toBeInTheDocument();
+    expect(container.querySelector('[data-part="blocked-badge"]')).not
+      .toBeInTheDocument();
   });
 
   it("does_not_render_blocked_badge_when_blocked_is_undefined", () => {
     const { container } = render(<KanbanCardView card={baseCard} />);
-    expect(container.querySelector('[data-part="blocked-badge"]')).not.toBeInTheDocument();
+    expect(container.querySelector('[data-part="blocked-badge"]')).not
+      .toBeInTheDocument();
   });
 });
 
@@ -122,7 +131,8 @@ describe("KanbanCardView — cover and blocked combined", () => {
       />,
     );
     expect(container.querySelector('[data-part="cover"]')).toBeInTheDocument();
-    expect(container.querySelector('[data-part="blocked-badge"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-part="blocked-badge"]'))
+      .toBeInTheDocument();
     expect(screen.getByText("Test card")).toBeInTheDocument();
   });
 });

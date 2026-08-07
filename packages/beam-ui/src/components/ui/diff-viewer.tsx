@@ -430,7 +430,8 @@ const rootStyle = css({
 const fileHeader = css({
   display: "flex",
   alignItems: "center",
-  padding: "2.5 4",
+  py: "2.5",
+  px: "4",
   backgroundColor: "bg.card",
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",
@@ -449,11 +450,13 @@ const fileNameMuted = css({
 
 const fileNameArrow = css({
   color: "text.muted",
-  padding: "0 1",
+  py: "0",
+  px: "1",
 });
 
 const hunkHeaderStyle = css({
-  padding: "1.5 4",
+  py: "1.5",
+  px: "4",
   backgroundColor: {
     base: "slate.08",
     _dark: "slate.15",
@@ -481,7 +484,8 @@ const lineNumCell = css({
   justifyContent: "flex-end",
   width: "12",
   minWidth: "12",
-  padding: "0 2",
+  py: "0",
+  px: "2",
   color: "text.secondary",
   fontSize: "11",
   userSelect: "none",
@@ -504,7 +508,8 @@ const contentCell = css({
   display: "inline-flex",
   alignItems: "center",
   flex: 1,
-  padding: "0 3",
+  py: "0",
+  px: "3",
   whiteSpace: "pre",
   overflowX: "auto",
 });
@@ -543,7 +548,8 @@ const splitLeftBorder = css({
 const collapsedRow = css({
   display: "flex",
   justifyContent: "center",
-  padding: "1 0",
+  py: "1",
+  px: "0",
   backgroundColor: "slate.05",
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",
@@ -557,7 +563,8 @@ const expandBtn = css({
   fontFamily: "mono",
   fontSize: "11",
   color: "text.muted",
-  padding: "0.5 3",
+  py: "0.5",
+  px: "3",
   borderRadius: "md",
   transition: "all 0.15s ease",
   _hover: {

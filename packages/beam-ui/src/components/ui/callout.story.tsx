@@ -2,7 +2,14 @@ import { Callout } from "./callout.tsx";
 
 export default function CalloutStory() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 600 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        maxWidth: 600,
+      }}
+    >
       <Callout variant="tip">
         Use keyboard shortcuts to navigate the diff viewer. Press <strong>j</strong> and{" "}
         <strong>k</strong> to move between hunks.

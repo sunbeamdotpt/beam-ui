@@ -25,7 +25,14 @@ export function CustomPresets() {
       value={color}
       onChange={setColor}
       label="Monochrome"
-      presets={["#000000", "#333333", "#666666", "#999999", "#CCCCCC", "#FFFFFF"]}
+      presets={[
+        "#000000",
+        "#333333",
+        "#666666",
+        "#999999",
+        "#CCCCCC",
+        "#FFFFFF",
+      ]}
     />
   );
 }

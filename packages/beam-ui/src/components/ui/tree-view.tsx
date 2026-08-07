@@ -46,7 +46,9 @@ export interface TreeViewProps {
  * <TreeView nodes={nodes} activeId="index.ts" />
  * ```
  */
-export function TreeView({ nodes, activeId, className }: TreeViewProps): ReactNode {
+export function TreeView(
+  { nodes, activeId, className }: TreeViewProps,
+): ReactNode {
   return (
     <div className={cx(root, className)} role="tree">
       {nodes.map((node) => <TreeItem key={node.id} node={node} activeId={activeId} level={0} />)}
@@ -69,21 +71,37 @@ function TreeItem({
 
   if (isFolder) {
     return (
-      <CollapsibleRoot defaultOpen open={open} onOpenChange={(d) => setOpen(d.open)}>
+      <CollapsibleRoot
+        defaultOpen
+        open={open}
+        onOpenChange={(d) => setOpen(d.open)}
+      >
         <CollapsibleTrigger
           className={cx(itemRow, isActive && activeRow)}
           role="treeitem"
           aria-expanded={open}
         >
-          <span style={{ paddingLeft: `${level * 16}px` }} className={itemInner}>
+          <span
+            style={{ paddingLeft: `${level * 16}px` }}
+            className={itemInner}
+          >
             <Icon name="expand_more" size={16} className={chevron} />
-            <Icon name={node.icon ?? "folder"} size={18} className={folderIcon} />
+            <Icon
+              name={node.icon ?? "folder"}
+              size={18}
+              className={folderIcon}
+            />
             <span className={labelStyle}>{node.label}</span>
           </span>
         </CollapsibleTrigger>
         <CollapsibleContent role="group">
           {node.children!.map((child) => (
-            <TreeItem key={child.id} node={child} activeId={activeId} level={level + 1} />
+            <TreeItem
+              key={child.id}
+              node={child}
+              activeId={activeId}
+              level={level + 1}
+            />
           ))}
         </CollapsibleContent>
       </CollapsibleRoot>
@@ -99,7 +117,11 @@ function TreeItem({
     >
       <span style={{ paddingLeft: `${level * 16}px` }} className={itemInner}>
         <span className={css({ width: "4", flexShrink: 0 })} />
-        <Icon name={node.icon ?? "description"} size={18} className={fileIcon} />
+        <Icon
+          name={node.icon ?? "description"}
+          size={18}
+          className={fileIcon}
+        />
         <span className={labelStyle}>{node.label}</span>
       </span>
     </button>

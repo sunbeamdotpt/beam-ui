@@ -106,7 +106,9 @@ const header = css({
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "space-between",
-  padding: "6 6 0",
+  pt: "6",
+  px: "6",
+  pb: "0",
 });
 
 const titleStyle = css({
@@ -134,7 +136,9 @@ const closeButton = css({
 });
 
 const body = css({
-  padding: "4 6 6",
+  pt: "4",
+  px: "6",
+  pb: "6",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
@@ -145,5 +149,7 @@ const actionsBar = css({
   display: "flex",
   justifyContent: "flex-end",
   gap: "2",
-  padding: "0 6 6",
+  pt: "0",
+  px: "6",
+  pb: "6",
 });

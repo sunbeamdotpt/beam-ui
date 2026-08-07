@@ -4,11 +4,14 @@ export default function ScrollAreaStory() {
   return (
     <ScrollArea maxHeight="200px">
       <div style={{ padding: 16 }}>
-        {Array.from({ length: 20 }, (_, i) => (
-          <p key={i} style={{ margin: "8px 0" }}>
-            Scrollable item {i + 1}
-          </p>
-        ))}
+        {Array.from(
+          { length: 20 },
+          (_, i) => (
+            <p key={i} style={{ margin: "8px 0" }}>
+              Scrollable item {i + 1}
+            </p>
+          ),
+        )}
       </div>
     </ScrollArea>
   );
@@ -20,7 +23,11 @@ export function HoverScrollbar() {
       <div style={{ padding: 16 }}>
         {Array.from(
           { length: 20 },
-          (_, i) => <p key={i} style={{ margin: "8px 0" }}>Hover scrollbar item {i + 1}</p>,
+          (_, i) => (
+            <p key={i} style={{ margin: "8px 0" }}>
+              Hover scrollbar item {i + 1}
+            </p>
+          ),
         )}
       </div>
     </ScrollArea>
@@ -34,7 +41,10 @@ export function Horizontal() {
         {Array.from(
           { length: 20 },
           (_, i) => (
-            <div key={i} style={{ minWidth: 100, padding: 16, border: "1px solid #ccc" }}>
+            <div
+              key={i}
+              style={{ minWidth: 100, padding: 16, border: "1px solid #ccc" }}
+            >
               Item {i + 1}
             </div>
           ),
@@ -50,7 +60,11 @@ export function AutoScrollbar() {
       <div style={{ padding: 16 }}>
         {Array.from(
           { length: 20 },
-          (_, i) => <p key={i} style={{ margin: "8px 0" }}>Auto scrollbar item {i + 1}</p>,
+          (_, i) => (
+            <p key={i} style={{ margin: "8px 0" }}>
+              Auto scrollbar item {i + 1}
+            </p>
+          ),
         )}
       </div>
     </ScrollArea>
@@ -63,7 +77,11 @@ export function VisibleScrollbar() {
       <div style={{ padding: 16 }}>
         {Array.from(
           { length: 20 },
-          (_, i) => <p key={i} style={{ margin: "8px 0" }}>Visible scrollbar item {i + 1}</p>,
+          (_, i) => (
+            <p key={i} style={{ margin: "8px 0" }}>
+              Visible scrollbar item {i + 1}
+            </p>
+          ),
         )}
       </div>
     </ScrollArea>

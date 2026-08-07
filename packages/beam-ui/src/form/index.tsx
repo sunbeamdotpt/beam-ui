@@ -203,7 +203,8 @@ const labelStyle = css({
 });
 
 const inputStyle = css({
-  padding: "2.5 3",
+  py: "2.5",
+  px: "3",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",

@@ -2,11 +2,26 @@ import { List } from "./list.tsx";
 
 export default function ListStory() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 480 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 32,
+        maxWidth: 480,
+      }}
+    >
       <List
         items={[
-          { label: "Dashboard", description: "Overview of key metrics", icon: "dashboard" },
-          { label: "Settings", description: "Manage your preferences", icon: "settings" },
+          {
+            label: "Dashboard",
+            description: "Overview of key metrics",
+            icon: "dashboard",
+          },
+          {
+            label: "Settings",
+            description: "Manage your preferences",
+            icon: "settings",
+          },
           {
             label: "Billing",
             description: "View invoices and payment methods",
@@ -49,18 +64,30 @@ export function CompactVariant() {
 export function BorderedVariant() {
   return (
     <List
-      items={[{ label: "Alpha", icon: "star" }, { label: "Beta", icon: "code" }]}
+      items={[{ label: "Alpha", icon: "star" }, {
+        label: "Beta",
+        icon: "code",
+      }]}
       variant="bordered"
     />
   );
 }
 
 export function Ordered() {
-  return <List items={[{ label: "First" }, { label: "Second" }, { label: "Third" }]} ordered />;
+  return (
+    <List
+      items={[{ label: "First" }, { label: "Second" }, { label: "Third" }]}
+      ordered
+    />
+  );
 }
 
 export function Unordered() {
-  return <List items={[{ label: "Apples" }, { label: "Bananas" }, { label: "Cherries" }]} />;
+  return (
+    <List
+      items={[{ label: "Apples" }, { label: "Bananas" }, { label: "Cherries" }]}
+    />
+  );
 }
 
 export function WithDescriptions() {

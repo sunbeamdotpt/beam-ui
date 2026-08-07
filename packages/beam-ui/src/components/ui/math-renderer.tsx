@@ -94,7 +94,8 @@ export function MathRenderer(
 const displayStyle = css({
   display: "block",
   textAlign: "center",
-  padding: "6 4",
+  py: "6",
+  px: "4",
   overflowX: "auto",
 });
 
@@ -106,7 +107,8 @@ const errorStyle = css({
   fontFamily: "mono",
   fontSize: "13",
   color: "sunbeam.orange",
-  padding: "1 2",
+  py: "1",
+  px: "2",
   border: "1px solid",
   borderColor: "sunbeam.orange",
   backgroundColor: "accent.06",

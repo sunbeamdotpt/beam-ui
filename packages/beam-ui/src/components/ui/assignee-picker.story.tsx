@@ -25,10 +25,22 @@ export default function AssigneePickerStory() {
 
 export function NoSelection() {
   const [selected, setSelected] = useState<string[]>([]);
-  return <AssigneePicker options={users} selected={selected} onChange={setSelected} />;
+  return (
+    <AssigneePicker
+      options={users}
+      selected={selected}
+      onChange={setSelected}
+    />
+  );
 }
 
 export function MultipleSelected() {
   const [selected, setSelected] = useState<string[]>(["1", "2", "3"]);
-  return <AssigneePicker options={users} selected={selected} onChange={setSelected} />;
+  return (
+    <AssigneePicker
+      options={users}
+      selected={selected}
+      onChange={setSelected}
+    />
+  );
 }

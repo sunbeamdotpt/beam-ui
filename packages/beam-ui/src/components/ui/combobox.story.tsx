@@ -39,7 +39,12 @@ export function EmptyState() {
   const [value, setValue] = useState("");
   return (
     <div style={{ maxWidth: 320 }}>
-      <Combobox options={[]} value={value} onChange={setValue} placeholder="No options available" />
+      <Combobox
+        options={[]}
+        value={value}
+        onChange={setValue}
+        placeholder="No options available"
+      />
     </div>
   );
 }

@@ -59,7 +59,12 @@ export function WithHighlightedLines() {
 export function LightTheme() {
   return (
     <div style={{ maxWidth: 600 }}>
-      <SyntaxHighlighter code={sampleCode} language="tsx" theme="light" showLineNumbers />
+      <SyntaxHighlighter
+        code={sampleCode}
+        language="tsx"
+        theme="light"
+        showLineNumbers
+      />
     </div>
   );
 }
@@ -67,7 +72,12 @@ export function LightTheme() {
 export function DarkTheme() {
   return (
     <div style={{ maxWidth: 600 }}>
-      <SyntaxHighlighter code={sampleCode} language="tsx" theme="dark" showLineNumbers />
+      <SyntaxHighlighter
+        code={sampleCode}
+        language="tsx"
+        theme="dark"
+        showLineNumbers
+      />
     </div>
   );
 }

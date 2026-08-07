@@ -1,9 +1,30 @@
 import { Badge } from "./badge.tsx";
 
 const categories = {
-  "Tier / Recognition": ["featured", "premier", "verified", "partner", "community"] as const,
-  "Release Stage": ["stable", "new", "beta", "preview", "experimental", "deprecated"] as const,
-  "Work Status": ["open", "draft", "review", "approved", "merged", "closed", "revision"] as const,
+  "Tier / Recognition": [
+    "featured",
+    "premier",
+    "verified",
+    "partner",
+    "community",
+  ] as const,
+  "Release Stage": [
+    "stable",
+    "new",
+    "beta",
+    "preview",
+    "experimental",
+    "deprecated",
+  ] as const,
+  "Work Status": [
+    "open",
+    "draft",
+    "review",
+    "approved",
+    "merged",
+    "closed",
+    "revision",
+  ] as const,
   Priority: ["critical", "high", "medium", "low"] as const,
   Utility: ["section"] as const,
 };
@@ -13,8 +34,17 @@ export default function BadgeStory() {
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       {Object.entries(categories).map(([category, variants]) => (
         <div key={category}>
-          <p style={{ fontSize: 12, marginBottom: 8, color: "#888" }}>{category}</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+          <p style={{ fontSize: 12, marginBottom: 8, color: "#888" }}>
+            {category}
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 8,
+              alignItems: "center",
+            }}
+          >
             {variants.map((variant) => (
               <Badge key={variant} variant={variant}>
                 {variant}

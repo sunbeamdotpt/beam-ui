@@ -25,7 +25,9 @@ export interface IconProps {
  * <Icon name="settings" filled label="Settings" />
  * ```
  */
-export function Icon({ name, size, filled, className, label }: IconProps): ReactNode {
+export function Icon(
+  { name, size, filled, className, label }: IconProps,
+): ReactNode {
   const style: React.CSSProperties = {
     fontSize: typeof size === "number" ? `${size}px` : size,
     lineHeight: 1,

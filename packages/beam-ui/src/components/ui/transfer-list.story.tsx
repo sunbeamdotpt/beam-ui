@@ -47,7 +47,10 @@ export function EmptySelected() {
 
 export function AllSelected() {
   const [available, setAvailable] = useState<TransferItem[]>([]);
-  const [selected, setSelected] = useState([...initialAvailable, ...initialSelected]);
+  const [selected, setSelected] = useState([
+    ...initialAvailable,
+    ...initialSelected,
+  ]);
   return (
     <TransferList
       available={available}

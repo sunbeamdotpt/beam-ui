@@ -31,7 +31,14 @@ export function LargeStep() {
   const [value, setValue] = useState(50);
   return (
     <div style={{ maxWidth: 240 }}>
-      <NumberInput value={value} onChange={setValue} min={0} max={1000} step={10} label="Amount" />
+      <NumberInput
+        value={value}
+        onChange={setValue}
+        min={0}
+        max={1000}
+        step={10}
+        label="Amount"
+      />
     </div>
   );
 }

@@ -68,7 +68,11 @@ export function AllRead() {
   const allRead = initial.map((n) => ({ ...n, read: true }));
   return (
     <div style={{ display: "flex", justifyContent: "flex-end", padding: 16 }}>
-      <NotificationCenter notifications={allRead} onMarkRead={() => {}} onMarkAllRead={() => {}} />
+      <NotificationCenter
+        notifications={allRead}
+        onMarkRead={() => {}}
+        onMarkAllRead={() => {}}
+      />
     </div>
   );
 }
@@ -76,7 +80,11 @@ export function AllRead() {
 export function EmptyNotifications() {
   return (
     <div style={{ display: "flex", justifyContent: "flex-end", padding: 16 }}>
-      <NotificationCenter notifications={[]} onMarkRead={() => {}} onMarkAllRead={() => {}} />
+      <NotificationCenter
+        notifications={[]}
+        onMarkRead={() => {}}
+        onMarkAllRead={() => {}}
+      />
     </div>
   );
 }

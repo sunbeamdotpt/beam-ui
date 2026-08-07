@@ -2,7 +2,14 @@ import { ModelRow } from "./model-row.tsx";
 
 export default function ModelRowStory() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 480 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 24,
+        maxWidth: 480,
+      }}
+    >
       <ModelRow
         name="Sunbeam Pro"
         icon="auto_awesome"

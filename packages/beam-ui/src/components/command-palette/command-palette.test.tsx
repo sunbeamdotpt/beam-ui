@@ -10,11 +10,31 @@ import { useCommandPaletteShortcut } from "./use-command-palette-shortcut.ts";
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeItems(overrides?: Partial<CommandPaletteItem>[]): CommandPaletteItem[] {
+function makeItems(
+  overrides?: Partial<CommandPaletteItem>[],
+): CommandPaletteItem[] {
   const base: CommandPaletteItem[] = [
-    { id: "1", label: "Open board", hint: "B", icon: "view_kanban", onSelect: vi.fn() },
-    { id: "2", label: "Create card", hint: "C", icon: "add", onSelect: vi.fn() },
-    { id: "3", label: "Find person", hint: "P", icon: "person", onSelect: vi.fn() },
+    {
+      id: "1",
+      label: "Open board",
+      hint: "B",
+      icon: "view_kanban",
+      onSelect: vi.fn(),
+    },
+    {
+      id: "2",
+      label: "Create card",
+      hint: "C",
+      icon: "add",
+      onSelect: vi.fn(),
+    },
+    {
+      id: "3",
+      label: "Find person",
+      hint: "P",
+      icon: "person",
+      onSelect: vi.fn(),
+    },
   ];
   if (!overrides) return base;
   return base.map((item, i) => ({ ...item, ...(overrides[i] ?? {}) }));

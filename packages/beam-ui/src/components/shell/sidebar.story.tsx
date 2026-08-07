@@ -52,15 +52,24 @@ export function ManySections() {
       sections={[
         {
           title: "Basics",
-          items: [{ label: "Overview", href: "/overview" }, { label: "Install", href: "/install" }],
+          items: [{ label: "Overview", href: "/overview" }, {
+            label: "Install",
+            href: "/install",
+          }],
         },
         {
           title: "Components",
-          items: [{ label: "Button", href: "/button" }, { label: "Input", href: "/input" }],
+          items: [{ label: "Button", href: "/button" }, {
+            label: "Input",
+            href: "/input",
+          }],
         },
         {
           title: "Patterns",
-          items: [{ label: "Forms", href: "/forms" }, { label: "Tables", href: "/tables" }],
+          items: [{ label: "Forms", href: "/forms" }, {
+            label: "Tables",
+            href: "/tables",
+          }],
         },
       ]}
     />

@@ -59,7 +59,8 @@ const area = css({
 
 const preview = css({
   width: "100%",
-  padding: "2 0",
+  py: "2",
+  px: "0",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
@@ -78,7 +79,8 @@ const preview = css({
 
 const input = css({
   width: "100%",
-  padding: "2 3",
+  py: "2",
+  px: "3",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",

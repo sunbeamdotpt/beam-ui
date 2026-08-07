@@ -65,7 +65,8 @@ function PillToggle({
           aria-pressed={value === opt}
           className={cx(
             css({
-              padding: "1 3",
+              py: "1",
+              px: "3",
               fontSize: "2xs",
               fontWeight: "button",
               borderRadius: "md",
@@ -326,7 +327,8 @@ const topBar = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "2 4",
+  py: "2",
+  px: "4",
   backgroundColor: "scrim.50",
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",
@@ -337,7 +339,8 @@ const controlsBar = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "3 4",
+  py: "3",
+  px: "4",
   backgroundColor: "sunbeam.black",
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",
@@ -355,7 +358,8 @@ const tabList = css({
 });
 
 const tabTrigger = css({
-  padding: "1 3",
+  py: "1",
+  px: "3",
   fontSize: "2xs",
   fontWeight: "button",
   textTransform: "uppercase",

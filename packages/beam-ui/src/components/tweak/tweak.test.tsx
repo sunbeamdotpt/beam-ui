@@ -143,7 +143,9 @@ describe("TweakToggle", () => {
       />,
     );
     const user = userEvent.setup();
-    const switchLabel = container.querySelector('[data-part="root"]') as HTMLElement;
+    const switchLabel = container.querySelector(
+      '[data-part="root"]',
+    ) as HTMLElement;
     await user.click(switchLabel);
     expect(onChange).toHaveBeenCalledWith(true);
   });
@@ -157,7 +159,9 @@ describe("TweakToggle", () => {
         onChange={onChange}
       />,
     );
-    const switchLabel = container.querySelector('[data-part="root"]') as HTMLElement;
+    const switchLabel = container.querySelector(
+      '[data-part="root"]',
+    ) as HTMLElement;
     const user = userEvent.setup();
     await user.click(switchLabel);
     expect(onChange).toHaveBeenCalledWith(true);

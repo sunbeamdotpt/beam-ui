@@ -39,7 +39,10 @@ export function MultipleTabs() {
   return (
     <div style={{ maxWidth: 700 }}>
       <CodeBlock
-        tabs={[{ label: "Python", content: pythonCode }, { label: "TypeScript", content: tsCode }]}
+        tabs={[{ label: "Python", content: pythonCode }, {
+          label: "TypeScript",
+          content: tsCode,
+        }]}
       />
     </div>
   );
@@ -50,7 +53,10 @@ export function WithStreamToggle() {
     <div style={{ maxWidth: 700 }}>
       <CodeBlock
         tabs={[{ label: "Python", content: pythonCode }]}
-        streamToggle={{ options: ["Non-streaming", "Streaming"], defaultValue: "Non-streaming" }}
+        streamToggle={{
+          options: ["Non-streaming", "Streaming"],
+          defaultValue: "Non-streaming",
+        }}
       />
     </div>
   );

@@ -2,7 +2,14 @@ import { BentoItem } from "./bento-item.tsx";
 
 export default function BentoItemStory() {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, maxWidth: 800 }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: 16,
+        maxWidth: 800,
+      }}
+    >
       <BentoItem
         variant="large"
         title="Build a Git Server from Scratch"

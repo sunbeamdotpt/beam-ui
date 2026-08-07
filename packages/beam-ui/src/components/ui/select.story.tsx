@@ -42,7 +42,10 @@ export function CustomPlaceholder() {
         value={value}
         onChange={setValue}
         placeholder="Pick a framework..."
-        options={[{ value: "react", label: "React" }, { value: "vue", label: "Vue" }, {
+        options={[{ value: "react", label: "React" }, {
+          value: "vue",
+          label: "Vue",
+        }, {
           value: "svelte",
           label: "Svelte",
         }]}
@@ -58,7 +61,10 @@ export function Default() {
       <Select
         value={value}
         onChange={setValue}
-        options={[{ value: "ts", label: "TypeScript" }, { value: "rs", label: "Rust" }, {
+        options={[{ value: "ts", label: "TypeScript" }, {
+          value: "rs",
+          label: "Rust",
+        }, {
           value: "go",
           label: "Go",
         }]}

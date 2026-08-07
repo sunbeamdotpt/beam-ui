@@ -61,9 +61,21 @@ export function SingleItem() {
 
 export function Selectable() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  return <WorkItemList items={items} selectable selected={selected} onSelect={setSelected} />;
+  return (
+    <WorkItemList
+      items={items}
+      selectable
+      selected={selected}
+      onSelect={setSelected}
+    />
+  );
 }
 
 export function WithLoadMore() {
-  return <WorkItemList items={items} onLoadMore={() => console.log("Load more")} />;
+  return (
+    <WorkItemList
+      items={items}
+      onLoadMore={() => console.log("Load more")}
+    />
+  );
 }

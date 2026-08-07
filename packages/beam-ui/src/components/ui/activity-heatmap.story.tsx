@@ -34,7 +34,10 @@ export function HighActivity() {
   const highData: ActivityDay[] = Array.from({ length: 365 }, (_, i) => {
     const date = new Date();
     date.setDate(date.getDate() - (364 - i));
-    return { date: date.toISOString().split("T")[0], count: Math.floor(Math.random() * 15) + 5 };
+    return {
+      date: date.toISOString().split("T")[0],
+      count: Math.floor(Math.random() * 15) + 5,
+    };
   });
   return <ActivityHeatmap data={highData} />;
 }

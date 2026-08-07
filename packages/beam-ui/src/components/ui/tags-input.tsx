@@ -151,7 +151,10 @@ const deleteTrigger = css({
   opacity: 0.7,
   background: "none",
   border: "none",
-  padding: "0 0 0 0.5",
+  pt: "0",
+  pr: "0",
+  pb: "0",
+  pl: "0.5",
   _hover: {
     opacity: 1,
   },
@@ -166,7 +169,8 @@ const deleteTrigger = css({
 const input = css({
   flex: 1,
   minWidth: "20",
-  padding: "1 0",
+  py: "1",
+  px: "0",
   fontSize: "sm",
   fontFamily: "body",
   fontWeight: "body",

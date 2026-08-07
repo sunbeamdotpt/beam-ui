@@ -298,7 +298,8 @@ const searchRow = css({
   display: "flex",
   alignItems: "center",
   gap: "2",
-  padding: "3 4",
+  py: "3",
+  px: "4",
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",
   borderColor: "border.default",
@@ -324,7 +325,8 @@ const searchInput = css({
 const list = css({
   listStyle: "none",
   margin: 0,
-  padding: "1 0",
+  py: "1",
+  px: "0",
   maxHeight: "95",
   overflowY: "auto",
 });
@@ -333,7 +335,8 @@ const rowBase = css({
   display: "flex",
   alignItems: "center",
   gap: "2.5",
-  padding: "2.25 4",
+  py: "2.25",
+  px: "4",
   cursor: "pointer",
   fontSize: "sm",
   fontFamily: "body",
@@ -377,7 +380,9 @@ const groupLabel = css({
   color: "text.secondary",
   textTransform: "uppercase",
   letterSpacing: "0.06em",
-  padding: "2 4 1",
+  pt: "2",
+  px: "4",
+  pb: "1",
 });
 
 const groupList = css({
@@ -387,7 +392,8 @@ const groupList = css({
 });
 
 const emptyState = css({
-  padding: "5 4",
+  py: "5",
+  px: "4",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.secondary",

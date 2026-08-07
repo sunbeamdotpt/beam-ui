@@ -341,7 +341,8 @@ const badge = css({
   fontWeight: "button",
   fontFamily: "body",
   borderRadius: "full",
-  padding: "0 1",
+  py: "0",
+  px: "1",
   lineHeight: 1,
 });
 
@@ -449,7 +450,8 @@ const groupUnreadBadge = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 1",
+  py: "0",
+  px: "1",
   lineHeight: 1,
 });
 

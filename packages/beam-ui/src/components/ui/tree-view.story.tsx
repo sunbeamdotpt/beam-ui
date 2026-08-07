@@ -50,7 +50,11 @@ export function DeepNesting() {
               id: "c",
               label: "Level 3",
               icon: "folder",
-              children: [{ id: "d", label: "deep-file.ts", icon: "description" }],
+              children: [{
+                id: "d",
+                label: "deep-file.ts",
+                icon: "description",
+              }],
             },
           ],
         },

@@ -33,8 +33,16 @@ export function Single() {
   return (
     <Accordion
       items={[
-        { value: "a", title: "First Item", content: "Content for the first item." },
-        { value: "b", title: "Second Item", content: "Content for the second item." },
+        {
+          value: "a",
+          title: "First Item",
+          content: "Content for the first item.",
+        },
+        {
+          value: "b",
+          title: "Second Item",
+          content: "Content for the second item.",
+        },
       ]}
     />
   );

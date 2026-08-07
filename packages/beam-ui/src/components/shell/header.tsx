@@ -274,7 +274,8 @@ const searchDropdown = css({
 
 const searchResultItem = css({
   display: "block",
-  padding: "2.5 4",
+  py: "2.5",
+  px: "4",
   fontSize: "sm",
   color: "text.secondary",
   textDecoration: "none",
@@ -292,7 +293,9 @@ const searchResultSection = css({
   textTransform: "uppercase",
   letterSpacing: "0.15em",
   color: "text.muted",
-  padding: "2 4 1",
+  pt: "2",
+  px: "4",
+  pb: "1",
 });
 
 const searchNoResults = css({

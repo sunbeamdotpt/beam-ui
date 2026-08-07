@@ -285,7 +285,8 @@ const controlStyle = css({
 
 const inputStyle = css({
   width: "100%",
-  padding: "2.5 3",
+  py: "2.5",
+  px: "3",
   backgroundColor: "bg.card",
   borderWidth: "0.25",
   borderStyle: "solid",
@@ -314,7 +315,8 @@ const triggerButton = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 3",
+  py: "0",
+  px: "3",
   height: "auto",
   alignSelf: "stretch",
   backgroundColor: "bg.card",
@@ -396,7 +398,8 @@ const viewTrigger = css({
   fontWeight: "heading",
   fontFamily: "body",
   color: "text.primary",
-  padding: "1 2",
+  py: "1",
+  px: "2",
   transition: "color 0.15s ease",
   _hover: {
     color: "sunbeam.orange",

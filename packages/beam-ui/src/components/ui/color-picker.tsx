@@ -168,7 +168,8 @@ const triggerStyle = css({
   display: "inline-flex",
   alignItems: "center",
   gap: "2",
-  padding: "2 3",
+  py: "2",
+  px: "3",
   backgroundColor: "bg.card",
   borderWidth: "0.25",
   borderStyle: "solid",
@@ -335,7 +336,8 @@ const hexLabel = css({
 
 const hexInputStyle = css({
   flex: 1,
-  padding: "1.5 2",
+  py: "1.5",
+  px: "2",
   backgroundColor: "bg.card",
   borderWidth: "0.25",
   borderStyle: "solid",

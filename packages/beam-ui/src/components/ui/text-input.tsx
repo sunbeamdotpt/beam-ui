@@ -90,7 +90,8 @@ const labelStyle = css({
 
 const input = css({
   width: "100%",
-  padding: "2.5 3",
+  py: "2.5",
+  px: "3",
   backgroundColor: "bg.card",
   borderWidth: "0.25",
   borderStyle: "solid",

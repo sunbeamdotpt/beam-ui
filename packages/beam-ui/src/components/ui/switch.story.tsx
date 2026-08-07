@@ -6,7 +6,11 @@ export default function SwitchStory() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <Switch checked={checked} onChange={setChecked} label="Enable notifications" />
+      <Switch
+        checked={checked}
+        onChange={setChecked}
+        label="Enable notifications"
+      />
       <Switch checked={false} onChange={() => {}} label="Disabled" disabled />
     </div>
   );
@@ -19,7 +23,14 @@ export function Off() {
   return <Switch checked={false} onChange={() => {}} label="Disabled toggle" />;
 }
 export function Disabled() {
-  return <Switch checked={false} onChange={() => {}} label="Cannot change" disabled />;
+  return (
+    <Switch
+      checked={false}
+      onChange={() => {}}
+      label="Cannot change"
+      disabled
+    />
+  );
 }
 export function DisabledChecked() {
   return <Switch checked onChange={() => {}} label="Locked on" disabled />;

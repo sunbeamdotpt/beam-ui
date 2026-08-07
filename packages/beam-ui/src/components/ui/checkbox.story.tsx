@@ -7,10 +7,28 @@ export default function CheckboxStory() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <Checkbox checked={checked} onChange={setChecked} label="Enable notifications" />
-      <Checkbox checked={accepted} onChange={setAccepted} label="I accept the terms" />
-      <Checkbox checked={false} onChange={() => {}} label="Disabled option" disabled />
-      <Checkbox checked={false} onChange={() => {}} label="Indeterminate" indeterminate />
+      <Checkbox
+        checked={checked}
+        onChange={setChecked}
+        label="Enable notifications"
+      />
+      <Checkbox
+        checked={accepted}
+        onChange={setAccepted}
+        label="I accept the terms"
+      />
+      <Checkbox
+        checked={false}
+        onChange={() => {}}
+        label="Disabled option"
+        disabled
+      />
+      <Checkbox
+        checked={false}
+        onChange={() => {}}
+        label="Indeterminate"
+        indeterminate
+      />
     </div>
   );
 }
@@ -28,7 +46,14 @@ export function DisabledChecked() {
   return <Checkbox checked onChange={() => {}} label="Disabled Checked" disabled />;
 }
 export function Indeterminate() {
-  return <Checkbox checked={false} onChange={() => {}} label="Indeterminate" indeterminate />;
+  return (
+    <Checkbox
+      checked={false}
+      onChange={() => {}}
+      label="Indeterminate"
+      indeterminate
+    />
+  );
 }
 export function WithoutLabel() {
   return <Checkbox checked onChange={() => {}} />;

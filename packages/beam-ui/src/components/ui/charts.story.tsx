@@ -20,7 +20,14 @@ const barData = [
 
 export default function ChartsStory() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, maxWidth: 700 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 32,
+        maxWidth: 700,
+      }}
+    >
       <LineChart
         data={lineData}
         lines={[

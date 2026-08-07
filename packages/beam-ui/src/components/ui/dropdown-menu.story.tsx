@@ -16,7 +16,12 @@ export default function DropdownMenuStory() {
         {
           label: "Danger Zone",
           items: [
-            { label: "Delete", icon: "delete", onClick: () => {}, danger: true },
+            {
+              label: "Delete",
+              icon: "delete",
+              onClick: () => {},
+              danger: true,
+            },
           ],
         },
       ]}

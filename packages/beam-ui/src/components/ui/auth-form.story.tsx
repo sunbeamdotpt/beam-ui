@@ -9,7 +9,11 @@ export default function AuthFormsStory() {
       }}
       oauthProviders={[
         { name: "Continue with GitHub", icon: "code", onClick: () => {} },
-        { name: "Continue with Google", icon: "g_mobiledata", onClick: () => {} },
+        {
+          name: "Continue with Google",
+          icon: "g_mobiledata",
+          onClick: () => {},
+        },
       ]}
     />
   );
@@ -45,7 +49,12 @@ export function SignUpLoading() {
   return <SignUpForm onSubmit={() => {}} loading />;
 }
 export function ForgotPasswordWithError() {
-  return <ForgotPasswordForm onSubmit={() => {}} error="No account found with that email." />;
+  return (
+    <ForgotPasswordForm
+      onSubmit={() => {}}
+      error="No account found with that email."
+    />
+  );
 }
 export function ForgotPasswordLoading() {
   return <ForgotPasswordForm onSubmit={() => {}} loading />;

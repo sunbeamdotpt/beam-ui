@@ -48,22 +48,31 @@ const baseCard: KanbanCardData = {
 /* ------------------------------------------------------------------ */
 describe("KanbanCardDetail — head", () => {
   it("renders_title", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
-    expect(screen.getByText("Implement live-reload toggle for the showcase")).toBeInTheDocument();
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
+    expect(screen.getByText("Implement live-reload toggle for the showcase"))
+      .toBeInTheDocument();
   });
 
   it("renders_shortId", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("BEAM-204")).toBeInTheDocument();
   });
 
   it("renders_breadcrumb", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Beam UI / Components")).toBeInTheDocument();
   });
 
   it("renders_columnTitle", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Backlog")).toBeInTheDocument();
   });
 });
@@ -73,20 +82,26 @@ describe("KanbanCardDetail — head", () => {
 /* ------------------------------------------------------------------ */
 describe("KanbanCardDetail — checklist", () => {
   it("renders_all_checklist_items", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Subtask 1")).toBeInTheDocument();
     expect(screen.getByText("Subtask 2")).toBeInTheDocument();
     expect(screen.getByText("Subtask 3")).toBeInTheDocument();
   });
 
   it("renders_correct_checklist_count", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     // "Checklist · 1/3" — 1 done out of 3
     expect(screen.getByText(/Checklist\s*·\s*1\/3/)).toBeInTheDocument();
   });
 
   it("renders_checkboxes_for_each_item", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     const checkboxes = screen.getAllByRole("checkbox");
     expect(checkboxes).toHaveLength(3);
   });
@@ -97,19 +112,26 @@ describe("KanbanCardDetail — checklist", () => {
 /* ------------------------------------------------------------------ */
 describe("KanbanCardDetail — comments", () => {
   it("renders_all_comment_authors", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Sofia Pereira")).toBeInTheDocument();
     expect(screen.getByText("Miguel Costa")).toBeInTheDocument();
   });
 
   it("renders_comment_body_text", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
-    expect(screen.getByText("Started a draft of the spec.")).toBeInTheDocument();
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
+    expect(screen.getByText("Started a draft of the spec."))
+      .toBeInTheDocument();
     expect(screen.getByText("Looks great, one concern.")).toBeInTheDocument();
   });
 
   it("renders_activity_count_in_section_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText(/Activity\s*·\s*2/)).toBeInTheDocument();
   });
 });
@@ -119,38 +141,52 @@ describe("KanbanCardDetail — comments", () => {
 /* ------------------------------------------------------------------ */
 describe("KanbanCardDetail — side fields", () => {
   it("renders_assignees_field_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Assignees")).toBeInTheDocument();
   });
 
   it("renders_labels_field_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Labels")).toBeInTheDocument();
   });
 
   it("renders_label_chips", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("feature")).toBeInTheDocument();
     expect(screen.getByText("design")).toBeInTheDocument();
   });
 
   it("renders_priority_field_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Priority")).toBeInTheDocument();
   });
 
   it("renders_priority_value", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("medium")).toBeInTheDocument();
   });
 
   it("renders_due_date_field_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Due date")).toBeInTheDocument();
   });
 
   it("renders_due_date_value", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("2026-06-01")).toBeInTheDocument();
   });
 
@@ -161,12 +197,16 @@ describe("KanbanCardDetail — side fields", () => {
   });
 
   it("renders_milestone_field_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Milestone")).toBeInTheDocument();
   });
 
   it("renders_milestone_value", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("v2.0 Release")).toBeInTheDocument();
   });
 
@@ -179,12 +219,16 @@ describe("KanbanCardDetail — side fields", () => {
   });
 
   it("renders_attachments_field_label", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("Attachments")).toBeInTheDocument();
   });
 
   it("renders_attachments_count", () => {
-    render(<KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />);
+    render(
+      <KanbanCardDetail card={baseCard} open onClose={() => {}} readOnly />,
+    );
     expect(screen.getByText("1 file")).toBeInTheDocument();
   });
 
@@ -216,12 +260,21 @@ describe("KanbanCardDetail — onSave", () => {
   it("calls_onSave_with_updated_title_after_edit", async () => {
     const onSave = vi.fn();
     render(
-      <KanbanCardDetail card={baseCard} open onClose={() => {}} onSave={onSave} />,
+      <KanbanCardDetail
+        card={baseCard}
+        open
+        onClose={() => {}}
+        onSave={onSave}
+      />,
     );
     // Click title to enter edit mode
-    const titleEl = screen.getByText("Implement live-reload toggle for the showcase");
+    const titleEl = screen.getByText(
+      "Implement live-reload toggle for the showcase",
+    );
     await userEvent.click(titleEl);
-    const textarea = screen.getByDisplayValue("Implement live-reload toggle for the showcase");
+    const textarea = screen.getByDisplayValue(
+      "Implement live-reload toggle for the showcase",
+    );
     await userEvent.clear(textarea);
     await userEvent.type(textarea, "New title");
     // Blur triggers save

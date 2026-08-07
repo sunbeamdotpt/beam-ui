@@ -138,7 +138,8 @@ const control = css({
 
 const input = css({
   flex: 1,
-  padding: "2.5 3",
+  py: "2.5",
+  px: "3",
   background: "none",
   border: "none",
   outline: "none",
@@ -158,7 +159,8 @@ const triggerBtn = css({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "0 2",
+  py: "0",
+  px: "2",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -188,7 +190,8 @@ const content = css({
 const item = css({
   display: "flex",
   alignItems: "center",
-  padding: "2 3",
+  py: "2",
+  px: "3",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",
@@ -207,7 +210,8 @@ const item = css({
 });
 
 const empty = css({
-  padding: "2 3",
+  py: "2",
+  px: "3",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.muted",

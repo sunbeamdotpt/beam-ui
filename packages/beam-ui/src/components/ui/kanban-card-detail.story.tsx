@@ -45,7 +45,12 @@ export function MinimalCard() {
   const minimal: KanbanCardData = { id: "card-2", title: "Simple task" };
   return (
     <div style={{ position: "relative", minHeight: "500px" }}>
-      <KanbanCardDetail card={minimal} open onClose={() => {}} onSave={() => {}} />
+      <KanbanCardDetail
+        card={minimal}
+        open
+        onClose={() => {}}
+        onSave={() => {}}
+      />
     </div>
   );
 }

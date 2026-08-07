@@ -6,7 +6,11 @@ export default function EditableStory() {
 
   return (
     <div style={{ maxWidth: 400 }}>
-      <Editable value={value} onChange={setValue} placeholder="Click to edit..." />
+      <Editable
+        value={value}
+        onChange={setValue}
+        placeholder="Click to edit..."
+      />
     </div>
   );
 }
@@ -15,7 +19,11 @@ export function Empty() {
   const [value, setValue] = useState("");
   return (
     <div style={{ maxWidth: 400 }}>
-      <Editable value={value} onChange={setValue} placeholder="Type something..." />
+      <Editable
+        value={value}
+        onChange={setValue}
+        placeholder="Type something..."
+      />
     </div>
   );
 }

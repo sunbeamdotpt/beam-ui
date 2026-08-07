@@ -31,7 +31,9 @@ function getInitial(): Theme {
 
 function readTheme(): Theme {
   if (typeof window === "undefined") return "light";
-  const attr = document.documentElement.getAttribute("data-theme") as Theme | null;
+  const attr = document.documentElement.getAttribute("data-theme") as
+    | Theme
+    | null;
   if (attr === "light" || attr === "dark") return attr;
   return getInitial();
 }

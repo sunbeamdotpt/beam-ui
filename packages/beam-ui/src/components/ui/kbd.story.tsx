@@ -2,7 +2,14 @@ import { Kbd } from "./kbd.tsx";
 
 export default function KbdStory() {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 12,
+        alignItems: "center",
+      }}
+    >
       <Kbd>⌘K</Kbd>
       <Kbd>⌘</Kbd>
       <Kbd>⌥</Kbd>

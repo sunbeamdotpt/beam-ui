@@ -5,7 +5,14 @@ export default function TextInputStory() {
   const [value, setValue] = useState("");
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 320 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        maxWidth: 320,
+      }}
+    >
       <TextInput
         value={value}
         onChange={setValue}
@@ -19,23 +26,49 @@ export default function TextInputStory() {
         label="With error"
         error="This field is required"
       />
-      <TextInput value="" onChange={() => {}} label="Disabled" placeholder="Cannot edit" disabled />
+      <TextInput
+        value=""
+        onChange={() => {}}
+        label="Disabled"
+        placeholder="Cannot edit"
+        disabled
+      />
     </div>
   );
 }
 
 export function Default() {
   const [value, setValue] = useState("");
-  return <TextInput value={value} onChange={setValue} label="Name" placeholder="Enter name" />;
+  return (
+    <TextInput
+      value={value}
+      onChange={setValue}
+      label="Name"
+      placeholder="Enter name"
+    />
+  );
 }
 
 export function WithError() {
-  return <TextInput value="bad" onChange={() => {}} label="Email" error="Invalid email address" />;
+  return (
+    <TextInput
+      value="bad"
+      onChange={() => {}}
+      label="Email"
+      error="Invalid email address"
+    />
+  );
 }
 
 export function Disabled() {
   return (
-    <TextInput value="" onChange={() => {}} label="Locked" placeholder="Cannot edit" disabled />
+    <TextInput
+      value=""
+      onChange={() => {}}
+      label="Locked"
+      placeholder="Cannot edit"
+      disabled
+    />
   );
 }
 
@@ -68,7 +101,13 @@ export function EmailType() {
 export function NumberType() {
   const [value, setValue] = useState("");
   return (
-    <TextInput value={value} onChange={setValue} label="Quantity" type="number" placeholder="0" />
+    <TextInput
+      value={value}
+      onChange={setValue}
+      label="Quantity"
+      type="number"
+      placeholder="0"
+    />
   );
 }
 

@@ -68,7 +68,8 @@ const itemStyle = css({
   alignItems: "center",
   gap: "2",
   fontSize: "sm",
-  padding: "2 3",
+  py: "2",
+  px: "3",
   cursor: "pointer",
   color: "text.primary",
   transition: "background 0.15s ease",
@@ -86,7 +87,8 @@ const iconStyle = css({
 const separatorStyle = css({
   height: "0.25",
   backgroundColor: "border.default",
-  margin: "1 0",
+  my: "1",
+  mx: "0",
 });
 
 // ContextMenu function is documented above, before the const contentStyle declaration

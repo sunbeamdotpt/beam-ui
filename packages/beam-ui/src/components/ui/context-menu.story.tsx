@@ -7,7 +7,13 @@ export default function ContextMenuStory() {
         { label: "Open", icon: "open_in_new", onClick: () => {} },
         { label: "Edit", icon: "edit", onClick: () => {} },
         { label: "Copy link", icon: "link", onClick: () => {} },
-        { label: "Delete", icon: "delete", onClick: () => {}, danger: true, divider: true },
+        {
+          label: "Delete",
+          icon: "delete",
+          onClick: () => {},
+          danger: true,
+          divider: true,
+        },
       ]}
     >
       <div
@@ -29,7 +35,10 @@ export default function ContextMenuStory() {
 export function SimpleMenu() {
   return (
     <ContextMenu
-      items={[{ label: "Copy", onClick: () => {} }, { label: "Paste", onClick: () => {} }]}
+      items={[{ label: "Copy", onClick: () => {} }, {
+        label: "Paste",
+        onClick: () => {},
+      }]}
     >
       <div
         style={{
@@ -49,7 +58,14 @@ export function SimpleMenu() {
 
 export function WithDangerItem() {
   return (
-    <ContextMenu items={[{ label: "Remove", icon: "delete", onClick: () => {}, danger: true }]}>
+    <ContextMenu
+      items={[{
+        label: "Remove",
+        icon: "delete",
+        onClick: () => {},
+        danger: true,
+      }]}
+    >
       <div
         style={{
           padding: "40px 60px",

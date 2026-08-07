@@ -83,7 +83,8 @@ const itemStyle = css({
   alignItems: "center",
   gap: "2",
   fontSize: "sm",
-  padding: "2 3",
+  py: "2",
+  px: "3",
   cursor: "pointer",
   color: "text.primary",
   transition: "background 0.15s ease",
@@ -107,7 +108,8 @@ const iconStyle = css({
 const separatorStyle = css({
   height: "0.25",
   backgroundColor: "border.default",
-  margin: "1 0",
+  my: "1",
+  mx: "0",
 });
 
 const groupLabelStyle = css({
@@ -116,7 +118,9 @@ const groupLabelStyle = css({
   color: "text.muted",
   textTransform: "uppercase",
   letterSpacing: "0.1em",
-  padding: "1.5 3 1",
+  pt: "1.5",
+  px: "3",
+  pb: "1",
 });
 
 // Helper function for rendering individual menu items (not exported or documented separately)

@@ -28,7 +28,11 @@ export function Empty() {
   const [value, setValue] = useState("");
   return (
     <div style={{ maxWidth: 640 }}>
-      <MarkdownEditor value={value} onChange={setValue} placeholder="Write something..." />
+      <MarkdownEditor
+        value={value}
+        onChange={setValue}
+        placeholder="Write something..."
+      />
     </div>
   );
 }

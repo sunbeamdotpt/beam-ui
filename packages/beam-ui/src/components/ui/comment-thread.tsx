@@ -380,7 +380,8 @@ const commentHeader = css({
   display: "flex",
   alignItems: "center",
   gap: "2",
-  padding: "3 4",
+  py: "3",
+  px: "4",
   borderBottomWidth: "0.5",
   borderBottomStyle: "solid",
   borderColor: "sunbeam.orange",
@@ -405,7 +406,8 @@ const editedBadge = css({
 });
 
 const commentBody = css({
-  padding: "4 5",
+  py: "4",
+  px: "5",
   backgroundColor: "bg.page",
 });
 
@@ -413,7 +415,8 @@ const commentFooter = css({
   display: "flex",
   alignItems: "center",
   gap: "3",
-  padding: "2.5 4",
+  py: "2.5",
+  px: "4",
   borderTopWidth: "0.25",
   borderTopStyle: "solid",
   borderColor: "border.default",
@@ -437,7 +440,8 @@ const editButton = css({
 });
 
 const editArea = css({
-  padding: "3 4",
+  py: "3",
+  px: "4",
 });
 
 const editActions = css({
@@ -466,7 +470,8 @@ const eventRow = css({
   display: "flex",
   alignItems: "center",
   gap: "2",
-  padding: "1 0",
+  py: "1",
+  px: "0",
 });
 
 const eventIconWrapper = css({

@@ -194,7 +194,8 @@ const borderedItem = css({
   borderBottomWidth: "0.25",
   borderBottomStyle: "solid",
   borderColor: "border.default",
-  padding: "3 0",
+  py: "3",
+  px: "0",
   _first: { paddingTop: 0 },
 });
 

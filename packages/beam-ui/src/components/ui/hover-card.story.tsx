@@ -25,7 +25,11 @@ export function UserProfile() {
   return (
     <div style={{ padding: 80 }}>
       <HoverCard
-        trigger={<span style={{ textDecoration: "underline", cursor: "pointer" }}>@sienna</span>}
+        trigger={
+          <span style={{ textDecoration: "underline", cursor: "pointer" }}>
+            @sienna
+          </span>
+        }
       >
         <div>
           <strong>Sienna Park</strong>

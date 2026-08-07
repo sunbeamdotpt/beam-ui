@@ -128,7 +128,8 @@ export function I18nProvider(
 
   const t = useCallback(
     (key: string, vars?: Record<string, string | number>): string => {
-      const messages = config.locales[locale] ?? config.locales[config.defaultLocale] ?? {};
+      const messages = config.locales[locale] ??
+        config.locales[config.defaultLocale] ?? {};
       const fallback = config.locales[config.defaultLocale] ?? {};
 
       // Handle pluralization: if `count` is provided, try `.one` / `.other` suffixes

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { BranchSelector } from "./branch-selector.tsx";
 
-const branches = ["main", "develop", "feature/auth-flow", "fix/header-layout", "release/v2.1"];
+const branches = [
+  "main",
+  "develop",
+  "feature/auth-flow",
+  "fix/header-layout",
+  "release/v2.1",
+];
 const tags = ["v2.0.0", "v1.9.3", "v1.9.2", "v1.0.0"];
 
 export default function BranchSelectorStory() {

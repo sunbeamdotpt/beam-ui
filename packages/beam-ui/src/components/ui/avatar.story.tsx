@@ -6,7 +6,11 @@ export default function AvatarStory() {
       <Avatar name="Sienna Park" size="sm" />
       <Avatar name="Jordan Chen" size="md" />
       <Avatar name="Amira Kapoor" size="lg" />
-      <Avatar name="Luca Rossi" size="md" src="https://i.pravatar.cc/80?u=luca" />
+      <Avatar
+        name="Luca Rossi"
+        size="md"
+        src="https://i.pravatar.cc/80?u=luca"
+      />
     </div>
   );
 }
@@ -27,7 +31,13 @@ export function SmallWithImage() {
   return <Avatar name="Luca Rossi" size="sm" src="https://i.pravatar.cc/64?u=luca" />;
 }
 export function LargeWithImage() {
-  return <Avatar name="Luca Rossi" size="lg" src="https://i.pravatar.cc/112?u=luca" />;
+  return (
+    <Avatar
+      name="Luca Rossi"
+      size="lg"
+      src="https://i.pravatar.cc/112?u=luca"
+    />
+  );
 }
 export function SingleName() {
   return <Avatar name="Sienna" size="md" />;

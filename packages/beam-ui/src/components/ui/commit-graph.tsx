@@ -280,7 +280,8 @@ const commitMeta = css({
 const branchBadge = css({
   fontSize: "2xs",
   fontFamily: "mono",
-  padding: "0.25 1.5",
+  py: "0.25",
+  px: "1.5",
   borderWidth: "0.25",
   borderStyle: "solid",
   color: "text.primary",
@@ -291,7 +292,8 @@ const branchBadge = css({
 const tagBadge = css({
   fontSize: "2xs",
   fontFamily: "mono",
-  padding: "0.25 1.5",
+  py: "0.25",
+  px: "1.5",
   backgroundColor: "accent.10",
   color: "sunbeam.orange",
   whiteSpace: "nowrap",

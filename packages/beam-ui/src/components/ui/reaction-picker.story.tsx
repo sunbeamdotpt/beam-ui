@@ -12,7 +12,11 @@ export default function ReactionPickerStory() {
     setReactions((prev) =>
       prev.map((r) =>
         r.emoji === emoji
-          ? { ...r, reacted: !r.reacted, count: r.reacted ? r.count - 1 : r.count + 1 }
+          ? {
+            ...r,
+            reacted: !r.reacted,
+            count: r.reacted ? r.count - 1 : r.count + 1,
+          }
           : r
       )
     );
@@ -30,7 +34,13 @@ export default function ReactionPickerStory() {
     });
   };
 
-  return <ReactionPicker reactions={reactions} onToggle={handleToggle} onAdd={handleAdd} />;
+  return (
+    <ReactionPicker
+      reactions={reactions}
+      onToggle={handleToggle}
+      onAdd={handleAdd}
+    />
+  );
 }
 
 export function Empty() {

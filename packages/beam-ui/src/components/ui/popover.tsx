@@ -83,7 +83,9 @@ const header = css({
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "space-between",
-  padding: "4 4 0",
+  pt: "4",
+  px: "4",
+  pb: "0",
 });
 
 const titleStyle = css({
@@ -112,7 +114,9 @@ const closeButton = css({
 });
 
 const body = css({
-  padding: "3 4 4",
+  pt: "3",
+  px: "4",
+  pb: "4",
   fontSize: "sm",
   fontFamily: "body",
   color: "text.primary",

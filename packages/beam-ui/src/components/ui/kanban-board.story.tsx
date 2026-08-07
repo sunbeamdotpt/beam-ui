@@ -70,7 +70,11 @@ export function EmptyBoard() {
 
 export function SingleColumn() {
   const [columns, setColumns] = useState<KanbanColumn[]>([
-    { id: "all", title: "All Tasks", cards: initialColumns.flatMap((c) => c.cards) },
+    {
+      id: "all",
+      title: "All Tasks",
+      cards: initialColumns.flatMap((c) => c.cards),
+    },
   ]);
   return <KanbanBoard columns={columns} onChange={setColumns} />;
 }

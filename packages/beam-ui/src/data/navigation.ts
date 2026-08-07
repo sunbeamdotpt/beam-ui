@@ -85,7 +85,10 @@ export const docsSidebar: NavSection[] = [
         children: [
           { label: "LoginForm", href: "/components/login-form" },
           { label: "SignUpForm", href: "/components/signup-form" },
-          { label: "ForgotPasswordForm", href: "/components/forgot-password-form" },
+          {
+            label: "ForgotPasswordForm",
+            href: "/components/forgot-password-form",
+          },
           { label: "TwoFactorForm", href: "/components/two-factor-form" },
         ],
       },
@@ -255,7 +258,10 @@ export const footerSections = [
   {
     title: "Resources",
     links: [
-      { label: "Source Control", href: "https://src.sunbeam.pt/studio/beam-ui" },
+      {
+        label: "Source Control",
+        href: "https://src.sunbeam.pt/studio/beam-ui",
+      },
       {
         label: "Contact Us",
         href:

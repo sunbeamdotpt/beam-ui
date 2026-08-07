@@ -41,7 +41,12 @@ export default function IconStory() {
       {icons.map((name) => (
         <div
           key={name}
-          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 6,
+          }}
         >
           <Icon name={name} size={28} />
           <span style={{ fontSize: 10, opacity: 0.6 }}>{name}</span>

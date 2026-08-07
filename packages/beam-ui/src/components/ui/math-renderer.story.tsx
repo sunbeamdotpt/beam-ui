@@ -38,9 +38,19 @@ export function Inline() {
 }
 
 export function DisplayMode() {
-  return <MathRenderer math="\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}" display />;
+  return (
+    <MathRenderer
+      math="\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}"
+      display
+    />
+  );
 }
 
 export function Matrix() {
-  return <MathRenderer math="\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}" display />;
+  return (
+    <MathRenderer
+      math="\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}"
+      display
+    />
+  );
 }

@@ -24,7 +24,10 @@ export function WithoutLabel() {
     <RadioGroup
       value={value}
       onChange={setValue}
-      options={[{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }]}
+      options={[{ value: "a", label: "Option A" }, {
+        value: "b",
+        label: "Option B",
+      }]}
     />
   );
 }

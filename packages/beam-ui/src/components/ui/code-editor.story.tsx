@@ -54,10 +54,17 @@ export function NoLineNumbers() {
 }
 
 export function PythonLanguage() {
-  const [value, setValue] = useState("def hello():\n    print('Hello, Beam!')\n");
+  const [value, setValue] = useState(
+    "def hello():\n    print('Hello, Beam!')\n",
+  );
   return (
     <div style={{ maxWidth: 700 }}>
-      <CodeEditor value={value} onChange={setValue} language="python" height="160px" />
+      <CodeEditor
+        value={value}
+        onChange={setValue}
+        language="python"
+        height="160px"
+      />
     </div>
   );
 }

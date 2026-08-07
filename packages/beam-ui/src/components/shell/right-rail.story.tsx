@@ -19,7 +19,10 @@ export default function RightRailStory() {
 export function FewItems() {
   return (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <RightRail items={[{ label: "Overview", id: "overview" }]} lastUpdated="April 1, 2026" />
+      <RightRail
+        items={[{ label: "Overview", id: "overview" }]}
+        lastUpdated="April 1, 2026"
+      />
     </div>
   );
 }
@@ -28,7 +31,10 @@ export function ManyItems() {
   return (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
       <RightRail
-        items={Array.from({ length: 10 }, (_, i) => ({ label: `Section ${i + 1}`, id: `s${i}` }))}
+        items={Array.from(
+          { length: 10 },
+          (_, i) => ({ label: `Section ${i + 1}`, id: `s${i}` }),
+        )}
         lastUpdated="April 3, 2026"
       />
     </div>

@@ -27,7 +27,12 @@ export function WithoutLabel() {
 export function Disabled() {
   return (
     <div style={{ maxWidth: 300 }}>
-      <DatePicker value="2026-04-03" onChange={() => {}} label="Locked Date" disabled />
+      <DatePicker
+        value="2026-04-03"
+        onChange={() => {}}
+        label="Locked Date"
+        disabled
+      />
     </div>
   );
 }

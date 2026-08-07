@@ -2,7 +2,14 @@ import { ProgressBar } from "./progress-bar.tsx";
 
 export default function ProgressBarStory() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 400 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 24,
+        maxWidth: 400,
+      }}
+    >
       <ProgressBar value={65} showLabel />
       <ProgressBar value={100} variant="success" showLabel />
       <ProgressBar value={30} variant="error" showLabel />

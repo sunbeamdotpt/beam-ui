@@ -2,7 +2,14 @@ import { Button } from "./button.tsx";
 
 export default function ButtonStory() {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center" }}>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 16,
+        alignItems: "center",
+      }}
+    >
       <Button variant="primary">Primary</Button>
       <Button variant="dark">Dark</Button>
       <Button variant="cream">Cream</Button>
