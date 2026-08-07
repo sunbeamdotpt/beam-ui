@@ -12,7 +12,7 @@
  * Hand-curated adjustments live in src/plasmic/registry.overrides.tsx.
  * See docs/plasmic-app-host-scope.md §4 for the triage rules.
  */
-import { readdirSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { parse, type PropItem } from "react-docgen-typescript";
 import { skipComponents } from "../src/plasmic/registry.overrides";
@@ -152,6 +152,8 @@ for (const { file, path } of discover()) {
     console.warn(`  ⚠ docgen failed for ${file}: ${(e as Error).message}`);
     continue;
   }
+  const acceptsPolymorphicChildren =
+    /ComponentPropsWith(?:out)?Ref|PropsWithChildren/.test(readFileSync(path, "utf8"));
   for (const doc of docs) {
     const name = doc.displayName;
     if (!name || !/^[A-Z]/.test(name) || skipComponents.includes(name)) continue;
@@ -165,6 +167,20 @@ for (const { file, path } of discover()) {
       }
     }
     totalUnmapped += unmapped.length;
+    // Polymorphic components spread generic ComponentPropsWithoutRef<T>,
+    // which docgen cannot resolve — children vanishes from the prop list.
+    // If the source uses the spread and docgen found no children, inject
+    // the slot manually.
+    if (!props.children && acceptsPolymorphicChildren) {
+      props.children = { type: "slot" };
+    }
+    // Slots with no default content render as empty 0×0 boxes on the Studio
+    // canvas — give the children slot a text placeholder so instances are
+    // visible and hug-sized out of the gate (curate richer defaults per
+    // component in registry.overrides.tsx).
+    if (props.children?.type === "slot" && props.children.defaultValue === undefined) {
+      props.children.defaultValue = name;
+    }
     components.push({ name, file, importPath: HEAVY_SUBPATHS[file] ?? ROOT_IMPORT, props, unmapped });
   }
 }

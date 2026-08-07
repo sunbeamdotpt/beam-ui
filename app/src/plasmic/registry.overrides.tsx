@@ -4,13 +4,13 @@
  *
  * - skipComponents: never registered in Studio (see scope doc §4 triage).
  * - overrides: per-component meta patches; `props` are merged per-key over
- *   the generated prop metadata (set a prop to null to hide it).
+ *   the generated prop metadata (set a prop to null to hide it). Slot props
+ *   take Plasmic's `defaultValue` (any ReactNode, so JSX works here).
  *
  * This module is imported BOTH by the build-time generator
  * (scripts/generate-plasmic-registry.ts, for skipComponents) and by the
  * generated runtime module — keep it free of side effects.
  */
-import type { ReactNode } from "react";
 
 export interface PropOverride {
   type?: string;
@@ -21,7 +21,6 @@ export interface PropOverride {
   hidden?: boolean;
   advanced?: boolean;
   allowedComponents?: string[];
-  defaultValueContent?: ReactNode;
 }
 
 export interface ComponentOverride {
@@ -40,17 +39,22 @@ export const skipComponents: string[] = [
 ];
 
 export const overrides: Record<string, ComponentOverride> = {
-  // Curated adjustments go here. Example (slot with default content):
-  //
-  // Dialog: {
-  //   props: {
-  //     children: {
-  //       type: "slot",
-  //       defaultValueContent: <p>Edit me</p>,
-  //     },
-  //   },
-  // },
+  // Modals are closed unless `open` is set — without a default they render
+  // as invisible 0×0 instances on the canvas.
+  Dialog: {
+    props: {
+      open: { defaultValue: true },
+      title: { defaultValue: "Dialog title" },
+    },
+  },
+  WizardModal: {
+    props: {
+      open: { defaultValue: true },
+    },
+  },
   //
   // The design-language navigation props (linkAs/currentPath/onNavigate/
-  // isActive) are already hidden globally by the generator.
+  // isActive) are already hidden globally by the generator. Data-driven
+  // components (Accordion items, StatBar stats, Steps steps, …) render
+  // empty until sample data is curated here — add as we see real usage.
 };

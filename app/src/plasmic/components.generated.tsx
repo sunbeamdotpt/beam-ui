@@ -165,7 +165,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Page content."
+      "description": "Page content.",
+      "defaultValue": "ApiLayout"
     }
   }
 }));
@@ -308,7 +309,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Badge label text."
+      "description": "Badge label text.",
+      "defaultValue": "Badge"
     },
     "variant": {
       "type": "choice",
@@ -386,6 +388,10 @@ export function registerBeamComponents(): void {
       "type": "string",
       "description": "Internal or external link target. Defaults to \"/guides\".",
       "defaultValue": "/guides"
+    },
+    "children": {
+      "type": "slot",
+      "defaultValue": "BentoItem"
     }
   }
 }));
@@ -457,6 +463,10 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "Disables interaction and dims the visual."
+    },
+    "children": {
+      "type": "slot",
+      "defaultValue": "Button"
     }
   }
 }));
@@ -469,7 +479,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Callout message content."
+      "description": "Callout message content.",
+      "defaultValue": "Callout"
     },
     "variant": {
       "type": "choice",
@@ -520,7 +531,8 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "description": "Generic card content. Ignored when `title` is provided."
+      "description": "Generic card content. Ignored when `title` is provided.",
+      "defaultValue": "Card"
     }
   }
 }));
@@ -663,7 +675,8 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "description": "Custom trigger element (e.g., button or icon). If omitted, renders a default \"Copy\" button."
+      "description": "Custom trigger element (e.g., button or icon). If omitted, renders a default \"Copy\" button.",
+      "defaultValue": "Clipboard"
     },
     "timeout": {
       "type": "number",
@@ -841,7 +854,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Element or component that triggers the context menu on right-click."
+      "description": "Element or component that triggers the context menu on right-click.",
+      "defaultValue": "ContextMenu"
     }
   }
 }));
@@ -903,7 +917,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Main content of the dialog (typically text, form fields, or other components)."
+      "description": "Main content of the dialog (typically text, form fields, or other components).",
+      "defaultValue": "Dialog"
     },
     "actions": {
       "type": "slot",
@@ -951,7 +966,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Page content."
+      "description": "Page content.",
+      "defaultValue": "DocsLayout"
     },
     "pageDates": {
       "type": "object",
@@ -979,7 +995,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Element or component that triggers the dropdown on click."
+      "description": "Element or component that triggers the dropdown on click.",
+      "defaultValue": "DropdownMenu"
     },
     "positioning": {
       "type": "object",
@@ -1130,7 +1147,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Page content."
+      "description": "Page content.",
+      "defaultValue": "FullwidthLayout"
     }
   }
 }));
@@ -1204,7 +1222,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Content displayed in the popover when hovering."
+      "description": "Content displayed in the popover when hovering.",
+      "defaultValue": "HoverCard"
     }
   }
 }));
@@ -1275,7 +1294,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Keyboard key name or symbol (e.g., \"Ctrl\", \"⌘\", \"Enter\", \"⌘K\")."
+      "description": "Keyboard key name or symbol (e.g., \"Ctrl\", \"⌘\", \"Enter\", \"⌘K\").",
+      "defaultValue": "Kbd"
     },
     "platform": {
       "type": "choice",
@@ -1453,6 +1473,10 @@ export function registerBeamComponents(): void {
     "href": {
       "type": "string",
       "description": "Optional link target. If provided, row becomes a link."
+    },
+    "children": {
+      "type": "slot",
+      "defaultValue": "ModelRow"
     }
   }
 }));
@@ -1591,7 +1615,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Content displayed inside the popover body."
+      "description": "Content displayed inside the popover body.",
+      "defaultValue": "Popover"
     },
     "title": {
       "type": "string",
@@ -1747,7 +1772,8 @@ export function registerBeamComponents(): void {
     },
     "children": {
       "type": "slot",
-      "description": "Content to render."
+      "description": "Content to render.",
+      "defaultValue": "Shell"
     },
     "showThemeToggle": {
       "type": "boolean",
@@ -1909,7 +1935,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Exactly two child elements to split."
+      "description": "Exactly two child elements to split.",
+      "defaultValue": "Splitter"
     },
     "direction": {
       "type": "choice",
@@ -2235,7 +2262,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Content displayed inside the button (text, icon, or both)."
+      "description": "Content displayed inside the button (text, icon, or both).",
+      "defaultValue": "Toggle"
     }
   }
 }));
@@ -2253,7 +2281,8 @@ export function registerBeamComponents(): void {
     "children": {
       "type": "slot",
       "required": true,
-      "description": "Element that triggers the tooltip."
+      "description": "Element that triggers the tooltip.",
+      "defaultValue": "Tooltip"
     },
     "position": {
       "type": "choice",
