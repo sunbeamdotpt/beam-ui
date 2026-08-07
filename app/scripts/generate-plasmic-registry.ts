@@ -176,14 +176,13 @@ for (const { file, path } of discover()) {
     }
     // Slots with no default content render as empty 0×0 boxes on the Studio
     // canvas — give the children slot a text placeholder so instances are
-    // visible and hug-sized out of the gate. The marker is emitted as a
-    // slotText(...) call (see below): bare strings become Plasmic text
-    // nodes styled with the PROJECT's default typography (Inter 16px from
-    // starter templates), not the component's — the wrapper forces
-    // inheritance. Curate richer defaults per component in
-    // registry.overrides.tsx.
+    // visible and hug-sized out of the gate (curate richer defaults per
+    // component in registry.overrides.tsx).
+    // NOTE: do NOT emit JSX defaults here — Studio converts registered
+    // slot defaultValue JSX into its tpl model at registry-ingest time,
+    // and unsupported content hard-errors the frame ("Unexpected error").
     if (props.children?.type === "slot" && props.children.defaultValue === undefined) {
-      props.children.defaultValue = `@@SLOT_TEXT@@${name}`;
+      props.children.defaultValue = name;
     }
     components.push({ name, file, importPath: HEAVY_SUBPATHS[file] ?? ROOT_IMPORT, props, unmapped });
   }
@@ -230,18 +229,6 @@ const lines: string[] = [
   ``,
   ...heavy.map((c) => `const ${c.name}Host = withSuspense(${c.name}Lazy);`),
   ``,
-  `// Slot placeholder text must explicitly inherit the component's`,
-  `// typography: bare strings become Plasmic text nodes styled with the`,
-  `// PROJECT's default typography (e.g. Inter 16px from starter`,
-  `// templates), not ours. Inline styles beat Plasmic's unlayered rules.`,
-  `function slotText(text: string): ReactNode {`,
-  `  return (`,
-  `    <span style={{ font: "inherit", color: "inherit", letterSpacing: "inherit", textTransform: "inherit" }}>`,
-  `      {text}`,
-  `    </span>`,
-  `  );`,
-  `}`,
-  ``,
   `export function registerBeamComponents(): void {`,
 ];
 
@@ -254,12 +241,7 @@ for (const c of components) {
     importName: c.name,
     props: c.props,
   };
-  lines.push(`  registerComponent(withSanitizedProps(${ref}), withOverride(${JSON.stringify(c.name)}, ${
-    JSON.stringify(meta, null, 2).replaceAll(
-      `"@@SLOT_TEXT@@${c.name}"`,
-      `slotText(${JSON.stringify(c.name)})`,
-    )
-  }));`);
+  lines.push(`  registerComponent(withSanitizedProps(${ref}), withOverride(${JSON.stringify(c.name)}, ${JSON.stringify(meta, null, 2)}));`);
 }
 
 lines.push(`}`);
