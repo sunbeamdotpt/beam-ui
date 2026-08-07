@@ -358,3 +358,21 @@ default typography — the durable fix is setting the Plasmic project's
 default typography to the registered Beam / Body token (project
 settings, one-time). Existing instances keep their stored text-node
 styles; delete + re-drag to pick up slotText defaults.
+
+## 2026-08-07 — Token tree + slot typography, verified against Studio source
+
+Two fixes landed after reading the actual Plasmic source instead of
+guessing. (1) Slot defaultValue is a PlasmicElement SCHEMA (element-
+types.d.ts: text/box/img/input/code-component objects), NOT JSX — the
+failed slotText attempt errored registry ingest because JSX isn't a
+valid schema. Slot defaults now use GenericTextElement with inherit
+styles, so placeholder text keeps component typography instead of the
+project default (Inter). (2) Studio's token tree splits display names
+on "/" AND "." — numeric leaves must be dot-free and explicitly
+grouped ("Beam / Spacing / 0-5"), and Panda's escaped-dot CSS vars
+(var(--spacing-0\.5)) break Studio's token evaluator (raw var() text
+shown instead of 2px) — registered values now strip the backslash.
+Verification rule going forward: before shipping a registration-shape
+change, check the type in @plasmicapp/host dist types or the wab
+source (~/Development/plasmic) — Studio ingest errors are opaque
+("Unexpected error: w").
