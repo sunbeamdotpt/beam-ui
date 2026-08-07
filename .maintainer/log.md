@@ -376,3 +376,17 @@ Verification rule going forward: before shipping a registration-shape
 change, check the type in @plasmicapp/host dist types or the wab
 source (~/Development/plasmic) — Studio ingest errors are opaque
 ("Unexpected error: w").
+
+## 2026-08-07 — Canvas font inheritance: artboard root stamps project typography
+
+The persistent "wrong font" mechanism, finally nailed from wab source
+(core/styles.ts makeDefaultStylesRules): Studio declares the project's
+default typography ON THE ARTBOARD ROOT (.__wab_defaults__all) with a
+zero-specificity :where() rule. Zero specificity doesn't matter — any
+direct declaration beats INHERITANCE from our body rule, so every Beam
+component that inherits font-family (most of them) got Inter. Fix:
+canvas-overrides.css on the host page re-asserts --fonts-body etc. on
+that root (0,1,x specificity beats :where()). Also note for future
+canvas debugging: Studio's right-panel typography fields show project
+DEFAULTS as placeholders for unset values — they are not the applied
+styles (panel said #000/16px while text rendered white/14px).
