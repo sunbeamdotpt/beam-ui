@@ -104,6 +104,22 @@ function withSuspense(Lazy: ComponentType<any>): ComponentType<any> {
   };
 }
 
+// Plasmic's canvas proxy injects its own internal props into code
+// components; our components spread unknown props onto DOM elements,
+// which triggers React unknown-prop warnings in dev. Strip them here.
+const PLASMIC_INTERNAL_PROPS = new Set([
+  "setControlContextData",
+  "plasmicNotifyAutoOpenedContent",
+  "plasmicUpdateVariant",
+]);
+function withSanitizedProps(Component: ComponentType<any>): ComponentType<any> {
+  return function PlasmicSanitizedHost(props: Record<string, unknown>) {
+    const clean = { ...props };
+    for (const k of PLASMIC_INTERNAL_PROPS) delete clean[k];
+    return <Component {...clean} />;
+  };
+}
+
 const LineChartHost = withSuspense(LineChartLazy);
 const BarChartHost = withSuspense(BarChartLazy);
 const PieChartHost = withSuspense(PieChartLazy);
@@ -118,7 +134,7 @@ const MathRendererHost = withSuspense(MathRendererLazy);
 const SyntaxHighlighterHost = withSuspense(SyntaxHighlighterLazy);
 
 export function registerBeamComponents(): void {
-  registerComponent(Accordion, withOverride("Accordion", {
+  registerComponent(withSanitizedProps(Accordion), withOverride("Accordion", {
   "name": "BeamAccordion",
   "displayName": "Beam / Accordion",
   "importPath": "@sunbeam/beam-ui",
@@ -142,7 +158,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ActivityHeatmap, withOverride("ActivityHeatmap", {
+  registerComponent(withSanitizedProps(ActivityHeatmap), withOverride("ActivityHeatmap", {
   "name": "BeamActivityHeatmap",
   "displayName": "Beam / ActivityHeatmap",
   "importPath": "@sunbeam/beam-ui",
@@ -156,7 +172,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ApiLayout, withOverride("ApiLayout", {
+  registerComponent(withSanitizedProps(ApiLayout), withOverride("ApiLayout", {
   "name": "BeamApiLayout",
   "displayName": "Beam / ApiLayout",
   "importPath": "@sunbeam/beam-ui",
@@ -170,7 +186,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(AssigneePicker, withOverride("AssigneePicker", {
+  registerComponent(withSanitizedProps(AssigneePicker), withOverride("AssigneePicker", {
   "name": "BeamAssigneePicker",
   "displayName": "Beam / AssigneePicker",
   "importPath": "@sunbeam/beam-ui",
@@ -195,7 +211,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(LoginForm, withOverride("LoginForm", {
+  registerComponent(withSanitizedProps(LoginForm), withOverride("LoginForm", {
   "name": "BeamLoginForm",
   "displayName": "Beam / LoginForm",
   "importPath": "@sunbeam/beam-ui",
@@ -217,7 +233,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(SignUpForm, withOverride("SignUpForm", {
+  registerComponent(withSanitizedProps(SignUpForm), withOverride("SignUpForm", {
   "name": "BeamSignUpForm",
   "displayName": "Beam / SignUpForm",
   "importPath": "@sunbeam/beam-ui",
@@ -234,7 +250,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ForgotPasswordForm, withOverride("ForgotPasswordForm", {
+  registerComponent(withSanitizedProps(ForgotPasswordForm), withOverride("ForgotPasswordForm", {
   "name": "BeamForgotPasswordForm",
   "displayName": "Beam / ForgotPasswordForm",
   "importPath": "@sunbeam/beam-ui",
@@ -256,7 +272,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(TwoFactorForm, withOverride("TwoFactorForm", {
+  registerComponent(withSanitizedProps(TwoFactorForm), withOverride("TwoFactorForm", {
   "name": "BeamTwoFactorForm",
   "displayName": "Beam / TwoFactorForm",
   "importPath": "@sunbeam/beam-ui",
@@ -273,7 +289,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Avatar, withOverride("Avatar", {
+  registerComponent(withSanitizedProps(Avatar), withOverride("Avatar", {
   "name": "BeamAvatar",
   "displayName": "Beam / Avatar",
   "importPath": "@sunbeam/beam-ui",
@@ -300,7 +316,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Badge, withOverride("Badge", {
+  registerComponent(withSanitizedProps(Badge), withOverride("Badge", {
   "name": "BeamBadge",
   "displayName": "Beam / Badge",
   "importPath": "@sunbeam/beam-ui",
@@ -344,7 +360,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(BentoItem, withOverride("BentoItem", {
+  registerComponent(withSanitizedProps(BentoItem), withOverride("BentoItem", {
   "name": "BeamBentoItem",
   "displayName": "Beam / BentoItem",
   "importPath": "@sunbeam/beam-ui",
@@ -395,7 +411,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(BranchSelector, withOverride("BranchSelector", {
+  registerComponent(withSanitizedProps(BranchSelector), withOverride("BranchSelector", {
   "name": "BeamBranchSelector",
   "displayName": "Beam / BranchSelector",
   "importPath": "@sunbeam/beam-ui",
@@ -424,7 +440,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Breadcrumbs, withOverride("Breadcrumbs", {
+  registerComponent(withSanitizedProps(Breadcrumbs), withOverride("Breadcrumbs", {
   "name": "BeamBreadcrumbs",
   "displayName": "Beam / Breadcrumbs",
   "importPath": "@sunbeam/beam-ui",
@@ -438,7 +454,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Button, withOverride("Button", {
+  registerComponent(withSanitizedProps(Button), withOverride("Button", {
   "name": "BeamButton",
   "displayName": "Beam / Button",
   "importPath": "@sunbeam/beam-ui",
@@ -470,7 +486,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Callout, withOverride("Callout", {
+  registerComponent(withSanitizedProps(Callout), withOverride("Callout", {
   "name": "BeamCallout",
   "displayName": "Beam / Callout",
   "importPath": "@sunbeam/beam-ui",
@@ -494,7 +510,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Card, withOverride("Card", {
+  registerComponent(withSanitizedProps(Card), withOverride("Card", {
   "name": "BeamCard",
   "displayName": "Beam / Card",
   "importPath": "@sunbeam/beam-ui",
@@ -536,7 +552,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(LineChartHost, withOverride("LineChart", {
+  registerComponent(withSanitizedProps(LineChartHost), withOverride("LineChart", {
   "name": "BeamLineChart",
   "displayName": "Beam / LineChart",
   "importPath": "@sunbeam/beam-ui/charts",
@@ -561,7 +577,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(BarChartHost, withOverride("BarChart", {
+  registerComponent(withSanitizedProps(BarChartHost), withOverride("BarChart", {
   "name": "BeamBarChart",
   "displayName": "Beam / BarChart",
   "importPath": "@sunbeam/beam-ui/charts",
@@ -586,7 +602,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(PieChartHost, withOverride("PieChart", {
+  registerComponent(withSanitizedProps(PieChartHost), withOverride("PieChart", {
   "name": "BeamPieChart",
   "displayName": "Beam / PieChart",
   "importPath": "@sunbeam/beam-ui/charts",
@@ -610,7 +626,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(AreaChartHost, withOverride("AreaChart", {
+  registerComponent(withSanitizedProps(AreaChartHost), withOverride("AreaChart", {
   "name": "BeamAreaChart",
   "displayName": "Beam / AreaChart",
   "importPath": "@sunbeam/beam-ui/charts",
@@ -635,7 +651,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Checkbox, withOverride("Checkbox", {
+  registerComponent(withSanitizedProps(Checkbox), withOverride("Checkbox", {
   "name": "BeamCheckbox",
   "displayName": "Beam / Checkbox",
   "importPath": "@sunbeam/beam-ui",
@@ -662,7 +678,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Clipboard, withOverride("Clipboard", {
+  registerComponent(withSanitizedProps(Clipboard), withOverride("Clipboard", {
   "name": "BeamClipboard",
   "displayName": "Beam / Clipboard",
   "importPath": "@sunbeam/beam-ui",
@@ -685,7 +701,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(CodeBlock, withOverride("CodeBlock", {
+  registerComponent(withSanitizedProps(CodeBlock), withOverride("CodeBlock", {
   "name": "BeamCodeBlock",
   "displayName": "Beam / CodeBlock",
   "importPath": "@sunbeam/beam-ui",
@@ -714,7 +730,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(CodeEditorHost, withOverride("CodeEditor", {
+  registerComponent(withSanitizedProps(CodeEditorHost), withOverride("CodeEditor", {
   "name": "BeamCodeEditor",
   "displayName": "Beam / CodeEditor",
   "importPath": "@sunbeam/beam-ui/code-editor",
@@ -760,7 +776,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ColorPicker, withOverride("ColorPicker", {
+  registerComponent(withSanitizedProps(ColorPicker), withOverride("ColorPicker", {
   "name": "BeamColorPicker",
   "displayName": "Beam / ColorPicker",
   "importPath": "@sunbeam/beam-ui",
@@ -782,7 +798,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Combobox, withOverride("Combobox", {
+  registerComponent(withSanitizedProps(Combobox), withOverride("Combobox", {
   "name": "BeamCombobox",
   "displayName": "Beam / Combobox",
   "importPath": "@sunbeam/beam-ui",
@@ -811,7 +827,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(CommentThread, withOverride("CommentThread", {
+  registerComponent(withSanitizedProps(CommentThread), withOverride("CommentThread", {
   "name": "BeamCommentThread",
   "displayName": "Beam / CommentThread",
   "importPath": "@sunbeam/beam-ui",
@@ -825,7 +841,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(CommitGraph, withOverride("CommitGraph", {
+  registerComponent(withSanitizedProps(CommitGraph), withOverride("CommitGraph", {
   "name": "BeamCommitGraph",
   "displayName": "Beam / CommitGraph",
   "importPath": "@sunbeam/beam-ui",
@@ -839,7 +855,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ContextMenu, withOverride("ContextMenu", {
+  registerComponent(withSanitizedProps(ContextMenu), withOverride("ContextMenu", {
   "name": "BeamContextMenu",
   "displayName": "Beam / ContextMenu",
   "importPath": "@sunbeam/beam-ui",
@@ -859,7 +875,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(DatePicker, withOverride("DatePicker", {
+  registerComponent(withSanitizedProps(DatePicker), withOverride("DatePicker", {
   "name": "BeamDatePicker",
   "displayName": "Beam / DatePicker",
   "importPath": "@sunbeam/beam-ui",
@@ -885,7 +901,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(DiagramRendererHost, withOverride("DiagramRenderer", {
+  registerComponent(withSanitizedProps(DiagramRendererHost), withOverride("DiagramRenderer", {
   "name": "BeamDiagramRenderer",
   "displayName": "Beam / DiagramRenderer",
   "importPath": "@sunbeam/beam-ui/diagram",
@@ -898,7 +914,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Dialog, withOverride("Dialog", {
+  registerComponent(withSanitizedProps(Dialog), withOverride("Dialog", {
   "name": "BeamDialog",
   "displayName": "Beam / Dialog",
   "importPath": "@sunbeam/beam-ui",
@@ -926,7 +942,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(DiffViewer, withOverride("DiffViewer", {
+  registerComponent(withSanitizedProps(DiffViewer), withOverride("DiffViewer", {
   "name": "BeamDiffViewer",
   "displayName": "Beam / DiffViewer",
   "importPath": "@sunbeam/beam-ui",
@@ -957,7 +973,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(DocsLayout, withOverride("DocsLayout", {
+  registerComponent(withSanitizedProps(DocsLayout), withOverride("DocsLayout", {
   "name": "BeamDocsLayout",
   "displayName": "Beam / DocsLayout",
   "importPath": "@sunbeam/beam-ui",
@@ -976,7 +992,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(DropdownMenu, withOverride("DropdownMenu", {
+  registerComponent(withSanitizedProps(DropdownMenu), withOverride("DropdownMenu", {
   "name": "BeamDropdownMenu",
   "displayName": "Beam / DropdownMenu",
   "importPath": "@sunbeam/beam-ui",
@@ -1005,7 +1021,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Editable, withOverride("Editable", {
+  registerComponent(withSanitizedProps(Editable), withOverride("Editable", {
   "name": "BeamEditable",
   "displayName": "Beam / Editable",
   "importPath": "@sunbeam/beam-ui",
@@ -1023,7 +1039,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(EmptyState, withOverride("EmptyState", {
+  registerComponent(withSanitizedProps(EmptyState), withOverride("EmptyState", {
   "name": "BeamEmptyState",
   "displayName": "Beam / EmptyState",
   "importPath": "@sunbeam/beam-ui",
@@ -1048,7 +1064,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(FeatureTile, withOverride("FeatureTile", {
+  registerComponent(withSanitizedProps(FeatureTile), withOverride("FeatureTile", {
   "name": "BeamFeatureTile",
   "displayName": "Beam / FeatureTile",
   "importPath": "@sunbeam/beam-ui",
@@ -1071,7 +1087,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(FileList, withOverride("FileList", {
+  registerComponent(withSanitizedProps(FileList), withOverride("FileList", {
   "name": "BeamFileList",
   "displayName": "Beam / FileList",
   "importPath": "@sunbeam/beam-ui",
@@ -1109,7 +1125,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(FileUpload, withOverride("FileUpload", {
+  registerComponent(withSanitizedProps(FileUpload), withOverride("FileUpload", {
   "name": "BeamFileUpload",
   "displayName": "Beam / FileUpload",
   "importPath": "@sunbeam/beam-ui",
@@ -1131,14 +1147,14 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Footer, withOverride("Footer", {
+  registerComponent(withSanitizedProps(Footer), withOverride("Footer", {
   "name": "BeamFooter",
   "displayName": "Beam / Footer",
   "importPath": "@sunbeam/beam-ui",
   "importName": "Footer",
   "props": {}
 }));
-  registerComponent(FullwidthLayout, withOverride("FullwidthLayout", {
+  registerComponent(withSanitizedProps(FullwidthLayout), withOverride("FullwidthLayout", {
   "name": "BeamFullwidthLayout",
   "displayName": "Beam / FullwidthLayout",
   "importPath": "@sunbeam/beam-ui",
@@ -1152,7 +1168,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Header, withOverride("Header", {
+  registerComponent(withSanitizedProps(Header), withOverride("Header", {
   "name": "BeamHeader",
   "displayName": "Beam / Header",
   "importPath": "@sunbeam/beam-ui",
@@ -1208,7 +1224,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(HoverCard, withOverride("HoverCard", {
+  registerComponent(withSanitizedProps(HoverCard), withOverride("HoverCard", {
   "name": "BeamHoverCard",
   "displayName": "Beam / HoverCard",
   "importPath": "@sunbeam/beam-ui",
@@ -1227,7 +1243,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Icon, withOverride("Icon", {
+  registerComponent(withSanitizedProps(Icon), withOverride("Icon", {
   "name": "BeamIcon",
   "displayName": "Beam / Icon",
   "importPath": "@sunbeam/beam-ui",
@@ -1248,7 +1264,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(KanbanCardViewHost, withOverride("KanbanCardView", {
+  registerComponent(withSanitizedProps(KanbanCardViewHost), withOverride("KanbanCardView", {
   "name": "BeamKanbanCardView",
   "displayName": "Beam / KanbanCardView",
   "importPath": "@sunbeam/beam-ui/kanban",
@@ -1264,7 +1280,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(KanbanCardDetailHost, withOverride("KanbanCardDetail", {
+  registerComponent(withSanitizedProps(KanbanCardDetailHost), withOverride("KanbanCardDetail", {
   "name": "BeamKanbanCardDetail",
   "displayName": "Beam / KanbanCardDetail",
   "importPath": "@sunbeam/beam-ui/kanban",
@@ -1285,7 +1301,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Kbd, withOverride("Kbd", {
+  registerComponent(withSanitizedProps(Kbd), withOverride("Kbd", {
   "name": "BeamKbd",
   "displayName": "Beam / Kbd",
   "importPath": "@sunbeam/beam-ui",
@@ -1308,7 +1324,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(LabelPicker, withOverride("LabelPicker", {
+  registerComponent(withSanitizedProps(LabelPicker), withOverride("LabelPicker", {
   "name": "BeamLabelPicker",
   "displayName": "Beam / LabelPicker",
   "importPath": "@sunbeam/beam-ui",
@@ -1333,7 +1349,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(List, withOverride("List", {
+  registerComponent(withSanitizedProps(List), withOverride("List", {
   "name": "BeamList",
   "displayName": "Beam / List",
   "importPath": "@sunbeam/beam-ui",
@@ -1361,7 +1377,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(MarkdownEditorHost, withOverride("MarkdownEditor", {
+  registerComponent(withSanitizedProps(MarkdownEditorHost), withOverride("MarkdownEditor", {
   "name": "BeamMarkdownEditor",
   "displayName": "Beam / MarkdownEditor",
   "importPath": "@sunbeam/beam-ui/markdown",
@@ -1384,7 +1400,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(MarkdownRendererHost, withOverride("MarkdownRenderer", {
+  registerComponent(withSanitizedProps(MarkdownRendererHost), withOverride("MarkdownRenderer", {
   "name": "BeamMarkdownRenderer",
   "displayName": "Beam / MarkdownRenderer",
   "importPath": "@sunbeam/beam-ui/markdown",
@@ -1397,7 +1413,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(MathRendererHost, withOverride("MathRenderer", {
+  registerComponent(withSanitizedProps(MathRendererHost), withOverride("MathRenderer", {
   "name": "BeamMathRenderer",
   "displayName": "Beam / MathRenderer",
   "importPath": "@sunbeam/beam-ui/math",
@@ -1415,7 +1431,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(MilestonePicker, withOverride("MilestonePicker", {
+  registerComponent(withSanitizedProps(MilestonePicker), withOverride("MilestonePicker", {
   "name": "BeamMilestonePicker",
   "displayName": "Beam / MilestonePicker",
   "importPath": "@sunbeam/beam-ui",
@@ -1439,7 +1455,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ModelRow, withOverride("ModelRow", {
+  registerComponent(withSanitizedProps(ModelRow), withOverride("ModelRow", {
   "name": "BeamModelRow",
   "displayName": "Beam / ModelRow",
   "importPath": "@sunbeam/beam-ui",
@@ -1480,7 +1496,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(NotificationItem, withOverride("NotificationItem", {
+  registerComponent(withSanitizedProps(NotificationItem), withOverride("NotificationItem", {
   "name": "BeamNotificationItem",
   "displayName": "Beam / NotificationItem",
   "importPath": "@sunbeam/beam-ui",
@@ -1493,7 +1509,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(NotificationCenter, withOverride("NotificationCenter", {
+  registerComponent(withSanitizedProps(NotificationCenter), withOverride("NotificationCenter", {
   "name": "BeamNotificationCenter",
   "displayName": "Beam / NotificationCenter",
   "importPath": "@sunbeam/beam-ui",
@@ -1522,7 +1538,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(NumberInput, withOverride("NumberInput", {
+  registerComponent(withSanitizedProps(NumberInput), withOverride("NumberInput", {
   "name": "BeamNumberInput",
   "displayName": "Beam / NumberInput",
   "importPath": "@sunbeam/beam-ui",
@@ -1552,7 +1568,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Pagination, withOverride("Pagination", {
+  registerComponent(withSanitizedProps(Pagination), withOverride("Pagination", {
   "name": "BeamPagination",
   "displayName": "Beam / Pagination",
   "importPath": "@sunbeam/beam-ui",
@@ -1574,7 +1590,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(PinInput, withOverride("PinInput", {
+  registerComponent(withSanitizedProps(PinInput), withOverride("PinInput", {
   "name": "BeamPinInput",
   "displayName": "Beam / PinInput",
   "importPath": "@sunbeam/beam-ui",
@@ -1601,7 +1617,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Popover, withOverride("Popover", {
+  registerComponent(withSanitizedProps(Popover), withOverride("Popover", {
   "name": "BeamPopover",
   "displayName": "Beam / Popover",
   "importPath": "@sunbeam/beam-ui",
@@ -1624,7 +1640,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ProgressBar, withOverride("ProgressBar", {
+  registerComponent(withSanitizedProps(ProgressBar), withOverride("ProgressBar", {
   "name": "BeamProgressBar",
   "displayName": "Beam / ProgressBar",
   "importPath": "@sunbeam/beam-ui",
@@ -1661,7 +1677,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(RadioGroup, withOverride("RadioGroup", {
+  registerComponent(withSanitizedProps(RadioGroup), withOverride("RadioGroup", {
   "name": "BeamRadioGroup",
   "displayName": "Beam / RadioGroup",
   "importPath": "@sunbeam/beam-ui",
@@ -1684,7 +1700,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ReactionPicker, withOverride("ReactionPicker", {
+  registerComponent(withSanitizedProps(ReactionPicker), withOverride("ReactionPicker", {
   "name": "BeamReactionPicker",
   "displayName": "Beam / ReactionPicker",
   "importPath": "@sunbeam/beam-ui",
@@ -1698,7 +1714,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(RightRail, withOverride("RightRail", {
+  registerComponent(withSanitizedProps(RightRail), withOverride("RightRail", {
   "name": "BeamRightRail",
   "displayName": "Beam / RightRail",
   "importPath": "@sunbeam/beam-ui",
@@ -1716,14 +1732,14 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(SearchInput, withOverride("SearchInput", {
+  registerComponent(withSanitizedProps(SearchInput), withOverride("SearchInput", {
   "name": "BeamSearchInput",
   "displayName": "Beam / SearchInput",
   "importPath": "@sunbeam/beam-ui",
   "importName": "SearchInput",
   "props": {}
 }));
-  registerComponent(Select, withOverride("Select", {
+  registerComponent(withSanitizedProps(Select), withOverride("Select", {
   "name": "BeamSelect",
   "displayName": "Beam / Select",
   "importPath": "@sunbeam/beam-ui",
@@ -1752,7 +1768,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Shell, withOverride("Shell", {
+  registerComponent(withSanitizedProps(Shell), withOverride("Shell", {
   "name": "BeamShell",
   "displayName": "Beam / Shell",
   "importPath": "@sunbeam/beam-ui",
@@ -1818,7 +1834,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Sidebar, withOverride("Sidebar", {
+  registerComponent(withSanitizedProps(Sidebar), withOverride("Sidebar", {
   "name": "BeamSidebar",
   "displayName": "Beam / Sidebar",
   "importPath": "@sunbeam/beam-ui",
@@ -1832,7 +1848,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Skeleton, withOverride("Skeleton", {
+  registerComponent(withSanitizedProps(Skeleton), withOverride("Skeleton", {
   "name": "BeamSkeleton",
   "displayName": "Beam / Skeleton",
   "importPath": "@sunbeam/beam-ui",
@@ -1863,7 +1879,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Slider, withOverride("Slider", {
+  registerComponent(withSanitizedProps(Slider), withOverride("Slider", {
   "name": "BeamSlider",
   "displayName": "Beam / Slider",
   "importPath": "@sunbeam/beam-ui",
@@ -1895,7 +1911,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Spinner, withOverride("Spinner", {
+  registerComponent(withSanitizedProps(Spinner), withOverride("Spinner", {
   "name": "BeamSpinner",
   "displayName": "Beam / Spinner",
   "importPath": "@sunbeam/beam-ui",
@@ -1926,7 +1942,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Splitter, withOverride("Splitter", {
+  registerComponent(withSanitizedProps(Splitter), withOverride("Splitter", {
   "name": "BeamSplitter",
   "displayName": "Beam / Splitter",
   "importPath": "@sunbeam/beam-ui",
@@ -1963,7 +1979,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(StatBar, withOverride("StatBar", {
+  registerComponent(withSanitizedProps(StatBar), withOverride("StatBar", {
   "name": "BeamStatBar",
   "displayName": "Beam / StatBar",
   "importPath": "@sunbeam/beam-ui",
@@ -1977,7 +1993,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Steps, withOverride("Steps", {
+  registerComponent(withSanitizedProps(Steps), withOverride("Steps", {
   "name": "BeamSteps",
   "displayName": "Beam / Steps",
   "importPath": "@sunbeam/beam-ui",
@@ -1996,7 +2012,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Switch, withOverride("Switch", {
+  registerComponent(withSanitizedProps(Switch), withOverride("Switch", {
   "name": "BeamSwitch",
   "displayName": "Beam / Switch",
   "importPath": "@sunbeam/beam-ui",
@@ -2018,7 +2034,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(SyntaxHighlighterHost, withOverride("SyntaxHighlighter", {
+  registerComponent(withSanitizedProps(SyntaxHighlighterHost), withOverride("SyntaxHighlighter", {
   "name": "BeamSyntaxHighlighter",
   "displayName": "Beam / SyntaxHighlighter",
   "importPath": "@sunbeam/beam-ui/syntax-highlighter",
@@ -2054,7 +2070,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Table, withOverride("Table", {
+  registerComponent(withSanitizedProps(Table), withOverride("Table", {
   "name": "BeamTable",
   "displayName": "Beam / Table",
   "importPath": "@sunbeam/beam-ui",
@@ -2087,7 +2103,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Tabs, withOverride("Tabs", {
+  registerComponent(withSanitizedProps(Tabs), withOverride("Tabs", {
   "name": "BeamTabs",
   "displayName": "Beam / Tabs",
   "importPath": "@sunbeam/beam-ui",
@@ -2115,7 +2131,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(TagsInput, withOverride("TagsInput", {
+  registerComponent(withSanitizedProps(TagsInput), withOverride("TagsInput", {
   "name": "BeamTagsInput",
   "displayName": "Beam / TagsInput",
   "importPath": "@sunbeam/beam-ui",
@@ -2142,7 +2158,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(TextInput, withOverride("TextInput", {
+  registerComponent(withSanitizedProps(TextInput), withOverride("TextInput", {
   "name": "BeamTextInput",
   "displayName": "Beam / TextInput",
   "importPath": "@sunbeam/beam-ui",
@@ -2183,7 +2199,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ThemeToggle, withOverride("ThemeToggle", {
+  registerComponent(withSanitizedProps(ThemeToggle), withOverride("ThemeToggle", {
   "name": "BeamThemeToggle",
   "displayName": "Beam / ThemeToggle",
   "importPath": "@sunbeam/beam-ui",
@@ -2201,7 +2217,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Toast, withOverride("Toast", {
+  registerComponent(withSanitizedProps(Toast), withOverride("Toast", {
   "name": "BeamToast",
   "displayName": "Beam / Toast",
   "importPath": "@sunbeam/beam-ui",
@@ -2229,7 +2245,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(ToggleGroup, withOverride("ToggleGroup", {
+  registerComponent(withSanitizedProps(ToggleGroup), withOverride("ToggleGroup", {
   "name": "BeamToggleGroup",
   "displayName": "Beam / ToggleGroup",
   "importPath": "@sunbeam/beam-ui",
@@ -2248,7 +2264,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Toggle, withOverride("Toggle", {
+  registerComponent(withSanitizedProps(Toggle), withOverride("Toggle", {
   "name": "BeamToggle",
   "displayName": "Beam / Toggle",
   "importPath": "@sunbeam/beam-ui",
@@ -2267,7 +2283,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Tooltip, withOverride("Tooltip", {
+  registerComponent(withSanitizedProps(Tooltip), withOverride("Tooltip", {
   "name": "BeamTooltip",
   "displayName": "Beam / Tooltip",
   "importPath": "@sunbeam/beam-ui",
@@ -2297,7 +2313,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(TransferList, withOverride("TransferList", {
+  registerComponent(withSanitizedProps(TransferList), withOverride("TransferList", {
   "name": "BeamTransferList",
   "displayName": "Beam / TransferList",
   "importPath": "@sunbeam/beam-ui",
@@ -2327,7 +2343,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(TreeView, withOverride("TreeView", {
+  registerComponent(withSanitizedProps(TreeView), withOverride("TreeView", {
   "name": "BeamTreeView",
   "displayName": "Beam / TreeView",
   "importPath": "@sunbeam/beam-ui",
@@ -2345,7 +2361,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(Wizard, withOverride("Wizard", {
+  registerComponent(withSanitizedProps(Wizard), withOverride("Wizard", {
   "name": "BeamWizard",
   "displayName": "Beam / Wizard",
   "importPath": "@sunbeam/beam-ui",
@@ -2379,7 +2395,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(WizardModal, withOverride("WizardModal", {
+  registerComponent(withSanitizedProps(WizardModal), withOverride("WizardModal", {
   "name": "BeamWizardModal",
   "displayName": "Beam / WizardModal",
   "importPath": "@sunbeam/beam-ui",
@@ -2418,7 +2434,7 @@ export function registerBeamComponents(): void {
     }
   }
 }));
-  registerComponent(WorkItemList, withOverride("WorkItemList", {
+  registerComponent(withSanitizedProps(WorkItemList), withOverride("WorkItemList", {
   "name": "BeamWorkItemList",
   "displayName": "Beam / WorkItemList",
   "importPath": "@sunbeam/beam-ui",

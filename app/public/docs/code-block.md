@@ -61,7 +61,8 @@ function PillToggle({
           aria-pressed={value === opt}
           className={cx(
             css({
-              padding: "1 3",
+              py: "1",
+              px: "3",
               fontSize: "2xs",
               fontWeight: "button",
               borderRadius: "md",

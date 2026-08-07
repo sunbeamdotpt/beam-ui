@@ -208,6 +208,22 @@ const lines: string[] = [
   `  };`,
   `}`,
   ``,
+  `// Plasmic's canvas proxy injects its own internal props into code`,
+  `// components; our components spread unknown props onto DOM elements,`,
+  `// which triggers React unknown-prop warnings in dev. Strip them here.`,
+  `const PLASMIC_INTERNAL_PROPS = new Set([`,
+  `  "setControlContextData",`,
+  `  "plasmicNotifyAutoOpenedContent",`,
+  `  "plasmicUpdateVariant",`,
+  `]);`,
+  `function withSanitizedProps(Component: ComponentType<any>): ComponentType<any> {`,
+  `  return function PlasmicSanitizedHost(props: Record<string, unknown>) {`,
+  `    const clean = { ...props };`,
+  `    for (const k of PLASMIC_INTERNAL_PROPS) delete clean[k];`,
+  `    return <Component {...clean} />;`,
+  `  };`,
+  `}`,
+  ``,
   ...heavy.map((c) => `const ${c.name}Host = withSuspense(${c.name}Lazy);`),
   ``,
   `export function registerBeamComponents(): void {`,
@@ -222,7 +238,7 @@ for (const c of components) {
     importName: c.name,
     props: c.props,
   };
-  lines.push(`  registerComponent(${ref}, withOverride(${JSON.stringify(c.name)}, ${JSON.stringify(meta, null, 2)}));`);
+  lines.push(`  registerComponent(withSanitizedProps(${ref}), withOverride(${JSON.stringify(c.name)}, ${JSON.stringify(meta, null, 2)}));`);
 }
 
 lines.push(`}`);
