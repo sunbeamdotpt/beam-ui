@@ -4,7 +4,7 @@ version = "0.7.1"
 entrypoint = "lib.typ"
 authors = ["Sunbeam Studios <studio@sunbeam.pt>"]
 license = "MIT"
-description = "Beam Design Language — Typst document templates (beam-doc, beam-newsletter, beam-announcement, beam-slides)"
+description = "Beam Design Language — Typst document templates (beam-doc, beam-newsletter, beam-announcement, beam-slides, beam-packet)"
 repository = "https://src.sunbeam.pt/studio/beam-ui-typst"
 keywords = ["design", "template", "beam", "sunbeam"]
 
@@ -12,3 +12,6 @@ keywords = ["design", "template", "beam", "sunbeam"]
 path = "template"
 entrypoint = "main.typ"
 thumbnail = "thumbnail.png"
+
+[dependencies]
+lilaq = "0.6.0"

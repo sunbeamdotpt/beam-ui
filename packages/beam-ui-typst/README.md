@@ -1,6 +1,6 @@
 # beam-ui-typst
 
-Typst document templates for the [Beam Design Language](https://design.sunbeam.pt). Provides three show-rule templates — `beam-doc`, `beam-newsletter`, and `beam-announcement` — plus a shared component library.
+Typst document templates for the [Beam Design Language](https://design.sunbeam.pt). Provides four show-rule templates — `beam-doc`, `beam-newsletter`, `beam-announcement`, and `beam-packet` — plus a shared component library.
 
 **Fonts:** Ysabeau Infant · Monaspace Argon · Material Symbols Outlined
 
@@ -118,6 +118,34 @@ Single-page announcement with hero headline, info bar, and body.
   audience: "Engineering & Design",      // optional
   date: "April 7, 2026",                 // optional
 )
+```
+
+### `beam-packet`
+
+Dark, long-form data packet / investor briefing / newsletter. Built for flowing prose with a running header and footer, light visuals, and the occasional table or callout.
+
+```typst
+#show: beam-packet.with(
+  title: "Sunbeam Compute Platform",
+  author: "Sunbeam Studios",
+  date: datetime.today(),
+)
+
+#packet-cover(
+  "Sunbeam Compute Platform",
+  subtitle: "Mass Function Activation — powered by mcvi",
+  body: [One-sentence summary.],
+  label: "Investor Briefing",
+  date: "2026",
+)
+
+= The Problem
+
+Body text here.
+
+#packet-callout(label: "Key insight")[
+  A left-bordered callout that sits inside the text flow.
+]
 ```
 
 ---
@@ -239,6 +267,40 @@ Two-column layout wrapper for dense newsletter content.
 
 Hyperlink in the accent color.
 
+### Packet components
+
+These helpers only work inside `beam-packet` documents and rely on the packet color tokens.
+
+#### `packet-cover(title, subtitle, body, label, date)`
+
+Masthead block for the first page: small label, title, optional italic subtitle, body, and date.
+
+#### `packet-section(label, headline, subhead: none)`
+
+Section opener: small gold label + document-scale headline + optional muted subhead.
+
+#### `packet-callout(label, body)`
+
+Simple left-orange-rule callout. No card fill or radius — it sits inside the text flow.
+
+#### `packet-table(columns, ..rows, highlight: none)`
+
+Comparison table with gold header, dark rows, and an optional highlighted row index.
+
+```typst
+#packet-table(
+  (1fr, 1fr, 1fr, 1fr),
+  ("Mechanism", "Isolation", "Billing", "Elastic?"),
+  ("Whole GPU", "Real", "Device-hour", "No"),
+  ("mcvi", "Per-activation", "GPU-second", "Yes"),
+  highlight: 1,
+)
+```
+
+#### Denser layout helpers
+
+For decks or one-pagers that need cards, metrics, pricing tiers, team cards, or a full-page closing, the library also includes `packet-card`, `packet-card-grid`, `packet-metric`, `packet-arrow-list`, `packet-milestones`, `packet-pricing-tiers`, `packet-team-card`, and `packet-closing`.
+
 ---
 
 ## Color Tokens
@@ -327,10 +389,39 @@ Font weights: `weight-display` (431) · `weight-heading` (575) · `weight-body` 
 | `content-slide(title, body)` | Standard slide with title + body |
 | `split-slide(title, left, right, ratio)` | Two-column layout |
 | `columns-slide(title, ..bodies)` | N-column vertical cards (tiers, products, pricing) |
+| `rows-slide(title, ..bodies)` | N horizontal stacked rows |
+| `quad-slide(title, top-left, top-right, bottom-left, bottom-right)` | 2×2 grid of four equal cards |
 | `image-slide(title, image-path, caption, position)` | Image-dominant slide (`"full"`, `"left"`, `"right"`) |
+| `graph-slide(title, body)` | Slide optimized for charts / data viz |
+| `team-slide(title, ..members)` | N-column people cards with avatars |
+| `logo-slide(title, ..logos, columns: 4)` | Grid of company/partner logos |
 | `focus-slide(body, tone)` | Full-bleed impact slide (`"accent"` or `"dark"`) |
 | `closing-slide(title, subtitle, cta)` | Final slide with optional CTA |
 | `blank-slide(body)` | No layout constraints |
+
+### Logo Slide
+
+Showcase a grid of company or partner logos. Pass image paths as strings, or any custom content for placeholders.
+
+```typst
+#logo-slide("Trusted by", columns: 4,
+  "logos/acme.svg",
+  "logos/globex.svg",
+  "logos/soylent.svg",
+  "logos/initech.svg",
+)
+```
+
+Each logo is centered in a cream card with `fit: "contain"` scaling.
+
+- `columns` — how many logos per row (default: 4)
+- `rows` — evenly distribute logos across a fixed number of rows; when set, it overrides `columns`
+
+```typst
+#logo-slide("Trusted by", rows: 2,
+  ..logos,
+)
+```
 
 ### Slide Typography
 
