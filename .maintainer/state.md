@@ -3,17 +3,25 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-08-14T15:12:57Z
+timestamp: 2026-08-14T16:35:00Z
 ---
 
-# State — 2026-08-14 (BEAM-002 Phase 2 closed + sample-data sweep)
+# State — 2026-08-14 (BEAM-002 Phase 2 closed + sample-data sweep + Accordion state)
 
-BEAM-002 implementation is complete and pushed. `deno task ci` green, app build
-green, `npm run test:plasmic:registry` passes with **zero warnings**, and the
-kitchen-sink harness renders all 91 registered components with **zero error
-boxes** in light/dark. The Plasmic host canvas defaults to dark mode; every
-registered component that requires data now ships with design-language sample
+BEAM-002 implementation is complete and pushed through `c8978f3`. `deno task ci`
+green, app build green, `npm run test:plasmic:registry` passes with **zero
+warnings**, and the kitchen-sink harness renders all registered components with
+**zero error boxes** in light/dark. The Plasmic host canvas defaults to dark
+mode; every registered component that requires data now ships with sample
 defaults.
+
+Registry now has **87 components** (down from 91). Page-level layouts
+(`ApiLayout`, `DocsLayout`, `FullwidthLayout`) and the full-app `Shell` are
+excluded because they are page wrappers, not canvas building blocks.
+
+`Beam / Accordion` now exposes its open/closed value as a writable Plasmic
+state. In Studio it can be toggled in **Focus mode** with **interactive mode**
+turned on.
 
 ## In flight
 
@@ -32,20 +40,24 @@ defaults.
 - Primary variant default fix committed (`6afa57d`); generator now sets
   `defaultValue: "primary"` when a variant group contains that option.
 - Added sample data defaults in `registry.overrides.tsx` for all 25+
-  data-driven components that previously had empty required object/array props
-  (Accordion, ActivityHeatmap, charts, tables, FileList, WorkItemList, Sidebar,
-  CommentThread, CommitGraph, DiffViewer, Kanban cards, notifications, etc.).
-- Kitchen-sink harness now verifies all 91 components render without errors in
-  both light and dark modes.
+  data-driven components that previously had empty required object/array props.
+- Exposed `Beam / Accordion` state to Plasmic Studio by adding controlled mode
+  (`value` + `onValueChange`) and registering a writable state (`25dcf79`).
+- Extended `registry.overrides.tsx` and the generator to support `states` and
+  event-handler `argTypes`.
+- Removed `ApiLayout`, `DocsLayout`, `FullwidthLayout`, and `Shell` from the
+  Plasmic registry (`c8978f3`).
 - Regenerated app artifacts committed (`public/api/components.json`,
   `src/generated/build-info.ts`, `components.generated.json`).
 
 ## Pick up first
 
-1. **Human verification in Plasmic Studio**: refresh the host page and drag any
-   `Beam / *` component onto the canvas. It should render with sample data on a
-   dark artboard.
-2. **Unblock BEAM-006/BEAM-007** by providing the Plasmic project ID + public
+1. **Human verification in Plasmic Studio**: refresh the host page, ensure Focus
+   mode + interactive mode are on, then click `Beam / Accordion` sections to
+   confirm they expand/collapse.
+2. **Apply the same state-exposure pattern** to other stateful components if
+   Studio interaction is desired: Tabs, ToggleGroup, Switch, Checkbox, etc.
+3. **Unblock BEAM-006/BEAM-007** by providing the Plasmic project ID + public
    API token when ready.
 
 # State — 2026-08-14 (BEAM-002 Phase 2 defaults curated)

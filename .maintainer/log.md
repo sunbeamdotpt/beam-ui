@@ -483,3 +483,31 @@ docgen-required flags when a default makes the prop effectively optional.
 Verification: `deno task ci` green, `npm run build` green,
 `npm run test:plasmic:registry` zero warnings,
 `npm run test:plasmic:kitchen-sink` passes for light and dark.
+
+## 2026-08-14 — BEAM-002: expose Accordion state to Plasmic Studio
+
+Human testing showed `Beam / Accordion` rendered with sample data but could
+not be opened/closed on the canvas. Root cause: Plasmic Studio needs code
+components to expose interactive state explicitly; uncontrolled `defaultValue`
+components don't get canvas-driven toggles.
+
+Fixed by adding controlled mode to `Accordion` (`value` + `onValueChange`)
+and registering a writable Plasmic state in the component metadata. Also
+extended `registry.overrides.tsx` and the generator to support `states` and
+event-handler `argTypes` for future stateful components.
+
+Verification: `deno task ci` green, `npm run build` green,
+`npm run test:plasmic:registry` zero warnings,
+`npm run test:plasmic:kitchen-sink` passes for light and dark.
+Commit `25dcf79`, dev server restarted.
+
+## 2026-08-14 — BEAM-002: skip page-level layouts and Shell in Plasmic registry
+
+Removed `ApiLayout`, `DocsLayout`, `FullwidthLayout`, and `Shell` from the
+Plasmic component registry. These are page wrappers, not building blocks for
+Studio artboards. Registry now has 87 registered components instead of 91.
+
+Verification: `deno task ci` green, `npm run build` green,
+`npm run test:plasmic:registry` zero warnings,
+`npm run test:plasmic:kitchen-sink` passes for light and dark.
+Commit `c8978f3`, dev server restarted.
