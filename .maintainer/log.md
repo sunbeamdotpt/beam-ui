@@ -465,3 +465,21 @@ prop includes that option. All generated app artifacts refreshed.
 
 Verification: `deno task ci` green, `npm run build` green,
 `npm run test:plasmic:registry` zero warnings.
+
+## 2026-08-14 — BEAM-002 sample-data sweep for all data-driven components
+
+Added design-language sample defaults to `registry.overrides.tsx` for every
+registered component with a required object/array prop, so dragging any
+`Beam / *` component onto the Plasmic Studio canvas renders immediately instead
+of erroring or appearing 0×0. Covered: Accordion, ActivityHeatmap, AssigneePicker,
+AreaChart, BarChart, CodeBlock, CommentThread, CommitGraph, ContextMenu,
+DiffViewer, FileList, KanbanCardView, KanbanCardDetail, LabelPicker, LineChart,
+List, NotificationItem, NotificationCenter, PieChart, ReactionPicker, RightRail,
+Sidebar, StatBar, Table, TagsInput, TransferList, TreeView, and WorkItemList.
+
+Also added `required?: boolean` to `PropOverride` so future overrides can clear
+docgen-required flags when a default makes the prop effectively optional.
+
+Verification: `deno task ci` green, `npm run build` green,
+`npm run test:plasmic:registry` zero warnings,
+`npm run test:plasmic:kitchen-sink` passes for light and dark.
