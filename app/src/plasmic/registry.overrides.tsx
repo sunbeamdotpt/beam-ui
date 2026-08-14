@@ -45,11 +45,98 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       open: { defaultValue: true },
       title: { defaultValue: "Dialog title" },
+      actions: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Save",
+        },
+      },
     },
   },
-  WizardModal: {
+  EmptyState: {
     props: {
-      open: { defaultValue: true },
+      title: { defaultValue: "Nothing here" },
+      description: { defaultValue: "Add your first item to get started." },
+      action: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Create item",
+        },
+      },
+    },
+  },
+  Header: {
+    props: {
+      actions: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Action",
+        },
+      },
+      brand: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Beam",
+        },
+      },
+    },
+  },
+  HoverCard: {
+    props: {
+      trigger: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Hover me",
+        },
+      },
+    },
+  },
+  Popover: {
+    props: {
+      trigger: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Open",
+        },
+      },
+    },
+  },
+  Shell: {
+    props: {
+      headerActions: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Action",
+        },
+      },
+      header: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Header",
+        },
+      },
+      footer: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Footer",
+        },
+      },
+      brand: {
+        defaultValue: {
+          type: "text",
+          tag: "span",
+          value: "Beam",
+        },
+      },
     },
   },
   //
