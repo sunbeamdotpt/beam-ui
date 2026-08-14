@@ -155,6 +155,11 @@ export function registerBeamComponents(): void {
       "type": "object",
       "description": "Section(s) expanded by default; array of `value` strings.",
       "advanced": true
+    },
+    "value": {
+      "type": "object",
+      "description": "Controlled expanded section(s). When provided, the component operates in controlled mode.",
+      "advanced": true
     }
   }
 });
@@ -2733,5 +2738,7 @@ function withOverride(name: string, meta: Record<string, unknown>): any {
     if (v === null) delete props[k];
     else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };
   }
-  return { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };
+  const result: Record<string, unknown> = { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };
+  if (o.states) result.states = o.states;
+  return result;
 }

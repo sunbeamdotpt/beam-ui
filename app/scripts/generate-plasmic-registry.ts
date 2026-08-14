@@ -29,12 +29,14 @@ function applyOverride(name: string, meta: Record<string, unknown>): Record<stri
     if (v === null) delete props[k];
     else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };
   }
-  return {
+  const result: Record<string, unknown> = {
     ...meta,
     displayName: o.displayName ?? meta.displayName,
     description: o.description ?? meta.description,
     props,
   };
+  if (o.states) result.states = o.states;
+  return result;
 }
 const ROOT_IMPORT = "@sunbeam/beam-ui";
 
@@ -308,7 +310,9 @@ lines.push(`  for (const [k, v] of Object.entries(o.props ?? {})) {`);
 lines.push(`    if (v === null) delete props[k];`);
 lines.push(`    else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };`);
 lines.push(`  }`);
-lines.push(`  return { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };`);
+lines.push(`  const result: Record<string, unknown> = { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };`);
+lines.push(`  if (o.states) result.states = o.states;`);
+lines.push(`  return result;`);
 lines.push(`}`);
 lines.push(``);
 

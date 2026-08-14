@@ -37,6 +37,10 @@ export interface AccordionProps {
   multiple?: boolean;
   /** Section(s) expanded by default; array of `value` strings. */
   defaultValue?: string[];
+  /** Controlled expanded section(s). When provided, the component operates in controlled mode. */
+  value?: string[];
+  /** Called when the expanded section(s) change; required for controlled mode. */
+  onValueChange?: (value: string[]) => void;
   /** Additional Panda CSS classes. */
   className?: string;
 }

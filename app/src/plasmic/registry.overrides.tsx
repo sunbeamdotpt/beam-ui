@@ -12,6 +12,12 @@
  * generated runtime module — keep it free of side effects.
  */
 
+/** Description of an event-handler argument for Plasmic Studio interactions. */
+export interface EventHandlerArg {
+  name: string;
+  type: string;
+}
+
 export interface PropOverride {
   type?: string;
   options?: (string | number)[];
@@ -22,12 +28,16 @@ export interface PropOverride {
   advanced?: boolean;
   allowedComponents?: string[];
   required?: boolean;
+  editOnly?: boolean;
+  uncontrolledProp?: string;
+  argTypes?: EventHandlerArg[];
 }
 
 export interface ComponentOverride {
   displayName?: string;
   description?: string;
   props?: Record<string, PropOverride | null>;
+  states?: Record<string, Record<string, unknown>>;
 }
 
 /** Components that must not appear in Studio. */
@@ -692,7 +702,25 @@ export const overrides: Record<string, ComponentOverride> = {
   Accordion: {
     props: {
       items: { defaultValue: SAMPLE_ACCORDION_ITEMS },
-      defaultValue: { defaultValue: ["overview"] },
+      defaultValue: { defaultValue: ["overview"], advanced: true },
+      value: {
+        type: "object",
+        displayName: "Expanded items",
+        description: "Currently expanded accordion item values (controlled).",
+        defaultValue: ["overview"],
+      },
+      onValueChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "value", type: "object" }],
+      },
+    },
+    states: {
+      value: {
+        type: "writable",
+        variableType: "array",
+        valueProp: "value",
+        onChangeProp: "onValueChange",
+      },
     },
   },
   ActivityHeatmap: {

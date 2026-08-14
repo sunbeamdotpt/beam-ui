@@ -18,6 +18,10 @@ export interface AccordionProps {
   multiple?: boolean;
   /** Section(s) expanded by default; array of `value` strings. */
   defaultValue?: string[];
+  /** Controlled expanded section(s). When provided, the component operates in controlled mode. */
+  value?: string[];
+  /** Called when the expanded section(s) change; required for controlled mode. */
+  onValueChange?: (value: string[]) => void;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -37,6 +41,8 @@ import { Accordion } from "@sunbeam/beam-ui/components/ui/accordion"
 | items | `AccordionEntry[]` | Yes | Array of accordion items to render. |
 | multiple | `boolean` | No | If true, multiple sections can be expanded simultaneously; otherwise only one. Defaults to false. |
 | defaultValue | `string[]` | No | Section(s) expanded by default; array of `value` strings. |
+| value | `string[]` | No | Controlled expanded section(s). When provided, the component operates in controlled mode. |
+| onValueChange | `(value: string[]) => void` | No | Called when the expanded section(s) change; required for controlled mode. |
 | className | `string` | No | Additional Panda CSS classes. |
 
 ---

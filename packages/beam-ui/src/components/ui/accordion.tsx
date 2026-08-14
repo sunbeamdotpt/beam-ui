@@ -28,6 +28,10 @@ export interface AccordionProps {
   multiple?: boolean;
   /** Section(s) expanded by default; array of `value` strings. */
   defaultValue?: string[];
+  /** Controlled expanded section(s). When provided, the component operates in controlled mode. */
+  value?: string[];
+  /** Called when the expanded section(s) change; required for controlled mode. */
+  onValueChange?: (value: string[]) => void;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -53,13 +57,17 @@ export function Accordion({
   items,
   multiple = false,
   defaultValue,
+  value,
+  onValueChange,
   className,
 }: AccordionProps): ReactNode {
   return (
     <AccordionRoot
       collapsible
       multiple={multiple}
-      defaultValue={defaultValue}
+      defaultValue={value === undefined ? defaultValue : undefined}
+      value={value}
+      onValueChange={(details) => onValueChange?.(details.value)}
       className={cx(root, className)}
     >
       {items.map((entry) => (
