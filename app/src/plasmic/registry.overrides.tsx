@@ -461,8 +461,19 @@ export const overrides: Record<string, ComponentOverride> = {
       tags: { defaultValue: SAMPLE_TAGS },
       current: { defaultValue: "main" },
       defaultBranch: { defaultValue: "main" },
-      // Render the dropdown inline in Studio so interactive mode works reliably.
-      portalled: { defaultValue: false },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   Breadcrumbs: {
@@ -730,8 +741,19 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       options: { defaultValue: SAMPLE_ASSIGNEES },
       selected: { defaultValue: ["user-1"] },
-      // Render the dropdown inline in Studio so interactive mode works reliably.
-      portalled: { defaultValue: false },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   AreaChart: {
@@ -752,10 +774,6 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       tabs: { defaultValue: SAMPLE_CODE_TABS },
       showLineNumbers: { defaultValue: true },
-      // Toggles only apply when tab variants are used; hide them for the simple sample.
-      streamToggle: null,
-      versionToggle: null,
-      modeToggle: null,
     },
   },
   CommentThread: {

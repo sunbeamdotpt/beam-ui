@@ -26,6 +26,10 @@ export interface BranchSelectorProps {
   onCreateBranch?: (name: string) => void;
   /** If false, the dropdown is rendered inline instead of in a portal. Defaults to true. */
   portalled?: boolean;
+  /** Controlled open state of the dropdown. */
+  open?: boolean;
+  /** Called when the dropdown open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -57,10 +61,18 @@ export function BranchSelector({
   onChange,
   onCreateBranch,
   portalled = true,
+  open,
+  onOpenChange,
   className,
 }: BranchSelectorProps): ReactNode {
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState("branches");
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = open ?? internalOpen;
+  const setIsOpen = (next: boolean) => {
+    if (open === undefined) setInternalOpen(next);
+    onOpenChange?.(next);
+  };
 
   const filteredBranches = branches.filter((b) => b.toLowerCase().includes(query.toLowerCase()));
 
@@ -76,9 +88,13 @@ export function BranchSelector({
   return (
     <PopoverRoot
       positioning={{ placement: "bottom-start" }}
-      onOpenChange={() => {
-        setQuery("");
-        setTab("branches");
+      open={isOpen}
+      onOpenChange={(details) => {
+        setIsOpen(details.open);
+        if (!details.open) {
+          setQuery("");
+          setTab("branches");
+        }
       }}
       portalled={portalled}
     >

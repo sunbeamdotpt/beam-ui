@@ -34,6 +34,10 @@ export interface AssigneePickerProps {
   placeholder?: string;
   /** If false, the dropdown is rendered inline instead of in a portal. Defaults to true. */
   portalled?: boolean;
+  /** Controlled open state of the dropdown. */
+  open?: boolean;
+  /** Called when the dropdown open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -62,9 +66,17 @@ export function AssigneePicker({
   onChange,
   placeholder = "Assignees",
   portalled = true,
+  open,
+  onOpenChange,
   className,
 }: AssigneePickerProps): ReactNode {
   const [query, setQuery] = useState("");
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = open ?? internalOpen;
+  const setIsOpen = (next: boolean) => {
+    if (open === undefined) setInternalOpen(next);
+    onOpenChange?.(next);
+  };
 
   const filtered = options.filter(
     (opt) =>
@@ -85,7 +97,11 @@ export function AssigneePicker({
   return (
     <PopoverRoot
       positioning={{ placement: "bottom-start" }}
-      onOpenChange={() => setQuery("")}
+      open={isOpen}
+      onOpenChange={(details) => {
+        setIsOpen(details.open);
+        if (!details.open) setQuery("");
+      }}
       portalled={portalled}
     >
       <PopoverTrigger asChild>
