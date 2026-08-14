@@ -78,59 +78,59 @@
         "defaultValue": [
           {
             "date": "2026-06-16",
-            "count": 1
+            "count": 5
           },
           {
             "date": "2026-06-17",
-            "count": 3
+            "count": 1
           },
           {
             "date": "2026-06-18",
-            "count": 0
+            "count": 5
           },
           {
             "date": "2026-06-19",
-            "count": 0
+            "count": 5
           },
           {
             "date": "2026-06-20",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-06-21",
-            "count": 4
+            "count": 1
           },
           {
             "date": "2026-06-22",
-            "count": 8
+            "count": 1
           },
           {
             "date": "2026-06-23",
-            "count": 0
+            "count": 8
           },
           {
             "date": "2026-06-24",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-06-25",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-06-26",
-            "count": 0
+            "count": 3
           },
           {
             "date": "2026-06-27",
-            "count": 0
+            "count": 1
           },
           {
             "date": "2026-06-28",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-06-29",
-            "count": 0
+            "count": 3
           },
           {
             "date": "2026-06-30",
@@ -138,23 +138,23 @@
           },
           {
             "date": "2026-07-01",
-            "count": 1
+            "count": 4
           },
           {
             "date": "2026-07-02",
-            "count": 2
-          },
-          {
-            "date": "2026-07-03",
-            "count": 0
-          },
-          {
-            "date": "2026-07-04",
             "count": 8
           },
           {
+            "date": "2026-07-03",
+            "count": 1
+          },
+          {
+            "date": "2026-07-04",
+            "count": 0
+          },
+          {
             "date": "2026-07-05",
-            "count": 4
+            "count": 3
           },
           {
             "date": "2026-07-06",
@@ -162,23 +162,23 @@
           },
           {
             "date": "2026-07-07",
-            "count": 4
+            "count": 2
           },
           {
             "date": "2026-07-08",
-            "count": 5
+            "count": 1
           },
           {
             "date": "2026-07-09",
-            "count": 0
+            "count": 1
           },
           {
             "date": "2026-07-10",
-            "count": 5
+            "count": 0
           },
           {
             "date": "2026-07-11",
-            "count": 5
+            "count": 0
           },
           {
             "date": "2026-07-12",
@@ -186,7 +186,7 @@
           },
           {
             "date": "2026-07-13",
-            "count": 4
+            "count": 0
           },
           {
             "date": "2026-07-14",
@@ -194,35 +194,35 @@
           },
           {
             "date": "2026-07-15",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-16",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-07-17",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-18",
-            "count": 1
+            "count": 5
           },
           {
             "date": "2026-07-19",
-            "count": 1
+            "count": 4
           },
           {
             "date": "2026-07-20",
-            "count": 2
+            "count": 5
           },
           {
             "date": "2026-07-21",
-            "count": 3
+            "count": 4
           },
           {
             "date": "2026-07-22",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-07-23",
@@ -230,27 +230,27 @@
           },
           {
             "date": "2026-07-24",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-07-25",
-            "count": 3
+            "count": 1
           },
           {
             "date": "2026-07-26",
-            "count": 5
+            "count": 1
           },
           {
             "date": "2026-07-27",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-07-28",
-            "count": 4
+            "count": 1
           },
           {
             "date": "2026-07-29",
-            "count": 1
+            "count": 5
           },
           {
             "date": "2026-07-30",
@@ -258,27 +258,27 @@
           },
           {
             "date": "2026-07-31",
-            "count": 4
+            "count": 0
           },
           {
             "date": "2026-08-01",
-            "count": 3
+            "count": 8
           },
           {
             "date": "2026-08-02",
-            "count": 2
+            "count": 8
           },
           {
             "date": "2026-08-03",
-            "count": 2
+            "count": 5
           },
           {
             "date": "2026-08-04",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-08-05",
-            "count": 0
+            "count": 8
           },
           {
             "date": "2026-08-06",
@@ -286,7 +286,7 @@
           },
           {
             "date": "2026-08-07",
-            "count": 5
+            "count": 1
           },
           {
             "date": "2026-08-08",
@@ -294,11 +294,11 @@
           },
           {
             "date": "2026-08-09",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-08-10",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-08-11",
@@ -306,15 +306,15 @@
           },
           {
             "date": "2026-08-12",
-            "count": 4
+            "count": 0
           },
           {
             "date": "2026-08-13",
-            "count": 8
+            "count": 0
           },
           {
             "date": "2026-08-14",
-            "count": 4
+            "count": 3
           }
         ]
       }
@@ -826,33 +826,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 4103,
-            "costs": 2512
+            "revenue": 3539,
+            "costs": 3528
           },
           {
             "label": "Feb",
-            "revenue": 6614,
-            "costs": 1597
+            "revenue": 2445,
+            "costs": 1731
           },
           {
             "label": "Mar",
-            "revenue": 5299,
-            "costs": 3574
+            "revenue": 6705,
+            "costs": 1097
           },
           {
             "label": "Apr",
-            "revenue": 6104,
-            "costs": 1196
+            "revenue": 6975,
+            "costs": 1943
           },
           {
             "label": "May",
-            "revenue": 2143,
-            "costs": 2210
+            "revenue": 5920,
+            "costs": 2584
           },
           {
             "label": "Jun",
-            "revenue": 2347,
-            "costs": 3092
+            "revenue": 5413,
+            "costs": 1819
           }
         ]
       },
@@ -898,33 +898,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 4103,
-            "costs": 2512
+            "revenue": 3539,
+            "costs": 3528
           },
           {
             "label": "Feb",
-            "revenue": 6614,
-            "costs": 1597
+            "revenue": 2445,
+            "costs": 1731
           },
           {
             "label": "Mar",
-            "revenue": 5299,
-            "costs": 3574
+            "revenue": 6705,
+            "costs": 1097
           },
           {
             "label": "Apr",
-            "revenue": 6104,
-            "costs": 1196
+            "revenue": 6975,
+            "costs": 1943
           },
           {
             "label": "May",
-            "revenue": 2143,
-            "costs": 2210
+            "revenue": 5920,
+            "costs": 2584
           },
           {
             "label": "Jun",
-            "revenue": 2347,
-            "costs": 3092
+            "revenue": 5413,
+            "costs": 1819
           }
         ]
       },
@@ -1013,33 +1013,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 4103,
-            "costs": 2512
+            "revenue": 3539,
+            "costs": 3528
           },
           {
             "label": "Feb",
-            "revenue": 6614,
-            "costs": 1597
+            "revenue": 2445,
+            "costs": 1731
           },
           {
             "label": "Mar",
-            "revenue": 5299,
-            "costs": 3574
+            "revenue": 6705,
+            "costs": 1097
           },
           {
             "label": "Apr",
-            "revenue": 6104,
-            "costs": 1196
+            "revenue": 6975,
+            "costs": 1943
           },
           {
             "label": "May",
-            "revenue": 2143,
-            "costs": 2210
+            "revenue": 5920,
+            "costs": 2584
           },
           {
             "label": "Jun",
-            "revenue": 2347,
-            "costs": 3092
+            "revenue": 5413,
+            "costs": 1819
           }
         ]
       },
@@ -1230,6 +1230,28 @@
       "label": {
         "type": "string",
         "description": "Optional label shown above the color picker."
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the color picker popover is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -1266,10 +1288,32 @@
         "description": "Placeholder text shown in the input when no option is selected. Defaults to `\"Search...\"`.",
         "defaultValue": "Search..."
       },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the dropdown is open. Defaults to `false`.",
+        "defaultValue": false
+      },
       "disabled": {
         "type": "boolean",
         "description": "If true, the combobox is disabled and cannot be interacted with. Defaults to false.",
         "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -1398,6 +1442,28 @@
           "tag": "span",
           "value": "Right-click me"
         }
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the context menu is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -1409,7 +1475,8 @@
     "props": {
       "value": {
         "type": "string",
-        "description": "Current date value as ISO 8601 string (e.g., `\"2024-12-25\"`)."
+        "description": "Current date value as ISO 8601 string (e.g., `\"2024-12-25\"`).",
+        "defaultValue": "2026-08-14"
       },
       "label": {
         "type": "string",
@@ -1420,10 +1487,32 @@
         "description": "Placeholder text shown in the input when no date is selected. Defaults to `\"Select date\"`.",
         "defaultValue": "Select date"
       },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the calendar popover is open. Defaults to `false`.",
+        "defaultValue": false
+      },
       "disabled": {
         "type": "boolean",
         "description": "If true, the date picker is disabled and cannot be interacted with. Defaults to false.",
         "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -1551,7 +1640,22 @@
       "items": {
         "type": "object",
         "description": "Flat list of items (mutually exclusive with `groups`).",
-        "advanced": true
+        "advanced": true,
+        "defaultValue": [
+          {
+            "label": "Edit",
+            "icon": "edit"
+          },
+          {
+            "label": "Duplicate",
+            "icon": "content_copy"
+          },
+          {
+            "label": "Delete",
+            "icon": "delete",
+            "danger": true
+          }
+        ]
       },
       "groups": {
         "type": "object",
@@ -1568,10 +1672,32 @@
           "value": "DropdownMenu"
         }
       },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the dropdown menu is open. Defaults to `false`.",
+        "defaultValue": false
+      },
       "positioning": {
         "type": "object",
         "description": "Positioning options for Ark UI's MenuRoot (e.g., `{ placement: \"bottom-start\" }`).",
         "advanced": true
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -1760,6 +1886,28 @@
           "tag": "span",
           "value": "HoverCard"
         }
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the hover card is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -1998,6 +2146,28 @@
         "type": "string",
         "description": "Placeholder text when no labels are selected. Defaults to `\"Labels\"`.",
         "defaultValue": "Labels"
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the label dropdown is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -2159,6 +2329,28 @@
         "type": "string",
         "description": "Placeholder text when no milestone is selected. Defaults to `\"Milestone\"`.",
         "defaultValue": "Milestone"
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the milestone dropdown is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -2266,6 +2458,11 @@
           }
         ]
       },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the notification panel is open. Defaults to `false`.",
+        "defaultValue": false
+      },
       "title": {
         "type": "string",
         "description": "Header title. Defaults to `\"Notifications\"`.",
@@ -2280,6 +2477,23 @@
         "type": "boolean",
         "description": "If true, groups are collapsible with unread count badges. Defaults to `false`.",
         "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -2397,6 +2611,28 @@
       "title": {
         "type": "string",
         "description": "Optional header title."
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the popover is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -2501,6 +2737,28 @@
             "reacted": false
           }
         ]
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the add-reaction popover is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -2577,10 +2835,32 @@
         "description": "Placeholder text. Defaults to `\"Select…\"`.",
         "defaultValue": "Select…"
       },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the options dropdown is open. Defaults to `false`.",
+        "defaultValue": false
+      },
       "disabled": {
         "type": "boolean",
         "description": "Disable the select. Defaults to `false`.",
         "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },
@@ -3158,6 +3438,28 @@
           "right"
         ],
         "defaultValue": "top"
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Whether the tooltip is open. Defaults to `false`.",
+        "defaultValue": false
+      },
+      "onOpenChange": {
+        "type": "eventHandler",
+        "argTypes": [
+          {
+            "name": "open",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "states": {
+      "open": {
+        "type": "writable",
+        "variableType": "boolean",
+        "valueProp": "open",
+        "onChangeProp": "onOpenChange"
       }
     }
   },

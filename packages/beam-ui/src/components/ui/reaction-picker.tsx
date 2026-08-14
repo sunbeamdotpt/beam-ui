@@ -27,6 +27,10 @@ export interface ReactionPickerProps {
   onToggle: (emoji: string) => void;
   /** Fired when a new emoji is selected from the picker. */
   onAdd: (emoji: string) => void;
+  /** Whether the add-reaction popover is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Additional CSS class. */
   className?: string;
 }
@@ -59,6 +63,8 @@ export function ReactionPicker({
   reactions,
   onToggle,
   onAdd,
+  open,
+  onOpenChange,
   className,
 }: ReactionPickerProps): ReactNode {
   return (
@@ -78,7 +84,11 @@ export function ReactionPicker({
         </button>
       ))}
 
-      <PopoverRoot positioning={{ placement: "bottom-start" }}>
+      <PopoverRoot
+        positioning={{ placement: "bottom-start" }}
+        open={open}
+        onOpenChange={(d) => onOpenChange?.(d.open)}
+      >
         <PopoverTrigger className={addButton}>
           +
         </PopoverTrigger>

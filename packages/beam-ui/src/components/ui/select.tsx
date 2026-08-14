@@ -32,6 +32,10 @@ export interface SelectProps {
   onChange: (value: string) => void;
   /** Placeholder text. Defaults to `"Select…"`. */
   placeholder?: string;
+  /** Whether the options dropdown is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Disable the select. Defaults to `false`. */
   disabled?: boolean;
   /** Additional CSS class. */
@@ -60,6 +64,8 @@ export function Select({
   value,
   onChange,
   placeholder = "Select…",
+  open,
+  onOpenChange,
   disabled = false,
   className,
 }: SelectProps): ReactNode {
@@ -77,6 +83,8 @@ export function Select({
         const next = details.value[0];
         if (next !== undefined) onChange(next);
       }}
+      open={open}
+      onOpenChange={(d) => onOpenChange?.(d.open)}
       disabled={disabled}
       positioning={{ sameWidth: true }}
     >

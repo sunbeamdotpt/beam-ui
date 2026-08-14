@@ -43,6 +43,10 @@ export interface DropdownMenuProps {
   groups?: DropdownMenuGroup[];
   /** Element or component that triggers the dropdown on click. */
   children: ReactNode;
+  /** Whether the dropdown menu is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Positioning options for Ark UI's MenuRoot (e.g., `{ placement: "bottom-start" }`). */
   positioning?: ComponentProps<typeof MenuRoot>["positioning"];
 }
@@ -147,10 +151,16 @@ export function DropdownMenu({
   items,
   groups,
   children,
+  open,
+  onOpenChange,
   positioning,
 }: DropdownMenuProps): ReactNode {
   return (
-    <MenuRoot positioning={positioning}>
+    <MenuRoot
+      positioning={positioning}
+      open={open}
+      onOpenChange={(d) => onOpenChange?.(d.open)}
+    >
       <MenuTrigger asChild>{children}</MenuTrigger>
       <MenuPositioner>
         <MenuContent className={contentStyle}>

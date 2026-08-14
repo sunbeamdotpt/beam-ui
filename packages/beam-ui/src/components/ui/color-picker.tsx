@@ -20,6 +20,10 @@ export interface ColorPickerProps {
   presets?: string[];
   /** Optional label shown above the color picker. */
   label?: string;
+  /** Whether the color picker popover is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Extra CSS class names to apply to the root container. */
   className?: string;
 }
@@ -63,6 +67,8 @@ export function ColorPicker({
   onChange,
   presets = DEFAULT_PRESETS,
   label,
+  open,
+  onOpenChange,
   className,
 }: ColorPickerProps): ReactNode {
   const hexInputId = useId();
@@ -83,7 +89,11 @@ export function ColorPicker({
   return (
     <div className={cx(wrapper, className)}>
       {label && <label className={labelStyle}>{label}</label>}
-      <PopoverRoot positioning={{ placement: "bottom-start" }}>
+      <PopoverRoot
+        positioning={{ placement: "bottom-start" }}
+        open={open}
+        onOpenChange={(d) => onOpenChange?.(d.open)}
+      >
         <PopoverTrigger className={triggerStyle}>
           <span
             className={triggerSwatch}

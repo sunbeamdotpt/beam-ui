@@ -513,12 +513,38 @@ export const overrides: Record<string, ComponentOverride> = {
   ColorPicker: {
     props: {
       value: { defaultValue: "#FF5733" },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   Combobox: {
     props: {
       options: { defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   DiagramRenderer: {
@@ -559,6 +585,19 @@ export const overrides: Record<string, ComponentOverride> = {
           tag: "span",
           value: "Hover me",
         },
+      },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
       },
     },
   },
@@ -610,6 +649,19 @@ export const overrides: Record<string, ComponentOverride> = {
         ],
       },
       selected: { defaultValue: "v1-0" },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   ModelRow: {
@@ -648,6 +700,19 @@ export const overrides: Record<string, ComponentOverride> = {
           value: "Open",
         },
       },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   ProgressBar: {
@@ -666,6 +731,19 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       options: { defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   Slider: {
@@ -724,6 +802,19 @@ export const overrides: Record<string, ComponentOverride> = {
   Tooltip: {
     props: {
       content: { defaultValue: "Tooltip text" },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
 
@@ -819,6 +910,37 @@ export const overrides: Record<string, ComponentOverride> = {
           value: "Right-click me",
         },
       },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
+    },
+  },
+  DatePicker: {
+    props: {
+      value: { defaultValue: "2026-08-14" },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   DiffViewer: {
@@ -826,6 +948,24 @@ export const overrides: Record<string, ComponentOverride> = {
       hunks: { defaultValue: SAMPLE_DIFF_HUNKS },
       oldFileName: { defaultValue: "theme.ts" },
       newFileName: { defaultValue: "theme.ts" },
+    },
+  },
+  DropdownMenu: {
+    props: {
+      items: { defaultValue: SAMPLE_CONTEXT_MENU_ITEMS },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   FileList: {
@@ -861,6 +1001,19 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       options: { defaultValue: SAMPLE_LABELS },
       selected: { defaultValue: ["label-1"] },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   LineChart: {
@@ -883,6 +1036,19 @@ export const overrides: Record<string, ComponentOverride> = {
   NotificationCenter: {
     props: {
       notifications: { defaultValue: SAMPLE_NOTIFICATIONS },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   PieChart: {
@@ -894,6 +1060,19 @@ export const overrides: Record<string, ComponentOverride> = {
   ReactionPicker: {
     props: {
       reactions: { defaultValue: SAMPLE_REACTIONS },
+      open: { defaultValue: false },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   RightRail: {

@@ -44,6 +44,10 @@ export interface NotificationCenterProps {
   onMarkAllRead: () => void;
   /** Optional callback when user clicks a notification. */
   onClickNotification?: (notification: Notification) => void;
+  /** Whether the notification panel is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Header title. Defaults to `"Notifications"`. */
   title?: string;
   /** Trigger icon name. Defaults to `"notifications"`. */
@@ -205,6 +209,8 @@ export function NotificationCenter({
   onMarkRead,
   onMarkAllRead,
   onClickNotification,
+  open,
+  onOpenChange,
   title: headerText = "Notifications",
   triggerIcon = "notifications",
   collapsibleGroups = false,
@@ -224,7 +230,11 @@ export function NotificationCenter({
   );
 
   return (
-    <PopoverRoot positioning={{ placement: "bottom-end" }}>
+    <PopoverRoot
+      positioning={{ placement: "bottom-end" }}
+      open={open}
+      onOpenChange={(d) => onOpenChange?.(d.open)}
+    >
       <PopoverTrigger asChild>
         <button
           className={cx(triggerBtn, className)}

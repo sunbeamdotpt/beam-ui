@@ -18,6 +18,10 @@ export interface TooltipProps {
   children: ReactNode;
   /** Tooltip placement relative to the trigger. Defaults to `"top"`. */
   position?: "top" | "bottom" | "left" | "right";
+  /** Whether the tooltip is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
 }
 
 const contentStyle = css({
@@ -49,10 +53,15 @@ const arrowStyle = css({
  * ```
  */
 export function Tooltip(
-  { content, children, position = "top" }: TooltipProps,
+  { content, children, position = "top", open, onOpenChange }: TooltipProps,
 ): ReactNode {
   return (
-    <TooltipRoot openDelay={200} positioning={{ placement: position }}>
+    <TooltipRoot
+      openDelay={200}
+      positioning={{ placement: position }}
+      open={open}
+      onOpenChange={(d) => onOpenChange?.(d.open)}
+    >
       <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipPositioner>
         <TooltipContent className={contentStyle}>

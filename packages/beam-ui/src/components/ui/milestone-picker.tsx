@@ -35,6 +35,10 @@ export interface MilestonePickerProps {
   onChange: (selected: string | null) => void;
   /** Placeholder text when no milestone is selected. Defaults to `"Milestone"`. */
   placeholder?: string;
+  /** Whether the milestone dropdown is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Optional CSS class for the trigger button. */
   className?: string;
 }
@@ -59,6 +63,8 @@ export function MilestonePicker({
   selected,
   onChange,
   placeholder = "Milestone",
+  open,
+  onOpenChange,
   className,
 }: MilestonePickerProps): ReactNode {
   const [query, setQuery] = useState("");
@@ -78,7 +84,11 @@ export function MilestonePicker({
   return (
     <PopoverRoot
       positioning={{ placement: "bottom-start" }}
-      onOpenChange={() => setQuery("")}
+      open={open}
+      onOpenChange={(d) => {
+        onOpenChange?.(d.open);
+        if (!d.open) setQuery("");
+      }}
     >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">

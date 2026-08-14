@@ -32,6 +32,10 @@ export interface ComboboxProps {
   onChange: (value: string) => void;
   /** Placeholder text shown in the input when no option is selected. Defaults to `"Search..."`. */
   placeholder?: string;
+  /** Whether the dropdown is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** If true, the combobox is disabled and cannot be interacted with. Defaults to false. */
   disabled?: boolean;
   /** Extra CSS class names to apply to the root component. */
@@ -58,11 +62,18 @@ export function Combobox({
   value,
   onChange,
   placeholder = "Search...",
+  open: openProp,
+  onOpenChange,
   disabled = false,
   className,
 }: ComboboxProps): ReactNode {
   const [inputValue, setInputValue] = useState("");
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = openProp ?? internalOpen;
+  const handleOpenChange = (next: boolean) => {
+    onOpenChange?.(next);
+    if (openProp === undefined) setInternalOpen(next);
+  };
 
   const filtered = useMemo(() => {
     if (!inputValue) return options;
@@ -88,11 +99,11 @@ export function Combobox({
         const next = details.value[0];
         if (next !== undefined) {
           onChange(next);
-          setOpen(false);
+          handleOpenChange(false);
         }
       }}
-      open={open}
-      onOpenChange={(details) => setOpen(details.open)}
+      open={isOpen}
+      onOpenChange={(details) => handleOpenChange(details.open)}
       inputBehavior="autohighlight"
       onInputValueChange={(details) => setInputValue(details.inputValue)}
       disabled={disabled}

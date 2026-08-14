@@ -31,6 +31,10 @@ export interface LabelPickerProps {
   onChange: (selected: string[]) => void;
   /** Placeholder text when no labels are selected. Defaults to `"Labels"`. */
   placeholder?: string;
+  /** Whether the label dropdown is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Optional CSS class for the trigger button. */
   className?: string;
 }
@@ -53,6 +57,8 @@ export function LabelPicker({
   selected,
   onChange,
   placeholder = "Labels",
+  open,
+  onOpenChange,
   className,
 }: LabelPickerProps): ReactNode {
   const [query, setQuery] = useState("");
@@ -76,7 +82,11 @@ export function LabelPicker({
   return (
     <PopoverRoot
       positioning={{ placement: "bottom-start" }}
-      onOpenChange={() => setQuery("")}
+      open={open}
+      onOpenChange={(d) => {
+        onOpenChange?.(d.open);
+        if (!d.open) setQuery("");
+      }}
     >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">

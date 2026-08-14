@@ -19,6 +19,10 @@ export interface PopoverProps {
   children: ReactNode;
   /** Optional header title. */
   title?: string;
+  /** Whether the popover is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Additional CSS class. */
   className?: string;
 }
@@ -38,10 +42,16 @@ export function Popover({
   trigger,
   children,
   title,
+  open,
+  onOpenChange,
   className,
 }: PopoverProps): ReactNode {
   return (
-    <PopoverRoot positioning={{ placement: "bottom" }}>
+    <PopoverRoot
+      positioning={{ placement: "bottom" }}
+      open={open}
+      onOpenChange={(d) => onOpenChange?.(d.open)}
+    >
       <PopoverTrigger asChild>
         <span className={triggerStyle}>{trigger}</span>
       </PopoverTrigger>

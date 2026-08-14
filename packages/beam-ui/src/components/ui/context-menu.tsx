@@ -31,6 +31,10 @@ export interface ContextMenuProps {
   items: ContextMenuItem[];
   /** Element or component that triggers the context menu on right-click. */
   children: ReactNode;
+  /** Whether the context menu is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
 }
 
 /**
@@ -97,10 +101,15 @@ const rootWrapper = css({
 });
 
 // ContextMenu function is documented above, before the const contentStyle declaration
-export function ContextMenu({ items, children }: ContextMenuProps): ReactNode {
+export function ContextMenu({
+  items,
+  children,
+  open,
+  onOpenChange,
+}: ContextMenuProps): ReactNode {
   return (
     <div className={rootWrapper}>
-      <MenuRoot>
+      <MenuRoot open={open} onOpenChange={(d) => onOpenChange?.(d.open)}>
         <MenuContextTrigger asChild>{children}</MenuContextTrigger>
         <MenuPositioner>
           <MenuContent className={contentStyle}>

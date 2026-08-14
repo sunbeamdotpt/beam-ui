@@ -14,6 +14,10 @@ export interface HoverCardProps {
   trigger: ReactNode;
   /** Content displayed in the popover when hovering. */
   children: ReactNode;
+  /** Whether the hover card is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** Optional CSS class for the popover content container. */
   className?: string;
 }
@@ -29,10 +33,15 @@ export interface HoverCardProps {
  * ```
  */
 export function HoverCard(
-  { trigger, children, className }: HoverCardProps,
+  { trigger, children, open, onOpenChange, className }: HoverCardProps,
 ): ReactNode {
   return (
-    <HoverCardRoot openDelay={300} closeDelay={100}>
+    <HoverCardRoot
+      openDelay={300}
+      closeDelay={100}
+      open={open}
+      onOpenChange={(d) => onOpenChange?.(d.open)}
+    >
       <HoverCardTrigger asChild>
         <span className={triggerStyle}>{trigger}</span>
       </HoverCardTrigger>

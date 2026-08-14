@@ -872,6 +872,10 @@ export function registerBeamComponents(): void {
     "label": {
       "type": "string",
       "description": "Optional label shown above the color picker."
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the color picker popover is open. Defaults to `false`."
     }
   }
 });
@@ -898,6 +902,10 @@ export function registerBeamComponents(): void {
       "type": "string",
       "description": "Placeholder text shown in the input when no option is selected. Defaults to `\"Search...\"`.",
       "defaultValue": "Search..."
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the dropdown is open. Defaults to `false`."
     },
     "disabled": {
       "type": "boolean",
@@ -961,6 +969,10 @@ export function registerBeamComponents(): void {
         "tag": "span",
         "value": "ContextMenu"
       }
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the context menu is open. Defaults to `false`."
     }
   }
 });
@@ -984,6 +996,10 @@ export function registerBeamComponents(): void {
       "type": "string",
       "description": "Placeholder text shown in the input when no date is selected. Defaults to `\"Select date\"`.",
       "defaultValue": "Select date"
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the calendar popover is open. Defaults to `false`."
     },
     "disabled": {
       "type": "boolean",
@@ -1101,6 +1117,10 @@ export function registerBeamComponents(): void {
         "tag": "span",
         "value": "DropdownMenu"
       }
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the dropdown menu is open. Defaults to `false`."
     },
     "positioning": {
       "type": "object",
@@ -1267,6 +1287,10 @@ export function registerBeamComponents(): void {
         "tag": "span",
         "value": "HoverCard"
       }
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the hover card is open. Defaults to `false`."
     }
   }
 });
@@ -1387,6 +1411,10 @@ export function registerBeamComponents(): void {
       "type": "string",
       "description": "Placeholder text when no labels are selected. Defaults to `\"Labels\"`.",
       "defaultValue": "Labels"
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the label dropdown is open. Defaults to `false`."
     }
   }
 });
@@ -1503,6 +1531,10 @@ export function registerBeamComponents(): void {
       "type": "string",
       "description": "Placeholder text when no milestone is selected. Defaults to `\"Milestone\"`.",
       "defaultValue": "Milestone"
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the milestone dropdown is open. Defaults to `false`."
     }
   }
 });
@@ -1581,6 +1613,10 @@ export function registerBeamComponents(): void {
       "required": true,
       "description": "Array of notifications to display.",
       "advanced": true
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the notification panel is open. Defaults to `false`."
     },
     "title": {
       "type": "string",
@@ -1710,6 +1746,10 @@ export function registerBeamComponents(): void {
     "title": {
       "type": "string",
       "description": "Optional header title."
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the popover is open. Defaults to `false`."
     }
   }
 });
@@ -1790,6 +1830,10 @@ export function registerBeamComponents(): void {
       "required": true,
       "description": "Array of existing reactions to display.",
       "advanced": true
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the add-reaction popover is open. Defaults to `false`."
     }
   }
 });
@@ -1845,6 +1889,10 @@ export function registerBeamComponents(): void {
       "type": "string",
       "description": "Placeholder text. Defaults to `\"Select…\"`.",
       "defaultValue": "Select…"
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the options dropdown is open. Defaults to `false`."
     },
     "disabled": {
       "type": "boolean",
@@ -2361,6 +2409,10 @@ export function registerBeamComponents(): void {
         "right"
       ],
       "defaultValue": "top"
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Whether the tooltip is open. Defaults to `false`."
     }
   }
 });

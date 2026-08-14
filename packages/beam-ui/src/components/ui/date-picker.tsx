@@ -35,6 +35,10 @@ export interface DatePickerProps {
   label?: string;
   /** Placeholder text shown in the input when no date is selected. Defaults to `"Select date"`. */
   placeholder?: string;
+  /** Whether the calendar popover is open. Defaults to `false`. */
+  open?: boolean;
+  /** Called when the open state changes. */
+  onOpenChange?: (open: boolean) => void;
   /** If true, the date picker is disabled and cannot be interacted with. Defaults to false. */
   disabled?: boolean;
   /** Extra CSS class names to apply to the root container. */
@@ -57,6 +61,8 @@ export function DatePicker({
   onChange,
   label,
   placeholder = "Select date",
+  open,
+  onOpenChange,
   disabled = false,
   className,
 }: DatePickerProps): ReactNode {
@@ -75,6 +81,8 @@ export function DatePicker({
             onChange?.(iso);
           }
         }}
+        open={open}
+        onOpenChange={(d) => onOpenChange?.(d.open)}
         disabled={disabled}
         closeOnSelect
       >
