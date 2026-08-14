@@ -36,8 +36,6 @@ import {
   FeatureTile,
   FileList,
   FileUpload,
-  Footer,
-  Header,
   HoverCard,
   Icon,
   Kbd,
@@ -57,7 +55,6 @@ import {
   RightRail,
   SearchInput,
   Select,
-  Sidebar,
   Skeleton,
   Slider,
   Spinner,
@@ -1227,73 +1224,6 @@ export function registerBeamComponents(): void {
 });
   beamComponentRegistry.push(metaBeamFileUpload);
   registerComponent(withSanitizedProps(FileUpload), metaBeamFileUpload);
-  const metaBeamFooter = withOverride("Footer", {
-  "name": "BeamFooter",
-  "displayName": "Beam / Footer",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "Footer",
-  "props": {}
-});
-  beamComponentRegistry.push(metaBeamFooter);
-  registerComponent(withSanitizedProps(Footer), metaBeamFooter);
-  const metaBeamHeader = withOverride("Header", {
-  "name": "BeamHeader",
-  "displayName": "Beam / Header",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "Header",
-  "props": {
-    "showThemeToggle": {
-      "type": "boolean",
-      "description": "Show a theme toggle button (right-aligned). Defaults to true.",
-      "defaultValue": true
-    },
-    "actions": {
-      "type": "slot",
-      "description": "Extra elements rendered in the right group before the theme toggle."
-    },
-    "brand": {
-      "type": "slot",
-      "description": "Replace the default brand link with a custom element."
-    },
-    "navLinks": {
-      "type": "object",
-      "description": "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set.",
-      "advanced": true
-    },
-    "breadcrumbs": {
-      "type": "object",
-      "description": "Breadcrumb items shown in place of nav links. When set, nav links are hidden.",
-      "advanced": true
-    },
-    "drawerSections": {
-      "type": "object",
-      "description": "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar.",
-      "advanced": true
-    },
-    "searchItems": {
-      "type": "object",
-      "description": "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections.",
-      "advanced": true
-    },
-    "searchPlaceholder": {
-      "type": "string",
-      "description": "Placeholder text for the search input. Defaults to \"Search docs...\".",
-      "defaultValue": "Search docs..."
-    },
-    "showSearch": {
-      "type": "boolean",
-      "description": "Show the search input and Cmd+K shortcut. Defaults to true.",
-      "defaultValue": true
-    },
-    "fullWidth": {
-      "type": "boolean",
-      "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false.",
-      "defaultValue": false
-    }
-  }
-});
-  beamComponentRegistry.push(metaBeamHeader);
-  registerComponent(withSanitizedProps(Header), metaBeamHeader);
   const metaBeamHoverCard = withOverride("HoverCard", {
   "name": "BeamHoverCard",
   "displayName": "Beam / HoverCard",
@@ -1902,22 +1832,6 @@ export function registerBeamComponents(): void {
 });
   beamComponentRegistry.push(metaBeamSelect);
   registerComponent(withSanitizedProps(Select), metaBeamSelect);
-  const metaBeamSidebar = withOverride("Sidebar", {
-  "name": "BeamSidebar",
-  "displayName": "Beam / Sidebar",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "Sidebar",
-  "props": {
-    "sections": {
-      "type": "object",
-      "required": true,
-      "description": "Navigation sections to render. Each section has a title and list of items.",
-      "advanced": true
-    }
-  }
-});
-  beamComponentRegistry.push(metaBeamSidebar);
-  registerComponent(withSanitizedProps(Sidebar), metaBeamSidebar);
   const metaBeamSkeleton = withOverride("Skeleton", {
   "name": "BeamSkeleton",
   "displayName": "Beam / Skeleton",

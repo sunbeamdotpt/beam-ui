@@ -78,19 +78,19 @@
         "defaultValue": [
           {
             "date": "2026-06-16",
-            "count": 1
+            "count": 4
           },
           {
             "date": "2026-06-17",
-            "count": 3
+            "count": 1
           },
           {
             "date": "2026-06-18",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-06-19",
-            "count": 0
+            "count": 1
           },
           {
             "date": "2026-06-20",
@@ -98,11 +98,11 @@
           },
           {
             "date": "2026-06-21",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-06-22",
-            "count": 1
+            "count": 4
           },
           {
             "date": "2026-06-23",
@@ -110,7 +110,7 @@
           },
           {
             "date": "2026-06-24",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-06-25",
@@ -118,39 +118,39 @@
           },
           {
             "date": "2026-06-26",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-06-27",
-            "count": 2
-          },
-          {
-            "date": "2026-06-28",
-            "count": 8
-          },
-          {
-            "date": "2026-06-29",
-            "count": 1
-          },
-          {
-            "date": "2026-06-30",
-            "count": 1
-          },
-          {
-            "date": "2026-07-01",
-            "count": 1
-          },
-          {
-            "date": "2026-07-02",
             "count": 0
           },
           {
-            "date": "2026-07-03",
+            "date": "2026-06-28",
+            "count": 0
+          },
+          {
+            "date": "2026-06-29",
+            "count": 3
+          },
+          {
+            "date": "2026-06-30",
+            "count": 4
+          },
+          {
+            "date": "2026-07-01",
             "count": 2
           },
           {
-            "date": "2026-07-04",
+            "date": "2026-07-02",
             "count": 2
+          },
+          {
+            "date": "2026-07-03",
+            "count": 0
+          },
+          {
+            "date": "2026-07-04",
+            "count": 1
           },
           {
             "date": "2026-07-05",
@@ -158,31 +158,31 @@
           },
           {
             "date": "2026-07-06",
-            "count": 0
-          },
-          {
-            "date": "2026-07-07",
-            "count": 0
-          },
-          {
-            "date": "2026-07-08",
             "count": 2
           },
           {
+            "date": "2026-07-07",
+            "count": 2
+          },
+          {
+            "date": "2026-07-08",
+            "count": 4
+          },
+          {
             "date": "2026-07-09",
-            "count": 3
+            "count": 2
           },
           {
             "date": "2026-07-10",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-07-11",
-            "count": 3
+            "count": 0
           },
           {
             "date": "2026-07-12",
-            "count": 0
+            "count": 5
           },
           {
             "date": "2026-07-13",
@@ -190,11 +190,11 @@
           },
           {
             "date": "2026-07-14",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-07-15",
-            "count": 8
+            "count": 0
           },
           {
             "date": "2026-07-16",
@@ -202,27 +202,27 @@
           },
           {
             "date": "2026-07-17",
-            "count": 5
-          },
-          {
-            "date": "2026-07-18",
-            "count": 1
-          },
-          {
-            "date": "2026-07-19",
-            "count": 0
-          },
-          {
-            "date": "2026-07-20",
-            "count": 2
-          },
-          {
-            "date": "2026-07-21",
             "count": 3
           },
           {
+            "date": "2026-07-18",
+            "count": 4
+          },
+          {
+            "date": "2026-07-19",
+            "count": 5
+          },
+          {
+            "date": "2026-07-20",
+            "count": 4
+          },
+          {
+            "date": "2026-07-21",
+            "count": 4
+          },
+          {
             "date": "2026-07-22",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-23",
@@ -234,63 +234,63 @@
           },
           {
             "date": "2026-07-25",
-            "count": 5
+            "count": 1
           },
           {
             "date": "2026-07-26",
-            "count": 2
+            "count": 8
           },
           {
             "date": "2026-07-27",
-            "count": 4
+            "count": 3
           },
           {
             "date": "2026-07-28",
-            "count": 5
+            "count": 1
           },
           {
             "date": "2026-07-29",
-            "count": 3
+            "count": 0
           },
           {
             "date": "2026-07-30",
-            "count": 3
+            "count": 5
           },
           {
             "date": "2026-07-31",
-            "count": 0
-          },
-          {
-            "date": "2026-08-01",
             "count": 3
           },
           {
+            "date": "2026-08-01",
+            "count": 1
+          },
+          {
             "date": "2026-08-02",
-            "count": 4
+            "count": 2
           },
           {
             "date": "2026-08-03",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-08-04",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-08-05",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-08-06",
-            "count": 0
+            "count": 5
           },
           {
             "date": "2026-08-07",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-08-08",
-            "count": 4
+            "count": 8
           },
           {
             "date": "2026-08-09",
@@ -298,19 +298,19 @@
           },
           {
             "date": "2026-08-10",
-            "count": 1
-          },
-          {
-            "date": "2026-08-11",
-            "count": 0
-          },
-          {
-            "date": "2026-08-12",
             "count": 5
           },
           {
-            "date": "2026-08-13",
+            "date": "2026-08-11",
+            "count": 4
+          },
+          {
+            "date": "2026-08-12",
             "count": 1
+          },
+          {
+            "date": "2026-08-13",
+            "count": 3
           },
           {
             "date": "2026-08-14",
@@ -770,33 +770,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 3233,
-            "costs": 3594
+            "revenue": 3061,
+            "costs": 1211
           },
           {
             "label": "Feb",
-            "revenue": 3988,
-            "costs": 3088
+            "revenue": 5983,
+            "costs": 3608
           },
           {
             "label": "Mar",
-            "revenue": 4882,
-            "costs": 3694
+            "revenue": 3500,
+            "costs": 3141
           },
           {
             "label": "Apr",
-            "revenue": 4772,
-            "costs": 1935
+            "revenue": 6165,
+            "costs": 3181
           },
           {
             "label": "May",
-            "revenue": 3206,
-            "costs": 2599
+            "revenue": 2841,
+            "costs": 3764
           },
           {
             "label": "Jun",
-            "revenue": 6963,
-            "costs": 3204
+            "revenue": 6324,
+            "costs": 1948
           }
         ]
       },
@@ -837,33 +837,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 3233,
-            "costs": 3594
+            "revenue": 3061,
+            "costs": 1211
           },
           {
             "label": "Feb",
-            "revenue": 3988,
-            "costs": 3088
+            "revenue": 5983,
+            "costs": 3608
           },
           {
             "label": "Mar",
-            "revenue": 4882,
-            "costs": 3694
+            "revenue": 3500,
+            "costs": 3141
           },
           {
             "label": "Apr",
-            "revenue": 4772,
-            "costs": 1935
+            "revenue": 6165,
+            "costs": 3181
           },
           {
             "label": "May",
-            "revenue": 3206,
-            "costs": 2599
+            "revenue": 2841,
+            "costs": 3764
           },
           {
             "label": "Jun",
-            "revenue": 6963,
-            "costs": 3204
+            "revenue": 6324,
+            "costs": 1948
           }
         ]
       },
@@ -942,33 +942,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 3233,
-            "costs": 3594
+            "revenue": 3061,
+            "costs": 1211
           },
           {
             "label": "Feb",
-            "revenue": 3988,
-            "costs": 3088
+            "revenue": 5983,
+            "costs": 3608
           },
           {
             "label": "Mar",
-            "revenue": 4882,
-            "costs": 3694
+            "revenue": 3500,
+            "costs": 3141
           },
           {
             "label": "Apr",
-            "revenue": 4772,
-            "costs": 1935
+            "revenue": 6165,
+            "costs": 3181
           },
           {
             "label": "May",
-            "revenue": 3206,
-            "costs": 2599
+            "revenue": 2841,
+            "costs": 3764
           },
           {
             "label": "Jun",
-            "revenue": 6963,
-            "costs": 3204
+            "revenue": 6324,
+            "costs": 1948
           }
         ]
       },
@@ -1659,79 +1659,6 @@
       "disabled": {
         "type": "boolean",
         "description": "If true, the upload zone is disabled and cannot accept files. Defaults to false.",
-        "defaultValue": false
-      }
-    }
-  },
-  {
-    "name": "BeamFooter",
-    "displayName": "Beam / Footer",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "Footer",
-    "props": {}
-  },
-  {
-    "name": "BeamHeader",
-    "displayName": "Beam / Header",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "Header",
-    "props": {
-      "showThemeToggle": {
-        "type": "boolean",
-        "description": "Show a theme toggle button (right-aligned). Defaults to true.",
-        "defaultValue": true
-      },
-      "actions": {
-        "type": "slot",
-        "description": "Extra elements rendered in the right group before the theme toggle.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Action"
-        }
-      },
-      "brand": {
-        "type": "slot",
-        "description": "Replace the default brand link with a custom element.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Beam"
-        }
-      },
-      "navLinks": {
-        "type": "object",
-        "description": "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set.",
-        "advanced": true
-      },
-      "breadcrumbs": {
-        "type": "object",
-        "description": "Breadcrumb items shown in place of nav links. When set, nav links are hidden.",
-        "advanced": true
-      },
-      "drawerSections": {
-        "type": "object",
-        "description": "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar.",
-        "advanced": true
-      },
-      "searchItems": {
-        "type": "object",
-        "description": "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections.",
-        "advanced": true
-      },
-      "searchPlaceholder": {
-        "type": "string",
-        "description": "Placeholder text for the search input. Defaults to \"Search docs...\".",
-        "defaultValue": "Search docs..."
-      },
-      "showSearch": {
-        "type": "boolean",
-        "description": "Show the search input and Cmd+K shortcut. Defaults to true.",
-        "defaultValue": true
-      },
-      "fullWidth": {
-        "type": "boolean",
-        "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false.",
         "defaultValue": false
       }
     }
@@ -2522,48 +2449,6 @@
         "type": "boolean",
         "description": "Disable the select. Defaults to `false`.",
         "defaultValue": false
-      }
-    }
-  },
-  {
-    "name": "BeamSidebar",
-    "displayName": "Beam / Sidebar",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "Sidebar",
-    "props": {
-      "sections": {
-        "type": "object",
-        "required": true,
-        "description": "Navigation sections to render. Each section has a title and list of items.",
-        "advanced": true,
-        "defaultValue": [
-          {
-            "title": "Foundations",
-            "items": [
-              {
-                "label": "Colors",
-                "href": "/foundations/colors"
-              },
-              {
-                "label": "Typography",
-                "href": "/foundations/typography"
-              }
-            ]
-          },
-          {
-            "title": "Components",
-            "items": [
-              {
-                "label": "Button",
-                "href": "/components/button"
-              },
-              {
-                "label": "Card",
-                "href": "/components/card"
-              }
-            ]
-          }
-        ]
       }
     }
   },

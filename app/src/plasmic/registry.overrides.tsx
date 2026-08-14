@@ -53,6 +53,10 @@ export const skipComponents: string[] = [
   "FullwidthLayout",
   // Full-application shell is a page wrapper, not a canvas building block.
   "Shell",
+  // Shell sub-components are composed inside Shell; not standalone artboard blocks.
+  "Header",
+  "Footer",
+  "Sidebar",
 ];
 
 // Shared sample data sets reused across data-driven components.
@@ -281,23 +285,6 @@ const SAMPLE_RIGHT_RAIL_ITEMS = [
   { label: "Props", id: "props" },
 ];
 
-const SAMPLE_SIDEBAR_SECTIONS = [
-  {
-    title: "Foundations",
-    items: [
-      { label: "Colors", href: "/foundations/colors" },
-      { label: "Typography", href: "/foundations/typography" },
-    ],
-  },
-  {
-    title: "Components",
-    items: [
-      { label: "Button", href: "/components/button" },
-      { label: "Card", href: "/components/card" },
-    ],
-  },
-];
-
 const SAMPLE_STAT_BAR = {
   speed: 4,
   performance: 5,
@@ -492,24 +479,6 @@ export const overrides: Record<string, ComponentOverride> = {
       name: { defaultValue: "Feature" },
       endpoint: { defaultValue: "/api/feature" },
       icon: { defaultValue: "star" },
-    },
-  },
-  Header: {
-    props: {
-      actions: {
-        defaultValue: {
-          type: "text",
-          tag: "span",
-          value: "Action",
-        },
-      },
-      brand: {
-        defaultValue: {
-          type: "text",
-          tag: "span",
-          value: "Beam",
-        },
-      },
     },
   },
   HoverCard: {
@@ -812,11 +781,6 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       items: { defaultValue: SAMPLE_RIGHT_RAIL_ITEMS },
       lastUpdated: { defaultValue: "Aug 14, 2026" },
-    },
-  },
-  Sidebar: {
-    props: {
-      sections: { defaultValue: SAMPLE_SIDEBAR_SECTIONS },
     },
   },
   StatBar: {
