@@ -33,6 +33,8 @@ boxes** in light/dark.
 - Phase 2 defaults: design-language-aligned `defaultValue` for all 48 required
   scalar props plus co-dependent array defaults (options, steps, tabs,
   branches, milestones, wizard steps). Zero validation warnings.
+- Studio feedback loop fixes: generator now emits real booleans (not `"false"`
+  strings) for boolean defaults; Breadcrumbs got sample `items`.
 - Docs visual re-baseline run; no git-tracked changes because
   `app/tests/__screenshots__/` is gitignored.
 - Generated app artifacts committed per standing housekeeping rule
@@ -40,11 +42,13 @@ boxes** in light/dark.
 
 ## Pick up first
 
-1. **Human verification in Plasmic Studio**: re-drag a fresh Beam / Button and
-   a few other components to confirm they render with correct typography,
-   sizing, and defaults. Report any mismatch and we'll add overrides.
-2. **Optional**: add richer sample data for the advanced object props of
-   data-heavy components if Studio usage demands it.
+1. **Human verification in Plasmic Studio**: refresh the host page, then
+   re-drag fresh Beam / Breadcrumbs and Beam / Checkbox. Breadcrumbs should
+   render without the `map` error; Checkbox toggles should default off and
+   be editable. Report any mismatch and we'll add overrides.
+2. **Continue sample-data pass**: add defaults for remaining advanced required
+   object/array props (Accordion, List, ContextMenu, DropdownMenu, charts,
+   tables, etc.) so every dragged component renders on the canvas.
 3. **Unblock BEAM-006/BEAM-007** by providing the Plasmic project ID + public
    API token when ready.
 
