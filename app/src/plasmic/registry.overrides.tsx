@@ -116,6 +116,17 @@ export const overrides: Record<string, ComponentOverride> = {
       defaultBranch: { defaultValue: "main" },
     },
   },
+  Breadcrumbs: {
+    props: {
+      items: {
+        defaultValue: [
+          { label: "Home", href: "/" },
+          { label: "Components", href: "/components" },
+          { label: "Breadcrumbs" },
+        ],
+      },
+    },
+  },
   Checkbox: {
     props: {
       checked: { defaultValue: false },

@@ -79,6 +79,12 @@ interface ComponentMeta {
   unmapped: string[];
 }
 
+/** react-docgen-typescript returns boolean defaults as strings; Plasmic
+ *  treats any truthy string as true, so normalize to actual booleans. */
+function parseBooleanDefault(value: unknown): boolean {
+  return String(value).toLowerCase() === "true";
+}
+
 function mapProp(name: string, prop: PropItem): PropMeta | null {
   if (SKIP_PROPS.has(name) || /^(aria-|data-)/.test(name)) return null;
   const t = prop.type as { name: string; raw?: string; value?: { value: string | number }[] };
@@ -106,7 +112,7 @@ function mapProp(name: string, prop: PropItem): PropMeta | null {
     // boolean union → boolean
     if (values.every((v) => v === "false" || v === "true")) {
       meta.type = "boolean";
-      if (prop.defaultValue) meta.defaultValue = prop.defaultValue.value;
+      if (prop.defaultValue) meta.defaultValue = parseBooleanDefault(prop.defaultValue.value);
       return meta;
     }
     // string-literal union → choice
@@ -121,6 +127,12 @@ function mapProp(name: string, prop: PropItem): PropMeta | null {
       return meta;
     }
     return null; // other unions: unmapped
+  }
+
+  if (t.name === "boolean") {
+    meta.type = "boolean";
+    if (prop.defaultValue) meta.defaultValue = parseBooleanDefault(prop.defaultValue.value);
+    return meta;
   }
 
   if (t.name === "string" || t.name === "number") {
