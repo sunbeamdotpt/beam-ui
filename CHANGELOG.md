@@ -4,6 +4,42 @@ All notable changes to `@sunbeam/beam-ui` (JSR, semver). The showcase app and
 container image follow the repo's mainline; see `.maintainer/log.md` for the
 full decision journal.
 
+## [0.15.0] — 2026-08-14
+
+### Added
+
+- **Plasmic Studio app-host integration** (BEAM-002/003/004/005/007).
+  - Component registry generator that scans `@sunbeam/beam-ui` exports and
+    emits Plasmic `registerComponent` metadata.
+  - Token registration from `beamPreset` so Plasmic designers use the same
+    design-language tokens.
+  - Kitchen-sink regression page + Playwright harness for every registered
+    component in light and dark.
+  - Sample data defaults for all data-driven components so dragged instances
+    render immediately on the canvas.
+  - Writable Plasmic state exposure for stateful components: `Accordion`,
+    `AssigneePicker`, `BranchSelector`, `Combobox`, `ContextMenu`,
+    `DatePicker`, `DropdownMenu`, `HoverCard`, `KanbanCardDetail`,
+    `LabelPicker`, `MarkdownEditor`, `MilestonePicker`, `NotificationCenter`,
+    `Popover`, `ReactionPicker`, `Select`, and `Tooltip`.
+  - Canvas defaults to dark mode; `Checkbox` `checked` prop is editable;
+    primary variants default to `"primary"` when available.
+
+### Changed
+
+- Page-level layouts (`ApiLayout`, `DocsLayout`, `FullwidthLayout`), `Shell`,
+  and shell sub-components (`Header`, `Footer`, `Sidebar`) are excluded from
+  the Plasmic registry; they are page wrappers, not artboard building blocks.
+
+### Fixed
+
+- Chart components render at the correct size in Plasmic Studio.
+- `Combobox` closes on selection.
+- `ContextMenu` trigger hitbox no longer fills the canvas.
+- `Clipboard` and `CodeBlock` render with usable defaults.
+- `KanbanCardDetail` sample checklist shape matches the component type.
+- `LoginForm` props panel no longer shows unset values.
+
 ## [0.14.0] — 2026-08-06
 
 ### Fixed

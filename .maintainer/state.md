@@ -3,8 +3,35 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-08-14T18:45:00Z
+timestamp: 2026-08-14T19:15:00Z
 ---
+
+# State — 2026-08-14 (v0.15.0 release prep)
+
+All Plasmic overlay components now expose controlled `open`/`onOpenChange`
+props and default to closed on the Studio canvas, eliminating the oversized
+hitbox problem. The fix set is pushed as `1a0a32a`.
+
+Release prep for `@sunbeam/beam-ui` **v0.15.0** is complete:
+- `CHANGELOG.md` updated with the v0.15.0 section.
+- `packages/beam-ui/deno.json` bumped to `0.15.0`.
+- `deno publish --dry-run` passes (only pre-existing KaTeX dynamic-import
+  warnings remain).
+
+## In flight
+
+- **v0.15.0 JSR publish** — ready for human approval. Per the charter, the
+  actual `deno publish` and git tag must be done by the human.
+- **BEAM-006** and **BEAM-007** — still blocked on the human for Plasmic
+  project ID + public API token.
+
+## Pick up first
+
+1. If v0.15.0 looks good, commit the release-prep files, tag `v0.15.0`, and
+   run `deno publish` from `packages/beam-ui`.
+2. If a patch is preferred instead, change `deno.json` back to `0.14.1` and
+   adjust `CHANGELOG.md` accordingly.
+3. Continue BEAM-006/007 when the Plasmic credentials are available.
 
 # State — 2026-08-14 (BEAM-002 verification fixes)
 

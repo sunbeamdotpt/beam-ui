@@ -548,3 +548,20 @@ Regenerated `app/src/plasmic/components.generated.json` and committed the
 changes. Verification: `deno task ci` green, `npm run test:plasmic:registry`
 zero warnings, `npm run test:plasmic:kitchen-sink` passes for light and dark.
 Commit `69cf72a`, dev server already running.
+
+## 2026-08-14 — release prep: v0.15.0
+
+Prepared `@sunbeam/beam-ui` v0.15.0 for JSR publish. Changes since v0.14.0 are
+all additive (Plasmic app-host integration, controlled open states, sample data
+defaults) and backward-compatible, so the bump is minor per semver.
+
+Release prep done by the agent:
+- Updated `CHANGELOG.md` with the v0.15.0 section summarizing Plasmic work.
+- Bumped `packages/beam-ui/deno.json` from `0.14.0` to `0.15.0`.
+- Ran `deno publish --dry-run --allow-dirty`: success. Only pre-existing
+  warnings are the two unanalyzable dynamic imports for KaTeX CSS in
+  `markdown-renderer.tsx` and `math-renderer.tsx`; these are known and do not
+  block publishing.
+
+Remaining human steps per charter: tag `v0.15.0`, run `deno publish` to JSR,
+and cut the container image if desired.
