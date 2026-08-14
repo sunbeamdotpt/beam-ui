@@ -119,8 +119,13 @@ function mapProp(name: string, prop: PropItem): PropMeta | null {
     const quoted = strings.filter((v) => v.startsWith('"') && v.endsWith('"'));
     if (quoted.length > 0 && quoted.length === strings.length) {
       meta.type = "choice";
-      meta.options = quoted.map((v) => v.slice(1, -1));
-      if (prop.defaultValue) {
+      const options = quoted.map((v) => v.slice(1, -1));
+      meta.options = options;
+      // Design-language rule: a "primary" variant should be the Studio default
+      // whenever it exists. Otherwise respect the source default, if any.
+      if (options.includes("primary")) {
+        meta.defaultValue = "primary";
+      } else if (prop.defaultValue) {
         const dv = String(prop.defaultValue.value).replace(/^"|"$/g, "");
         meta.defaultValue = dv;
       }

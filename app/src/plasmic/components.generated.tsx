@@ -508,7 +508,7 @@ export function registerBeamComponents(): void {
         "ghost",
         "primary"
       ],
-      "defaultValue": "dark"
+      "defaultValue": "primary"
     },
     "href": {
       "type": "string",

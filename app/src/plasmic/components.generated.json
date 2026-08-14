@@ -377,7 +377,7 @@
           "ghost",
           "primary"
         ],
-        "defaultValue": "dark"
+        "defaultValue": "primary"
       },
       "href": {
         "type": "string",
