@@ -38,9 +38,32 @@ export const skipComponents: string[] = [
   "CommandPalette",
 ];
 
+// Shared sample data sets reused across data-driven components.
+const SAMPLE_BRANCHES = ["main", "develop", "feature/auth"];
+const SAMPLE_TAGS = ["v1.0.0", "v1.1.0"];
+const SAMPLE_OPTIONS = [
+  { value: "option-1", label: "Option 1" },
+  { value: "option-2", label: "Option 2" },
+];
+const SAMPLE_TABS = [
+  { value: "tab-1", label: "Overview" },
+  { value: "tab-2", label: "Details" },
+];
+const SAMPLE_STEPS = [
+  { title: "Personal", description: "Your info" },
+  { title: "Payment" },
+  { title: "Review" },
+];
+const SAMPLE_WIZARD_STEPS = [
+  { title: "Profile", content: "Configure your profile." },
+  { title: "Preferences", content: "Set your preferences." },
+];
+
 export const overrides: Record<string, ComponentOverride> = {
+  // ------------------------------------------------------------------
   // Modals are closed unless `open` is set — without a default they render
   // as invisible 0×0 instances on the canvas.
+  // ------------------------------------------------------------------
   Dialog: {
     props: {
       open: { defaultValue: true },
@@ -54,6 +77,82 @@ export const overrides: Record<string, ComponentOverride> = {
       },
     },
   },
+  WizardModal: {
+    props: {
+      open: { defaultValue: true },
+      title: { defaultValue: "Wizard" },
+      steps: { defaultValue: SAMPLE_WIZARD_STEPS },
+    },
+  },
+  Wizard: {
+    props: {
+      steps: { defaultValue: SAMPLE_WIZARD_STEPS },
+    },
+  },
+
+  // ------------------------------------------------------------------
+  // Simple scalar defaults so components render with design-language
+  // placeholder content instead of blank 0×0 instances.
+  // ------------------------------------------------------------------
+  Avatar: {
+    props: {
+      name: { defaultValue: "Ada Lovelace" },
+    },
+  },
+  BentoItem: {
+    props: {
+      variant: { defaultValue: "small" },
+      title: { defaultValue: "Bento item" },
+      description: { defaultValue: "Short description of this bento item." },
+      difficulty: { defaultValue: "Beginner" },
+      category: { defaultValue: "Web Development" },
+    },
+  },
+  BranchSelector: {
+    props: {
+      branches: { defaultValue: SAMPLE_BRANCHES },
+      tags: { defaultValue: SAMPLE_TAGS },
+      current: { defaultValue: "main" },
+      defaultBranch: { defaultValue: "main" },
+    },
+  },
+  Checkbox: {
+    props: {
+      checked: { defaultValue: false },
+      label: { defaultValue: "Accept terms" },
+    },
+  },
+  Clipboard: {
+    props: {
+      value: { defaultValue: "npm install @sunbeam/beam-ui" },
+    },
+  },
+  CodeEditor: {
+    props: {
+      value: { defaultValue: "// Start coding\n" },
+    },
+  },
+  ColorPicker: {
+    props: {
+      value: { defaultValue: "#FF5733" },
+    },
+  },
+  Combobox: {
+    props: {
+      options: { defaultValue: SAMPLE_OPTIONS },
+      value: { defaultValue: "option-1" },
+    },
+  },
+  DiagramRenderer: {
+    props: {
+      code: { defaultValue: "flowchart TD\n  A[Start] --> B[End]" },
+    },
+  },
+  Editable: {
+    props: {
+      value: { defaultValue: "Editable text" },
+    },
+  },
   EmptyState: {
     props: {
       title: { defaultValue: "Nothing here" },
@@ -65,6 +164,13 @@ export const overrides: Record<string, ComponentOverride> = {
           value: "Create item",
         },
       },
+    },
+  },
+  FeatureTile: {
+    props: {
+      name: { defaultValue: "Feature" },
+      endpoint: { defaultValue: "/api/feature" },
+      icon: { defaultValue: "star" },
     },
   },
   Header: {
@@ -96,6 +202,69 @@ export const overrides: Record<string, ComponentOverride> = {
       },
     },
   },
+  Icon: {
+    props: {
+      name: { defaultValue: "star" },
+    },
+  },
+  KanbanCardDetail: {
+    props: {
+      open: { defaultValue: true },
+    },
+  },
+  MarkdownEditor: {
+    props: {
+      value: { defaultValue: "# Hello\n\nStart writing…" },
+    },
+  },
+  MarkdownRenderer: {
+    props: {
+      content: { defaultValue: "# Hello\n\nRendered markdown." },
+    },
+  },
+  MathRenderer: {
+    props: {
+      math: { defaultValue: "E = mc^2" },
+    },
+  },
+  MilestonePicker: {
+    props: {
+      options: {
+        defaultValue: [
+          { id: "v1-0", title: "v1.0", progress: 75, open: 3, closed: 9 },
+          { id: "v1-1", title: "v1.1", progress: 40, open: 5, closed: 2 },
+        ],
+      },
+      selected: { defaultValue: "v1-0" },
+    },
+  },
+  ModelRow: {
+    props: {
+      name: { defaultValue: "Solstice 4 Vision" },
+      icon: { defaultValue: "model_training" },
+      tier: { defaultValue: "Pro" },
+      version: { defaultValue: "v1.0" },
+      description: { defaultValue: "General-purpose reasoning model." },
+    },
+  },
+  NumberInput: {
+    props: {
+      value: { defaultValue: 42 },
+      label: { defaultValue: "Quantity" },
+    },
+  },
+  Pagination: {
+    props: {
+      currentPage: { defaultValue: 1 },
+      totalPages: { defaultValue: 5 },
+    },
+  },
+  PinInput: {
+    props: {
+      value: { defaultValue: "1234" },
+      label: { defaultValue: "Verification code" },
+    },
+  },
   Popover: {
     props: {
       trigger: {
@@ -105,6 +274,24 @@ export const overrides: Record<string, ComponentOverride> = {
           value: "Open",
         },
       },
+    },
+  },
+  ProgressBar: {
+    props: {
+      value: { defaultValue: 65 },
+    },
+  },
+  RadioGroup: {
+    props: {
+      options: { defaultValue: SAMPLE_OPTIONS },
+      value: { defaultValue: "option-1" },
+      label: { defaultValue: "Choose one" },
+    },
+  },
+  Select: {
+    props: {
+      options: { defaultValue: SAMPLE_OPTIONS },
+      value: { defaultValue: "option-1" },
     },
   },
   Shell: {
@@ -139,9 +326,68 @@ export const overrides: Record<string, ComponentOverride> = {
       },
     },
   },
+  Slider: {
+    props: {
+      value: { defaultValue: 50 },
+      label: { defaultValue: "Amount" },
+    },
+  },
+  Steps: {
+    props: {
+      steps: { defaultValue: SAMPLE_STEPS },
+      currentStep: { defaultValue: 1 },
+    },
+  },
+  Switch: {
+    props: {
+      checked: { defaultValue: false },
+      label: { defaultValue: "Enable notifications" },
+    },
+  },
+  SyntaxHighlighter: {
+    props: {
+      code: { defaultValue: "console.log('hello');" },
+      language: { defaultValue: "javascript" },
+    },
+  },
+  Tabs: {
+    props: {
+      items: { defaultValue: SAMPLE_TABS },
+      activeValue: { defaultValue: "tab-1" },
+    },
+  },
+  TextInput: {
+    props: {
+      value: { defaultValue: "Hello world" },
+      label: { defaultValue: "Label" },
+    },
+  },
+  Toast: {
+    props: {
+      message: { defaultValue: "Operation completed successfully." },
+      visible: { defaultValue: true },
+    },
+  },
+  Toggle: {
+    props: {
+      pressed: { defaultValue: false },
+    },
+  },
+  ToggleGroup: {
+    props: {
+      items: { defaultValue: SAMPLE_OPTIONS },
+      value: { defaultValue: "option-1" },
+    },
+  },
+  Tooltip: {
+    props: {
+      content: { defaultValue: "Tooltip text" },
+    },
+  },
   //
   // The design-language navigation props (linkAs/currentPath/onNavigate/
   // isActive) are already hidden globally by the generator. Data-driven
   // components (Accordion items, StatBar stats, Steps steps, …) render
   // empty until sample data is curated here — add as we see real usage.
+  //
 };
