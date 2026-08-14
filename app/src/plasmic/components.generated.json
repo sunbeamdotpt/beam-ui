@@ -78,15 +78,15 @@
         "defaultValue": [
           {
             "date": "2026-06-16",
-            "count": 0
+            "count": 1
           },
           {
             "date": "2026-06-17",
-            "count": 3
+            "count": 8
           },
           {
             "date": "2026-06-18",
-            "count": 4
+            "count": 0
           },
           {
             "date": "2026-06-19",
@@ -94,95 +94,95 @@
           },
           {
             "date": "2026-06-20",
-            "count": 0
+            "count": 5
           },
           {
             "date": "2026-06-21",
-            "count": 1
+            "count": 8
           },
           {
             "date": "2026-06-22",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-06-23",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-06-24",
-            "count": 1
+            "count": 3
           },
           {
             "date": "2026-06-25",
-            "count": 2
+            "count": 8
           },
           {
             "date": "2026-06-26",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-06-27",
-            "count": 0
+            "count": 4
           },
           {
             "date": "2026-06-28",
-            "count": 5
+            "count": 0
           },
           {
             "date": "2026-06-29",
-            "count": 3
+            "count": 2
           },
           {
             "date": "2026-06-30",
-            "count": 8
+            "count": 0
           },
           {
             "date": "2026-07-01",
-            "count": 3
+            "count": 2
           },
           {
             "date": "2026-07-02",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-03",
-            "count": 8
+            "count": 4
           },
           {
             "date": "2026-07-04",
-            "count": 1
+            "count": 3
           },
           {
             "date": "2026-07-05",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-06",
-            "count": 0
-          },
-          {
-            "date": "2026-07-07",
-            "count": 5
-          },
-          {
-            "date": "2026-07-08",
-            "count": 1
-          },
-          {
-            "date": "2026-07-09",
-            "count": 8
-          },
-          {
-            "date": "2026-07-10",
-            "count": 8
-          },
-          {
-            "date": "2026-07-11",
             "count": 2
           },
           {
+            "date": "2026-07-07",
+            "count": 2
+          },
+          {
+            "date": "2026-07-08",
+            "count": 2
+          },
+          {
+            "date": "2026-07-09",
+            "count": 2
+          },
+          {
+            "date": "2026-07-10",
+            "count": 5
+          },
+          {
+            "date": "2026-07-11",
+            "count": 1
+          },
+          {
             "date": "2026-07-12",
-            "count": 0
+            "count": 1
           },
           {
             "date": "2026-07-13",
@@ -190,23 +190,23 @@
           },
           {
             "date": "2026-07-14",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-07-15",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-07-16",
-            "count": 0
+            "count": 2
           },
           {
             "date": "2026-07-17",
-            "count": 8
+            "count": 1
           },
           {
             "date": "2026-07-18",
-            "count": 1
+            "count": 3
           },
           {
             "date": "2026-07-19",
@@ -214,27 +214,27 @@
           },
           {
             "date": "2026-07-20",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-21",
-            "count": 1
+            "count": 0
           },
           {
             "date": "2026-07-22",
-            "count": 1
+            "count": 3
           },
           {
             "date": "2026-07-23",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-24",
-            "count": 5
+            "count": 2
           },
           {
             "date": "2026-07-25",
-            "count": 2
+            "count": 0
           },
           {
             "date": "2026-07-26",
@@ -242,15 +242,15 @@
           },
           {
             "date": "2026-07-27",
-            "count": 4
+            "count": 2
           },
           {
             "date": "2026-07-28",
-            "count": 8
+            "count": 0
           },
           {
             "date": "2026-07-29",
-            "count": 2
+            "count": 4
           },
           {
             "date": "2026-07-30",
@@ -258,83 +258,65 @@
           },
           {
             "date": "2026-07-31",
-            "count": 4
+            "count": 0
           },
           {
             "date": "2026-08-01",
-            "count": 3
+            "count": 5
           },
           {
             "date": "2026-08-02",
-            "count": 0
+            "count": 1
           },
           {
             "date": "2026-08-03",
-            "count": 5
-          },
-          {
-            "date": "2026-08-04",
-            "count": 0
-          },
-          {
-            "date": "2026-08-05",
-            "count": 4
-          },
-          {
-            "date": "2026-08-06",
-            "count": 0
-          },
-          {
-            "date": "2026-08-07",
-            "count": 5
-          },
-          {
-            "date": "2026-08-08",
-            "count": 2
-          },
-          {
-            "date": "2026-08-09",
-            "count": 0
-          },
-          {
-            "date": "2026-08-10",
             "count": 3
           },
           {
-            "date": "2026-08-11",
+            "date": "2026-08-04",
             "count": 1
+          },
+          {
+            "date": "2026-08-05",
+            "count": 1
+          },
+          {
+            "date": "2026-08-06",
+            "count": 4
+          },
+          {
+            "date": "2026-08-07",
+            "count": 2
+          },
+          {
+            "date": "2026-08-08",
+            "count": 0
+          },
+          {
+            "date": "2026-08-09",
+            "count": 3
+          },
+          {
+            "date": "2026-08-10",
+            "count": 4
+          },
+          {
+            "date": "2026-08-11",
+            "count": 5
           },
           {
             "date": "2026-08-12",
-            "count": 4
-          },
-          {
-            "date": "2026-08-13",
             "count": 1
           },
           {
+            "date": "2026-08-13",
+            "count": 2
+          },
+          {
             "date": "2026-08-14",
-            "count": 4
+            "count": 2
           }
         ]
-      }
-    }
-  },
-  {
-    "name": "BeamApiLayout",
-    "displayName": "Beam / ApiLayout",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "ApiLayout",
-    "props": {
-      "children": {
-        "type": "slot",
-        "required": true,
-        "description": "Page content.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "ApiLayout"
-        }
       }
     }
   },
@@ -788,33 +770,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 5331,
-            "costs": 3808
+            "revenue": 5341,
+            "costs": 2333
           },
           {
             "label": "Feb",
-            "revenue": 4965,
-            "costs": 2936
+            "revenue": 3707,
+            "costs": 1570
           },
           {
             "label": "Mar",
-            "revenue": 6682,
-            "costs": 3630
+            "revenue": 6750,
+            "costs": 2068
           },
           {
             "label": "Apr",
-            "revenue": 6337,
-            "costs": 2721
+            "revenue": 5788,
+            "costs": 3387
           },
           {
             "label": "May",
-            "revenue": 2069,
-            "costs": 2437
+            "revenue": 4880,
+            "costs": 2089
           },
           {
             "label": "Jun",
-            "revenue": 2074,
-            "costs": 2926
+            "revenue": 3490,
+            "costs": 3578
           }
         ]
       },
@@ -855,33 +837,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 5331,
-            "costs": 3808
+            "revenue": 5341,
+            "costs": 2333
           },
           {
             "label": "Feb",
-            "revenue": 4965,
-            "costs": 2936
+            "revenue": 3707,
+            "costs": 1570
           },
           {
             "label": "Mar",
-            "revenue": 6682,
-            "costs": 3630
+            "revenue": 6750,
+            "costs": 2068
           },
           {
             "label": "Apr",
-            "revenue": 6337,
-            "costs": 2721
+            "revenue": 5788,
+            "costs": 3387
           },
           {
             "label": "May",
-            "revenue": 2069,
-            "costs": 2437
+            "revenue": 4880,
+            "costs": 2089
           },
           {
             "label": "Jun",
-            "revenue": 2074,
-            "costs": 2926
+            "revenue": 3490,
+            "costs": 3578
           }
         ]
       },
@@ -960,33 +942,33 @@
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 5331,
-            "costs": 3808
+            "revenue": 5341,
+            "costs": 2333
           },
           {
             "label": "Feb",
-            "revenue": 4965,
-            "costs": 2936
+            "revenue": 3707,
+            "costs": 1570
           },
           {
             "label": "Mar",
-            "revenue": 6682,
-            "costs": 3630
+            "revenue": 6750,
+            "costs": 2068
           },
           {
             "label": "Apr",
-            "revenue": 6337,
-            "costs": 2721
+            "revenue": 5788,
+            "costs": 3387
           },
           {
             "label": "May",
-            "revenue": 2069,
-            "costs": 2437
+            "revenue": 4880,
+            "costs": 2089
           },
           {
             "label": "Jun",
-            "revenue": 2074,
-            "costs": 2926
+            "revenue": 3490,
+            "costs": 3578
           }
         ]
       },
@@ -1489,29 +1471,6 @@
     }
   },
   {
-    "name": "BeamDocsLayout",
-    "displayName": "Beam / DocsLayout",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "DocsLayout",
-    "props": {
-      "children": {
-        "type": "slot",
-        "required": true,
-        "description": "Page content.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "DocsLayout"
-        }
-      },
-      "pageDates": {
-        "type": "object",
-        "description": "Optional map of route paths to last-updated timestamps, shown in the right rail.",
-        "advanced": true
-      }
-    }
-  },
-  {
     "name": "BeamDropdownMenu",
     "displayName": "Beam / DropdownMenu",
     "importPath": "@sunbeam/beam-ui",
@@ -1710,24 +1669,6 @@
     "importPath": "@sunbeam/beam-ui",
     "importName": "Footer",
     "props": {}
-  },
-  {
-    "name": "BeamFullwidthLayout",
-    "displayName": "Beam / FullwidthLayout",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "FullwidthLayout",
-    "props": {
-      "children": {
-        "type": "slot",
-        "required": true,
-        "description": "Page content.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "FullwidthLayout"
-        }
-      }
-    }
   },
   {
     "name": "BeamHeader",
@@ -2581,96 +2522,6 @@
         "type": "boolean",
         "description": "Disable the select. Defaults to `false`.",
         "defaultValue": false
-      }
-    }
-  },
-  {
-    "name": "BeamShell",
-    "displayName": "Beam / Shell",
-    "importPath": "@sunbeam/beam-ui",
-    "importName": "Shell",
-    "props": {
-      "headerActions": {
-        "type": "slot",
-        "description": "Extra elements rendered in the header's right group before the theme toggle",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Action"
-        }
-      },
-      "header": {
-        "type": "slot",
-        "description": "Replace the default Header with a custom element.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Header"
-        }
-      },
-      "footer": {
-        "type": "slot",
-        "description": "Replace the default Footer with a custom element.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Footer"
-        }
-      },
-      "children": {
-        "type": "slot",
-        "description": "Content to render.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Shell"
-        }
-      },
-      "showThemeToggle": {
-        "type": "boolean",
-        "description": "Show a theme toggle button (right-aligned). Defaults to true.",
-        "defaultValue": true
-      },
-      "brand": {
-        "type": "slot",
-        "description": "Replace the default brand link with a custom element.",
-        "defaultValue": {
-          "type": "text",
-          "tag": "span",
-          "value": "Beam"
-        }
-      },
-      "navLinks": {
-        "type": "object",
-        "description": "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set.",
-        "advanced": true
-      },
-      "breadcrumbs": {
-        "type": "object",
-        "description": "Breadcrumb items shown in place of nav links. When set, nav links are hidden.",
-        "advanced": true
-      },
-      "drawerSections": {
-        "type": "object",
-        "description": "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar.",
-        "advanced": true
-      },
-      "searchItems": {
-        "type": "object",
-        "description": "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections.",
-        "advanced": true
-      },
-      "searchPlaceholder": {
-        "type": "string",
-        "description": "Placeholder text for the search input. Defaults to \"Search docs...\"."
-      },
-      "showSearch": {
-        "type": "boolean",
-        "description": "Show the search input and Cmd+K shortcut. Defaults to true."
-      },
-      "fullWidth": {
-        "type": "boolean",
-        "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false."
       }
     }
   },

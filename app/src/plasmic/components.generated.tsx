@@ -6,7 +6,6 @@ import { registerComponent } from "@plasmicapp/react-web/lib/host";
 import {
   Accordion,
   ActivityHeatmap,
-  ApiLayout,
   AssigneePicker,
   LoginForm,
   SignUpForm,
@@ -31,7 +30,6 @@ import {
   DatePicker,
   Dialog,
   DiffViewer,
-  DocsLayout,
   DropdownMenu,
   Editable,
   EmptyState,
@@ -39,7 +37,6 @@ import {
   FileList,
   FileUpload,
   Footer,
-  FullwidthLayout,
   Header,
   HoverCard,
   Icon,
@@ -60,7 +57,6 @@ import {
   RightRail,
   SearchInput,
   Select,
-  Shell,
   Sidebar,
   Skeleton,
   Slider,
@@ -181,26 +177,6 @@ export function registerBeamComponents(): void {
 });
   beamComponentRegistry.push(metaBeamActivityHeatmap);
   registerComponent(withSanitizedProps(ActivityHeatmap), metaBeamActivityHeatmap);
-  const metaBeamApiLayout = withOverride("ApiLayout", {
-  "name": "BeamApiLayout",
-  "displayName": "Beam / ApiLayout",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "ApiLayout",
-  "props": {
-    "children": {
-      "type": "slot",
-      "required": true,
-      "description": "Page content.",
-      "defaultValue": {
-        "type": "text",
-        "tag": "span",
-        "value": "ApiLayout"
-      }
-    }
-  }
-});
-  beamComponentRegistry.push(metaBeamApiLayout);
-  registerComponent(withSanitizedProps(ApiLayout), metaBeamApiLayout);
   const metaBeamAssigneePicker = withOverride("AssigneePicker", {
   "name": "BeamAssigneePicker",
   "displayName": "Beam / AssigneePicker",
@@ -1080,31 +1056,6 @@ export function registerBeamComponents(): void {
 });
   beamComponentRegistry.push(metaBeamDiffViewer);
   registerComponent(withSanitizedProps(DiffViewer), metaBeamDiffViewer);
-  const metaBeamDocsLayout = withOverride("DocsLayout", {
-  "name": "BeamDocsLayout",
-  "displayName": "Beam / DocsLayout",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "DocsLayout",
-  "props": {
-    "children": {
-      "type": "slot",
-      "required": true,
-      "description": "Page content.",
-      "defaultValue": {
-        "type": "text",
-        "tag": "span",
-        "value": "DocsLayout"
-      }
-    },
-    "pageDates": {
-      "type": "object",
-      "description": "Optional map of route paths to last-updated timestamps, shown in the right rail.",
-      "advanced": true
-    }
-  }
-});
-  beamComponentRegistry.push(metaBeamDocsLayout);
-  registerComponent(withSanitizedProps(DocsLayout), metaBeamDocsLayout);
   const metaBeamDropdownMenu = withOverride("DropdownMenu", {
   "name": "BeamDropdownMenu",
   "displayName": "Beam / DropdownMenu",
@@ -1285,26 +1236,6 @@ export function registerBeamComponents(): void {
 });
   beamComponentRegistry.push(metaBeamFooter);
   registerComponent(withSanitizedProps(Footer), metaBeamFooter);
-  const metaBeamFullwidthLayout = withOverride("FullwidthLayout", {
-  "name": "BeamFullwidthLayout",
-  "displayName": "Beam / FullwidthLayout",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "FullwidthLayout",
-  "props": {
-    "children": {
-      "type": "slot",
-      "required": true,
-      "description": "Page content.",
-      "defaultValue": {
-        "type": "text",
-        "tag": "span",
-        "value": "FullwidthLayout"
-      }
-    }
-  }
-});
-  beamComponentRegistry.push(metaBeamFullwidthLayout);
-  registerComponent(withSanitizedProps(FullwidthLayout), metaBeamFullwidthLayout);
   const metaBeamHeader = withOverride("Header", {
   "name": "BeamHeader",
   "displayName": "Beam / Header",
@@ -1971,78 +1902,6 @@ export function registerBeamComponents(): void {
 });
   beamComponentRegistry.push(metaBeamSelect);
   registerComponent(withSanitizedProps(Select), metaBeamSelect);
-  const metaBeamShell = withOverride("Shell", {
-  "name": "BeamShell",
-  "displayName": "Beam / Shell",
-  "importPath": "@sunbeam/beam-ui",
-  "importName": "Shell",
-  "props": {
-    "headerActions": {
-      "type": "slot",
-      "description": "Extra elements rendered in the header's right group before the theme toggle"
-    },
-    "header": {
-      "type": "slot",
-      "description": "Replace the default Header with a custom element."
-    },
-    "footer": {
-      "type": "slot",
-      "description": "Replace the default Footer with a custom element."
-    },
-    "children": {
-      "type": "slot",
-      "description": "Content to render.",
-      "defaultValue": {
-        "type": "text",
-        "tag": "span",
-        "value": "Shell"
-      }
-    },
-    "showThemeToggle": {
-      "type": "boolean",
-      "description": "Show a theme toggle button (right-aligned). Defaults to true.",
-      "defaultValue": true
-    },
-    "brand": {
-      "type": "slot",
-      "description": "Replace the default brand link with a custom element."
-    },
-    "navLinks": {
-      "type": "object",
-      "description": "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set.",
-      "advanced": true
-    },
-    "breadcrumbs": {
-      "type": "object",
-      "description": "Breadcrumb items shown in place of nav links. When set, nav links are hidden.",
-      "advanced": true
-    },
-    "drawerSections": {
-      "type": "object",
-      "description": "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar.",
-      "advanced": true
-    },
-    "searchItems": {
-      "type": "object",
-      "description": "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections.",
-      "advanced": true
-    },
-    "searchPlaceholder": {
-      "type": "string",
-      "description": "Placeholder text for the search input. Defaults to \"Search docs...\"."
-    },
-    "showSearch": {
-      "type": "boolean",
-      "description": "Show the search input and Cmd+K shortcut. Defaults to true."
-    },
-    "fullWidth": {
-      "type": "boolean",
-      "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false."
-    }
-  }
-});
-  beamComponentRegistry.push(metaBeamShell);
-  registerComponent(withSanitizedProps(Shell), metaBeamShell);
   const metaBeamSidebar = withOverride("Sidebar", {
   "name": "BeamSidebar",
   "displayName": "Beam / Sidebar",

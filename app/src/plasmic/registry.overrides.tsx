@@ -47,6 +47,12 @@ export const skipComponents: string[] = [
   "KanbanBoard",
   // Keyboard-driven modal — no meaningful canvas representation.
   "CommandPalette",
+  // Page-level layouts are composed in code, not dragged onto artboards.
+  "ApiLayout",
+  "DocsLayout",
+  "FullwidthLayout",
+  // Full-application shell is a page wrapper, not a canvas building block.
+  "Shell",
 ];
 
 // Shared sample data sets reused across data-driven components.
@@ -602,38 +608,6 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       options: { defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
-    },
-  },
-  Shell: {
-    props: {
-      headerActions: {
-        defaultValue: {
-          type: "text",
-          tag: "span",
-          value: "Action",
-        },
-      },
-      header: {
-        defaultValue: {
-          type: "text",
-          tag: "span",
-          value: "Header",
-        },
-      },
-      footer: {
-        defaultValue: {
-          type: "text",
-          tag: "span",
-          value: "Footer",
-        },
-      },
-      brand: {
-        defaultValue: {
-          type: "text",
-          tag: "span",
-          value: "Beam",
-        },
-      },
     },
   },
   Slider: {
