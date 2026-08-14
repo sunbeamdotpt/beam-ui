@@ -412,3 +412,22 @@ All green: `deno task ci`, `npm run test:plasmic:registry`,
 `npm run test:plasmic:kitchen-sink`. BEAM-002 moved to in progress on the
 dev board; BEAM-006/BEAM-007 remain blocked on the human for Plasmic
 project ID + public API token.
+
+## 2026-08-14 — BEAM-002 Phase 2: curated component defaults
+
+Added design-language-aligned defaults to `registry.overrides.tsx` for all
+48 required scalar props flagged by the validation script, plus
+co-dependent array/object defaults (options, steps, tabs, branches,
+milestones, wizard steps) so components that need both a selected value
+and a list of choices render correctly. Validation now passes with **zero
+warnings**; the kitchen-sink harness renders all 91 registered components
+with **zero error boxes**. *Why:* a registered component that renders
+0×0 or errors on the Studio canvas is effectively unusable; defaults are
+part of the component API just like props and tokens, and they should
+communicate the design language (Beam names, Beam icons, Beam model
+references) rather than generic lorem ipsum.
+
+Commit `80fb395`. Also ran the docs visual re-baseline (`npm run test:visual
+-- -u`); no tracked changes because `app/tests/__screenshots__/` is
+gitignored. Build validation flagged 2 pre-existing WorkItemList empty-list
+screens as "no-visual-content" — unrelated to this work.

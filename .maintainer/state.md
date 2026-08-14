@@ -6,46 +6,47 @@ tags: [state]
 timestamp: 2026-08-14T14:16:00Z
 ---
 
-# State — 2026-08-14 (BEAM-002 Phase 1 harness landed)
+# State — 2026-08-14 (BEAM-002 Phase 2 defaults curated)
 
-Five commits pushed (`f936480`..`625bcb7`) close Phase 1 of BEAM-002:
-a repeatable Plasmic component-verification harness. `deno task ci` green,
-app build green, `npm run test:plasmic:registry` passes with 48 curated-
-default warnings, and Playwright kitchen-sink snapshots pass in light/dark.
+Six commits pushed this session (`f936480`..`80fb395`). Phase 1 (repeatable
+harness) and Phase 2 (curated defaults) of BEAM-002 are now complete.
+`deno task ci` green, app build green,
+`npm run test:plasmic:registry` passes with **zero warnings**, and the
+kitchen-sink harness renders all 91 registered components with **zero error
+boxes** in light/dark.
 
 ## In flight
 
 - **BEAM-002** — Plasmic app-host scope + implement (in progress column).
-  Phase 1 done. Phase 2 is curating `defaultValue` / sample data for the 48
-  required scalar props flagged by `validate-plasmic-registry.ts` so Studio
-  instances render with design-language defaults instead of 0×0 / blank boxes.
+  Phase 1 + Phase 2 done. Remaining: optional richer sample data for advanced
+  object props of data-heavy components (Accordion, ActivityHeatmap,
+  Breadcrumbs, CodeBlock, CommentThread, CommitGraph, ContextMenu, DiffViewer,
+  charts, etc.) — these do not block basic Studio usage and can be curated as
+  real use cases arise.
 - **BEAM-006** and **BEAM-007** — blocked on the human for Plasmic project ID
   + public API token (W1 of the original scope).
 
 ## Done this session
 
-- `app/scripts/generate-plasmic-registry.ts` emits `components.generated.json`
-  alongside `.tsx`; `app/scripts/validate-plasmic-registry.ts` enforces hard
-  invariants over the JSON.
-- `app/src/pages/plasmic-kitchen-sink.tsx` renders all 91 registered
-  components with their registered defaults; modals/toasts forced closed.
-- `app/tests/plasmic-kitchen-sink.spec.ts` captures light/dark Playwright
-  baselines.
-- `registry.overrides.tsx` got slot defaults for `Dialog`, `EmptyState`,
-  `Header`, `HoverCard`, `Popover`, `Shell`, and open defaults for modal
-  components.
+- Phase 1 harness: `components.generated.json`, validation script,
+  `/plasmic-kitchen-sink`, Playwright snapshots, npm scripts.
+- Phase 2 defaults: design-language-aligned `defaultValue` for all 48 required
+  scalar props plus co-dependent array defaults (options, steps, tabs,
+  branches, milestones, wizard steps). Zero validation warnings.
+- Docs visual re-baseline run; no git-tracked changes because
+  `app/tests/__screenshots__/` is gitignored.
 - Generated app artifacts committed per standing housekeeping rule
   (`public/api/components.json`, `src/generated/build-info.ts`).
 
 ## Pick up first
 
-1. Run the docs visual re-baseline (`npm run test:visual -- -u` in `app/`)
-   and inspect the diff — expected delta is the padding-shorthand fix from
-   2026-08-07 finally rendering with real padding.
-2. Phase 2: curate the 48 scalar/sample-data defaults flagged by the
-   validation script. Work component-by-component; the JSON warnings are the
-   checklist.
-3. Re-verify in Studio once defaults land (re-drag a fresh Beam / Button).
+1. **Human verification in Plasmic Studio**: re-drag a fresh Beam / Button and
+   a few other components to confirm they render with correct typography,
+   sizing, and defaults. Report any mismatch and we'll add overrides.
+2. **Optional**: add richer sample data for the advanced object props of
+   data-heavy components if Studio usage demands it.
+3. **Unblock BEAM-006/BEAM-007** by providing the Plasmic project ID + public
+   API token when ready.
 
 # State — 2026-08-06 (v0.14.0 shipped; Plasmic scoped)
 
