@@ -525,3 +525,26 @@ Verification: `deno task ci` green, `npm run build` green,
 `npm run test:plasmic:registry` zero warnings,
 `npm run test:plasmic:kitchen-sink` passes for light and dark.
 Commit `7b449a1`, dev server restarted.
+
+## 2026-08-14 — BEAM-002: fix KanbanCardDetail sample data, LoginForm defaults, MarkdownEditor state
+
+Fixed three Studio verification failures reported during human drag testing:
+
+1. `Beam / KanbanCardDetail` threw `TypeError: (card.checklist ?? []).filter is not a
+   function` because `SAMPLE_KANBAN_CARD.checklist` was a summary object
+   `{ done: 3, total: 5 }` while the component expects an array of
+   `{ id, title, done }`. Replaced the sample data with a real checklist array.
+2. `Beam / LoginForm` showed `oauthProviders` and `error` as unset in the Studio
+   props panel. Added `LoginForm` overrides with empty-array/default-string
+   defaults so the form renders with a clean default state.
+3. `Beam / MarkdownEditor` could not be edited in Studio interactive mode
+   because `value`/`onChange` were only static props. Registered a writable
+   Plasmic state (`value` → `onChange`) so the canvas textarea is editable.
+4. `Beam / KanbanCardDetail` could not be opened/closed in Studio. Added an
+   `onOpenChange` callback prop to the component and registered a writable
+   `open` state in Plasmic so the dialog visibility can be toggled.
+
+Regenerated `app/src/plasmic/components.generated.json` and committed the
+changes. Verification: `deno task ci` green, `npm run test:plasmic:registry`
+zero warnings, `npm run test:plasmic:kitchen-sink` passes for light and dark.
+Commit `69cf72a`, dev server already running.

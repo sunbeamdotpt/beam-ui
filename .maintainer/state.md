@@ -3,8 +3,44 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-08-14T16:45:00Z
+timestamp: 2026-08-14T18:45:00Z
 ---
+
+# State — 2026-08-14 (BEAM-002 verification fixes)
+
+Additional Studio verification failures fixed and pushed in `69cf72a`:
+
+- `Beam / KanbanCardDetail` sample checklist shape now matches the component's
+  expected `{ id, title, done }[]` array, eliminating the `.filter` TypeError.
+- `Beam / LoginForm` now has clean defaults (`oauthProviders: []`, `error: ""`,
+  `loading: false`) so the props panel no longer shows unset values.
+- `Beam / MarkdownEditor` exposes `value` as a writable Plasmic state, making
+  the textarea editable in Studio interactive mode.
+- `Beam / KanbanCardDetail` exposes `open` as a writable Plasmic state via a
+  new `onOpenChange` callback, so the dialog can be opened/closed in Studio.
+
+`deno task ci` green, `npm run test:plasmic:registry` zero warnings,
+`npm run test:plasmic:kitchen-sink` passes for light and dark. The Vite dev
+server is still running for live Studio verification.
+
+## In flight
+
+- **BEAM-002** — Plasmic app-host scope + implement (in review column).
+  Implementation complete. Awaiting human Studio verification of the latest
+  fixes; report any remaining drag-test failures and we'll patch them.
+- **BEAM-006** and **BEAM-007** — blocked on the human for Plasmic project ID
+  + public API token (W1 of the original scope).
+
+## Pick up first
+
+1. **Human verification in Plasmic Studio**: refresh the host page, re-drag
+   `Beam / KanbanCardDetail`, `Beam / LoginForm`, and `Beam / MarkdownEditor`,
+   and confirm the checklist renders, the login form shows clean defaults, and
+   the markdown editor can be typed in interactive mode.
+2. If any other components fail drag-test verification, add sample data or
+   writable states in `app/src/plasmic/registry.overrides.tsx` and regenerate.
+3. **Unblock BEAM-006/BEAM-007** by providing the Plasmic project ID + public
+   API token when ready.
 
 # State — 2026-08-14 (BEAM-002 Phase 2 closed + registry triage + Accordion state)
 
