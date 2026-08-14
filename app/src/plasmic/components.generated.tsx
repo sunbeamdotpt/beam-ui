@@ -149,7 +149,7 @@ export function registerBeamComponents(): void {
     "multiple": {
       "type": "boolean",
       "description": "If true, multiple sections can be expanded simultaneously; otherwise only one. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "defaultValue": {
       "type": "object",
@@ -241,7 +241,7 @@ export function registerBeamComponents(): void {
     "loading": {
       "type": "boolean",
       "description": "If true, inputs are disabled and submit button shows spinner. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -260,7 +260,7 @@ export function registerBeamComponents(): void {
     "loading": {
       "type": "boolean",
       "description": "If true, inputs are disabled and submit button shows spinner. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -279,12 +279,12 @@ export function registerBeamComponents(): void {
     "loading": {
       "type": "boolean",
       "description": "If true, input is disabled and submit button shows spinner. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "success": {
       "type": "boolean",
       "description": "If true, shows success message instead of the form. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -303,7 +303,7 @@ export function registerBeamComponents(): void {
     "loading": {
       "type": "boolean",
       "description": "If true, input is disabled and submit button shows spinner. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -682,7 +682,7 @@ export function registerBeamComponents(): void {
     "donut": {
       "type": "boolean",
       "description": "If true, renders as a donut (hollow center) instead of a pie. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -733,12 +733,12 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "If true, disables interaction. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "indeterminate": {
       "type": "boolean",
       "description": "If true, shows a dash (indeterminate state) instead of a checkmark. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -827,17 +827,17 @@ export function registerBeamComponents(): void {
     "readOnly": {
       "type": "boolean",
       "description": "If true, the editor is read-only and cannot be modified. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "showLineNumbers": {
       "type": "boolean",
       "description": "If true, line numbers are shown in the left gutter. Defaults to true.",
-      "defaultValue": "true"
+      "defaultValue": true
     },
     "softWrap": {
       "type": "boolean",
       "description": "If true, long lines wrap instead of scrolling horizontally. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "placeholder": {
       "type": "string",
@@ -901,7 +901,7 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "If true, the combobox is disabled and cannot be interacted with. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -987,7 +987,7 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "If true, the date picker is disabled and cannot be interacted with. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1260,12 +1260,12 @@ export function registerBeamComponents(): void {
     "multiple": {
       "type": "boolean",
       "description": "If true, multiple files can be selected at once. If false, only one file at a time. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "disabled": {
       "type": "boolean",
       "description": "If true, the upload zone is disabled and cannot accept files. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1309,7 +1309,7 @@ export function registerBeamComponents(): void {
     "showThemeToggle": {
       "type": "boolean",
       "description": "Show a theme toggle button (right-aligned). Defaults to true.",
-      "defaultValue": "true"
+      "defaultValue": true
     },
     "actions": {
       "type": "slot",
@@ -1347,12 +1347,12 @@ export function registerBeamComponents(): void {
     "showSearch": {
       "type": "boolean",
       "description": "Show the search input and Cmd+K shortcut. Defaults to true.",
-      "defaultValue": "true"
+      "defaultValue": true
     },
     "fullWidth": {
       "type": "boolean",
       "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1441,7 +1441,7 @@ export function registerBeamComponents(): void {
     },
     "readOnly": {
       "type": "boolean",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1587,7 +1587,7 @@ export function registerBeamComponents(): void {
     "display": {
       "type": "boolean",
       "description": "If true, renders as block (centered, full-width). Defaults to `false` (inline).",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1706,7 +1706,7 @@ export function registerBeamComponents(): void {
     "collapsibleGroups": {
       "type": "boolean",
       "description": "If true, groups are collapsible with unread count badges. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1787,7 +1787,7 @@ export function registerBeamComponents(): void {
     "mask": {
       "type": "boolean",
       "description": "Mask input (show dots instead of digits). Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "label": {
       "type": "string",
@@ -1850,7 +1850,7 @@ export function registerBeamComponents(): void {
     "showLabel": {
       "type": "boolean",
       "description": "Show percentage label. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "size": {
       "type": "choice",
@@ -1960,7 +1960,7 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "Disable the select. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -1996,7 +1996,7 @@ export function registerBeamComponents(): void {
     "showThemeToggle": {
       "type": "boolean",
       "description": "Show a theme toggle button (right-aligned). Defaults to true.",
-      "defaultValue": "true"
+      "defaultValue": true
     },
     "brand": {
       "type": "slot",
@@ -2144,7 +2144,7 @@ export function registerBeamComponents(): void {
     "accent": {
       "type": "boolean",
       "description": "Use brand orange color instead of muted gold. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "color": {
       "type": "string",
@@ -2252,7 +2252,7 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "Disable interaction. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
@@ -2285,7 +2285,7 @@ export function registerBeamComponents(): void {
     "showLineNumbers": {
       "type": "boolean",
       "description": "Show line numbers in a gutter. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "highlightLines": {
       "type": "object",
@@ -2416,7 +2416,7 @@ export function registerBeamComponents(): void {
     "disabled": {
       "type": "boolean",
       "description": "Whether the input is disabled. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     },
     "type": {
       "type": "choice",
@@ -2714,7 +2714,7 @@ export function registerBeamComponents(): void {
     "selectable": {
       "type": "boolean",
       "description": "Whether checkboxes appear for row selection. Defaults to `false`.",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   }
 });
