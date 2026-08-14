@@ -431,3 +431,19 @@ Commit `80fb395`. Also ran the docs visual re-baseline (`npm run test:visual
 -- -u`); no tracked changes because `app/tests/__screenshots__/` is
 gitignored. Build validation flagged 2 pre-existing WorkItemList empty-list
 screens as "no-visual-content" — unrelated to this work.
+
+## 2026-08-14 — Studio feedback loop: boolean defaults + Breadcrumbs fix
+
+Two Studio issues surfaced during human testing. (1) `Beam / Breadcrumbs`
+errored with "Cannot read properties of undefined (reading 'map')" because
+`items` is a required advanced object prop with no default; fixed by adding
+sample breadcrumb items to `registry.overrides.tsx`. (2) Checkbox toggles
+appeared locked/on when they should be off — root cause was the generator
+emitting boolean defaults as strings (`"false"`), which Plasmic treated as
+truthy. Fixed in `generate-plasmic-registry.ts` by normalizing docgen's
+string boolean defaults to real booleans.
+
+Commits `409dd82`, `77e8a4d`. Dev server restarted with the fixed registry.
+Remaining work: add sample data for other advanced required object props
+(e.g., Accordion, List, ContextMenu, charts, tables) as more components are
+drag-tested in Studio.
