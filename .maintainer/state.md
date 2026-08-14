@@ -3,21 +3,23 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-08-14T16:35:00Z
+timestamp: 2026-08-14T16:45:00Z
 ---
 
-# State — 2026-08-14 (BEAM-002 Phase 2 closed + sample-data sweep + Accordion state)
+# State — 2026-08-14 (BEAM-002 Phase 2 closed + registry triage + Accordion state)
 
-BEAM-002 implementation is complete and pushed through `c8978f3`. `deno task ci`
+BEAM-002 implementation is complete and pushed through `7b449a1`. `deno task ci`
 green, app build green, `npm run test:plasmic:registry` passes with **zero
 warnings**, and the kitchen-sink harness renders all registered components with
 **zero error boxes** in light/dark. The Plasmic host canvas defaults to dark
 mode; every registered component that requires data now ships with sample
 defaults.
 
-Registry now has **87 components** (down from 91). Page-level layouts
-(`ApiLayout`, `DocsLayout`, `FullwidthLayout`) and the full-app `Shell` are
-excluded because they are page wrappers, not canvas building blocks.
+Registry now has **84 components** (down from 91). Page-level layouts
+(`ApiLayout`, `DocsLayout`, `FullwidthLayout`), the full-app `Shell`, and the
+shell sub-components `Header`, `Footer`, `Sidebar` are excluded because they are
+page wrappers or composed inside Shell, not canvas building blocks. `Breadcrumbs`
+stays registered as a standalone navigation primitive.
 
 `Beam / Accordion` now exposes its open/closed value as a writable Plasmic
 state. In Studio it can be toggled in **Focus mode** with **interactive mode**
@@ -45,8 +47,9 @@ turned on.
   (`value` + `onValueChange`) and registering a writable state (`25dcf79`).
 - Extended `registry.overrides.tsx` and the generator to support `states` and
   event-handler `argTypes`.
-- Removed `ApiLayout`, `DocsLayout`, `FullwidthLayout`, and `Shell` from the
-  Plasmic registry (`c8978f3`).
+- Removed page-level layouts and `Shell` from the Plasmic registry (`c8978f3`).
+- Removed `Header`, `Footer`, and `Sidebar` from the Plasmic registry
+  (`7b449a1`).
 - Regenerated app artifacts committed (`public/api/components.json`,
   `src/generated/build-info.ts`, `components.generated.json`).
 

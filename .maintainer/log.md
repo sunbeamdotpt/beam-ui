@@ -511,3 +511,17 @@ Verification: `deno task ci` green, `npm run build` green,
 `npm run test:plasmic:registry` zero warnings,
 `npm run test:plasmic:kitchen-sink` passes for light and dark.
 Commit `c8978f3`, dev server restarted.
+
+## 2026-08-14 — BEAM-002: skip Header, Footer, Sidebar in Plasmic registry
+
+Removed `Header`, `Footer`, and `Sidebar` from the Plasmic component registry.
+These are shell sub-components composed inside `Shell` in code, not standalone
+building blocks for Studio artboards. `Breadcrumbs` remains registered as a
+standalone navigation primitive. Removed the Header and Sidebar sample-data
+overrides and the now-unused `SAMPLE_SIDEBAR_SECTIONS` constant. Registry now
+has 84 registered components.
+
+Verification: `deno task ci` green, `npm run build` green,
+`npm run test:plasmic:registry` zero warnings,
+`npm run test:plasmic:kitchen-sink` passes for light and dark.
+Commit `7b449a1`, dev server restarted.
