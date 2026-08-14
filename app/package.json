@@ -11,7 +11,10 @@
     "storybook": "panda codegen && panda cssgen --outfile .storybook/panda.css && npx tsx scripts/generate-stories.ts && storybook dev -p 6006",
     "build-storybook": "panda codegen && panda cssgen --outfile .storybook/panda.css && npx tsx scripts/generate-stories.ts && STORYBOOK_BASE=/storybook/ storybook build",
     "test:visual": "playwright test",
-    "test:visual:ui": "playwright test --ui"
+    "test:visual:ui": "playwright test --ui",
+    "test:plasmic:registry": "npx tsx scripts/validate-plasmic-registry.ts",
+    "test:plasmic:kitchen-sink": "playwright test tests/plasmic-kitchen-sink.spec.ts",
+    "test:plasmic": "npm run test:plasmic:registry && npm run test:plasmic:kitchen-sink"
   },
   "dependencies": {
     "@ark-ui/react": "^4.0.0",
