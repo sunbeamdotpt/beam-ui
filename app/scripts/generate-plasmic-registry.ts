@@ -15,16 +15,26 @@
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { parse, type PropItem } from "react-docgen-typescript";
-import { overrides, skipComponents, type ComponentOverride } from "../src/plasmic/registry.overrides";
+import {
+  type ComponentOverride,
+  overrides,
+  skipComponents,
+} from "../src/plasmic/registry.overrides";
 
-const SRC = new URL("../../packages/beam-ui/src/components/", import.meta.url).pathname;
+const SRC =
+  new URL("../../packages/beam-ui/src/components/", import.meta.url).pathname;
 
 /** Apply registry.overrides.tsx adjustments at generation time so we can also
  * emit a JSON sidecar of the final metadata for static validation. */
-function applyOverride(name: string, meta: Record<string, unknown>): Record<string, unknown> {
+function applyOverride(
+  name: string,
+  meta: Record<string, unknown>,
+): Record<string, unknown> {
   const o = overrides[name];
   if (!o) return meta;
-  const props: Record<string, unknown> = { ...(meta.props as Record<string, unknown> ?? {}) };
+  const props: Record<string, unknown> = {
+    ...(meta.props as Record<string, unknown> ?? {}),
+  };
   for (const [k, v] of Object.entries(o.props ?? {})) {
     if (v === null) delete props[k];
     else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };
@@ -36,6 +46,7 @@ function applyOverride(name: string, meta: Record<string, unknown>): Record<stri
     props,
   };
   if (o.states) result.states = o.states;
+  if (o.defaultStyles) result.defaultStyles = o.defaultStyles;
   return result;
 }
 const ROOT_IMPORT = "@sunbeam/beam-ui";
@@ -60,8 +71,16 @@ const SKIP_FILES = new Set(["scroll-area.tsx"]);
  * props (linkAs/currentPath/onNavigate/isActive) — framework-coupled by
  * design; Studio-friendly href wrappers are a later curation (scope doc §4). */
 const SKIP_PROPS = new Set([
-  "as", "className", "css", "style", "ref", "key",
-  "linkAs", "currentPath", "onNavigate", "isActive",
+  "as",
+  "className",
+  "css",
+  "style",
+  "ref",
+  "key",
+  "linkAs",
+  "currentPath",
+  "onNavigate",
+  "isActive",
 ]);
 
 interface PropMeta {
@@ -89,10 +108,16 @@ function parseBooleanDefault(value: unknown): boolean {
 
 function mapProp(name: string, prop: PropItem): PropMeta | null {
   if (SKIP_PROPS.has(name) || /^(aria-|data-)/.test(name)) return null;
-  const t = prop.type as { name: string; raw?: string; value?: { value: string | number }[] };
+  const t = prop.type as {
+    name: string;
+    raw?: string;
+    value?: { value: string | number }[];
+  };
   // Event handlers (func types + the onX convention) stay hidden in the
   // skeleton; Studio interaction wiring is a later curation.
-  if (t.name === "func" || t.raw?.includes("=>") || /^on[A-Z]/.test(name)) return null;
+  if (t.name === "func" || t.raw?.includes("=>") || /^on[A-Z]/.test(name)) {
+    return null;
+  }
 
   const meta: PropMeta = { type: "" };
   if (prop.required) meta.required = true;
@@ -114,7 +139,9 @@ function mapProp(name: string, prop: PropItem): PropMeta | null {
     // boolean union → boolean
     if (values.every((v) => v === "false" || v === "true")) {
       meta.type = "boolean";
-      if (prop.defaultValue) meta.defaultValue = parseBooleanDefault(prop.defaultValue.value);
+      if (prop.defaultValue) {
+        meta.defaultValue = parseBooleanDefault(prop.defaultValue.value);
+      }
       return meta;
     }
     // string-literal union → choice
@@ -138,7 +165,9 @@ function mapProp(name: string, prop: PropItem): PropMeta | null {
 
   if (t.name === "boolean") {
     meta.type = "boolean";
-    if (prop.defaultValue) meta.defaultValue = parseBooleanDefault(prop.defaultValue.value);
+    if (prop.defaultValue) {
+      meta.defaultValue = parseBooleanDefault(prop.defaultValue.value);
+    }
     return meta;
   }
 
@@ -160,7 +189,9 @@ function discover(): { file: string; path: string }[] {
   const out: { file: string; path: string }[] = [];
   for (const dir of dirs) {
     for (const f of readdirSync(join(SRC, dir))) {
-      if (!f.endsWith(".tsx") || f.endsWith(".story.tsx") || SKIP_FILES.has(f)) continue;
+      if (
+        !f.endsWith(".tsx") || f.endsWith(".story.tsx") || SKIP_FILES.has(f)
+      ) continue;
       out.push({ file: f, path: join(SRC, dir, f) });
     }
   }
@@ -180,7 +211,9 @@ for (const { file, path } of discover()) {
       propFilter: (prop) => {
         if (prop.name === "children") return true;
         if (prop.declarations?.length) {
-          return !prop.declarations.every((d) => d.fileName.includes("node_modules"));
+          return !prop.declarations.every((d) =>
+            d.fileName.includes("node_modules")
+          );
         }
         return true;
       },
@@ -190,10 +223,14 @@ for (const { file, path } of discover()) {
     continue;
   }
   const acceptsPolymorphicChildren =
-    /ComponentPropsWith(?:out)?Ref|PropsWithChildren/.test(readFileSync(path, "utf8"));
+    /ComponentPropsWith(?:out)?Ref|PropsWithChildren/.test(
+      readFileSync(path, "utf8"),
+    );
   for (const doc of docs) {
     const name = doc.displayName;
-    if (!name || !/^[A-Z]/.test(name) || skipComponents.includes(name)) continue;
+    if (!name || !/^[A-Z]/.test(name) || skipComponents.includes(name)) {
+      continue;
+    }
     const props: Record<string, PropMeta> = {};
     const unmapped: string[] = [];
     for (const [propName, prop] of Object.entries(doc.props)) {
@@ -223,14 +260,23 @@ for (const { file, path } of discover()) {
     // slot text comes out in Beam fonts. (Do NOT set styles like
     // fontFamily: "inherit" on the schema — Studio's font checker treats
     // "inherit" as a literal font name and warns it "is not available".)
-    if (props.children?.type === "slot" && props.children.defaultValue === undefined) {
+    if (
+      props.children?.type === "slot" &&
+      props.children.defaultValue === undefined
+    ) {
       props.children.defaultValue = {
         type: "text",
         tag: "span",
         value: name,
       };
     }
-    components.push({ name, file, importPath: HEAVY_SUBPATHS[file] ?? ROOT_IMPORT, props, unmapped });
+    components.push({
+      name,
+      file,
+      importPath: HEAVY_SUBPATHS[file] ?? ROOT_IMPORT,
+      props,
+      unmapped,
+    });
   }
 }
 
@@ -292,40 +338,68 @@ for (const c of components) {
   const finalMeta = applyOverride(c.name, meta);
   finalMetas.push(finalMeta);
   const varName = `metaBeam${c.name}`;
-  lines.push(`  const ${varName} = withOverride(${JSON.stringify(c.name)}, ${JSON.stringify(meta, null, 2)});`);
+  lines.push(
+    `  const ${varName} = withOverride(${JSON.stringify(c.name)}, ${
+      JSON.stringify(meta, null, 2)
+    });`,
+  );
   lines.push(`  beamComponentRegistry.push(${varName});`);
   lines.push(`  registerComponent(withSanitizedProps(${ref}), ${varName});`);
 }
 
 lines.push(`}`);
 lines.push(``);
-lines.push(`// Overrides are applied at runtime so registry.overrides.tsx can use JSX.`);
-lines.push(`import { overrides, type ComponentOverride } from "./registry.overrides";`);
-lines.push(`export const beamComponentRegistry: Record<string, unknown>[] = [];`);
-lines.push(`function withOverride(name: string, meta: Record<string, unknown>): any {`);
+lines.push(
+  `// Overrides are applied at runtime so registry.overrides.tsx can use JSX.`,
+);
+lines.push(
+  `import { overrides, type ComponentOverride } from "./registry.overrides";`,
+);
+lines.push(
+  `export const beamComponentRegistry: Record<string, unknown>[] = [];`,
+);
+lines.push(
+  `function withOverride(name: string, meta: Record<string, unknown>): any {`,
+);
 lines.push(`  const o: ComponentOverride | undefined = overrides[name];`);
 lines.push(`  if (!o) return meta;`);
 lines.push(`  const props = { ...(meta.props as Record<string, unknown>) };`);
 lines.push(`  for (const [k, v] of Object.entries(o.props ?? {})) {`);
 lines.push(`    if (v === null) delete props[k];`);
-lines.push(`    else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };`);
+lines.push(
+  `    else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };`,
+);
 lines.push(`  }`);
-lines.push(`  const result: Record<string, unknown> = { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };`);
+lines.push(
+  `  const result: Record<string, unknown> = { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };`,
+);
 lines.push(`  if (o.states) result.states = o.states;`);
+lines.push(`  if (o.defaultStyles) result.defaultStyles = o.defaultStyles;`);
 lines.push(`  return result;`);
 lines.push(`}`);
 lines.push(``);
 
-writeFileSync(new URL("../src/plasmic/components.generated.tsx", import.meta.url), lines.join("\n"));
+writeFileSync(
+  new URL("../src/plasmic/components.generated.tsx", import.meta.url),
+  lines.join("\n"),
+);
 writeFileSync(
   new URL("../src/plasmic/components.generated.json", import.meta.url),
   JSON.stringify(finalMetas, null, 2),
 );
-const skippedNote = skipComponents.length ? `, skipped: ${skipComponents.join(", ")}` : "";
-console.log(`  wrote components.generated.tsx (${components.length} components: ${root.length} root, ${heavy.length} lazy${skippedNote})`);
-console.log(`  wrote components.generated.json (${finalMetas.length} metadata entries)`);
+const skippedNote = skipComponents.length
+  ? `, skipped: ${skipComponents.join(", ")}`
+  : "";
+console.log(
+  `  wrote components.generated.tsx (${components.length} components: ${root.length} root, ${heavy.length} lazy${skippedNote})`,
+);
+console.log(
+  `  wrote components.generated.json (${finalMetas.length} metadata entries)`,
+);
 if (totalUnmapped > 0) {
-  console.log(`  ${totalUnmapped} data props exposed as advanced JSON controls:`);
+  console.log(
+    `  ${totalUnmapped} data props exposed as advanced JSON controls:`,
+  );
 }
 for (const c of components.filter((c) => c.unmapped.length > 0)) {
   console.log(`    ${c.name}: ${c.unmapped.join(", ")}`);

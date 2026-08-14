@@ -24,6 +24,8 @@ export interface BranchSelectorProps {
   onChange: (ref: string) => void;
   /** Optional callback to create a new branch with the given name. */
   onCreateBranch?: (name: string) => void;
+  /** If false, the dropdown is rendered inline instead of in a portal. Defaults to true. */
+  portalled?: boolean;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -54,6 +56,7 @@ export function BranchSelector({
   defaultBranch,
   onChange,
   onCreateBranch,
+  portalled = true,
   className,
 }: BranchSelectorProps): ReactNode {
   const [query, setQuery] = useState("");
@@ -77,6 +80,7 @@ export function BranchSelector({
         setQuery("");
         setTab("branches");
       }}
+      portalled={portalled}
     >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">

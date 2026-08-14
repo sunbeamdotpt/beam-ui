@@ -80,6 +80,8 @@ export interface LineChartProps {
   data: ChartDataPoint[];
   /** Array of line series; each specifies a data `key`, optional `color`, and optional `label`. */
   lines: { key: string; color?: string; label?: string }[];
+  /** Chart width as a number (px) or CSS string. Defaults to "100%". */
+  width?: number | string;
   /** Chart height in pixels. Defaults to 300. */
   height?: number;
   /** Additional Panda CSS classes. */
@@ -103,7 +105,14 @@ export interface LineChartProps {
  * ```
  */
 export function LineChart(
-  { data, lines, height = 300, className, "aria-label": ariaLabel }: LineChartProps,
+  {
+    data,
+    lines,
+    width = "100%",
+    height = 300,
+    className,
+    "aria-label": ariaLabel,
+  }: LineChartProps,
 ): ReactNode {
   const defaultLabel = `Line chart with ${data.length} data points`;
   return (
@@ -111,6 +120,7 @@ export function LineChart(
       className={cx(chartWrapper, className)}
       role="img"
       aria-label={ariaLabel ?? defaultLabel}
+      style={{ width }}
     >
       <ResponsiveContainer width="100%" height={height}>
         <RLineChart data={data}>
@@ -165,6 +175,8 @@ export interface BarChartProps {
   data: ChartDataPoint[];
   /** Array of bar series; each specifies a data `key`, optional `color`, and optional `label`. */
   bars: { key: string; color?: string; label?: string }[];
+  /** Chart width as a number (px) or CSS string. Defaults to "100%". */
+  width?: number | string;
   /** Chart height in pixels. Defaults to 300. */
   height?: number;
   /** Additional Panda CSS classes. */
@@ -188,7 +200,14 @@ export interface BarChartProps {
  * ```
  */
 export function BarChart(
-  { data, bars, height = 300, className, "aria-label": ariaLabel }: BarChartProps,
+  {
+    data,
+    bars,
+    width = "100%",
+    height = 300,
+    className,
+    "aria-label": ariaLabel,
+  }: BarChartProps,
 ): ReactNode {
   const defaultLabel = `Bar chart with ${data.length} data points`;
   return (
@@ -196,6 +215,7 @@ export function BarChart(
       className={cx(chartWrapper, className)}
       role="img"
       aria-label={ariaLabel ?? defaultLabel}
+      style={{ width }}
     >
       <ResponsiveContainer width="100%" height={height}>
         <RBarChart data={data}>
@@ -245,6 +265,8 @@ export function BarChart(
 export interface PieChartProps {
   /** Array of segments; each with `name`, `value`, and optional `color`. */
   data: { name: string; value: number; color?: string }[];
+  /** Chart width as a number (px) or CSS string. Defaults to "100%". */
+  width?: number | string;
   /** Chart height in pixels. Defaults to 300. */
   height?: number;
   /** If true, renders as a donut (hollow center) instead of a pie. Defaults to false. */
@@ -274,7 +296,14 @@ export interface PieChartProps {
  * ```
  */
 export function PieChart(
-  { data, height = 300, donut = false, className, "aria-label": ariaLabel }: PieChartProps,
+  {
+    data,
+    width = "100%",
+    height = 300,
+    donut = false,
+    className,
+    "aria-label": ariaLabel,
+  }: PieChartProps,
 ): ReactNode {
   const defaultLabel = `${donut ? "Donut" : "Pie"} chart with ${data.length} segments`;
   return (
@@ -282,6 +311,7 @@ export function PieChart(
       className={cx(chartWrapper, className)}
       role="img"
       aria-label={ariaLabel ?? defaultLabel}
+      style={{ width }}
     >
       <ResponsiveContainer width="100%" height={height}>
         <RPieChart>
@@ -326,6 +356,8 @@ export interface AreaChartProps {
   data: ChartDataPoint[];
   /** Array of area series; each specifies a data `key`, optional `color`, and optional `label`. */
   areas: { key: string; color?: string; label?: string }[];
+  /** Chart width as a number (px) or CSS string. Defaults to "100%". */
+  width?: number | string;
   /** Chart height in pixels. Defaults to 300. */
   height?: number;
   /** Additional Panda CSS classes. */
@@ -349,7 +381,14 @@ export interface AreaChartProps {
  * ```
  */
 export function AreaChart(
-  { data, areas, height = 300, className, "aria-label": ariaLabel }: AreaChartProps,
+  {
+    data,
+    areas,
+    width = "100%",
+    height = 300,
+    className,
+    "aria-label": ariaLabel,
+  }: AreaChartProps,
 ): ReactNode {
   const defaultLabel = `Area chart with ${data.length} data points`;
   return (
@@ -357,6 +396,7 @@ export function AreaChart(
       className={cx(chartWrapper, className)}
       role="img"
       aria-label={ariaLabel ?? defaultLabel}
+      style={{ width }}
     >
       <ResponsiveContainer width="100%" height={height}>
         <RAreaChart data={data}>

@@ -12,6 +12,8 @@
  * generated runtime module — keep it free of side effects.
  */
 
+import type { CSSProperties } from "react";
+
 /** Description of an event-handler argument for Plasmic Studio interactions. */
 export interface EventHandlerArg {
   name: string;
@@ -38,6 +40,7 @@ export interface ComponentOverride {
   description?: string;
   props?: Record<string, PropOverride | null>;
   states?: Record<string, Record<string, unknown>>;
+  defaultStyles?: CSSProperties;
 }
 
 /** Components that must not appear in Studio. */
@@ -155,7 +158,8 @@ const SAMPLE_COMMENTS = [
   {
     id: "comment-1",
     author: { username: "ada", displayName: "Ada Lovelace" },
-    body: "This looks great! One small question about the edge case on line 42.",
+    body:
+      "This looks great! One small question about the edge case on line 42.",
     createdAt: "2026-08-10T09:30:00Z",
     reactions: [{ emoji: "👍", count: 3, reacted: true }],
   },
@@ -209,17 +213,39 @@ const SAMPLE_DIFF_HUNKS = [
   {
     header: "@@ -1,5 +1,5 @@",
     lines: [
-      { type: "context", content: "import { Button } from '@sunbeam/beam-ui';", oldLineNumber: 1, newLineNumber: 1 },
+      {
+        type: "context",
+        content: "import { Button } from '@sunbeam/beam-ui';",
+        oldLineNumber: 1,
+        newLineNumber: 1,
+      },
       { type: "remove", content: "const theme = 'light';", oldLineNumber: 2 },
       { type: "add", content: "const theme = 'dark';", newLineNumber: 2 },
-      { type: "context", content: "export function Hero() {", oldLineNumber: 3, newLineNumber: 3 },
+      {
+        type: "context",
+        content: "export function Hero() {",
+        oldLineNumber: 3,
+        newLineNumber: 3,
+      },
     ],
   },
 ];
 
 const SAMPLE_FILES = [
-  { id: "f1", name: "README.md", type: "file", size: "12 KB", modified: "2 hours ago" },
-  { id: "f2", name: "package.json", type: "file", size: "3 KB", modified: "1 day ago" },
+  {
+    id: "f1",
+    name: "README.md",
+    type: "file",
+    size: "12 KB",
+    modified: "2 hours ago",
+  },
+  {
+    id: "f2",
+    name: "package.json",
+    type: "file",
+    size: "3 KB",
+    modified: "1 day ago",
+  },
   { id: "f3", name: "src", type: "folder", modified: "3 days ago" },
 ];
 
@@ -239,15 +265,39 @@ const SAMPLE_KANBAN_CARD = {
 };
 
 const SAMPLE_LABELS = [
-  { id: "label-1", name: "bug", color: "#fa520f", description: "Something is broken" },
-  { id: "label-2", name: "feature", color: "#4a9eff", description: "New capability" },
-  { id: "label-3", name: "docs", color: "#5bb8a6", description: "Documentation" },
+  {
+    id: "label-1",
+    name: "bug",
+    color: "#fa520f",
+    description: "Something is broken",
+  },
+  {
+    id: "label-2",
+    name: "feature",
+    color: "#4a9eff",
+    description: "New capability",
+  },
+  {
+    id: "label-3",
+    name: "docs",
+    color: "#5bb8a6",
+    description: "Documentation",
+  },
 ];
 
 const SAMPLE_LIST_ITEMS = [
-  { label: "Installation", icon: "download", href: "/foundations/installation" },
+  {
+    label: "Installation",
+    icon: "download",
+    href: "/foundations/installation",
+  },
   { label: "Colors", icon: "palette", href: "/foundations/colors" },
-  { label: "Typography", description: "Fonts, weights, and sizes", icon: "text_fields", href: "/foundations/typography" },
+  {
+    label: "Typography",
+    description: "Fonts, weights, and sizes",
+    icon: "text_fields",
+    href: "/foundations/typography",
+  },
 ];
 
 const SAMPLE_NOTIFICATION = {
@@ -411,6 +461,8 @@ export const overrides: Record<string, ComponentOverride> = {
       tags: { defaultValue: SAMPLE_TAGS },
       current: { defaultValue: "main" },
       defaultBranch: { defaultValue: "main" },
+      // Render the dropdown inline in Studio so interactive mode works reliably.
+      portalled: { defaultValue: false },
     },
   },
   Breadcrumbs: {
@@ -433,6 +485,9 @@ export const overrides: Record<string, ComponentOverride> = {
   Clipboard: {
     props: {
       value: { defaultValue: "npm install @sunbeam/beam-ui" },
+      // Hide the children slot so Studio uses the styled default "Copy" trigger
+      // instead of an unstyled text placeholder.
+      children: null,
     },
   },
   CodeEditor: {
@@ -675,6 +730,8 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       options: { defaultValue: SAMPLE_ASSIGNEES },
       selected: { defaultValue: ["user-1"] },
+      // Render the dropdown inline in Studio so interactive mode works reliably.
+      portalled: { defaultValue: false },
     },
   },
   AreaChart: {
@@ -682,16 +739,23 @@ export const overrides: Record<string, ComponentOverride> = {
       data: { defaultValue: SAMPLE_CHART_DATA },
       areas: { defaultValue: SAMPLE_AREA_AREAS },
     },
+    defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   BarChart: {
     props: {
       data: { defaultValue: SAMPLE_CHART_DATA },
       bars: { defaultValue: SAMPLE_BAR_BARS },
     },
+    defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   CodeBlock: {
     props: {
       tabs: { defaultValue: SAMPLE_CODE_TABS },
+      showLineNumbers: { defaultValue: true },
+      // Toggles only apply when tab variants are used; hide them for the simple sample.
+      streamToggle: null,
+      versionToggle: null,
+      modeToggle: null,
     },
   },
   CommentThread: {
@@ -751,6 +815,7 @@ export const overrides: Record<string, ComponentOverride> = {
       data: { defaultValue: SAMPLE_CHART_DATA },
       lines: { defaultValue: SAMPLE_LINE_LINES },
     },
+    defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   List: {
     props: {
@@ -771,6 +836,7 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       data: { defaultValue: SAMPLE_PIE_DATA },
     },
+    defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   ReactionPicker: {
     props: {

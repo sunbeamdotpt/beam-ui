@@ -32,6 +32,8 @@ export interface AssigneePickerProps {
   onChange: (selected: string[]) => void;
   /** Placeholder text shown when no users are selected. Defaults to "Assignees". */
   placeholder?: string;
+  /** If false, the dropdown is rendered inline instead of in a portal. Defaults to true. */
+  portalled?: boolean;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -59,6 +61,7 @@ export function AssigneePicker({
   selected,
   onChange,
   placeholder = "Assignees",
+  portalled = true,
   className,
 }: AssigneePickerProps): ReactNode {
   const [query, setQuery] = useState("");
@@ -83,6 +86,7 @@ export function AssigneePicker({
     <PopoverRoot
       positioning={{ placement: "bottom-start" }}
       onOpenChange={() => setQuery("")}
+      portalled={portalled}
     >
       <PopoverTrigger asChild>
         <button className={cx(triggerStyle, className)} type="button">

@@ -62,6 +62,7 @@ export function Combobox({
   className,
 }: ComboboxProps): ReactNode {
   const [inputValue, setInputValue] = useState("");
+  const [open, setOpen] = useState(false);
 
   const filtered = useMemo(() => {
     if (!inputValue) return options;
@@ -85,8 +86,13 @@ export function Combobox({
       value={[value]}
       onValueChange={(details) => {
         const next = details.value[0];
-        if (next !== undefined) onChange(next);
+        if (next !== undefined) {
+          onChange(next);
+          setOpen(false);
+        }
       }}
+      open={open}
+      onOpenChange={(details) => setOpen(details.open)}
       inputBehavior="autohighlight"
       onInputValueChange={(details) => setInputValue(details.inputValue)}
       disabled={disabled}

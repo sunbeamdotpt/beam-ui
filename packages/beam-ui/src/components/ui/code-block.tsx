@@ -32,6 +32,8 @@ export interface CodeBlockProps {
   versionToggle?: ToggleGroup;
   /** Optional mode toggle (appears in controls bar as pill group). */
   modeToggle?: ToggleGroup;
+  /** If true, line numbers are shown next to the code. Defaults to true. */
+  showLineNumbers?: boolean;
   /** Additional Panda CSS classes. */
   className?: string;
 }
@@ -121,11 +123,39 @@ function PillToggle({
  * />
  * ```
  */
+/* ------------------------------------------------------------------ */
+/* Code content with optional line numbers                             */
+/* ------------------------------------------------------------------ */
+function CodeContent({
+  content,
+  showLineNumbers,
+}: {
+  content: ReactNode;
+  showLineNumbers: boolean;
+}) {
+  if (!showLineNumbers || typeof content !== "string") {
+    return <>{content}</>;
+  }
+
+  const lines = content.split("\n");
+  return (
+    <div className={codeLines}>
+      {lines.map((line, i) => (
+        <div key={i} className={codeLine}>
+          <span className={lineNumber}>{i + 1}</span>
+          <span className={lineContent}>{line || " "}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function CodeBlock({
   tabs,
   streamToggle,
   versionToggle,
   modeToggle,
+  showLineNumbers = true,
   className,
 }: CodeBlockProps): ReactNode {
   const [stream, setStream] = useState(
@@ -298,7 +328,10 @@ export function CodeBlock({
       {tabs.map((tab) => (
         <TabContent key={tab.label} value={tab.label} className={codeBody}>
           <div data-code-content="">
-            {resolveContent(tab)}
+            <CodeContent
+              content={resolveContent(tab)}
+              showLineNumbers={showLineNumbers}
+            />
           </div>
         </TabContent>
       ))}
@@ -393,6 +426,32 @@ const codeBody = css({
   overflowX: "auto",
   lineHeight: 1.7,
   "& pre": { margin: 0, fontFamily: "mono" },
+});
+
+const codeLines = css({
+  display: "flex",
+  flexDirection: "column",
+  fontFamily: "mono",
+});
+
+const codeLine = css({
+  display: "flex",
+  alignItems: "flex-start",
+  gap: "4",
+});
+
+const lineNumber = css({
+  display: "inline-block",
+  width: "6",
+  textAlign: "right",
+  color: "chrome.30",
+  fontSize: "sm",
+  userSelect: "none",
+});
+
+const lineContent = css({
+  flex: 1,
+  whiteSpace: "pre",
 });
 
 /* ------------------------------------------------------------------ */

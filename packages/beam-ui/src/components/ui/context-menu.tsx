@@ -91,28 +91,35 @@ const separatorStyle = css({
   mx: "0",
 });
 
+const rootWrapper = css({
+  display: "inline-block",
+  width: "fit-content",
+});
+
 // ContextMenu function is documented above, before the const contentStyle declaration
 export function ContextMenu({ items, children }: ContextMenuProps): ReactNode {
   return (
-    <MenuRoot>
-      <MenuContextTrigger asChild>{children}</MenuContextTrigger>
-      <MenuPositioner>
-        <MenuContent className={contentStyle}>
-          {items.map((item, i) => (
-            <div key={i}>
-              {item.divider && <MenuSeparator className={separatorStyle} />}
-              <MenuItem
-                value={item.label}
-                className={cx(itemStyle, item.danger && itemDangerStyle)}
-                onClick={item.onClick}
-              >
-                {item.icon && <Icon name={item.icon} size={16} className={iconStyle} />}
-                {item.label}
-              </MenuItem>
-            </div>
-          ))}
-        </MenuContent>
-      </MenuPositioner>
-    </MenuRoot>
+    <div className={rootWrapper}>
+      <MenuRoot>
+        <MenuContextTrigger asChild>{children}</MenuContextTrigger>
+        <MenuPositioner>
+          <MenuContent className={contentStyle}>
+            {items.map((item, i) => (
+              <div key={i}>
+                {item.divider && <MenuSeparator className={separatorStyle} />}
+                <MenuItem
+                  value={item.label}
+                  className={cx(itemStyle, item.danger && itemDangerStyle)}
+                  onClick={item.onClick}
+                >
+                  {item.icon && <Icon name={item.icon} size={16} className={iconStyle} />}
+                  {item.label}
+                </MenuItem>
+              </div>
+            ))}
+          </MenuContent>
+        </MenuPositioner>
+      </MenuRoot>
+    </div>
   );
 }
