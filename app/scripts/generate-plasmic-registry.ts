@@ -15,9 +15,27 @@
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { parse, type PropItem } from "react-docgen-typescript";
-import { skipComponents } from "../src/plasmic/registry.overrides";
+import { overrides, skipComponents, type ComponentOverride } from "../src/plasmic/registry.overrides";
 
 const SRC = new URL("../../packages/beam-ui/src/components/", import.meta.url).pathname;
+
+/** Apply registry.overrides.tsx adjustments at generation time so we can also
+ * emit a JSON sidecar of the final metadata for static validation. */
+function applyOverride(name: string, meta: Record<string, unknown>): Record<string, unknown> {
+  const o = overrides[name];
+  if (!o) return meta;
+  const props: Record<string, unknown> = { ...(meta.props as Record<string, unknown> ?? {}) };
+  for (const [k, v] of Object.entries(o.props ?? {})) {
+    if (v === null) delete props[k];
+    else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };
+  }
+  return {
+    ...meta,
+    displayName: o.displayName ?? meta.displayName,
+    description: o.description ?? meta.description,
+    props,
+  };
+}
 const ROOT_IMPORT = "@sunbeam/beam-ui";
 
 /** component file → package subpath (heavy deps, lazy-registered). */
@@ -241,6 +259,8 @@ const lines: string[] = [
   `export function registerBeamComponents(): void {`,
 ];
 
+const finalMetas: Record<string, unknown>[] = [];
+
 for (const c of components) {
   const ref = c.importPath === ROOT_IMPORT ? c.name : `${c.name}Host`;
   const meta: Record<string, unknown> = {
@@ -250,13 +270,19 @@ for (const c of components) {
     importName: c.name,
     props: c.props,
   };
-  lines.push(`  registerComponent(withSanitizedProps(${ref}), withOverride(${JSON.stringify(c.name)}, ${JSON.stringify(meta, null, 2)}));`);
+  const finalMeta = applyOverride(c.name, meta);
+  finalMetas.push(finalMeta);
+  const varName = `metaBeam${c.name}`;
+  lines.push(`  const ${varName} = withOverride(${JSON.stringify(c.name)}, ${JSON.stringify(meta, null, 2)});`);
+  lines.push(`  beamComponentRegistry.push(${varName});`);
+  lines.push(`  registerComponent(withSanitizedProps(${ref}), ${varName});`);
 }
 
 lines.push(`}`);
 lines.push(``);
 lines.push(`// Overrides are applied at runtime so registry.overrides.tsx can use JSX.`);
 lines.push(`import { overrides, type ComponentOverride } from "./registry.overrides";`);
+lines.push(`export const beamComponentRegistry: Record<string, unknown>[] = [];`);
 lines.push(`function withOverride(name: string, meta: Record<string, unknown>): any {`);
 lines.push(`  const o: ComponentOverride | undefined = overrides[name];`);
 lines.push(`  if (!o) return meta;`);
@@ -270,8 +296,13 @@ lines.push(`}`);
 lines.push(``);
 
 writeFileSync(new URL("../src/plasmic/components.generated.tsx", import.meta.url), lines.join("\n"));
+writeFileSync(
+  new URL("../src/plasmic/components.generated.json", import.meta.url),
+  JSON.stringify(finalMetas, null, 2),
+);
 const skippedNote = skipComponents.length ? `, skipped: ${skipComponents.join(", ")}` : "";
 console.log(`  wrote components.generated.tsx (${components.length} components: ${root.length} root, ${heavy.length} lazy${skippedNote})`);
+console.log(`  wrote components.generated.json (${finalMetas.length} metadata entries)`);
 if (totalUnmapped > 0) {
   console.log(`  ${totalUnmapped} data props exposed as advanced JSON controls:`);
 }

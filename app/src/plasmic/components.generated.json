@@ -1,0 +1,2460 @@
+[
+  {
+    "name": "BeamAccordion",
+    "displayName": "Beam / Accordion",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Accordion",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of accordion items to render.",
+        "advanced": true
+      },
+      "multiple": {
+        "type": "boolean",
+        "description": "If true, multiple sections can be expanded simultaneously; otherwise only one. Defaults to false.",
+        "defaultValue": "false"
+      },
+      "defaultValue": {
+        "type": "object",
+        "description": "Section(s) expanded by default; array of `value` strings.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamActivityHeatmap",
+    "displayName": "Beam / ActivityHeatmap",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ActivityHeatmap",
+    "props": {
+      "data": {
+        "type": "object",
+        "required": true,
+        "description": "Array of daily activity data (last 365 days).",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamApiLayout",
+    "displayName": "Beam / ApiLayout",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ApiLayout",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Page content.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "ApiLayout"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamAssigneePicker",
+    "displayName": "Beam / AssigneePicker",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "AssigneePicker",
+    "props": {
+      "options": {
+        "type": "object",
+        "required": true,
+        "description": "List of available users to pick from.",
+        "advanced": true
+      },
+      "selected": {
+        "type": "object",
+        "required": true,
+        "description": "Array of selected user IDs.",
+        "advanced": true
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text shown when no users are selected. Defaults to \"Assignees\".",
+        "defaultValue": "Assignees"
+      }
+    }
+  },
+  {
+    "name": "BeamLoginForm",
+    "displayName": "Beam / LoginForm",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "LoginForm",
+    "props": {
+      "oauthProviders": {
+        "type": "object",
+        "description": "OAuth provider buttons to display (optional).",
+        "advanced": true
+      },
+      "error": {
+        "type": "string",
+        "description": "Error message displayed in a callout (optional)."
+      },
+      "loading": {
+        "type": "boolean",
+        "description": "If true, inputs are disabled and submit button shows spinner. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamSignUpForm",
+    "displayName": "Beam / SignUpForm",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "SignUpForm",
+    "props": {
+      "error": {
+        "type": "string",
+        "description": "Error message displayed in a callout (optional)."
+      },
+      "loading": {
+        "type": "boolean",
+        "description": "If true, inputs are disabled and submit button shows spinner. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamForgotPasswordForm",
+    "displayName": "Beam / ForgotPasswordForm",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ForgotPasswordForm",
+    "props": {
+      "error": {
+        "type": "string",
+        "description": "Error message displayed in a callout (optional)."
+      },
+      "loading": {
+        "type": "boolean",
+        "description": "If true, input is disabled and submit button shows spinner. Defaults to false.",
+        "defaultValue": "false"
+      },
+      "success": {
+        "type": "boolean",
+        "description": "If true, shows success message instead of the form. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamTwoFactorForm",
+    "displayName": "Beam / TwoFactorForm",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "TwoFactorForm",
+    "props": {
+      "error": {
+        "type": "string",
+        "description": "Error message displayed in a callout (optional)."
+      },
+      "loading": {
+        "type": "boolean",
+        "description": "If true, input is disabled and submit button shows spinner. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamAvatar",
+    "displayName": "Beam / Avatar",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Avatar",
+    "props": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "description": "Person's name (used for initials fallback and accessibility)."
+      },
+      "src": {
+        "type": "string",
+        "description": "Image URL; if omitted, renders initials on a colored background."
+      },
+      "size": {
+        "type": "choice",
+        "description": "Avatar size. Defaults to `\"md\"` (40px).",
+        "options": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "defaultValue": "md"
+      }
+    }
+  },
+  {
+    "name": "BeamBadge",
+    "displayName": "Beam / Badge",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Badge",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Badge label text.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Badge"
+        }
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Visual style. Defaults to `\"premier\"`.",
+        "options": [
+          "featured",
+          "premier",
+          "verified",
+          "partner",
+          "community",
+          "stable",
+          "new",
+          "beta",
+          "preview",
+          "experimental",
+          "deprecated",
+          "open",
+          "draft",
+          "review",
+          "approved",
+          "merged",
+          "closed",
+          "revision",
+          "critical",
+          "high",
+          "medium",
+          "low",
+          "section"
+        ],
+        "defaultValue": "premier"
+      }
+    }
+  },
+  {
+    "name": "BeamBentoItem",
+    "displayName": "Beam / BentoItem",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "BentoItem",
+    "props": {
+      "variant": {
+        "type": "choice",
+        "required": true,
+        "description": "Layout variant: `large` (2x2 grid cell), `horizontal` (2-col row), or `small` (compact).",
+        "options": [
+          "small",
+          "large",
+          "horizontal"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "required": true,
+        "description": "Card heading."
+      },
+      "description": {
+        "type": "string",
+        "required": true,
+        "description": "Card description text."
+      },
+      "difficulty": {
+        "type": "string",
+        "required": true,
+        "description": "Difficulty level (e.g., \"Beginner\", \"Advanced\"); displayed in label."
+      },
+      "category": {
+        "type": "string",
+        "required": true,
+        "description": "Category tag (e.g., \"Web Development\"); displayed as badge."
+      },
+      "imageAlt": {
+        "type": "string",
+        "description": "Alt text for image (currently unused)."
+      },
+      "href": {
+        "type": "string",
+        "description": "Internal or external link target. Defaults to \"/guides\".",
+        "defaultValue": "/guides"
+      },
+      "children": {
+        "type": "slot",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "BentoItem"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamBranchSelector",
+    "displayName": "Beam / BranchSelector",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "BranchSelector",
+    "props": {
+      "branches": {
+        "type": "object",
+        "required": true,
+        "description": "Array of branch names to choose from.",
+        "advanced": true
+      },
+      "tags": {
+        "type": "object",
+        "required": true,
+        "description": "Array of tag names to choose from.",
+        "advanced": true
+      },
+      "current": {
+        "type": "string",
+        "required": true,
+        "description": "Currently selected branch or tag name."
+      },
+      "defaultBranch": {
+        "type": "string",
+        "description": "Name of the default/main branch (shown with \"default\" badge)."
+      }
+    }
+  },
+  {
+    "name": "BeamBreadcrumbs",
+    "displayName": "Beam / Breadcrumbs",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Breadcrumbs",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of breadcrumb items. Last item is rendered as current page (no link).",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamButton",
+    "displayName": "Beam / Button",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Button",
+    "props": {
+      "variant": {
+        "type": "choice",
+        "description": "Visual style. Defaults to `\"dark\"`.",
+        "options": [
+          "text",
+          "dark",
+          "cream",
+          "ghost",
+          "primary"
+        ],
+        "defaultValue": "dark"
+      },
+      "href": {
+        "type": "string",
+        "description": "When set, the component renders as a link (or as the `as` component with this href)."
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "Disables interaction and dims the visual."
+      },
+      "children": {
+        "type": "slot",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Button"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamCallout",
+    "displayName": "Beam / Callout",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Callout",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Callout message content.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Callout"
+        }
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Visual style and semantics. Defaults to `\"tip\"`.",
+        "options": [
+          "tip",
+          "warning",
+          "info"
+        ],
+        "defaultValue": "tip"
+      }
+    }
+  },
+  {
+    "name": "BeamCard",
+    "displayName": "Beam / Card",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Card",
+    "props": {
+      "variant": {
+        "type": "choice",
+        "description": "Visual surface variant.",
+        "options": [
+          "elevated",
+          "outlined"
+        ]
+      },
+      "icon": {
+        "type": "string",
+        "description": "Material icon name. When provided alongside `title`, renders a structured content card."
+      },
+      "title": {
+        "type": "string",
+        "description": "Card heading. When provided, renders a structured content card instead of a generic container."
+      },
+      "description": {
+        "type": "string",
+        "description": "Card description text."
+      },
+      "href": {
+        "type": "string",
+        "description": "Link destination. When provided, the whole card becomes a link."
+      },
+      "action": {
+        "type": "object",
+        "description": "Internal call-to-action link rendered inside the card.",
+        "advanced": true
+      },
+      "children": {
+        "type": "slot",
+        "description": "Generic card content. Ignored when `title` is provided.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Card"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamLineChart",
+    "displayName": "Beam / LineChart",
+    "importPath": "@sunbeam/beam-ui/charts",
+    "importName": "LineChart",
+    "props": {
+      "data": {
+        "type": "object",
+        "required": true,
+        "description": "Array of data points with a `label` key and numeric data series.",
+        "advanced": true
+      },
+      "lines": {
+        "type": "object",
+        "required": true,
+        "description": "Array of line series; each specifies a data `key`, optional `color`, and optional `label`.",
+        "advanced": true
+      },
+      "height": {
+        "type": "number",
+        "description": "Chart height in pixels. Defaults to 300.",
+        "defaultValue": "300"
+      }
+    }
+  },
+  {
+    "name": "BeamBarChart",
+    "displayName": "Beam / BarChart",
+    "importPath": "@sunbeam/beam-ui/charts",
+    "importName": "BarChart",
+    "props": {
+      "data": {
+        "type": "object",
+        "required": true,
+        "description": "Array of data points with a `label` key and numeric data series.",
+        "advanced": true
+      },
+      "bars": {
+        "type": "object",
+        "required": true,
+        "description": "Array of bar series; each specifies a data `key`, optional `color`, and optional `label`.",
+        "advanced": true
+      },
+      "height": {
+        "type": "number",
+        "description": "Chart height in pixels. Defaults to 300.",
+        "defaultValue": "300"
+      }
+    }
+  },
+  {
+    "name": "BeamPieChart",
+    "displayName": "Beam / PieChart",
+    "importPath": "@sunbeam/beam-ui/charts",
+    "importName": "PieChart",
+    "props": {
+      "data": {
+        "type": "object",
+        "required": true,
+        "description": "Array of segments; each with `name`, `value`, and optional `color`.",
+        "advanced": true
+      },
+      "height": {
+        "type": "number",
+        "description": "Chart height in pixels. Defaults to 300.",
+        "defaultValue": "300"
+      },
+      "donut": {
+        "type": "boolean",
+        "description": "If true, renders as a donut (hollow center) instead of a pie. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamAreaChart",
+    "displayName": "Beam / AreaChart",
+    "importPath": "@sunbeam/beam-ui/charts",
+    "importName": "AreaChart",
+    "props": {
+      "data": {
+        "type": "object",
+        "required": true,
+        "description": "Array of data points with a `label` key and numeric data series.",
+        "advanced": true
+      },
+      "areas": {
+        "type": "object",
+        "required": true,
+        "description": "Array of area series; each specifies a data `key`, optional `color`, and optional `label`.",
+        "advanced": true
+      },
+      "height": {
+        "type": "number",
+        "description": "Chart height in pixels. Defaults to 300.",
+        "defaultValue": "300"
+      }
+    }
+  },
+  {
+    "name": "BeamCheckbox",
+    "displayName": "Beam / Checkbox",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Checkbox",
+    "props": {
+      "checked": {
+        "type": "boolean",
+        "required": true,
+        "description": "Whether the checkbox is checked."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label text displayed next to the checkbox."
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "If true, disables interaction. Defaults to false.",
+        "defaultValue": "false"
+      },
+      "indeterminate": {
+        "type": "boolean",
+        "description": "If true, shows a dash (indeterminate state) instead of a checkmark. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamClipboard",
+    "displayName": "Beam / Clipboard",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Clipboard",
+    "props": {
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Text to copy to clipboard when triggered."
+      },
+      "children": {
+        "type": "slot",
+        "description": "Custom trigger element (e.g., button or icon). If omitted, renders a default \"Copy\" button.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Clipboard"
+        }
+      },
+      "timeout": {
+        "type": "number",
+        "description": "Duration (ms) to show \"Copied!\" feedback. Defaults to 2000.",
+        "defaultValue": "2000"
+      }
+    }
+  },
+  {
+    "name": "BeamCodeBlock",
+    "displayName": "Beam / CodeBlock",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "CodeBlock",
+    "props": {
+      "tabs": {
+        "type": "object",
+        "required": true,
+        "description": "Array of code tabs to display.",
+        "advanced": true
+      },
+      "streamToggle": {
+        "type": "object",
+        "description": "Optional streaming mode toggle (appears in top bar).",
+        "advanced": true
+      },
+      "versionToggle": {
+        "type": "object",
+        "description": "Optional version toggle (appears in controls bar as pill group).",
+        "advanced": true
+      },
+      "modeToggle": {
+        "type": "object",
+        "description": "Optional mode toggle (appears in controls bar as pill group).",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamCodeEditor",
+    "displayName": "Beam / CodeEditor",
+    "importPath": "@sunbeam/beam-ui/code-editor",
+    "importName": "CodeEditor",
+    "props": {
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Controlled text value (the code being edited)."
+      },
+      "language": {
+        "type": "string",
+        "description": "Language for syntax highlighting (e.g., \"javascript\", \"typescript\", \"python\", \"rust\"). Defaults to no highlighting."
+      },
+      "height": {
+        "type": "string",
+        "description": "CSS height of the editor viewport. Defaults to `\"300px\"`.",
+        "defaultValue": "300px"
+      },
+      "readOnly": {
+        "type": "boolean",
+        "description": "If true, the editor is read-only and cannot be modified. Defaults to false.",
+        "defaultValue": "false"
+      },
+      "showLineNumbers": {
+        "type": "boolean",
+        "description": "If true, line numbers are shown in the left gutter. Defaults to true.",
+        "defaultValue": "true"
+      },
+      "softWrap": {
+        "type": "boolean",
+        "description": "If true, long lines wrap instead of scrolling horizontally. Defaults to false.",
+        "defaultValue": "false"
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text shown when the editor is empty."
+      },
+      "extensions": {
+        "type": "object",
+        "description": "Extra CodeMirror extensions to append. Typed as unknown[] to avoid Extension symbol mismatch when the caller uses a different",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamColorPicker",
+    "displayName": "Beam / ColorPicker",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ColorPicker",
+    "props": {
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Current hex color value (e.g., `\"#FF5733\"`)."
+      },
+      "presets": {
+        "type": "object",
+        "description": "Array of preset hex colors to display in the swatch grid. Defaults to a curated palette.",
+        "advanced": true
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label shown above the color picker."
+      }
+    }
+  },
+  {
+    "name": "BeamCombobox",
+    "displayName": "Beam / Combobox",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Combobox",
+    "props": {
+      "options": {
+        "type": "object",
+        "required": true,
+        "description": "Array of options to display in the dropdown.",
+        "advanced": true
+      },
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Currently selected option value."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text shown in the input when no option is selected. Defaults to `\"Search...\"`.",
+        "defaultValue": "Search..."
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "If true, the combobox is disabled and cannot be interacted with. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamCommentThread",
+    "displayName": "Beam / CommentThread",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "CommentThread",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of comments and timeline events, rendered in chronological order.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamCommitGraph",
+    "displayName": "Beam / CommitGraph",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "CommitGraph",
+    "props": {
+      "commits": {
+        "type": "object",
+        "required": true,
+        "description": "Array of commits to display, in chronological order.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamContextMenu",
+    "displayName": "Beam / ContextMenu",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ContextMenu",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of menu items to display.",
+        "advanced": true
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Element or component that triggers the context menu on right-click.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "ContextMenu"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamDatePicker",
+    "displayName": "Beam / DatePicker",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "DatePicker",
+    "props": {
+      "value": {
+        "type": "string",
+        "description": "Current date value as ISO 8601 string (e.g., `\"2024-12-25\"`)."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label shown above the date input."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text shown in the input when no date is selected. Defaults to `\"Select date\"`.",
+        "defaultValue": "Select date"
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "If true, the date picker is disabled and cannot be interacted with. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamDiagramRenderer",
+    "displayName": "Beam / DiagramRenderer",
+    "importPath": "@sunbeam/beam-ui/diagram",
+    "importName": "DiagramRenderer",
+    "props": {
+      "code": {
+        "type": "string",
+        "required": true,
+        "description": "Mermaid diagram syntax (flowchart, sequence, gantt, etc.)."
+      }
+    }
+  },
+  {
+    "name": "BeamDialog",
+    "displayName": "Beam / Dialog",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Dialog",
+    "props": {
+      "open": {
+        "type": "boolean",
+        "required": true,
+        "description": "If true, the dialog is visible; if false, it is hidden.",
+        "defaultValue": true
+      },
+      "title": {
+        "type": "string",
+        "required": true,
+        "description": "Title displayed at the top of the dialog.",
+        "defaultValue": "Dialog title"
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Main content of the dialog (typically text, form fields, or other components).",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Dialog"
+        }
+      },
+      "actions": {
+        "type": "slot",
+        "description": "Optional action buttons (typically rendered at the bottom right of the dialog).",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Save"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamDiffViewer",
+    "displayName": "Beam / DiffViewer",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "DiffViewer",
+    "props": {
+      "hunks": {
+        "type": "object",
+        "required": true,
+        "description": "Array of hunks to display.",
+        "advanced": true
+      },
+      "oldFileName": {
+        "type": "string",
+        "description": "Optional old file name (shown in unified mode or when different from newFileName)."
+      },
+      "newFileName": {
+        "type": "string",
+        "description": "Optional new file name (shown in all modes)."
+      },
+      "mode": {
+        "type": "choice",
+        "description": "Render mode: \"unified\" (single column) or \"split\" (side-by-side). Defaults to `\"unified\"`.",
+        "options": [
+          "unified",
+          "split"
+        ],
+        "defaultValue": "unified"
+      }
+    }
+  },
+  {
+    "name": "BeamDocsLayout",
+    "displayName": "Beam / DocsLayout",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "DocsLayout",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Page content.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "DocsLayout"
+        }
+      },
+      "pageDates": {
+        "type": "object",
+        "description": "Optional map of route paths to last-updated timestamps, shown in the right rail.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamDropdownMenu",
+    "displayName": "Beam / DropdownMenu",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "DropdownMenu",
+    "props": {
+      "items": {
+        "type": "object",
+        "description": "Flat list of items (mutually exclusive with `groups`).",
+        "advanced": true
+      },
+      "groups": {
+        "type": "object",
+        "description": "Grouped list of items (mutually exclusive with `items`).",
+        "advanced": true
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Element or component that triggers the dropdown on click.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "DropdownMenu"
+        }
+      },
+      "positioning": {
+        "type": "object",
+        "description": "Positioning options for Ark UI's MenuRoot (e.g., `{ placement: \"bottom-start\" }`).",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamEditable",
+    "displayName": "Beam / Editable",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Editable",
+    "props": {
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Current text value (shown in preview mode)."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text shown in edit mode if the field is empty. Defaults to `\"Click to edit...\"`.",
+        "defaultValue": "Click to edit..."
+      }
+    }
+  },
+  {
+    "name": "BeamEmptyState",
+    "displayName": "Beam / EmptyState",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "EmptyState",
+    "props": {
+      "icon": {
+        "type": "string",
+        "description": "Optional Material Design icon name (e.g., \"inbox_zero\", \"search\")."
+      },
+      "title": {
+        "type": "string",
+        "required": true,
+        "description": "Main heading displayed in the empty state.",
+        "defaultValue": "Nothing here"
+      },
+      "description": {
+        "type": "string",
+        "description": "Optional explanatory text shown below the title.",
+        "defaultValue": "Add your first item to get started."
+      },
+      "action": {
+        "type": "slot",
+        "description": "Optional call-to-action button or element (e.g., a \"Create\" button).",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Create item"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamFeatureTile",
+    "displayName": "Beam / FeatureTile",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "FeatureTile",
+    "props": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "description": "Display name of the feature (e.g., \"Analytics\", \"File Upload\")."
+      },
+      "endpoint": {
+        "type": "string",
+        "required": true,
+        "description": "URL endpoint or path for this feature."
+      },
+      "icon": {
+        "type": "string",
+        "required": true,
+        "description": "Material Design icon name to display above the name."
+      }
+    }
+  },
+  {
+    "name": "BeamFileList",
+    "displayName": "Beam / FileList",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "FileList",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of files and folders to display.",
+        "advanced": true
+      },
+      "selected": {
+        "type": "object",
+        "required": true,
+        "description": "Set of currently selected item IDs.",
+        "advanced": true
+      },
+      "layout": {
+        "type": "choice",
+        "description": "Render layout: \"list\" (detailed table) or \"grid\" (icon grid). Defaults to `\"list\"`.",
+        "options": [
+          "list",
+          "grid"
+        ],
+        "defaultValue": "list"
+      },
+      "font": {
+        "type": "choice",
+        "description": "Font family for file names: \"body\" (Ysabeau Infant) or \"mono\" (Monaspace Argon). Defaults to `\"body\"`.",
+        "options": [
+          "body",
+          "mono"
+        ],
+        "defaultValue": "body"
+      }
+    }
+  },
+  {
+    "name": "BeamFileUpload",
+    "displayName": "Beam / FileUpload",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "FileUpload",
+    "props": {
+      "accept": {
+        "type": "string",
+        "description": "MIME type or file extension filter (e.g., `\"image/*\"`, `\".pdf,.docx\"`)."
+      },
+      "multiple": {
+        "type": "boolean",
+        "description": "If true, multiple files can be selected at once. If false, only one file at a time. Defaults to false.",
+        "defaultValue": "false"
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "If true, the upload zone is disabled and cannot accept files. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamFooter",
+    "displayName": "Beam / Footer",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Footer",
+    "props": {}
+  },
+  {
+    "name": "BeamFullwidthLayout",
+    "displayName": "Beam / FullwidthLayout",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "FullwidthLayout",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Page content.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "FullwidthLayout"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamHeader",
+    "displayName": "Beam / Header",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Header",
+    "props": {
+      "showThemeToggle": {
+        "type": "boolean",
+        "description": "Show a theme toggle button (right-aligned). Defaults to true.",
+        "defaultValue": "true"
+      },
+      "actions": {
+        "type": "slot",
+        "description": "Extra elements rendered in the right group before the theme toggle.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Action"
+        }
+      },
+      "brand": {
+        "type": "slot",
+        "description": "Replace the default brand link with a custom element.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Beam"
+        }
+      },
+      "navLinks": {
+        "type": "object",
+        "description": "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set.",
+        "advanced": true
+      },
+      "breadcrumbs": {
+        "type": "object",
+        "description": "Breadcrumb items shown in place of nav links. When set, nav links are hidden.",
+        "advanced": true
+      },
+      "drawerSections": {
+        "type": "object",
+        "description": "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar.",
+        "advanced": true
+      },
+      "searchItems": {
+        "type": "object",
+        "description": "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections.",
+        "advanced": true
+      },
+      "searchPlaceholder": {
+        "type": "string",
+        "description": "Placeholder text for the search input. Defaults to \"Search docs...\".",
+        "defaultValue": "Search docs..."
+      },
+      "showSearch": {
+        "type": "boolean",
+        "description": "Show the search input and Cmd+K shortcut. Defaults to true.",
+        "defaultValue": "true"
+      },
+      "fullWidth": {
+        "type": "boolean",
+        "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamHoverCard",
+    "displayName": "Beam / HoverCard",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "HoverCard",
+    "props": {
+      "trigger": {
+        "type": "slot",
+        "required": true,
+        "description": "Content that triggers the hover card on mouse hover.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Hover me"
+        }
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Content displayed in the popover when hovering.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "HoverCard"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamIcon",
+    "displayName": "Beam / Icon",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Icon",
+    "props": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "description": "Material Symbol icon name (e.g., \"home\", \"settings\", \"check\")."
+      },
+      "filled": {
+        "type": "boolean",
+        "description": "Apply filled variant (FILL 1 font-variation). Defaults to `false`."
+      },
+      "label": {
+        "type": "string",
+        "description": "When provided, the icon is treated as meaningful: role=\"img\" + aria-label. Otherwise aria-hidden=\"true\"."
+      }
+    }
+  },
+  {
+    "name": "BeamKanbanCardView",
+    "displayName": "Beam / KanbanCardView",
+    "importPath": "@sunbeam/beam-ui/kanban",
+    "importName": "KanbanCardView",
+    "props": {
+      "card": {
+        "type": "object",
+        "required": true,
+        "advanced": true
+      },
+      "ghost": {
+        "type": "boolean"
+      }
+    }
+  },
+  {
+    "name": "BeamKanbanCardDetail",
+    "displayName": "Beam / KanbanCardDetail",
+    "importPath": "@sunbeam/beam-ui/kanban",
+    "importName": "KanbanCardDetail",
+    "props": {
+      "card": {
+        "type": "object",
+        "required": true,
+        "advanced": true
+      },
+      "open": {
+        "type": "boolean",
+        "required": true
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamKbd",
+    "displayName": "Beam / Kbd",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Kbd",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Keyboard key name or symbol (e.g., \"Ctrl\", \"⌘\", \"Enter\", \"⌘K\").",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Kbd"
+        }
+      },
+      "platform": {
+        "type": "choice",
+        "description": "Override platform detection. Defaults to auto-detect based on user agent.",
+        "options": [
+          "mac",
+          "windows",
+          "linux"
+        ]
+      }
+    }
+  },
+  {
+    "name": "BeamLabelPicker",
+    "displayName": "Beam / LabelPicker",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "LabelPicker",
+    "props": {
+      "options": {
+        "type": "object",
+        "required": true,
+        "description": "Array of available labels to choose from.",
+        "advanced": true
+      },
+      "selected": {
+        "type": "object",
+        "required": true,
+        "description": "Array of selected label IDs.",
+        "advanced": true
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text when no labels are selected. Defaults to `\"Labels\"`.",
+        "defaultValue": "Labels"
+      }
+    }
+  },
+  {
+    "name": "BeamList",
+    "displayName": "Beam / List",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "List",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of items to display.",
+        "advanced": true
+      },
+      "ordered": {
+        "type": "boolean",
+        "description": "If true, render as `<ol>` (numbered). Defaults to `<ul>` (unordered)."
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Visual style. Defaults to `\"default\"`.",
+        "options": [
+          "default",
+          "compact",
+          "bordered"
+        ],
+        "defaultValue": "default"
+      }
+    }
+  },
+  {
+    "name": "BeamMarkdownEditor",
+    "displayName": "Beam / MarkdownEditor",
+    "importPath": "@sunbeam/beam-ui/markdown",
+    "importName": "MarkdownEditor",
+    "props": {
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Current markdown content."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text in the textarea. Defaults to `\"Write your markdown here...\"`.",
+        "defaultValue": "Write your markdown here..."
+      },
+      "minHeight": {
+        "type": "string",
+        "description": "Minimum height of the editor area. Defaults to `\"200px\"`.",
+        "defaultValue": "200px"
+      }
+    }
+  },
+  {
+    "name": "BeamMarkdownRenderer",
+    "displayName": "Beam / MarkdownRenderer",
+    "importPath": "@sunbeam/beam-ui/markdown",
+    "importName": "MarkdownRenderer",
+    "props": {
+      "content": {
+        "type": "string",
+        "required": true,
+        "description": "Markdown source string (CommonMark + GitHub Flavored Markdown). Supports inline/block LaTeX with `$...$` (inline) and `$$...$$` (display)."
+      }
+    }
+  },
+  {
+    "name": "BeamMathRenderer",
+    "displayName": "Beam / MathRenderer",
+    "importPath": "@sunbeam/beam-ui/math",
+    "importName": "MathRenderer",
+    "props": {
+      "math": {
+        "type": "string",
+        "required": true,
+        "description": "LaTeX math string (e.g., `\"E = mc^2\"`, `\"\\\\int_0^\\\\infty e^{-x^2} dx\"`)."
+      },
+      "display": {
+        "type": "boolean",
+        "description": "If true, renders as block (centered, full-width). Defaults to `false` (inline).",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamMilestonePicker",
+    "displayName": "Beam / MilestonePicker",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "MilestonePicker",
+    "props": {
+      "options": {
+        "type": "object",
+        "required": true,
+        "description": "Array of available milestones to choose from.",
+        "advanced": true
+      },
+      "selected": {
+        "type": "string",
+        "required": true,
+        "description": "ID of the currently selected milestone, or null if none selected."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text when no milestone is selected. Defaults to `\"Milestone\"`.",
+        "defaultValue": "Milestone"
+      }
+    }
+  },
+  {
+    "name": "BeamModelRow",
+    "displayName": "Beam / ModelRow",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ModelRow",
+    "props": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "description": "Model name / display label."
+      },
+      "icon": {
+        "type": "string",
+        "required": true,
+        "description": "Material Symbol icon name for the model."
+      },
+      "tier": {
+        "type": "string",
+        "required": true,
+        "description": "Tier/category badge text (e.g., \"PREMIUM\", \"STANDARD\", \"BETA\")."
+      },
+      "version": {
+        "type": "string",
+        "required": true,
+        "description": "Version string (e.g., \"1.0\", \"2.5-alpha\")."
+      },
+      "description": {
+        "type": "string",
+        "required": true,
+        "description": "Short description of the model."
+      },
+      "href": {
+        "type": "string",
+        "description": "Optional link target. If provided, row becomes a link."
+      },
+      "children": {
+        "type": "slot",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "ModelRow"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamNotificationItem",
+    "displayName": "Beam / NotificationItem",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "NotificationItem",
+    "props": {
+      "notification": {
+        "type": "object",
+        "required": true,
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamNotificationCenter",
+    "displayName": "Beam / NotificationCenter",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "NotificationCenter",
+    "props": {
+      "notifications": {
+        "type": "object",
+        "required": true,
+        "description": "Array of notifications to display.",
+        "advanced": true
+      },
+      "title": {
+        "type": "string",
+        "description": "Header title. Defaults to `\"Notifications\"`.",
+        "defaultValue": "Notifications"
+      },
+      "triggerIcon": {
+        "type": "string",
+        "description": "Trigger icon name. Defaults to `\"notifications\"`.",
+        "defaultValue": "notifications"
+      },
+      "collapsibleGroups": {
+        "type": "boolean",
+        "description": "If true, groups are collapsible with unread count badges. Defaults to `false`.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamNumberInput",
+    "displayName": "Beam / NumberInput",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "NumberInput",
+    "props": {
+      "value": {
+        "type": "number",
+        "required": true,
+        "description": "Current numeric value."
+      },
+      "min": {
+        "type": "number",
+        "description": "Minimum allowed value (inclusive)."
+      },
+      "max": {
+        "type": "number",
+        "description": "Maximum allowed value (inclusive)."
+      },
+      "step": {
+        "type": "number",
+        "description": "Increment/decrement step size. Defaults to `1`.",
+        "defaultValue": "1"
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label text above the input."
+      }
+    }
+  },
+  {
+    "name": "BeamPagination",
+    "displayName": "Beam / Pagination",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Pagination",
+    "props": {
+      "currentPage": {
+        "type": "number",
+        "required": true,
+        "description": "Currently active page (1-indexed)."
+      },
+      "totalPages": {
+        "type": "number",
+        "required": true,
+        "description": "Total number of pages."
+      },
+      "pageSize": {
+        "type": "number",
+        "description": "Current items-per-page count. If provided with onPageSizeChange, shows size selector."
+      }
+    }
+  },
+  {
+    "name": "BeamPinInput",
+    "displayName": "Beam / PinInput",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "PinInput",
+    "props": {
+      "length": {
+        "type": "number",
+        "description": "Number of input slots. Defaults to `4`.",
+        "defaultValue": "4"
+      },
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Current value as a concatenated string."
+      },
+      "mask": {
+        "type": "boolean",
+        "description": "Mask input (show dots instead of digits). Defaults to `false`.",
+        "defaultValue": "false"
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label above the input."
+      }
+    }
+  },
+  {
+    "name": "BeamPopover",
+    "displayName": "Beam / Popover",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Popover",
+    "props": {
+      "trigger": {
+        "type": "slot",
+        "required": true,
+        "description": "Element or text that triggers the popover on click.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Open"
+        }
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Content displayed inside the popover body.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Popover"
+        }
+      },
+      "title": {
+        "type": "string",
+        "description": "Optional header title."
+      }
+    }
+  },
+  {
+    "name": "BeamProgressBar",
+    "displayName": "Beam / ProgressBar",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ProgressBar",
+    "props": {
+      "value": {
+        "type": "number",
+        "required": true,
+        "description": "Numeric progress value (0–100). Clamped automatically."
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Visual style. Defaults to `\"default\"`.",
+        "options": [
+          "default",
+          "success",
+          "error"
+        ],
+        "defaultValue": "default"
+      },
+      "showLabel": {
+        "type": "boolean",
+        "description": "Show percentage label. Defaults to `false`.",
+        "defaultValue": "false"
+      },
+      "size": {
+        "type": "choice",
+        "description": "Bar height. Defaults to `\"md\"`.",
+        "options": [
+          "sm",
+          "md"
+        ],
+        "defaultValue": "md"
+      }
+    }
+  },
+  {
+    "name": "BeamRadioGroup",
+    "displayName": "Beam / RadioGroup",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "RadioGroup",
+    "props": {
+      "options": {
+        "type": "object",
+        "required": true,
+        "description": "Array of radio options.",
+        "advanced": true
+      },
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Currently selected value."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional group label."
+      }
+    }
+  },
+  {
+    "name": "BeamReactionPicker",
+    "displayName": "Beam / ReactionPicker",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ReactionPicker",
+    "props": {
+      "reactions": {
+        "type": "object",
+        "required": true,
+        "description": "Array of existing reactions to display.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamRightRail",
+    "displayName": "Beam / RightRail",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "RightRail",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Table-of-contents items: each must correspond to a section heading with a matching `id`.",
+        "advanced": true
+      },
+      "lastUpdated": {
+        "type": "string",
+        "description": "Optional timestamp (e.g., \"May 1, 2026\") shown at the bottom."
+      }
+    }
+  },
+  {
+    "name": "BeamSearchInput",
+    "displayName": "Beam / SearchInput",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "SearchInput",
+    "props": {}
+  },
+  {
+    "name": "BeamSelect",
+    "displayName": "Beam / Select",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Select",
+    "props": {
+      "options": {
+        "type": "object",
+        "required": true,
+        "description": "Array of available options.",
+        "advanced": true
+      },
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Currently selected value."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text. Defaults to `\"Select…\"`.",
+        "defaultValue": "Select…"
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "Disable the select. Defaults to `false`.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamShell",
+    "displayName": "Beam / Shell",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Shell",
+    "props": {
+      "headerActions": {
+        "type": "slot",
+        "description": "Extra elements rendered in the header's right group before the theme toggle",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Action"
+        }
+      },
+      "header": {
+        "type": "slot",
+        "description": "Replace the default Header with a custom element.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Header"
+        }
+      },
+      "footer": {
+        "type": "slot",
+        "description": "Replace the default Footer with a custom element.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Footer"
+        }
+      },
+      "children": {
+        "type": "slot",
+        "description": "Content to render.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Shell"
+        }
+      },
+      "showThemeToggle": {
+        "type": "boolean",
+        "description": "Show a theme toggle button (right-aligned). Defaults to true.",
+        "defaultValue": "true"
+      },
+      "brand": {
+        "type": "slot",
+        "description": "Replace the default brand link with a custom element.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Beam"
+        }
+      },
+      "navLinks": {
+        "type": "object",
+        "description": "Navigation links for the desktop header bar. Defaults to beam-ui docs links. Ignored when `breadcrumbs` is set.",
+        "advanced": true
+      },
+      "breadcrumbs": {
+        "type": "object",
+        "description": "Breadcrumb items shown in place of nav links. When set, nav links are hidden.",
+        "advanced": true
+      },
+      "drawerSections": {
+        "type": "object",
+        "description": "Sections for the mobile drawer sidebar. Defaults to beam-ui docs sidebar.",
+        "advanced": true
+      },
+      "searchItems": {
+        "type": "object",
+        "description": "Searchable items for the Cmd+K search. Defaults to items derived from drawerSections.",
+        "advanced": true
+      },
+      "searchPlaceholder": {
+        "type": "string",
+        "description": "Placeholder text for the search input. Defaults to \"Search docs...\"."
+      },
+      "showSearch": {
+        "type": "boolean",
+        "description": "Show the search input and Cmd+K shortcut. Defaults to true."
+      },
+      "fullWidth": {
+        "type": "boolean",
+        "description": "Remove the max-width constraint so the header spans the full viewport. Defaults to false."
+      }
+    }
+  },
+  {
+    "name": "BeamSidebar",
+    "displayName": "Beam / Sidebar",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Sidebar",
+    "props": {
+      "sections": {
+        "type": "object",
+        "required": true,
+        "description": "Navigation sections to render. Each section has a title and list of items.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamSkeleton",
+    "displayName": "Beam / Skeleton",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Skeleton",
+    "props": {
+      "width": {
+        "type": "string",
+        "description": "Width (CSS string)."
+      },
+      "height": {
+        "type": "string",
+        "description": "Height (CSS string)."
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Skeleton shape. Defaults to `\"text\"`.",
+        "options": [
+          "text",
+          "circle",
+          "rect"
+        ],
+        "defaultValue": "text"
+      },
+      "count": {
+        "type": "number",
+        "description": "Number of skeletons to render (stacked vertically). Defaults to `1`.",
+        "defaultValue": "1"
+      }
+    }
+  },
+  {
+    "name": "BeamSlider",
+    "displayName": "Beam / Slider",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Slider",
+    "props": {
+      "value": {
+        "type": "number",
+        "required": true,
+        "description": "Current slider value."
+      },
+      "min": {
+        "type": "number",
+        "description": "Minimum value. Defaults to `0`.",
+        "defaultValue": "0"
+      },
+      "max": {
+        "type": "number",
+        "description": "Maximum value. Defaults to `100`.",
+        "defaultValue": "100"
+      },
+      "step": {
+        "type": "number",
+        "description": "Increment step. Defaults to `1`.",
+        "defaultValue": "1"
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label above slider."
+      }
+    }
+  },
+  {
+    "name": "BeamSpinner",
+    "displayName": "Beam / Spinner",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Spinner",
+    "props": {
+      "size": {
+        "type": "choice",
+        "description": "Size. Defaults to `\"md\"`.",
+        "options": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "defaultValue": "md"
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label shown below spinner."
+      },
+      "accent": {
+        "type": "boolean",
+        "description": "Use brand orange color instead of muted gold. Defaults to `false`.",
+        "defaultValue": "false"
+      },
+      "color": {
+        "type": "string",
+        "description": "Custom color hex (overrides accent)."
+      }
+    }
+  },
+  {
+    "name": "BeamSplitter",
+    "displayName": "Beam / Splitter",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Splitter",
+    "props": {
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Exactly two child elements to split.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Splitter"
+        }
+      },
+      "direction": {
+        "type": "choice",
+        "description": "Split direction. Defaults to `\"horizontal\"`.",
+        "options": [
+          "horizontal",
+          "vertical"
+        ],
+        "defaultValue": "horizontal"
+      },
+      "defaultSize": {
+        "type": "number",
+        "description": "Initial size of left/top panel as percentage (0–100). Defaults to `50`.",
+        "defaultValue": "50"
+      },
+      "collapsed": {
+        "type": "boolean",
+        "description": "Whether the first panel is collapsed to its minimum size."
+      },
+      "collapsedSize": {
+        "type": "number",
+        "description": "Size of the first panel when collapsed, in percent. Defaults to `0`.",
+        "defaultValue": "0"
+      }
+    }
+  },
+  {
+    "name": "BeamStatBar",
+    "displayName": "Beam / StatBar",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "StatBar",
+    "props": {
+      "stats": {
+        "type": "object",
+        "required": true,
+        "description": "Model statistics to display.",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamSteps",
+    "displayName": "Beam / Steps",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Steps",
+    "props": {
+      "steps": {
+        "type": "object",
+        "required": true,
+        "description": "Array of steps.",
+        "advanced": true
+      },
+      "currentStep": {
+        "type": "number",
+        "required": true,
+        "description": "Currently active step index (0-based)."
+      }
+    }
+  },
+  {
+    "name": "BeamSwitch",
+    "displayName": "Beam / Switch",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Switch",
+    "props": {
+      "checked": {
+        "type": "boolean",
+        "required": true,
+        "description": "Checked state."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label beside the toggle."
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "Disable interaction. Defaults to `false`.",
+        "defaultValue": "false"
+      }
+    }
+  },
+  {
+    "name": "BeamSyntaxHighlighter",
+    "displayName": "Beam / SyntaxHighlighter",
+    "importPath": "@sunbeam/beam-ui/syntax-highlighter",
+    "importName": "SyntaxHighlighter",
+    "props": {
+      "code": {
+        "type": "string",
+        "required": true,
+        "description": "Source code string to highlight."
+      },
+      "language": {
+        "type": "string",
+        "required": true,
+        "description": "Language identifier (e.g., \"javascript\", \"python\", \"rust\")."
+      },
+      "theme": {
+        "type": "choice",
+        "description": "Theme override. Defaults to theme from `useTheme()`.",
+        "options": [
+          "light",
+          "dark"
+        ]
+      },
+      "showLineNumbers": {
+        "type": "boolean",
+        "description": "Show line numbers in a gutter. Defaults to `false`.",
+        "defaultValue": "false"
+      },
+      "highlightLines": {
+        "type": "object",
+        "description": "Array of 1-based line numbers to highlight (e.g., `[1, 3, 5]`).",
+        "advanced": true
+      }
+    }
+  },
+  {
+    "name": "BeamTable",
+    "displayName": "Beam / Table",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Table",
+    "props": {
+      "columns": {
+        "type": "object",
+        "required": true,
+        "description": "Array of column definitions with keys, labels, and optional sort/width.",
+        "advanced": true
+      },
+      "rows": {
+        "type": "object",
+        "required": true,
+        "description": "Array of row objects, matched against column keys.",
+        "advanced": true
+      },
+      "selectable": {
+        "type": "boolean",
+        "description": "Whether checkboxes appear for row selection. Defaults to `false`."
+      },
+      "rowKey": {
+        "type": "string",
+        "description": "Data key to use as the unique row identifier. Defaults to `\"id\"`.",
+        "defaultValue": "id"
+      },
+      "caption": {
+        "type": "string",
+        "description": "Accessible caption for the table (visually hidden by default)."
+      }
+    }
+  },
+  {
+    "name": "BeamTabs",
+    "displayName": "Beam / Tabs",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Tabs",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of tab items with value and label.",
+        "advanced": true
+      },
+      "activeValue": {
+        "type": "string",
+        "required": true,
+        "description": "Currently active tab value."
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Visual style. Defaults to `\"default\"`.",
+        "options": [
+          "default",
+          "dark"
+        ],
+        "defaultValue": "default"
+      }
+    }
+  },
+  {
+    "name": "BeamTagsInput",
+    "displayName": "Beam / TagsInput",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "TagsInput",
+    "props": {
+      "value": {
+        "type": "object",
+        "required": true,
+        "description": "Array of tag strings.",
+        "advanced": true
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text for the input. Defaults to `\"Add tag...\"`.",
+        "defaultValue": "Add tag..."
+      },
+      "max": {
+        "type": "number",
+        "description": "Maximum number of tags allowed."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label displayed above the input."
+      }
+    }
+  },
+  {
+    "name": "BeamTextInput",
+    "displayName": "Beam / TextInput",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "TextInput",
+    "props": {
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Current input value."
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "Placeholder text displayed when empty."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label displayed above the input."
+      },
+      "error": {
+        "type": "string",
+        "description": "Error message displayed below the input with orange accent."
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "Whether the input is disabled. Defaults to `false`.",
+        "defaultValue": "false"
+      },
+      "type": {
+        "type": "choice",
+        "description": "HTML input type. Defaults to `\"text\"`.",
+        "options": [
+          "number",
+          "text",
+          "password",
+          "email"
+        ],
+        "defaultValue": "text"
+      }
+    }
+  },
+  {
+    "name": "BeamThemeToggle",
+    "displayName": "Beam / ThemeToggle",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ThemeToggle",
+    "props": {
+      "variant": {
+        "type": "choice",
+        "description": "Visual variant. Defaults to `\"icon\"`.",
+        "options": [
+          "icon",
+          "switch",
+          "pill"
+        ],
+        "defaultValue": "icon"
+      }
+    }
+  },
+  {
+    "name": "BeamToast",
+    "displayName": "Beam / Toast",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Toast",
+    "props": {
+      "message": {
+        "type": "string",
+        "required": true,
+        "description": "Message text displayed in the toast."
+      },
+      "variant": {
+        "type": "choice",
+        "description": "Visual variant. Defaults to `\"info\"`.",
+        "options": [
+          "success",
+          "error",
+          "info"
+        ],
+        "defaultValue": "info"
+      },
+      "visible": {
+        "type": "boolean",
+        "required": true,
+        "description": "Whether the toast is visible. Controls slide-in/out animation."
+      }
+    }
+  },
+  {
+    "name": "BeamToggleGroup",
+    "displayName": "Beam / ToggleGroup",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "ToggleGroup",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of toggle options with value and label.",
+        "advanced": true
+      },
+      "value": {
+        "type": "string",
+        "required": true,
+        "description": "Currently selected option value."
+      }
+    }
+  },
+  {
+    "name": "BeamToggle",
+    "displayName": "Beam / Toggle",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Toggle",
+    "props": {
+      "pressed": {
+        "type": "boolean",
+        "required": true,
+        "description": "Whether the toggle is currently pressed (active)."
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Content displayed inside the button (text, icon, or both).",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Toggle"
+        }
+      }
+    }
+  },
+  {
+    "name": "BeamTooltip",
+    "displayName": "Beam / Tooltip",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Tooltip",
+    "props": {
+      "content": {
+        "type": "string",
+        "required": true,
+        "description": "Tooltip text displayed on hover."
+      },
+      "children": {
+        "type": "slot",
+        "required": true,
+        "description": "Element that triggers the tooltip.",
+        "defaultValue": {
+          "type": "text",
+          "tag": "span",
+          "value": "Tooltip"
+        }
+      },
+      "position": {
+        "type": "choice",
+        "description": "Tooltip placement relative to the trigger. Defaults to `\"top\"`.",
+        "options": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "defaultValue": "top"
+      }
+    }
+  },
+  {
+    "name": "BeamTransferList",
+    "displayName": "Beam / TransferList",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "TransferList",
+    "props": {
+      "available": {
+        "type": "object",
+        "required": true,
+        "description": "Array of available items (left panel).",
+        "advanced": true
+      },
+      "selected": {
+        "type": "object",
+        "required": true,
+        "description": "Array of selected items (right panel).",
+        "advanced": true
+      },
+      "availableTitle": {
+        "type": "string",
+        "description": "Title for the available items panel. Defaults to `\"Available\"`.",
+        "defaultValue": "Available"
+      },
+      "selectedTitle": {
+        "type": "string",
+        "description": "Title for the selected items panel. Defaults to `\"Selected\"`.",
+        "defaultValue": "Selected"
+      }
+    }
+  },
+  {
+    "name": "BeamTreeView",
+    "displayName": "Beam / TreeView",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "TreeView",
+    "props": {
+      "nodes": {
+        "type": "object",
+        "required": true,
+        "description": "Array of root tree nodes.",
+        "advanced": true
+      },
+      "activeId": {
+        "type": "string",
+        "description": "ID of the currently active/selected node."
+      }
+    }
+  },
+  {
+    "name": "BeamWizard",
+    "displayName": "Beam / Wizard",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "Wizard",
+    "props": {
+      "steps": {
+        "type": "object",
+        "required": true,
+        "description": "Array of wizard steps with title and content.",
+        "advanced": true
+      },
+      "nextLabel": {
+        "type": "string",
+        "description": "Button label for advancing to the next step. Defaults to `\"Continue\"`.",
+        "defaultValue": "Continue"
+      },
+      "backLabel": {
+        "type": "string",
+        "description": "Button label for returning to the previous step. Defaults to `\"Back\"`.",
+        "defaultValue": "Back"
+      },
+      "completeLabel": {
+        "type": "string",
+        "description": "Button label on the final step. Defaults to `\"Finish\"`.",
+        "defaultValue": "Finish"
+      },
+      "cancelLabel": {
+        "type": "string",
+        "description": "Button label for canceling (first step only). Defaults to `\"Cancel\"`.",
+        "defaultValue": "Cancel"
+      }
+    }
+  },
+  {
+    "name": "BeamWizardModal",
+    "displayName": "Beam / WizardModal",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "WizardModal",
+    "props": {
+      "open": {
+        "type": "boolean",
+        "required": true,
+        "description": "Whether the modal is open."
+      },
+      "title": {
+        "type": "string",
+        "description": "Optional title displayed in the modal header."
+      },
+      "steps": {
+        "type": "object",
+        "required": true,
+        "description": "Array of wizard steps with title and content.",
+        "advanced": true
+      },
+      "nextLabel": {
+        "type": "string",
+        "description": "Button label for advancing to the next step. Defaults to `\"Continue\"`."
+      },
+      "backLabel": {
+        "type": "string",
+        "description": "Button label for returning to the previous step. Defaults to `\"Back\"`."
+      },
+      "completeLabel": {
+        "type": "string",
+        "description": "Button label on the final step. Defaults to `\"Finish\"`."
+      },
+      "cancelLabel": {
+        "type": "string",
+        "description": "Button label for canceling (first step only). Defaults to `\"Cancel\"`."
+      }
+    }
+  },
+  {
+    "name": "BeamWorkItemList",
+    "displayName": "Beam / WorkItemList",
+    "importPath": "@sunbeam/beam-ui",
+    "importName": "WorkItemList",
+    "props": {
+      "items": {
+        "type": "object",
+        "required": true,
+        "description": "Array of work item rows.",
+        "advanced": true
+      },
+      "selected": {
+        "type": "object",
+        "description": "Set of currently selected item IDs.",
+        "advanced": true
+      },
+      "selectable": {
+        "type": "boolean",
+        "description": "Whether checkboxes appear for row selection. Defaults to `false`.",
+        "defaultValue": "false"
+      }
+    }
+  }
+]

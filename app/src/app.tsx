@@ -15,6 +15,7 @@ import {
 } from "@sunbeam/beam-ui";
 import { pageDates } from "./generated/page-dates";
 import { PlasmicHostPage } from "./pages/plasmic-host";
+import { PlasmicKitchenSinkPage } from "./pages/plasmic-kitchen-sink";
 import { TokensPage } from "./pages/tokens";
 import { DocsHomePage } from "./pages/docs-home";
 import { DocsInteriorPage } from "./pages/docs-interior";
@@ -216,6 +217,8 @@ export function App() {
       <Routes>
         {/* Plasmic app host — bare page, no Shell chrome (BEAM-003) */}
         <Route path="plasmic-host" element={<PlasmicHostPage />} />
+        {/* Kitchen-sink verification page — bare page for screenshot regression testing */}
+        <Route path="plasmic-kitchen-sink" element={<PlasmicKitchenSinkPage />} />
         <Route element={<RouterShell />}>
           {/* Full-width pages (no sidebar) */}
           <Route index element={<TokensPage />} />
