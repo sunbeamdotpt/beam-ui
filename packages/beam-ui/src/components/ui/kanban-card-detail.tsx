@@ -73,6 +73,8 @@ export interface KanbanCardDetailProps {
   card: KanbanCardData;
   open: boolean;
   onClose: () => void;
+  /** Optional callback invoked with the new open value when visibility changes. */
+  onOpenChange?: (open: boolean) => void;
   onSave?: (card: KanbanCardData) => void;
   onDelete?: (id: string) => void;
   readOnly?: boolean;
@@ -158,6 +160,7 @@ export function KanbanCardDetail({
   card,
   open,
   onClose,
+  onOpenChange,
   onSave,
   onDelete,
   readOnly = false,
@@ -205,6 +208,7 @@ export function KanbanCardDetail({
     <DialogRoot
       open={open}
       onOpenChange={(d) => {
+        onOpenChange?.(d.open);
         if (!d.open) onClose();
       }}
     >

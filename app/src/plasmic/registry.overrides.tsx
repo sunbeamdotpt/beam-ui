@@ -258,7 +258,11 @@ const SAMPLE_KANBAN_CARD = {
   dueDate: "Aug 21",
   status: "In Progress",
   priority: "high",
-  checklist: { done: 3, total: 5 },
+  checklist: [
+    { id: "chk-1", title: "Scope components", done: true },
+    { id: "chk-2", title: "Wire tokens", done: true },
+    { id: "chk-3", title: "Test interactive mode", done: false },
+  ],
   commentCount: 4,
   attachmentCount: 1,
   shortId: "BEAM-204",
@@ -563,9 +567,28 @@ export const overrides: Record<string, ComponentOverride> = {
       name: { defaultValue: "star" },
     },
   },
+  LoginForm: {
+    props: {
+      oauthProviders: { defaultValue: [] },
+      error: { defaultValue: "" },
+      loading: { defaultValue: false },
+    },
+  },
   MarkdownEditor: {
     props: {
       value: { defaultValue: "# Hello\n\nStart writing…" },
+      onChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "value", type: "string" }],
+      },
+    },
+    states: {
+      value: {
+        type: "writable",
+        variableType: "text",
+        valueProp: "value",
+        onChangeProp: "onChange",
+      },
     },
   },
   MarkdownRenderer: {
@@ -820,6 +843,18 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       card: { defaultValue: SAMPLE_KANBAN_CARD },
       open: { defaultValue: true },
+      onOpenChange: {
+        type: "eventHandler",
+        argTypes: [{ name: "open", type: "boolean" }],
+      },
+    },
+    states: {
+      open: {
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "open",
+        onChangeProp: "onOpenChange",
+      },
     },
   },
   LabelPicker: {
