@@ -21,6 +21,7 @@ export interface PropOverride {
   hidden?: boolean;
   advanced?: boolean;
   allowedComponents?: string[];
+  required?: boolean;
 }
 
 export interface ComponentOverride {
@@ -129,7 +130,7 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   Checkbox: {
     props: {
-      checked: { defaultValue: false },
+      checked: { defaultValue: false, required: false },
       label: { defaultValue: "Accept terms" },
     },
   },

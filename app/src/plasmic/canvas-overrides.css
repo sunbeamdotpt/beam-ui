@@ -1,5 +1,11 @@
+:root {
+  /* Default the host iframe to dark mode so Panda CSS semantic tokens
+   * resolve to dark values and new artboards render on a dark canvas. */
+  color-scheme: dark;
+}
+
 /**
- * Plasmic canvas typography override.
+ * Plasmic canvas overrides — loaded ONLY by the /plasmic-host page.
  *
  * Studio stamps the PROJECT's default typography (starter template:
  * Inter 16px) onto the artboard root element (.__wab_defaults__all) via
@@ -9,14 +15,17 @@
  * font-family rather than setting it, so canvas instances rendered in
  * Inter instead of Ysabeau Infant.
  *
- * This rule re-asserts the Beam body typography on the artboard root,
- * mirroring beamPreset's globalCss body block. Ordinary specificity
- * (0,1,0 / 0,1,1) beats Plasmic's :where() (0,0,0). Imported ONLY by the
- * /plasmic-host page — never loaded by the docs app routes.
+ * These rules re-assert the Beam body typography and default dark-mode
+ * surface colors on the artboard root. Ordinary specificity
+ * (0,1,0 / 0,1,1) beats Plasmic's :where() (0,0,0), while inline styles
+ * and more-specific Studio classes still win when the designer overrides
+ * them.
  */
 body .__wab_defaults__all,
 body div[class*="__wab_defaults"] {
   font-family: var(--fonts-body);
   font-weight: var(--font-weights-body);
   line-height: 1.5;
+  background-color: var(--colors-bg-page);
+  color: var(--colors-text-primary);
 }

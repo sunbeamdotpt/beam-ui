@@ -447,3 +447,21 @@ Commits `409dd82`, `77e8a4d`. Dev server restarted with the fixed registry.
 Remaining work: add sample data for other advanced required object props
 (e.g., Accordion, List, ContextMenu, charts, tables) as more components are
 drag-tested in Studio.
+
+## 2026-08-14 — BEAM-002 Phase 2 close-out: dark-mode canvas default + Checkbox prop unlock
+
+Closed the remaining Studio friction from human testing. (1) Dragged Beam
+components rendered on a light canvas even though the design language is
+dark-first; fixed by setting `data-theme="dark"` in `PlasmicHostPage` and
+adding dark surface colors (`bg.page`, `text.primary`) to the artboard root in
+`canvas-overrides.css`. (2) `Beam / Checkbox` `checked` appeared locked in the
+Studio props panel because the override only supplied `defaultValue: false` and
+did not clear the docgen `required: true` flag; fixed by adding `required` to
+`PropOverride` and setting `required: false` on the Checkbox `checked` prop.
+
+Also includes the primary-variant default fix from the previous commit
+(`6afa57d`) — the generator now emits `defaultValue: "primary"` when a variant
+prop includes that option. All generated app artifacts refreshed.
+
+Verification: `deno task ci` green, `npm run build` green,
+`npm run test:plasmic:registry` zero warnings.

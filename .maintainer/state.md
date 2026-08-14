@@ -3,8 +3,49 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-08-14T14:16:00Z
+timestamp: 2026-08-14T15:12:57Z
 ---
+
+# State — 2026-08-14 (BEAM-002 Phase 2 closed; dark-mode default + prop unlock)
+
+Phase 2 of BEAM-002 is now closed and pushed. `deno task ci` green, app build
+green, `npm run test:plasmic:registry` passes with **zero warnings**. The
+Plasmic host page now defaults the Studio canvas to dark mode, and the Checkbox
+`checked` prop is editable in Studio instead of locked.
+
+## In flight
+
+- **BEAM-002** — Plasmic app-host scope + implement (in progress column).
+  Phase 1 (harness) and Phase 2 (defaults/dark mode/prop unlock) are done.
+  Remaining: optional richer sample data for advanced object/array props of
+  data-heavy components (Accordion, ActivityHeatmap, CodeBlock, CommentThread,
+  CommitGraph, ContextMenu, DiffViewer, charts, tables, etc.) — these do not
+  block basic Studio usage and can be curated as real use cases arise.
+- **BEAM-006** and **BEAM-007** — blocked on the human for Plasmic project ID
+  + public API token (W1 of the original scope).
+
+## Done this session
+
+- Defaulted the Plasmic host canvas to dark mode via `data-theme="dark"` on
+  the host document and dark surface colors on the artboard root in
+  `canvas-overrides.css`.
+- Unlocked the `Beam / Checkbox` `checked` prop in Studio by adding
+  `required: false` to the prop override (overrides previously only supplied a
+  `defaultValue`, leaving the docgen-required flag in place).
+- Primary variant default fix committed (`6afa57d`); generator now sets
+  `defaultValue: "primary"` when a variant group contains that option.
+- Regenerated app artifacts committed (`public/api/components.json`,
+  `src/generated/build-info.ts`, `components.generated.json`).
+
+## Pick up first
+
+1. **Human verification in Plasmic Studio**: refresh the host page, drag a
+   fresh `Beam / Button` — it should render on a dark canvas with the
+   "primary" variant selected by default. Drag `Beam / Checkbox` — the
+   `Checked`, `Disabled`, and `Indeterminate` toggles should all be editable.
+2. **Continue sample-data pass** as more components are drag-tested in Studio.
+3. **Unblock BEAM-006/BEAM-007** by providing the Plasmic project ID + public
+   API token when ready.
 
 # State — 2026-08-14 (BEAM-002 Phase 2 defaults curated)
 

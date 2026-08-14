@@ -12,7 +12,14 @@
 import "../plasmic/registry";
 import "../plasmic/canvas-overrides.css";
 import { PlasmicCanvasHost } from "@plasmicapp/react-web/lib/host";
+import { useEffect } from "react";
 
 export function PlasmicHostPage() {
+  // Beam defaults to dark mode; set the theme attribute on the host iframe
+  // document so Panda CSS semantic tokens render with dark values in Studio.
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }, []);
+
   return <PlasmicCanvasHost />;
 }

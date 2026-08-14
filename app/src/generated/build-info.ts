@@ -1,8 +1,8 @@
 // Auto-generated at build time. Do not edit.
 export const buildInfo = {
-  commit: "dfc6e60",
+  commit: "6afa57d",
   branch: "mainline",
   dirty: true,
-  timestamp: "2026-08-14T14:44:28.444Z",
-  label: "dfc6e60+dirty",
+  timestamp: "2026-08-14T15:11:23.890Z",
+  label: "6afa57d+dirty",
 } as const;

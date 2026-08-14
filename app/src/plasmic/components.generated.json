@@ -578,7 +578,7 @@
     "props": {
       "checked": {
         "type": "boolean",
-        "required": true,
+        "required": false,
         "description": "Whether the checkbox is checked.",
         "defaultValue": false
       },
