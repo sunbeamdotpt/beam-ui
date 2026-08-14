@@ -3,8 +3,49 @@ type: State
 title: Current state of beam-ui
 description: What is in flight, what is blocked, what the next session should pick up first.
 tags: [state]
-timestamp: 2026-08-06T21:00:00Z
+timestamp: 2026-08-14T14:16:00Z
 ---
+
+# State — 2026-08-14 (BEAM-002 Phase 1 harness landed)
+
+Five commits pushed (`f936480`..`625bcb7`) close Phase 1 of BEAM-002:
+a repeatable Plasmic component-verification harness. `deno task ci` green,
+app build green, `npm run test:plasmic:registry` passes with 48 curated-
+default warnings, and Playwright kitchen-sink snapshots pass in light/dark.
+
+## In flight
+
+- **BEAM-002** — Plasmic app-host scope + implement (in progress column).
+  Phase 1 done. Phase 2 is curating `defaultValue` / sample data for the 48
+  required scalar props flagged by `validate-plasmic-registry.ts` so Studio
+  instances render with design-language defaults instead of 0×0 / blank boxes.
+- **BEAM-006** and **BEAM-007** — blocked on the human for Plasmic project ID
+  + public API token (W1 of the original scope).
+
+## Done this session
+
+- `app/scripts/generate-plasmic-registry.ts` emits `components.generated.json`
+  alongside `.tsx`; `app/scripts/validate-plasmic-registry.ts` enforces hard
+  invariants over the JSON.
+- `app/src/pages/plasmic-kitchen-sink.tsx` renders all 91 registered
+  components with their registered defaults; modals/toasts forced closed.
+- `app/tests/plasmic-kitchen-sink.spec.ts` captures light/dark Playwright
+  baselines.
+- `registry.overrides.tsx` got slot defaults for `Dialog`, `EmptyState`,
+  `Header`, `HoverCard`, `Popover`, `Shell`, and open defaults for modal
+  components.
+- Generated app artifacts committed per standing housekeeping rule
+  (`public/api/components.json`, `src/generated/build-info.ts`).
+
+## Pick up first
+
+1. Run the docs visual re-baseline (`npm run test:visual -- -u` in `app/`)
+   and inspect the diff — expected delta is the padding-shorthand fix from
+   2026-08-07 finally rendering with real padding.
+2. Phase 2: curate the 48 scalar/sample-data defaults flagged by the
+   validation script. Work component-by-component; the JSON warnings are the
+   checklist.
+3. Re-verify in Studio once defaults land (re-drag a fresh Beam / Button).
 
 # State — 2026-08-06 (v0.14.0 shipped; Plasmic scoped)
 

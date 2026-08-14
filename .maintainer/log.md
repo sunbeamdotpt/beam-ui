@@ -390,3 +390,25 @@ that root (0,1,x specificity beats :where()). Also note for future
 canvas debugging: Studio's right-panel typography fields show project
 DEFAULTS as placeholders for unset values — they are not the applied
 styles (panel said #000/16px while text rendered white/14px).
+
+## 2026-08-14 — BEAM-002 Phase 1: repeatable Plasmic verification harness
+
+Closed the loop on ad-hoc Studio verification. Added
+`app/src/pages/plasmic-kitchen-sink.tsx` and
+`app/tests/plasmic-kitchen-sink.spec.ts` to render every registered Beam
+component with its registered defaults in light/dark; added
+`app/scripts/validate-plasmic-registry.ts` to enforce hard invariants over
+`components.generated.json`. The generator now emits the JSON metadata
+alongside the TSX registry so validation is fast and doesn't need a
+browser. *Why:* the previous fixes (slot defaults, font inheritance,
+Panda shorthand) were each discovered reactively inside Studio; the harness
+makes "does every component render with correct defaults" a repeatable
+local check and gives us a curated checklist (48 scalar/sample-data
+warnings) for Phase 2.
+
+Commits: `f936480` kitchen-sink page, `e2a5ed5` validation script,
+`57f2b9c` slot defaults, `96ebb3c` npm scripts, `625bcb7` build artifacts.
+All green: `deno task ci`, `npm run test:plasmic:registry`,
+`npm run test:plasmic:kitchen-sink`. BEAM-002 moved to in progress on the
+dev board; BEAM-006/BEAM-007 remain blocked on the human for Plasmic
+project ID + public API token.
