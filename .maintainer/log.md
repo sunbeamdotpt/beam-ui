@@ -565,3 +565,22 @@ Release prep done by the agent:
 
 Remaining human steps per charter: tag `v0.15.0`, run `deno publish` to JSR,
 and cut the container image if desired.
+
+## 2026-08-14 — v0.15.1 patch: fix array prop registration in Plasmic
+
+Studio rejected `Beam / Accordion` with "Unknown type for prop defaultValue"
+because the registry generator emitted `type: "object"` for all TypeScript
+array props (`string[]`, `AccordionEntry[]`, etc.) while the override supplied
+an array default like `["overview"]`. Plasmic validates `defaultValue` against
+the declared prop type, so an object-typed prop with an array default failed.
+
+Fixed the generator in `app/scripts/generate-plasmic-registry.ts` to detect
+array shapes (`name.endsWith("[]")`). This covers `string[]`, `Array<T>`
+(normalized by react-docgen-typescript to `T[]`), `readonly T[]`,
+`ReadonlyArray<T>`, object arrays, and nested arrays. Regenerated
+`components.generated.tsx` and `components.generated.json`; validation still
+passes with zero warnings.
+
+Bumped `@sunbeam/beam-ui` to **v0.15.1** so the container build picks up the
+fixed registry. Remaining human steps per charter: tag `v0.15.1` and run
+`deno publish` from `packages/beam-ui`.

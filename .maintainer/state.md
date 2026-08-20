@@ -6,6 +6,33 @@ tags: [state]
 timestamp: 2026-08-14T19:15:00Z
 ---
 
+# State — 2026-08-14 (v0.15.1 patch)
+
+Fixed the Plasmic registry generator so TypeScript array props emit
+`type: "array"` instead of `type: "object"`. This resolves the Studio
+registration error for `Beam / Accordion.defaultValue` and the same class of
+error for `AssigneePicker`, `LabelPicker`, and other array-typed props.
+
+Release prep for `@sunbeam/beam-ui` **v0.15.1** is complete:
+- Generator fix committed and registry regenerated.
+- `CHANGELOG.md` updated with the v0.15.1 section.
+- `packages/beam-ui/deno.json` bumped to `0.15.1`.
+- `npm run test:plasmic:registry` passes with zero warnings.
+
+## In flight
+
+- **v0.15.1 JSR publish** — ready for human approval. Per the charter, the
+  actual `deno publish` and git tag must be done by the human.
+- **BEAM-006** and **BEAM-007** — still blocked on the human for Plasmic
+  project ID + public API token.
+
+## Pick up first
+
+1. Tag `v0.15.1`, push the tag, and run `deno publish` from
+   `packages/beam-ui`.
+2. Rebuild the container image so it picks up the fixed registry.
+3. Continue BEAM-006/007 when the Plasmic credentials are available.
+
 # State — 2026-08-14 (v0.15.0 release prep)
 
 All Plasmic overlay components now expose controlled `open`/`onOpenChange`

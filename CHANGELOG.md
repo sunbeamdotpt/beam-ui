@@ -4,6 +4,15 @@ All notable changes to `@sunbeam/beam-ui` (JSR, semver). The showcase app and
 container image follow the repo's mainline; see `.maintainer/log.md` for the
 full decision journal.
 
+## [0.15.1] — 2026-08-14
+
+### Fixed
+
+- Plasmic registry generator now emits `type: "array"` for TypeScript array
+  props (`string[]`, `Array<T>`, `readonly T[]`, object arrays, nested arrays),
+  fixing Studio registration errors like "Unknown type for prop defaultValue"
+  on `Accordion`, `AssigneePicker`, `LabelPicker`, and similar components.
+
 ## [0.15.0] — 2026-08-14
 
 ### Added
