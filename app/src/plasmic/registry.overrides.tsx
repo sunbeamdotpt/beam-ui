@@ -432,12 +432,12 @@ export const overrides: Record<string, ComponentOverride> = {
     props: {
       open: { defaultValue: true },
       title: { defaultValue: "Wizard" },
-      steps: { defaultValue: SAMPLE_WIZARD_STEPS },
+      steps: { type: "array", defaultValue: SAMPLE_WIZARD_STEPS },
     },
   },
   Wizard: {
     props: {
-      steps: { defaultValue: SAMPLE_WIZARD_STEPS },
+      steps: { type: "array", defaultValue: SAMPLE_WIZARD_STEPS },
     },
   },
 
@@ -461,8 +461,8 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   BranchSelector: {
     props: {
-      branches: { defaultValue: SAMPLE_BRANCHES },
-      tags: { defaultValue: SAMPLE_TAGS },
+      branches: { type: "array", defaultValue: SAMPLE_BRANCHES },
+      tags: { type: "array", defaultValue: SAMPLE_TAGS },
       current: { defaultValue: "main" },
       defaultBranch: { defaultValue: "main" },
       open: { defaultValue: false },
@@ -530,7 +530,7 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   Combobox: {
     props: {
-      options: { defaultValue: SAMPLE_OPTIONS },
+      options: { type: "array", defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
       open: { defaultValue: false },
       onOpenChange: {
@@ -608,7 +608,7 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   LoginForm: {
     props: {
-      oauthProviders: { defaultValue: [] },
+      oauthProviders: { type: "array", defaultValue: [] },
       error: { defaultValue: "" },
       loading: { defaultValue: false },
     },
@@ -722,14 +722,14 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   RadioGroup: {
     props: {
-      options: { defaultValue: SAMPLE_OPTIONS },
+      options: { type: "array", defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
       label: { defaultValue: "Choose one" },
     },
   },
   Select: {
     props: {
-      options: { defaultValue: SAMPLE_OPTIONS },
+      options: { type: "array", defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
       open: { defaultValue: false },
       onOpenChange: {
@@ -754,7 +754,7 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   Steps: {
     props: {
-      steps: { defaultValue: SAMPLE_STEPS },
+      steps: { type: "array", defaultValue: SAMPLE_STEPS },
       currentStep: { defaultValue: 1 },
     },
   },
@@ -772,7 +772,7 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   Tabs: {
     props: {
-      items: { defaultValue: SAMPLE_TABS },
+      items: { type: "array", defaultValue: SAMPLE_TABS },
       activeValue: { defaultValue: "tab-1" },
     },
   },
@@ -795,7 +795,7 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   ToggleGroup: {
     props: {
-      items: { defaultValue: SAMPLE_OPTIONS },
+      items: { type: "array", defaultValue: SAMPLE_OPTIONS },
       value: { defaultValue: "option-1" },
     },
   },
@@ -824,8 +824,8 @@ export const overrides: Record<string, ComponentOverride> = {
   // ------------------------------------------------------------------
   Accordion: {
     props: {
-      items: { defaultValue: SAMPLE_ACCORDION_ITEMS },
-      defaultValue: { defaultValue: ["overview"], advanced: true },
+      items: { type: "array", defaultValue: SAMPLE_ACCORDION_ITEMS },
+      defaultValue: { type: "array", defaultValue: ["overview"], advanced: true },
       value: {
         type: "object",
         displayName: "Expanded items",
@@ -848,13 +848,13 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   ActivityHeatmap: {
     props: {
-      data: { defaultValue: SAMPLE_ACTIVITY_HEATMAP },
+      data: { type: "array", defaultValue: SAMPLE_ACTIVITY_HEATMAP },
     },
   },
   AssigneePicker: {
     props: {
-      options: { defaultValue: SAMPLE_ASSIGNEES },
-      selected: { defaultValue: ["user-1"] },
+      options: { type: "array", defaultValue: SAMPLE_ASSIGNEES },
+      selected: { type: "array", defaultValue: ["user-1"] },
       open: { defaultValue: false },
       onOpenChange: {
         type: "eventHandler",
@@ -872,37 +872,37 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   AreaChart: {
     props: {
-      data: { defaultValue: SAMPLE_CHART_DATA },
-      areas: { defaultValue: SAMPLE_AREA_AREAS },
+      data: { type: "array", defaultValue: SAMPLE_CHART_DATA },
+      areas: { type: "array", defaultValue: SAMPLE_AREA_AREAS },
     },
     defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   BarChart: {
     props: {
-      data: { defaultValue: SAMPLE_CHART_DATA },
-      bars: { defaultValue: SAMPLE_BAR_BARS },
+      data: { type: "array", defaultValue: SAMPLE_CHART_DATA },
+      bars: { type: "array", defaultValue: SAMPLE_BAR_BARS },
     },
     defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   CodeBlock: {
     props: {
-      tabs: { defaultValue: SAMPLE_CODE_TABS },
+      tabs: { type: "array", defaultValue: SAMPLE_CODE_TABS },
       showLineNumbers: { defaultValue: true },
     },
   },
   CommentThread: {
     props: {
-      items: { defaultValue: SAMPLE_COMMENTS },
+      items: { type: "array", defaultValue: SAMPLE_COMMENTS },
     },
   },
   CommitGraph: {
     props: {
-      commits: { defaultValue: SAMPLE_COMMITS },
+      commits: { type: "array", defaultValue: SAMPLE_COMMITS },
     },
   },
   ContextMenu: {
     props: {
-      items: { defaultValue: SAMPLE_CONTEXT_MENU_ITEMS },
+      items: { type: "array", defaultValue: SAMPLE_CONTEXT_MENU_ITEMS },
       children: {
         defaultValue: {
           type: "text",
@@ -945,14 +945,14 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   DiffViewer: {
     props: {
-      hunks: { defaultValue: SAMPLE_DIFF_HUNKS },
+      hunks: { type: "array", defaultValue: SAMPLE_DIFF_HUNKS },
       oldFileName: { defaultValue: "theme.ts" },
       newFileName: { defaultValue: "theme.ts" },
     },
   },
   DropdownMenu: {
     props: {
-      items: { defaultValue: SAMPLE_CONTEXT_MENU_ITEMS },
+      items: { type: "array", defaultValue: SAMPLE_CONTEXT_MENU_ITEMS },
       open: { defaultValue: false },
       onOpenChange: {
         type: "eventHandler",
@@ -970,18 +970,18 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   FileList: {
     props: {
-      items: { defaultValue: SAMPLE_FILES },
-      selected: { defaultValue: [] },
+      items: { type: "array", defaultValue: SAMPLE_FILES },
+      selected: { type: "array", defaultValue: [] },
     },
   },
   KanbanCardView: {
     props: {
-      card: { defaultValue: SAMPLE_KANBAN_CARD },
+      card: { type: "object", defaultValue: SAMPLE_KANBAN_CARD },
     },
   },
   KanbanCardDetail: {
     props: {
-      card: { defaultValue: SAMPLE_KANBAN_CARD },
+      card: { type: "object", defaultValue: SAMPLE_KANBAN_CARD },
       open: { defaultValue: true },
       onOpenChange: {
         type: "eventHandler",
@@ -999,8 +999,8 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   LabelPicker: {
     props: {
-      options: { defaultValue: SAMPLE_LABELS },
-      selected: { defaultValue: ["label-1"] },
+      options: { type: "array", defaultValue: SAMPLE_LABELS },
+      selected: { type: "array", defaultValue: ["label-1"] },
       open: { defaultValue: false },
       onOpenChange: {
         type: "eventHandler",
@@ -1018,24 +1018,24 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   LineChart: {
     props: {
-      data: { defaultValue: SAMPLE_CHART_DATA },
-      lines: { defaultValue: SAMPLE_LINE_LINES },
+      data: { type: "array", defaultValue: SAMPLE_CHART_DATA },
+      lines: { type: "array", defaultValue: SAMPLE_LINE_LINES },
     },
     defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   List: {
     props: {
-      items: { defaultValue: SAMPLE_LIST_ITEMS },
+      items: { type: "array", defaultValue: SAMPLE_LIST_ITEMS },
     },
   },
   NotificationItem: {
     props: {
-      notification: { defaultValue: SAMPLE_NOTIFICATION },
+      notification: { type: "object", defaultValue: SAMPLE_NOTIFICATION },
     },
   },
   NotificationCenter: {
     props: {
-      notifications: { defaultValue: SAMPLE_NOTIFICATIONS },
+      notifications: { type: "array", defaultValue: SAMPLE_NOTIFICATIONS },
       open: { defaultValue: false },
       onOpenChange: {
         type: "eventHandler",
@@ -1053,13 +1053,13 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   PieChart: {
     props: {
-      data: { defaultValue: SAMPLE_PIE_DATA },
+      data: { type: "array", defaultValue: SAMPLE_PIE_DATA },
     },
     defaultStyles: { width: "100%", minWidth: "300px", height: "300px" },
   },
   ReactionPicker: {
     props: {
-      reactions: { defaultValue: SAMPLE_REACTIONS },
+      reactions: { type: "array", defaultValue: SAMPLE_REACTIONS },
       open: { defaultValue: false },
       onOpenChange: {
         type: "eventHandler",
@@ -1077,43 +1077,43 @@ export const overrides: Record<string, ComponentOverride> = {
   },
   RightRail: {
     props: {
-      items: { defaultValue: SAMPLE_RIGHT_RAIL_ITEMS },
+      items: { type: "array", defaultValue: SAMPLE_RIGHT_RAIL_ITEMS },
       lastUpdated: { defaultValue: "Aug 14, 2026" },
     },
   },
   StatBar: {
     props: {
-      stats: { defaultValue: SAMPLE_STAT_BAR },
+      stats: { type: "object", defaultValue: SAMPLE_STAT_BAR },
     },
   },
   Table: {
     props: {
-      columns: { defaultValue: SAMPLE_TABLE_COLUMNS },
-      rows: { defaultValue: SAMPLE_TABLE_ROWS },
+      columns: { type: "array", defaultValue: SAMPLE_TABLE_COLUMNS },
+      rows: { type: "array", defaultValue: SAMPLE_TABLE_ROWS },
     },
   },
   TagsInput: {
     props: {
-      value: { defaultValue: SAMPLE_TAG_STRINGS },
+      value: { type: "array", defaultValue: SAMPLE_TAG_STRINGS },
       label: { defaultValue: "Tags" },
     },
   },
   TransferList: {
     props: {
-      available: { defaultValue: SAMPLE_TRANSFER_AVAILABLE },
-      selected: { defaultValue: SAMPLE_TRANSFER_SELECTED },
+      available: { type: "array", defaultValue: SAMPLE_TRANSFER_AVAILABLE },
+      selected: { type: "array", defaultValue: SAMPLE_TRANSFER_SELECTED },
     },
   },
   TreeView: {
     props: {
-      nodes: { defaultValue: SAMPLE_TREE_NODES },
+      nodes: { type: "array", defaultValue: SAMPLE_TREE_NODES },
       activeId: { defaultValue: "src/index.ts" },
     },
   },
   WorkItemList: {
     props: {
-      items: { defaultValue: SAMPLE_WORK_ITEMS },
-      selected: { defaultValue: [] },
+      items: { type: "array", defaultValue: SAMPLE_WORK_ITEMS },
+      selected: { type: "array", defaultValue: [] },
     },
   },
 };
