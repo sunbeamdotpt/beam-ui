@@ -177,7 +177,16 @@ function mapProp(name: string, prop: PropItem): PropMeta | null {
     return meta;
   }
 
-  // Structured data (arrays/objects/mixed unions): expose as an advanced
+  // Arrays (e.g. string[], AccordionEntry[]): expose as an advanced array
+  // control so Studio validates defaultValue correctly and doesn't treat
+  // ["overview"] as an invalid object default.
+  if (t.name.endsWith("[]")) {
+    meta.type = "array";
+    meta.advanced = true;
+    return meta;
+  }
+
+  // Structured data (objects/mixed unions): expose as an advanced
   // JSON control so data-driven components stay usable in Studio.
   meta.type = "object";
   meta.advanced = true;

@@ -134,7 +134,7 @@ export function registerBeamComponents(): void {
   "importName": "Accordion",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of accordion items to render.",
       "advanced": true
@@ -145,12 +145,12 @@ export function registerBeamComponents(): void {
       "defaultValue": false
     },
     "defaultValue": {
-      "type": "object",
+      "type": "array",
       "description": "Section(s) expanded by default; array of `value` strings.",
       "advanced": true
     },
     "value": {
-      "type": "object",
+      "type": "array",
       "description": "Controlled expanded section(s). When provided, the component operates in controlled mode.",
       "advanced": true
     }
@@ -165,7 +165,7 @@ export function registerBeamComponents(): void {
   "importName": "ActivityHeatmap",
   "props": {
     "data": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of daily activity data (last 365 days).",
       "advanced": true
@@ -181,13 +181,13 @@ export function registerBeamComponents(): void {
   "importName": "AssigneePicker",
   "props": {
     "options": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "List of available users to pick from.",
       "advanced": true
     },
     "selected": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of selected user IDs.",
       "advanced": true
@@ -217,7 +217,7 @@ export function registerBeamComponents(): void {
   "importName": "LoginForm",
   "props": {
     "oauthProviders": {
-      "type": "object",
+      "type": "array",
       "description": "OAuth provider buttons to display (optional).",
       "advanced": true
     },
@@ -439,13 +439,13 @@ export function registerBeamComponents(): void {
   "importName": "BranchSelector",
   "props": {
     "branches": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of branch names to choose from.",
       "advanced": true
     },
     "tags": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of tag names to choose from.",
       "advanced": true
@@ -479,7 +479,7 @@ export function registerBeamComponents(): void {
   "importName": "Breadcrumbs",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of breadcrumb items. Last item is rendered as current page (no link).",
       "advanced": true
@@ -611,13 +611,13 @@ export function registerBeamComponents(): void {
   "importName": "LineChart",
   "props": {
     "data": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of data points with a `label` key and numeric data series.",
       "advanced": true
     },
     "lines": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of line series; each specifies a data `key`, optional `color`, and optional `label`.",
       "advanced": true
@@ -638,13 +638,13 @@ export function registerBeamComponents(): void {
   "importName": "BarChart",
   "props": {
     "data": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of data points with a `label` key and numeric data series.",
       "advanced": true
     },
     "bars": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of bar series; each specifies a data `key`, optional `color`, and optional `label`.",
       "advanced": true
@@ -665,7 +665,7 @@ export function registerBeamComponents(): void {
   "importName": "PieChart",
   "props": {
     "data": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of segments; each with `name`, `value`, and optional `color`.",
       "advanced": true
@@ -691,13 +691,13 @@ export function registerBeamComponents(): void {
   "importName": "AreaChart",
   "props": {
     "data": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of data points with a `label` key and numeric data series.",
       "advanced": true
     },
     "areas": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of area series; each specifies a data `key`, optional `color`, and optional `label`.",
       "advanced": true
@@ -776,7 +776,7 @@ export function registerBeamComponents(): void {
   "importName": "CodeBlock",
   "props": {
     "tabs": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of code tabs to display.",
       "advanced": true
@@ -845,7 +845,7 @@ export function registerBeamComponents(): void {
       "description": "Placeholder text shown when the editor is empty."
     },
     "extensions": {
-      "type": "object",
+      "type": "array",
       "description": "Extra CodeMirror extensions to append. Typed as unknown[] to avoid Extension symbol mismatch when the caller uses a different",
       "advanced": true
     }
@@ -865,7 +865,7 @@ export function registerBeamComponents(): void {
       "description": "Current hex color value (e.g., `\"#FF5733\"`)."
     },
     "presets": {
-      "type": "object",
+      "type": "array",
       "description": "Array of preset hex colors to display in the swatch grid. Defaults to a curated palette.",
       "advanced": true
     },
@@ -888,7 +888,7 @@ export function registerBeamComponents(): void {
   "importName": "Combobox",
   "props": {
     "options": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of options to display in the dropdown.",
       "advanced": true
@@ -923,7 +923,7 @@ export function registerBeamComponents(): void {
   "importName": "CommentThread",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of comments and timeline events, rendered in chronological order.",
       "advanced": true
@@ -939,7 +939,7 @@ export function registerBeamComponents(): void {
   "importName": "CommitGraph",
   "props": {
     "commits": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of commits to display, in chronological order.",
       "advanced": true
@@ -955,7 +955,7 @@ export function registerBeamComponents(): void {
   "importName": "ContextMenu",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of menu items to display.",
       "advanced": true
@@ -1066,7 +1066,7 @@ export function registerBeamComponents(): void {
   "importName": "DiffViewer",
   "props": {
     "hunks": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of hunks to display.",
       "advanced": true
@@ -1099,12 +1099,12 @@ export function registerBeamComponents(): void {
   "importName": "DropdownMenu",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "description": "Flat list of items (mutually exclusive with `groups`).",
       "advanced": true
     },
     "groups": {
-      "type": "object",
+      "type": "array",
       "description": "Grouped list of items (mutually exclusive with `items`).",
       "advanced": true
     },
@@ -1210,7 +1210,7 @@ export function registerBeamComponents(): void {
   "importName": "FileList",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of files and folders to display.",
       "advanced": true
@@ -1396,13 +1396,13 @@ export function registerBeamComponents(): void {
   "importName": "LabelPicker",
   "props": {
     "options": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of available labels to choose from.",
       "advanced": true
     },
     "selected": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of selected label IDs.",
       "advanced": true
@@ -1427,7 +1427,7 @@ export function registerBeamComponents(): void {
   "importName": "List",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of items to display.",
       "advanced": true
@@ -1517,7 +1517,7 @@ export function registerBeamComponents(): void {
   "importName": "MilestonePicker",
   "props": {
     "options": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of available milestones to choose from.",
       "advanced": true
@@ -1609,7 +1609,7 @@ export function registerBeamComponents(): void {
   "importName": "NotificationCenter",
   "props": {
     "notifications": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of notifications to display.",
       "advanced": true
@@ -1801,7 +1801,7 @@ export function registerBeamComponents(): void {
   "importName": "RadioGroup",
   "props": {
     "options": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of radio options.",
       "advanced": true
@@ -1826,7 +1826,7 @@ export function registerBeamComponents(): void {
   "importName": "ReactionPicker",
   "props": {
     "reactions": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of existing reactions to display.",
       "advanced": true
@@ -1846,7 +1846,7 @@ export function registerBeamComponents(): void {
   "importName": "RightRail",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Table-of-contents items: each must correspond to a section heading with a matching `id`.",
       "advanced": true
@@ -1875,7 +1875,7 @@ export function registerBeamComponents(): void {
   "importName": "Select",
   "props": {
     "options": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of available options.",
       "advanced": true
@@ -2069,7 +2069,7 @@ export function registerBeamComponents(): void {
   "importName": "Steps",
   "props": {
     "steps": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of steps.",
       "advanced": true
@@ -2137,7 +2137,7 @@ export function registerBeamComponents(): void {
       "defaultValue": false
     },
     "highlightLines": {
-      "type": "object",
+      "type": "array",
       "description": "Array of 1-based line numbers to highlight (e.g., `[1, 3, 5]`).",
       "advanced": true
     }
@@ -2152,13 +2152,13 @@ export function registerBeamComponents(): void {
   "importName": "Table",
   "props": {
     "columns": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of column definitions with keys, labels, and optional sort/width.",
       "advanced": true
     },
     "rows": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of row objects, matched against column keys.",
       "advanced": true
@@ -2187,7 +2187,7 @@ export function registerBeamComponents(): void {
   "importName": "Tabs",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of tab items with value and label.",
       "advanced": true
@@ -2217,7 +2217,7 @@ export function registerBeamComponents(): void {
   "importName": "TagsInput",
   "props": {
     "value": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of tag strings.",
       "advanced": true
@@ -2339,7 +2339,7 @@ export function registerBeamComponents(): void {
   "importName": "ToggleGroup",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of toggle options with value and label.",
       "advanced": true
@@ -2425,13 +2425,13 @@ export function registerBeamComponents(): void {
   "importName": "TransferList",
   "props": {
     "available": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of available items (left panel).",
       "advanced": true
     },
     "selected": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of selected items (right panel).",
       "advanced": true
@@ -2457,7 +2457,7 @@ export function registerBeamComponents(): void {
   "importName": "TreeView",
   "props": {
     "nodes": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of root tree nodes.",
       "advanced": true
@@ -2477,7 +2477,7 @@ export function registerBeamComponents(): void {
   "importName": "Wizard",
   "props": {
     "steps": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of wizard steps with title and content.",
       "advanced": true
@@ -2522,7 +2522,7 @@ export function registerBeamComponents(): void {
       "description": "Optional title displayed in the modal header."
     },
     "steps": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of wizard steps with title and content.",
       "advanced": true
@@ -2554,7 +2554,7 @@ export function registerBeamComponents(): void {
   "importName": "WorkItemList",
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "required": true,
       "description": "Array of work item rows.",
       "advanced": true

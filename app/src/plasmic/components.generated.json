@@ -6,7 +6,7 @@
     "importName": "Accordion",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of accordion items to render.",
         "advanced": true,
@@ -29,7 +29,7 @@
         "defaultValue": false
       },
       "defaultValue": {
-        "type": "object",
+        "type": "array",
         "description": "Section(s) expanded by default; array of `value` strings.",
         "advanced": true,
         "defaultValue": [
@@ -71,54 +71,30 @@
     "importName": "ActivityHeatmap",
     "props": {
       "data": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of daily activity data (last 365 days).",
         "advanced": true,
         "defaultValue": [
           {
-            "date": "2026-06-16",
-            "count": 5
-          },
-          {
-            "date": "2026-06-17",
-            "count": 1
-          },
-          {
-            "date": "2026-06-18",
-            "count": 5
-          },
-          {
-            "date": "2026-06-19",
-            "count": 5
-          },
-          {
-            "date": "2026-06-20",
-            "count": 1
-          },
-          {
-            "date": "2026-06-21",
-            "count": 1
-          },
-          {
             "date": "2026-06-22",
-            "count": 1
+            "count": 3
           },
           {
             "date": "2026-06-23",
-            "count": 8
+            "count": 1
           },
           {
             "date": "2026-06-24",
-            "count": 2
+            "count": 8
           },
           {
             "date": "2026-06-25",
-            "count": 2
+            "count": 4
           },
           {
             "date": "2026-06-26",
-            "count": 3
+            "count": 8
           },
           {
             "date": "2026-06-27",
@@ -126,23 +102,23 @@
           },
           {
             "date": "2026-06-28",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-06-29",
-            "count": 3
-          },
-          {
-            "date": "2026-06-30",
             "count": 5
           },
           {
+            "date": "2026-06-30",
+            "count": 1
+          },
+          {
             "date": "2026-07-01",
-            "count": 4
+            "count": 1
           },
           {
             "date": "2026-07-02",
-            "count": 8
+            "count": 3
           },
           {
             "date": "2026-07-03",
@@ -150,83 +126,83 @@
           },
           {
             "date": "2026-07-04",
-            "count": 0
+            "count": 3
           },
           {
             "date": "2026-07-05",
-            "count": 3
+            "count": 0
           },
           {
             "date": "2026-07-06",
-            "count": 3
+            "count": 1
           },
           {
             "date": "2026-07-07",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-07-08",
-            "count": 1
+            "count": 5
           },
           {
             "date": "2026-07-09",
-            "count": 1
-          },
-          {
-            "date": "2026-07-10",
-            "count": 0
-          },
-          {
-            "date": "2026-07-11",
-            "count": 0
-          },
-          {
-            "date": "2026-07-12",
-            "count": 1
-          },
-          {
-            "date": "2026-07-13",
-            "count": 0
-          },
-          {
-            "date": "2026-07-14",
-            "count": 8
-          },
-          {
-            "date": "2026-07-15",
-            "count": 0
-          },
-          {
-            "date": "2026-07-16",
-            "count": 1
-          },
-          {
-            "date": "2026-07-17",
-            "count": 0
-          },
-          {
-            "date": "2026-07-18",
-            "count": 5
-          },
-          {
-            "date": "2026-07-19",
-            "count": 4
-          },
-          {
-            "date": "2026-07-20",
-            "count": 5
-          },
-          {
-            "date": "2026-07-21",
-            "count": 4
-          },
-          {
-            "date": "2026-07-22",
             "count": 2
           },
           {
-            "date": "2026-07-23",
+            "date": "2026-07-10",
+            "count": 1
+          },
+          {
+            "date": "2026-07-11",
+            "count": 2
+          },
+          {
+            "date": "2026-07-12",
             "count": 8
+          },
+          {
+            "date": "2026-07-13",
+            "count": 2
+          },
+          {
+            "date": "2026-07-14",
+            "count": 1
+          },
+          {
+            "date": "2026-07-15",
+            "count": 1
+          },
+          {
+            "date": "2026-07-16",
+            "count": 4
+          },
+          {
+            "date": "2026-07-17",
+            "count": 1
+          },
+          {
+            "date": "2026-07-18",
+            "count": 0
+          },
+          {
+            "date": "2026-07-19",
+            "count": 5
+          },
+          {
+            "date": "2026-07-20",
+            "count": 2
+          },
+          {
+            "date": "2026-07-21",
+            "count": 1
+          },
+          {
+            "date": "2026-07-22",
+            "count": 5
+          },
+          {
+            "date": "2026-07-23",
+            "count": 3
           },
           {
             "date": "2026-07-24",
@@ -234,27 +210,27 @@
           },
           {
             "date": "2026-07-25",
-            "count": 1
+            "count": 3
           },
           {
             "date": "2026-07-26",
-            "count": 1
+            "count": 0
           },
           {
             "date": "2026-07-27",
-            "count": 2
+            "count": 1
           },
           {
             "date": "2026-07-28",
-            "count": 1
-          },
-          {
-            "date": "2026-07-29",
             "count": 5
           },
           {
+            "date": "2026-07-29",
+            "count": 8
+          },
+          {
             "date": "2026-07-30",
-            "count": 1
+            "count": 8
           },
           {
             "date": "2026-07-31",
@@ -262,15 +238,15 @@
           },
           {
             "date": "2026-08-01",
-            "count": 8
+            "count": 1
           },
           {
             "date": "2026-08-02",
-            "count": 8
+            "count": 5
           },
           {
             "date": "2026-08-03",
-            "count": 5
+            "count": 8
           },
           {
             "date": "2026-08-04",
@@ -278,35 +254,35 @@
           },
           {
             "date": "2026-08-05",
-            "count": 8
+            "count": 2
           },
           {
             "date": "2026-08-06",
-            "count": 8
+            "count": 5
           },
           {
             "date": "2026-08-07",
-            "count": 1
+            "count": 8
           },
           {
             "date": "2026-08-08",
-            "count": 3
+            "count": 2
           },
           {
             "date": "2026-08-09",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-08-10",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-08-11",
-            "count": 1
+            "count": 2
           },
           {
             "date": "2026-08-12",
-            "count": 0
+            "count": 4
           },
           {
             "date": "2026-08-13",
@@ -314,7 +290,31 @@
           },
           {
             "date": "2026-08-14",
-            "count": 3
+            "count": 0
+          },
+          {
+            "date": "2026-08-15",
+            "count": 0
+          },
+          {
+            "date": "2026-08-16",
+            "count": 1
+          },
+          {
+            "date": "2026-08-17",
+            "count": 1
+          },
+          {
+            "date": "2026-08-18",
+            "count": 5
+          },
+          {
+            "date": "2026-08-19",
+            "count": 0
+          },
+          {
+            "date": "2026-08-20",
+            "count": 1
           }
         ]
       }
@@ -327,7 +327,7 @@
     "importName": "AssigneePicker",
     "props": {
       "options": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "List of available users to pick from.",
         "advanced": true,
@@ -350,7 +350,7 @@
         ]
       },
       "selected": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of selected user IDs.",
         "advanced": true,
@@ -399,7 +399,7 @@
     "importName": "LoginForm",
     "props": {
       "oauthProviders": {
-        "type": "object",
+        "type": "array",
         "description": "OAuth provider buttons to display (optional).",
         "advanced": true,
         "defaultValue": []
@@ -615,7 +615,7 @@
     "importName": "BranchSelector",
     "props": {
       "branches": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of branch names to choose from.",
         "advanced": true,
@@ -626,7 +626,7 @@
         ]
       },
       "tags": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of tag names to choose from.",
         "advanced": true,
@@ -682,7 +682,7 @@
     "importName": "Breadcrumbs",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of breadcrumb items. Last item is rendered as current page (no link).",
         "advanced": true,
@@ -819,45 +819,45 @@
     "importName": "LineChart",
     "props": {
       "data": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of data points with a `label` key and numeric data series.",
         "advanced": true,
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 3539,
-            "costs": 3528
+            "revenue": 6523,
+            "costs": 1961
           },
           {
             "label": "Feb",
-            "revenue": 2445,
-            "costs": 1731
+            "revenue": 6566,
+            "costs": 2752
           },
           {
             "label": "Mar",
-            "revenue": 6705,
-            "costs": 1097
+            "revenue": 5502,
+            "costs": 3957
           },
           {
             "label": "Apr",
-            "revenue": 6975,
-            "costs": 1943
+            "revenue": 6844,
+            "costs": 1959
           },
           {
             "label": "May",
-            "revenue": 5920,
-            "costs": 2584
+            "revenue": 6342,
+            "costs": 1291
           },
           {
             "label": "Jun",
-            "revenue": 5413,
-            "costs": 1819
+            "revenue": 6106,
+            "costs": 3152
           }
         ]
       },
       "lines": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of line series; each specifies a data `key`, optional `color`, and optional `label`.",
         "advanced": true,
@@ -891,45 +891,45 @@
     "importName": "BarChart",
     "props": {
       "data": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of data points with a `label` key and numeric data series.",
         "advanced": true,
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 3539,
-            "costs": 3528
+            "revenue": 6523,
+            "costs": 1961
           },
           {
             "label": "Feb",
-            "revenue": 2445,
-            "costs": 1731
+            "revenue": 6566,
+            "costs": 2752
           },
           {
             "label": "Mar",
-            "revenue": 6705,
-            "costs": 1097
+            "revenue": 5502,
+            "costs": 3957
           },
           {
             "label": "Apr",
-            "revenue": 6975,
-            "costs": 1943
+            "revenue": 6844,
+            "costs": 1959
           },
           {
             "label": "May",
-            "revenue": 5920,
-            "costs": 2584
+            "revenue": 6342,
+            "costs": 1291
           },
           {
             "label": "Jun",
-            "revenue": 5413,
-            "costs": 1819
+            "revenue": 6106,
+            "costs": 3152
           }
         ]
       },
       "bars": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of bar series; each specifies a data `key`, optional `color`, and optional `label`.",
         "advanced": true,
@@ -963,7 +963,7 @@
     "importName": "PieChart",
     "props": {
       "data": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of segments; each with `name`, `value`, and optional `color`.",
         "advanced": true,
@@ -1006,45 +1006,45 @@
     "importName": "AreaChart",
     "props": {
       "data": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of data points with a `label` key and numeric data series.",
         "advanced": true,
         "defaultValue": [
           {
             "label": "Jan",
-            "revenue": 3539,
-            "costs": 3528
+            "revenue": 6523,
+            "costs": 1961
           },
           {
             "label": "Feb",
-            "revenue": 2445,
-            "costs": 1731
+            "revenue": 6566,
+            "costs": 2752
           },
           {
             "label": "Mar",
-            "revenue": 6705,
-            "costs": 1097
+            "revenue": 5502,
+            "costs": 3957
           },
           {
             "label": "Apr",
-            "revenue": 6975,
-            "costs": 1943
+            "revenue": 6844,
+            "costs": 1959
           },
           {
             "label": "May",
-            "revenue": 5920,
-            "costs": 2584
+            "revenue": 6342,
+            "costs": 1291
           },
           {
             "label": "Jun",
-            "revenue": 5413,
-            "costs": 1819
+            "revenue": 6106,
+            "costs": 3152
           }
         ]
       },
       "areas": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of area series; each specifies a data `key`, optional `color`, and optional `label`.",
         "advanced": true,
@@ -1126,7 +1126,7 @@
     "importName": "CodeBlock",
     "props": {
       "tabs": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of code tabs to display.",
         "advanced": true,
@@ -1204,7 +1204,7 @@
         "description": "Placeholder text shown when the editor is empty."
       },
       "extensions": {
-        "type": "object",
+        "type": "array",
         "description": "Extra CodeMirror extensions to append. Typed as unknown[] to avoid Extension symbol mismatch when the caller uses a different",
         "advanced": true
       }
@@ -1223,7 +1223,7 @@
         "defaultValue": "#FF5733"
       },
       "presets": {
-        "type": "object",
+        "type": "array",
         "description": "Array of preset hex colors to display in the swatch grid. Defaults to a curated palette.",
         "advanced": true
       },
@@ -1262,7 +1262,7 @@
     "importName": "Combobox",
     "props": {
       "options": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of options to display in the dropdown.",
         "advanced": true,
@@ -1324,7 +1324,7 @@
     "importName": "CommentThread",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of comments and timeline events, rendered in chronological order.",
         "advanced": true,
@@ -1363,7 +1363,7 @@
     "importName": "CommitGraph",
     "props": {
       "commits": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of commits to display, in chronological order.",
         "advanced": true,
@@ -1413,7 +1413,7 @@
     "importName": "ContextMenu",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of menu items to display.",
         "advanced": true,
@@ -1576,7 +1576,7 @@
     "importName": "DiffViewer",
     "props": {
       "hunks": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of hunks to display.",
         "advanced": true,
@@ -1638,7 +1638,7 @@
     "importName": "DropdownMenu",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "description": "Flat list of items (mutually exclusive with `groups`).",
         "advanced": true,
         "defaultValue": [
@@ -1658,7 +1658,7 @@
         ]
       },
       "groups": {
-        "type": "object",
+        "type": "array",
         "description": "Grouped list of items (mutually exclusive with `items`).",
         "advanced": true
       },
@@ -1785,7 +1785,7 @@
     "importName": "FileList",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of files and folders to display.",
         "advanced": true,
@@ -2108,7 +2108,7 @@
     "importName": "LabelPicker",
     "props": {
       "options": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of available labels to choose from.",
         "advanced": true,
@@ -2134,7 +2134,7 @@
         ]
       },
       "selected": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of selected label IDs.",
         "advanced": true,
@@ -2178,7 +2178,7 @@
     "importName": "List",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of items to display.",
         "advanced": true,
@@ -2298,7 +2298,7 @@
     "importName": "MilestonePicker",
     "props": {
       "options": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of available milestones to choose from.",
         "advanced": true,
@@ -2433,7 +2433,7 @@
     "importName": "NotificationCenter",
     "props": {
       "notifications": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of notifications to display.",
         "advanced": true,
@@ -2681,7 +2681,7 @@
     "importName": "RadioGroup",
     "props": {
       "options": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of radio options.",
         "advanced": true,
@@ -2716,7 +2716,7 @@
     "importName": "ReactionPicker",
     "props": {
       "reactions": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of existing reactions to display.",
         "advanced": true,
@@ -2769,7 +2769,7 @@
     "importName": "RightRail",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Table-of-contents items: each must correspond to a section heading with a matching `id`.",
         "advanced": true,
@@ -2809,7 +2809,7 @@
     "importName": "Select",
     "props": {
       "options": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of available options.",
         "advanced": true,
@@ -3034,7 +3034,7 @@
     "importName": "Steps",
     "props": {
       "steps": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of steps.",
         "advanced": true,
@@ -3115,7 +3115,7 @@
         "defaultValue": false
       },
       "highlightLines": {
-        "type": "object",
+        "type": "array",
         "description": "Array of 1-based line numbers to highlight (e.g., `[1, 3, 5]`).",
         "advanced": true
       }
@@ -3128,7 +3128,7 @@
     "importName": "Table",
     "props": {
       "columns": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of column definitions with keys, labels, and optional sort/width.",
         "advanced": true,
@@ -3149,7 +3149,7 @@
         ]
       },
       "rows": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of row objects, matched against column keys.",
         "advanced": true,
@@ -3196,7 +3196,7 @@
     "importName": "Tabs",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of tab items with value and label.",
         "advanced": true,
@@ -3235,7 +3235,7 @@
     "importName": "TagsInput",
     "props": {
       "value": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of tag strings.",
         "advanced": true,
@@ -3359,7 +3359,7 @@
     "importName": "ToggleGroup",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of toggle options with value and label.",
         "advanced": true,
@@ -3470,7 +3470,7 @@
     "importName": "TransferList",
     "props": {
       "available": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of available items (left panel).",
         "advanced": true,
@@ -3493,7 +3493,7 @@
         ]
       },
       "selected": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of selected items (right panel).",
         "advanced": true,
@@ -3524,7 +3524,7 @@
     "importName": "TreeView",
     "props": {
       "nodes": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of root tree nodes.",
         "advanced": true,
@@ -3569,7 +3569,7 @@
     "importName": "Wizard",
     "props": {
       "steps": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of wizard steps with title and content.",
         "advanced": true,
@@ -3624,7 +3624,7 @@
         "defaultValue": "Wizard"
       },
       "steps": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of wizard steps with title and content.",
         "advanced": true,
@@ -3664,7 +3664,7 @@
     "importName": "WorkItemList",
     "props": {
       "items": {
-        "type": "object",
+        "type": "array",
         "required": true,
         "description": "Array of work item rows.",
         "advanced": true,
