@@ -37,7 +37,17 @@ function applyOverride(
   };
   for (const [k, v] of Object.entries(o.props ?? {})) {
     if (v === null) delete props[k];
-    else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };
+    else {
+      const base = (props[k] as Record<string, unknown> ?? {});
+      const patch = v as Record<string, unknown>;
+      props[k] = { ...base, ...patch };
+      // Preserve the generated prop type when the override only tweaks
+      // defaults/labels. Without this, an override like { defaultValue: false }
+      // replaces the generated type and Plasmic rejects the prop.
+      if (base.type && !patch.type) {
+        (props[k] as Record<string, unknown>).type = base.type;
+      }
+    }
   }
   const result: Record<string, unknown> = {
     ...meta,
@@ -375,9 +385,14 @@ lines.push(`  if (!o) return meta;`);
 lines.push(`  const props = { ...(meta.props as Record<string, unknown>) };`);
 lines.push(`  for (const [k, v] of Object.entries(o.props ?? {})) {`);
 lines.push(`    if (v === null) delete props[k];`);
-lines.push(
-  `    else props[k] = { ...(props[k] as Record<string, unknown> ?? {}), ...v };`,
-);
+lines.push(`    else {`);
+lines.push(`      const base = (props[k] as Record<string, unknown> ?? {});`);
+lines.push(`      const patch = v as Record<string, unknown>;`);
+lines.push(`      props[k] = { ...base, ...patch };`);
+lines.push(`      if (base.type && !patch.type) {`);
+lines.push(`        (props[k] as Record<string, unknown>).type = base.type;`);
+lines.push(`      }`);
+lines.push(`    }`);
 lines.push(`  }`);
 lines.push(
   `  const result: Record<string, unknown> = { ...meta, displayName: o.displayName ?? meta.displayName, description: o.description ?? meta.description, props };`,
