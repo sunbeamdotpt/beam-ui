@@ -4,6 +4,7 @@ WORKDIR /build
 
 # Copy workspace structure
 COPY package.json ./
+COPY package-lock.json ./
 COPY packages/ packages/
 COPY app/package.json app/panda.config.ts app/postcss.config.cjs app/tsconfig.json app/vite.config.ts app/index.html ./app/
 COPY app/.storybook/ app/.storybook/
