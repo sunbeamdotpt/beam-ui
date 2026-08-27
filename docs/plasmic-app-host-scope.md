@@ -1,3 +1,7 @@
+---
+title: Plasmic App-Host — Scope (2026-08-06)
+---
+
 # Plasmic App-Host — Scope (2026-08-06)
 
 Goal: make the hosted app container (design.sunbeam.pt) double as a
